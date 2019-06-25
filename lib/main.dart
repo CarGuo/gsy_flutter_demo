@@ -4,6 +4,7 @@ import 'package:gsy_flutter_demo/widget/bubble/bubble_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/clip_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/controller_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/custom_pull/refrsh_demo_page3.dart';
+import 'package:gsy_flutter_demo/widget/floating_touch_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/honor_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/keyboard_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/positioned_demo_page.dart';
@@ -93,6 +94,7 @@ const routerName = [
   "状态栏颜色 例子",
   "键盘相关 例子",
   "动画 例子",
+  "悬浮触摸控件 例子",
 ];
 
 Map<String, WidgetBuilder> routers = {
@@ -147,5 +149,7 @@ Map<String, WidgetBuilder> routers = {
   "widget/anima": (context) {
     return new AnimaDemoPage();
   },
-
+  "widget/floating": (context) {
+    return new FloatingTouchDemoPage();
+  },
 };
