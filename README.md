@@ -1,4 +1,4 @@
-## GSY Flutter Demo
+# GSY Flutter Demo
 
 ### 不同于 [GSYGithubAppFlutter](https://github.com/CarGuo/GSYGithubAppFlutter) 项目，本项目将逐步完善各种 Flutter 独立例子，方便新手学习上手。
 
