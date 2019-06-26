@@ -21,6 +21,7 @@ import 'package:gsy_flutter_demo/widget/tag_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/text_line_height_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/text_size_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/transform_demo_page.dart';
+import 'package:gsy_flutter_demo/widget/verification_code_input_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/viewpager_demo_page.dart';
 
 void main() => runApp(MyApp());
@@ -105,6 +106,7 @@ const routerName = [
   "富文本 例子",
   "viewpager 例子",
   "滑动停靠 例子",
+  "验证码输入框 例子",
 ];
 
 Map<String, WidgetBuilder> routers = {
@@ -177,4 +179,8 @@ Map<String, WidgetBuilder> routers = {
   "widget/sliver": (context) {
     return new SliverListDemoPage();
   },
+  "widget/vc": (context) {
+    return new VerificationCodeInputDemoPage();
+  },
+
 };
