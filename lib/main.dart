@@ -14,6 +14,7 @@ import 'package:gsy_flutter_demo/widget/rich_text_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/scroll_listener_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/scroll_to_index_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/scroll_to_index_demo_page2.dart';
+import 'package:gsy_flutter_demo/widget/sliver_list_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/statusbar_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/tag_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/text_line_height_demo_page.dart';
@@ -101,6 +102,7 @@ const routerName = [
   "全局字体大小 例子",
   "富文本 例子",
   "viewpager 例子",
+  "滑动停靠 例子",
 ];
 
 Map<String, WidgetBuilder> routers = {
@@ -167,6 +169,8 @@ Map<String, WidgetBuilder> routers = {
   "widget/viewpager": (context) {
     return new ViewPagerDemoPage();
   },
-
+  "widget/sliver": (context) {
+    return new SliverListDemoPage();
+  },
 
 };
