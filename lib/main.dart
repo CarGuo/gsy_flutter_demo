@@ -16,6 +16,7 @@ import 'package:gsy_flutter_demo/widget/scroll_to_index_demo_page2.dart';
 import 'package:gsy_flutter_demo/widget/statusbar_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/tag_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/text_line_height_demo_page.dart';
+import 'package:gsy_flutter_demo/widget/text_size_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/transform_demo_page.dart';
 
 void main() => runApp(MyApp());
@@ -95,6 +96,7 @@ const routerName = [
   "键盘相关 例子",
   "动画 例子",
   "悬浮触摸控件 例子",
+  "全局字体大小 例子",
 ];
 
 Map<String, WidgetBuilder> routers = {
@@ -152,4 +154,9 @@ Map<String, WidgetBuilder> routers = {
   "widget/floating": (context) {
     return new FloatingTouchDemoPage();
   },
+  "widget/textsize": (context) {
+    return new TextSizeDemoPage();
+  },
+
+
 };
