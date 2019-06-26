@@ -10,6 +10,7 @@ import 'package:gsy_flutter_demo/widget/keyboard_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/positioned_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/refrsh_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/refrsh_demo_page2.dart';
+import 'package:gsy_flutter_demo/widget/rich_text_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/scroll_listener_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/scroll_to_index_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/scroll_to_index_demo_page2.dart';
@@ -97,6 +98,7 @@ const routerName = [
   "动画 例子",
   "悬浮触摸控件 例子",
   "全局字体大小 例子",
+  "富文本 例子",
 ];
 
 Map<String, WidgetBuilder> routers = {
@@ -156,6 +158,9 @@ Map<String, WidgetBuilder> routers = {
   },
   "widget/textsize": (context) {
     return new TextSizeDemoPage();
+  },
+  "widget/richtext": (context) {
+    return new RichTextDemoPage();
   },
 
 
