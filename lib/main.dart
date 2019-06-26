@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gsy_flutter_demo/widget/anima_demo_page.dart';
+import 'package:gsy_flutter_demo/widget/anima_demo_page2.dart';
 import 'package:gsy_flutter_demo/widget/bubble/bubble_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/clip_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/controller_demo_page.dart';
@@ -98,6 +99,7 @@ const routerName = [
   "状态栏颜色 例子",
   "键盘相关 例子",
   "动画 例子",
+  "动画2 例子",
   "悬浮触摸控件 例子",
   "全局字体大小 例子",
   "富文本 例子",
@@ -157,6 +159,9 @@ Map<String, WidgetBuilder> routers = {
   "widget/anima": (context) {
     return new AnimaDemoPage();
   },
+  "widget/anima2": (context) {
+    return new AnimaDemoPage2();
+  },
   "widget/floating": (context) {
     return new FloatingTouchDemoPage();
   },
@@ -172,5 +177,4 @@ Map<String, WidgetBuilder> routers = {
   "widget/sliver": (context) {
     return new SliverListDemoPage();
   },
-
 };
