@@ -4,6 +4,7 @@ import 'package:gsy_flutter_demo/widget/anima_demo_page2.dart';
 import 'package:gsy_flutter_demo/widget/bubble/bubble_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/clip_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/controller_demo_page.dart';
+import 'package:gsy_flutter_demo/widget/custom_multi_render_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/custom_pull/refrsh_demo_page3.dart';
 import 'package:gsy_flutter_demo/widget/floating_touch_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/honor_demo_page.dart';
@@ -107,6 +108,7 @@ const routerName = [
   "viewpager 例子",
   "滑动停靠 例子",
   "验证码输入框 例子",
+  "自定义布局 例子",
 ];
 
 Map<String, WidgetBuilder> routers = {
@@ -181,6 +183,9 @@ Map<String, WidgetBuilder> routers = {
   },
   "widget/vc": (context) {
     return new VerificationCodeInputDemoPage();
+  },
+  "widget/cmd": (context) {
+    return new CustomMultiRenderDemoPage();
   },
 
 };
