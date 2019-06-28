@@ -33,7 +33,7 @@
 
 
 
-![](http://img.cdn.guoshuyu.cn/ffffff--f-f-demo.jpg)
+![](demo.jpg)
 
 
 ## 相关文章
