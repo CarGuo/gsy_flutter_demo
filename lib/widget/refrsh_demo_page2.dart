@@ -12,6 +12,8 @@ class RefreshDemoPage2 extends StatefulWidget {
 class _RefreshDemoPageState2 extends State<RefreshDemoPage2> {
   final int pageSize = 30;
 
+  bool disposed = false;
+
   List<String> dataList = new List();
 
   final ScrollController _scrollController = new ScrollController();
@@ -22,6 +24,9 @@ class _RefreshDemoPageState2 extends State<RefreshDemoPage2> {
     for (int i = 0; i < pageSize; i++) {
       dataList.add("refresh");
     }
+    if(disposed) {
+      return;
+    }
     setState(() {});
   }
 
@@ -29,6 +34,9 @@ class _RefreshDemoPageState2 extends State<RefreshDemoPage2> {
     await Future.delayed(Duration(seconds: 2));
     for (int i = 0; i < pageSize; i++) {
       dataList.add("loadmore");
+    }
+    if(disposed) {
+      return;
     }
     setState(() {});
   }
@@ -43,6 +51,12 @@ class _RefreshDemoPageState2 extends State<RefreshDemoPage2> {
           duration: Duration(milliseconds: 600), curve: Curves.linear);
       return true;
     });
+  }
+
+  @override
+  void dispose() {
+    disposed = true;
+    super.dispose();
   }
 
   @override
