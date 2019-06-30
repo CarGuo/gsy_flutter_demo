@@ -206,9 +206,11 @@ class _VerCodeInputState extends State<VerCodeInput> {
       // the ones between the character entities.
       GestureDetector(
           onTap: () {
-            final focusScope = FocusScope.of(context);
-            focusScope.requestFocus(FocusNode());
-            Future.delayed(Duration.zero, () => focusScope.requestFocus(node));
+            if (MediaQuery.of(context).viewInsets.bottom == 0){
+              final focusScope = FocusScope.of(context);
+              focusScope.requestFocus(FocusNode());
+              Future.delayed(Duration.zero, () => focusScope.requestFocus(node));
+            }
           },
           child: Container(
             color: Colors.transparent,
