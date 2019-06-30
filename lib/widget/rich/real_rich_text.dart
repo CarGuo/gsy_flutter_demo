@@ -82,7 +82,7 @@ class RealRichText extends Text {
       effectiveTextStyle = defaultTextStyle.style.merge(style);
     if (MediaQuery.boldTextOverride(context))
       effectiveTextStyle = effectiveTextStyle
-          .merge(const TextStyle(fontWeight: FontWeight.bold));
+          .merge(TextStyle(fontWeight: FontWeight.bold));
 
     TextSpan textSpan = TextSpan(
         style: effectiveTextStyle,
@@ -228,7 +228,7 @@ class ImageResolver {
 ///
 /// No more special purpose.
 class _RichTextWrapper extends RichText {
-  const _RichTextWrapper({
+  _RichTextWrapper({
     Key key,
     @required TextSpan text,
     TextAlign textAlign = TextAlign.start,
