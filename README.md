@@ -31,6 +31,7 @@
 - **验证码输入框 例子**
 - **自定义布局 例子**
 - **自定义布局云词图 例子**
+- **列表停靠 例子**
 
 
 ![](demo.jpg)
@@ -53,6 +54,7 @@
 * ### [Flutter 完整开发实战详解(十三、全面深入触摸和滑动原理)](https://juejin.im/post/5cd54839f265da03b2044c32)
 * ### [Flutter 完整开发实战详解(十四、混合开发打包 Android 篇)](https://juejin.im/post/5cf527036fb9a07ed911acd8)
 * ### [Flutter 完整开发实战详解(十五、全面理解State与Provider)](https://juejin.im/post/5d0634c7f265da1b91639232)
+* ### [Flutter 完整开发实战详解(十六、详解自定义布局实战)](https://juejin.im/post/5d1af0aee51d454fbf540a52)
 
 ----
 * ### [全网最全 Flutter 与 React Native 深入对比分析](https://juejin.im/post/5d0bac156fb9a07ec56e7f15)

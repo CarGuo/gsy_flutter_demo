@@ -164,6 +164,7 @@ class RenderCloudWidget extends RenderBox
         size.width < recordRect.width || size.height < recordRect.height;
   }
 
+  ///设置绘制默认
   @override
   void paint(PaintingContext context, Offset offset) {
     if (!_needClip || _overflow != Overflow.clip) {
