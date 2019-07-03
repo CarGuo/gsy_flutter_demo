@@ -18,6 +18,7 @@ import 'package:gsy_flutter_demo/widget/scroll_listener_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/scroll_to_index_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/scroll_to_index_demo_page2.dart';
 import 'package:gsy_flutter_demo/widget/sliver_list_demo_page.dart';
+import 'package:gsy_flutter_demo/widget/sliver_stick_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/statusbar_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/stick/stick_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/tag_demo_page.dart';
@@ -113,6 +114,7 @@ const routerName = [
   "自定义布局 例子",
   "自定义布局云词图 例子",
   "列表停靠Stick 例子",
+  "列表停靠Stick2 例子",
 ];
 
 Map<String, WidgetBuilder> routers = {
@@ -196,6 +198,9 @@ Map<String, WidgetBuilder> routers = {
   },
   "widget/stick": (context) {
     return new StickDemoPage();
+  },
+  "widget/stick2": (context) {
+    return new SliverStickListDemoPage();
   },
 
 };
