@@ -11,97 +11,36 @@ class SliverStickListDemoPage extends StatefulWidget {
       _SliverStickListDemoPageState();
 }
 
-class _SliverStickListDemoPageState extends State<SliverStickListDemoPage>
-    with SingleTickerProviderStateMixin {
-  bool isTranslate = false;
-
-  ///header高度
-  double headerHeight = 60;
-
-  ///内容高度
-  double contentHeight = 120;
-
+class _SliverStickListDemoPageState extends State<SliverStickListDemoPage> {
   ScrollController scrollController = new ScrollController();
 
   var slivers = List<Widget>();
+
+  ///header高度
+  final double headerHeight = 60;
+
+  ///内容高度
+  final double contentHeight = 120;
 
   void initItem() {
     slivers.clear();
     for (var i = 0; i < 50; i++) {
       slivers.add(
-        ///头部信息
-        SliverPersistentHeader(
-          pinned: true,
-          floating: true,
-          delegate: GSYSliverHeaderDelegate(
-              maxHeight: headerHeight,
-              minHeight: headerHeight,
-              snapConfig: FloatingHeaderSnapConfiguration(
-                vsync: this,
-                curve: Curves.bounceInOut,
-                duration: const Duration(milliseconds: 10),
-              ),
-              builder: (context, shrinkOffset, overlapsContent) {
-                var state = Scrollable.of(context);
-
-                ///整个 item 的大小
-                var itemHeight = headerHeight + contentHeight;
-
-                ///当前顶部的位置
-                var position = state.position.pixels ~/ itemHeight;
-
-                ///当前和挂着的 header 相邻的 item 位置
-                var offsetPosition =
-                    (state.position.pixels + headerHeight) ~/ itemHeight;
-
-                ///当前和挂着的 header 相邻的 item ，需要改变的偏移
-                var changeOffset =
-                    state.position.pixels - offsetPosition * itemHeight;
-
-                /// header 动态显示需要的高度
-                var height = offsetPosition == (i + 1)
-                    ? (changeOffset < 0) ? -changeOffset : headerHeight
-                    : headerHeight;
-
-                if (isTranslate) {
-                  ///越过去就不可见了
-                  return Visibility(
-                    visible: (position <= i),
-                    child: new Transform.translate(
-                      offset: Offset(0, -(headerHeight - height)),
-                      child: new Container(
-                        ///如果把 height 模式 Transform.translate 更有趣
-                        height: headerHeight,
-                        alignment: Alignment.center,
-                        color: Colors.redAccent,
-                        child: new Container(
-                          padding: EdgeInsets.symmetric(horizontal: 10),
-                          alignment: Alignment.centerLeft,
-                          height: headerHeight,
-                          child: new Text("Header $i"),
-                        ),
-                      ),
-                    ),
-                  );
-                }
-
-                ///越过去就不可见了
-                return Visibility(
-                  visible: (position <= i),
-                  child: new Container(
-                    ///如果把 height 模式 Transform.translate 更有趣
-                    height: height,
-                    alignment: Alignment.center,
-                    color: Colors.redAccent,
-                    child: new Container(
-                      padding: EdgeInsets.symmetric(horizontal: 10),
-                      alignment: Alignment.centerLeft,
-                      height: headerHeight,
-                      child: new Text("Header $i"),
-                    ),
-                  ),
-                );
-              }),
+        SliverHeaderItem(
+          i,
+          child: new Container(
+            height: headerHeight,
+            alignment: Alignment.center,
+            color: Colors.redAccent,
+            child: new Container(
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              alignment: Alignment.centerLeft,
+              height: headerHeight,
+              child: new Text("Header $i"),
+            ),
+          ),
+          headerHeight: headerHeight,
+          contentHeight: contentHeight,
         ),
       );
 
@@ -120,39 +59,20 @@ class _SliverStickListDemoPageState extends State<SliverStickListDemoPage>
   }
 
   @override
-  void initState() {
-    super.initState();
-
-    ///监听列表改变
+  void didChangeDependencies() {
+    super.didChangeDependencies();
     Future.delayed(Duration(seconds: 0), () {
-      scrollController.addListener(() {
-        setState(() {});
+      setState(() {
+        initItem();
       });
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    initItem();
     return Scaffold(
       appBar: AppBar(
         title: new Text("SliverListDemoPage"),
-        actions: <Widget>[
-          new IconButton(
-              icon: Icon(Icons.transform),
-              onPressed: () {
-                setState(() {
-                  isTranslate = false;
-                });
-              }),
-          new IconButton(
-              icon: Icon(Icons.swap_calls),
-              onPressed: () {
-                setState(() {
-                  isTranslate = true;
-                });
-              }),
-        ],
       ),
       body: new Container(
         child: CustomScrollView(
@@ -161,6 +81,93 @@ class _SliverStickListDemoPageState extends State<SliverStickListDemoPage>
           slivers: slivers,
         ),
       ),
+    );
+  }
+}
+
+class SliverHeaderItem extends StatefulWidget {
+  final int index;
+
+  final Widget child;
+
+  ///header高度
+  final double headerHeight;
+
+  ///内容高度
+  final double contentHeight;
+
+  SliverHeaderItem(this.index,
+      {@required this.child, this.headerHeight = 60, this.contentHeight = 120});
+
+  @override
+  _SliverHeaderItemState createState() => _SliverHeaderItemState();
+}
+
+class _SliverHeaderItemState extends State<SliverHeaderItem>
+    with SingleTickerProviderStateMixin {
+  scrollListener() {
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    ///监听列表改变
+    Future.delayed(Duration(seconds: 0), () {
+      Scrollable.of(context).position.addListener(scrollListener);
+    });
+  }
+
+  @override
+  void dispose() {
+    Scrollable.of(context).position.removeListener(scrollListener);
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverPersistentHeader(
+      pinned: true,
+      floating: true,
+      delegate: GSYSliverHeaderDelegate(
+          maxHeight: widget.headerHeight,
+          minHeight: widget.headerHeight,
+          snapConfig: FloatingHeaderSnapConfiguration(
+            vsync: this,
+            curve: Curves.bounceInOut,
+            duration: const Duration(milliseconds: 10),
+          ),
+          builder: (context, shrinkOffset, overlapsContent) {
+            var state = Scrollable.of(context);
+
+            ///整个 item 的大小
+            var itemHeight = widget.headerHeight + widget.contentHeight;
+
+            ///当前顶部的位置
+            var position = state.position.pixels ~/ itemHeight;
+
+            ///当前和挂着的 header 相邻的 item 位置
+            var offsetPosition =
+                (state.position.pixels + widget.headerHeight) ~/ itemHeight;
+
+            ///当前和挂着的 header 相邻的 item ，需要改变的偏移
+            var changeOffset =
+                state.position.pixels - offsetPosition * itemHeight;
+
+            /// header 动态显示需要的高度
+            var height = offsetPosition == (widget.index + 1)
+                ? (changeOffset < 0) ? -changeOffset : widget.headerHeight
+                : widget.headerHeight;
+
+            return Visibility(
+              visible: (position <= widget.index),
+              child: new Transform.translate(
+                offset: Offset(0, -(widget.headerHeight - height)),
+                child: widget.child,
+              ),
+            );
+          }),
     );
   }
 }
