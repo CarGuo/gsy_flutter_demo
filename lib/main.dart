@@ -9,6 +9,7 @@ import 'package:gsy_flutter_demo/widget/custom_multi_render_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/custom_pull/refrsh_demo_page3.dart';
 import 'package:gsy_flutter_demo/widget/floating_touch_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/honor_demo_page.dart';
+import 'package:gsy_flutter_demo/widget/input_bottom_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/keyboard_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/positioned_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/refrsh_demo_page.dart';
@@ -115,6 +116,7 @@ const routerName = [
   "自定义布局云词图 例子",
   "列表停靠Stick 例子",
   "列表停靠Stick2 例子",
+  "键盘顶起 例子",
 ];
 
 Map<String, WidgetBuilder> routers = {
@@ -202,5 +204,9 @@ Map<String, WidgetBuilder> routers = {
   "widget/stick2": (context) {
     return new SliverStickListDemoPage();
   },
+  "widget/kb": (context) {
+    return new InputBottomDemoPage();
+  },
+
 
 };
