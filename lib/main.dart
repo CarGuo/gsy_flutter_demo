@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gsy_flutter_demo/widget/anima_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/anima_demo_page2.dart';
+import 'package:gsy_flutter_demo/widget/blur_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/bubble/bubble_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/clip_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/cloud/cloud_demo_page.dart';
@@ -117,6 +118,7 @@ const routerName = [
   "列表停靠Stick 例子",
   "列表停靠Stick2 例子",
   "键盘顶起 例子",
+  "Blur 例子",
 ];
 
 Map<String, WidgetBuilder> routers = {
@@ -207,6 +209,8 @@ Map<String, WidgetBuilder> routers = {
   "widget/kb": (context) {
     return new InputBottomDemoPage();
   },
-
+  "widget/blur": (context) {
+    return new BlurDemoPage();
+  },
 
 };
