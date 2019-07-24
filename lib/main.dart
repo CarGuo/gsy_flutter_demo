@@ -27,6 +27,7 @@ import 'package:gsy_flutter_demo/widget/stick/stick_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/tag_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/text_line_height_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/text_size_demo_page.dart';
+import 'package:gsy_flutter_demo/widget/tick_click_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/transform_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/verification_code_input_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/viewpager_demo_page.dart';
@@ -121,6 +122,7 @@ const routerName = [
   "键盘顶起 例子",
   "Blur 例子",
   "动画3 例子",
+  "时钟动画 例子",
 ];
 
 Map<String, WidgetBuilder> routers = {
@@ -214,8 +216,11 @@ Map<String, WidgetBuilder> routers = {
   "widget/blur": (context) {
     return new BlurDemoPage();
   },
-
   "widget/anima_container": (context) {
     return new AnimationContainerDemoPage();
   },
+  "widget/tick": (context) {
+    return new TickClickDemoPage();
+  },
+
 };
