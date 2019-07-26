@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gsy_flutter_demo/widget/anima_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/anima_demo_page2.dart';
+import 'package:gsy_flutter_demo/widget/anima_demo_page4.dart';
 import 'package:gsy_flutter_demo/widget/animation_container_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/blur_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/bubble/bubble_demo_page.dart';
@@ -123,6 +124,7 @@ const routerName = [
   "Blur 例子",
   "动画3 例子",
   "时钟动画 例子",
+  "动画4 例子",
 ];
 
 Map<String, WidgetBuilder> routers = {
@@ -221,6 +223,9 @@ Map<String, WidgetBuilder> routers = {
   },
   "widget/tick": (context) {
     return new TickClickDemoPage();
+  },
+  "widget/anmi4": (context) {
+    return new AnimaDemoPage4();
   },
 
 };
