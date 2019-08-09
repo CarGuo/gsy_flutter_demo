@@ -14,7 +14,7 @@ import 'package:gsy_flutter_demo/widget/floating_touch_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/honor_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/input_bottom_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/keyboard_demo_page.dart';
-import 'package:gsy_flutter_demo/widget/list_anim_demo_page.dart';
+import 'package:gsy_flutter_demo/widget/list_anim/list_anim_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/positioned_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/refrsh_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/refrsh_demo_page2.dart';
