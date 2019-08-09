@@ -15,6 +15,7 @@ import 'package:gsy_flutter_demo/widget/honor_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/input_bottom_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/keyboard_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/list_anim/list_anim_demo_page.dart';
+import 'package:gsy_flutter_demo/widget/list_anim_2/list_anim_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/positioned_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/refrsh_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/refrsh_demo_page2.dart';
@@ -127,6 +128,7 @@ const routerName = [
   "时钟动画 例子",
   "动画4 例子",
   "列表动画 例子",
+  "列表动画2 例子",
 ];
 
 Map<String, WidgetBuilder> routers = {
@@ -231,6 +233,9 @@ Map<String, WidgetBuilder> routers = {
   },
   "widget/listanim": (context) {
     return new ListAnimDemoPage();
+  },
+  "widget/listanim2": (context) {
+    return new ListAnimDemoPage2();
   },
 
 };
