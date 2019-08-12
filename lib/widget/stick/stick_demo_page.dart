@@ -28,20 +28,31 @@ class _StickDemoPageState extends State<StickDemoPage> {
                     color: Colors.deepPurple,
                     padding: new EdgeInsets.only(left: 10.0),
                     alignment: Alignment.centerLeft,
-                    child: new Text(
-                      '我的 $index 头啊',
-                      style: TextStyle(color: Colors.white),
+                    child: new InkWell(
+                      onTap: () {
+                        print("header");
+                      },
+                      child: new Text(
+                        '我的 $index 头啊',
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ),
                   ),
+
                   ///content
-                  stickContent: new Container(
-                    margin: EdgeInsets.only(left: 10),
-                    color: Colors.pinkAccent,
-                    height: 150,
-                    child: new Center(
-                      child: new Text(
-                        '我的$index 内容 啊',
-                        style: TextStyle(color: Colors.white),
+                  stickContent: new InkWell(
+                    onTap: () {
+                      print("content");
+                    },
+                    child: new Container(
+                      margin: EdgeInsets.only(left: 10),
+                      color: Colors.pinkAccent,
+                      height: 150,
+                      child: new Center(
+                        child: new Text(
+                          '我的$index 内容 啊',
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ),
                     ),
                   ),

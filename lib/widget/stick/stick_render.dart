@@ -125,6 +125,11 @@ class StickRender extends RenderBox
     new Offset(0, math.max(0, realHeaderOffset));
   }
 
+  @override
+  bool hitTestChildren(HitTestResult result, {Offset position}) {
+    return defaultHitTestChildren(result, position: position);
+  }
+
 }
 
 class StickParentData extends ContainerBoxParentData<RenderBox> {}
