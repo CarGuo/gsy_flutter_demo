@@ -10,6 +10,7 @@ import 'package:gsy_flutter_demo/widget/cloud/cloud_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/controller_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/custom_multi_render_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/custom_pull/refrsh_demo_page3.dart';
+import 'package:gsy_flutter_demo/widget/drop_select_menu/drop_select_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/floating_touch_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/honor_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/input_bottom_demo_page.dart';
@@ -131,6 +132,7 @@ const routerName = [
   "动画4 例子",
   "列表动画 例子",
   "列表动画2 例子",
+  "下弹筛选 例子",
 ];
 
 Map<String, WidgetBuilder> routers = {
@@ -242,4 +244,9 @@ Map<String, WidgetBuilder> routers = {
   "widget/listanim2": (context) {
     return new ListAnimDemoPage2();
   },
+  "widget/drop": (context) {
+    return new DropSelectDemoPage();
+  },
+
+
 };
