@@ -6,21 +6,19 @@ import 'drop_select_controller.dart';
 import 'drop_select_widget.dart';
 
 typedef Widget MenuItemBuilder<T extends DropSelectObject>(
-    BuildContext context, T data, bool selected);
-typedef void MenuItemOnTap<T>(T data, int index);
-typedef List<E> GetSubData<T, E>(T data);
+    BuildContext context, T data);
 
 const double kDropSelectMenuItemHeight = 45.0;
 
 class DropSelectListMenu<T extends DropSelectObject> extends DropSelectWidget {
   final List<T> data;
-  final int selectedIndex;
   final MenuItemBuilder itemBuilder;
+  final bool singleSelected;
   final double itemExtent;
 
   DropSelectListMenu(
       {this.data,
-      this.selectedIndex,
+      this.singleSelected = false,
       this.itemBuilder,
       this.itemExtent: kDropSelectMenuItemHeight});
 
@@ -32,11 +30,8 @@ class DropSelectListMenu<T extends DropSelectObject> extends DropSelectWidget {
 
 class _MenuListState<T extends DropSelectObject>
     extends DropSelectState<DropSelectListMenu<T>> {
-  int _selectedIndex;
-
   @override
   void initState() {
-    _selectedIndex = widget.selectedIndex;
     super.initState();
   }
 
@@ -46,13 +41,17 @@ class _MenuListState<T extends DropSelectObject>
     final T data = list[index];
     return new GestureDetector(
       behavior: HitTestBehavior.opaque,
-      child: widget.itemBuilder(context, data, index == _selectedIndex),
+      child: widget.itemBuilder(context, data),
       onTap: () {
+        if (widget.singleSelected) {
+          widget.data.forEach((item) {
+            item.selected = false;
+          });
+        }
         setState(() {
-          _selectedIndex = index;
+          data.selected = !data.selected;
         });
-        assert(controller != null);
-        controller.select(data, index: index);
+        controller?.select(data, index: index);
       },
     );
   }

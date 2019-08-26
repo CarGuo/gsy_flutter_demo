@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:gsy_flutter_demo/widget/expand/expand_widget.dart';
 
 import 'drop_select_controller.dart';
 import 'drop_select_object.dart';
@@ -9,18 +8,16 @@ import 'drop_select_widget.dart';
 const double kDropExpendedSelectMenuItemHeight = 45.0;
 
 typedef Widget MenuItemGridBuilder<T extends DropSelectObject>(
-    BuildContext context, T data, bool selected);
+    BuildContext context, T data);
 
 class DropSelectGridListMenu<T extends DropSelectObject>
     extends DropSelectWidget {
   final List<T> data;
-  final int selectedIndex;
   final double itemExtent;
   final MenuItemGridBuilder itemBuilder;
 
   DropSelectGridListMenu(
       {this.data,
-      this.selectedIndex,
       this.itemBuilder,
       this.itemExtent: kDropExpendedSelectMenuItemHeight});
 
@@ -32,11 +29,8 @@ class DropSelectGridListMenu<T extends DropSelectObject>
 
 class _MenuListGridState<T extends DropSelectObject>
     extends DropSelectState<DropSelectGridListMenu<T>> {
-  int _lastSelectedIndex;
-
   @override
   void initState() {
-    _lastSelectedIndex = widget.selectedIndex;
     super.initState();
   }
 
@@ -48,8 +42,7 @@ class _MenuListGridState<T extends DropSelectObject>
         crossAxisCount: 2,
         childAspectRatio: 3,
         children: List.generate(count, (index) {
-          return widget.itemBuilder(
-              context, data.children[index], index == _lastSelectedIndex);
+          return widget.itemBuilder(context, data.children[index]);
         }),
       ),
     );

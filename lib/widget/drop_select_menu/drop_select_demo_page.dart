@@ -50,7 +50,6 @@ class _DropSelectDemoPageState extends State<DropSelectDemoPage> {
           new DropSelectMenuBuilder(
               builder: (BuildContext context) {
                 return new DropSelectExpandedListMenu(
-                  selectedIndex: 0,
                   data: selectExpand,
                   itemBuilder: renderSelectItemGrid,
                 );
@@ -59,7 +58,6 @@ class _DropSelectDemoPageState extends State<DropSelectDemoPage> {
           new DropSelectMenuBuilder(
               builder: (BuildContext context) {
                 return new DropSelectGridListMenu(
-                  selectedIndex: 0,
                   data: selectChildGrid,
                   itemBuilder: renderSelectItemGrid,
                 );
@@ -68,8 +66,8 @@ class _DropSelectDemoPageState extends State<DropSelectDemoPage> {
           new DropSelectMenuBuilder(
               builder: (BuildContext context) {
                 return new DropSelectListMenu(
-                  selectedIndex: 0,
                   data: selectNormal,
+                  singleSelected: true,
                   itemBuilder: renderSelectItem,
                 );
               },
@@ -77,8 +75,7 @@ class _DropSelectDemoPageState extends State<DropSelectDemoPage> {
         ]);
   }
 
-  Widget renderSelectItem(
-      BuildContext context, DropSelectObject data, bool selected) {
+  Widget renderSelectItem(BuildContext context, DropSelectObject data) {
     return new Padding(
         padding: new EdgeInsets.all(10.0),
         child: new Row(
@@ -95,7 +92,7 @@ class _DropSelectDemoPageState extends State<DropSelectDemoPage> {
             new Expanded(
                 child: new Align(
               alignment: Alignment.centerRight,
-              child: selected
+              child: data.selected
                   ? new Icon(
                       Icons.check_circle,
                       color: Theme.of(context).primaryColor,
@@ -106,8 +103,7 @@ class _DropSelectDemoPageState extends State<DropSelectDemoPage> {
         ));
   }
 
-  Widget renderSelectItemGrid(
-      BuildContext context, DropSelectObject data, bool selected) {
+  Widget renderSelectItemGrid(BuildContext context, DropSelectObject data) {
     return new InkWell(
       onTap: () {
         setState(() {
