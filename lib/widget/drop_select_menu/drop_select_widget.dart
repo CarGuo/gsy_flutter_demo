@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gsy_flutter_demo/widget/drop_select_menu/drop_select_object.dart';
 
 import 'drop_select_controller.dart';
 
@@ -37,6 +38,19 @@ abstract class DropSelectState<T extends DropSelectWidget> extends State<T> {
     super.didUpdateWidget(oldWidget);
   }
 
+  cloneDataList(List<DropSelectObject> form, List<DropSelectObject> to) {
+    to.clear();
+    form.forEach((item) {
+      to.add(item.clone());
+    });
+  }
+
+  resetList(List<DropSelectObject> list) {
+    list.forEach((item) {
+      item.selected = false;
+    });
+  }
+
   void _onEvent() {
     onEvent(controller.event);
   }
@@ -45,7 +59,6 @@ abstract class DropSelectState<T extends DropSelectWidget> extends State<T> {
 }
 
 class DropSelectMenuContainer extends StatefulWidget {
-
   DropSelectMenuContainer({
     Key key,
     @required this.child,
@@ -69,7 +82,6 @@ class DropSelectMenuContainer extends StatefulWidget {
 
 class _DropSelectMenuContainerState extends State<DropSelectMenuContainer>
     with SingleTickerProviderStateMixin {
-
   DropSelectController _controller;
 
   @override
