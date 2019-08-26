@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gsy_flutter_demo/widget/drop_select_menu/drop_select_object.dart';
@@ -15,11 +17,13 @@ class DropSelectExpandedListMenu<T extends DropSelectObject>
     extends DropSelectWidget {
   final List<T> data;
   final double itemExtent;
+  final bool singleSelected;
   final MenuItemExpandedBuilder itemBuilder;
 
   DropSelectExpandedListMenu(
       {this.data,
       this.itemBuilder,
+      this.singleSelected = false,
       this.itemExtent: kDropExpendedSelectMenuItemHeight});
 
   @override
@@ -30,6 +34,9 @@ class DropSelectExpandedListMenu<T extends DropSelectObject>
 
 class _MenuListExpandedState<T extends DropSelectObject>
     extends DropSelectState<DropSelectExpandedListMenu<T>> {
+
+  Map<String, int> cleanOtherList = new HashMap();
+
   @override
   void initState() {
     super.initState();
@@ -43,7 +50,35 @@ class _MenuListExpandedState<T extends DropSelectObject>
         crossAxisCount: 2,
         childAspectRatio: 3,
         children: List.generate(count, (i) {
-          return widget.itemBuilder(context, data.children[i]);
+          var child =  data.children[i];
+          if(child.selectedCleanOther) {
+            cleanOtherList["$i"] = i;
+          }
+          return new InkWell(
+            onTap: () {
+              if (widget.singleSelected) {
+                data.forEach((item) {
+                  item.selected = false;
+                });
+              }
+              if(child.selectedCleanOther) {
+                data.children.forEach((item) {
+                  item.selected = false;
+                });
+              }
+              if(!child.selectedCleanOther && cleanOtherList.length > 0) {
+                cleanOtherList.forEach((key, value) {
+                  if(value != i) {
+                    data.children[value].selected = false;
+                  }
+                });
+              }
+              setState(() {
+                child.selected = !child.selected;
+              });
+            },
+            child: widget.itemBuilder(context, child),
+          );
         }),
       ),
     );

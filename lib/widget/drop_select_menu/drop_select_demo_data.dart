@@ -6,7 +6,7 @@ final selectChildGrid = getSelectChildList();
 
 getSelectList() {
   return [
-    DropSelectObject(title: "选择1"),
+    DropSelectObject(title: "全部", selectedCleanOther: true, selected: true),
     DropSelectObject(title: "选择2"),
     DropSelectObject(title: "选择3"),
     DropSelectObject(title: "选择4"),
@@ -18,7 +18,8 @@ getSelectList() {
 }
 
 getSelectChildList() {
-  List<DropSelectObject>  children1 = [
+  List<DropSelectObject> children1 = [
+    DropSelectObject(title: "全部", selectedCleanOther: true, selected: true),
     DropSelectObject(title: "问题1"),
     DropSelectObject(title: "问题2"),
     DropSelectObject(title: "问题3"),
@@ -30,6 +31,7 @@ getSelectChildList() {
   ];
 
   List<DropSelectObject> children2 = [
+    DropSelectObject(title: "全部", selectedCleanOther: true, selected: true),
     DropSelectObject(title: "测试1"),
     DropSelectObject(title: "测试2"),
     DropSelectObject(title: "测试3"),
@@ -45,7 +47,8 @@ getSelectChildList() {
 }
 
 getSelectChildExpandList() {
-  List<DropSelectObject>  children1 = [
+  List<DropSelectObject> children1 = [
+    DropSelectObject(title: "全部", selectedCleanOther: true, selected: true),
     DropSelectObject(title: "距离1"),
     DropSelectObject(title: "距离2"),
     DropSelectObject(title: "距离3"),
@@ -55,7 +58,8 @@ getSelectChildExpandList() {
     DropSelectObject(title: "距离7"),
   ];
 
-  List<DropSelectObject>  children2 = [
+  List<DropSelectObject> children2 = [
+    DropSelectObject(title: "全部", selectedCleanOther: true, selected: true),
     DropSelectObject(title: "范围1"),
     DropSelectObject(title: "范围2"),
     DropSelectObject(title: "范围3"),
@@ -66,7 +70,8 @@ getSelectChildExpandList() {
     DropSelectObject(title: "范围8"),
   ];
 
-  List<DropSelectObject>  children3 = [
+  List<DropSelectObject> children3 = [
+    DropSelectObject(title: "全部", selectedCleanOther: true, selected: true),
     DropSelectObject(title: "路径1"),
     DropSelectObject(title: "路径2"),
     DropSelectObject(title: "路径3"),
@@ -74,7 +79,8 @@ getSelectChildExpandList() {
     DropSelectObject(title: "路径5"),
   ];
 
-  List<DropSelectObject>  children4 = [
+  List<DropSelectObject> children4 = [
+    DropSelectObject(title: "全部", selectedCleanOther: true, selected: true),
     DropSelectObject(title: "回家1"),
     DropSelectObject(title: "回家2"),
     DropSelectObject(title: "回家3"),

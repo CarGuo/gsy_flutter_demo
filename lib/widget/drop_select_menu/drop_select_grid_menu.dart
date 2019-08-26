@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -14,11 +16,13 @@ class DropSelectGridListMenu<T extends DropSelectObject>
     extends DropSelectWidget {
   final List<T> data;
   final double itemExtent;
+  final bool singleSelected;
   final MenuItemGridBuilder itemBuilder;
 
   DropSelectGridListMenu(
       {this.data,
       this.itemBuilder,
+      this.singleSelected = false,
       this.itemExtent: kDropExpendedSelectMenuItemHeight});
 
   @override
@@ -29,6 +33,10 @@ class DropSelectGridListMenu<T extends DropSelectObject>
 
 class _MenuListGridState<T extends DropSelectObject>
     extends DropSelectState<DropSelectGridListMenu<T>> {
+
+
+  Map<String, int> cleanOtherList = new HashMap();
+
   @override
   void initState() {
     super.initState();
@@ -41,8 +49,37 @@ class _MenuListGridState<T extends DropSelectObject>
         physics: NeverScrollableScrollPhysics(),
         crossAxisCount: 2,
         childAspectRatio: 3,
-        children: List.generate(count, (index) {
-          return widget.itemBuilder(context, data.children[index]);
+        children: List.generate(count, (i) {
+          var child =  data.children[i];
+          ///记录冲突选择的Map
+          if(child.selectedCleanOther) {
+            cleanOtherList["$i"] = i;
+          }
+          return new InkWell(
+            onTap: () {
+              if (widget.singleSelected) {
+                data.children.forEach((item) {
+                  item.selected = false;
+                });
+              }
+              if(child.selectedCleanOther) {
+                data.children.forEach((item) {
+                  item.selected = false;
+                });
+              }
+              if(!child.selectedCleanOther && cleanOtherList.length > 0) {
+                cleanOtherList.forEach((key, value) {
+                  if(value != i) {
+                    data.children[value].selected = false;
+                  }
+                });
+              }
+              setState(() {
+                child.selected = !child.selected;
+              });
+            },
+            child: widget.itemBuilder(context, child),
+          );
         }),
       ),
     );

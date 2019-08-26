@@ -104,32 +104,24 @@ class _DropSelectDemoPageState extends State<DropSelectDemoPage> {
   }
 
   Widget renderSelectItemGrid(BuildContext context, DropSelectObject data) {
-    return new InkWell(
-      onTap: () {
-        setState(() {
-          data.selected = !data.selected;
-        });
-      },
+    return new Container(
+      padding: new EdgeInsets.all(10.0),
       child: new Container(
-        padding: new EdgeInsets.all(10.0),
-        child: new Container(
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            border: Border.all(
-                color: data.selected
-                    ? Theme.of(context).primaryColor
-                    : Colors.grey,
-                width: 1.0),
-          ),
-          child: new Text(
-            data.title,
-            style: data.selected
-                ? new TextStyle(
-                    fontSize: 14.0,
-                    color: Theme.of(context).primaryColor,
-                    fontWeight: FontWeight.w400)
-                : new TextStyle(fontSize: 14.0),
-          ),
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          border: Border.all(
+              color:
+                  data.selected ? Theme.of(context).primaryColor : Colors.grey,
+              width: 1.0),
+        ),
+        child: new Text(
+          data.title,
+          style: data.selected
+              ? new TextStyle(
+                  fontSize: 14.0,
+                  color: Theme.of(context).primaryColor,
+                  fontWeight: FontWeight.w400)
+              : new TextStyle(fontSize: 14.0),
         ),
       ),
     );

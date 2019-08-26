@@ -48,6 +48,11 @@ class _MenuListState<T extends DropSelectObject>
             item.selected = false;
           });
         }
+        if(data.selectedCleanOther) {
+          widget.data.forEach((item) {
+            item.selected = false;
+          });
+        }
         setState(() {
           data.selected = !data.selected;
         });
