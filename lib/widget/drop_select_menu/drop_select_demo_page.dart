@@ -71,7 +71,7 @@ class _DropSelectDemoPageState extends State<DropSelectDemoPage> {
                   itemBuilder: renderSelectItem,
                 );
               },
-              height: MediaQuery.of(context).size.height),
+              height: kDropSelectMenuItemHeight * selectNormal.length),
         ]);
   }
 
@@ -135,26 +135,32 @@ class _DropSelectDemoPageState extends State<DropSelectDemoPage> {
       ),
       body: Container(
         child: new DropSelectMenuContainer(
-            child: new Column(
-          children: <Widget>[
-            renderDropSelectHeader(),
-            new Expanded(
+          child: new Column(
+            children: <Widget>[
+              renderDropSelectHeader(),
+              new Expanded(
                 child: new Stack(
-              children: <Widget>[
-                new ListView(
-                  children: List.generate(100, (index) {
-                    return Container(
-                      height: 40,
-                      margin: EdgeInsets.only(left: 10),
-                      child: new Text("Text $index"),
-                    );
-                  }),
+                  children: <Widget>[
+                    new ListView(
+                      children: List.generate(100, (index) {
+                        return Container(
+                          height: 40,
+                          margin: EdgeInsets.only(left: 10),
+                          child: new Text("Text $index"),
+                        );
+                      }),
+                    ),
+                    new Column(
+                      children: <Widget>[
+                        new Expanded(child: renderDropSelectMenu()),
+                      ],
+                    )
+                  ],
                 ),
-                renderDropSelectMenu()
-              ],
-            ))
-          ],
-        )),
+              )
+            ],
+          ),
+        ),
       ),
     );
   }

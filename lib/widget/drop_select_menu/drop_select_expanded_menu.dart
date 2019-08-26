@@ -34,19 +34,43 @@ class DropSelectExpandedListMenu<T extends DropSelectObject>
 
 class _MenuListExpandedState<T extends DropSelectObject>
     extends DropSelectState<DropSelectExpandedListMenu<T>> {
-
   Map<String, int> cleanOtherList = new HashMap();
 
-  bool _expanded = false;
-
-  final ExpandableController _controller = new ExpandableController();
+  final List<ExpandableController> _controllers =
+      new List<ExpandableController>();
 
   @override
   void initState() {
     super.initState();
-    _controller.addListener((){
-      _expanded = _controller.expanded;
+
+    _controllers.clear();
+
+    ///配置多个 ExpandableController 控制器
+    List.generate(widget.data.length, (index) {
+      _controllers.add(ExpandableController(false));
     });
+  }
+
+  Widget renderButton() {
+    return new Container(
+      height: 50,
+      child: new Row(
+        children: <Widget>[
+          new Expanded(
+              child: new FlatButton(
+                  onPressed: () {
+                    controller.hide();
+                  },
+                  child: new Text("重置"))),
+          new Expanded(
+              child: new FlatButton(
+                  onPressed: () {
+                    controller.select([]);
+                  },
+                  child: new Text("确定"))),
+        ],
+      ),
+    );
   }
 
   renderGrid(count, data, index) {
@@ -57,8 +81,8 @@ class _MenuListExpandedState<T extends DropSelectObject>
         crossAxisCount: 2,
         childAspectRatio: 3,
         children: List.generate(count, (i) {
-          var child =  data.children[i];
-          if(child.selectedCleanOther) {
+          var child = data.children[i];
+          if (child.selectedCleanOther) {
             cleanOtherList["$i"] = i;
           }
           return new InkWell(
@@ -68,14 +92,14 @@ class _MenuListExpandedState<T extends DropSelectObject>
                   item.selected = false;
                 });
               }
-              if(child.selectedCleanOther) {
+              if (child.selectedCleanOther) {
                 data.children.forEach((item) {
                   item.selected = false;
                 });
               }
-              if(!child.selectedCleanOther && cleanOtherList.length > 0) {
+              if (!child.selectedCleanOther && cleanOtherList.length > 0) {
                 cleanOtherList.forEach((key, value) {
-                  if(value != i) {
+                  if (value != i) {
                     data.children[value].selected = false;
                   }
                 });
@@ -94,29 +118,37 @@ class _MenuListExpandedState<T extends DropSelectObject>
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: new ListView.builder(
-        itemBuilder: (context, index) {
-          return ExpandablePanel(
-            height: widget.itemExtent,
-            initialExpanded: _expanded,
-            controller: _controller,
-            header: new Container(
-              height: widget.itemExtent,
-              child: new Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  widget.data[index].title,
-                  style: TextStyle(fontSize: 16, color: Colors.black),
-                ),
-              ),
+      child: new Column(
+        children: <Widget>[
+          new Expanded(
+            child: new ListView.builder(
+              itemBuilder: (context, index) {
+                return ExpandablePanel(
+                  height: widget.itemExtent,
+                  initialExpanded: _controllers[index].expanded,
+                  controller: _controllers[index],
+                  header: new Container(
+                    height: widget.itemExtent,
+                    padding: EdgeInsets.only(left: 10),
+                    child: new Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        widget.data[index].title,
+                        style: TextStyle(fontSize: 16, color: Colors.black),
+                      ),
+                    ),
+                  ),
+                  expanded: renderGrid(widget.data[index].children.length,
+                      widget.data[index], index),
+                  tapHeaderToExpand: true,
+                  hasIcon: true,
+                );
+              },
+              itemCount: widget.data.length,
             ),
-            expanded: renderGrid(
-                widget.data[index].children.length, widget.data[index], index),
-            tapHeaderToExpand: true,
-            hasIcon: true,
-          );
-        },
-        itemCount: widget.data.length,
+          ),
+          renderButton(),
+        ],
       ),
     );
   }

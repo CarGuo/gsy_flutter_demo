@@ -33,8 +33,6 @@ class DropSelectGridListMenu<T extends DropSelectObject>
 
 class _MenuListGridState<T extends DropSelectObject>
     extends DropSelectState<DropSelectGridListMenu<T>> {
-
-
   Map<String, int> cleanOtherList = new HashMap();
 
   @override
@@ -50,9 +48,10 @@ class _MenuListGridState<T extends DropSelectObject>
         crossAxisCount: 2,
         childAspectRatio: 3,
         children: List.generate(count, (i) {
-          var child =  data.children[i];
+          var child = data.children[i];
+
           ///记录冲突选择的Map
-          if(child.selectedCleanOther) {
+          if (child.selectedCleanOther) {
             cleanOtherList["$i"] = i;
           }
           return new InkWell(
@@ -62,17 +61,15 @@ class _MenuListGridState<T extends DropSelectObject>
                   item.selected = false;
                 });
               }
-              if(child.selectedCleanOther) {
+              if (child.selectedCleanOther) {
                 data.children.forEach((item) {
                   item.selected = false;
                 });
               }
 
-              ///todo 还少了选择后是否收起，底部按键，统一数据管理
-
-              if(!child.selectedCleanOther && cleanOtherList.length > 0) {
+              if (!child.selectedCleanOther && cleanOtherList.length > 0) {
                 cleanOtherList.forEach((key, value) {
-                  if(value != i) {
+                  if (value != i) {
                     data.children[value].selected = false;
                   }
                 });
@@ -88,26 +85,53 @@ class _MenuListGridState<T extends DropSelectObject>
     );
   }
 
+  Widget renderButton() {
+    return new Container(
+      height: 50,
+      child: new Row(
+        children: <Widget>[
+          new Expanded(
+              child: new FlatButton(
+                  onPressed: () {
+                    controller.hide();
+                  },
+                  child: new Text("重置"))),
+          new Expanded(
+              child: new FlatButton(
+                  onPressed: () {
+                    controller.select([]);
+                  },
+                  child: new Text("确定"))),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: new ListView.builder(
-        itemBuilder: (context, index) {
-          return new Container(
-            child: new Column(
-              children: <Widget>[
-                new Container(
-                  child: new Text(widget.data[index].title),
-                  alignment: Alignment.centerLeft,
+      child: new Column(children: <Widget>[
+        new Expanded(
+          child: new ListView.builder(
+            itemBuilder: (context, index) {
+              return new Container(
+                child: new Column(
+                  children: <Widget>[
+                    new Container(
+                      child: new Text(widget.data[index].title),
+                      alignment: Alignment.centerLeft,
+                    ),
+                    renderGrid(widget.data[index].children.length,
+                        widget.data[index], index)
+                  ],
                 ),
-                renderGrid(widget.data[index].children.length,
-                    widget.data[index], index)
-              ],
-            ),
-          );
-        },
-        itemCount: widget.data.length,
-      ),
+              );
+            },
+            itemCount: widget.data.length,
+          ),
+        ),
+        renderButton(),
+      ]),
     );
   }
 
