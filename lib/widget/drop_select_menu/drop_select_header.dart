@@ -8,7 +8,7 @@ typedef void DropdownMenuHeadTapCallback(int index);
 typedef String ShowTitle(dynamic data, int index);
 
 class DropSelectHeader extends DropSelectWidget {
-  final List<dynamic> titles;
+  final List titles;
   final int activeIndex;
   final DropdownMenuHeadTapCallback onTap;
 
@@ -80,14 +80,14 @@ class _DropSelectHeaderState extends DropSelectState<DropSelectHeader> {
   }
 
   int _activeIndex;
-  List<dynamic> _titles;
+  List _titles;
 
   @override
   Widget build(BuildContext context) {
     List<Widget> list = [];
 
     final int activeIndex = _activeIndex;
-    final List<dynamic> titles = _titles;
+    final List titles = _titles;
     final double height = widget.height;
 
     for (int i = 0, c = widget.titles.length; i < c; ++i) {

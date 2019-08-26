@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:gsy_flutter_demo/widget/drop_select_menu/drop_select_object.dart';
 import 'package:gsy_flutter_demo/widget/expand/expand_widget.dart';
 
-import 'drop_select_const.dart';
 import 'drop_select_controller.dart';
 import 'drop_select_widget.dart';
 
 const double kDropExpendedSelectMenuItemHeight = 45.0;
 
-typedef Widget MenuItemExpandedBuilder<T>(
+typedef Widget MenuItemExpandedBuilder<T extends DropSelectObject>(
     BuildContext context, T data, bool selected);
 
-class DropSelectExpandedListMenu<T> extends DropSelectWidget {
+class DropSelectExpandedListMenu<T extends DropSelectObject>
+    extends DropSelectWidget {
   final List<T> data;
   final int selectedIndex;
   final double itemExtent;
@@ -29,31 +30,14 @@ class DropSelectExpandedListMenu<T> extends DropSelectWidget {
   }
 }
 
-class _MenuListExpandedState<T>
+class _MenuListExpandedState<T extends DropSelectObject>
     extends DropSelectState<DropSelectExpandedListMenu<T>> {
-  int _selectedIndex;
+  int _lastSelectedIndex;
 
   @override
   void initState() {
-    _selectedIndex = widget.selectedIndex;
+    _lastSelectedIndex = widget.selectedIndex;
     super.initState();
-  }
-
-  Widget buildItem(BuildContext context, int index) {
-    final List<T> list = widget.data;
-
-    final T data = list[index];
-    return new GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      child: widget.itemBuilder(context, data, index == _selectedIndex),
-      onTap: () {
-        setState(() {
-          _selectedIndex = index;
-        });
-        assert(controller != null);
-        controller.select(data, index: index);
-      },
-    );
   }
 
   renderGrid(count, data, index) {
@@ -63,9 +47,9 @@ class _MenuListExpandedState<T>
         physics: NeverScrollableScrollPhysics(),
         crossAxisCount: 2,
         childAspectRatio: 3,
-        children: List.generate(count, (index) {
+        children: List.generate(count, (i) {
           return widget.itemBuilder(
-              context, data[SUB_LIST_KEY][index], index == _selectedIndex);
+              context, data.children[i], i == _lastSelectedIndex);
         }),
       ),
     );
@@ -84,15 +68,13 @@ class _MenuListExpandedState<T>
               child: new Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  (widget.data[index] as Map)["title"],
+                  widget.data[index].title,
                   style: TextStyle(fontSize: 16, color: Colors.black),
                 ),
               ),
             ),
             expanded: renderGrid(
-                (widget.data[index] as Map)[SUB_LIST_KEY].length,
-                widget.data[index],
-                index),
+                widget.data[index].children.length, widget.data[index], index),
             tapHeaderToExpand: true,
             hasIcon: true,
           );

@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:gsy_flutter_demo/widget/drop_select_menu/drop_select_object.dart';
 
 import 'drop_select_controller.dart';
 import 'drop_select_widget.dart';
 
-
-typedef Widget MenuItemBuilder<T>(BuildContext context, T data, bool selected);
+typedef Widget MenuItemBuilder<T extends DropSelectObject>(
+    BuildContext context, T data, bool selected);
 typedef void MenuItemOnTap<T>(T data, int index);
 typedef List<E> GetSubData<T, E>(T data);
 
 const double kDropSelectMenuItemHeight = 45.0;
 
-class DropSelectListMenu<T> extends DropSelectWidget {
+class DropSelectListMenu<T extends DropSelectObject> extends DropSelectWidget {
   final List<T> data;
   final int selectedIndex;
   final MenuItemBuilder itemBuilder;
@@ -29,7 +30,8 @@ class DropSelectListMenu<T> extends DropSelectWidget {
   }
 }
 
-class _MenuListState<T> extends DropSelectState<DropSelectListMenu<T>> {
+class _MenuListState<T extends DropSelectObject>
+    extends DropSelectState<DropSelectListMenu<T>> {
   int _selectedIndex;
 
   @override
@@ -77,4 +79,3 @@ class _MenuListState<T> extends DropSelectState<DropSelectListMenu<T>> {
     }
   }
 }
-

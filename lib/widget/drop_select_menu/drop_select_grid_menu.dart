@@ -2,16 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gsy_flutter_demo/widget/expand/expand_widget.dart';
 
-import 'drop_select_const.dart';
 import 'drop_select_controller.dart';
+import 'drop_select_object.dart';
 import 'drop_select_widget.dart';
 
 const double kDropExpendedSelectMenuItemHeight = 45.0;
 
-typedef Widget MenuItemGridBuilder<T>(
+typedef Widget MenuItemGridBuilder<T extends DropSelectObject>(
     BuildContext context, T data, bool selected);
 
-class DropSelectGridListMenu<T> extends DropSelectWidget {
+class DropSelectGridListMenu<T extends DropSelectObject>
+    extends DropSelectWidget {
   final List<T> data;
   final int selectedIndex;
   final double itemExtent;
@@ -29,30 +30,14 @@ class DropSelectGridListMenu<T> extends DropSelectWidget {
   }
 }
 
-class _MenuListGridState<T> extends DropSelectState<DropSelectGridListMenu<T>> {
-  int _selectedIndex;
+class _MenuListGridState<T extends DropSelectObject>
+    extends DropSelectState<DropSelectGridListMenu<T>> {
+  int _lastSelectedIndex;
 
   @override
   void initState() {
-    _selectedIndex = widget.selectedIndex;
+    _lastSelectedIndex = widget.selectedIndex;
     super.initState();
-  }
-
-  Widget buildItem(BuildContext context, int index) {
-    final List<T> list = widget.data;
-
-    final T data = list[index];
-    return new GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      child: widget.itemBuilder(context, data, index == _selectedIndex),
-      onTap: () {
-        setState(() {
-          _selectedIndex = index;
-        });
-        assert(controller != null);
-        controller.select(data, index: index);
-      },
-    );
   }
 
   renderGrid(count, data, index) {
@@ -64,7 +49,7 @@ class _MenuListGridState<T> extends DropSelectState<DropSelectGridListMenu<T>> {
         childAspectRatio: 3,
         children: List.generate(count, (index) {
           return widget.itemBuilder(
-              context, data[SUB_LIST_KEY][index], index == _selectedIndex);
+              context, data.children[index], index == _lastSelectedIndex);
         }),
       ),
     );
@@ -79,10 +64,10 @@ class _MenuListGridState<T> extends DropSelectState<DropSelectGridListMenu<T>> {
             child: new Column(
               children: <Widget>[
                 new Container(
-                  child: new Text((widget.data[index] as Map)[LIST_TITLE_KEY]),
+                  child: new Text(widget.data[index].title),
                   alignment: Alignment.centerLeft,
                 ),
-                renderGrid((widget.data[index] as Map)[SUB_LIST_KEY].length,
+                renderGrid(widget.data[index].children.length,
                     widget.data[index], index)
               ],
             ),

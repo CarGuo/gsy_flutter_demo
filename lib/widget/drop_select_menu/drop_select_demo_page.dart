@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:gsy_flutter_demo/widget/drop_select_menu/drop_select_widget.dart';
+import 'package:gsy_flutter_demo/widget/drop_select_menu/drop_select_object.dart';
 
-import 'drop_select_const.dart';
 import 'drop_select_demo_data.dart';
+import 'drop_select_widget.dart';
 import 'drop_select_expanded_menu.dart';
 import 'drop_select_grid_menu.dart';
 import 'drop_select_header.dart';
@@ -28,7 +28,7 @@ class _DropSelectDemoPageState extends State<DropSelectDemoPage> {
 
   DropSelectHeader renderDropSelectHeader() {
     return new DropSelectHeader(
-      titles: [SELECT2[0], SELECT[0], SELECT[0]],
+      titles: [selectChildGrid[0], selectExpand[0], selectNormal[0]],
       showTitle: (_, index) {
         switch (index) {
           case 0:
@@ -51,7 +51,7 @@ class _DropSelectDemoPageState extends State<DropSelectDemoPage> {
               builder: (BuildContext context) {
                 return new DropSelectExpandedListMenu(
                   selectedIndex: 0,
-                  data: SELECT3,
+                  data: selectExpand,
                   itemBuilder: renderSelectItemGrid,
                 );
               },
@@ -60,7 +60,7 @@ class _DropSelectDemoPageState extends State<DropSelectDemoPage> {
               builder: (BuildContext context) {
                 return new DropSelectGridListMenu(
                   selectedIndex: 0,
-                  data: SELECT2,
+                  data: selectChildGrid,
                   itemBuilder: renderSelectItemGrid,
                 );
               },
@@ -69,7 +69,7 @@ class _DropSelectDemoPageState extends State<DropSelectDemoPage> {
               builder: (BuildContext context) {
                 return new DropSelectListMenu(
                   selectedIndex: 0,
-                  data: SELECT,
+                  data: selectNormal,
                   itemBuilder: renderSelectItem,
                 );
               },
@@ -77,14 +77,15 @@ class _DropSelectDemoPageState extends State<DropSelectDemoPage> {
         ]);
   }
 
-  Widget renderSelectItem(BuildContext context, dynamic data, bool selected) {
+  Widget renderSelectItem(
+      BuildContext context, DropSelectObject data, bool selected) {
     return new Padding(
         padding: new EdgeInsets.all(10.0),
         child: new Row(
           children: <Widget>[
             new Text(
-              data[LIST_TITLE_KEY],
-              style: selected
+              data.title,
+              style: data.selected
                   ? new TextStyle(
                       fontSize: 14.0,
                       color: Theme.of(context).primaryColor,
@@ -105,24 +106,34 @@ class _DropSelectDemoPageState extends State<DropSelectDemoPage> {
         ));
   }
 
-  Widget renderSelectItemGrid(BuildContext context, dynamic data, bool selected) {
-    return new Container(
-      padding: new EdgeInsets.all(10.0),
+  Widget renderSelectItemGrid(
+      BuildContext context, DropSelectObject data, bool selected) {
+    return new InkWell(
+      onTap: () {
+        setState(() {
+          data.selected = !data.selected;
+        });
+      },
       child: new Container(
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          border: Border.all(
-              color: selected ? Theme.of(context).primaryColor : Colors.grey,
-              width: 1.0),
-        ),
-        child: new Text(
-          data[LIST_TITLE_KEY],
-          style: selected
-              ? new TextStyle(
-                  fontSize: 14.0,
-                  color: Theme.of(context).primaryColor,
-                  fontWeight: FontWeight.w400)
-              : new TextStyle(fontSize: 14.0),
+        padding: new EdgeInsets.all(10.0),
+        child: new Container(
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            border: Border.all(
+                color: data.selected
+                    ? Theme.of(context).primaryColor
+                    : Colors.grey,
+                width: 1.0),
+          ),
+          child: new Text(
+            data.title,
+            style: data.selected
+                ? new TextStyle(
+                    fontSize: 14.0,
+                    color: Theme.of(context).primaryColor,
+                    fontWeight: FontWeight.w400)
+                : new TextStyle(fontSize: 14.0),
+          ),
         ),
       ),
     );
