@@ -132,6 +132,7 @@ class ExpandablePanel extends StatelessWidget {
 
   /// Expand/collspse icon placement
   final ExpandablePanelIconPlacement iconPlacement;
+  final ExpandableController controller;
 
   static Widget defaultExpandableBuilder(
       BuildContext context, Widget collapsed, Widget expanded) {
@@ -150,6 +151,7 @@ class ExpandablePanel extends StatelessWidget {
       this.tapHeaderToExpand = true,
       this.expandableIcon,
       this.hasIcon = true,
+      this.controller,
       this.iconPlacement = ExpandablePanelIconPlacement.right,
       this.builder = defaultExpandableBuilder});
 
@@ -201,7 +203,7 @@ class ExpandablePanel extends StatelessWidget {
     }
 
     return ExpandableNotifier(
-      controller: ExpandableController(initialExpanded),
+      controller: controller ?? ExpandableController(initialExpanded),
       child: this.header != null ? buildWithHeader() : buildWithoutHeader(),
     );
   }

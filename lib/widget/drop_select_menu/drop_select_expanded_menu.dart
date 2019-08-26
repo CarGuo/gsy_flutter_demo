@@ -37,9 +37,16 @@ class _MenuListExpandedState<T extends DropSelectObject>
 
   Map<String, int> cleanOtherList = new HashMap();
 
+  bool _expanded = false;
+
+  final ExpandableController _controller = new ExpandableController();
+
   @override
   void initState() {
     super.initState();
+    _controller.addListener((){
+      _expanded = _controller.expanded;
+    });
   }
 
   renderGrid(count, data, index) {
@@ -91,7 +98,8 @@ class _MenuListExpandedState<T extends DropSelectObject>
         itemBuilder: (context, index) {
           return ExpandablePanel(
             height: widget.itemExtent,
-            initialExpanded: false,
+            initialExpanded: _expanded,
+            controller: _controller,
             header: new Container(
               height: widget.itemExtent,
               child: new Align(

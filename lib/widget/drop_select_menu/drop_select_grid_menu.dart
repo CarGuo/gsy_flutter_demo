@@ -67,6 +67,9 @@ class _MenuListGridState<T extends DropSelectObject>
                   item.selected = false;
                 });
               }
+
+              ///todo 还少了选择后是否收起，底部按键，统一数据管理
+
               if(!child.selectedCleanOther && cleanOtherList.length > 0) {
                 cleanOtherList.forEach((key, value) {
                   if(value != i) {
