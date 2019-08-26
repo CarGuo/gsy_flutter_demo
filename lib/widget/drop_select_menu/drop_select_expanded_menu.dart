@@ -53,6 +53,12 @@ class _MenuListExpandedState<T extends DropSelectObject>
     });
   }
 
+  hideAllExpandController() {
+    _controllers.forEach((controller) {
+      controller.expanded = false;
+    });
+  }
+
   Widget renderButton() {
     return new Container(
       height: 50,
@@ -168,7 +174,9 @@ class _MenuListExpandedState<T extends DropSelectObject>
           break;
         }
       case DropSelectEvent.HIDE:
-        {}
+        {
+          hideAllExpandController();
+        }
         break;
       case DropSelectEvent.ACTIVE:
         {
