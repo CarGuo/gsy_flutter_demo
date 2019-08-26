@@ -48,6 +48,18 @@ abstract class DropSelectState<T extends DropSelectWidget> extends State<T> {
   resetList(List<DropSelectObject> list) {
     list.forEach((item) {
       item.selected = false;
+      item.children?.forEach((child) {
+        child.selected = false;
+      });
+    });
+    selectChildFirst(list);
+  }
+
+  selectChildFirst(List<DropSelectObject> list) {
+    list.forEach((item) {
+      if (item.children != null) {
+        item.children[0].selected = true;
+      }
     });
   }
 
