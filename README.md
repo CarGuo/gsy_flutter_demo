@@ -3,6 +3,8 @@
 ### 不同于 [GSYGithubAppFlutter](https://github.com/CarGuo/GSYGithubAppFlutter) 项目，本项目将逐步完善各种 Flutter 独立例子，方便新手学习上手。
 
 
+### [Web 版在线测试](https://guoshuyu.cn/home/web/#/)
+
 > 目前开始逐步补全完善，主要提供一些有用或者有趣的例子，如果你也有好例子，环境提交 PR 。
 > **运行须知：配置好Flutter开发环境(目前Flutter SDK 版本 *v1.7.8* 以上版本)**
 
