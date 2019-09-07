@@ -8,21 +8,24 @@ import 'package:flutter/widgets.dart';
 class _CustomSliver extends SingleChildRenderObjectWidget {
   const _CustomSliver({
     Key key,
-    this.indicatorLayoutExtent = 0.0,
+    this.containerLayoutExtent = 0.0,
+    this.initLayoutExtent = 0.0,
     this.hasLayoutExtent = false,
     Widget child,
-  })  : assert(indicatorLayoutExtent != null),
-        assert(indicatorLayoutExtent >= 0.0),
+  })  : assert(containerLayoutExtent != null),
+        assert(containerLayoutExtent >= 0.0),
         assert(hasLayoutExtent != null),
         super(key: key, child: child);
 
-  final double indicatorLayoutExtent;
+  final double initLayoutExtent;
+  final double containerLayoutExtent;
   final bool hasLayoutExtent;
 
   @override
   _RenderCustomSliver createRenderObject(BuildContext context) {
     return _RenderCustomSliver(
-      indicatorExtent: indicatorLayoutExtent,
+      containerExtent: containerLayoutExtent,
+      initLayoutExtent: initLayoutExtent,
       hasLayoutExtent: hasLayoutExtent,
     );
   }
@@ -30,32 +33,44 @@ class _CustomSliver extends SingleChildRenderObjectWidget {
   @override
   void updateRenderObject(BuildContext context, covariant _RenderCustomSliver renderObject) {
     renderObject
-      ..indicatorLayoutExtent = indicatorLayoutExtent
+      ..containerLayoutExtent = containerLayoutExtent
       ..hasLayoutExtent = hasLayoutExtent;
   }
 }
 
 class _RenderCustomSliver extends RenderSliver with RenderObjectWithChildMixin<RenderBox> {
   _RenderCustomSliver({
-    @required double indicatorExtent,
+    @required double containerExtent,
+    @required double initLayoutExtent,
     @required bool hasLayoutExtent,
     RenderBox child,
-  })  : assert(indicatorExtent != null),
-        assert(indicatorExtent >= 0.0),
+  })  : assert(containerExtent != null),
+        assert(containerExtent >= 0.0),
         assert(hasLayoutExtent != null),
-        _indicatorExtent = indicatorExtent,
+        _containerExtent = containerExtent,
+        _initLayoutExtent = initLayoutExtent,
         _hasLayoutExtent = hasLayoutExtent {
     this.child = child;
   }
 
-  double get indicatorLayoutExtent => _indicatorExtent;
-  double _indicatorExtent;
+  double get containerLayoutExtent => _containerExtent;
+  double _containerExtent;
 
-  set indicatorLayoutExtent(double value) {
+  set containerLayoutExtent(double value) {
     assert(value != null);
     assert(value >= 0.0);
-    if (value == _indicatorExtent) return;
-    _indicatorExtent = value;
+    if (value == _containerExtent) return;
+    _containerExtent = value;
+    markNeedsLayout();
+  }
+
+  double _initLayoutExtent;
+
+  set initLayoutExtent(double value) {
+    assert(value != null);
+    assert(value >= 0.0);
+    if (value == _containerExtent) return;
+    _initLayoutExtent = value;
     markNeedsLayout();
   }
 
@@ -75,7 +90,10 @@ class _RenderCustomSliver extends RenderSliver with RenderObjectWithChildMixin<R
   void performLayout() {
     assert(constraints.axisDirection == AxisDirection.down);
     assert(constraints.growthDirection == GrowthDirection.forward);
-    final double layoutExtent = (_hasLayoutExtent ? 1.0 : 0.0) * _indicatorExtent;
+    double layoutExtent = (_hasLayoutExtent ? 1.0 : 0.0) * _containerExtent;
+    if (_hasLayoutExtent == false && _initLayoutExtent != null && _initLayoutExtent > 0) {
+      layoutExtent += _initLayoutExtent;
+    }
     if (layoutExtent != layoutExtentOffsetCompensation) {
       geometry = SliverGeometry(
         scrollOffsetCorrection: layoutExtent - layoutExtentOffsetCompensation,
@@ -123,53 +141,56 @@ class _RenderCustomSliver extends RenderSliver with RenderObjectWithChildMixin<R
   void applyPaintTransform(RenderObject child, Matrix4 transform) {}
 }
 
-typedef ControlIndicatorBuilder = Widget Function(
+typedef ControlcontainerBuilder = Widget Function(
   BuildContext context,
   double pulledExtent,
   double triggerPullDistance,
-  double indicatorExtent,
+  double containerExtent,
 );
 
 class CustomSliver extends StatefulWidget {
   const CustomSliver({
     Key key,
     this.triggerPullDistance = _defaultTriggerPullDistance,
-    this.indicatorExtent = _defaultIndicatorExtent,
-    this.builder = buildSimpleIndicator,
+    this.containerExtent = _defaultcontainerExtent,
+    this.initLayoutExtent = 0,
+    this.builder = buildSimplecontainer,
   })  : assert(triggerPullDistance != null),
         assert(triggerPullDistance > 0.0),
-        assert(indicatorExtent != null),
-        assert(indicatorExtent >= 0.0),
+        assert(containerExtent != null),
+        assert(containerExtent >= 0.0),
         assert(
-            triggerPullDistance >= indicatorExtent,
-            'The  indicator cannot take more space in its final state '
+            triggerPullDistance >= containerExtent,
+            'The  container cannot take more space in its final state '
             'than the amount initially created by overscrolling.'),
         super(key: key);
 
   final double triggerPullDistance;
 
-  final double indicatorExtent;
+  final double initLayoutExtent;
 
-  final ControlIndicatorBuilder builder;
+  final double containerExtent;
+
+  final ControlcontainerBuilder builder;
 
   static const double _defaultTriggerPullDistance = 100.0;
-  static const double _defaultIndicatorExtent = 60.0;
+  static const double _defaultcontainerExtent = 60.0;
 
-  static Widget buildSimpleIndicator(
+  static Widget buildSimplecontainer(
     BuildContext context,
     double pulledExtent,
     double triggerPullDistance,
-    double indicatorExtent,
+    double containerExtent,
   ) {
     const Curve opacityCurve = Interval(0.0, 1, curve: Curves.easeInOut);
     return Stack(
       children: <Widget>[
         new Opacity(
-          opacity: 1 - opacityCurve.transform(min(pulledExtent / indicatorExtent, 1.0)),
+          opacity: 1 - opacityCurve.transform(min(pulledExtent / containerExtent, 1.0)),
           child: new Container(color: Colors.red),
         ),
         new Opacity(
-          opacity: opacityCurve.transform(min(pulledExtent / indicatorExtent, 1.0)),
+          opacity: opacityCurve.transform(min(pulledExtent / containerExtent, 1.0)),
           child: new Container(color: Colors.amber),
         ),
       ],
@@ -181,7 +202,7 @@ class CustomSliver extends StatefulWidget {
 }
 
 class CustomSliverState extends State<CustomSliver> {
-  double latestIndicatorBoxExtent = 0.0;
+  double latestcontainerBoxExtent = 0.0;
   bool hasSliverLayoutExtent = false;
   bool need = false;
   bool draging = false;
@@ -206,17 +227,18 @@ class CustomSliverState extends State<CustomSliver> {
   @override
   Widget build(BuildContext context) {
     return _CustomSliver(
-      indicatorLayoutExtent: widget.indicatorExtent,
+      containerLayoutExtent: widget.containerExtent,
+      initLayoutExtent: widget.initLayoutExtent,
       hasLayoutExtent: hasSliverLayoutExtent,
       child: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
-          latestIndicatorBoxExtent = constraints.maxHeight;
-          if (widget.builder != null && latestIndicatorBoxExtent > 0) {
+          latestcontainerBoxExtent = constraints.maxHeight;
+          if (widget.builder != null && latestcontainerBoxExtent > 0) {
             return widget.builder(
               context,
-              latestIndicatorBoxExtent,
+              latestcontainerBoxExtent,
               widget.triggerPullDistance,
-              widget.indicatorExtent,
+              widget.containerExtent,
             );
           }
           return Container();

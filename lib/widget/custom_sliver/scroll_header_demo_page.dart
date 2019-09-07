@@ -10,6 +10,9 @@ class ScrollHeaderDemoPage extends StatefulWidget {
 class _ScrollHeaderDemoPageState extends State<ScrollHeaderDemoPage> with SingleTickerProviderStateMixin {
   GlobalKey<CustomSliverState> globalKey = new GlobalKey();
 
+  final ScrollController controller = ScrollController(initialScrollOffset: -70);
+
+  final double initLayoutExtent = 70;
   final double indicatorExtent = 200;
   final double triggerPullDistance = 300;
 
@@ -23,7 +26,6 @@ class _ScrollHeaderDemoPageState extends State<ScrollHeaderDemoPage> with Single
       body: new NotificationListener(
         onNotification: (ScrollNotification notification) {
           if (notification is ScrollUpdateNotification) {
-            print("${notification.metrics.pixels}");
             if (notification.metrics.pixels < -indicatorExtent) {
               globalKey.currentState.handleShow();
             } else if (notification.metrics.pixels > 5) {
@@ -33,11 +35,13 @@ class _ScrollHeaderDemoPageState extends State<ScrollHeaderDemoPage> with Single
           return false;
         },
         child: CustomScrollView(
+          controller: controller,
           physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
           slivers: <Widget>[
             CustomSliver(
               key: globalKey,
-              indicatorExtent: indicatorExtent,
+              initLayoutExtent: initLayoutExtent,
+              containerExtent: indicatorExtent,
               triggerPullDistance: triggerPullDistance,
             ),
 
