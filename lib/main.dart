@@ -25,6 +25,7 @@ import 'package:gsy_flutter_demo/widget/rich_text_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/scroll_listener_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/scroll_to_index_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/scroll_to_index_demo_page2.dart';
+import 'package:gsy_flutter_demo/widget/custom_sliver/scroll_header_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/sliver_list_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/sliver_stick_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/statusbar_demo_page.dart';
@@ -135,6 +136,7 @@ const routerName = [
   "列表动画2 例子",
   "下弹筛选 例子",
   "动画5 例子",
+  "自定义滑动效果 例子",
 ];
 
 Map<String, WidgetBuilder> routers = {
@@ -251,6 +253,9 @@ Map<String, WidgetBuilder> routers = {
   },
   "widget/anmi5": (context) {
     return new AnimaDemoPage5();
+  },
+  "widget/sf": (context) {
+    return new ScrollHeaderDemoPage();
   },
 
 
