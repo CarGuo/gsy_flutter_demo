@@ -12,7 +12,7 @@ class _ScrollHeaderDemoPageState extends State<ScrollHeaderDemoPage> with Single
 
   final ScrollController controller = ScrollController(initialScrollOffset: -70);
 
-  final double initLayoutExtent = 70;
+  double initLayoutExtent = 70;
   final double indicatorExtent = 200;
   final double triggerPullDistance = 300;
   final double showPullDistance = 150;
@@ -69,14 +69,34 @@ class _ScrollHeaderDemoPageState extends State<ScrollHeaderDemoPage> with Single
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          setState(() {
-            pinned = !pinned;
-          });
-        },
-        child: new Text(pinned ? "pinned" : "scroll"),
-      ),
+      persistentFooterButtons: <Widget>[
+        new RaisedButton(
+          onPressed: () async {
+            setState(() {
+              pinned = !pinned;
+            });
+          },
+          child: new Text(
+            pinned ? "pinned" : "scroll",
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
+        new RaisedButton(
+          onPressed: () async {
+            setState(() {
+              if (initLayoutExtent == 0) {
+                initLayoutExtent = 70;
+              } else {
+                initLayoutExtent = 0;
+              }
+            });
+          },
+          child: new Text(
+            initLayoutExtent != 0 ? "minHeight" : "non Height",
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
+      ],
     );
   }
 }
