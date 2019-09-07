@@ -11,6 +11,7 @@ class _CustomSliver extends SingleChildRenderObjectWidget {
     this.containerLayoutExtent = 0.0,
     this.initLayoutExtent = 0.0,
     this.hasLayoutExtent = false,
+    this.pinned = false,
     Widget child,
   })  : assert(containerLayoutExtent != null),
         assert(containerLayoutExtent >= 0.0),
@@ -20,6 +21,7 @@ class _CustomSliver extends SingleChildRenderObjectWidget {
   final double initLayoutExtent;
   final double containerLayoutExtent;
   final bool hasLayoutExtent;
+  final bool pinned;
 
   @override
   _RenderCustomSliver createRenderObject(BuildContext context) {
@@ -27,6 +29,7 @@ class _CustomSliver extends SingleChildRenderObjectWidget {
       containerExtent: containerLayoutExtent,
       initLayoutExtent: initLayoutExtent,
       hasLayoutExtent: hasLayoutExtent,
+      pinned: pinned,
     );
   }
 
@@ -34,6 +37,8 @@ class _CustomSliver extends SingleChildRenderObjectWidget {
   void updateRenderObject(BuildContext context, covariant _RenderCustomSliver renderObject) {
     renderObject
       ..containerLayoutExtent = containerLayoutExtent
+      ..initLayoutExtent = initLayoutExtent
+      ..pinned = pinned
       ..hasLayoutExtent = hasLayoutExtent;
   }
 }
@@ -43,12 +48,14 @@ class _RenderCustomSliver extends RenderSliver with RenderObjectWithChildMixin<R
     @required double containerExtent,
     @required double initLayoutExtent,
     @required bool hasLayoutExtent,
+    @required bool pinned,
     RenderBox child,
   })  : assert(containerExtent != null),
         assert(containerExtent >= 0.0),
         assert(hasLayoutExtent != null),
         _containerExtent = containerExtent,
         _initLayoutExtent = initLayoutExtent,
+        _pinned = pinned,
         _hasLayoutExtent = hasLayoutExtent {
     this.child = child;
   }
@@ -61,6 +68,15 @@ class _RenderCustomSliver extends RenderSliver with RenderObjectWithChildMixin<R
     assert(value >= 0.0);
     if (value == _containerExtent) return;
     _containerExtent = value;
+    markNeedsLayout();
+  }
+
+  bool _pinned;
+
+  set pinned(bool value) {
+    assert(value != null);
+    if (value == _pinned) return;
+    _pinned = value;
     markNeedsLayout();
   }
 
@@ -111,20 +127,36 @@ class _RenderCustomSliver extends RenderSliver with RenderObjectWithChildMixin<R
       ),
       parentUsesSize: true,
     );
+
     if (active) {
-      geometry = SliverGeometry(
-        scrollExtent: layoutExtent,
-        paintOrigin: -overscrolledExtent - constraints.scrollOffset,
-        paintExtent: max(
-          max(child.size.height, layoutExtent) - constraints.scrollOffset,
-          0.0,
-        ),
-        maxPaintExtent: max(
-          max(child.size.height, layoutExtent) - constraints.scrollOffset,
-          0.0,
-        ),
-        layoutExtent: max(layoutExtent - constraints.scrollOffset, 0.0),
-      );
+      if (_pinned) {
+        geometry = SliverGeometry(
+          scrollExtent: containerLayoutExtent,
+          paintOrigin: constraints.overlap,
+          paintExtent: min(layoutExtent, constraints.remainingPaintExtent),
+          layoutExtent: layoutExtent,
+          maxPaintExtent: containerLayoutExtent,
+          maxScrollObstructionExtent: 70,
+          cacheExtent: layoutExtent > 0.0 ? -constraints.cacheOrigin + layoutExtent : layoutExtent,
+          hasVisualOverflow: true, // Conservatively say we do have overflow to avoid complexity.
+        );
+      } else {
+        geometry = SliverGeometry(
+          scrollExtent: layoutExtent,
+          paintOrigin: -overscrolledExtent - constraints.scrollOffset,
+          paintExtent: max(
+            max(child.size.height, layoutExtent) - constraints.scrollOffset,
+            0.0,
+          ),
+          maxPaintExtent: max(
+            max(child.size.height, layoutExtent) - constraints.scrollOffset,
+            0.0,
+          ),
+          maxScrollObstructionExtent: _initLayoutExtent,
+          layoutExtent: max(layoutExtent - constraints.scrollOffset, 0.0),
+          hasVisualOverflow: true, // Conservatively say we do have overflow to avoid complexity.
+        );
+      }
     } else {
       geometry = SliverGeometry.zero;
     }
@@ -141,7 +173,7 @@ class _RenderCustomSliver extends RenderSliver with RenderObjectWithChildMixin<R
   void applyPaintTransform(RenderObject child, Matrix4 transform) {}
 }
 
-typedef ControlcontainerBuilder = Widget Function(
+typedef ContainerBuilder = Widget Function(
   BuildContext context,
   double pulledExtent,
   double triggerPullDistance,
@@ -154,6 +186,7 @@ class CustomSliver extends StatefulWidget {
     this.triggerPullDistance = _defaultTriggerPullDistance,
     this.containerExtent = _defaultcontainerExtent,
     this.initLayoutExtent = 0,
+    this.pinned = false,
     this.builder = buildSimplecontainer,
   })  : assert(triggerPullDistance != null),
         assert(triggerPullDistance > 0.0),
@@ -171,7 +204,9 @@ class CustomSliver extends StatefulWidget {
 
   final double containerExtent;
 
-  final ControlcontainerBuilder builder;
+  final bool pinned;
+
+  final ContainerBuilder builder;
 
   static const double _defaultTriggerPullDistance = 100.0;
   static const double _defaultcontainerExtent = 60.0;
@@ -186,7 +221,7 @@ class CustomSliver extends StatefulWidget {
     return Stack(
       children: <Widget>[
         new Opacity(
-          opacity: 1 - opacityCurve.transform(min(pulledExtent / containerExtent, 1.0)),
+          opacity: 1,
           child: new Container(color: Colors.red),
         ),
         new Opacity(
@@ -230,6 +265,7 @@ class CustomSliverState extends State<CustomSliver> {
       containerLayoutExtent: widget.containerExtent,
       initLayoutExtent: widget.initLayoutExtent,
       hasLayoutExtent: hasSliverLayoutExtent,
+      pinned: widget.pinned,
       child: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
           latestcontainerBoxExtent = constraints.maxHeight;

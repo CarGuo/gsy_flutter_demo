@@ -15,6 +15,8 @@ class _ScrollHeaderDemoPageState extends State<ScrollHeaderDemoPage> with Single
   final double initLayoutExtent = 70;
   final double indicatorExtent = 200;
   final double triggerPullDistance = 300;
+  final double showPullDistance = 150;
+  bool pinned = true;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,7 @@ class _ScrollHeaderDemoPageState extends State<ScrollHeaderDemoPage> with Single
       body: new NotificationListener(
         onNotification: (ScrollNotification notification) {
           if (notification is ScrollUpdateNotification) {
-            if (notification.metrics.pixels < -indicatorExtent) {
+            if (notification.metrics.pixels < -showPullDistance) {
               globalKey.currentState.handleShow();
             } else if (notification.metrics.pixels > 5) {
               globalKey.currentState.handleHide();
@@ -43,6 +45,7 @@ class _ScrollHeaderDemoPageState extends State<ScrollHeaderDemoPage> with Single
               initLayoutExtent: initLayoutExtent,
               containerExtent: indicatorExtent,
               triggerPullDistance: triggerPullDistance,
+              pinned: pinned,
             ),
 
             ///列表区域
@@ -65,6 +68,14 @@ class _ScrollHeaderDemoPageState extends State<ScrollHeaderDemoPage> with Single
             ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          setState(() {
+            pinned = !pinned;
+          });
+        },
+        child: new Text(pinned ? "pinned" : "scroll"),
       ),
     );
   }
