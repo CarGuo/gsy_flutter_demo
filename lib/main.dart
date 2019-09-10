@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gsy_flutter_demo/widget/anim_tip_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/anima_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/anima_demo_page2.dart';
 import 'package:gsy_flutter_demo/widget/anima_demo_page4.dart';
@@ -137,6 +138,7 @@ const routerName = [
   "下弹筛选 例子",
   "动画5 例子",
   "自定义滑动效果 例子",
+  "动画5",
 ];
 
 Map<String, WidgetBuilder> routers = {
@@ -257,6 +259,8 @@ Map<String, WidgetBuilder> routers = {
   "widget/sf": (context) {
     return new ScrollHeaderDemoPage();
   },
-
+  "widget/anim5": (context) {
+    return new AnimTipDemoPage();
+  },
 
 };
