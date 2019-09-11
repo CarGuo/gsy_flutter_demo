@@ -40,7 +40,7 @@ class BubbleDemoPage extends StatelessWidget {
 
   bool isClient() {
     try {
-      return Platform.isAndroid == true && Platform.isIOS == true;
+      return Platform.isAndroid == true || Platform.isIOS == true;
     } catch (e) {
       return false;
     }
@@ -48,7 +48,9 @@ class BubbleDemoPage extends StatelessWidget {
 
   getY1() {
     if (isClient()) {
-      return getY(button1Key);
+      return getY(button1Key) +
+          getHeight(button1Key) -
+          MediaQueryData.fromWindow(WidgetsBinding.instance.window).padding.top;
     } else {
       return getY(button1Key) + getHeight(button1Key);
     }
@@ -56,7 +58,10 @@ class BubbleDemoPage extends StatelessWidget {
 
   getY2() {
     if (isClient()) {
-      return getY(button2Key) - getHeight(button2Key);
+      return getY(button2Key) +
+          getHeight(button2Key) / 2 -
+          MediaQueryData.fromWindow(WidgetsBinding.instance.window).padding.top;
+      ;
     } else {
       return getY(button2Key) + getHeight(button2Key) / 2;
     }
@@ -64,15 +69,19 @@ class BubbleDemoPage extends StatelessWidget {
 
   getY3() {
     if (isClient()) {
-      return getY(button3Key) - getHeight(button4Key) / 2;
+      return getY(button3Key) +
+          getHeight(button3Key) / 2 -
+          MediaQueryData.fromWindow(WidgetsBinding.instance.window).padding.top;
     } else {
-      return getY(button3Key) + getHeight(button4Key) / 2;
+      return getY(button3Key) + getHeight(button3Key) / 2;
     }
   }
 
   getY4() {
     if (isClient()) {
-      return getY(button4Key) - bubbleHeight - getHeight(button4Key);
+      return getY(button4Key) -
+          bubbleHeight -
+          MediaQueryData.fromWindow(WidgetsBinding.instance.window).padding.top;
     } else {
       return getY(button4Key) - bubbleHeight;
     }
@@ -141,7 +150,7 @@ class BubbleDemoPage extends StatelessWidget {
                           height: bubbleHeight,
                           width: bubbleWidth,
                           arrowLocation: ArrowLocation.LEFT,
-                          x: getX(button3Key) + getWidth(button4Key),
+                          x: getX(button3Key) + getWidth(button3Key),
                           y: getY3(),
                         );
                       });
