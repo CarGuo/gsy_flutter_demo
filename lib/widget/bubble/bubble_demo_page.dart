@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 import 'bubble_painter.dart';
@@ -36,6 +38,46 @@ class BubbleDemoPage extends StatelessWidget {
     return renderBox.size.height;
   }
 
+  bool isClient() {
+    try {
+      return Platform.isAndroid == true && Platform.isIOS == true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  getY1() {
+    if (isClient()) {
+      return getY(button1Key);
+    } else {
+      return getY(button1Key) + getHeight(button1Key);
+    }
+  }
+
+  getY2() {
+    if (isClient()) {
+      return getY(button2Key) - getHeight(button2Key);
+    } else {
+      return getY(button2Key) + getHeight(button2Key) / 2;
+    }
+  }
+
+  getY3() {
+    if (isClient()) {
+      return getY(button3Key) - getHeight(button4Key) / 2;
+    } else {
+      return getY(button3Key) + getHeight(button4Key) / 2;
+    }
+  }
+
+  getY4() {
+    if (isClient()) {
+      return getY(button4Key) - bubbleHeight - getHeight(button4Key);
+    } else {
+      return getY(button4Key) - bubbleHeight;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,7 +103,7 @@ class BubbleDemoPage extends StatelessWidget {
                         width: bubbleWidth,
                         arrowLocation: ArrowLocation.TOP,
                         x: getX(button1Key) + getWidth(button1Key) / 2,
-                        y: getY(button1Key),
+                        y: getY1(),
                       );
                     });
               },
@@ -80,7 +122,7 @@ class BubbleDemoPage extends StatelessWidget {
                             width: bubbleWidth,
                             arrowLocation: ArrowLocation.RIGHT,
                             x: getX(button2Key) - bubbleWidth,
-                            y: getY(button2Key) - getHeight(button2Key) / 2,
+                            y: getY2(),
                           );
                         });
                   },
@@ -100,8 +142,7 @@ class BubbleDemoPage extends StatelessWidget {
                           width: bubbleWidth,
                           arrowLocation: ArrowLocation.LEFT,
                           x: getX(button3Key) + getWidth(button4Key),
-                          y: getY(button3Key) -
-                              getHeight(button4Key) / 2,
+                          y: getY3(),
                         );
                       });
                 },
@@ -123,9 +164,7 @@ class BubbleDemoPage extends StatelessWidget {
                           width: bubbleWidth,
                           arrowLocation: ArrowLocation.BOTTOM,
                           x: getX(button4Key) + getWidth(button4Key) / 2,
-                          y: getY(button4Key) -
-                              bubbleHeight -
-                              getHeight(button4Key),
+                          y: getY4(),
                         );
                       });
                 },

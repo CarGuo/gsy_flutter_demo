@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:ui' as ui;
 import 'dart:math' as math;
 
@@ -100,8 +101,9 @@ class _ClickAnimationPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     init(size);
-
-    canvas.drawColor(Colors.black, BlendMode.clear);
+    if (Platform.isAndroid == true && Platform.isIOS == true) {
+      canvas.drawColor(Colors.black, BlendMode.clear);
+    }
     canvas.save();
     canvas.translate(paintWidth / 2, paintHeight / 2);
 
@@ -184,11 +186,11 @@ class _ClickAnimationPainter extends CustomPainter {
       canvas.save();
       double iDeg = 2 * math.pi / 12 * i;
       canvas.rotate(iDeg);
-      bool colorTime =
-          ((iDeg / (2 * math.pi) * 360).floor() + (degrees / (2 * math.pi) * 360).floor())
-                  .abs()
-                  .toInt() ==
-              360;
+      bool colorTime = ((iDeg / (2 * math.pi) * 360).floor() +
+                  (degrees / (2 * math.pi) * 360).floor())
+              .abs()
+              .toInt() ==
+          360;
       Color color = colorTime ? Colors.blueGrey : Colors.white;
       drawText(canvas, "${(i + 1).toString()}点", color, hourRadius, Offset.zero,
           textAlign: TextAlign.right, fontSize: fontSize);

@@ -14,7 +14,7 @@ description: A new Flutter application by gsy
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.2.2 <3.0.0"
+  sdk: ">=2.4.9 <3.0.0"
 
 dependencies:
   flutter:
@@ -27,6 +27,8 @@ dependencies:
   transformer_page_view: ^0.1.6
 
 dev_dependencies:
+  build_runner: ^1.6.1
+  build_web_compilers: ^2.1.1
   flutter_test:
     sdk: flutter
 
