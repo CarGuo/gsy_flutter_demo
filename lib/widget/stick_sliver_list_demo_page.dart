@@ -159,12 +159,20 @@ class _SliverExpandedListState extends State<SliverExpandedList> {
           alignment: Alignment.center,
           width: MediaQuery.of(context).size.width,
           child: new Text(
-            '查看更多',
+            expanded ? "收起" : '查看更多',
             style: TextStyle(color: Colors.black),
           ),
         ),
       ),
     );
+  }
+
+  getListCount(bool needExpanded) {
+    return (expanded)
+        ? (needExpanded)
+            ? widget.expendedModel.dataList.length + 2
+            : widget.expendedModel.dataList.length + 1
+        : (needExpanded) ? widget.visibleCount + 2 : widget.visibleCount + 1;
   }
 
   @override
@@ -174,12 +182,15 @@ class _SliverExpandedListState extends State<SliverExpandedList> {
       key: widget.expendedModel.globalKey,
       delegate: SliverChildBuilderDelegate(
         (BuildContext context, int index) {
+          ///增加bottom
           if (!expanded && needExpanded && index == widget.visibleCount + 1) {
             return renderExpendedMore();
           }
           if (index == widget.expendedModel.dataList.length + 1) {
             return renderExpendedMore();
           }
+
+          ///增加header
           if (index == 0) {
             return StickHeader(widget.title);
           }
@@ -191,13 +202,7 @@ class _SliverExpandedListState extends State<SliverExpandedList> {
             ),
           );
         },
-        childCount: (expanded)
-            ? (needExpanded)
-                ? widget.expendedModel.dataList.length + 2
-                : widget.expendedModel.dataList.length + 1
-            : (needExpanded)
-                ? widget.visibleCount + 2
-                : widget.visibleCount + 1,
+        childCount: getListCount(needExpanded),
       ),
     );
   }
