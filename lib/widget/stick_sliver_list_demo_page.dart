@@ -101,9 +101,9 @@ class _StickSliverListDemoPageState extends State<StickSliverListDemoPage> {
               var item = widget.dataList[_titleIndex];
               RenderSliver renderSliver =
                   item.globalKey.currentContext.findRenderObject();
-              var posoiton = _scrollController.position.pixels -
+              var position = _scrollController.position.pixels -
                   renderSliver.constraints.scrollOffset;
-              _scrollController.position.jumpTo(posoiton);
+              _scrollController.position.jumpTo(position);
             })
           ],
         ));
@@ -232,7 +232,7 @@ class StickHeader extends StatelessWidget {
               onTap: () {
                 callback?.call();
               },
-              child: Icon(Icons.add),
+              child: Icon(Icons.vertical_align_top),
             ),
           )
         ],
