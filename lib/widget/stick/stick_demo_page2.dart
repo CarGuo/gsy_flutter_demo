@@ -5,6 +5,7 @@ import 'package:gsy_flutter_demo/widget/expand/expand_widget.dart';
 import 'package:gsy_flutter_demo/widget/stick/stick_widget.dart';
 
 final random = math.Random();
+final stickHeader = 50.0;
 
 ///具备展开和收缩列表能力的Demo
 class StickExpendDemoPage extends StatefulWidget {
@@ -37,7 +38,7 @@ class _StickExpendDemoPageState extends State<StickExpendDemoPage> {
                 child: new StickWidget(
                   ///头部
                   stickHeader: new Container(
-                    height: 50.0,
+                    height: stickHeader,
                     color: Colors.deepPurple,
                     padding: new EdgeInsets.only(left: 10.0),
                     alignment: Alignment.centerLeft,
@@ -93,9 +94,8 @@ class _ExpandChildListState extends State<ExpandChildList> {
   ///所以使用滚动和notifyListeners解决
   fixCloseState() {
     var y = getY(globalKey);
-    Scrollable.of(context)
-        .position
-        .jumpTo(math.max(0, Scrollable.of(context).position.pixels + y));
+    Scrollable.of(context).position.jumpTo(
+        math.max(0, Scrollable.of(context).position.pixels + y) - stickHeader);
     widget.expendedModel.expended = false;
 
     ///必须延时到收起动画结束后再更新UI
@@ -108,33 +108,38 @@ class _ExpandChildListState extends State<ExpandChildList> {
   Widget build(BuildContext context) {
     double itemHeight = 150;
     double height = itemHeight * 3.0;
-    return ExpandablePanel(
-      height: height,
-      initialExpanded: widget.expendedModel.expended,
-      header: ExpandableVisibleContainer(
-        widget.expendedModel.dataList,
-        visibleCount: 3,
-        key: globalKey,
-        expandedStateChanged: (_) {
-          widget.expendedModel.expended = true;
-        },
+
+    return ExpandableNotifier(
+      child: ScrollOnExpand(
+        child: ExpandablePanel(
+          height: height,
+          initialExpanded: widget.expendedModel.expended,
+          header: ExpandableVisibleContainer(
+            widget.expendedModel.dataList,
+            visibleCount: 3,
+            key: globalKey,
+            expandedStateChanged: (_) {
+              widget.expendedModel.expended = true;
+            },
+          ),
+          builder: (BuildContext context, Widget collapsed, Widget expanded) {
+            return Expandable(
+              animationDuration: Duration(milliseconds: animMilliseconds),
+              collapsed: collapsed,
+              expanded: expanded,
+            );
+          },
+          expanded: ExpandableContainer(
+            widget.expendedModel.dataList,
+            visibleCount: 3,
+            expandedStateChanged: (_) {
+              fixCloseState();
+            },
+          ),
+          tapHeaderToExpand: false,
+          hasIcon: false,
+        ),
       ),
-      builder: (BuildContext context, Widget collapsed, Widget expanded) {
-        return Expandable(
-          animationDuration: Duration(milliseconds: animMilliseconds),
-          collapsed: collapsed,
-          expanded: expanded,
-        );
-      },
-      expanded: ExpandableContainer(
-        widget.expendedModel.dataList,
-        visibleCount: 3,
-        expandedStateChanged: (_) {
-          fixCloseState();
-        },
-      ),
-      tapHeaderToExpand: false,
-      hasIcon: false,
     );
   }
 }
@@ -261,6 +266,10 @@ class ExpandableContainer extends StatelessWidget {
     int decCount = dataList.length - visibleCount;
     int expandedCount =
         !ExpandableController.of(context).expanded ? decCount : decCount + 1;
+
+    if (!ExpandableController.of(context).expanded) {
+      return Container();
+    }
 
     return new Column(
       children: List.generate(expandedCount, (index) {

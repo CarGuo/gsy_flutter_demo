@@ -49,7 +49,7 @@ class _MenuListExpandedState<T extends DropSelectObject>
     ///配置多个 ExpandableController 控制器
     _controllers.clear();
     List.generate(widget.data.length, (index) {
-      _controllers.add(ExpandableController(false));
+      _controllers.add(ExpandableController(initialExpanded: false));
     });
   }
 
