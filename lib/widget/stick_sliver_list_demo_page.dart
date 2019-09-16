@@ -134,7 +134,9 @@ class _SliverExpandedListState extends State<SliverExpandedList> {
     }
     var position = Scrollable.of(context).position.pixels -
         render.constraints.scrollOffset;
-    Scrollable.of(context).position.jumpTo(position);
+    if (position >= 0) {
+      Scrollable.of(context).position.jumpTo(position);
+    }
   }
 
   ///大于可见数量才使用 查看更多
@@ -248,6 +250,7 @@ class StickHeader extends StatelessWidget {
 
 class ExpendedModel {
   bool expended;
+
   List dataList;
 
   GlobalKey globalKey = new GlobalKey();
