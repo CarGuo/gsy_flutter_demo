@@ -49,6 +49,7 @@ class _ScrollListenerDemoPageState extends State<ScrollListenerDemoPage> {
             setState(() {
               this.notify = notify;
             });
+            return false;
           },
           child: new ListView.builder(
             controller: _scrollController,
