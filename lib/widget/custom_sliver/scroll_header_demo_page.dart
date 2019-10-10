@@ -13,9 +13,9 @@ class _ScrollHeaderDemoPageState extends State<ScrollHeaderDemoPage> with Single
   final ScrollController controller = ScrollController(initialScrollOffset: -70);
 
   double initLayoutExtent = 70;
+  double showPullDistance = 150;
   final double indicatorExtent = 200;
   final double triggerPullDistance = 300;
-  final double showPullDistance = 150;
   bool pinned = true;
 
   @override
@@ -99,6 +99,21 @@ class _ScrollHeaderDemoPageState extends State<ScrollHeaderDemoPage> with Single
           },
           child: new Text(
             initLayoutExtent != 0 ? "minHeight" : "non Height",
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
+        new RaisedButton(
+          onPressed: () async {
+            setState(() {
+              if (showPullDistance > 150) {
+                showPullDistance = 150;
+              } else {
+                showPullDistance = 1500;
+              }
+            });
+          },
+          child: new Text(
+            showPullDistance > 150 ? "autoBack" : "non autoBack",
             style: TextStyle(color: Colors.white),
           ),
         ),
