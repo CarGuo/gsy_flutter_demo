@@ -34,7 +34,8 @@ class _CustomSliver extends SingleChildRenderObjectWidget {
   }
 
   @override
-  void updateRenderObject(BuildContext context, covariant _RenderCustomSliver renderObject) {
+  void updateRenderObject(
+      BuildContext context, covariant _RenderCustomSliver renderObject) {
     renderObject
       ..containerLayoutExtent = containerLayoutExtent
       ..initLayoutExtent = initLayoutExtent
@@ -43,7 +44,8 @@ class _CustomSliver extends SingleChildRenderObjectWidget {
   }
 }
 
-class _RenderCustomSliver extends RenderSliver with RenderObjectWithChildMixin<RenderBox> {
+class _RenderCustomSliver extends RenderSliver
+    with RenderObjectWithChildMixin<RenderBox> {
   _RenderCustomSliver({
     @required double containerExtent,
     @required double initLayoutExtent,
@@ -107,7 +109,9 @@ class _RenderCustomSliver extends RenderSliver with RenderObjectWithChildMixin<R
     assert(constraints.axisDirection == AxisDirection.down);
     assert(constraints.growthDirection == GrowthDirection.forward);
     double layoutExtent = (_hasLayoutExtent ? 1.0 : 0.0) * _containerExtent;
-    if (_hasLayoutExtent == false && _initLayoutExtent != null && _initLayoutExtent > 0) {
+    if (_hasLayoutExtent == false &&
+        _initLayoutExtent != null &&
+        _initLayoutExtent > 0) {
       layoutExtent += _initLayoutExtent;
     }
     if (layoutExtent != layoutExtentOffsetCompensation) {
@@ -119,7 +123,8 @@ class _RenderCustomSliver extends RenderSliver with RenderObjectWithChildMixin<R
     }
 
     final bool active = constraints.overlap < 0.0 || layoutExtent > 0.0;
-    final double overscrolledExtent = constraints.overlap < 0.0 ? constraints.overlap.abs() : 0.0;
+    final double overscrolledExtent =
+        constraints.overlap < 0.0 ? constraints.overlap.abs() : 0.0;
 
     child.layout(
       constraints.asBoxConstraints(
@@ -137,8 +142,11 @@ class _RenderCustomSliver extends RenderSliver with RenderObjectWithChildMixin<R
           layoutExtent: layoutExtent,
           maxPaintExtent: containerLayoutExtent,
           maxScrollObstructionExtent: 70,
-          cacheExtent: layoutExtent > 0.0 ? -constraints.cacheOrigin + layoutExtent : layoutExtent,
-          hasVisualOverflow: true, // Conservatively say we do have overflow to avoid complexity.
+          cacheExtent: layoutExtent > 0.0
+              ? -constraints.cacheOrigin + layoutExtent
+              : layoutExtent,
+          hasVisualOverflow:
+              true, // Conservatively say we do have overflow to avoid complexity.
         );
       } else {
         geometry = SliverGeometry(
@@ -154,7 +162,8 @@ class _RenderCustomSliver extends RenderSliver with RenderObjectWithChildMixin<R
           ),
           maxScrollObstructionExtent: _initLayoutExtent,
           layoutExtent: max(layoutExtent - constraints.scrollOffset, 0.0),
-          hasVisualOverflow: true, // Conservatively say we do have overflow to avoid complexity.
+          hasVisualOverflow:
+              true, // Conservatively say we do have overflow to avoid complexity.
         );
       }
     } else {
@@ -164,7 +173,8 @@ class _RenderCustomSliver extends RenderSliver with RenderObjectWithChildMixin<R
 
   @override
   void paint(PaintingContext paintContext, Offset offset) {
-    if (constraints.overlap < 0.0 || constraints.scrollOffset + child.size.height > 0) {
+    if (constraints.overlap < 0.0 ||
+        constraints.scrollOffset + child.size.height > 0) {
       paintContext.paintChild(child, offset);
     }
   }
@@ -225,8 +235,19 @@ class CustomSliver extends StatefulWidget {
           child: new Container(color: Colors.red),
         ),
         new Opacity(
-          opacity: opacityCurve.transform(min(pulledExtent / containerExtent, 1.0)),
-          child: new Container(color: Colors.amber),
+          opacity:
+              opacityCurve.transform(min(pulledExtent / containerExtent, 1.0)),
+          child: new Container(
+            decoration: BoxDecoration(
+              color: Colors.amber,
+              image: DecorationImage(
+                fit: BoxFit.cover,
+                image: AssetImage(
+                  "static/gsy_cat.png",
+                ),
+              ),
+            ),
+          ),
         ),
       ],
     );

@@ -50,7 +50,13 @@ class _ScrollHeaderDemoPageState extends State<ScrollHeaderDemoPage> with Single
 
             ///列表区域
             SliverSafeArea(
-              sliver: SliverList(
+              sliver: SliverGrid(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 2,
+                  crossAxisSpacing: 2,
+                  childAspectRatio: 2,
+                ),
                 ///代理显示
                 delegate: SliverChildBuilderDelegate(
                   (BuildContext context, int index) {
