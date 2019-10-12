@@ -87,7 +87,7 @@ class _RenderCustomSliver extends RenderSliver
   set initLayoutExtent(double value) {
     assert(value != null);
     assert(value >= 0.0);
-    if (value == _containerExtent) return;
+    if (value == _initLayoutExtent) return;
     _initLayoutExtent = value;
     markNeedsLayout();
   }
