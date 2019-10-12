@@ -180,6 +180,16 @@ class _RenderCustomSliver extends RenderSliver
   }
 
   @override
+  bool hitTestChildren(SliverHitTestResult result,
+      {double mainAxisPosition, double crossAxisPosition}) {
+    if (child != null) {
+      return child.hitTest(BoxHitTestResult.wrap(result),
+          position: Offset(crossAxisPosition, mainAxisPosition));
+    }
+    return false;
+  }
+
+  @override
   void applyPaintTransform(RenderObject child, Matrix4 transform) {}
 }
 
