@@ -149,19 +149,32 @@ class _RenderCustomSliver extends RenderSliver
               true, // Conservatively say we do have overflow to avoid complexity.
         );
       } else {
+        var le = max(layoutExtent - constraints.scrollOffset, 0.0);
+
+        ///必须保证 paintExtent <= constraints.remainingPaintExtent
+        if (le > constraints.remainingPaintExtent) {
+          le = constraints.remainingPaintExtent;
+        }
+        var paintExtent = max(
+          max(child.size.height, layoutExtent) - constraints.scrollOffset,
+          0.0,
+        );
+
+        ///必须保证 layoutExtent = paintExtent;
+        if (paintExtent != le) {
+          paintExtent = le;
+        }
+
         geometry = SliverGeometry(
           scrollExtent: layoutExtent,
           paintOrigin: -overscrolledExtent - constraints.scrollOffset,
-          paintExtent: max(
-            max(child.size.height, layoutExtent) - constraints.scrollOffset,
-            0.0,
-          ),
+          paintExtent: paintExtent,
           maxPaintExtent: max(
             max(child.size.height, layoutExtent) - constraints.scrollOffset,
             0.0,
           ),
           maxScrollObstructionExtent: _initLayoutExtent,
-          layoutExtent: max(layoutExtent - constraints.scrollOffset, 0.0),
+          layoutExtent: le,
           hasVisualOverflow:
               true, // Conservatively say we do have overflow to avoid complexity.
         );
