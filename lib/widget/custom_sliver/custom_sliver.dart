@@ -12,6 +12,7 @@ class _CustomSliver extends SingleChildRenderObjectWidget {
     this.initLayoutExtent = 0.0,
     this.hasLayoutExtent = false,
     this.pinned = false,
+    this.hideFirst = false,
     Widget child,
   })  : assert(containerLayoutExtent != null),
         assert(containerLayoutExtent >= 0.0),
@@ -22,6 +23,7 @@ class _CustomSliver extends SingleChildRenderObjectWidget {
   final double containerLayoutExtent;
   final bool hasLayoutExtent;
   final bool pinned;
+  final bool hideFirst;
 
   @override
   _RenderCustomSliver createRenderObject(BuildContext context) {
@@ -30,6 +32,7 @@ class _CustomSliver extends SingleChildRenderObjectWidget {
       initLayoutExtent: initLayoutExtent,
       hasLayoutExtent: hasLayoutExtent,
       pinned: pinned,
+      hideFirst: hideFirst,
     );
   }
 
@@ -40,6 +43,7 @@ class _CustomSliver extends SingleChildRenderObjectWidget {
       ..containerLayoutExtent = containerLayoutExtent
       ..initLayoutExtent = initLayoutExtent
       ..pinned = pinned
+      ..hideFirst = hideFirst
       ..hasLayoutExtent = hasLayoutExtent;
   }
 }
@@ -51,12 +55,14 @@ class _RenderCustomSliver extends RenderSliver
     @required double initLayoutExtent,
     @required bool hasLayoutExtent,
     @required bool pinned,
+    @required bool hideFirst,
     RenderBox child,
   })  : assert(containerExtent != null),
         assert(containerExtent >= 0.0),
         assert(hasLayoutExtent != null),
         _containerExtent = containerExtent,
         _initLayoutExtent = initLayoutExtent,
+        _hideFirst = hideFirst,
         _pinned = pinned,
         _hasLayoutExtent = hasLayoutExtent {
     this.child = child;
@@ -82,6 +88,15 @@ class _RenderCustomSliver extends RenderSliver
     markNeedsLayout();
   }
 
+  bool _hideFirst;
+
+  set hideFirst(bool value) {
+    assert(value != null);
+    if (value == _hideFirst) return;
+    _hideFirst = value;
+    markNeedsLayout();
+  }
+
   double _initLayoutExtent;
 
   set initLayoutExtent(double value) {
@@ -102,6 +117,7 @@ class _RenderCustomSliver extends RenderSliver
     markNeedsLayout();
   }
 
+  ///for not pin and hide first
   double layoutExtentOffsetCompensation = 0.0;
 
   @override
@@ -114,12 +130,16 @@ class _RenderCustomSliver extends RenderSliver
         _initLayoutExtent > 0) {
       layoutExtent += _initLayoutExtent;
     }
-    if (layoutExtent != layoutExtentOffsetCompensation) {
-      geometry = SliverGeometry(
-        scrollOffsetCorrection: layoutExtent - layoutExtentOffsetCompensation,
-      );
-      layoutExtentOffsetCompensation = layoutExtent;
-      return;
+
+    ///一开始不显示
+    if(_hideFirst && !_pinned) {
+      if (layoutExtent != layoutExtentOffsetCompensation) {
+        geometry = SliverGeometry(
+          scrollOffsetCorrection: layoutExtent - layoutExtentOffsetCompensation,
+        );
+        layoutExtentOffsetCompensation = layoutExtent;
+        return;
+      }
     }
 
     final bool active = constraints.overlap < 0.0 || layoutExtent > 0.0;
@@ -220,6 +240,7 @@ class CustomSliver extends StatefulWidget {
     this.containerExtent = _defaultcontainerExtent,
     this.initLayoutExtent = 0,
     this.pinned = false,
+    this.hideFirst = false,
     this.builder = buildSimplecontainer,
   })  : assert(triggerPullDistance != null),
         assert(triggerPullDistance > 0.0),
@@ -238,6 +259,7 @@ class CustomSliver extends StatefulWidget {
   final double containerExtent;
 
   final bool pinned;
+  final bool hideFirst;
 
   final ContainerBuilder builder;
 
@@ -310,6 +332,7 @@ class CustomSliverState extends State<CustomSliver> {
       initLayoutExtent: widget.initLayoutExtent,
       hasLayoutExtent: hasSliverLayoutExtent,
       pinned: widget.pinned,
+      hideFirst: widget.hideFirst,
       child: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
           latestcontainerBoxExtent = constraints.maxHeight;
