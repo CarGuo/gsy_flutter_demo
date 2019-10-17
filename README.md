@@ -6,7 +6,11 @@
 ### [Web 版在线测试](https://guoshuyu.cn/home/web/#/)
 
 > 目前开始逐步补全完善，主要提供一些有用或者有趣的例子，如果你也有好例子，环境提交 PR 。
-> **运行须知：配置好Flutter开发环境(目前Flutter SDK 版本 *1.10.2-pre* 以上版本)**
+>
+> **运行须知：配置好Flutter开发环境(目前Flutter SDK 版本 *1.10.2-pre* 以上版本)。**
+>
+> **[如果克隆太慢，可尝试码云地址下载。](https://gitee.com/CarGuo/GSYFlutterDemo)**
+
 
 ### 已有例子
 
