@@ -12,7 +12,6 @@ class _CustomSliver extends SingleChildRenderObjectWidget {
     this.initLayoutExtent = 0.0,
     this.hasLayoutExtent = false,
     this.pinned = false,
-    this.hideFirst = false,
     Widget child,
   })  : assert(containerLayoutExtent != null),
         assert(containerLayoutExtent >= 0.0),
@@ -23,7 +22,6 @@ class _CustomSliver extends SingleChildRenderObjectWidget {
   final double containerLayoutExtent;
   final bool hasLayoutExtent;
   final bool pinned;
-  final bool hideFirst;
 
   @override
   _RenderCustomSliver createRenderObject(BuildContext context) {
@@ -32,7 +30,6 @@ class _CustomSliver extends SingleChildRenderObjectWidget {
       initLayoutExtent: initLayoutExtent,
       hasLayoutExtent: hasLayoutExtent,
       pinned: pinned,
-      hideFirst: hideFirst,
     );
   }
 
@@ -43,7 +40,6 @@ class _CustomSliver extends SingleChildRenderObjectWidget {
       ..containerLayoutExtent = containerLayoutExtent
       ..initLayoutExtent = initLayoutExtent
       ..pinned = pinned
-      ..hideFirst = hideFirst
       ..hasLayoutExtent = hasLayoutExtent;
   }
 }
@@ -62,7 +58,6 @@ class _RenderCustomSliver extends RenderSliver
         assert(hasLayoutExtent != null),
         _containerExtent = containerExtent,
         _initLayoutExtent = initLayoutExtent,
-        _hideFirst = hideFirst,
         _pinned = pinned,
         _hasLayoutExtent = hasLayoutExtent {
     this.child = child;
@@ -85,15 +80,6 @@ class _RenderCustomSliver extends RenderSliver
     assert(value != null);
     if (value == _pinned) return;
     _pinned = value;
-    markNeedsLayout();
-  }
-
-  bool _hideFirst;
-
-  set hideFirst(bool value) {
-    assert(value != null);
-    if (value == _hideFirst) return;
-    _hideFirst = value;
     markNeedsLayout();
   }
 
@@ -131,16 +117,16 @@ class _RenderCustomSliver extends RenderSliver
       layoutExtent += _initLayoutExtent;
     }
 
-    ///一开始不显示
-    if(_hideFirst && !_pinned) {
-      if (layoutExtent != layoutExtentOffsetCompensation) {
-        geometry = SliverGeometry(
-          scrollOffsetCorrection: layoutExtent - layoutExtentOffsetCompensation,
-        );
-        layoutExtentOffsetCompensation = layoutExtent;
-        return;
-      }
+    ///布局发生变化，调整 geometry
+    if (layoutExtent != layoutExtentOffsetCompensation) {
+      geometry = SliverGeometry(
+        scrollOffsetCorrection: layoutExtent - layoutExtentOffsetCompensation,
+      );
+      layoutExtentOffsetCompensation = layoutExtent;
+      return;
     }
+
+    ///布局没有发生变化，滚动
 
     final bool active = constraints.overlap < 0.0 || layoutExtent > 0.0;
     final double overscrolledExtent =
@@ -156,10 +142,19 @@ class _RenderCustomSliver extends RenderSliver
     if (active) {
       if (_pinned) {
         geometry = SliverGeometry(
+          ///可滚动区域为 containerLayoutExtent 而已
           scrollExtent: containerLayoutExtent,
+
+          /// 从 overlap 开始绘制
           paintOrigin: constraints.overlap,
+
+          /// 绘制大小为自身大小或者残留大小
           paintExtent: min(layoutExtent, constraints.remainingPaintExtent),
+
+          /// 布局大小
           layoutExtent: layoutExtent,
+
+          ///最大可会知区域
           maxPaintExtent: containerLayoutExtent,
           maxScrollObstructionExtent: 70,
           cacheExtent: layoutExtent > 0.0
@@ -240,7 +235,6 @@ class CustomSliver extends StatefulWidget {
     this.containerExtent = _defaultcontainerExtent,
     this.initLayoutExtent = 0,
     this.pinned = false,
-    this.hideFirst = false,
     this.builder = buildSimplecontainer,
   })  : assert(triggerPullDistance != null),
         assert(triggerPullDistance > 0.0),
@@ -259,7 +253,6 @@ class CustomSliver extends StatefulWidget {
   final double containerExtent;
 
   final bool pinned;
-  final bool hideFirst;
 
   final ContainerBuilder builder;
 
@@ -285,12 +278,12 @@ class CustomSliver extends StatefulWidget {
           child: new Container(
             decoration: BoxDecoration(
               color: Colors.amber,
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: AssetImage(
-                  "static/gsy_cat.png",
-                ),
-              ),
+//              image: DecorationImage(
+//                fit: BoxFit.cover,
+//                image: AssetImage(
+//                  "static/gsy_cat.png",
+//                ),
+//              ),
             ),
           ),
         ),
@@ -332,7 +325,6 @@ class CustomSliverState extends State<CustomSliver> {
       initLayoutExtent: widget.initLayoutExtent,
       hasLayoutExtent: hasSliverLayoutExtent,
       pinned: widget.pinned,
-      hideFirst: widget.hideFirst,
       child: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
           latestcontainerBoxExtent = constraints.maxHeight;

@@ -7,16 +7,18 @@ class ScrollHeaderDemoPage extends StatefulWidget {
   _ScrollHeaderDemoPageState createState() => _ScrollHeaderDemoPageState();
 }
 
-class _ScrollHeaderDemoPageState extends State<ScrollHeaderDemoPage> with SingleTickerProviderStateMixin {
+class _ScrollHeaderDemoPageState extends State<ScrollHeaderDemoPage>
+    with SingleTickerProviderStateMixin {
   GlobalKey<CustomSliverState> globalKey = new GlobalKey();
 
-  final ScrollController controller = ScrollController(initialScrollOffset: -70);
+  final ScrollController controller =
+      ScrollController(initialScrollOffset: -70);
 
   double initLayoutExtent = 70;
   double showPullDistance = 150;
   final double indicatorExtent = 200;
   final double triggerPullDistance = 300;
-  bool pinned = true;
+  bool pinned = false;
 
   @override
   Widget build(BuildContext context) {
@@ -28,17 +30,20 @@ class _ScrollHeaderDemoPageState extends State<ScrollHeaderDemoPage> with Single
       body: new NotificationListener(
         onNotification: (ScrollNotification notification) {
           if (notification is ScrollUpdateNotification) {
-            if (notification.metrics.pixels < -showPullDistance) {
-              globalKey.currentState.handleShow();
-            } else if (notification.metrics.pixels > 5) {
-              globalKey.currentState.handleHide();
+            if (initLayoutExtent > 0) {
+              if (notification.metrics.pixels < -showPullDistance) {
+                globalKey.currentState.handleShow();
+              } else if (notification.metrics.pixels > 5) {
+                globalKey.currentState.handleHide();
+              }
             }
           }
           return false;
         },
         child: CustomScrollView(
           controller: controller,
-          physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+          physics: const BouncingScrollPhysics(
+              parent: AlwaysScrollableScrollPhysics()),
           slivers: <Widget>[
             CustomSliver(
               key: globalKey,
@@ -57,6 +62,7 @@ class _ScrollHeaderDemoPageState extends State<ScrollHeaderDemoPage> with Single
                   crossAxisSpacing: 2,
                   childAspectRatio: 2,
                 ),
+
                 ///代理显示
                 delegate: SliverChildBuilderDelegate(
                   (BuildContext context, int index) {
@@ -94,6 +100,7 @@ class _ScrollHeaderDemoPageState extends State<ScrollHeaderDemoPage> with Single
                 initLayoutExtent = 70;
               } else {
                 initLayoutExtent = 0;
+                globalKey.currentState.handleShow();
               }
             });
           },
