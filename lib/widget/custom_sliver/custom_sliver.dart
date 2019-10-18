@@ -51,7 +51,6 @@ class _RenderCustomSliver extends RenderSliver
     @required double initLayoutExtent,
     @required bool hasLayoutExtent,
     @required bool pinned,
-    @required bool hideFirst,
     RenderBox child,
   })  : assert(containerExtent != null),
         assert(containerExtent >= 0.0),
@@ -106,6 +105,10 @@ class _RenderCustomSliver extends RenderSliver
   ///for not pin and hide first
   double layoutExtentOffsetCompensation = 0.0;
 
+  ///调节 center 位置，当 pined 的时候
+  @override
+  double get centerOffsetAdjustment => _pinned ? _initLayoutExtent : 0;
+
   @override
   void performLayout() {
     assert(constraints.axisDirection == AxisDirection.down);
@@ -154,9 +157,9 @@ class _RenderCustomSliver extends RenderSliver
           /// 布局大小
           layoutExtent: layoutExtent,
 
-          ///最大可会知区域
+          ///最大可绘制区域
           maxPaintExtent: containerLayoutExtent,
-          maxScrollObstructionExtent: 70,
+          maxScrollObstructionExtent: _initLayoutExtent,
           cacheExtent: layoutExtent > 0.0
               ? -constraints.cacheOrigin + layoutExtent
               : layoutExtent,
@@ -269,21 +272,26 @@ class CustomSliver extends StatefulWidget {
     return Stack(
       children: <Widget>[
         new Opacity(
-          opacity: 1,
+          opacity: 1.0,
           child: new Container(color: Colors.red),
         ),
         new Opacity(
           opacity:
               opacityCurve.transform(min(pulledExtent / containerExtent, 1.0)),
-          child: new Container(
-            decoration: BoxDecoration(
-              color: Colors.amber,
-//              image: DecorationImage(
-//                fit: BoxFit.cover,
-//                image: AssetImage(
-//                  "static/gsy_cat.png",
-//                ),
-//              ),
+          child: InkWell(
+            onTap: () {
+              print("FFFF");
+            },
+            child: new Container(
+              decoration: BoxDecoration(
+                color: Colors.amber,
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: AssetImage(
+                    "static/gsy_cat.png",
+                  ),
+                ),
+              ),
             ),
           ),
         ),
