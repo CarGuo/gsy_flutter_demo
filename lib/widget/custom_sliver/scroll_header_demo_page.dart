@@ -18,7 +18,7 @@ class _ScrollHeaderDemoPageState extends State<ScrollHeaderDemoPage>
   double showPullDistance = 150;
   final double indicatorExtent = 200;
   final double triggerPullDistance = 300;
-  bool pinned = false;
+  bool pinned = true;
 
   @override
   Widget build(BuildContext context) {
