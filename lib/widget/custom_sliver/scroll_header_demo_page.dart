@@ -54,7 +54,8 @@ class _ScrollHeaderDemoPageState extends State<ScrollHeaderDemoPage>
             ),
 
             ///列表区域
-            SliverSafeArea(
+            SliverPadding(
+              padding: EdgeInsets.only(bottom: pinned ? initLayoutExtent : 0),
               sliver: SliverGrid(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
