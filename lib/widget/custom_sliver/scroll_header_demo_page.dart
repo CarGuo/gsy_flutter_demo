@@ -54,26 +54,29 @@ class _ScrollHeaderDemoPageState extends State<ScrollHeaderDemoPage>
             ),
 
             ///列表区域
-            SliverGrid(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: 2,
-                crossAxisSpacing: 2,
-                childAspectRatio: 2,
-              ),
+            SliverPadding(
+              padding: EdgeInsets.only(bottom: pinned ? initLayoutExtent : 0),
+              sliver: SliverGrid(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 2,
+                  crossAxisSpacing: 2,
+                  childAspectRatio: 2,
+                ),
 
-              ///代理显示
-              delegate: SliverChildBuilderDelegate(
-                (BuildContext context, int index) {
-                  return Card(
-                    child: new Container(
-                      height: 60,
-                      alignment: Alignment.centerLeft,
-                      child: new Text("Item $index"),
-                    ),
-                  );
-                },
-                childCount: 40,
+                ///代理显示
+                delegate: SliverChildBuilderDelegate(
+                  (BuildContext context, int index) {
+                    return Card(
+                      child: new Container(
+                        height: 60,
+                        alignment: Alignment.centerLeft,
+                        child: new Text("Item $index"),
+                      ),
+                    );
+                  },
+                  childCount: 40,
+                ),
               ),
             ),
           ],

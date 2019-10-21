@@ -106,8 +106,9 @@ class _RenderCustomSliver extends RenderSliver
   double layoutExtentOffsetCompensation = 0.0;
 
   ///调节 center 位置，当 pined 的时候
-  @override
-  double get centerOffsetAdjustment => _pinned ? _initLayoutExtent : 0;
+  ///外部通过 SliverPadding 去处理底部问题
+  //@override
+  //double get centerOffsetAdjustment => _pinned ? _initLayoutExtent : 0;
 
   @override
   void performLayout() {
