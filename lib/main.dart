@@ -20,6 +20,7 @@ import 'package:gsy_flutter_demo/widget/input_bottom_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/keyboard_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/list_anim/list_anim_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/list_anim_2/list_anim_demo_page.dart';
+import 'package:gsy_flutter_demo/widget/overflow_image_page.dart';
 import 'package:gsy_flutter_demo/widget/positioned_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/refrsh_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/refrsh_demo_page2.dart';
@@ -141,6 +142,7 @@ const routerName = [
   "自定义滑动效果 例子",
   "动画6",
   "列表停靠展开Stick2 例子",
+  "overflow 图片",
 ];
 
 Map<String, WidgetBuilder> routers = {
@@ -267,5 +269,11 @@ Map<String, WidgetBuilder> routers = {
   "widget/stick5": (context) {
     return new StickSliverListDemoPage();
   },
+  "widget/overflow": (context) {
+    return new OverflowImagePage();
+  },
+
+
 
 };
+
