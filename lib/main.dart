@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gsy_flutter_demo/widget/align_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/anim_tip_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/anima_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/anima_demo_page2.dart';
@@ -143,6 +144,7 @@ const routerName = [
   "动画6",
   "列表停靠展开Stick2 例子",
   "overflow 图片",
+  "align",
 ];
 
 Map<String, WidgetBuilder> routers = {
@@ -272,7 +274,9 @@ Map<String, WidgetBuilder> routers = {
   "widget/overflow": (context) {
     return new OverflowImagePage();
   },
-
+  "widget/align": (context) {
+    return new AlignDemoPage();
+  },
 
 
 };
