@@ -23,6 +23,7 @@ class _AlignDemoPageState extends State<AlignDemoPage>
 
   @override
   Widget build(BuildContext context) {
+    int size = 20;
     return Scaffold(
       appBar: AppBar(
         title: new Text("AlignDemoPage"),
@@ -33,8 +34,8 @@ class _AlignDemoPageState extends State<AlignDemoPage>
           height: MediaQuery.of(context).size.width,
           width: MediaQuery.of(context).size.width,
           child: Stack(
-            children: List.generate(20, (index) {
-              return getAlign(index.toDouble() / 10);
+            children: List.generate(size, (index) {
+              return getAlign(index.toDouble() / size / 2);
             }),
           ),
         ),
