@@ -8,6 +8,7 @@ import 'package:gsy_flutter_demo/widget/anima_demo_page5.dart';
 import 'package:gsy_flutter_demo/widget/animation_container_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/blur_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/bubble/bubble_demo_page.dart';
+import 'package:gsy_flutter_demo/widget/card_item_page.dart';
 import 'package:gsy_flutter_demo/widget/clip_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/cloud/cloud_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/controller_demo_page.dart';
@@ -145,6 +146,7 @@ const routerName = [
   "列表停靠展开Stick2 例子",
   "overflow 图片",
   "align",
+  "Card Item",
 ];
 
 Map<String, WidgetBuilder> routers = {
@@ -276,6 +278,9 @@ Map<String, WidgetBuilder> routers = {
   },
   "widget/align": (context) {
     return new AlignDemoPage();
+  },
+  "widget/carditem": (context) {
+    return new CardItemPage();
   },
 
 
