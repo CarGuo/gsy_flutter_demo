@@ -33,6 +33,7 @@ import 'package:gsy_flutter_demo/widget/scroll_to_index_demo_page2.dart';
 import 'package:gsy_flutter_demo/widget/sliver_list_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/sliver_stick_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/sliver_tab_demo_page.dart';
+import 'package:gsy_flutter_demo/widget/sliver_tab_demo_page2.dart';
 import 'package:gsy_flutter_demo/widget/statusbar_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/stick/stick_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/stick/stick_demo_page2.dart';
@@ -149,6 +150,7 @@ const routerName = [
   "align",
   "Card Item",
   "Sliver Tab",
+  "Sliver Tab2",
 ];
 
 Map<String, WidgetBuilder> routers = {
@@ -286,6 +288,9 @@ Map<String, WidgetBuilder> routers = {
   },
   "widget/slivertab": (context) {
     return new SliverTabDemoPage();
+  },
+  "widget/slivertab2": (context) {
+    return new SliverTabDemoPage2();
   },
 };
 

@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
+/// 低级版 Sliver Tab，还有 SliverTabDemoPage2
 class SliverTabDemoPage extends StatefulWidget {
   @override
   _SliverTabDemoPageState createState() => _SliverTabDemoPageState();
