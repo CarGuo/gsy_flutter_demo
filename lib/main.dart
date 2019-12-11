@@ -32,6 +32,7 @@ import 'package:gsy_flutter_demo/widget/scroll_to_index_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/scroll_to_index_demo_page2.dart';
 import 'package:gsy_flutter_demo/widget/sliver_list_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/sliver_stick_demo_page.dart';
+import 'package:gsy_flutter_demo/widget/sliver_tab_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/statusbar_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/stick/stick_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/stick/stick_demo_page2.dart';
@@ -147,6 +148,7 @@ const routerName = [
   "overflow 图片",
   "align",
   "Card Item",
+  "Sliver Tab",
 ];
 
 Map<String, WidgetBuilder> routers = {
@@ -282,7 +284,8 @@ Map<String, WidgetBuilder> routers = {
   "widget/carditem": (context) {
     return new CardItemPage();
   },
-
-
+  "widget/slivertab": (context) {
+    return new SliverTabDemoPage();
+  },
 };
 
