@@ -12,10 +12,17 @@ class _SliverTabDemoPageState extends State<SliverTabDemoPage>
     with TickerProviderStateMixin {
   TabController tabController;
 
+  final ScrollController scrollController = new ScrollController();
   final int tabLength = 4;
   final double maxHeight = kToolbarHeight;
   final double minHeight = 30;
   final double tabIconSize = 30;
+  final List dataList = [
+    List(30),
+    List(2),
+    List(8),
+    List(40),
+  ];
 
   List<Widget> renderTabs(double shrinkOffset) {
     double offset = (shrinkOffset > tabIconSize) ? tabIconSize : shrinkOffset;
@@ -41,6 +48,25 @@ class _SliverTabDemoPageState extends State<SliverTabDemoPage>
     });
   }
 
+  renderListByIndex() {
+    int indexTab = tabController.index;
+    var list = dataList[indexTab];
+    return SliverList(
+      delegate: SliverChildBuilderDelegate(
+        (BuildContext context, int index) {
+          return Card(
+            child: new Container(
+              height: 60,
+              alignment: Alignment.centerLeft,
+              child: new Text("Tab $indexTab Item $index"),
+            ),
+          );
+        },
+        childCount: list.length,
+      ),
+    );
+  }
+
   @override
   void initState() {
     tabController = new TabController(length: tabLength, vsync: this);
@@ -55,6 +81,7 @@ class _SliverTabDemoPageState extends State<SliverTabDemoPage>
       ),
       body: new Container(
         child: new CustomScrollView(
+          controller: scrollController,
           slivers: <Widget>[
             ///动态放大缩小的tab控件
             SliverPersistentHeader(
@@ -81,24 +108,17 @@ class _SliverTabDemoPageState extends State<SliverTabDemoPage>
                         labelColor: Colors.cyanAccent,
                         controller: tabController,
                         tabs: renderTabs(shrinkOffset),
+                        onTap: (index) {
+                          setState(() {});
+                          scrollController.animateTo(0,
+                              duration: Duration(milliseconds: 100),
+                              curve: Curves.fastOutSlowIn);
+                        },
                       ),
                     );
                   }),
             ),
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (BuildContext context, int index) {
-                  return Card(
-                    child: new Container(
-                      height: 60,
-                      alignment: Alignment.centerLeft,
-                      child: new Text("Item $index"),
-                    ),
-                  );
-                },
-                childCount: 30,
-              ),
-            )
+            renderListByIndex()
           ],
         ),
       ),
