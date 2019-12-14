@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gsy_flutter_demo/widget/book_page/cal_point.dart';
 
 import 'book_painter.dart';
+import 'book_text_clip.dart';
 
 class BookPage extends StatefulWidget {
   @override
@@ -20,6 +21,7 @@ class _BookPageState extends State<BookPage>
   Animation cancelAnim;
   Tween cancelValue;
   bool needCancelAnim = true;
+  Path pathA = Path();
 
   toNormal([_]) {
     if (needCancelAnim) {
@@ -128,6 +130,7 @@ class _BookPageState extends State<BookPage>
   Widget build(BuildContext context) {
     width = MediaQuery.of(context).size.width;
     height = MediaQuery.of(context).size.height;
+    pathA ??= Path();
     return Scaffold(
       body: Container(
         height: height,
@@ -140,6 +143,8 @@ class _BookPageState extends State<BookPage>
           onPanUpdate: toDragUpdate,
           child: CustomPaint(
             painter: BookPainter(
+              text: content,
+              pathA: pathA,
               viewWidth: width,
               viewHeight: height,
               cur: curPoint,
@@ -150,9 +155,44 @@ class _BookPageState extends State<BookPage>
                 prePoint = pre;
               },
             ),
+            child: ClipPath(
+              clipper: BookTextClip(pathA),
+              child: new Container(
+                padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).padding.top,
+                    right: 10,
+                    left: 10,
+                    bottom: 10),
+                child: new Text(
+                  content,
+                  style: TextStyle(fontSize: 22),
+                ),
+              ),
+            ),
           ),
         ),
       ),
     );
   }
 }
+
+const content = """林语堂\n
+一、腰有十文钱必振衣作响；\n
+
+二、每与人言必谈及贵戚；\n
+
+三、遇美人必急索登床；\n
+
+四、见到问路之人必作傲睨之态；\n
+
+五、与朋友相聚便喋喋高吟其酸腐诗文；\n
+
+六、头已花白却喜唱艳曲；\n
+
+七、施人一小惠便广布于众；\n
+
+八、与人交谈便借刁言以逞才；\n
+
+九、借人之债时其脸如丐，被人索偿时则其态如王；\n
+
+十、见人常多蜜语而背地却常揭人短处。""";

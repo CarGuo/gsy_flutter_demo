@@ -18,15 +18,20 @@ class BookPainter extends CustomPainter {
   double viewWidth;
   double viewHeight;
 
+  final Path pathA;
+
+  Path pathC, pathB;
+
   Paint bgPaint; //背景画笔
-  Paint pointPaint; //绘制各标识点的画笔
-  Paint pathAPaint, pathCPaint, pathBPaint; //绘制A区域画笔
-  Path pathA, pathC, pathB;
+  Paint pathAPaint, pathCPaint, pathBPaint; //绘制区域画笔
 
   PositionStyle style;
   ValueChanged changedPoint;
+  String text;
 
   BookPainter({
+    @required this.text,
+    @required this.pathA,
     @required this.viewWidth,
     @required this.viewHeight,
     @required CalPoint cur,
@@ -126,14 +131,11 @@ class BookPainter extends CustomPainter {
   }
 
   _initPaintAndPath() {
-    pointPaint = new Paint();
-    pointPaint.color = Colors.red;
-
     bgPaint = new Paint();
     bgPaint.color = Colors.white;
 
     pathAPaint = new Paint();
-    pathAPaint.color = Colors.purple;
+    pathAPaint.color = Colors.tealAccent;
     pathAPaint.isAntiAlias = true;
 
     pathCPaint = new Paint();
@@ -147,7 +149,6 @@ class BookPainter extends CustomPainter {
     pathBPaint.isAntiAlias = true;
 
     pathC = new Path();
-    pathA = new Path();
     pathB = new Path();
   }
 
@@ -165,7 +166,6 @@ class BookPainter extends CustomPainter {
       canvas.drawPath(_getPathC(), pathCPaint);
       canvas.drawPath(_getPathB(), pathBPaint);
     }
-
     canvas.restore();
   }
 
@@ -327,31 +327,31 @@ class BookPainter extends CustomPainter {
   }
 
   _drawTestPoint() {
-//    _drawText(canvas, "a", pointPaint.color, size.width, Offset(a.x, a.y),
+//    _drawText(canvas, "a",  Colors.red, size.width, Offset(a.x, a.y),
 //        textAlign: TextAlign.left, fontSize: 25);
-//    _drawText(canvas, "f", pointPaint.color, size.width, Offset(f.x, f.y),
+//    _drawText(canvas, "f",  Colors.red, size.width, Offset(f.x, f.y),
 //        textAlign: TextAlign.left, fontSize: 25);
-//    _drawText(canvas, "g", pointPaint.color, size.width, Offset(g.x, g.y),
-//        textAlign: TextAlign.left, fontSize: 25);
-//
-//    _drawText(canvas, "e", pointPaint.color, size.width, Offset(e.x, e.y),
-//        textAlign: TextAlign.left, fontSize: 25);
-//    _drawText(canvas, "h", pointPaint.color, size.width, Offset(h.x, h.y),
+//    _drawText(canvas, "g",  Colors.red, size.width, Offset(g.x, g.y),
 //        textAlign: TextAlign.left, fontSize: 25);
 //
-//    _drawText(canvas, "c", pointPaint.color, size.width, Offset(c.x, c.y),
+//    _drawText(canvas, "e",  Colors.red, size.width, Offset(e.x, e.y),
 //        textAlign: TextAlign.left, fontSize: 25);
-//    _drawText(canvas, "j", pointPaint.color, size.width, Offset(j.x, j.y),
-//        textAlign: TextAlign.left, fontSize: 25);
-//
-//    _drawText(canvas, "b", pointPaint.color, size.width, Offset(b.x, b.y),
-//        textAlign: TextAlign.left, fontSize: 25);
-//    _drawText(canvas, "k", pointPaint.color, size.width, Offset(k.x, k.y),
+//    _drawText(canvas, "h",  Colors.red, size.width, Offset(h.x, h.y),
 //        textAlign: TextAlign.left, fontSize: 25);
 //
-//    _drawText(canvas, "d", pointPaint.color, size.width, Offset(d.x, d.y),
+//    _drawText(canvas, "c",  Colors.red, size.width, Offset(c.x, c.y),
 //        textAlign: TextAlign.left, fontSize: 25);
-//    _drawText(canvas, "i", pointPaint.color, size.width, Offset(i.x, i.y),
+//    _drawText(canvas, "j",  Colors.red, size.width, Offset(j.x, j.y),
+//        textAlign: TextAlign.left, fontSize: 25);
+//
+//    _drawText(canvas, "b",  Colors.red, size.width, Offset(b.x, b.y),
+//        textAlign: TextAlign.left, fontSize: 25);
+//    _drawText(canvas, "k",  Colors.red, size.width, Offset(k.x, k.y),
+//        textAlign: TextAlign.left, fontSize: 25);
+//
+//    _drawText(canvas, "d",  Colors.red, size.width, Offset(d.x, d.y),
+//        textAlign: TextAlign.left, fontSize: 25);
+//    _drawText(canvas, "i",  Colors.red, size.width, Offset(i.x, i.y),
 //        textAlign: TextAlign.left, fontSize: 25);
   }
 }
