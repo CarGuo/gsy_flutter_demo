@@ -8,20 +8,29 @@ class BookPage extends StatefulWidget {
   _BookPageState createState() => _BookPageState();
 }
 
-class _BookPageState extends State<BookPage> {
+class _BookPageState extends State<BookPage>
+    with SingleTickerProviderStateMixin {
   CalPoint curPoint = CalPoint.data(-1, -1);
   CalPoint prePoint = CalPoint.data(-1, -1);
 
   PositionStyle style = PositionStyle.STYLE_LOWER_RIGHT;
   double width;
   double height;
+  AnimationController animationController;
+  Animation cancelAnim;
+  Tween cancelValue;
+  bool needCancelAnim = true;
 
   toNormal([_]) {
-    setState(() {
-      curPoint = CalPoint.data(-1, -1);
-      prePoint = CalPoint.data(-1, -1);
-      style = PositionStyle.STYLE_LOWER_RIGHT;
-    });
+    if (needCancelAnim) {
+      startCancelAnim();
+    } else {
+      setState(() {
+        style = PositionStyle.STYLE_LOWER_RIGHT;
+        prePoint = CalPoint.data(-1, -1);
+        curPoint = CalPoint.data(-1, -1);
+      });
+    }
   }
 
   toDragUpdate(d) {
@@ -64,6 +73,57 @@ class _BookPageState extends State<BookPage> {
     });
   }
 
+  startCancelAnim() {
+    double dx, dy;
+    if (style == PositionStyle.STYLE_TOP_RIGHT) {
+      dx = (width - 1 - prePoint.x);
+      dy = (1 - prePoint.y);
+    } else {
+      dx = (width - 1 - prePoint.x);
+      dy = (height - 1 - prePoint.y);
+    }
+    cancelValue =
+        Tween(begin: Offset(prePoint.x, prePoint.y), end: Offset(dx, dy));
+    animationController.forward();
+  }
+
+  _initCancelAnim() {
+    animationController = new AnimationController(
+        vsync: this, duration: Duration(milliseconds: 300));
+    cancelAnim = animationController.drive(CurveTween(curve: Curves.linear));
+    cancelAnim
+      ..addListener(() {
+        if (animationController.isAnimating) {
+          setState(() {
+            var bdx = cancelValue.begin.dx;
+            var bdy = cancelValue.begin.dy;
+
+            var edx = cancelValue.end.dx;
+            var edy = cancelValue.end.dy;
+
+            curPoint = CalPoint.data(
+                bdx + edx * cancelAnim.value, bdy + edy * cancelAnim.value);
+          });
+        }
+      })
+      ..addStatusListener((status) {
+        if (status == AnimationStatus.completed) {
+          setState(() {
+            style = PositionStyle.STYLE_LOWER_RIGHT;
+            prePoint = CalPoint.data(-1, -1);
+            curPoint = CalPoint.data(-1, -1);
+            animationController.reset();
+          });
+        }
+      });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _initCancelAnim();
+  }
+
   @override
   Widget build(BuildContext context) {
     width = MediaQuery.of(context).size.width;
@@ -75,10 +135,6 @@ class _BookPageState extends State<BookPage> {
         child: GestureDetector(
           onTapDown: toDown,
           onTapUp: toNormal,
-//          onVerticalDragEnd: toNormal,
-//          onVerticalDragCancel: toNormal,
-//          onHorizontalDragEnd: toNormal,
-//          onHorizontalDragCancel: toNormal,
           onPanEnd: toNormal,
           onPanCancel: toNormal,
           onPanUpdate: toDragUpdate,
