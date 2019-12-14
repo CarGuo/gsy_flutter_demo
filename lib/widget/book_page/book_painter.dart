@@ -19,8 +19,9 @@ class BookPainter extends CustomPainter {
   double viewHeight;
 
   final Path pathA;
+  Path pathB;
 
-  Path pathC, pathB;
+  final Path pathC;
 
   Paint bgPaint; //背景画笔
   Paint pathAPaint, pathCPaint, pathBPaint; //绘制区域画笔
@@ -28,12 +29,17 @@ class BookPainter extends CustomPainter {
   PositionStyle style;
   ValueChanged changedPoint;
   String text;
+  Color bgColor;
+  Color frontColor;
 
   BookPainter({
     @required this.text,
     @required this.pathA,
+    @required this.pathC,
     @required this.viewWidth,
     @required this.viewHeight,
+    @required this.frontColor,
+    @required this.bgColor,
     @required CalPoint cur,
     @required CalPoint pre,
     @required this.changedPoint,
@@ -78,6 +84,8 @@ class BookPainter extends CustomPainter {
     k = new CalPoint();
     d = new CalPoint();
     i = new CalPoint();
+
+    pathB = new Path();
   }
 
   _selectCalPoint(CalPoint cur, CalPoint pre, {bool limitAngle = true}) {
@@ -135,11 +143,11 @@ class BookPainter extends CustomPainter {
     bgPaint.color = Colors.white;
 
     pathAPaint = new Paint();
-    pathAPaint.color = Colors.tealAccent;
+    pathAPaint.color = bgColor;
     pathAPaint.isAntiAlias = true;
 
     pathCPaint = new Paint();
-    pathCPaint.color = Colors.yellow;
+    pathCPaint.color = frontColor;
     pathCPaint.blendMode = BlendMode.dstATop;
     pathCPaint.isAntiAlias = true;
 
@@ -148,7 +156,6 @@ class BookPainter extends CustomPainter {
     pathBPaint.blendMode = BlendMode.dstATop;
     pathBPaint.isAntiAlias = true;
 
-    pathC = new Path();
     pathB = new Path();
   }
 

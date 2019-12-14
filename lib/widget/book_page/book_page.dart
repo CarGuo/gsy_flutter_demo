@@ -22,6 +22,7 @@ class _BookPageState extends State<BookPage>
   Tween cancelValue;
   bool needCancelAnim = true;
   Path pathA = Path();
+  Path pathC = Path();
 
   toNormal([_]) {
     if (needCancelAnim) {
@@ -130,6 +131,7 @@ class _BookPageState extends State<BookPage>
   Widget build(BuildContext context) {
     width = MediaQuery.of(context).size.width;
     height = MediaQuery.of(context).size.height;
+    Color bgColor = Colors.tealAccent;
     pathA ??= Path();
     return Scaffold(
       body: Container(
@@ -145,29 +147,54 @@ class _BookPageState extends State<BookPage>
             painter: BookPainter(
               text: content,
               pathA: pathA,
+              pathC: pathC,
               viewWidth: width,
               viewHeight: height,
               cur: curPoint,
               pre: prePoint,
               style: style,
+              bgColor: bgColor,
+              frontColor: Colors.yellow,
               limitAngle: true,
               changedPoint: (pre) {
                 prePoint = pre;
               },
             ),
-            child: ClipPath(
-              clipper: BookTextClip(pathA),
-              child: new Container(
-                padding: EdgeInsets.only(
-                    top: MediaQuery.of(context).padding.top,
-                    right: 10,
-                    left: 10,
-                    bottom: 10),
-                child: new Text(
-                  content,
-                  style: TextStyle(fontSize: 22),
+            child: Stack(
+              children: <Widget>[
+                new Container(
+                  padding: EdgeInsets.only(
+                      top: MediaQuery.of(context).padding.top,
+                      right: 10,
+                      left: 10,
+                      bottom: 10),
+                  child: new Text(
+                    content2,
+                    style: TextStyle(fontSize: 22),
+                  ),
                 ),
-              ),
+                ClipPath(
+                  clipper: BookTextClip(pathC),
+                  child: new Container(
+                    color: Colors.yellow,
+                  ),
+                ),
+                ClipPath(
+                  clipper: BookTextClip(pathA),
+                  child: new Container(
+                    color: bgColor,
+                    padding: EdgeInsets.only(
+                        top: MediaQuery.of(context).padding.top,
+                        right: 10,
+                        left: 10,
+                        bottom: 10),
+                    child: new Text(
+                      content,
+                      style: TextStyle(fontSize: 22),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ),
@@ -196,3 +223,9 @@ const content = """林语堂\n
 九、借人之债时其脸如丐，被人索偿时则其态如王；\n
 
 十、见人常多蜜语而背地却常揭人短处。""";
+
+const content2 = """林语堂\n
+1.人本过客来无处，休说故里在何方。随遇而安无不可，人间到处有芳香。——林语堂\n
+2.人生不过如此，且行且珍惜。自己永远是自己的主角，不要总在别人的戏剧里充当着配角。——林语堂《人生不过如此》\n
+3.最明亮时总是最迷茫，最繁华时也是最悲凉。——林语堂《京华烟云》\n
+4.理想的人并不是完美的人，通常只是受人喜爱，并且通情达理的人，而我只是努力去接近于此罢了。——林语堂""";
