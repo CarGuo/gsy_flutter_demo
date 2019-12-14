@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gsy_flutter_demo/widget/book_page/cal_point.dart';
 
 import 'book_painter.dart';
 
@@ -8,35 +9,39 @@ class BookPage extends StatefulWidget {
 }
 
 class _BookPageState extends State<BookPage> {
-  double x = -1;
-  double y = -1;
+  CalPoint curPoint = CalPoint.data(-1, -1);
+  CalPoint prePoint = CalPoint.data(-1, -1);
+
   PositionStyle style = PositionStyle.STYLE_LOWER_RIGHT;
   double width;
   double height;
 
   toNormal([_]) {
     setState(() {
-      x = -1;
-      y = -1;
+      curPoint = CalPoint.data(-1, -1);
+      prePoint = CalPoint.data(-1, -1);
     });
   }
 
   toDragUpdate(d) {
+    var x = d.localPosition.dx;
+    var y = d.localPosition.dy;
     setState(() {
-      x = d.localPosition.dx;
-      y = d.localPosition.dy;
+      curPoint = CalPoint.data(x, y);
     });
   }
 
-  toDown(TapDownDetails details) {
-    if (details.localPosition.dy < height / 2) {
+  toDown(TapDownDetails d) {
+    prePoint = CalPoint.data(-1, -1);
+    if (d.localPosition.dy < height / 2) {
       style = PositionStyle.STYLE_TOP_RIGHT;
-    } else if (details.localPosition.dy >= height / 2) {
+    } else if (d.localPosition.dy >= height / 2) {
       style = PositionStyle.STYLE_LOWER_RIGHT;
     }
+    var x = d.localPosition.dx;
+    var y = d.localPosition.dy;
     setState(() {
-      x = details.localPosition.dx;
-      y = details.localPosition.dy;
+      curPoint = CalPoint.data(x, y);
     });
   }
 
@@ -59,7 +64,16 @@ class _BookPageState extends State<BookPage> {
           onHorizontalDragUpdate: toDragUpdate,
           child: CustomPaint(
             painter: BookPainter(
-                viewWidth: width, viewHeight: height, x: x, y: y, style: style),
+              viewWidth: width,
+              viewHeight: height,
+              cur: curPoint,
+              pre: prePoint,
+              style: style,
+              limitAngle: true,
+              changedPoint: (pre) {
+                prePoint = pre;
+              },
+            ),
           ),
         ),
       ),

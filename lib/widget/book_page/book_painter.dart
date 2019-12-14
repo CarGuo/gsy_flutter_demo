@@ -17,14 +17,18 @@ class BookPainter extends CustomPainter {
   Path pathA, pathC, pathB;
 
   PositionStyle style;
+  ValueChanged changedPoint;
 
-  BookPainter(
-      {@required this.viewWidth,
-      @required this.viewHeight,
-      @required x,
-      @required y,
-      @required this.style}) {
-    init(x, y);
+  BookPainter({
+    @required this.viewWidth,
+    @required this.viewHeight,
+    @required CalPoint cur,
+    @required CalPoint pre,
+    @required this.changedPoint,
+    @required this.style,
+    bool limitAngle,
+  }) {
+    init(cur, pre, limitAngle);
   }
 
   @override
@@ -35,10 +39,10 @@ class BookPainter extends CustomPainter {
     onDraw(canvas, size);
   }
 
-  init(x, y) {
+  init(CalPoint cur, CalPoint pre, bool limitAngle) {
     _initPoint();
 
-    _selectCalPoint(x, y);
+    _selectCalPoint(cur, pre, limitAngle: limitAngle);
 
     _calcPointsXY(a, f);
 
@@ -64,7 +68,7 @@ class BookPainter extends CustomPainter {
     i = new CalPoint();
   }
 
-  _selectCalPoint(x, y) {
+  _selectCalPoint(CalPoint cur, CalPoint pre, {bool limitAngle = true}) {
     switch (style) {
       case PositionStyle.STYLE_TOP_RIGHT:
         f.x = viewWidth;
@@ -77,8 +81,25 @@ class BookPainter extends CustomPainter {
       default:
         break;
     }
-    a.x = x;
-    a.y = y;
+    CalPoint touchPoint = CalPoint.data(cur.x, cur.y);
+    if (f.x != null &&
+        touchPoint.x != null &&
+        (limitAngle != null && limitAngle)) {
+      ///如果大于0则设置a点坐标重新计算各标识点位置，否则a点坐标不变
+      if (_calcPointCX(touchPoint, f) > 0) {
+        a.x = cur.x;
+        a.y = cur.y;
+        changedPoint?.call(cur);
+        _calcPointsXY(a, f);
+      } else {
+        a.x = pre.x;
+        a.y = pre.y;
+        _calcPointsXY(a, f);
+      }
+    } else {
+      a.x = cur.x;
+      a.y = cur.y;
+    }
   }
 
   _initPaintAndPath() {
@@ -236,6 +257,20 @@ class BookPainter extends CustomPainter {
     pathA.lineTo(viewWidth, 0);
     pathA.close();
     return pathA;
+  }
+
+  ///计算C点的X值
+  _calcPointCX(CalPoint a, CalPoint f) {
+    CalPoint g, e;
+    g = new CalPoint();
+    e = new CalPoint();
+    g.x = (a.x + f.x) / 2;
+    g.y = (a.y + f.y) / 2;
+
+    e.x = g.x - (f.y - g.y) * (f.y - g.y) / (f.x - g.x);
+    e.y = f.y;
+
+    return e.x - (f.x - e.x) / 2;
   }
 
   ///利用 Paragraph 实现 _drawText
