@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
 import 'cal_point.dart';
+import 'dart:math' as Math;
 
-enum PositionStyle { STYLE_TOP_RIGHT, STYLE_LOWER_RIGHT }
+enum PositionStyle {
+  STYLE_TOP_RIGHT,
+  STYLE_LOWER_RIGHT,
+  STYLE_LEFT,
+  STYLE_RIGHT,
+  STYLE_MIDDLE,
+}
 
 ///页面画笔
 class BookPainter extends CustomPainter {
@@ -69,36 +76,52 @@ class BookPainter extends CustomPainter {
   }
 
   _selectCalPoint(CalPoint cur, CalPoint pre, {bool limitAngle = true}) {
-    switch (style) {
-      case PositionStyle.STYLE_TOP_RIGHT:
-        f.x = viewWidth;
-        f.y = 0;
-        break;
-      case PositionStyle.STYLE_LOWER_RIGHT:
-        f.x = viewWidth;
-        f.y = viewHeight;
-        break;
-      default:
-        break;
-    }
-    CalPoint touchPoint = CalPoint.data(cur.x, cur.y);
-    if (f.x != null &&
-        touchPoint.x != null &&
-        (limitAngle != null && limitAngle)) {
-      ///如果大于0则设置a点坐标重新计算各标识点位置，否则a点坐标不变
-      if (_calcPointCX(touchPoint, f) > 0) {
-        a.x = cur.x;
-        a.y = cur.y;
-        changedPoint?.call(cur);
+    a.x = cur.x;
+    a.y = cur.y;
+    doCalAngle() {
+      CalPoint touchPoint = CalPoint.data(cur.x, cur.y);
+      if (f.x != null &&
+          touchPoint.x != null &&
+          (limitAngle != null && limitAngle)) {
+        ///如果大于0则设置a点坐标重新计算各标识点位置，否则a点坐标不变
+        if (_calcPointCX(touchPoint, f) > 0) {
+          changedPoint?.call(cur);
+          _calcPointsXY(a, f);
+        } else {
+          a.x = pre.x;
+          a.y = pre.y;
+          _calcPointsXY(a, f);
+        }
+      } else if (_calcPointCX(touchPoint, f) < 0) {
+        ///如果c点x坐标小于0则重新测量a点坐标
+        _calcPointAByTouchPoint();
         _calcPointsXY(a, f);
       } else {
         a.x = pre.x;
         a.y = pre.y;
-        _calcPointsXY(a, f);
       }
-    } else {
-      a.x = cur.x;
-      a.y = cur.y;
+    }
+
+    switch (style) {
+      case PositionStyle.STYLE_TOP_RIGHT:
+        f.x = viewWidth;
+        f.y = 0;
+        doCalAngle();
+        break;
+      case PositionStyle.STYLE_LOWER_RIGHT:
+        f.x = viewWidth;
+        f.y = viewHeight;
+        doCalAngle();
+        break;
+      case PositionStyle.STYLE_LEFT:
+      case PositionStyle.STYLE_RIGHT:
+        a.y = viewHeight - 1;
+        f.x = viewWidth;
+        f.y = viewHeight;
+        _calcPointsXY(a, f);
+        break;
+      default:
+        break;
     }
   }
 
@@ -271,6 +294,19 @@ class BookPainter extends CustomPainter {
     e.y = f.y;
 
     return e.x - (f.x - e.x) / 2;
+  }
+
+  ///如果c点x坐标小于0,根据触摸点重新测量a点坐标
+  _calcPointAByTouchPoint() {
+    double w0 = viewWidth - c.x;
+
+    double w1 = (f.x - a.x).abs();
+    double w2 = viewWidth * w1 / w0;
+    a.x = (f.x - w2).abs();
+
+    double h1 = (f.y - a.y).abs();
+    double h2 = w2 * h1 / w1;
+    a.y = (f.y - h2).abs();
   }
 
   ///利用 Paragraph 实现 _drawText

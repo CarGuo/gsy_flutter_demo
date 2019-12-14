@@ -20,6 +20,7 @@ class _BookPageState extends State<BookPage> {
     setState(() {
       curPoint = CalPoint.data(-1, -1);
       prePoint = CalPoint.data(-1, -1);
+      style = PositionStyle.STYLE_LOWER_RIGHT;
     });
   }
 
@@ -33,11 +34,29 @@ class _BookPageState extends State<BookPage> {
 
   toDown(TapDownDetails d) {
     prePoint = CalPoint.data(-1, -1);
-    if (d.localPosition.dy < height / 2) {
+    var dy = d.localPosition.dy;
+    var dx = d.localPosition.dx;
+
+    if (dx <= width / 3) {
+      //左
+      style = PositionStyle.STYLE_LEFT;
+    } else if (dx > width / 3 && dy <= height / 3) {
+      //上
       style = PositionStyle.STYLE_TOP_RIGHT;
-    } else if (d.localPosition.dy >= height / 2) {
+    } else if (dx > width * 2 / 3 && dy > height / 3 && dy <= height * 2 / 3) {
+      //右
+      style = PositionStyle.STYLE_RIGHT;
+    } else if (dx > width / 3 && dy > height * 2 / 3) {
+      //下
       style = PositionStyle.STYLE_LOWER_RIGHT;
+    } else if (dx > width / 3 &&
+        dx < width * 2 / 3 &&
+        dy > height / 3 &&
+        dy < height * 2 / 3) {
+      //中
+      style = PositionStyle.STYLE_MIDDLE;
     }
+
     var x = d.localPosition.dx;
     var y = d.localPosition.dy;
     setState(() {
@@ -56,12 +75,13 @@ class _BookPageState extends State<BookPage> {
         child: GestureDetector(
           onTapDown: toDown,
           onTapUp: toNormal,
-          onVerticalDragEnd: toNormal,
-          onVerticalDragCancel: toNormal,
-          onHorizontalDragEnd: toNormal,
-          onHorizontalDragCancel: toNormal,
-          onVerticalDragUpdate: toDragUpdate,
-          onHorizontalDragUpdate: toDragUpdate,
+//          onVerticalDragEnd: toNormal,
+//          onVerticalDragCancel: toNormal,
+//          onHorizontalDragEnd: toNormal,
+//          onHorizontalDragCancel: toNormal,
+          onPanEnd: toNormal,
+          onPanCancel: toNormal,
+          onPanUpdate: toDragUpdate,
           child: CustomPaint(
             painter: BookPainter(
               viewWidth: width,
