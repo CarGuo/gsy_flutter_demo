@@ -172,9 +172,12 @@ class _BookPageState extends State<BookPage>
                       left: 10,
                       bottom: 10),
                   child: new Text(
-                    content2,
+                    content,
                     style: TextStyle(fontSize: 22),
                   ),
+                ),
+                Container(
+                  color: Colors.black12,
                 ),
                 ClipPath(
                   clipper: BookTextClip(pathC),
