@@ -15,7 +15,8 @@ class _SliverTabDemoPageState extends State<SliverTabDemoPage3>
   TabController tabController;
 
   final PageController pageController = new PageController();
-  final ScrollController scrollController = new ScrollController();
+  final ScrollController scrollController =
+      new ScrollController(initialScrollOffset: -100);
   final int tabLength = 4;
   final double maxHeight = kToolbarHeight;
   double minHeight = 30;
@@ -71,6 +72,7 @@ class _SliverTabDemoPageState extends State<SliverTabDemoPage3>
       child: Builder(
         builder: (BuildContext context) {
           return CustomScrollView(
+            physics: BouncingScrollPhysics(),
             key: PageStorageKey<String>(tabIndex.toString()),
             slivers: <Widget>[
               CustomSliver(
