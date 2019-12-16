@@ -35,6 +35,7 @@ import 'package:gsy_flutter_demo/widget/sliver_list_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/sliver_stick_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/sliver_tab_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/sliver_tab_demo_page2.dart';
+import 'package:gsy_flutter_demo/widget/sliver_tab_demo_page3.dart';
 import 'package:gsy_flutter_demo/widget/statusbar_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/stick/stick_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/stick/stick_demo_page2.dart';
@@ -152,6 +153,7 @@ const routerName = [
   "Card Item",
   "Sliver Tab",
   "Sliver Tab2",
+  "Sliver Tab3",
   "仿真书本翻页动画",
 ];
 
@@ -293,6 +295,9 @@ Map<String, WidgetBuilder> routers = {
   },
   "widget/slivertab2": (context) {
     return new SliverTabDemoPage2();
+  },
+  "widget/slivertab3": (context) {
+    return new SliverTabDemoPage3();
   },
   "widget/flipbook": (context) {
     return new BookPage();
