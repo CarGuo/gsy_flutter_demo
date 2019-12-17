@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:gsy_flutter_demo/widget/sliver_tab/sliver_tab_child_page.dart';
 
-final kMinHeight = 30;
+final kMinHeight = 30.0;
 
 /// 高级版 Sliver Tab
 class SliverTabDemoPage3 extends StatefulWidget {
@@ -88,7 +88,19 @@ class _SliverTabDemoPageState extends State<SliverTabDemoPage3>
               return false;
             }
           }
-          if (notification is ScrollUpdateNotification) {
+          if (notification is UserScrollNotification) {
+            if (notification.direction == ScrollDirection.idle) {
+              if (notification.metrics.pixels <= 0) {
+                minHeight = kToolbarHeight;
+                shrinkOffset = 0;
+                setState(() {});
+              } else {
+                minHeight = kMinHeight;
+                shrinkOffset = kMinHeight;
+                setState(() {});
+              }
+            }
+          } else if (notification is ScrollUpdateNotification) {
             if (notification.metrics.pixels < 0 &&
                 minHeight != kToolbarHeight) {
               var cur = minHeight - notification.metrics.pixels / 3;

@@ -54,7 +54,7 @@ class _SliverTabChildPageState extends State<SliverTabChildPage>
   }
 
   @override
-  bool get wantKeepAlive => true;
+  bool get wantKeepAlive => false;
 
   @override
   Widget build(BuildContext context) {
