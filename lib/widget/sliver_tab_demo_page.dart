@@ -82,6 +82,7 @@ class _SliverTabDemoPageState extends State<SliverTabDemoPage>
       ),
       body: new Container(
         child: new CustomScrollView(
+          physics: BouncingScrollPhysics(),
           controller: scrollController,
           slivers: <Widget>[
             ///动态放大缩小的tab控件

@@ -16,10 +16,9 @@ class _SliverTabDemoPageState extends State<SliverTabDemoPage3>
   TabController tabController;
 
   final PageController pageController = new PageController();
-  final ScrollController scrollController = new ScrollController();
   final int tabLength = 4;
-  final double maxHeight = kToolbarHeight;
-  double minHeight = 30;
+  double minHeight = kToolbarHeight;
+  double shrinkOffset = 0;
   final double tabIconSize = 30;
   final List<List> dataList = [
     List(30),
@@ -78,6 +77,15 @@ class _SliverTabDemoPageState extends State<SliverTabDemoPage3>
       ),
       body: new NotificationListener(
         onNotification: (ScrollNotification notification) {
+          if (notification.metrics is PageMetrics) {
+            return false;
+          }
+          if (notification.metrics is FixedScrollMetrics) {
+            if (notification.metrics.axisDirection == AxisDirection.left ||
+                notification.metrics.axisDirection == AxisDirection.right) {
+              return false;
+            }
+          }
           if (notification is ScrollUpdateNotification) {
             if (notification.metrics.pixels < 0 &&
                 minHeight != kToolbarHeight) {
@@ -85,63 +93,45 @@ class _SliverTabDemoPageState extends State<SliverTabDemoPage3>
                 minHeight = kToolbarHeight;
               });
             } else if (notification.metrics.pixels >= 0 && minHeight != 30) {
-              setState(() {
-                minHeight = 30;
-              });
+              var cur = kToolbarHeight - notification.metrics.pixels / 2;
+              shrinkOffset = notification.metrics.pixels / 2;
+              if (minHeight != cur) {
+                setState(() {
+                  minHeight = (cur > 30) ? cur : 30;
+                });
+              }
             }
           }
           return false;
         },
-        child: NestedScrollView(
-          controller: scrollController,
-          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-            return <Widget>[
-              SliverOverlapAbsorber(
-                handle:
-                    NestedScrollView.sliverOverlapAbsorberHandleFor(context),
-                child: SliverPersistentHeader(
-                  pinned: true,
-                  delegate: GSYSliverHeaderDelegate(
-                      maxHeight: maxHeight,
-                      minHeight: minHeight,
-                      changeSize: true,
-                      snapConfig: FloatingHeaderSnapConfiguration(
-                        vsync: this,
-                        curve: Curves.bounceInOut,
-                        duration: const Duration(milliseconds: 10),
-                      ),
-                      builder: (BuildContext context, double shrinkOffset,
-                          bool overlapsContent) {
-                        return Container(
-                          height: maxHeight,
-                          color: Colors.blue,
-                          child: TabBar(
-                            controller: tabController,
-                            indicatorColor: Colors.cyanAccent,
-                            unselectedLabelColor: Colors.white.withAlpha(100),
-                            labelColor: Colors.cyanAccent,
-                            tabs: renderTabs(shrinkOffset),
-                            onTap: (index) {
-                              setState(() {});
-                              scrollController.animateTo(0,
-                                  duration: Duration(milliseconds: 100),
-                                  curve: Curves.fastOutSlowIn);
-                              pageController.jumpToPage(index);
-                            },
-                          ),
-                        );
-                      }),
-                ),
+        child: Column(
+          children: <Widget>[
+            Container(
+              height: minHeight,
+              color: Colors.blue.withAlpha(10),
+              child: TabBar(
+                controller: tabController,
+                indicatorColor: Colors.cyanAccent,
+                unselectedLabelColor: Colors.white.withAlpha(100),
+                labelColor: Colors.cyanAccent,
+                tabs: renderTabs(shrinkOffset),
+                onTap: (index) {
+                  setState(() {});
+                  pageController.jumpToPage(index);
+                },
               ),
-            ];
-          },
-          body: PageView(
-            onPageChanged: (index) {
-              tabController.animateTo(index);
-            },
-            controller: pageController,
-            children: renderPages(),
-          ),
+            ),
+            new Expanded(
+              child: PageView(
+                physics: NeverScrollableScrollPhysics(),
+                onPageChanged: (index) {
+                  tabController.animateTo(index);
+                },
+                controller: pageController,
+                children: renderPages(),
+              ),
+            )
+          ],
         ),
       ),
     );
