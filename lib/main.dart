@@ -35,7 +35,7 @@ import 'package:gsy_flutter_demo/widget/sliver_list_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/sliver_stick_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/sliver_tab_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/sliver_tab_demo_page2.dart';
-import 'package:gsy_flutter_demo/widget/sliver_tab_demo_page3.dart';
+import 'package:gsy_flutter_demo/widget/sliver_tab/sliver_tab_demo_page3.dart';
 import 'package:gsy_flutter_demo/widget/statusbar_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/stick/stick_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/stick/stick_demo_page2.dart';

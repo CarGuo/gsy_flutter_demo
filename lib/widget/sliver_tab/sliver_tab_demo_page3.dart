@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:gsy_flutter_demo/widget/custom_sliver/custom_sliver.dart';
+import 'package:gsy_flutter_demo/widget/sliver_tab/sliver_tab_child_page.dart';
 
 /// 高级版 Sliver Tab
 class SliverTabDemoPage3 extends StatefulWidget {
@@ -15,8 +16,7 @@ class _SliverTabDemoPageState extends State<SliverTabDemoPage3>
   TabController tabController;
 
   final PageController pageController = new PageController();
-  final ScrollController scrollController =
-      new ScrollController(initialScrollOffset: -100);
+  final ScrollController scrollController = new ScrollController();
   final int tabLength = 4;
   final double maxHeight = kToolbarHeight;
   double minHeight = 30;
@@ -28,15 +28,8 @@ class _SliverTabDemoPageState extends State<SliverTabDemoPage3>
     List(40),
   ];
 
-  GlobalKey<CustomSliverState> globalKey = new GlobalKey();
   final ScrollController controller =
       ScrollController(initialScrollOffset: -70);
-
-  double initLayoutExtent = 100;
-  double showPullDistance = 150;
-  final double indicatorExtent = 200;
-  final double triggerPullDistance = 300;
-  bool pinned = false;
 
   List<Widget> renderTabs(double shrinkOffset) {
     double offset = (shrinkOffset > tabIconSize) ? tabIconSize : shrinkOffset;
@@ -65,47 +58,9 @@ class _SliverTabDemoPageState extends State<SliverTabDemoPage3>
     });
   }
 
-  renderListByIndex(tabIndex, pageList) {
-    return SafeArea(
-      top: false,
-      bottom: false,
-      child: Builder(
-        builder: (BuildContext context) {
-          return CustomScrollView(
-            physics: BouncingScrollPhysics(),
-            key: PageStorageKey<String>(tabIndex.toString()),
-            slivers: <Widget>[
-              CustomSliver(
-                key: globalKey,
-                initLayoutExtent: initLayoutExtent,
-                containerExtent: indicatorExtent,
-                triggerPullDistance: triggerPullDistance,
-                pinned: false,
-              ),
-              SliverPadding(
-                padding: const EdgeInsets.all(10.0),
-                sliver: SliverFixedExtentList(
-                  itemExtent: 50.0, //item高度或宽度，取决于滑动方向
-                  delegate: SliverChildBuilderDelegate(
-                    (BuildContext context, int index) {
-                      return ListTile(
-                        title: Text('Tab $tabIndex Item $index'),
-                      );
-                    },
-                    childCount: pageList.length,
-                  ),
-                ),
-              ),
-            ],
-          );
-        },
-      ),
-    );
-  }
-
   List<Widget> renderPages() {
     return List.generate(dataList.length, (index) {
-      return renderListByIndex(index, dataList[index]);
+      return SliverTabChildPage(index, dataList[index]);
     });
   }
 
