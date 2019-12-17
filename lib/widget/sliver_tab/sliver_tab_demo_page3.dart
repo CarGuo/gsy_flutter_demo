@@ -2,8 +2,9 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:gsy_flutter_demo/widget/custom_sliver/custom_sliver.dart';
 import 'package:gsy_flutter_demo/widget/sliver_tab/sliver_tab_child_page.dart';
+
+final kMinHeight = 30;
 
 /// 高级版 Sliver Tab
 class SliverTabDemoPage3 extends StatefulWidget {
@@ -17,8 +18,6 @@ class _SliverTabDemoPageState extends State<SliverTabDemoPage3>
 
   final PageController pageController = new PageController();
   final int tabLength = 4;
-  double minHeight = kToolbarHeight;
-  double shrinkOffset = 0;
   final double tabIconSize = 30;
   final List<List> dataList = [
     List(30),
@@ -26,6 +25,9 @@ class _SliverTabDemoPageState extends State<SliverTabDemoPage3>
     List(8),
     List(40),
   ];
+
+  double minHeight = kToolbarHeight;
+  double shrinkOffset = 0;
 
   final ScrollController controller =
       ScrollController(initialScrollOffset: -70);
@@ -89,16 +91,25 @@ class _SliverTabDemoPageState extends State<SliverTabDemoPage3>
           if (notification is ScrollUpdateNotification) {
             if (notification.metrics.pixels < 0 &&
                 minHeight != kToolbarHeight) {
-              setState(() {
-                minHeight = kToolbarHeight;
-              });
-            } else if (notification.metrics.pixels >= 0 && minHeight != 30) {
+              var cur = minHeight - notification.metrics.pixels / 3;
+              if (shrinkOffset > 0) {
+                shrinkOffset =
+                    (shrinkOffset + notification.metrics.pixels / 3).abs();
+              }
+              if (cur > kToolbarHeight) {
+                cur = kToolbarHeight;
+              }
+              if (minHeight != cur) {
+                minHeight = cur.abs();
+                setState(() {});
+              }
+            } else if (notification.metrics.pixels >= 0 &&
+                minHeight != kMinHeight) {
               var cur = kToolbarHeight - notification.metrics.pixels / 2;
               shrinkOffset = notification.metrics.pixels / 2;
               if (minHeight != cur) {
-                setState(() {
-                  minHeight = (cur > 30) ? cur : 30;
-                });
+                minHeight = (cur > kMinHeight) ? cur : kMinHeight;
+                setState(() {});
               }
             }
           }
@@ -108,7 +119,7 @@ class _SliverTabDemoPageState extends State<SliverTabDemoPage3>
           children: <Widget>[
             Container(
               height: minHeight,
-              color: Colors.blue.withAlpha(10),
+              color: Colors.blue,
               child: TabBar(
                 controller: tabController,
                 indicatorColor: Colors.cyanAccent,
@@ -123,7 +134,7 @@ class _SliverTabDemoPageState extends State<SliverTabDemoPage3>
             ),
             new Expanded(
               child: PageView(
-                physics: NeverScrollableScrollPhysics(),
+                //physics: NeverScrollableScrollPhysics(),
                 onPageChanged: (index) {
                   tabController.animateTo(index);
                 },
