@@ -149,6 +149,7 @@ class _BookPageState extends State<BookPage>
           child: CustomPaint(
             painter: BookPainter(
               text: content,
+              text2: content2,
               pathA: pathA,
               pathC: pathC,
               viewWidth: width,

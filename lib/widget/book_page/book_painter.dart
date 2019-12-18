@@ -29,11 +29,13 @@ class BookPainter extends CustomPainter {
   PositionStyle style;
   ValueChanged changedPoint;
   String text;
+  String text2;
   Color bgColor;
   Color frontColor;
 
   BookPainter({
     @required this.text,
+    @required this.text2,
     @required this.pathA,
     @required this.pathC,
     @required this.viewWidth,
@@ -164,14 +166,18 @@ class BookPainter extends CustomPainter {
 
     if (a.x == -1 && a.y == -1) {
       _drawPathAWithPic(canvas, _getPathDefault());
+      canvas.drawPath(_getPathC(), pathCPaint);
+      _drawPathBWithPic(canvas, _getPathDefault());
     } else {
       if (f.x == viewWidth && f.y == 0) {
         _drawPathAWithPic(canvas, _getPathAFromTopRight());
+        canvas.drawPath(_getPathC(), pathCPaint);
+        _drawPathBWithPic(canvas, _getPathAFromTopRight());
       } else if (f.x == viewWidth && f.y == viewHeight) {
         _drawPathAWithPic(canvas, _getPathAFromLowerRight());
+        canvas.drawPath(_getPathC(), pathCPaint);
+        _drawPathBWithPic(canvas, _getPathAFromLowerRight());
       }
-      canvas.drawPath(_getPathC(), pathCPaint);
-      canvas.drawPath(_getPathB(), pathBPaint);
     }
 
     canvas.restore();
@@ -187,6 +193,23 @@ class BookPainter extends CustomPainter {
     _drawText(canvasBitmap, text, Colors.black, viewWidth, Offset.zero);
     var pic = pictureRecorder.endRecording();
     canvas.clipPath(pp);
+    canvas.drawPicture(pic);
+    canvas.restore();
+  }
+
+  void _drawPathBWithPic(Canvas canvas, Path pa) {
+    canvas.save();
+    var pictureRecorder = ui.PictureRecorder();
+    var canvasBitmap = Canvas(pictureRecorder);
+    var paint = Paint();
+    paint.isAntiAlias = true;
+    canvasBitmap.drawPath(_getPathB(), pathBPaint);
+    _drawText(canvasBitmap, text2, Colors.black, viewWidth, Offset.zero);
+
+    var pic = pictureRecorder.endRecording();
+    var pn = Path.combine(PathOperation.reverseDifference, pa, _getPathB());
+    pn = Path.combine(PathOperation.reverseDifference, _getPathC(), pn);
+    canvas.clipPath(pn);
     canvas.drawPicture(pic);
     canvas.restore();
   }
