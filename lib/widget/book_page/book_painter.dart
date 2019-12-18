@@ -3,6 +3,7 @@ import 'dart:ui' as ui;
 import 'cal_point.dart';
 import 'dart:math' as Math;
 
+///触摸类型
 enum PositionStyle {
   STYLE_TOP_RIGHT,
   STYLE_LOWER_RIGHT,
@@ -18,30 +19,48 @@ class BookPainter extends CustomPainter {
   double viewWidth;
   double viewHeight;
 
-  final Path pathA;
+  ///顶部区域
+  Path pathA;
+
+  ///折叠出来的区域
+  Path pathC;
+
+  ///背部区域
   Path pathB;
 
-  final Path pathC;
+  ///背景画笔
+  Paint bgPaint;
 
-  Paint bgPaint; //背景画笔
-  Paint pathAPaint, pathCPaint, pathBPaint; //绘制区域画笔
+  ///绘制区域画笔
+  Paint pathAPaint, pathCPaint, pathBPaint;
 
+  ///触摸点的区域
   PositionStyle style;
+
+  ///回调数据外放
   ValueChanged changedPoint;
-  String text;
-  String text2;
+
+  ///背景色
   Color bgColor;
+
+  ///前景色
   Color frontColor;
 
+  ///文本一
+  String text;
+
+  ///文本二
+  String text2;
+
+  ///A区域左阴影矩形短边长度参考值
   double lPathAShadowDis = 0;
 
+  /// A区域右阴影矩形短边长度参考值
   double rPathAShadowDis = 0;
 
   BookPainter({
     @required this.text,
     @required this.text2,
-    @required this.pathA,
-    @required this.pathC,
     @required this.viewWidth,
     @required this.viewHeight,
     @required this.frontColor,
@@ -64,12 +83,16 @@ class BookPainter extends CustomPainter {
   }
 
   init(CalPoint cur, CalPoint pre, bool limitAngle) {
+    ///初始化点
     _initPoint();
 
+    ///选择工作模型
     _selectCalPoint(cur, pre, limitAngle: limitAngle);
 
+    ///计算
     _calcPointsXY(a, f);
 
+    ///初始化
     _initPaintAndPath();
   }
 
@@ -92,6 +115,8 @@ class BookPainter extends CustomPainter {
     i = new CalPoint();
 
     pathB = new Path();
+    pathA = new Path();
+    pathC = new Path();
   }
 
   _selectCalPoint(CalPoint cur, CalPoint pre, {bool limitAngle = true}) {
@@ -134,6 +159,7 @@ class BookPainter extends CustomPainter {
         break;
       case PositionStyle.STYLE_LEFT:
       case PositionStyle.STYLE_RIGHT:
+      case PositionStyle.STYLE_MIDDLE:
         a.y = viewHeight - 1;
         f.x = viewWidth;
         f.y = viewHeight;
@@ -170,18 +196,15 @@ class BookPainter extends CustomPainter {
 
     if (a.x == -1 && a.y == -1) {
       _drawPathAWithPic(canvas, _getPathDefault());
-      //canvas.drawPath(_getPathC(), pathCPaint);
       _drawPathCWithPic(canvas, _getPathDefault(), pathCPaint);
       _drawPathBWithPic(canvas, _getPathDefault());
     } else {
       if (f.x == viewWidth && f.y == 0) {
         _drawPathAWithPic(canvas, _getPathAFromTopRight());
-        //canvas.drawPath(_getPathC(), pathCPaint);
         _drawPathCWithPic(canvas, _getPathAFromTopRight(), pathCPaint);
         _drawPathBWithPic(canvas, _getPathAFromTopRight());
       } else if (f.x == viewWidth && f.y == viewHeight) {
         _drawPathAWithPic(canvas, _getPathAFromLowerRight());
-        //canvas.drawPath(_getPathC(), pathCPaint);
         _drawPathCWithPic(canvas, _getPathAFromLowerRight(), pathCPaint);
         _drawPathBWithPic(canvas, _getPathAFromLowerRight());
       }
