@@ -159,20 +159,35 @@ class BookPainter extends CustomPainter {
     pathB = new Path();
   }
 
-  void onDraw(Canvas canvas, Size size) {
+  void onDraw(Canvas canvas, Size size) async {
     canvas.saveLayer(Rect.fromLTRB(0, 0, size.width, size.height), bgPaint);
 
     if (a.x == -1 && a.y == -1) {
-      canvas.drawPath(_getPathDefault(), pathAPaint);
+      _drawPathAWithPic(canvas, _getPathDefault());
     } else {
       if (f.x == viewWidth && f.y == 0) {
-        canvas.drawPath(_getPathAFromTopRight(), pathAPaint);
+        _drawPathAWithPic(canvas, _getPathAFromTopRight());
       } else if (f.x == viewWidth && f.y == viewHeight) {
-        canvas.drawPath(_getPathAFromLowerRight(), pathAPaint);
+        _drawPathAWithPic(canvas, _getPathAFromLowerRight());
       }
       canvas.drawPath(_getPathC(), pathCPaint);
       canvas.drawPath(_getPathB(), pathBPaint);
     }
+
+    canvas.restore();
+  }
+
+  void _drawPathAWithPic(Canvas canvas, Path pp) {
+    canvas.save();
+    var pictureRecorder = ui.PictureRecorder();
+    var canvasBitmap = Canvas(pictureRecorder);
+    var paint = Paint();
+    paint.isAntiAlias = true;
+    canvasBitmap.drawPath(pp, pathAPaint);
+    _drawText(canvasBitmap, text, Colors.black, viewWidth, Offset.zero);
+    var pic = pictureRecorder.endRecording();
+    canvas.clipPath(pp);
+    canvas.drawPicture(pic);
     canvas.restore();
   }
 

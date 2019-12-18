@@ -163,7 +163,7 @@ class _BookPageState extends State<BookPage>
                 prePoint = pre;
               },
             ),
-            child: Stack(
+            /*child: Stack(
               children: <Widget>[
                 new Container(
                   padding: EdgeInsets.only(
@@ -198,7 +198,7 @@ class _BookPageState extends State<BookPage>
                   ),
                 ),
               ],
-            ),
+            ),*/
           ),
         ),
       ),
