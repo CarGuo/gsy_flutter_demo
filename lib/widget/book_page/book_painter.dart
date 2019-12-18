@@ -33,6 +33,10 @@ class BookPainter extends CustomPainter {
   Color bgColor;
   Color frontColor;
 
+  double lPathAShadowDis = 0;
+
+  double rPathAShadowDis = 0;
+
   BookPainter({
     @required this.text,
     @required this.text2,
@@ -197,7 +201,131 @@ class BookPainter extends CustomPainter {
     var pic = pictureRecorder.endRecording();
     canvas.clipPath(pp);
     canvas.drawPicture(pic);
+
+    if (style == PositionStyle.STYLE_LEFT ||
+        style == PositionStyle.STYLE_RIGHT) {
+      _drawPathAHorizontalShadow(canvas, pathA);
+    } else if (a.x != -1 && a.y != -1) {
+      _drawPathALeftShadow(canvas, pp);
+      _drawPathARightShadow(canvas, pp);
+    }
+
     canvas.restore();
+  }
+
+  void _drawPathALeftShadow(Canvas canvas, Path pathA) {
+    canvas.restore();
+    canvas.save();
+
+    var gradientColors = [Color(0x01333333), Color(0x33333333)];
+
+    double left;
+    double right;
+    double top = e.y;
+    double bottom = (e.y + viewHeight);
+
+    ui.Gradient gradient;
+    if (style == PositionStyle.STYLE_TOP_RIGHT) {
+      left = (e.x - lPathAShadowDis / 2);
+      right = (e.x);
+      gradient = ui.Gradient.linear(
+          Offset(left, top), Offset(right, top), gradientColors);
+    } else {
+      left = (e.x);
+      right = (e.x + lPathAShadowDis / 2);
+
+      gradient = ui.Gradient.linear(
+          Offset(right, top), Offset(left, top), gradientColors);
+    }
+    Paint paint = new Paint()..shader = gradient;
+
+    //裁剪出我们需要的区域
+    Path mPath = new Path();
+    mPath.moveTo(a.x - Math.max(rPathAShadowDis, lPathAShadowDis) / 2, a.y);
+    mPath.lineTo(d.x, d.y);
+    mPath.lineTo(e.x, e.y);
+    mPath.lineTo(a.x, a.y);
+    mPath.close();
+    //canvas.clipPath(pathA);
+    var pn = Path.combine(PathOperation.intersect, pathA, mPath);
+    canvas.clipPath(pn);
+
+    canvas.translate(e.x, e.y);
+    canvas.rotate(Math.atan2(e.x - a.x, a.y - e.y));
+    canvas.translate(-e.x, -e.y);
+    var rect = Rect.fromLTRB(left, top, right, bottom);
+    canvas.drawRect(rect, paint);
+  }
+
+  void _drawPathARightShadow(Canvas canvas, Path pathA) {
+    canvas.restore();
+    canvas.save();
+
+    var gradientColors = [
+      Color(0x33333333),
+      Color(0x01333333),
+    ];
+
+    double viewDiagonalLength = _hypot(viewWidth, viewHeight); //view对角线长度
+    double left = h.x;
+    double right = (h.x + viewDiagonalLength * 10); //需要足够长的长度
+    double top;
+    double bottom;
+
+    ui.Gradient gradient;
+    if (style == PositionStyle.STYLE_TOP_RIGHT) {
+      top = (h.y - rPathAShadowDis / 2);
+      bottom = h.y;
+      gradient = ui.Gradient.linear(
+          Offset(left, bottom), Offset(left, top), gradientColors);
+    } else {
+      top = h.y;
+      bottom = (h.y + rPathAShadowDis / 2);
+
+      gradient = ui.Gradient.linear(
+          Offset(left, top), Offset(left, bottom), gradientColors);
+    }
+    Paint paint = new Paint()..shader = gradient;
+
+    Path mPath = new Path();
+    mPath.moveTo(a.x - Math.max(rPathAShadowDis, lPathAShadowDis) / 2, a.y);
+//        mPath.lineTo(i.x,i.y);
+    mPath.lineTo(h.x, h.y);
+    mPath.lineTo(a.x, a.y);
+    mPath.close();
+    var pn = Path.combine(PathOperation.intersect, pathA, mPath);
+    canvas.clipPath(pn);
+
+    canvas.translate(h.x, h.y);
+    canvas.rotate(Math.atan2(a.y - h.y, a.x - h.x));
+    canvas.translate(-h.x, -h.y);
+    var rect = Rect.fromLTRB(left, top, right, bottom);
+    canvas.drawRect(rect, paint);
+  }
+
+  void _drawPathAHorizontalShadow(Canvas canvas, Path pathA) {
+    canvas.restore();
+    canvas.save();
+
+    var radientColors = [Color(0x01333333), Color(0x44333333)]; //渐变颜色数组
+
+    double maxShadowWidth = 30; //阴影矩形最大的宽度
+    double left = (a.x - Math.min(maxShadowWidth, (rPathAShadowDis / 2)));
+    double right = (a.x);
+    double top = 0;
+    double bottom = viewHeight;
+
+    ui.Gradient gradient = ui.Gradient.linear(
+        Offset(left, top), Offset(right, top), radientColors);
+    Paint paint = new Paint()..shader = gradient;
+
+    canvas.clipPath(pathA);
+
+    canvas.translate(a.x, a.y);
+    canvas.rotate(Math.atan2(f.x - a.x, f.y - h.y));
+    canvas.translate(-a.x, -a.y);
+    var rect = Rect.fromLTRB(left, top, right, bottom);
+    canvas.drawRect(rect, paint);
   }
 
   void _drawPathBWithPic(Canvas canvas, Path pa) {
@@ -219,7 +347,7 @@ class BookPainter extends CustomPainter {
   }
 
   void _drawPathBShadow(Canvas canvas) {
-    var gradientColors = [Color(0xf0111111),Color(0x00000000)]; //渐变颜色数组
+    var gradientColors = [Color(0xf0111111), Color(0x00000000)]; //渐变颜色数组
     int elevation = 6;
     int deepOffset = 0; //深色端的偏移值
     int lightOffset = 0; //浅色端的偏移值
@@ -247,8 +375,8 @@ class BookPainter extends CustomPainter {
     }
 
     Paint paint = new Paint()
-    //..color = Colors.black.withAlpha(80);
-    //..blendMode = BlendMode.srcOver
+      //..color = Colors.black.withAlpha(80);
+      //..blendMode = BlendMode.srcOver
       ..shader = gradient;
 
     canvas.translate(c.x, c.y);
@@ -259,7 +387,6 @@ class BookPainter extends CustomPainter {
   }
 
   void _drawPathCWithPic(Canvas canvas, Path pathA, Paint pathPaint) {
-
     canvas.drawPath(_getPathC(), pathPaint);
 
     canvas.save();
@@ -271,12 +398,28 @@ class BookPainter extends CustomPainter {
     var pn = Path.combine(PathOperation.reverseDifference, pathA, _getPathC());
     canvas.clipPath(pn);
 
-
     double eh = _hypot(f.x - e.x, h.y - f.y);
     double sin0 = (f.x - e.x) / eh;
     double cos0 = (h.y - f.y) / eh;
     //设置翻转和旋转矩阵
-    var mMatrixArray = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.1, 0.0, 0.0, 0.0, 0.0, 0.1];
+    var mMatrixArray = [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.1,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.1
+    ];
     mMatrixArray[0] = -(1 - 2 * sin0 * sin0);
     mMatrixArray[1] = 2 * sin0 * cos0;
     mMatrixArray[4] = 2 * sin0 * cos0;
@@ -291,6 +434,7 @@ class BookPainter extends CustomPainter {
     _drawPathCShadow(canvas); //调用阴影绘制方法
     canvas.restore();
   }
+
   void _drawPathCShadow(Canvas canvas) {
     var gradientColors = [Color(0x00333333), Color(0xff111111)]; //渐变颜色数组
 
@@ -353,6 +497,16 @@ class BookPainter extends CustomPainter {
 
     i.x = (j.x + 2 * h.x + k.x) / 4;
     i.y = (2 * h.y + j.y + k.y) / 4;
+
+    double lA = a.y - e.y;
+    double lB = e.x - a.x;
+    double lC = a.x * e.y - e.x * a.y;
+    lPathAShadowDis = ((lA * d.x + lB * d.y + lC) / (_hypot(lA, lB)).abs());
+
+    double rA = a.y - h.y;
+    double rB = h.x - a.x;
+    double rC = a.x * h.y - h.x * a.y;
+    rPathAShadowDis = ((rA * i.x + rB * i.y + rC) / _hypot(rA, rB)).abs();
   }
 
   /// 计算两线段相交点坐标
