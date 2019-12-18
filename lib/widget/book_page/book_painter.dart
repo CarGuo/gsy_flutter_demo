@@ -166,16 +166,19 @@ class BookPainter extends CustomPainter {
 
     if (a.x == -1 && a.y == -1) {
       _drawPathAWithPic(canvas, _getPathDefault());
-      canvas.drawPath(_getPathC(), pathCPaint);
+      //canvas.drawPath(_getPathC(), pathCPaint);
+      _drawPathCWithPic(canvas, _getPathDefault(), pathCPaint);
       _drawPathBWithPic(canvas, _getPathDefault());
     } else {
       if (f.x == viewWidth && f.y == 0) {
         _drawPathAWithPic(canvas, _getPathAFromTopRight());
-        canvas.drawPath(_getPathC(), pathCPaint);
+        //canvas.drawPath(_getPathC(), pathCPaint);
+        _drawPathCWithPic(canvas, _getPathAFromTopRight(), pathCPaint);
         _drawPathBWithPic(canvas, _getPathAFromTopRight());
       } else if (f.x == viewWidth && f.y == viewHeight) {
         _drawPathAWithPic(canvas, _getPathAFromLowerRight());
-        canvas.drawPath(_getPathC(), pathCPaint);
+        //canvas.drawPath(_getPathC(), pathCPaint);
+        _drawPathCWithPic(canvas, _getPathAFromLowerRight(), pathCPaint);
         _drawPathBWithPic(canvas, _getPathAFromLowerRight());
       }
     }
@@ -211,7 +214,118 @@ class BookPainter extends CustomPainter {
     pn = Path.combine(PathOperation.reverseDifference, _getPathC(), pn);
     canvas.clipPath(pn);
     canvas.drawPicture(pic);
+    _drawPathBShadow(canvas); //调用阴影绘制方法
     canvas.restore();
+  }
+
+  void _drawPathBShadow(Canvas canvas) {
+    var gradientColors = [Color(0xf0111111),Color(0x00000000)]; //渐变颜色数组
+    int elevation = 6;
+    int deepOffset = 0; //深色端的偏移值
+    int lightOffset = 0; //浅色端的偏移值
+    double aTof = _hypot((a.x - f.x), (a.y - f.y)); //a到f的距离
+    double viewDiagonalLength = _hypot(viewWidth, viewHeight); //对角线长度
+
+    double left;
+    double right;
+    double top = c.y;
+    double bottom = (viewDiagonalLength + c.y);
+    ui.Gradient gradient;
+    if (style == PositionStyle.STYLE_TOP_RIGHT) {
+      //f点在右上角
+      //从左向右线性渐变
+      left = (c.x - deepOffset); //c点位于左上角
+      right = (c.x + aTof / elevation + lightOffset);
+
+      gradient = ui.Gradient.linear(
+          Offset(left, top), Offset(right, top), gradientColors);
+    } else {
+      left = (c.x - aTof / elevation - lightOffset); //c点位于左下角
+      right = (c.x + deepOffset);
+      gradient = ui.Gradient.linear(
+          Offset(right, top), Offset(left, top), gradientColors);
+    }
+
+    Paint paint = new Paint()
+    //..color = Colors.black.withAlpha(80);
+    //..blendMode = BlendMode.srcOver
+      ..shader = gradient;
+
+    canvas.translate(c.x, c.y);
+    canvas.rotate(Math.atan2(e.x - f.x, h.y - f.y));
+    canvas.translate(-c.x, -c.y);
+    var rect = Rect.fromLTRB(left, top, right, bottom);
+    canvas.drawRect(rect, paint);
+  }
+
+  void _drawPathCWithPic(Canvas canvas, Path pathA, Paint pathPaint) {
+
+    canvas.drawPath(_getPathC(), pathPaint);
+
+    canvas.save();
+    var pictureRecorder = ui.PictureRecorder();
+    var canvasBitmap = Canvas(pictureRecorder);
+    canvasBitmap.drawPath(_getPathB(), pathPaint);
+    var pic = pictureRecorder.endRecording();
+
+    var pn = Path.combine(PathOperation.reverseDifference, pathA, _getPathC());
+    canvas.clipPath(pn);
+
+
+    double eh = _hypot(f.x - e.x, h.y - f.y);
+    double sin0 = (f.x - e.x) / eh;
+    double cos0 = (h.y - f.y) / eh;
+    //设置翻转和旋转矩阵
+    var mMatrixArray = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.1, 0.0, 0.0, 0.0, 0.0, 0.1];
+    mMatrixArray[0] = -(1 - 2 * sin0 * sin0);
+    mMatrixArray[1] = 2 * sin0 * cos0;
+    mMatrixArray[4] = 2 * sin0 * cos0;
+    mMatrixArray[5] = 1 - 2 * sin0 * sin0;
+
+    Matrix4 mMatrix = Matrix4.fromList(mMatrixArray);
+
+    mMatrix.leftTranslate(e.x, e.y);
+    mMatrix.translate(-e.x, -e.y);
+    canvas.transform(mMatrix.storage);
+    canvas.drawPicture(pic);
+    _drawPathCShadow(canvas); //调用阴影绘制方法
+    canvas.restore();
+  }
+  void _drawPathCShadow(Canvas canvas) {
+    var gradientColors = [Color(0x00333333), Color(0xff111111)]; //渐变颜色数组
+
+    int deepOffset = 1; //深色端的偏移值
+    int lightOffset = -30; //浅色端的偏移值
+    var viewDiagonalLength = _hypot(viewWidth, viewHeight); //view对角线长度
+    double midpoint_ce = (c.x + e.x) / 2; //ce中点
+    double midpoint_jh = (j.y + h.y) / 2; //jh中点
+    double minDisToControlPoint = Math.min(
+        (midpoint_ce - e.x).abs(), (midpoint_jh - h.y).abs()); //中点到控制点的最小值
+
+    double left;
+    double right;
+    double top = c.y;
+    double bottom = (viewDiagonalLength + c.y);
+    ui.Gradient gradient;
+    if (style == PositionStyle.STYLE_TOP_RIGHT) {
+      left = (c.x - lightOffset);
+      right = (c.x + minDisToControlPoint + deepOffset);
+
+      gradient = ui.Gradient.linear(
+          Offset(left, top), Offset(right, top), gradientColors);
+    } else {
+      left = (c.x - minDisToControlPoint - deepOffset);
+      right = (c.x + lightOffset);
+      gradient = ui.Gradient.linear(
+          Offset(right, top), Offset(left, top), gradientColors);
+    }
+    Paint paint = new Paint()..shader = gradient;
+
+    canvas.translate(c.x, c.y);
+    canvas.rotate(Math.atan2(e.x - f.x, h.y - f.y));
+    canvas.translate(-c.x, -c.y);
+    var rect = Rect.fromLTRB(left, top, right, bottom);
+    canvas.drawRect(rect, paint);
   }
 
   /// 计算各点坐标
@@ -398,5 +512,22 @@ class BookPainter extends CustomPainter {
 //        textAlign: TextAlign.left, fontSize: 25);
 //    _drawText(canvas, "i",  Colors.red, size.width, Offset(i.x, i.y),
 //        textAlign: TextAlign.left, fontSize: 25);
+  }
+
+  num _hypot(num x, num y) {
+    var first = x.abs();
+    var second = y.abs();
+
+    if (y > x) {
+      first = y.abs();
+      second = x.abs();
+    }
+
+    if (first == 0.0) {
+      return second;
+    }
+
+    final t = second / first;
+    return first * Math.sqrt(1 + t * t);
   }
 }
