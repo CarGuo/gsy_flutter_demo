@@ -11,7 +11,7 @@
 >
 > **[如果克隆太慢，可尝试码云地址下载。](https://gitee.com/CarGuo/GSYFlutterDemo)**
 
-![公众号](http://img.cdn.guoshuyu.cn/WechatIMG3024.jpeg)
+![公众号](http://img.cdn.guoshuyu.cn/WeChat-Code)
 
 ### 已有例子
 
