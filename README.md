@@ -40,6 +40,8 @@
 - **自定义布局云词图 例子**
 - **列表停靠 例子**
 - **高斯模糊 例子**
+- **多Tab动画列表 例子**
+- **仿真翻页 例子**
 
 
 ![](demo.jpg)
@@ -50,12 +52,11 @@
 
 * ### [Flutter 完整实战实战系列文章专栏](https://juejin.im/collection/5db25bcff265da06a19a304e)
 * ### [Flutter 番外的世界系列文章专栏](https://juejin.im/collection/5db25d706fb9a069f422c374)
-* ### [全网最全 Flutter 与 React Native 深入对比分析](https://juejin.im/post/5d0bac156fb9a07ec56e7f15)
-* ### [Flutter 番外篇之面试知识点集锦](https://juejin.im/post/5cd9875ae51d453d022cb662)
-* ### [Flutter 开发实战与前景展望 - RTC Dev Meetup](https://juejin.im/post/5ce7ddf95188257a2b1eac8a)
 * ### [目前各种主流状态管理演示Demo](https://github.com/CarGuo/state_manager_demo)
 
 ----
+
+- ## [Flutter Github客户端](https://github.com/CarGuo/gsy_github_app_flutter) 
 
 - ## [Flutter 完整开发实战详解 Gitbook 预览下载](https://github.com/CarGuo/GSYFlutterBook)
 
