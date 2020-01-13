@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gsy_flutter_demo/widget/align_demo_page.dart';
+import 'package:gsy_flutter_demo/widget/anim_bg_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/anim_tip_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/anima_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/anima_demo_page2.dart';
@@ -157,6 +158,7 @@ const routerName = [
   "Sliver Tab3",
   "仿真书本翻页动画",
   "粒子动画效果",
+  "动画背景效果",
 ];
 
 Map<String, WidgetBuilder> routers = {
@@ -307,4 +309,8 @@ Map<String, WidgetBuilder> routers = {
   "widget/particle": (context) {
     return new ParticlePage();
   },
+  "widget/anima_bg": (context) {
+    return new AnimBgDemoPage();
+  },
+
 };
