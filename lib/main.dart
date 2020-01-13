@@ -24,6 +24,7 @@ import 'package:gsy_flutter_demo/widget/keyboard_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/list_anim/list_anim_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/list_anim_2/list_anim_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/overflow_image_page.dart';
+import 'package:gsy_flutter_demo/widget/particle/particle_page.dart';
 import 'package:gsy_flutter_demo/widget/positioned_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/refrsh_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/refrsh_demo_page2.dart';
@@ -155,6 +156,7 @@ const routerName = [
   "Sliver Tab2",
   "Sliver Tab3",
   "仿真书本翻页动画",
+  "粒子动画效果",
 ];
 
 Map<String, WidgetBuilder> routers = {
@@ -301,5 +303,8 @@ Map<String, WidgetBuilder> routers = {
   },
   "widget/flipbook": (context) {
     return new BookPage();
+  },
+  "widget/particle": (context) {
+    return new ParticlePage();
   },
 };
