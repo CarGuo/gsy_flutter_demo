@@ -43,6 +43,7 @@ import 'package:gsy_flutter_demo/widget/stick/stick_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/stick/stick_demo_page2.dart';
 import 'package:gsy_flutter_demo/widget/stick_sliver_list_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/tag_demo_page.dart';
+import 'package:gsy_flutter_demo/widget/matrix_custom_painter_page.dart';
 import 'package:gsy_flutter_demo/widget/text_line_height_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/text_size_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/tick_click_demo_page.dart';
@@ -159,6 +160,7 @@ const routerName = [
   "仿真书本翻页动画",
   "粒子动画效果",
   "动画背景效果",
+  "手势效果",
 ];
 
 Map<String, WidgetBuilder> routers = {
@@ -311,6 +313,9 @@ Map<String, WidgetBuilder> routers = {
   },
   "widget/anima_bg": (context) {
     return new AnimBgDemoPage();
+  },
+  "widget/matrix_custom": (context) {
+    return new MatrixCustomPainterDemo();
   },
 
 };

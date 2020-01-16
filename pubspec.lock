@@ -284,6 +284,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.12.5"
+  matrix_gesture_detector:
+    dependency: "direct main"
+    description:
+      name: matrix_gesture_detector
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.1.0"
   meta:
     dependency: transitive
     description:
