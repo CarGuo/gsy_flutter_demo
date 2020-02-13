@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gsy_flutter_demo/widget/scroll_inner_content_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/align_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/anim_bg_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/anim_tip_demo_page.dart';
@@ -161,6 +162,7 @@ const routerName = [
   "粒子动画效果",
   "动画背景效果",
   "手势效果",
+  "一个有趣的底部跟随例子",
 ];
 
 Map<String, WidgetBuilder> routers = {
@@ -316,6 +318,9 @@ Map<String, WidgetBuilder> routers = {
   },
   "widget/matrix_custom": (context) {
     return new MatrixCustomPainterDemo();
+  },
+  "widget/scrolldemo": (context) {
+    return new ScrollInnerContentDemoPage();
   },
 
 };
