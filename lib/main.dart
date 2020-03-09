@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gsy_flutter_demo/widget/rich_text_demo_page2.dart';
 import 'package:gsy_flutter_demo/widget/scroll_inner_content_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/align_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/anim_bg_demo_page.dart';
@@ -132,6 +133,7 @@ const routerName = [
   "悬浮触摸控件 例子",
   "全局字体大小 例子",
   "富文本 例子",
+  "富文本2 例子",
   "viewpager 例子",
   "滑动停靠 例子",
   "验证码输入框 例子",
@@ -228,6 +230,9 @@ Map<String, WidgetBuilder> routers = {
   },
   "widget/richtext": (context) {
     return new RichTextDemoPage();
+  },
+  "widget/richtext2": (context) {
+    return new RichTextDemoPage2();
   },
   "widget/viewpager": (context) {
     return new ViewPagerDemoPage();
