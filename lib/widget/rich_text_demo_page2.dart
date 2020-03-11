@@ -6,11 +6,31 @@ class RichTextDemoPage2 extends StatefulWidget {
 }
 
 class _RichTextDemoState2 extends State<RichTextDemoPage2> {
+  double size = 50;
+
   @override
   Widget build(BuildContext mainContext) {
     return Scaffold(
       appBar: AppBar(
         title: new Text("RichTextDemoPage"),
+        actions: <Widget>[
+          IconButton(
+            onPressed: () {
+              setState(() {
+                size += 10;
+              });
+            },
+            icon: Icon(Icons.add_circle_outline),
+          ),
+          IconButton(
+            onPressed: () {
+              setState(() {
+                size -= 10;
+              });
+            },
+            icon: Icon(Icons.remove_circle_outline),
+          )
+        ],
       ),
       body: new Container(
         margin: EdgeInsets.all(10),
@@ -23,12 +43,14 @@ class _RichTextDemoState2 extends State<RichTextDemoPage2> {
                     child: SizedBox(
                   width: 120,
                   height: 50,
-                  child: Card(child: Center(child: Text('Hello World!'))),
+                  child: Card(
+                      color: Colors.blue,
+                      child: Center(child: Text('Hello World!'))),
                 )),
                 WidgetSpan(
                     child: SizedBox(
-                  width: 50,
-                  height: 50,
+                  width: size > 0 ? size : 0,
+                  height: size > 0 ? size : 0,
                   child: new Image.asset(
                     "static/gsy_cat.png",
                     fit: BoxFit.cover,
