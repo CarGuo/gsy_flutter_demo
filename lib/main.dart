@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:gsy_flutter_demo/widget/rich_text_demo_page2.dart';
+import 'package:gsy_flutter_demo/widget/scroll_inner_content_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/align_demo_page.dart';
+import 'package:gsy_flutter_demo/widget/anim_bg_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/anim_tip_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/anima_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/anima_demo_page2.dart';
@@ -24,6 +27,7 @@ import 'package:gsy_flutter_demo/widget/keyboard_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/list_anim/list_anim_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/list_anim_2/list_anim_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/overflow_image_page.dart';
+import 'package:gsy_flutter_demo/widget/particle/particle_page.dart';
 import 'package:gsy_flutter_demo/widget/positioned_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/refrsh_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/refrsh_demo_page2.dart';
@@ -35,11 +39,13 @@ import 'package:gsy_flutter_demo/widget/sliver_list_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/sliver_stick_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/sliver_tab_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/sliver_tab_demo_page2.dart';
+import 'package:gsy_flutter_demo/widget/sliver_tab/sliver_tab_demo_page3.dart';
 import 'package:gsy_flutter_demo/widget/statusbar_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/stick/stick_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/stick/stick_demo_page2.dart';
 import 'package:gsy_flutter_demo/widget/stick_sliver_list_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/tag_demo_page.dart';
+import 'package:gsy_flutter_demo/widget/matrix_custom_painter_page.dart';
 import 'package:gsy_flutter_demo/widget/text_line_height_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/text_size_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/tick_click_demo_page.dart';
@@ -127,6 +133,7 @@ const routerName = [
   "悬浮触摸控件 例子",
   "全局字体大小 例子",
   "富文本 例子",
+  "富文本2 例子",
   "viewpager 例子",
   "滑动停靠 例子",
   "验证码输入框 例子",
@@ -152,7 +159,12 @@ const routerName = [
   "Card Item",
   "Sliver Tab",
   "Sliver Tab2",
+  "Sliver Tab3",
   "仿真书本翻页动画",
+  "粒子动画效果",
+  "动画背景效果",
+  "手势效果",
+  "一个有趣的底部跟随例子",
 ];
 
 Map<String, WidgetBuilder> routers = {
@@ -218,6 +230,9 @@ Map<String, WidgetBuilder> routers = {
   },
   "widget/richtext": (context) {
     return new RichTextDemoPage();
+  },
+  "widget/richtext2": (context) {
+    return new RichTextDemoPage2();
   },
   "widget/viewpager": (context) {
     return new ViewPagerDemoPage();
@@ -294,7 +309,23 @@ Map<String, WidgetBuilder> routers = {
   "widget/slivertab2": (context) {
     return new SliverTabDemoPage2();
   },
+  "widget/slivertab3": (context) {
+    return new SliverTabDemoPage3();
+  },
   "widget/flipbook": (context) {
     return new BookPage();
   },
+  "widget/particle": (context) {
+    return new ParticlePage();
+  },
+  "widget/anima_bg": (context) {
+    return new AnimBgDemoPage();
+  },
+  "widget/matrix_custom": (context) {
+    return new MatrixCustomPainterDemo();
+  },
+  "widget/scrolldemo": (context) {
+    return new ScrollInnerContentDemoPage();
+  },
+
 };

@@ -3,6 +3,7 @@ import 'dart:ui' as ui;
 import 'cal_point.dart';
 import 'dart:math' as Math;
 
+///触摸类型
 enum PositionStyle {
   STYLE_TOP_RIGHT,
   STYLE_LOWER_RIGHT,
@@ -18,24 +19,48 @@ class BookPainter extends CustomPainter {
   double viewWidth;
   double viewHeight;
 
-  final Path pathA;
+  ///顶部区域
+  Path pathA;
+
+  ///折叠出来的区域
+  Path pathC;
+
+  ///背部区域
   Path pathB;
 
-  final Path pathC;
+  ///背景画笔
+  Paint bgPaint;
 
-  Paint bgPaint; //背景画笔
-  Paint pathAPaint, pathCPaint, pathBPaint; //绘制区域画笔
+  ///绘制区域画笔
+  Paint pathAPaint, pathCPaint, pathBPaint;
 
+  ///触摸点的区域
   PositionStyle style;
+
+  ///回调数据外放
   ValueChanged changedPoint;
-  String text;
+
+  ///背景色
   Color bgColor;
+
+  ///前景色
   Color frontColor;
+
+  ///文本一
+  String text;
+
+  ///文本二
+  String text2;
+
+  ///A区域左阴影矩形短边长度参考值
+  double lPathAShadowDis = 0;
+
+  /// A区域右阴影矩形短边长度参考值
+  double rPathAShadowDis = 0;
 
   BookPainter({
     @required this.text,
-    @required this.pathA,
-    @required this.pathC,
+    @required this.text2,
     @required this.viewWidth,
     @required this.viewHeight,
     @required this.frontColor,
@@ -58,12 +83,16 @@ class BookPainter extends CustomPainter {
   }
 
   init(CalPoint cur, CalPoint pre, bool limitAngle) {
+    ///初始化点
     _initPoint();
 
+    ///选择工作模型
     _selectCalPoint(cur, pre, limitAngle: limitAngle);
 
+    ///计算
     _calcPointsXY(a, f);
 
+    ///初始化
     _initPaintAndPath();
   }
 
@@ -86,6 +115,8 @@ class BookPainter extends CustomPainter {
     i = new CalPoint();
 
     pathB = new Path();
+    pathA = new Path();
+    pathC = new Path();
   }
 
   _selectCalPoint(CalPoint cur, CalPoint pre, {bool limitAngle = true}) {
@@ -128,6 +159,7 @@ class BookPainter extends CustomPainter {
         break;
       case PositionStyle.STYLE_LEFT:
       case PositionStyle.STYLE_RIGHT:
+      case PositionStyle.STYLE_MIDDLE:
         a.y = viewHeight - 1;
         f.x = viewWidth;
         f.y = viewHeight;
@@ -159,21 +191,308 @@ class BookPainter extends CustomPainter {
     pathB = new Path();
   }
 
-  void onDraw(Canvas canvas, Size size) {
+  void onDraw(Canvas canvas, Size size) async {
     canvas.saveLayer(Rect.fromLTRB(0, 0, size.width, size.height), bgPaint);
 
     if (a.x == -1 && a.y == -1) {
-      canvas.drawPath(_getPathDefault(), pathAPaint);
+      _drawPathAWithPic(canvas, _getPathDefault());
+      _drawPathCWithPic(canvas, _getPathDefault(), pathCPaint);
+      _drawPathBWithPic(canvas, _getPathDefault());
     } else {
       if (f.x == viewWidth && f.y == 0) {
-        canvas.drawPath(_getPathAFromTopRight(), pathAPaint);
+        _drawPathAWithPic(canvas, _getPathAFromTopRight());
+        _drawPathCWithPic(canvas, _getPathAFromTopRight(), pathCPaint);
+        _drawPathBWithPic(canvas, _getPathAFromTopRight());
       } else if (f.x == viewWidth && f.y == viewHeight) {
-        canvas.drawPath(_getPathAFromLowerRight(), pathAPaint);
+        _drawPathAWithPic(canvas, _getPathAFromLowerRight());
+        _drawPathCWithPic(canvas, _getPathAFromLowerRight(), pathCPaint);
+        _drawPathBWithPic(canvas, _getPathAFromLowerRight());
       }
-      canvas.drawPath(_getPathC(), pathCPaint);
-      canvas.drawPath(_getPathB(), pathBPaint);
     }
+
     canvas.restore();
+  }
+
+  void _drawPathAWithPic(Canvas canvas, Path pp) {
+    canvas.save();
+    var pictureRecorder = ui.PictureRecorder();
+    var canvasBitmap = Canvas(pictureRecorder);
+    var paint = Paint();
+    paint.isAntiAlias = true;
+    canvasBitmap.drawPath(pp, pathAPaint);
+    _drawText(canvasBitmap, text, Colors.black, viewWidth, Offset.zero);
+    var pic = pictureRecorder.endRecording();
+    canvas.clipPath(pp);
+    canvas.drawPicture(pic);
+
+    if (style == PositionStyle.STYLE_LEFT ||
+        style == PositionStyle.STYLE_RIGHT) {
+      _drawPathAHorizontalShadow(canvas, pathA);
+    } else if (a.x != -1 && a.y != -1) {
+      _drawPathALeftShadow(canvas, pp);
+      _drawPathARightShadow(canvas, pp);
+    }
+
+    canvas.restore();
+  }
+
+  void _drawPathALeftShadow(Canvas canvas, Path pathA) {
+    canvas.restore();
+    canvas.save();
+
+    var gradientColors = [Color(0x01333333), Color(0x33333333)];
+
+    double left;
+    double right;
+    double top = e.y;
+    double bottom = (e.y + viewHeight);
+
+    ui.Gradient gradient;
+    if (style == PositionStyle.STYLE_TOP_RIGHT) {
+      left = (e.x - lPathAShadowDis / 2);
+      right = (e.x);
+      gradient = ui.Gradient.linear(
+          Offset(left, top), Offset(right, top), gradientColors);
+    } else {
+      left = (e.x);
+      right = (e.x + lPathAShadowDis / 2);
+
+      gradient = ui.Gradient.linear(
+          Offset(right, top), Offset(left, top), gradientColors);
+    }
+    Paint paint = new Paint()..shader = gradient;
+
+    //裁剪出我们需要的区域
+    Path mPath = new Path();
+    mPath.moveTo(a.x - Math.max(rPathAShadowDis, lPathAShadowDis) / 2, a.y);
+    mPath.lineTo(d.x, d.y);
+    mPath.lineTo(e.x, e.y);
+    mPath.lineTo(a.x, a.y);
+    mPath.close();
+    //canvas.clipPath(pathA);
+    var pn = Path.combine(PathOperation.intersect, pathA, mPath);
+    canvas.clipPath(pn);
+
+    canvas.translate(e.x, e.y);
+    canvas.rotate(Math.atan2(e.x - a.x, a.y - e.y));
+    canvas.translate(-e.x, -e.y);
+    var rect = Rect.fromLTRB(left, top, right, bottom);
+    canvas.drawRect(rect, paint);
+  }
+
+  void _drawPathARightShadow(Canvas canvas, Path pathA) {
+    canvas.restore();
+    canvas.save();
+
+    var gradientColors = [
+      Color(0x33333333),
+      Color(0x01333333),
+    ];
+
+    double viewDiagonalLength = _hypot(viewWidth, viewHeight); //view对角线长度
+    double left = h.x;
+    double right = (h.x + viewDiagonalLength * 10); //需要足够长的长度
+    double top;
+    double bottom;
+
+    ui.Gradient gradient;
+    if (style == PositionStyle.STYLE_TOP_RIGHT) {
+      top = (h.y - rPathAShadowDis / 2);
+      bottom = h.y;
+      gradient = ui.Gradient.linear(
+          Offset(left, bottom), Offset(left, top), gradientColors);
+    } else {
+      top = h.y;
+      bottom = (h.y + rPathAShadowDis / 2);
+
+      gradient = ui.Gradient.linear(
+          Offset(left, top), Offset(left, bottom), gradientColors);
+    }
+    Paint paint = new Paint()..shader = gradient;
+
+    Path mPath = new Path();
+    mPath.moveTo(a.x - Math.max(rPathAShadowDis, lPathAShadowDis) / 2, a.y);
+//        mPath.lineTo(i.x,i.y);
+    mPath.lineTo(h.x, h.y);
+    mPath.lineTo(a.x, a.y);
+    mPath.close();
+    var pn = Path.combine(PathOperation.intersect, pathA, mPath);
+    canvas.clipPath(pn);
+
+    canvas.translate(h.x, h.y);
+    canvas.rotate(Math.atan2(a.y - h.y, a.x - h.x));
+    canvas.translate(-h.x, -h.y);
+    var rect = Rect.fromLTRB(left, top, right, bottom);
+    canvas.drawRect(rect, paint);
+  }
+
+  void _drawPathAHorizontalShadow(Canvas canvas, Path pathA) {
+    canvas.restore();
+    canvas.save();
+
+    var radientColors = [Color(0x01333333), Color(0x44333333)]; //渐变颜色数组
+
+    double maxShadowWidth = 30; //阴影矩形最大的宽度
+    double left = (a.x - Math.min(maxShadowWidth, (rPathAShadowDis / 2)));
+    double right = (a.x);
+    double top = 0;
+    double bottom = viewHeight;
+
+    ui.Gradient gradient = ui.Gradient.linear(
+        Offset(left, top), Offset(right, top), radientColors);
+    Paint paint = new Paint()..shader = gradient;
+
+    canvas.clipPath(pathA);
+
+    canvas.translate(a.x, a.y);
+    canvas.rotate(Math.atan2(f.x - a.x, f.y - h.y));
+    canvas.translate(-a.x, -a.y);
+    var rect = Rect.fromLTRB(left, top, right, bottom);
+    canvas.drawRect(rect, paint);
+  }
+
+  void _drawPathBWithPic(Canvas canvas, Path pa) {
+    canvas.save();
+    var pictureRecorder = ui.PictureRecorder();
+    var canvasBitmap = Canvas(pictureRecorder);
+    var paint = Paint();
+    paint.isAntiAlias = true;
+    canvasBitmap.drawPath(_getPathB(), pathBPaint);
+    _drawText(canvasBitmap, text2, Colors.black, viewWidth, Offset.zero);
+
+    var pic = pictureRecorder.endRecording();
+    var pn = Path.combine(PathOperation.reverseDifference, pa, _getPathB());
+    pn = Path.combine(PathOperation.reverseDifference, _getPathC(), pn);
+    canvas.clipPath(pn);
+    canvas.drawPicture(pic);
+    _drawPathBShadow(canvas); //调用阴影绘制方法
+    canvas.restore();
+  }
+
+  void _drawPathBShadow(Canvas canvas) {
+    var gradientColors = [Color(0xf0111111), Color(0x00000000)]; //渐变颜色数组
+    int elevation = 6;
+    int deepOffset = 0; //深色端的偏移值
+    int lightOffset = 0; //浅色端的偏移值
+    double aTof = _hypot((a.x - f.x), (a.y - f.y)); //a到f的距离
+    double viewDiagonalLength = _hypot(viewWidth, viewHeight); //对角线长度
+
+    double left;
+    double right;
+    double top = c.y;
+    double bottom = (viewDiagonalLength + c.y);
+    ui.Gradient gradient;
+    if (style == PositionStyle.STYLE_TOP_RIGHT) {
+      //f点在右上角
+      //从左向右线性渐变
+      left = (c.x - deepOffset); //c点位于左上角
+      right = (c.x + aTof / elevation + lightOffset);
+
+      gradient = ui.Gradient.linear(
+          Offset(left, top), Offset(right, top), gradientColors);
+    } else {
+      left = (c.x - aTof / elevation - lightOffset); //c点位于左下角
+      right = (c.x + deepOffset);
+      gradient = ui.Gradient.linear(
+          Offset(right, top), Offset(left, top), gradientColors);
+    }
+
+    Paint paint = new Paint()
+      //..color = Colors.black.withAlpha(80);
+      //..blendMode = BlendMode.srcOver
+      ..shader = gradient;
+
+    canvas.translate(c.x, c.y);
+    canvas.rotate(Math.atan2(e.x - f.x, h.y - f.y));
+    canvas.translate(-c.x, -c.y);
+    var rect = Rect.fromLTRB(left, top, right, bottom);
+    canvas.drawRect(rect, paint);
+  }
+
+  void _drawPathCWithPic(Canvas canvas, Path pathA, Paint pathPaint) {
+    canvas.drawPath(_getPathC(), pathPaint);
+
+    canvas.save();
+    var pictureRecorder = ui.PictureRecorder();
+    var canvasBitmap = Canvas(pictureRecorder);
+    canvasBitmap.drawPath(_getPathB(), pathPaint);
+    var pic = pictureRecorder.endRecording();
+
+    var pn = Path.combine(PathOperation.reverseDifference, pathA, _getPathC());
+    canvas.clipPath(pn);
+
+    double eh = _hypot(f.x - e.x, h.y - f.y);
+    double sin0 = (f.x - e.x) / eh;
+    double cos0 = (h.y - f.y) / eh;
+    //设置翻转和旋转矩阵
+    var mMatrixArray = [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.1,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.1
+    ];
+    mMatrixArray[0] = -(1 - 2 * sin0 * sin0);
+    mMatrixArray[1] = 2 * sin0 * cos0;
+    mMatrixArray[4] = 2 * sin0 * cos0;
+    mMatrixArray[5] = 1 - 2 * sin0 * sin0;
+
+    Matrix4 mMatrix = Matrix4.fromList(mMatrixArray);
+
+    mMatrix.leftTranslate(e.x, e.y);
+    mMatrix.translate(-e.x, -e.y);
+    canvas.transform(mMatrix.storage);
+    canvas.drawPicture(pic);
+    _drawPathCShadow(canvas); //调用阴影绘制方法
+    canvas.restore();
+  }
+
+  void _drawPathCShadow(Canvas canvas) {
+    var gradientColors = [Color(0x00333333), Color(0xff111111)]; //渐变颜色数组
+
+    int deepOffset = 1; //深色端的偏移值
+    int lightOffset = -30; //浅色端的偏移值
+    var viewDiagonalLength = _hypot(viewWidth, viewHeight); //view对角线长度
+    double midpoint_ce = (c.x + e.x) / 2; //ce中点
+    double midpoint_jh = (j.y + h.y) / 2; //jh中点
+    double minDisToControlPoint = Math.min(
+        (midpoint_ce - e.x).abs(), (midpoint_jh - h.y).abs()); //中点到控制点的最小值
+
+    double left;
+    double right;
+    double top = c.y;
+    double bottom = (viewDiagonalLength + c.y);
+    ui.Gradient gradient;
+    if (style == PositionStyle.STYLE_TOP_RIGHT) {
+      left = (c.x - lightOffset);
+      right = (c.x + minDisToControlPoint + deepOffset);
+
+      gradient = ui.Gradient.linear(
+          Offset(left, top), Offset(right, top), gradientColors);
+    } else {
+      left = (c.x - minDisToControlPoint - deepOffset);
+      right = (c.x + lightOffset);
+      gradient = ui.Gradient.linear(
+          Offset(right, top), Offset(left, top), gradientColors);
+    }
+    Paint paint = new Paint()..shader = gradient;
+
+    canvas.translate(c.x, c.y);
+    canvas.rotate(Math.atan2(e.x - f.x, h.y - f.y));
+    canvas.translate(-c.x, -c.y);
+    var rect = Rect.fromLTRB(left, top, right, bottom);
+    canvas.drawRect(rect, paint);
   }
 
   /// 计算各点坐标
@@ -201,6 +520,16 @@ class BookPainter extends CustomPainter {
 
     i.x = (j.x + 2 * h.x + k.x) / 4;
     i.y = (2 * h.y + j.y + k.y) / 4;
+
+    double lA = a.y - e.y;
+    double lB = e.x - a.x;
+    double lC = a.x * e.y - e.x * a.y;
+    lPathAShadowDis = ((lA * d.x + lB * d.y + lC) / (_hypot(lA, lB)).abs());
+
+    double rA = a.y - h.y;
+    double rB = h.x - a.x;
+    double rC = a.x * h.y - h.x * a.y;
+    rPathAShadowDis = ((rA * i.x + rB * i.y + rC) / _hypot(rA, rB)).abs();
   }
 
   /// 计算两线段相交点坐标
@@ -360,5 +689,22 @@ class BookPainter extends CustomPainter {
 //        textAlign: TextAlign.left, fontSize: 25);
 //    _drawText(canvas, "i",  Colors.red, size.width, Offset(i.x, i.y),
 //        textAlign: TextAlign.left, fontSize: 25);
+  }
+
+  num _hypot(num x, num y) {
+    var first = x.abs();
+    var second = y.abs();
+
+    if (y > x) {
+      first = y.abs();
+      second = x.abs();
+    }
+
+    if (first == 0.0) {
+      return second;
+    }
+
+    final t = second / first;
+    return first * Math.sqrt(1 + t * t);
   }
 }

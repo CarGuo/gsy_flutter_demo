@@ -57,6 +57,7 @@ class _SliverTabDemoPageState extends State<SliverTabDemoPage2>
       child: Builder(
         builder: (BuildContext context) {
           return CustomScrollView(
+            physics: BouncingScrollPhysics(),
             key: PageStorageKey<String>(tabIndex.toString()),
             slivers: <Widget>[
               SliverOverlapInjector(

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:gsy_flutter_demo/widget/book_page/cal_point.dart';
 
 import 'book_painter.dart';
-import 'book_text_clip.dart';
 
 class BookPage extends StatefulWidget {
   @override
@@ -21,8 +20,6 @@ class _BookPageState extends State<BookPage>
   Animation cancelAnim;
   Tween cancelValue;
   bool needCancelAnim = true;
-  Path pathA = Path();
-  Path pathC = Path();
 
   toNormal([_]) {
     if (needCancelAnim) {
@@ -81,9 +78,12 @@ class _BookPageState extends State<BookPage>
     if (style == PositionStyle.STYLE_TOP_RIGHT) {
       dx = (width - 1 - prePoint.x);
       dy = (1 - prePoint.y);
-    } else {
+    } else if (style == PositionStyle.STYLE_LOWER_RIGHT) {
       dx = (width - 1 - prePoint.x);
       dy = (height - 1 - prePoint.y);
+    } else {
+      dx = prePoint.x - width;
+      dy = -prePoint.y;
     }
     cancelValue =
         Tween(begin: Offset(prePoint.x, prePoint.y), end: Offset(dx, dy));
@@ -132,7 +132,6 @@ class _BookPageState extends State<BookPage>
     width = MediaQuery.of(context).size.width;
     height = MediaQuery.of(context).size.height - kToolbarHeight;
     Color bgColor = Colors.tealAccent;
-    pathA ??= Path();
     return Scaffold(
       appBar: AppBar(
         title: new Text("BookPage"),
@@ -149,8 +148,7 @@ class _BookPageState extends State<BookPage>
           child: CustomPaint(
             painter: BookPainter(
               text: content,
-              pathA: pathA,
-              pathC: pathC,
+              text2: content2,
               viewWidth: width,
               viewHeight: height,
               cur: curPoint,
@@ -162,45 +160,6 @@ class _BookPageState extends State<BookPage>
               changedPoint: (pre) {
                 prePoint = pre;
               },
-            ),
-            child: Stack(
-              children: <Widget>[
-                new Container(
-                  padding: EdgeInsets.only(
-                      top: MediaQuery.of(context).padding.top,
-                      right: 10,
-                      left: 10,
-                      bottom: 10),
-                  child: new Text(
-                    content,
-                    style: TextStyle(fontSize: 22),
-                  ),
-                ),
-                Container(
-                  color: Colors.black12,
-                ),
-                ClipPath(
-                  clipper: BookTextClip(pathC),
-                  child: new Container(
-                    color: Colors.yellow,
-                  ),
-                ),
-                ClipPath(
-                  clipper: BookTextClip(pathA),
-                  child: new Container(
-                    color: bgColor,
-                    padding: EdgeInsets.only(
-                        top: MediaQuery.of(context).padding.top,
-                        right: 10,
-                        left: 10,
-                        bottom: 10),
-                    child: new Text(
-                      content,
-                      style: TextStyle(fontSize: 22),
-                    ),
-                  ),
-                ),
-              ],
             ),
           ),
         ),
