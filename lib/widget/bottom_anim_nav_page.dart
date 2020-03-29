@@ -20,64 +20,87 @@ class _BottomAnimNavPageState extends State<BottomAnimNavPage> {
       appBar: AppBar(
         title: new Text("ViewPagerDemoPage"),
       ),
-      body: Container(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            new Expanded(child: new Container()),
-            new Container(
-              height: 300,
-              child: Stack(
-                children: <Widget>[
-                  SizedBox.expand(
-                    child: CustomPaint(
-                      painter: _RadiusPainter(
-                        width: MediaQuery.of(context).size.width,
-                        color: Colors.redAccent.withAlpha(190),
-                      ),
-                    ),
-                  ),
-                  Swiper(
-                    onIndexChanged: (index) {
-                      setState(() {
-                        this.index = index;
-                      });
-                    },
-                    itemBuilder: (BuildContext context, int index) {
-                      return new Container(
-                        decoration: BoxDecoration(
-                            color: Colors.red,
-                            shape: BoxShape.circle,
-                            border: Border.all(color: Colors.white)),
-                        margin: EdgeInsets.symmetric(
-                            horizontal: (index == this.index) ? 5 : 10),
-                        child: InkWell(
-                          onTap: () {
-                            print("##### ${index}");
-                          },
-                          focusColor: Colors.transparent,
-                          hoverColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          splashColor: Colors.transparent,
-                          child: new Center(
-                            child: new Text(
-                              "$index",
-                              style: new TextStyle(
-                                  fontSize: 20.0, color: Colors.white),
-                            ),
+      body: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: (){
+          Navigator.of(context).pop();
+        },
+        child: Container(
+          alignment: Alignment.bottomCenter,
+          margin: EdgeInsets.only(bottom: 50),
+          child: Builder(
+            builder: (context) {
+              return FlatButton(
+                color: Colors.red,
+                onPressed: () {
+                  showBottomSheet(
+                      context: context,
+                      backgroundColor: Colors.transparent,
+                      builder: (context) {
+                        return new Container(
+                          height: 300,
+                          child: Stack(
+                            children: <Widget>[
+                              SizedBox.expand(
+                                child: CustomPaint(
+                                  painter: _RadiusPainter(
+                                    width: MediaQuery.of(context).size.width,
+                                    color: Colors.redAccent.withAlpha(190),
+                                  ),
+                                ),
+                              ),
+                              Swiper(
+                                onIndexChanged: (index) {
+                                  setState(() {
+                                    this.index = index;
+                                  });
+                                },
+                                itemBuilder: (BuildContext context, int index) {
+                                  return new Container(
+                                    decoration: BoxDecoration(
+                                        color: Colors.red,
+                                        shape: BoxShape.circle,
+                                        border:
+                                            Border.all(color: Colors.white)),
+                                    margin: EdgeInsets.symmetric(
+                                        horizontal:
+                                            (index == this.index) ? 5 : 10),
+                                    child: InkWell(
+                                      onTap: () {
+                                        print("##### ${index}");
+                                      },
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      splashColor: Colors.transparent,
+                                      child: new Center(
+                                        child: new Text(
+                                          "$index",
+                                          style: new TextStyle(
+                                              fontSize: 20.0,
+                                              color: Colors.white),
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                },
+                                transformer: AngleTransformer(),
+                                itemCount: 18,
+                                itemWidth: 50,
+                                viewportFraction: 0.16,
+                              )
+                            ],
                           ),
-                        ),
-                      );
-                    },
-                    transformer: AngleTransformer(),
-                    itemCount: 18,
-                    itemWidth: 50,
-                    viewportFraction: 0.16,
-                  )
-                ],
-              ),
-            )
-          ],
+                        );
+                      });
+                },
+                child: new Text(
+                  "Show",
+                  style: TextStyle(fontSize: 22, color: Colors.white),
+                ),
+              );
+            },
+          ),
         ),
       ),
     );
@@ -85,14 +108,12 @@ class _BottomAnimNavPageState extends State<BottomAnimNavPage> {
 }
 
 class AngleTransformer extends PageTransformer {
-  final double _scale;
   final double _fade;
   final double _radius;
   final double _horizontalOffset = 20;
 
-  AngleTransformer({double fade: 1, double scale: 0.2, double radius = 140})
+  AngleTransformer({double fade: 1, double radius = 140})
       : _fade = fade,
-        _scale = scale,
         _radius = radius;
 
   @override
@@ -100,23 +121,12 @@ class AngleTransformer extends PageTransformer {
     double position = info.position;
     Widget child = item;
 
-    if (_scale != null) {
-      double scaleFactor = (1 - position.abs()) * (1 - _scale);
-      double scale = _scale + scaleFactor;
-
-      /*child = new Transform.scale(
-        scale: scale,
-        child: item,
-      );*/
-    }
-
     var dx = _horizontalOffset * (position.abs() * 10);
     var dy;
     if (dx <= _radius) {
       dy = _radius - math.sqrt((_radius * _radius) - (dx * dx));
     } else {
-      dy = math.sqrt((dx * dx) - (_radius * _radius));
-      print("##### ${dy}");
+      dy = _radius;
     }
 
     dx = 0;
