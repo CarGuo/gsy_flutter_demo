@@ -10,8 +10,21 @@ class BottomAnimNavPage extends StatefulWidget {
   _BottomAnimNavPageState createState() => _BottomAnimNavPageState();
 }
 
-class _BottomAnimNavPageState extends State<BottomAnimNavPage> {
+class _BottomAnimNavPageState extends State<BottomAnimNavPage>
+    with SingleTickerProviderStateMixin {
   int index = 0;
+
+  AnimationController controller;
+
+  Animation animation;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = AnimationController(vsync: this)
+      ..duration = Duration(milliseconds: 500);
+    animation = Tween(begin: 0.0, end: 1.0).animate(controller);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +35,7 @@ class _BottomAnimNavPageState extends State<BottomAnimNavPage> {
       ),
       body: GestureDetector(
         behavior: HitTestBehavior.opaque,
-        onTap: (){
+        onTap: () {
           Navigator.of(context).pop();
         },
         child: Container(
@@ -56,29 +69,32 @@ class _BottomAnimNavPageState extends State<BottomAnimNavPage> {
                                   });
                                 },
                                 itemBuilder: (BuildContext context, int index) {
-                                  return new Container(
-                                    decoration: BoxDecoration(
-                                        color: Colors.red,
-                                        shape: BoxShape.circle,
-                                        border:
-                                            Border.all(color: Colors.white)),
-                                    margin: EdgeInsets.symmetric(
-                                        horizontal:
-                                            (index == this.index) ? 5 : 10),
-                                    child: InkWell(
-                                      onTap: () {
-                                        print("##### ${index}");
-                                      },
-                                      focusColor: Colors.transparent,
-                                      hoverColor: Colors.transparent,
-                                      highlightColor: Colors.transparent,
-                                      splashColor: Colors.transparent,
-                                      child: new Center(
-                                        child: new Text(
-                                          "$index",
-                                          style: new TextStyle(
-                                              fontSize: 20.0,
-                                              color: Colors.white),
+                                  return ScaleTransition(
+                                    scale: animation,
+                                    child: new Container(
+                                      decoration: BoxDecoration(
+                                          color: Colors.red,
+                                          shape: BoxShape.circle,
+                                          border:
+                                              Border.all(color: Colors.white)),
+                                      margin: EdgeInsets.symmetric(
+                                          horizontal:
+                                              (index == this.index) ? 5 : 10),
+                                      child: InkWell(
+                                        onTap: () {
+                                          print("##### ${index}");
+                                        },
+                                        focusColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        splashColor: Colors.transparent,
+                                        child: new Center(
+                                          child: new Text(
+                                            "$index",
+                                            style: new TextStyle(
+                                                fontSize: 20.0,
+                                                color: Colors.white),
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -93,6 +109,8 @@ class _BottomAnimNavPageState extends State<BottomAnimNavPage> {
                           ),
                         );
                       });
+                  controller.reset();
+                  controller.forward();
                 },
                 child: new Text(
                   "Show",
