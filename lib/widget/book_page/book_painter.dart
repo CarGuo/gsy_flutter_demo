@@ -184,7 +184,7 @@ class BookPainter extends CustomPainter {
     pathCPaint.isAntiAlias = true;
 
     pathBPaint = new Paint();
-    pathBPaint.color = Colors.lightBlue;
+    pathBPaint.color = Colors.tealAccent;
     pathBPaint.blendMode = BlendMode.dstATop;
     pathBPaint.isAntiAlias = true;
 

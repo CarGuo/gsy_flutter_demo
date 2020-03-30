@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gsy_flutter_demo/widget/bottom_anim_nav_page.dart';
 import 'package:gsy_flutter_demo/widget/rich_text_demo_page2.dart';
 import 'package:gsy_flutter_demo/widget/scroll_inner_content_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/align_demo_page.dart';
@@ -165,6 +166,7 @@ const routerName = [
   "动画背景效果",
   "手势效果",
   "一个有趣的底部跟随例子",
+  "一个有趣的圆形选择器",
 ];
 
 Map<String, WidgetBuilder> routers = {
@@ -327,5 +329,7 @@ Map<String, WidgetBuilder> routers = {
   "widget/scrolldemo": (context) {
     return new ScrollInnerContentDemoPage();
   },
-
+  "widget/bottom_nav": (context) {
+    return new BottomAnimNavPage();
+  },
 };
