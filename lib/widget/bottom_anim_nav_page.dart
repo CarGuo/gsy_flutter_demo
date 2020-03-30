@@ -46,6 +46,7 @@ class _BottomAnimNavPageState extends State<BottomAnimNavPage>
               return FlatButton(
                 color: Colors.red,
                 onPressed: () {
+                  index = 0;
                   showBottomSheet(
                       context: context,
                       backgroundColor: Colors.transparent,
