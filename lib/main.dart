@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gsy_flutter_demo/widget/bottom_anim_nav_page.dart';
 import 'package:gsy_flutter_demo/widget/index_stack_drag_card_demo_page.dart';
+import 'package:gsy_flutter_demo/widget/index_stack_drag_card_demo_page2.dart';
 import 'package:gsy_flutter_demo/widget/rich_text_demo_page2.dart';
 import 'package:gsy_flutter_demo/widget/scroll_inner_content_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/align_demo_page.dart';
@@ -169,6 +170,7 @@ const routerName = [
   "一个有趣的底部跟随例子",
   "一个有趣的圆形选择器",
   "一个有趣的堆叠卡片例子",
+  "一个有趣的堆叠卡片例子2",
 ];
 
 Map<String, WidgetBuilder> routers = {
@@ -337,4 +339,8 @@ Map<String, WidgetBuilder> routers = {
   "widget/stack_index": (context) {
     return new IndexStackDragCardDemoPage();
   },
+  "widget/stack_index2": (context) {
+    return new IndexStackDragCardDemoPage2();
+  },
+
 };

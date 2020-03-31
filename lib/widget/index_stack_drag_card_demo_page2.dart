@@ -1,28 +1,22 @@
-import 'package:flutter/material.dart';
+import 'dart:math';
 
-class IndexStackDragCardDemoPage extends StatefulWidget {
+import 'package:flutter/material.dart';
+import 'package:flutter/physics.dart';
+
+class IndexStackDragCardDemoPage2 extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => IndexStackDragCardDemoPageState();
+  _IndexStackDragCardDemoPage2State createState() =>
+      _IndexStackDragCardDemoPage2State();
 }
 
-class IndexStackDragCardDemoPageState
-    extends State<IndexStackDragCardDemoPage> {
+class _IndexStackDragCardDemoPage2State
+    extends State<IndexStackDragCardDemoPage2> {
   var dataList = List();
 
   @override
   void initState() {
     super.initState();
     dataList = getDataList();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("IndexStackDragCardDemoPage"),
-      ),
-      body: Stack(alignment: Alignment.center, children: getCardList()),
-    );
   }
 
   void removeThis(index) {
@@ -36,6 +30,45 @@ class IndexStackDragCardDemoPageState
         });
       });
     }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('A draggable card!'),
+      ),
+      body: Stack(
+        children: getCardList(),
+      ),
+    );
+  }
+
+  List<Widget> getCardList() {
+    List<Widget> cardList = new List();
+    var length = dataList.length;
+    if (length > 5) {
+      length = 5;
+    }
+    for (int i = length - 1; i >= 0; i--) {
+      cardList.add(Positioned.fill(
+        child: DraggableCard(
+          removeCall: (index) {
+            removeThis(index);
+          },
+          index: i,
+          child: UnconstrainedBox(
+            child: Container(
+              margin: EdgeInsets.only(
+                  top: (i < 5) ? 10 * i.toDouble() : 40,
+                  left: (i < 5) ? 8 * i.toDouble() : 32),
+              child: getCardItem(i, dataList[i]),
+            ),
+          ),
+        ),
+      ));
+    }
+    return cardList;
   }
 
   getCardItem(index, data) {
@@ -75,40 +108,111 @@ class IndexStackDragCardDemoPageState
           )),
     );
   }
+}
 
-  List<Widget> getCardList() {
-    List<Widget> cardList = new List();
-    var length = dataList.length;
-    if (length > 5) {
-      length = 5;
-    }
-    for (int i = length - 1; i >= 0; i--) {
-      cardList.add(Positioned.fill(
-        child: UnconstrainedBox(
-            child: Container(
-          child: Draggable(
-              onDragEnd: (drag) {
-                print("#### ${drag.velocity.pixelsPerSecond} ${drag.offset}");
+class DraggableCard extends StatefulWidget {
+  final Widget child;
+  final ValueChanged removeCall;
+  final int index;
 
-                ///往下斜着拖
-                if (drag.offset.dx.abs() >
-                        MediaQuery.of(context).size.width / 2 ||
-                    drag.offset.dx < -MediaQuery.of(context).size.width / 4 ||
-                    drag.offset.dy.abs() >
-                        MediaQuery.of(context).size.height / 2) {
-                  removeThis(i);
-                }
-              },
-              childWhenDragging: Container(),
-              feedback: getCardItem(i, dataList[i]),
-              child: getCardItem(i, dataList[i])),
-          margin: EdgeInsets.only(
-              top: (i < 5) ? 10 * i.toDouble() : 40,
-              left: (i < 5) ? 8 * i.toDouble() : 32),
-        )),
-      ));
-    }
-    return cardList;
+  DraggableCard({this.child, this.removeCall, this.index});
+
+  @override
+  _DraggableCardState createState() => _DraggableCardState();
+}
+
+class _DraggableCardState extends State<DraggableCard>
+    with SingleTickerProviderStateMixin {
+  AnimationController _controller;
+  Alignment _dragAlignment = Alignment.center;
+  Animation<Alignment> _animation;
+  bool remove = false;
+
+  void _runAnimation(Offset pixelsPerSecond, Size size) {
+    _animation = _controller.drive(
+      AlignmentTween(
+        begin: _dragAlignment,
+        end: Alignment.center,
+      ),
+    );
+
+    final unitsPerSecondX = pixelsPerSecond.dx / size.width;
+    final unitsPerSecondY = pixelsPerSecond.dy / size.height;
+    final unitsPerSecond = Offset(unitsPerSecondX, unitsPerSecondY);
+    final unitVelocity = unitsPerSecond.distance;
+
+    const spring = SpringDescription(
+      mass: 30,
+      stiffness: 1,
+      damping: 1,
+    );
+
+    final simulation = SpringSimulation(spring, 0, 1, -unitVelocity);
+
+    _controller.animateWith(simulation);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(vsync: this)
+      ..duration = Duration(microseconds: 500);
+
+    _controller.addListener(() {
+      setState(() {
+        _dragAlignment = _animation.value;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    return GestureDetector(
+      onPanDown: (details) {
+        _controller.stop();
+      },
+      onPanUpdate: (details) {
+        print("#### ${details.localPosition}");
+
+        ///往下斜着拖
+        if ((details.localPosition.dx.abs() >
+                    MediaQuery.of(context).size.width / 3 * 2 ||
+                details.localPosition.dx <= 20) &&
+            details.localPosition.dy > MediaQuery.of(context).size.height / 2) {
+          remove = true;
+        } else {
+          remove = false;
+        }
+        setState(() {
+          _dragAlignment += Alignment(
+            details.delta.dx / (size.width / 2),
+            details.delta.dy / (size.height / 2),
+          );
+        });
+      },
+      onPanEnd: (details) {
+        if (remove == true) {
+          widget.removeCall(widget.index);
+          remove = false;
+          setState(() {
+            _dragAlignment = Alignment.center;
+          });
+        } else {
+          _runAnimation(details.velocity.pixelsPerSecond, size);
+        }
+      },
+      child: Align(
+        alignment: _dragAlignment,
+        child: widget.child,
+      ),
+    );
   }
 }
 
