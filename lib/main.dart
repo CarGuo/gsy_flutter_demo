@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gsy_flutter_demo/widget/anim_button/anim_button_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/bottom_anim_nav_page.dart';
 import 'package:gsy_flutter_demo/widget/index_stack_drag_card_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/index_stack_drag_card_demo_page2.dart';
@@ -102,7 +103,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   alignment: Alignment.centerLeft,
                   margin: EdgeInsets.symmetric(horizontal: 10),
                   height: 50,
-                  child: new Text(routerName[index]),
+                  child: new Text(routers.keys.toList()[index]),
                 ),
               ),
             );
@@ -114,233 +115,176 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-const routerName = [
-  "Controller 例子",
-  "圆角 例子",
-  "滑动监听 例子",
-  "滑动到指定位置 例子",
-  "滑动到指定位置2 例子",
-  "Transform 例子",
-  "文本行间距 例子",
-  "简单上下刷新 例子",
-  "简单上下刷新2 例子",
-  "简单上下刷新3 例子",
-  "绝对定位 例子",
-  "弹出提示框 例子",
-  "Tag 例子",
-  "共享元素 例子",
-  "状态栏颜色 例子",
-  "键盘相关 例子",
-  "动画 例子",
-  "动画2 例子",
-  "悬浮触摸控件 例子",
-  "全局字体大小 例子",
-  "富文本 例子",
-  "富文本2 例子",
-  "viewpager 例子",
-  "滑动停靠 例子",
-  "验证码输入框 例子",
-  "自定义布局 例子",
-  "自定义布局云词图 例子",
-  "列表停靠Stick 例子",
-  "列表停靠展开收缩 例子",
-  "列表停靠Stick3 例子",
-  "键盘顶起 例子",
-  "Blur 例子",
-  "动画3 例子",
-  "时钟动画 例子",
-  "动画4 例子",
-  "列表动画 例子",
-  "列表动画2 例子",
-  "下弹筛选 例子",
-  "动画5 例子",
-  "自定义滑动效果 例子",
-  "动画6",
-  "列表停靠展开Stick2 例子",
-  "overflow 图片",
-  "align",
-  "Card Item",
-  "Sliver Tab",
-  "Sliver Tab2",
-  "Sliver Tab3",
-  "仿真书本翻页动画",
-  "粒子动画效果",
-  "动画背景效果",
-  "手势效果",
-  "一个有趣的底部跟随例子",
-  "一个有趣的圆形选择器",
-  "一个有趣的堆叠卡片例子",
-  "一个有趣的堆叠卡片例子2",
-];
-
 Map<String, WidgetBuilder> routers = {
-  "widget/controller": (context) {
+  "文本输入框简单的 Controller": (context) {
     return new ControllerDemoPage();
   },
-  "widget/clip": (context) {
+  "实现控件圆角不同组合": (context) {
     return new ClipDemoPage();
   },
-  "widget/scroll": (context) {
+  "列表滑动监听": (context) {
     return new ScrollListenerDemoPage();
   },
-  "widget/scroll_index": (context) {
+  "滑动到指定位置": (context) {
     return new ScrollToIndexDemoPage();
   },
-  "widget/scroll_index2": (context) {
+  "滑动到指定位置2": (context) {
     return new ScrollToIndexDemoPage2();
   },
-  "widget/transform": (context) {
+  "Transform 效果展示": (context) {
     return new TransformDemoPage();
   },
-  "widget/text_line": (context) {
+  "计算另类文本行间距展示": (context) {
     return new TextLineHeightDemoPage();
   },
-  "widget/refresh": (context) {
+  "简单上下刷新": (context) {
     return new RefreshDemoPage();
   },
-  "widget/refresh2": (context) {
+  "简单上下刷新2": (context) {
     return new RefreshDemoPage2();
   },
-  "widget/refresh3": (context) {
+  "简单上下刷新3": (context) {
     return new RefreshDemoPage3();
   },
-  "widget/positioned": (context) {
+  "通过绝对定位布局": (context) {
     return new PositionedDemoPage();
   },
-  "widget/bubble": (context) {
+  "气泡提示框": (context) {
     return new BubbleDemoPage();
   },
-  "widget/tags": (context) {
+  "Tag效果展示": (context) {
     return new TagDemoPage();
   },
-  "widget/honor": (context) {
+  "共享元素跳转效果": (context) {
     return new HonorDemoPage();
   },
-  "widget/statusbar": (context) {
+  "状态栏颜色修改（仅 App）": (context) {
     return new StatusBarDemoPage();
   },
-  "widget/keyboard": (context) {
+  "键盘弹出与监听（仅 App）": (context) {
     return new KeyBoardDemoPage();
   },
-  "widget/anima": (context) {
+  "控件动画组合展示（旋转加放大圆）": (context) {
     return new AnimaDemoPage();
   },
-  "widget/anima2": (context) {
+  "控件展开动画效果": (context) {
     return new AnimaDemoPage2();
   },
-  "widget/floating": (context) {
+  "全局悬浮按键效果": (context) {
     return new FloatingTouchDemoPage();
   },
-  "widget/textsize": (context) {
+  "全局设置字体大小": (context) {
     return new TextSizeDemoPage();
   },
-  "widget/richtext": (context) {
+  "旧版实现富文本": (context) {
     return new RichTextDemoPage();
   },
-  "widget/richtext2": (context) {
+  "官方实现富文本": (context) {
     return new RichTextDemoPage2();
   },
-  "widget/viewpager": (context) {
+  "第三方 viewpager 封装实现": (context) {
     return new ViewPagerDemoPage();
   },
-  "widget/sliver": (context) {
+  "列表滑动过程控件停靠效果": (context) {
     return new SliverListDemoPage();
   },
-  "widget/vc": (context) {
+  "验证码输入框": (context) {
     return new VerificationCodeInputDemoPage();
   },
-  "widget/cmd": (context) {
+  "自定义布局展示效果": (context) {
     return new CustomMultiRenderDemoPage();
   },
-  "widget/cloud": (context) {
+  "自定义布局实现云词图展示": (context) {
     return new CloudDemoPage();
   },
-  "widget/stick": (context) {
+  "列表滑动停靠 （Stick）": (context) {
     return new StickDemoPage();
   },
-  "widget/stick2": (context) {
+  "列表滑动停靠 （Stick）+ 展开收回": (context) {
     return new StickExpendDemoPage();
   },
-  "widget/stick3": (context) {
+  "列表滑动停靠效果2 （Stick": (context) {
     return new SliverStickListDemoPage();
   },
-  "widget/kb": (context) {
+  "键盘顶起展示（仅 App）": (context) {
     return new InputBottomDemoPage();
   },
-  "widget/blur": (context) {
+  "Blur 高斯模糊效果": (context) {
     return new BlurDemoPage();
   },
-  "widget/anima_container": (context) {
+  "控件动画变形效果": (context) {
     return new AnimationContainerDemoPage();
   },
-  "widget/tick": (context) {
+  "时钟动画绘制展示": (context) {
     return new TickClickDemoPage();
   },
-  "widget/anmi4": (context) {
+  "按键切换动画效果": (context) {
     return new AnimaDemoPage4();
   },
-  "widget/listanim": (context) {
+  "列表滑动过程 item 停靠动画效果": (context) {
     return new ListAnimDemoPage();
   },
-  "widget/listanim2": (context) {
+  "列表滑动过程 item 停靠动画效果2": (context) {
     return new ListAnimDemoPage2();
   },
-  "widget/drop": (context) {
+  "下弹筛选展示效果": (context) {
     return new DropSelectDemoPage();
   },
-  "widget/anmi5": (context) {
+  "文本弹出动画效果": (context) {
     return new AnimaDemoPage5();
   },
-  "widget/sf": (context) {
+  "强大的自定义滑动与停靠结合展示": (context) {
     return new ScrollHeaderDemoPage();
   },
-  "widget/anim5": (context) {
+  "点击弹出动画提示": (context) {
     return new AnimTipDemoPage();
   },
-  "widget/stick5": (context) {
+  "列表停靠展开+回到当前头部": (context) {
     return new StickSliverListDemoPage();
   },
-  "widget/overflow": (context) {
+  "使用 overflow 处理图片": (context) {
     return new OverflowImagePage();
   },
-  "widget/align": (context) {
+  "展示 Align 排布控件": (context) {
     return new AlignDemoPage();
   },
-  "widget/carditem": (context) {
+  "通过不同尺寸计算方式展示比例": (context) {
     return new CardItemPage();
   },
-  "widget/slivertab": (context) {
+  "多列表+顶部Tab效果展示": (context) {
     return new SliverTabDemoPage();
   },
-  "widget/slivertab2": (context) {
+  "多列表+顶部Tab效果展示2": (context) {
     return new SliverTabDemoPage2();
   },
-  "widget/slivertab3": (context) {
+  "多列表+顶部Tab效果展示3": (context) {
     return new SliverTabDemoPage3();
   },
-  "widget/flipbook": (context) {
+  "仿真书本翻页动画（仅APP）": (context) {
     return new BookPage();
   },
-  "widget/particle": (context) {
+  "粒子动画效果": (context) {
     return new ParticlePage();
   },
-  "widget/anima_bg": (context) {
+  "动画背景效果": (context) {
     return new AnimBgDemoPage();
   },
-  "widget/matrix_custom": (context) {
+  "手势效果": (context) {
     return new MatrixCustomPainterDemo();
   },
-  "widget/scrolldemo": (context) {
+  "一个有趣的底部跟随和停靠例子": (context) {
     return new ScrollInnerContentDemoPage();
   },
-  "widget/bottom_nav": (context) {
+  "一个有趣的圆形选择器": (context) {
     return new BottomAnimNavPage();
   },
-  "widget/stack_index": (context) {
+  "一个有趣的堆叠卡片例子": (context) {
     return new IndexStackDragCardDemoPage();
   },
-  "widget/stack_index2": (context) {
+  "一个有趣的堆叠卡片例子2": (context) {
     return new IndexStackDragCardDemoPage2();
   },
-
+  "动画按键例子": (context) {
+    return new AnimButtonDemoPage();
+  },
 };

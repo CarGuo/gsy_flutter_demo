@@ -4,15 +4,17 @@ import 'package:flutter/rendering.dart';
 ///一个有趣的底部跟随例子
 class ScrollInnerContentDemoPage extends StatefulWidget {
   @override
-  _ScrollInnerContentDemoPageState createState() => _ScrollInnerContentDemoPageState();
+  _ScrollInnerContentDemoPageState createState() =>
+      _ScrollInnerContentDemoPageState();
 }
 
-class _ScrollInnerContentDemoPageState extends State<ScrollInnerContentDemoPage> {
+class _ScrollInnerContentDemoPageState
+    extends State<ScrollInnerContentDemoPage> {
   GlobalKey globalKey = new GlobalKey();
 
   final double buttonHeight = 40;
   bool outSize = false;
-  String content = "FFFFFF";
+  String content = "这是可滑动文本区域";
 
   Future<double> getButtonPosition() {
     return Future.delayed(Duration(seconds: 0), () {
@@ -51,7 +53,7 @@ class _ScrollInnerContentDemoPageState extends State<ScrollInnerContentDemoPage>
           IconButton(
             onPressed: () {
               setState(() {
-                content += "FFFFFFF";
+                content += "=｜-动态文本-｜=";
               });
             },
             icon: Icon(Icons.add_circle_outline),
@@ -60,7 +62,7 @@ class _ScrollInnerContentDemoPageState extends State<ScrollInnerContentDemoPage>
             onPressed: () {
               setState(() {
                 if (content.length > 8) {
-                  content = content.replaceFirst("FFFFFFF", "");
+                  content = content.replaceFirst("=｜-动态文本-｜=", "");
                 }
               });
             },
@@ -80,12 +82,15 @@ class _ScrollInnerContentDemoPageState extends State<ScrollInnerContentDemoPage>
                       new Container(
                         height: 60,
                         alignment: Alignment.centerLeft,
-                        child: new Text("FFFFFFFFF"),
+                        child: new Text(
+                          "点击右上角加减查看效果",
+                          style: TextStyle(fontSize: 18),
+                        ),
                       ),
                       new Container(
                         height: 60,
                         alignment: Alignment.centerLeft,
-                        child: new Text("FFFFFFFFF"),
+                        child: new Text("我是文本2"),
                       ),
                     ],
                   ),
@@ -102,7 +107,7 @@ class _ScrollInnerContentDemoPageState extends State<ScrollInnerContentDemoPage>
                         color: Colors.red,
                         child: new Text(
                           content,
-                          style: TextStyle(fontSize: 59),
+                          style: TextStyle(fontSize: 44),
                         ),
                       ),
                     ),
@@ -131,7 +136,7 @@ class _ScrollInnerContentDemoPageState extends State<ScrollInnerContentDemoPage>
                         horizontal: 20,
                       ),
                       color: Colors.blue,
-                      child: new Text("FFFFF"),
+                      child: new Text("#########"),
                     ),
                   ),
                 ),
