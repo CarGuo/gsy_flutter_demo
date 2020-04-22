@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:gsy_flutter_demo/widget/anim_button/play_anim_button.dart';
 
@@ -36,11 +38,19 @@ class _AnimButtonDemoPageState extends State<AnimButtonDemoPage> {
             new SizedBox(
               height: 50,
             ),
-            SizedBox(
-              height: 50,
-              width: 50,
-              child: PlayAnimButton(),
-            ),
+            if (Platform.isAndroid == true || Platform.isIOS == true)
+              SizedBox(
+                height: 50,
+                width: 50,
+                child: PlayAnimButton(),
+              )
+            else
+              new Container(
+                child: new Text(
+                  "该效果暂不支持 Web",
+                  style: new TextStyle(color: Colors.white, fontSize: 16),
+                ),
+              ),
             new SizedBox(
               height: 50,
             ),
