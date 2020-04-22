@@ -19,6 +19,30 @@ class _AnimButtonDemoPageState extends State<AnimButtonDemoPage> {
 
   @override
   Widget build(BuildContext context) {
+    var playButton;
+    try {
+      if (Platform.isAndroid == true || Platform.isIOS == true) {
+        playButton = SizedBox(
+          height: 50,
+          width: 50,
+          child: PlayAnimButton(),
+        );
+      } else {
+        playButton = new Container(
+          child: new Text(
+            "该控件效果暂不支持 Web，已隐藏",
+            style: new TextStyle(color: Colors.white, fontSize: 16),
+          ),
+        );
+      }
+    } catch (e) {
+      playButton = new Container(
+        child: new Text(
+          "该效果暂不支持 Web",
+          style: new TextStyle(color: Colors.white, fontSize: 16),
+        ),
+      );
+    }
     return Scaffold(
       appBar: AppBar(
         title: new Text("AnimButtonDemoPage"),
@@ -38,19 +62,7 @@ class _AnimButtonDemoPageState extends State<AnimButtonDemoPage> {
             new SizedBox(
               height: 50,
             ),
-            if (Platform.isAndroid == true || Platform.isIOS == true)
-              SizedBox(
-                height: 50,
-                width: 50,
-                child: PlayAnimButton(),
-              )
-            else
-              new Container(
-                child: new Text(
-                  "该效果暂不支持 Web",
-                  style: new TextStyle(color: Colors.white, fontSize: 16),
-                ),
-              ),
+            playButton,
             new SizedBox(
               height: 50,
             ),
