@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gsy_flutter_demo/widget/anim_button/anim_button_demo_page.dart';
+import 'package:gsy_flutter_demo/widget/anim_progress_img_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/bottom_anim_nav_page.dart';
 import 'package:gsy_flutter_demo/widget/index_stack_drag_card_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/index_stack_drag_card_demo_page2.dart';
@@ -286,5 +287,8 @@ Map<String, WidgetBuilder> routers = {
   },
   "动画按键例子": (context) {
     return new AnimButtonDemoPage();
+  },
+  "类似QQ发送图片的动画": (context) {
+    return new AnimProgressImgDemoPage();
   },
 };
