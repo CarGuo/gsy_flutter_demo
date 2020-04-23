@@ -20,33 +20,182 @@
 
 ### 已有例子
 
-- **Controller 例子**
-- **圆角 例子**
-- **滑动监听 例子**
-- **滑动到指定位置 例子**
-- **滑动到指定位置2 例子**
-- **Transform 例子**
-- **文本行间距 例子**
-- **多种下拉刷新 例子**
-- **绝对定位 例子**
-- **气泡提示框 例子**
-- **标签Wrap 例子**
-- **共享元素动画 例子**
-- **修改状态栏颜色 例子**
-- **系统键盘相关 例子**
-- **动画相关 例子**
-- **悬浮触摸控件 例子**
-- **全局字体大小 例子**
-- **富文本 例子**
-- **ViewPager 例子**
-- **滑动停靠 例子**
-- **验证码输入框 例子**
-- **自定义布局 例子**
-- **自定义布局云词图 例子**
-- **列表停靠 例子**
-- **高斯模糊 例子**
-- **多Tab动画列表 例子**
-- **仿真翻页 例子**
+```
+  "文本输入框简单的 Controller": (context) {
+    return new ControllerDemoPage();
+  },
+  "实现控件圆角不同组合": (context) {
+    return new ClipDemoPage();
+  },
+  "列表滑动监听": (context) {
+    return new ScrollListenerDemoPage();
+  },
+  "滑动到指定位置": (context) {
+    return new ScrollToIndexDemoPage();
+  },
+  "滑动到指定位置2": (context) {
+    return new ScrollToIndexDemoPage2();
+  },
+  "Transform 效果展示": (context) {
+    return new TransformDemoPage();
+  },
+  "计算另类文本行间距展示": (context) {
+    return new TextLineHeightDemoPage();
+  },
+  "简单上下刷新": (context) {
+    return new RefreshDemoPage();
+  },
+  "简单上下刷新2": (context) {
+    return new RefreshDemoPage2();
+  },
+  "简单上下刷新3": (context) {
+    return new RefreshDemoPage3();
+  },
+  "通过绝对定位布局": (context) {
+    return new PositionedDemoPage();
+  },
+  "气泡提示框": (context) {
+    return new BubbleDemoPage();
+  },
+  "Tag效果展示": (context) {
+    return new TagDemoPage();
+  },
+  "共享元素跳转效果": (context) {
+    return new HonorDemoPage();
+  },
+  "状态栏颜色修改（仅 App）": (context) {
+    return new StatusBarDemoPage();
+  },
+  "键盘弹出与监听（仅 App）": (context) {
+    return new KeyBoardDemoPage();
+  },
+  "控件动画组合展示（旋转加放大圆）": (context) {
+    return new AnimaDemoPage();
+  },
+  "控件展开动画效果": (context) {
+    return new AnimaDemoPage2();
+  },
+  "全局悬浮按键效果": (context) {
+    return new FloatingTouchDemoPage();
+  },
+  "全局设置字体大小": (context) {
+    return new TextSizeDemoPage();
+  },
+  "旧版实现富文本": (context) {
+    return new RichTextDemoPage();
+  },
+  "官方实现富文本": (context) {
+    return new RichTextDemoPage2();
+  },
+  "第三方 viewpager 封装实现": (context) {
+    return new ViewPagerDemoPage();
+  },
+  "列表滑动过程控件停靠效果": (context) {
+    return new SliverListDemoPage();
+  },
+  "验证码输入框": (context) {
+    return new VerificationCodeInputDemoPage();
+  },
+  "自定义布局展示效果": (context) {
+    return new CustomMultiRenderDemoPage();
+  },
+  "自定义布局实现云词图展示": (context) {
+    return new CloudDemoPage();
+  },
+  "列表滑动停靠 （Stick）": (context) {
+    return new StickDemoPage();
+  },
+  "列表滑动停靠 （Stick）+ 展开收回": (context) {
+    return new StickExpendDemoPage();
+  },
+  "列表滑动停靠效果2 （Stick": (context) {
+    return new SliverStickListDemoPage();
+  },
+  "键盘顶起展示（仅 App）": (context) {
+    return new InputBottomDemoPage();
+  },
+  "Blur 高斯模糊效果": (context) {
+    return new BlurDemoPage();
+  },
+  "控件动画变形效果": (context) {
+    return new AnimationContainerDemoPage();
+  },
+  "时钟动画绘制展示": (context) {
+    return new TickClickDemoPage();
+  },
+  "按键切换动画效果": (context) {
+    return new AnimaDemoPage4();
+  },
+  "列表滑动过程 item 停靠动画效果": (context) {
+    return new ListAnimDemoPage();
+  },
+  "列表滑动过程 item 停靠动画效果2": (context) {
+    return new ListAnimDemoPage2();
+  },
+  "下弹筛选展示效果": (context) {
+    return new DropSelectDemoPage();
+  },
+  "文本弹出动画效果": (context) {
+    return new AnimaDemoPage5();
+  },
+  "强大的自定义滑动与停靠结合展示": (context) {
+    return new ScrollHeaderDemoPage();
+  },
+  "点击弹出动画提示": (context) {
+    return new AnimTipDemoPage();
+  },
+  "列表停靠展开+回到当前头部": (context) {
+    return new StickSliverListDemoPage();
+  },
+  "使用 overflow 处理图片": (context) {
+    return new OverflowImagePage();
+  },
+  "展示 Align 排布控件": (context) {
+    return new AlignDemoPage();
+  },
+  "通过不同尺寸计算方式展示比例": (context) {
+    return new CardItemPage();
+  },
+  "多列表+顶部Tab效果展示": (context) {
+    return new SliverTabDemoPage();
+  },
+  "多列表+顶部Tab效果展示2": (context) {
+    return new SliverTabDemoPage2();
+  },
+  "多列表+顶部Tab效果展示3": (context) {
+    return new SliverTabDemoPage3();
+  },
+  "仿真书本翻页动画（仅APP）": (context) {
+    return new BookPage();
+  },
+  "粒子动画效果": (context) {
+    return new ParticlePage();
+  },
+  "动画背景效果": (context) {
+    return new AnimBgDemoPage();
+  },
+  "手势效果": (context) {
+    return new MatrixCustomPainterDemo();
+  },
+  "一个有趣的底部跟随和停靠例子": (context) {
+    return new ScrollInnerContentDemoPage();
+  },
+  "一个有趣的圆形选择器": (context) {
+    return new BottomAnimNavPage();
+  },
+  "一个有趣的堆叠卡片例子": (context) {
+    return new IndexStackDragCardDemoPage();
+  },
+  "一个有趣的堆叠卡片例子2": (context) {
+    return new IndexStackDragCardDemoPage2();
+  },
+  "动画按键例子": (context) {
+    return new AnimButtonDemoPage();
+  },
+  "类似QQ发送图片的动画": (context) {
+    return new AnimProgressImgDemoPage();
+  },
+```
 
 
 ![](demo.jpg)
