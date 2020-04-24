@@ -21,6 +21,7 @@
 ### 已有例子
 
 ```
+Map<String, WidgetBuilder> routers = {
   "文本输入框简单的 Controller": (context) {
     return new ControllerDemoPage();
   },
@@ -183,10 +184,10 @@
   "一个有趣的圆形选择器": (context) {
     return new BottomAnimNavPage();
   },
-  "一个有趣的堆叠卡片例子": (context) {
+  "一个类似探探堆叠卡片例子": (context) {
     return new IndexStackDragCardDemoPage();
   },
-  "一个有趣的堆叠卡片例子2": (context) {
+  "一个类似探探堆叠卡片例子2": (context) {
     return new IndexStackDragCardDemoPage2();
   },
   "动画按键例子": (context) {
@@ -195,6 +196,12 @@
   "类似QQ发送图片的动画": (context) {
     return new AnimProgressImgDemoPage();
   },
+  "类似探探扫描的动画效果": (context) {
+    return new AnimScanDemoPage();
+  },
+  
+};
+
 ```
 
 

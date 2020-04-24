@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gsy_flutter_demo/widget/anim_button/anim_button_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/anim_progress_img_demo_page.dart';
+import 'package:gsy_flutter_demo/widget/anim_scan_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/bottom_anim_nav_page.dart';
 import 'package:gsy_flutter_demo/widget/index_stack_drag_card_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/index_stack_drag_card_demo_page2.dart';
@@ -279,10 +280,10 @@ Map<String, WidgetBuilder> routers = {
   "一个有趣的圆形选择器": (context) {
     return new BottomAnimNavPage();
   },
-  "一个有趣的堆叠卡片例子": (context) {
+  "一个类似探探堆叠卡片例子": (context) {
     return new IndexStackDragCardDemoPage();
   },
-  "一个有趣的堆叠卡片例子2": (context) {
+  "一个类似探探堆叠卡片例子2": (context) {
     return new IndexStackDragCardDemoPage2();
   },
   "动画按键例子": (context) {
@@ -291,4 +292,8 @@ Map<String, WidgetBuilder> routers = {
   "类似QQ发送图片的动画": (context) {
     return new AnimProgressImgDemoPage();
   },
+  "类似探探扫描的动画效果": (context) {
+    return new AnimScanDemoPage();
+  },
+
 };
