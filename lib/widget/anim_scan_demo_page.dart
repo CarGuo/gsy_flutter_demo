@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:math' as Math;
 import 'dart:async';
 
@@ -104,11 +105,11 @@ class _AnimScanDemoPageState extends State<AnimScanDemoPage>
               startRipple(300, 300);
               startImgAnim();
             },
-            radius: 150,
+            radius: 70,
             child: ScaleTransition(
               scale: imgAnimation,
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(150),
+                borderRadius: BorderRadius.circular(70),
                 child: new Image.asset(
                   "static/gsy_cat.png",
                   fit: BoxFit.cover,
@@ -156,7 +157,11 @@ class AnimScanPainter extends CustomPainter {
 
     var sweepGradient =
         SweepGradient(colors: colors, stops: [0, 0.001, 0.9, 1]);
-    backPaint.shader = sweepGradient.createShader(Offset.zero & size);
+
+    /// shader 暂不支持 web
+    if (Platform.isAndroid == true || Platform.isIOS == true) {
+      backPaint.shader = sweepGradient.createShader(Offset.zero & size);
+    }
 
     canvas.translate(width / 2, height / 2);
     double iDeg = 2 * Math.pi / 360 * sweepProgress.toDouble();
