@@ -91,35 +91,38 @@ class _AnimScanDemoPageState extends State<AnimScanDemoPage>
         ),
         body: Container(
             child: Center(
-                child: Stack(alignment: Alignment.center, children: <Widget>[
-          new SizedBox(
-            width: 300,
-            height: 300,
-            child: CustomPaint(
-              painter: AnimScanPainter(
-                  rippleCircles: rippleCircles, sweepProgress: sweepProgress),
-            ),
-          ),
-          DebounceButton(
-            onTap: () {
-              startRipple(300, 300);
-              startImgAnim();
-            },
-            radius: 70,
-            child: ScaleTransition(
-              scale: imgAnimation,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(70),
-                child: new Image.asset(
-                  "static/gsy_cat.png",
-                  fit: BoxFit.cover,
-                  width: 140,
-                  height: 140,
-                ),
+                child: Stack(
+          alignment: Alignment.center,
+          children: <Widget>[
+            new SizedBox(
+              width: 300,
+              height: 300,
+              child: CustomPaint(
+                painter: AnimScanPainter(
+                    rippleCircles: rippleCircles, sweepProgress: sweepProgress),
               ),
             ),
-          )
-        ]))));
+            DebounceButton(
+              onTap: () {
+                startRipple(300, 300);
+                startImgAnim();
+              },
+              radius: 70,
+              child: ScaleTransition(
+                scale: imgAnimation,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(70),
+                  child: new Image.asset(
+                    "static/gsy_cat.png",
+                    fit: BoxFit.cover,
+                    width: 140,
+                    height: 140,
+                  ),
+                ),
+              ),
+            )
+          ],
+        ))));
   }
 }
 
@@ -173,11 +176,30 @@ class AnimScanPainter extends CustomPainter {
     canvas.saveLayer(rect, backPaint);
 
     canvas.drawCircle(Offset(width / 2, height / 2), radius, backPaint);
-    backPaint.blendMode = BlendMode.dstOut;
 
-    canvas.drawCircle(Offset(width / 2, height / 2), radius / 2, backPaint);
-    backPaint.blendMode = BlendMode.srcOver;
+    backPaint.shader = SweepGradient(colors: [
+      Color(0xFFFFF6F6).withAlpha(0),
+      Color(0xFFFFF6F6).withAlpha(10),
+      Colors.white.withAlpha(0),
+      Color(0xFFFFF6F6).withAlpha(10),
+      Colors.blue,
+    ], stops: [
+      0,
+      0.001,
+      0.001,
+      0.9,
+      1,
+    ]).createShader(Offset.zero & size);
+
+    canvas.drawArc(Rect.fromLTWH(0, 0, width, size.height), -0.3 * Math.pi,
+        0.6 * Math.pi, true, backPaint);
+
     backPaint.shader = null;
+
+    backPaint.blendMode = BlendMode.dstOut;
+    canvas.drawCircle(Offset(width / 2, height / 2), radius / 2, backPaint);
+
+    backPaint.blendMode = BlendMode.srcOver;
 
     canvas.translate(0, height / 2);
     if (rippleCircles != null) {
