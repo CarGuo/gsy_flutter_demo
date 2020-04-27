@@ -10,29 +10,48 @@ class ArcSeekBarDemoPage extends StatefulWidget {
 
 class _ArcSeekBarDemoPageState extends State<ArcSeekBarDemoPage>
     with SingleTickerProviderStateMixin {
-  AnimationController animController;
-  Animation animation;
+  double progress = 0;
+  final double rotateAngle = 90;
+  final double openAngle = 120;
+  final Size size = Size(300, 300);
 
-  @override
-  void initState() {
-    super.initState();
-    animController = new AnimationController(vsync: this)
-      ..duration = Duration(milliseconds: 4000);
-    this.animation = Tween(begin: 0.0, end: 1.0).animate(animController)
-      ..addListener(() {
-        updateState();
-      });
-    animController.repeat(reverse: true);
+  onTouch(DragUpdateDetails d) {
+    var x = d.localPosition.dx;
+    var y = d.localPosition.dy;
+    double tempProgressPresent = getCurrentProgress(x, y);
+    // 允许突变 或者非突变
+    setState(() {
+      progress = tempProgressPresent;
+    });
   }
 
-  @override
-  void dispose() {
-    animController.stop();
-    super.dispose();
+  double getCurrentProgress(double px, double py) {
+    double diffAngle = getDiffAngle(px, py);
+    double progress = diffAngle / (ArcSeekBarPainter.CIRCLE_ANGLE - openAngle);
+    if (progress < 0) progress = 0;
+    if (progress > 1) progress = 1;
+    return progress;
   }
 
-  updateState() {
-    setState(() {});
+  double getDiffAngle(double px, double py) {
+    double angle = getAngle(px, py);
+    double diffAngle;
+    diffAngle = angle - rotateAngle;
+    if (diffAngle < 0) {
+      diffAngle = (diffAngle + ArcSeekBarPainter.CIRCLE_ANGLE) %
+          ArcSeekBarPainter.CIRCLE_ANGLE;
+    }
+    diffAngle = diffAngle - openAngle / 2;
+    return diffAngle;
+  }
+
+  double getAngle(double px, double py) {
+    double angle =
+        atan2(py - size.height / 2, px - size.width / 2) * 180 / 3.14;
+    if (angle < 0) {
+      angle += 360;
+    }
+    return angle;
   }
 
   @override
@@ -43,11 +62,17 @@ class _ArcSeekBarDemoPageState extends State<ArcSeekBarDemoPage>
       ),
       body: Container(
         child: Center(
-          child: SizedBox(
-            height: 300,
-            width: 300,
-            child: CustomPaint(
-              painter: ArcSeekBarPainter(progress: animation.value),
+          child: GestureDetector(
+            onPanUpdate: onTouch,
+            child: SizedBox(
+              height: size.width,
+              width: size.height,
+              child: CustomPaint(
+                painter: new ArcSeekBarPainter(
+                    progress: progress,
+                    rotateAngle: rotateAngle,
+                    openAngle: openAngle),
+              ),
             ),
           ),
         ),
@@ -57,12 +82,18 @@ class _ArcSeekBarDemoPageState extends State<ArcSeekBarDemoPage>
 }
 
 class ArcSeekBarPainter extends CustomPainter {
-
   static const double CIRCLE_ANGLE = 360;
 
   final double progress;
+  final double rotateAngle;
 
-  ArcSeekBarPainter({this.progress});
+  final double openAngle;
+
+  ArcSeekBarPainter({
+    this.progress = 0,
+    this.rotateAngle = 90,
+    this.openAngle = 120,
+  });
 
   Path seekPath;
   Path borderPath;
@@ -81,8 +112,6 @@ class ArcSeekBarPainter extends CustomPainter {
   double arcWidth = 40;
   double borderWidth = 2;
   double shadowRadius = 0;
-  double openAngle = 120;
-  double rotateAngle = 90;
   double thumbShadowRadius = 2;
   double thumbRadius = 15;
 
@@ -97,11 +126,7 @@ class ArcSeekBarPainter extends CustomPainter {
   void initData() {
     seekPath = new Path();
     borderPath = new Path();
-    arcColors = [
-      Color(0xff1a2a6c),
-      Color(0xffb21f1f),
-      Color(0xfffdbb2d),
-    ];
+    arcColors = [Colors.blueAccent, Colors.pinkAccent, Colors.amberAccent];
   }
 
   void initPaint() {
