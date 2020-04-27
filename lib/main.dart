@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gsy_flutter_demo/widget/anim_bubble_gum.dart';
 import 'package:gsy_flutter_demo/widget/anim_button/anim_button_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/anim_progress_img_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/anim_scan_demo_page.dart';
@@ -299,4 +300,8 @@ Map<String, WidgetBuilder> routers = {
   "圆弧形的 SeekBar（仅APP）": (context) {
     return new ArcSeekBarDemoPage();
   },
+  "一个国外友人很惊艳的动画效果": (context) {
+    return new AnimBubbleGumDemoPage();
+  },
+
 };
