@@ -155,18 +155,20 @@ class Painter extends CustomPainter {
           ],
         );
       var light = Paint();
-      if (Platform.isAndroid || Platform.isIOS) {
-        light = Paint()
-          ..color = c.color
-          ..shader = ui.Gradient.radial(
-            c.offset - Offset(0, c.radius),
-            c.radius,
-            [
-              Color(0x53ffffff),
-              Colors.transparent,
-            ],
-          );
-      }
+      try {
+        if (Platform.isAndroid  == true|| Platform.isIOS == true) {
+          light = Paint()
+            ..color = c.color
+            ..shader = ui.Gradient.radial(
+              c.offset - Offset(0, c.radius),
+              c.radius,
+              [
+                Color(0x53ffffff),
+                Colors.transparent,
+              ],
+            );
+        }
+      } catch (e) {}
       //too heavy for mobile web rendering
 
       canvas
