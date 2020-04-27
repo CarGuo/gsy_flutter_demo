@@ -199,7 +199,12 @@ Map<String, WidgetBuilder> routers = {
   "类似探探扫描的动画效果": (context) {
     return new AnimScanDemoPage();
   },
-  
+  "圆弧形的 SeekBar（仅APP）": (context) {
+    return new ArcSeekBarDemoPage();
+  },
+  "一个国外友人很惊艳的动画效果": (context) {
+    return new AnimBubbleGumDemoPage();
+  },
 };
 
 ```
