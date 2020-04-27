@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gsy_flutter_demo/widget/anim_button/anim_button_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/anim_progress_img_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/anim_scan_demo_page.dart';
+import 'package:gsy_flutter_demo/widget/arc_seek_bar_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/bottom_anim_nav_page.dart';
 import 'package:gsy_flutter_demo/widget/index_stack_drag_card_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/index_stack_drag_card_demo_page2.dart';
@@ -295,5 +296,7 @@ Map<String, WidgetBuilder> routers = {
   "类似探探扫描的动画效果": (context) {
     return new AnimScanDemoPage();
   },
-
+  "圆弧形的 SeekBar": (context) {
+    return new ArcSeekBarDemoPage();
+  },
 };
