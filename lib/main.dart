@@ -5,6 +5,7 @@ import 'package:gsy_flutter_demo/widget/anim_progress_img_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/anim_scan_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/arc_seek_bar_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/bottom_anim_nav_page.dart';
+import 'package:gsy_flutter_demo/widget/canvas_click_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/index_stack_drag_card_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/index_stack_drag_card_demo_page2.dart';
 import 'package:gsy_flutter_demo/widget/rich_text_demo_page2.dart';
@@ -303,5 +304,7 @@ Map<String, WidgetBuilder> routers = {
   "一个国外友人很惊艳的动画效果": (context) {
     return new AnimBubbleGumDemoPage();
   },
-
+  "纯 Canvas 绘制闹钟": (context) {
+    return new CanvasClickDemoPage();
+  },
 };
