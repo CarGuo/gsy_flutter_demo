@@ -2,27 +2,35 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:vector_math/vector_math_64.dart' as vector;
 
 class CanvasClickDemoPage extends StatefulWidget {
   @override
   _CanvasClickDemoPageState createState() => _CanvasClickDemoPageState();
 }
 
-class _CanvasClickDemoPageState extends State<CanvasClickDemoPage> {
+class _CanvasClickDemoPageState extends State<CanvasClickDemoPage>
+    with SingleTickerProviderStateMixin {
   Timer timer;
+
+  AnimationController controller;
+
+  Animation animation;
 
   @override
   void initState() {
     timer = Timer.periodic(Duration(milliseconds: 800), (_) {
       setState(() {});
     });
+    controller = new AnimationController(
+        vsync: this, duration: Duration(milliseconds: 100));
+    animation = Tween(begin: 0.0, end: 0.0).animate(controller);
     super.initState();
   }
 
   @override
   void dispose() {
     timer.cancel();
+    controller.dispose();
     super.dispose();
   }
 
@@ -35,14 +43,32 @@ class _CanvasClickDemoPageState extends State<CanvasClickDemoPage> {
         ),
         body: Container(
           child: Center(
-            child: SizedBox(
-              width: 300,
-              height: 300,
-              child: CustomPaint(
-                painter: ClockPainter(
-                  hour: time.hour,
-                  minute: time.minute,
-                  second: time.second,
+            child: DebounceButton(
+              onTap: () {
+                if (controller.isAnimating) {
+                  animation = Tween(begin: 0.0, end: 0.0).animate(controller);
+                  controller.stop();
+                  setState(() {});
+                } else {
+                  CurvedAnimation curvedAnimation = CurvedAnimation(
+                      parent: controller, curve: Curves.bounceInOut);
+                  animation = Tween(begin: -0.01 * pi, end: 0.01 * pi)
+                      .animate(curvedAnimation);
+                  controller.repeat(reverse: true);
+                }
+              },
+              child: RotationTransition(
+                turns: animation,
+                child: SizedBox(
+                  width: 300,
+                  height: 300,
+                  child: CustomPaint(
+                    painter: ClockPainter(
+                      hour: time.hour,
+                      minute: time.minute,
+                      second: time.second,
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -384,4 +410,50 @@ class ClockPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(CustomPainter oldDelegate) => true;
+}
+
+class DebounceButton extends StatefulWidget {
+  final Widget child;
+  final GestureTapCallback onTap;
+  final double radius;
+
+  DebounceButton({this.child, this.onTap, this.radius = 0});
+
+  @override
+  _DebounceButtonState createState() => _DebounceButtonState();
+}
+
+class _DebounceButtonState extends State<DebounceButton> {
+  Duration durationTime = Duration(milliseconds: 500);
+  Timer timer;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    timer?.cancel();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      radius: widget.radius,
+      borderRadius: BorderRadius.circular(widget.radius),
+      onTap: () {
+        setState(() {
+          if (timer == null) {
+            widget?.onTap?.call();
+            timer = new Timer(durationTime, () {
+              timer = null;
+            });
+          }
+        });
+      },
+      child: widget.child,
+    );
+  }
 }
