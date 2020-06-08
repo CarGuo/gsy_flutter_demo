@@ -308,7 +308,7 @@ Map<String, WidgetBuilder> routers = {
   "纯 Canvas 绘制闹钟": (context) {
     return new CanvasClickDemoPage();
   },
-  "新的联动效果": (context) {
+  "类似 boss 直聘我的页面联动效果": (context) {
     return new LinkSliverDemoPage();
   },
 };
