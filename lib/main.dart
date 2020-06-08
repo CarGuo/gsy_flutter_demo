@@ -8,6 +8,7 @@ import 'package:gsy_flutter_demo/widget/bottom_anim_nav_page.dart';
 import 'package:gsy_flutter_demo/widget/canvas_click_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/index_stack_drag_card_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/index_stack_drag_card_demo_page2.dart';
+import 'package:gsy_flutter_demo/widget/link_sliver/link_sliver_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/rich_text_demo_page2.dart';
 import 'package:gsy_flutter_demo/widget/scroll_inner_content_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/align_demo_page.dart';
@@ -306,5 +307,8 @@ Map<String, WidgetBuilder> routers = {
   },
   "纯 Canvas 绘制闹钟": (context) {
     return new CanvasClickDemoPage();
+  },
+  "新的联动效果": (context) {
+    return new LinkSliverDemoPage();
   },
 };
