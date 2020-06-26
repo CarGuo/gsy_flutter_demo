@@ -19,7 +19,7 @@
 
 [![](http://img.cdn.guoshuyu.cn/WechatIMG65.jpeg)](https://item.jd.com/12883054.html)
 
-![公众号](http://img.cdn.guoshuyu.cn/WeChat-Code)
+![公众号](http://img.cdn.guoshuyu.cn/wechat_qq.png)
 
 ### 已有例子
 
