@@ -9,7 +9,7 @@
 >
 > **运行须知：配置好Flutter开发环境(目前Flutter SDK 版本 *1.12* 以上版本)。**
 >
-> **[如果克隆太慢，可尝试码云地址下载。](https://gitee.com/CarGuo/GSYFlutterDemo)**
+> **[如果克隆太慢或者图片看不到，可尝试从码云地址下载](https://gitee.com/CarGuo/GSYFlutterDemo)**
 
 | 公众号   | 掘金     |  知乎    |  CSDN   |   简书   
 |---------|---------|--------- |---------|---------|
