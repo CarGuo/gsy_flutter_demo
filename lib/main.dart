@@ -6,6 +6,7 @@ import 'package:gsy_flutter_demo/widget/anim_scan_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/arc_seek_bar_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/bottom_anim_nav_page.dart';
 import 'package:gsy_flutter_demo/widget/canvas_click_demo_page.dart';
+import 'package:gsy_flutter_demo/widget/drag_img_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/index_stack_drag_card_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/index_stack_drag_card_demo_page2.dart';
 import 'package:gsy_flutter_demo/widget/link_sliver/link_sliver_demo_page.dart';
@@ -310,5 +311,8 @@ Map<String, WidgetBuilder> routers = {
   },
   "类似 boss 直聘我的页面联动效果": (context) {
     return new LinkSliverDemoPage();
+  },
+  "结合 Matrix 的拖拽": (context) {
+    return new DragImgDemoPage();
   },
 };
