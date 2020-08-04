@@ -70,6 +70,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    print("######## ${ Cat.black.name}");
     return MaterialApp(
       title: 'GSY Flutter Demo',
       theme: ThemeData(
@@ -316,3 +317,26 @@ Map<String, WidgetBuilder> routers = {
     return new DragImgDemoPage();
   },
 };
+
+
+enum Cat {
+  black,
+  white
+}
+
+extension CatExtension on Cat {
+  String get name {
+    switch (this) {
+      case Cat.black:
+        return 'Mr Black Cat';
+      case Cat.white:
+        return 'Ms White Cat';
+      default:
+        return null;
+    }
+  }
+
+  void talk() {
+    print('meow');
+  }
+}
