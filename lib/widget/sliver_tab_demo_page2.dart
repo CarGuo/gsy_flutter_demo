@@ -109,7 +109,7 @@ class _SliverTabDemoPageState extends State<SliverTabDemoPage2>
           return <Widget>[
             SliverOverlapAbsorber(
               handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
-              child: SliverPersistentHeader(
+              sliver: SliverPersistentHeader(
                 pinned: true,
                 delegate: GSYSliverHeaderDelegate(
                     maxHeight: maxHeight,
