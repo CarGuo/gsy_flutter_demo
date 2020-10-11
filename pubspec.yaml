@@ -14,7 +14,7 @@ description: A new Flutter application by gsy
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.6.0 <3.0.0"
+  sdk: ">=2.8.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -22,8 +22,8 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^0.1.2
-  scroll_to_index: ^1.0.1
+  cupertino_icons: ^1.0.0
+  scroll_to_index: ^1.0.6
   transformer_page_view: ^0.1.6
   simple_animations : 1.3.4
   matrix_gesture_detector : 0.1.0
