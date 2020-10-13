@@ -101,9 +101,11 @@ class _ClickAnimationPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     init(size);
-    if (Platform.isAndroid == true || Platform.isIOS == true) {
-      canvas.drawColor(Colors.black, BlendMode.clear);
-    }
+    try {
+      if (Platform.isAndroid == true || Platform.isIOS == true) {
+        canvas.drawColor(Colors.black, BlendMode.clear);
+      }
+    } catch (e) {}
     canvas.save();
     canvas.translate(paintWidth / 2, paintHeight / 2);
 

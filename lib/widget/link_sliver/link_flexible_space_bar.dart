@@ -3,7 +3,6 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 
 class LinkFlexibleSpaceBar extends StatefulWidget {
-
   const LinkFlexibleSpaceBar({
     Key key,
     this.title,
@@ -32,7 +31,6 @@ class LinkFlexibleSpaceBar extends StatefulWidget {
   final List<StretchMode> stretchModes;
 
   final EdgeInsetsGeometry titlePadding;
-
 
   @override
   _LinkFlexibleSpaceBarState createState() => _LinkFlexibleSpaceBarState();
@@ -137,8 +135,8 @@ class _LinkFlexibleSpaceBarState extends State<LinkFlexibleSpaceBar> {
                       color: Colors.transparent,
                     ),
                     filter: ui.ImageFilter.blur(
-                      sigmaX: blurAmount,
-                      sigmaY: blurAmount,
+                      sigmaX: blurAmount ?? 0,
+                      sigmaY: blurAmount ?? 0,
                     ))));
           }
         }
@@ -153,8 +151,7 @@ class _LinkFlexibleSpaceBarState extends State<LinkFlexibleSpaceBar> {
           case TargetPlatform.iOS:
             title = widget.title;
             break;
-          case TargetPlatform.fuchsia:
-          case TargetPlatform.android:
+          default:
             title = Semantics(
               namesRoute: true,
               child: widget.title,

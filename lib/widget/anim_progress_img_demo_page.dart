@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'dart:math' as Math;
 import 'dart:ui' as ui;
 
@@ -156,13 +157,16 @@ class AnimProgressPainter extends CustomPainter {
       final Rect arcRect =
           Rect.fromCircle(center: Offset.zero, radius: outRadius - 10);
 
-      paint.shader =
-          RadialGradient(tileMode: TileMode.mirror, radius: 0.1, colors: [
-        Colors.transparent,
-        Colors.white.withAlpha((100 * animatorValue).toInt()),
-        Colors.white.withAlpha((255 * animatorValue).toInt()),
-        Colors.transparent
-      ]).createShader(arcRect);
+      try {
+        if (Platform.isAndroid == true || Platform.isIOS == true)
+          paint.shader =
+              RadialGradient(tileMode: TileMode.mirror, radius: 0.1, colors: [
+            Colors.transparent,
+            Colors.white.withAlpha((100 * animatorValue).toInt()),
+            Colors.white.withAlpha((255 * animatorValue).toInt()),
+            Colors.transparent
+          ]).createShader(arcRect);
+      } catch (e) {}
 
       canvas.drawCircle(Offset(0, 0),
           innRadius + (outRadius - innRadius - 3) * animatorValue, paint);

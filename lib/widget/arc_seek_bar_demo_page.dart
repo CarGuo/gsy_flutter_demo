@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:math';
 import 'dart:ui';
 
@@ -229,8 +230,10 @@ class ArcSeekBarPainter extends CustomPainter {
       pos[i] = startPos + (distance * i);
     }
     var sweepGradient = SweepGradient(colors: arcColors, stops: pos);
-
-    arcPaint.shader = sweepGradient.createShader(Offset.zero & size);
+    try {
+      if (Platform.isIOS == true || Platform.isAndroid == true)
+        arcPaint.shader = sweepGradient.createShader(Offset.zero & size);
+    } catch (e) {}
   }
 
   void draw(Canvas canvas) {
