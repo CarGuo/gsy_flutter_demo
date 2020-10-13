@@ -1,7 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:simple_animations/simple_animations/controlled_animation.dart';
-import 'package:simple_animations/simple_animations/multi_track_tween.dart';
+import 'package:simple_animations/simple_animations.dart';
 
 class AnimBgDemoPage extends StatelessWidget {
   @override
