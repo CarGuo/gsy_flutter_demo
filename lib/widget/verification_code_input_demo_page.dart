@@ -164,7 +164,7 @@ class VerCodeInput extends StatefulWidget {
     // For example, a code input with a number keyboard type probably doesn't
     // want to allow decimal separators or signs.
     if (keyboardType == TextInputType.number) {
-      formatters.add(WhitelistingTextInputFormatter(RegExp('^[0-9]*\$')));
+      formatters.add(FilteringTextInputFormatter.digitsOnly);
     }
 
     return formatters;
