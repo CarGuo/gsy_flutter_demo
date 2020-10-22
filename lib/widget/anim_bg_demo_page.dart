@@ -1,6 +1,9 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:simple_animations/simple_animations.dart';
+import 'package:supercharged/supercharged.dart';
+
+enum _ColorTween { color1, color2 }
 
 class AnimBgDemoPage extends StatelessWidget {
   @override
@@ -62,11 +65,10 @@ class AnimatedWave extends StatelessWidget {
       return Container(
         height: height,
         width: constraints.biggest.width,
-        child: ControlledAnimation(
-            playback: Playback.LOOP,
-            duration: Duration(milliseconds: (5000 / speed).round()),
-            tween: Tween(begin: 0.0, end: 2 * pi),
-            builder: (context, value) {
+        child: LoopAnimation<double>(
+            duration: (5000 / speed).round().milliseconds,
+            tween: 0.0.tweenTo(2 * pi),
+            builder: (context, child, value) {
               return CustomPaint(
                 foregroundPainter: CurvePainter(value + offset),
               );
@@ -112,24 +114,31 @@ class CurvePainter extends CustomPainter {
 class AnimatedBackground extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final tween = MultiTrackTween([
-      Track("color1").add(Duration(seconds: 3),
-          ColorTween(begin: Color(0xffD38312), end: Colors.lightBlue.shade900)),
-      Track("color2").add(Duration(seconds: 3),
-          ColorTween(begin: Color(0xffA83279), end: Colors.blue.shade600))
-    ]);
+    final tween = MultiTween<_ColorTween>()
+      ..add(
+        _ColorTween.color1,
+        Color(0xffD38312).tweenTo(Colors.lightBlue.shade900),
+        3.seconds,
+      )
+      ..add(
+        _ColorTween.color2,
+        Color(0xffA83279).tweenTo(Colors.blue.shade600),
+        3.seconds,
+      );
 
-    return ControlledAnimation(
-      playback: Playback.MIRROR,
+    return MirrorAnimation<MultiTweenValues<_ColorTween>>(
       tween: tween,
       duration: tween.duration,
-      builder: (context, animation) {
+      builder: (context, child, value) {
         return Container(
           decoration: BoxDecoration(
               gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
-                  colors: [animation["color1"], animation["color2"]])),
+                  colors: [
+                value.get<Color>(_ColorTween.color1),
+                value.get<Color>(_ColorTween.color2)
+              ])),
         );
       },
     );
