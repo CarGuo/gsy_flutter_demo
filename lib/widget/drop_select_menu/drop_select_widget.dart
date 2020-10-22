@@ -87,7 +87,7 @@ class DropSelectMenuContainer extends StatefulWidget {
 
   static DropSelectController of(BuildContext context) {
     final _DropSelectMenuInherited scope =
-        context.inheritFromWidgetOfExactType(_DropSelectMenuInherited);
+        context.dependOnInheritedWidgetOfExactType<_DropSelectMenuInherited>();
     return scope?.controller;
   }
 }

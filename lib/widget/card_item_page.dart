@@ -65,7 +65,7 @@ class CardItemPage extends StatelessWidget {
     double textSize = 15.0 * MediaQuery.of(context).size.width / 414.0;
 
     /// 注意，这是在 data.textScaleFactor = 1 的情况下
-    var data = MediaQueryData.fromWindow(WidgetsBinding.instance.window);
+    //var data = MediaQueryData.fromWindow(WidgetsBinding.instance.window);
 
     return Card(
       margin: EdgeInsets.all(5),

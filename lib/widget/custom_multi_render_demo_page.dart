@@ -152,7 +152,7 @@ class ContentItem extends StatelessWidget {
               text,
               style: Theme.of(context)
                   .textTheme
-                  .title
+                  .headline6
                   .copyWith(color: Colors.white),
             ),
           ),

@@ -61,7 +61,6 @@ class BubbleDemoPage extends StatelessWidget {
       return getY(button2Key) +
           getHeight(button2Key) / 2 -
           MediaQueryData.fromWindow(WidgetsBinding.instance.window).padding.top;
-      ;
     } else {
       return getY(button2Key) + getHeight(button2Key) / 2;
     }

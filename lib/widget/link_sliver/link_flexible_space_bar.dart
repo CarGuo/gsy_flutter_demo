@@ -46,8 +46,9 @@ class _LinkFlexibleSpaceBarState extends State<LinkFlexibleSpaceBar> {
         return false;
       case TargetPlatform.iOS:
         return true;
+      default:
+        return null;
     }
-    return null;
   }
 
   Alignment _getTitleAlignment(bool effectiveCenterTitle) {
@@ -172,7 +173,7 @@ class _LinkFlexibleSpaceBarState extends State<LinkFlexibleSpaceBar> {
 
         final double opacity = settings.toolbarOpacity;
         if (opacity > 0.0) {
-          TextStyle titleStyle = theme.primaryTextTheme.title;
+          TextStyle titleStyle = theme.primaryTextTheme.headline6;
           titleStyle =
               titleStyle.copyWith(color: titleStyle.color.withOpacity(opacity));
           final bool effectiveCenterTitle = _getEffectiveCenterTitle(theme);
@@ -195,11 +196,6 @@ class _LinkFlexibleSpaceBarState extends State<LinkFlexibleSpaceBar> {
 
           final Alignment titleAlignment =
               _getTitleAlignment(effectiveCenterTitle);
-
-          double statusBarHeight =
-              MediaQueryData.fromWindow(WidgetsBinding.instance.window)
-                  .padding
-                  .top;
 
           children.add(
             Container(

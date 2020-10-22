@@ -83,7 +83,7 @@ class _BottomAnimNavPageState extends State<BottomAnimNavPage>
                                               (index == this.index) ? 5 : 10),
                                       child: InkWell(
                                         onTap: () {
-                                          print("##### ${index}");
+                                          print("##### $index");
                                         },
                                         focusColor: Colors.transparent,
                                         hoverColor: Colors.transparent,

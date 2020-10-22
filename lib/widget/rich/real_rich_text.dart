@@ -1,4 +1,4 @@
-import 'dart:ui' as ui show Codec, Image;
+import 'dart:ui' as ui show Image;
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';

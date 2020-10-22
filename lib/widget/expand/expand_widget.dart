@@ -68,9 +68,9 @@ class ExpandableController extends ValueNotifier<bool> {
   static ExpandableController of(BuildContext context,
       {bool rebuildOnChange = true}) {
     final notifier = rebuildOnChange
-        ? context.inheritFromWidgetOfExactType(_ExpandableInheritedNotifier)
-        : context.ancestorWidgetOfExactType(_ExpandableInheritedNotifier);
-    return (notifier as _ExpandableInheritedNotifier)?.notifier;
+        ? context.dependOnInheritedWidgetOfExactType<_ExpandableInheritedNotifier>()
+        : context.findAncestorWidgetOfExactType<_ExpandableInheritedNotifier>();
+    return (notifier)?.notifier;
   }
 }
 

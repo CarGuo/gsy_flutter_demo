@@ -464,10 +464,10 @@ class BookPainter extends CustomPainter {
     int deepOffset = 1; //深色端的偏移值
     int lightOffset = -30; //浅色端的偏移值
     var viewDiagonalLength = _hypot(viewWidth, viewHeight); //view对角线长度
-    double midpoint_ce = (c.x + e.x) / 2; //ce中点
-    double midpoint_jh = (j.y + h.y) / 2; //jh中点
+    double midpointCe = (c.x + e.x) / 2; //ce中点
+    double midpointJh = (j.y + h.y) / 2; //jh中点
     double minDisToControlPoint = Math.min(
-        (midpoint_ce - e.x).abs(), (midpoint_jh - h.y).abs()); //中点到控制点的最小值
+        (midpointCe - e.x).abs(), (midpointJh - h.y).abs()); //中点到控制点的最小值
 
     double left;
     double right;
@@ -662,7 +662,7 @@ class BookPainter extends CustomPainter {
     canvas.drawParagraph(paragraph, offset);
   }
 
-  _drawTestPoint() {
+  //_drawTestPoint() {
 //    _drawText(canvas, "a",  Colors.red, size.width, Offset(a.x, a.y),
 //        textAlign: TextAlign.left, fontSize: 25);
 //    _drawText(canvas, "f",  Colors.red, size.width, Offset(f.x, f.y),
@@ -689,7 +689,7 @@ class BookPainter extends CustomPainter {
 //        textAlign: TextAlign.left, fontSize: 25);
 //    _drawText(canvas, "i",  Colors.red, size.width, Offset(i.x, i.y),
 //        textAlign: TextAlign.left, fontSize: 25);
-  }
+ // }
 
   num _hypot(num x, num y) {
     var first = x.abs();

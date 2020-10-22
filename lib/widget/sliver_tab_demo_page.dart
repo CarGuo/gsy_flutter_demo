@@ -94,8 +94,8 @@ class _SliverTabDemoPageState extends State<SliverTabDemoPage>
                   maxHeight: maxHeight,
                   minHeight: minHeight,
                   changeSize: true,
+                  vSync: this,
                   snapConfig: FloatingHeaderSnapConfiguration(
-                    vsync: this,
                     curve: Curves.bounceInOut,
                     duration: const Duration(milliseconds: 10),
                   ),
@@ -136,12 +136,14 @@ class GSYSliverHeaderDelegate extends SliverPersistentHeaderDelegate {
       @required this.snapConfig,
       this.child,
       this.builder,
+      this.vSync,
       this.changeSize = false});
 
   final double minHeight;
   final double maxHeight;
   final Widget child;
   final Builder builder;
+  final TickerProvider vSync;
   final bool changeSize;
   final FloatingHeaderSnapConfiguration snapConfig;
   AnimationController animationController;
@@ -151,6 +153,10 @@ class GSYSliverHeaderDelegate extends SliverPersistentHeaderDelegate {
 
   @override
   double get maxExtent => math.max(maxHeight, minHeight);
+
+
+  @override
+  TickerProvider get vsync => vSync;
 
   @override
   Widget build(
