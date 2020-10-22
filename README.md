@@ -7,7 +7,7 @@
 
 > 目前开始逐步补全完善，主要提供一些有用或者有趣的例子，如果你也有好例子，环境提交 PR 。
 >
-> **运行须知：配置好Flutter开发环境(目前Flutter SDK 版本 *1.12* 以上版本)。**
+> **运行须知：配置好Flutter开发环境(目前Flutter SDK 版本 *1.22* 以上版本)。**
 >
 > **[如果克隆太慢或者图片看不到，可尝试从码云地址下载](https://gitee.com/CarGuo/GSYFlutterDemo)**
 
@@ -24,6 +24,7 @@
 ### 已有例子
 
 ```
+
 Map<String, WidgetBuilder> routers = {
   "文本输入框简单的 Controller": (context) {
     return new ControllerDemoPage();
@@ -207,6 +208,15 @@ Map<String, WidgetBuilder> routers = {
   },
   "一个国外友人很惊艳的动画效果": (context) {
     return new AnimBubbleGumDemoPage();
+  },
+  "纯 Canvas 绘制闹钟": (context) {
+    return new CanvasClickDemoPage();
+  },
+  "类似 boss 直聘我的页面联动效果": (context) {
+    return new LinkSliverDemoPage();
+  },
+  "结合 Matrix 的拖拽": (context) {
+    return new DragImgDemoPage();
   },
 };
 
