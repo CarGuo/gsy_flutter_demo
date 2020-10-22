@@ -81,8 +81,8 @@ class RealRichText extends Text {
     if (style == null || style.inherit)
       effectiveTextStyle = defaultTextStyle.style.merge(style);
     if (MediaQuery.boldTextOverride(context))
-      effectiveTextStyle = effectiveTextStyle
-          .merge(TextStyle(fontWeight: FontWeight.bold));
+      effectiveTextStyle =
+          effectiveTextStyle.merge(TextStyle(fontWeight: FontWeight.bold));
 
     TextSpan textSpan = TextSpan(
         style: effectiveTextStyle,
@@ -303,7 +303,7 @@ class _RealRichRenderParagraph extends RenderParagraph {
   @override
   void attach(covariant Object owner) {
     super.attach(owner);
-    text.children.forEach((textSpan) {
+    (text as TextSpan).children.forEach((textSpan) {
       if (textSpan is ImageSpan) {
         textSpan.imageResolver.addListening();
       }
@@ -313,7 +313,7 @@ class _RealRichRenderParagraph extends RenderParagraph {
   @override
   void detach() {
     super.detach();
-    text.children.forEach((textSpan) {
+    (text as TextSpan).children.forEach((textSpan) {
       if (textSpan is ImageSpan) {
         textSpan.imageResolver.stopListening();
       }
@@ -337,7 +337,7 @@ class _RealRichRenderParagraph extends RenderParagraph {
     canvas.save();
 
     int textOffset = 0;
-    for (TextSpan textSpan in text.children) {
+    for (TextSpan textSpan in (text as TextSpan).children) {
       if (textSpan is ImageSpan) {
         // this is the top-center point of the ImageSpan
         Offset offsetForCaret = getOffsetForCaret(
