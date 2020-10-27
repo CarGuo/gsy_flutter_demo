@@ -1,8 +1,6 @@
-import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-const int _kIndeterminateLinearDuration = 1800;
 
 class ColorProgressDemoPage extends StatefulWidget {
   @override
