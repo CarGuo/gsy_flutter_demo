@@ -11,7 +11,7 @@ class _ColorProgressDemoPageState extends State<ColorProgressDemoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: new Text("data"),
+        title: new Text("ColorProgressDemoPage"),
       ),
       backgroundColor: Colors.grey,
       body: Center(
