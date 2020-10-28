@@ -218,6 +218,9 @@ Map<String, WidgetBuilder> routers = {
   "结合 Matrix 的拖拽": (context) {
     return new DragImgDemoPage();
   },
+  "彩色进度条": (context) {
+    return new ColorProgressDemoPage();
+  },
 };
 
 ```
