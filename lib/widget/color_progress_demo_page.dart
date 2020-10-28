@@ -18,25 +18,33 @@ class _ColorProgressDemoPageState extends State<ColorProgressDemoPage> {
         child: Container(
           color: Colors.grey,
           alignment: Alignment.center,
+          margin: EdgeInsets.symmetric(horizontal: 50),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               ColorProgress(
                 colorList: colorList1,
-                backgroundColor: Color.fromARGB(255, 137, 106, 35),
+                backgroundColor: bgColor1,
+                bgBorder: bgBorder1,
+                value: 0.5,
               ),
               SizedBox(
                 height: 10,
               ),
               ColorProgress(
                 colorList: colorList2,
-                backgroundColor: Color.fromARGB(255, 152, 20, 2),
+                backgroundColor: bgColor2,
+                bgBorder: bgBorder2,
+                value: 0.3,
               ),
               SizedBox(
                 height: 10,
               ),
               ColorProgress(
                 colorList: colorList3,
+                backgroundColor: bgColor3,
+                bgBorder: bgBorder3,
+                value: 1,
               ),
             ],
           ),
@@ -47,16 +55,24 @@ class _ColorProgressDemoPageState extends State<ColorProgressDemoPage> {
 }
 
 class ColorProgress extends StatefulWidget {
-  final Color backgroundColor;
+  final Gradient backgroundColor;
   final List<Gradient> colorList;
+  final Border bgBorder;
+  final double value;
 
-  ColorProgress({this.colorList, this.backgroundColor = Colors.black});
+  ColorProgress(
+      {@required this.colorList,
+      @required this.backgroundColor,
+      @required this.value,
+      @required this.bgBorder});
 
   @override
   _ColorProgressState createState() => _ColorProgressState();
 }
 
 class _ColorProgressState extends State<ColorProgress> {
+  double _value = 0;
+
   List<Widget> renderColorList() {
     List<Widget> widgetList = new List();
     widget.colorList?.forEach((element) {
@@ -75,35 +91,62 @@ class _ColorProgressState extends State<ColorProgress> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration(seconds: 0), () {
+      setState(() {
+        _value = widget.value;
+      });
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    var borderRadius = BorderRadius.all(Radius.circular(8));
     return ClipRRect(
       borderRadius: BorderRadius.all(Radius.circular(8)),
       child: Container(
-        width: 177,
-        height: 5,
         decoration: BoxDecoration(
-          color: widget.backgroundColor,
+          border: widget.bgBorder,
+          borderRadius: borderRadius,
         ),
-        child: Stack(
-          children: [
-            ClipRect(
-              child: OverflowBox(
-                minHeight: 10,
-                maxHeight: 10,
-                alignment: Alignment.centerLeft,
-                child: Container(
-                  child: Container(
-                    width: 100,
-                    child: Stack(
-                      overflow: Overflow.visible,
-                      alignment: Alignment.center,
-                      children: renderColorList(),
-                    ),
-                  ),
-                ),
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            return Container(
+              height: 5,
+              decoration: BoxDecoration(
+                gradient: widget.backgroundColor,
+                borderRadius: borderRadius,
               ),
-            )
-          ],
+              clipBehavior: Clip.antiAliasWithSaveLayer,
+              child: Stack(
+                children: [
+                  ClipRect(
+                    child: OverflowBox(
+                      minHeight: 10,
+                      maxHeight: 10,
+                      alignment: Alignment.centerLeft,
+                      child: Container(
+                        child: AnimatedContainer(
+                          // Use the properties stored in the State class.
+                          width: constraints.maxWidth * _value,
+                          duration: Duration(seconds: 2),
+                          curve: Curves.fastOutSlowIn,
+                          child: Container(
+                            child: Stack(
+                              overflow: Overflow.visible,
+                              alignment: Alignment.center,
+                              children: renderColorList(),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            );
+          },
         ),
       ),
     );
@@ -244,3 +287,57 @@ List<Gradient> colorList3 = [
     ],
   )
 ];
+
+var bgColor1 = LinearGradient(
+  begin: Alignment(0.99899, 0.5),
+  end: Alignment(0, 0.5),
+  stops: [
+    0,
+    1,
+  ],
+  colors: [
+    Color.fromARGB(255, 183, 145, 57),
+    Color.fromARGB(255, 137, 106, 35),
+  ],
+);
+
+var bgColor2 = LinearGradient(
+  begin: Alignment(1, 0.5),
+  end: Alignment(0, 0.5),
+  stops: [
+    0,
+    1,
+  ],
+  colors: [
+    Color.fromARGB(255, 92, 8, 1),
+    Color.fromARGB(255, 152, 20, 2),
+  ],
+);
+
+var bgColor3 = LinearGradient(
+  begin: Alignment(1, 0.5),
+  end: Alignment(0, 0.5),
+  stops: [
+    0,
+    1,
+  ],
+  colors: [
+    Color.fromARGB(255, 0, 0, 0),
+    Color.fromARGB(255, 28, 28, 28),
+  ],
+);
+
+var bgBorder1 = Border.all(
+  width: 1,
+  color: Color.fromARGB(58, 92, 64, 18),
+);
+
+var bgBorder2 = Border.all(
+  width: 1,
+  color: Color.fromARGB(69, 255, 124, 124),
+);
+
+var bgBorder3 = Border.all(
+  width: 1,
+  color: Color.fromARGB(69, 113, 113, 113),
+);
