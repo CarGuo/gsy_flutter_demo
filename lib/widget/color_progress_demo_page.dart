@@ -50,6 +50,15 @@ class _ColorProgressDemoPageState extends State<ColorProgressDemoPage> {
                 height: 10,
               ),
               ProgressPainterAnim(
+                colorList: colorList1,
+                backgroundColor: bgColor1,
+                bgBorder: bgBorder1,
+                value: 0.8,
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              ProgressPainterAnim(
                 colorList: colorList2,
                 backgroundColor: bgColor2,
                 bgBorder: bgBorder2,
@@ -59,10 +68,10 @@ class _ColorProgressDemoPageState extends State<ColorProgressDemoPage> {
                 height: 10,
               ),
               ProgressPainterAnim(
-                colorList: colorList1,
-                backgroundColor: bgColor1,
-                bgBorder: bgBorder1,
-                value: 0.8,
+                colorList: colorList3,
+                backgroundColor: bgColor3,
+                bgBorder: bgBorder3,
+                value: 0.7,
               ),
             ],
           ),
@@ -406,7 +415,7 @@ class _ProgressPainterAnimState extends State<ProgressPainterAnim>
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 10,
+      height: 6,
       child: LayoutBuilder(
         builder: (context, size) {
           return SizedBox(
@@ -443,7 +452,7 @@ class ProgressPainter extends CustomPainter {
     Paint paint = new Paint();
 
     var radiusOut = size.height / 2;
-    var radiusInner = size.height / 3;
+    var radiusInner = size.height / 2;
 
     paint..shader = backgroundColor.createShader(Offset.zero & size);
     canvas.drawRRect(
@@ -451,12 +460,16 @@ class ProgressPainter extends CustomPainter {
             0, 0, size.width, size.height, Radius.circular(radiusOut)),
         paint);
 
+    canvas.clipRRect(
+      RRect.fromLTRBR(
+          0, 0, size.width, size.height, Radius.circular(radiusOut)),
+    );
     colorList.forEach((element) {
       paint
         ..shader = element
             .createShader(Offset.zero & Size(size.width * value, size.height));
       canvas.drawRRect(
-        RRect.fromLTRBAndCorners(0, 0, size.width * value, size.height,
+        RRect.fromLTRBAndCorners(0, -5, size.width * value, size.height + 5,
             topLeft: Radius.circular(radiusOut),
             bottomLeft: Radius.circular(radiusOut),
             topRight: Radius.circular(radiusInner),
