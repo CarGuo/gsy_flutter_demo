@@ -46,6 +46,24 @@ class _ColorProgressDemoPageState extends State<ColorProgressDemoPage> {
                 bgBorder: bgBorder3,
                 value: 1,
               ),
+              SizedBox(
+                height: 10,
+              ),
+              ProgressPainterAnim(
+                colorList: colorList2,
+                backgroundColor: bgColor2,
+                bgBorder: bgBorder2,
+                value: 0.4,
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              ProgressPainterAnim(
+                colorList: colorList1,
+                backgroundColor: bgColor1,
+                bgBorder: bgBorder1,
+                value: 0.8,
+              ),
             ],
           ),
         ),
@@ -142,7 +160,7 @@ class _ColorProgressState extends State<ColorProgress> {
                         ),
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
             );
@@ -341,3 +359,116 @@ var bgBorder3 = Border.all(
   width: 1,
   color: Color.fromARGB(69, 113, 113, 113),
 );
+
+class ProgressPainterAnim extends StatefulWidget {
+  final Gradient backgroundColor;
+  final List<Gradient> colorList;
+  final Border bgBorder;
+  final double value;
+
+  ProgressPainterAnim(
+      {@required this.colorList,
+      @required this.backgroundColor,
+      @required this.value,
+      @required this.bgBorder});
+
+  @override
+  _ProgressPainterAnimState createState() => _ProgressPainterAnimState();
+}
+
+class _ProgressPainterAnimState extends State<ProgressPainterAnim>
+    with SingleTickerProviderStateMixin {
+  AnimationController controller;
+  Animation<double> animation;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 3),
+    );
+    CurvedAnimation curvedAnimation =
+        CurvedAnimation(parent: controller, curve: Curves.bounceInOut)
+          ..addListener(() {
+            setState(() {});
+          });
+    animation = Tween(begin: 0.0, end: widget.value).animate(curvedAnimation);
+    controller.repeat(reverse: true);
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 10,
+      child: LayoutBuilder(
+        builder: (context, size) {
+          return SizedBox(
+            width: size.maxWidth,
+            child: CustomPaint(
+              painter: ProgressPainter(
+                colorList: widget.colorList,
+                backgroundColor: widget.backgroundColor,
+                bgBorder: widget.bgBorder,
+                value: animation.value,
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+class ProgressPainter extends CustomPainter {
+  final Gradient backgroundColor;
+  final List<Gradient> colorList;
+  final Border bgBorder;
+  final double value;
+
+  ProgressPainter(
+      {@required this.colorList,
+      @required this.backgroundColor,
+      @required this.value,
+      @required this.bgBorder});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    Paint paint = new Paint();
+
+    var radiusOut = size.height / 2;
+    var radiusInner = size.height / 3;
+
+    paint..shader = backgroundColor.createShader(Offset.zero & size);
+    canvas.drawRRect(
+        RRect.fromLTRBR(
+            0, 0, size.width, size.height, Radius.circular(radiusOut)),
+        paint);
+
+    colorList.forEach((element) {
+      paint
+        ..shader = element
+            .createShader(Offset.zero & Size(size.width * value, size.height));
+      canvas.drawRRect(
+        RRect.fromLTRBAndCorners(0, 0, size.width * value, size.height,
+            topLeft: Radius.circular(radiusOut),
+            bottomLeft: Radius.circular(radiusOut),
+            topRight: Radius.circular(radiusInner),
+            bottomRight: Radius.circular(radiusInner)),
+        paint,
+      );
+    });
+
+    bgBorder.paint(canvas, Offset.zero & size,
+        borderRadius: BorderRadius.all(Radius.circular(radiusOut)));
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) => true;
+}
