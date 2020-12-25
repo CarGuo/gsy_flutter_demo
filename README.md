@@ -229,6 +229,11 @@ Map<String, WidgetBuilder> routers = {
 ![](demo.jpg)
 
 
+### 指定web地址而不是 localhost 的运行命令
+
+```
+flutter run -d web-server --web-hostname 127.0.0.1 --web-port 8989
+```
 
 ### 相关文章
 
@@ -244,3 +249,5 @@ Map<String, WidgetBuilder> routers = {
 
 
 ![](http://img.cdn.guoshuyu.cn/thanks.jpg)
+
+
