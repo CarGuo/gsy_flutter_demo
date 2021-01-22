@@ -69,7 +69,7 @@ class BubblePainter extends CustomPainter {
   ///绘制左边三角形
   void setUpLeftPath(Rect rect, Path path) {
     if (mArrowCenter) {
-      mArrowPosition = (rect.bottom - rect.top) / 2 - mArrowWidth / 2;
+      mArrowPosition = (rect.bottom - rect.top) / 2 - mArrowHeight / 2;
     }
     path.moveTo(rect.left + mArrowWidth, mArrowHeight + mArrowPosition);
     path.lineTo(rect.left + mArrowWidth, mArrowHeight + mArrowPosition);
