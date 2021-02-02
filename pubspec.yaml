@@ -25,8 +25,7 @@ dependencies:
   cupertino_icons: ^1.0.0
   scroll_to_index: ^1.0.6
   transformer_page_view: ^0.1.6
-  simple_animations: 2.2.2
-  supercharged: 1.10.0
+  simple_animations: 2.4.2
   matrix_gesture_detector : 0.1.0
   flutter_swiper : 1.1.6
 
