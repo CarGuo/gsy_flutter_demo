@@ -59,7 +59,7 @@ class _SliverListDemoPageState extends State<SliverListDemoPage>
                         child: new Container(
                           alignment: Alignment.center,
                           color: Colors.orangeAccent,
-                          child: new FlatButton(
+                          child: new TextButton(
                             onPressed: () {
                               setState(() {
                                 listCount = 30;
@@ -72,7 +72,7 @@ class _SliverListDemoPageState extends State<SliverListDemoPage>
                         child: new Container(
                           alignment: Alignment.center,
                           color: Colors.orangeAccent,
-                          child: new FlatButton(
+                          child: new TextButton(
                             onPressed: () {
                               setState(() {
                                 listCount = 4;

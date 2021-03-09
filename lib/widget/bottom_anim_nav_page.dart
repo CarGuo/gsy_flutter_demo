@@ -43,8 +43,12 @@ class _BottomAnimNavPageState extends State<BottomAnimNavPage>
           margin: EdgeInsets.only(bottom: 50),
           child: Builder(
             builder: (context) {
-              return FlatButton(
-                color: Colors.red,
+              return TextButton(
+                style: ButtonStyle(
+                  backgroundColor: ButtonStyleButton.allOrNull<Color>(
+                    Colors.red,
+                  ),
+                ),
                 onPressed: () {
                   index = 0;
                   showBottomSheet(

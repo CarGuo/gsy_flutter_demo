@@ -14,7 +14,7 @@ class SliverStickListDemoPage extends StatefulWidget {
 class _SliverStickListDemoPageState extends State<SliverStickListDemoPage> {
   ScrollController scrollController = new ScrollController();
 
-  var slivers = List<Widget>();
+  var slivers = [];
 
   ///header高度
   final double headerHeight = 60;

@@ -53,7 +53,7 @@ class _KeyBoardDemoPageState extends State<KeyBoardDemoPage> {
                 ),
                 new Expanded(
                   child: new Center(
-                    child: new FlatButton(
+                    child: new TextButton(
                       onPressed: () {
                         if (!isKeyboardShowing) {
                           /// 触摸收起键盘

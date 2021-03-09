@@ -58,7 +58,7 @@ class _AnimTipDemoPageState extends State<AnimTipDemoPage> {
           new Expanded(
             child: new Container(
               child: new Center(
-                child: new FlatButton(
+                child: new TextButton(
                   onPressed: () {
                     setState(() {
                       showTipItem = true;

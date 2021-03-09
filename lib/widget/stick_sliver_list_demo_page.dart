@@ -8,7 +8,7 @@ final stickHeader = 50.0;
 
 class StickSliverListDemoPage extends StatefulWidget {
   final List<ExpendedModel> dataList = List.generate(7, (index) {
-    return ExpendedModel(false, List(random.nextInt(100)));
+    return ExpendedModel(false, List.filled(random.nextInt(100), null));
   });
 
   @override

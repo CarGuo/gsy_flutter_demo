@@ -13,7 +13,7 @@ class DropSelectObject {
   DropSelectObject clone() {
     DropSelectObject newData = DropSelectObject();
     newData.title = title;
-    newData.children =  new List();
+    newData.children =  [];
     children?.forEach((item) {
       newData.children.add(item.clone());
     });

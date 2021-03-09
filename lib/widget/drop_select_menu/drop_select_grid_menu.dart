@@ -36,7 +36,7 @@ class _MenuListGridState<T extends DropSelectObject>
   Map<String, int> cleanOtherList = new HashMap();
 
   ///clone列表，深度拷贝，仅在确定选择后才复制到 widget.data
-  final List<T> _cloneList = List();
+  final List<T> _cloneList = [];
 
   @override
   void initState() {
@@ -106,7 +106,7 @@ class _MenuListGridState<T extends DropSelectObject>
       child: new Row(
         children: <Widget>[
           new Expanded(
-              child: new FlatButton(
+              child: new TextButton(
                   onPressed: () {
                     setState(() {
                       resetList(widget.data);
@@ -115,7 +115,7 @@ class _MenuListGridState<T extends DropSelectObject>
                   },
                   child: new Text("重置"))),
           new Expanded(
-              child: new FlatButton(
+              child: new TextButton(
                   onPressed: () {
                     controller.select(_cloneList);
                   },

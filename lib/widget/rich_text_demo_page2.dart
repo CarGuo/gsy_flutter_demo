@@ -66,12 +66,12 @@ class _RichTextDemoState2 extends State<RichTextDemoPage2> {
   }
 
   show(context, text) {
-    Scaffold.of(context).showSnackBar(SnackBar(
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text(text),
       action: SnackBarAction(
         label: 'ACTION',
         onPressed: () {
-          Scaffold.of(context).showSnackBar(SnackBar(
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text('You pressed snackbar\'s action.'),
           ));
         },

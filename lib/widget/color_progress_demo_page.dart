@@ -101,7 +101,7 @@ class _ColorProgressState extends State<ColorProgress> {
   double _value = 0;
 
   List<Widget> renderColorList() {
-    List<Widget> widgetList = new List();
+    List<Widget> widgetList = [];
     widget.colorList?.forEach((element) {
       widgetList.add(
         Container(
@@ -161,7 +161,7 @@ class _ColorProgressState extends State<ColorProgress> {
                           curve: Curves.fastOutSlowIn,
                           child: Container(
                             child: Stack(
-                              overflow: Overflow.visible,
+                              clipBehavior: Clip.none,
                               alignment: Alignment.center,
                               children: renderColorList(),
                             ),

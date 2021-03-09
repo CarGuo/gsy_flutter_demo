@@ -14,7 +14,7 @@ class _ScrollToIndexDemoPageState2 extends State<ScrollToIndexDemoPage2> {
 
   ScrollController controller = new ScrollController();
 
-  List<ItemModel> dataList = List();
+  List<ItemModel> dataList = [];
 
   @override
   void initState() {
@@ -65,7 +65,7 @@ class _ScrollToIndexDemoPageState2 extends State<ScrollToIndexDemoPage2> {
         ),
       ),
       persistentFooterButtons: <Widget>[
-        new FlatButton(
+        new TextButton(
           onPressed: () async {
             _scrollToIndex();
           },

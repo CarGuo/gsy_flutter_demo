@@ -33,7 +33,7 @@ class _StatusBarDemoPageState extends State<StatusBarDemoPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              new FlatButton(
+              new TextButton(
                 onPressed: () {
                   ///手动修改
                   setState(() {
@@ -42,13 +42,17 @@ class _StatusBarDemoPageState extends State<StatusBarDemoPage> {
                   SystemChrome.setSystemUIOverlayStyle(
                       SystemUiOverlayStyle.light);
                 },
+                style: ButtonStyle(
+                  backgroundColor: ButtonStyleButton.allOrNull<Color>(
+                    Colors.yellowAccent,
+                  ),
+                ),
                 child: new Text("Light"),
-                color: Colors.yellowAccent,
               ),
               new SizedBox(
                 width: 10,
               ),
-              new FlatButton(
+              new TextButton(
                 onPressed: () {
                   setState(() {
                     customSystemUIOverlayStyle = true;
@@ -56,8 +60,12 @@ class _StatusBarDemoPageState extends State<StatusBarDemoPage> {
                   SystemChrome.setSystemUIOverlayStyle(
                       SystemUiOverlayStyle.dark);
                 },
+                style: ButtonStyle(
+                  backgroundColor: ButtonStyleButton.allOrNull<Color>(
+                    Colors.greenAccent,
+                  ),
+                ),
                 child: new Text("Dart"),
-                color: Colors.greenAccent,
               ),
             ],
           ),

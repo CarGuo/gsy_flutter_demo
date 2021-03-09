@@ -9,7 +9,7 @@ class IndexStackDragCardDemoPage2 extends StatefulWidget {
 
 class _IndexStackDragCardDemoPage2State
     extends State<IndexStackDragCardDemoPage2> {
-  var dataList = List();
+  var dataList = [];
 
   @override
   void initState() {
@@ -43,7 +43,7 @@ class _IndexStackDragCardDemoPage2State
   }
 
   List<Widget> getCardList() {
-    List<Widget> cardList = new List();
+    List<Widget> cardList = [];
     var length = dataList.length;
     if (length > 5) {
       length = 5;
@@ -222,7 +222,7 @@ class CardContent {
 }
 
 getDataList() {
-  List<CardContent> dataList = new List();
+  List<CardContent> dataList = [];
   dataList.add(
     CardContent(
       "GSY11111",

@@ -36,10 +36,9 @@ class _MenuListExpandedState<T extends DropSelectObject>
     extends DropSelectState<DropSelectExpandedListMenu<T>> {
   Map<String, int> cleanOtherList = new HashMap();
 
-  final List<ExpandableController> _controllers =
-      new List<ExpandableController>();
+  final List<ExpandableController> _controllers = [];
 
-  final List<T> _cloneList = List();
+  final List<T> _cloneList = [];
 
   @override
   void initState() {
@@ -65,7 +64,7 @@ class _MenuListExpandedState<T extends DropSelectObject>
       child: new Row(
         children: <Widget>[
           new Expanded(
-              child: new FlatButton(
+              child: new TextButton(
                   onPressed: () {
                     setState(() {
                       resetList(widget.data);
@@ -74,7 +73,7 @@ class _MenuListExpandedState<T extends DropSelectObject>
                   },
                   child: new Text("重置"))),
           new Expanded(
-              child: new FlatButton(
+              child: new TextButton(
                   onPressed: () {
                     controller.select(_cloneList);
                   },

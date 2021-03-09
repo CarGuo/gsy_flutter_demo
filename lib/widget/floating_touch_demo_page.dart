@@ -73,7 +73,7 @@ class _FloatingTouchDemoPageState extends State<FloatingTouchDemoPage> {
       ),
       body: new Container(
         child: Center(
-          child: FlatButton(
+          child: TextButton(
               onPressed: () {
                 _showFloating();
               },

@@ -77,7 +77,7 @@ class _ScrollToIndexDemoPageState extends State<ScrollToIndexDemoPage> {
         ),
       ),
       persistentFooterButtons: <Widget>[
-        new FlatButton(
+        new TextButton(
           onPressed: () async {
             ///滑动到第13个的位置
             await controller.scrollToIndex(13,

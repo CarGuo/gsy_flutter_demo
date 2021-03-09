@@ -41,7 +41,7 @@ class _TextSizeDemoPageState extends State<TextSizeDemoPage> {
                   child: new Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      new FlatButton(
+                      new TextButton(
                         onPressed: () {
                           if (textScaleFactor > 1) {
                             setState(() {
@@ -49,19 +49,27 @@ class _TextSizeDemoPageState extends State<TextSizeDemoPage> {
                             });
                           }
                         },
-                        color: Colors.redAccent,
+                        style: ButtonStyle(
+                          backgroundColor: ButtonStyleButton.allOrNull<Color>(
+                            Colors.redAccent,
+                          ),
+                        ),
                         child: new Text("-"),
                       ),
                       new SizedBox(
                         width: 10,
                       ),
-                      new FlatButton(
+                      new TextButton(
                         onPressed: () {
                           setState(() {
                             textScaleFactor++;
                           });
                         },
-                        color: Colors.greenAccent,
+                        style: ButtonStyle(
+                          backgroundColor: ButtonStyleButton.allOrNull<Color>(
+                            Colors.greenAccent,
+                          ),
+                        ),
                         child: new Text("+"),
                       )
                     ],

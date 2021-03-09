@@ -67,7 +67,7 @@ class _ScrollListenerDemoPageState extends State<ScrollListenerDemoPage> {
         ),
       ),
       persistentFooterButtons: <Widget>[
-        new FlatButton(
+        new TextButton(
           onPressed: () {
             _scrollController.animateTo(0,
                 duration: Duration(seconds: 1), curve: Curves.bounceInOut);
@@ -75,13 +75,13 @@ class _ScrollListenerDemoPageState extends State<ScrollListenerDemoPage> {
           child: new Text("position: ${offset.floor()}"),
         ),
         new Container(width: 0.3, height: 30.0),
-        new FlatButton(
+        new TextButton(
           onPressed: () {},
           child: new Text(notify),
         ),
         new Visibility(
           visible: isEnd,
-          child: new FlatButton(
+          child: new TextButton(
             onPressed: () {},
             child: new Text("到达底部"),
           ),

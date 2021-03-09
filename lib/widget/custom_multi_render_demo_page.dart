@@ -47,8 +47,12 @@ class _CustomMultiRenderDemoPageState extends State<CustomMultiRenderDemoPage> {
         ),
       ),
       persistentFooterButtons: <Widget>[
-        new FlatButton(
-          color: Colors.amberAccent,
+        TextButton(
+          style: ButtonStyle(
+            backgroundColor: ButtonStyleButton.allOrNull<Color>(
+                Colors.amberAccent,
+            ),
+          ),
           onPressed: () {
             setState(() {
               customLayoutId.add("${customLayoutId.length}");
@@ -59,8 +63,12 @@ class _CustomMultiRenderDemoPageState extends State<CustomMultiRenderDemoPage> {
             style: TextStyle(color: Colors.white),
           ),
         ),
-        new FlatButton(
-          color: Colors.indigoAccent,
+        TextButton(
+          style: ButtonStyle(
+            backgroundColor: ButtonStyleButton.allOrNull<Color>(
+              Colors.indigoAccent,
+            ),
+          ),
           onPressed: () {
             setState(() {
               if (customLayoutId.length > 1) {

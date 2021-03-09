@@ -83,7 +83,7 @@ class _ScrollHeaderDemoPageState extends State<ScrollHeaderDemoPage>
         ),
       ),
       persistentFooterButtons: <Widget>[
-        new RaisedButton(
+        new ElevatedButton(
           onPressed: () async {
             setState(() {
               pinned = !pinned;
@@ -94,7 +94,7 @@ class _ScrollHeaderDemoPageState extends State<ScrollHeaderDemoPage>
             style: TextStyle(color: Colors.white),
           ),
         ),
-        new RaisedButton(
+        new ElevatedButton(
           onPressed: () async {
             setState(() {
               if (initLayoutExtent == 0) {
@@ -110,7 +110,7 @@ class _ScrollHeaderDemoPageState extends State<ScrollHeaderDemoPage>
             style: TextStyle(color: Colors.white),
           ),
         ),
-        new RaisedButton(
+        new ElevatedButton(
           onPressed: () async {
             setState(() {
               if (showPullDistance > 150) {

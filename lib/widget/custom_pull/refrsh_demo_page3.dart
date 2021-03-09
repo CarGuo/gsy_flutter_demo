@@ -21,7 +21,7 @@ class _RefreshDemoPageState3 extends State<RefreshDemoPage3> {
 
   bool disposed = false;
 
-  List<String> dataList = new List();
+  List<String> dataList = [];
 
   final ScrollController _scrollController = new ScrollController();
 

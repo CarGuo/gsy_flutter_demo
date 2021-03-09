@@ -11,7 +11,7 @@ final stickHeader = 50.0;
 class StickExpendDemoPage extends StatefulWidget {
   ///随机生成 tagList 的 data List 数据
   final List<ExpendedModel> tagList = List.generate(50, (index) {
-    return ExpendedModel(false, List(random.nextInt(20)));
+    return ExpendedModel(false, List.filled(random.nextInt(20), null));
   });
 
   @override

@@ -11,7 +11,7 @@ class RenderCloudWidget extends RenderBox
         RenderBoxContainerDefaultsMixin<RenderBox, RenderCloudParentData> {
   RenderCloudWidget({
     List<RenderBox> children,
-    Overflow overflow = Overflow.visible,
+    Clip overflow = Clip.none,
     double ratio,
   })  : _ratio = ratio,
         _overflow = overflow {
@@ -25,10 +25,10 @@ class RenderCloudWidget extends RenderBox
   bool _needClip = false;
 
   ///溢出
-  Overflow get overflow => _overflow;
-  Overflow _overflow;
+  Clip get overflow => _overflow;
+  Clip _overflow;
 
-  set overflow(Overflow value) {
+  set overflow(Clip value) {
     assert(value != null);
     if (_overflow != value) {
       _overflow = value;
@@ -167,7 +167,7 @@ class RenderCloudWidget extends RenderBox
   ///设置绘制默认
   @override
   void paint(PaintingContext context, Offset offset) {
-    if (!_needClip || _overflow != Overflow.clip) {
+    if (!_needClip || _overflow == Clip.none) {
       defaultPaint(context, offset);
     } else {
       context.pushClipRect(

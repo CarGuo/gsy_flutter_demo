@@ -20,10 +20,10 @@ class _SliverTabDemoPageState extends State<SliverTabDemoPage3>
   final int tabLength = 4;
   final double tabIconSize = 30;
   final List<List> dataList = [
-    List(30),
-    List(2),
-    List(8),
-    List(40),
+    List.filled(30, null),
+    List.filled(2, null),
+    List.filled(8, null),
+    List.filled(40, null),
   ];
 
   double minHeight = kToolbarHeight;

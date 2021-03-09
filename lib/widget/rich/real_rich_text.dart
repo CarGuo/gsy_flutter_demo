@@ -266,7 +266,7 @@ class _RichTextWrapper extends RichText {
       overflow: overflow,
       textScaleFactor: textScaleFactor,
       maxLines: maxLines,
-      locale: locale ?? Localizations.localeOf(context, nullOk: true),
+      locale: locale ?? Localizations.localeOf(context),
     );
   }
 }

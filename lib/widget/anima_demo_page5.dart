@@ -9,9 +9,9 @@ class AnimaDemoPage5 extends StatefulWidget {
 
 class _AnimaDemoPageState extends State<AnimaDemoPage5>
     with TickerProviderStateMixin {
-  List<String> _charList = List();
-  List<AnimationController> _controllerList = List();
-  List<CurvedAnimation> _moveAnimation = List();
+  List<String> _charList = [];
+  List<AnimationController> _controllerList =[];
+  List<CurvedAnimation> _moveAnimation = [];
 
   bool played = false;
   bool playing = false;

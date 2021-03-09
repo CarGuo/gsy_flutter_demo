@@ -12,7 +12,7 @@ class AnimScanDemoPage extends StatefulWidget {
 
 class _AnimScanDemoPageState extends State<AnimScanDemoPage>
     with TickerProviderStateMixin {
-  List<RippleCircle> rippleCircles = new List();
+  List<RippleCircle> rippleCircles = [];
 
   AnimationController animController;
   Animation animAnimation;
