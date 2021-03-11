@@ -233,6 +233,9 @@ Map<String, WidgetBuilder> routers = {
 
 ```
 flutter run -d web-server --web-hostname 127.0.0.1 --web-port 8989
+
+flutter build web --web-renderer canvaskit 指定渲染模式
+
 ```
 
 ### 相关文章
