@@ -3,6 +3,7 @@ import 'package:gsy_flutter_demo/widget/anim_bubble_gum.dart';
 import 'package:gsy_flutter_demo/widget/anim_button/anim_button_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/anim_progress_img_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/anim_scan_demo_page.dart';
+import 'package:gsy_flutter_demo/widget/anim_text_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/arc_seek_bar_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/bottom_anim_nav_page.dart';
 import 'package:gsy_flutter_demo/widget/canvas_click_demo_page.dart';
@@ -319,6 +320,9 @@ Map<String, WidgetBuilder> routers = {
   },
   "彩色进度条": (context) {
     return new ColorProgressDemoPage();
+  },
+  "第三方的动画字体": (context) {
+    return new AnimTextDemoPage();
   },
 
 };

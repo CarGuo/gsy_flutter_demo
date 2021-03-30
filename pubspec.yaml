@@ -28,6 +28,7 @@ dependencies:
   simple_animations: 2.4.2
   matrix_gesture_detector : 0.1.0
   flutter_swiper : 1.1.6
+  animated_text_kit : 4.1.1
 
 dev_dependencies:
   build_runner: ^1.6.1
@@ -77,3 +78,24 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+  fonts:
+    - family: Canterbury
+      fonts:
+        - asset: assets/Canterbury.ttf
+
+    - family: HelloStockholm
+      fonts:
+        - asset: assets/HelloStockholm.otf
+
+    - family: Horizon
+      fonts:
+        - asset: assets/Horizon.otf
+
+    - family: Bobbers
+      fonts:
+        - asset: assets/Bobbers.ttf
+
+    - family: Agne
+      fonts:
+        - asset: assets/Agne.otf
