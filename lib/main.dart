@@ -64,6 +64,7 @@ import 'package:gsy_flutter_demo/widget/text_size_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/tick_click_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/transform_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/verification_code_input_demo_page.dart';
+import 'package:gsy_flutter_demo/widget/verification_code_input_demo_page2.dart';
 import 'package:gsy_flutter_demo/widget/viewpager_demo_page.dart';
 
 void main() => runApp(MyApp());
@@ -200,6 +201,9 @@ Map<String, WidgetBuilder> routers = {
   },
   "验证码输入框": (context) {
     return new VerificationCodeInputDemoPage();
+  },
+  "验证码输入框2": (context) {
+    return new VerificationCodeInputDemoPage2();
   },
   "自定义布局展示效果": (context) {
     return new CustomMultiRenderDemoPage();
