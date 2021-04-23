@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' as W;
 import 'package:flutter/rendering.dart';
 
 class SliverListDemoPage extends StatefulWidget {
@@ -10,7 +11,6 @@ class SliverListDemoPage extends StatefulWidget {
 
 class _SliverListDemoPageState extends State<SliverListDemoPage>
     with SingleTickerProviderStateMixin {
-
   int listCount = 30;
 
   List<Widget> _sliverBuilder(BuildContext context, bool innerBoxIsScrolled) {
@@ -30,63 +30,66 @@ class _SliverListDemoPageState extends State<SliverListDemoPage>
           ),
         ),
       ),
+      SliverOverlapAbsorber(
+        handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
+        sliver: SliverPersistentHeader(
+          pinned: true,
 
-      ///动态放大缩小的tab控件
-      SliverPersistentHeader(
-        pinned: true,
-
-        /// SliverPersistentHeaderDelegate 的实现
-        delegate: GSYSliverHeaderDelegate(
-            maxHeight: 60,
-            minHeight: 60,
-            changeSize: true,
-            vSync: this,
-            snapConfig: FloatingHeaderSnapConfiguration(
-              curve: Curves.bounceInOut,
-              duration: const Duration(milliseconds: 10),
-            ),
-            builder: (BuildContext context, double shrinkOffset,
-                bool overlapsContent) {
-              ///根据数值计算偏差
-              var lr = 10 - shrinkOffset / 60 * 10;
-              return SizedBox.expand(
-                child: Padding(
-                  padding: EdgeInsets.only(bottom: 10, left: lr, right: lr, top: lr),
-                  child: new Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: <Widget>[
-                      new Expanded(
-                        child: new Container(
-                          alignment: Alignment.center,
-                          color: Colors.orangeAccent,
-                          child: new TextButton(
-                            onPressed: () {
-                              setState(() {
-                                listCount = 30;
-                              });},
-                            child: new Text("按键1"),
+          /// SliverPersistentHeaderDelegate 的实现
+          delegate: GSYSliverHeaderDelegate(
+              maxHeight: 60,
+              minHeight: 60,
+              changeSize: true,
+              vSync: this,
+              snapConfig: FloatingHeaderSnapConfiguration(
+                curve: Curves.bounceInOut,
+                duration: const Duration(milliseconds: 10),
+              ),
+              builder: (BuildContext context, double shrinkOffset,
+                  bool overlapsContent) {
+                ///根据数值计算偏差
+                var lr = 10 - shrinkOffset / 60 * 10;
+                return SizedBox.expand(
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                        bottom: 10, left: lr, right: lr, top: lr),
+                    child: new Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: <Widget>[
+                        new Expanded(
+                          child: new Container(
+                            alignment: Alignment.center,
+                            color: Colors.orangeAccent,
+                            child: new TextButton(
+                              onPressed: () {
+                                setState(() {
+                                  listCount = 30;
+                                });
+                              },
+                              child: new Text("按键1"),
+                            ),
                           ),
                         ),
-                      ),
-                      new Expanded(
-                        child: new Container(
-                          alignment: Alignment.center,
-                          color: Colors.orangeAccent,
-                          child: new TextButton(
-                            onPressed: () {
-                              setState(() {
-                                listCount = 4;
-                              });
-                            },
-                            child: new Text("按键2"),
+                        new Expanded(
+                          child: new Container(
+                            alignment: Alignment.center,
+                            color: Colors.orangeAccent,
+                            child: new TextButton(
+                              onPressed: () {
+                                setState(() {
+                                  listCount = 4;
+                                });
+                              },
+                              child: new Text("按键2"),
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              );
-            }),
+                );
+              }),
+        ),
       ),
     ];
   }
@@ -101,20 +104,31 @@ class _SliverListDemoPageState extends State<SliverListDemoPage>
         child: NestedScrollView(
           physics: const AlwaysScrollableScrollPhysics(),
           headerSliverBuilder: _sliverBuilder,
-          body: ListView.builder(
-            itemBuilder: (_, index) {
-              return Card(
-                child: new Container(
-                  height: 60,
-                  padding: EdgeInsets.only(left: 10),
-                  alignment: Alignment.centerLeft,
-                  child: new Text("Item $index"),
+          body: CustomScrollView(
+            slivers: [
+              W.Builder(
+                builder: (context) {
+                  return SliverOverlapInjector(
+                      handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
+                          context));
+                },
+              ),
+              SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  (context, index) {
+                    return Card(
+                      child: new Container(
+                        height: 60,
+                        padding: EdgeInsets.only(left: 10),
+                        alignment: Alignment.centerLeft,
+                        child: new Text("Item $index"),
+                      ),
+                    );
+                  },
+                  childCount: 100,
                 ),
-              );
-            },
-
-            ///根据状态返回数量
-            itemCount: listCount,
+              )
+            ],
           ),
         ),
       ),
@@ -147,7 +161,6 @@ class GSYSliverHeaderDelegate extends SliverPersistentHeaderDelegate {
 
   @override
   double get maxExtent => math.max(maxHeight, minHeight);
-
 
   @override
   TickerProvider get vsync => vSync;
