@@ -121,7 +121,7 @@ class _SliverHeaderItemState extends State<SliverHeaderItem>
 
   @override
   void dispose() {
-    Scrollable.of(context).position.removeListener(scrollListener);
+    //Scrollable.of(context).position.removeListener(scrollListener);
     super.dispose();
   }
 
