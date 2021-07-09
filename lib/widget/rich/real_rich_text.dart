@@ -44,15 +44,15 @@ class RealRichText extends Text {
 
   RealRichText(
     this.textSpanList, {
-    Key key,
-    TextStyle style,
+    Key? key,
+    TextStyle? style,
     TextAlign textAlign = TextAlign.start,
-    TextDirection textDirection,
+    TextDirection? textDirection,
     bool softWrap = true,
     TextOverflow overflow = TextOverflow.clip,
     double textScaleFactor = 1.0,
-    int maxLines,
-    Locale locale,
+    int? maxLines,
+    Locale? locale,
   }) : super("",
             style: style,
             textAlign: textAlign,
@@ -64,12 +64,12 @@ class RealRichText extends Text {
             locale: locale);
 
   List<TextSpan> extractAllNestedChildren(TextSpan textSpan) {
-    if (textSpan.children == null || textSpan.children.length == 0) {
+    if (textSpan.children == null || textSpan.children!.length == 0) {
       return [textSpan];
     }
     List<TextSpan> childrenSpan = [];
-    textSpan.children.forEach((child) {
-      childrenSpan.addAll(extractAllNestedChildren(child));
+    textSpan.children!.forEach((child) {
+      childrenSpan.addAll(extractAllNestedChildren(child as TextSpan));
     });
     return childrenSpan;
   }
@@ -77,12 +77,12 @@ class RealRichText extends Text {
   @override
   Widget build(BuildContext context) {
     final DefaultTextStyle defaultTextStyle = DefaultTextStyle.of(context);
-    TextStyle effectiveTextStyle = style;
-    if (style == null || style.inherit)
+    TextStyle? effectiveTextStyle = style;
+    if (style == null || style!.inherit)
       effectiveTextStyle = defaultTextStyle.style.merge(style);
     if (MediaQuery.boldTextOverride(context))
       effectiveTextStyle =
-          effectiveTextStyle.merge(TextStyle(fontWeight: FontWeight.bold));
+          effectiveTextStyle!.merge(TextStyle(fontWeight: FontWeight.bold));
 
     TextSpan textSpan = TextSpan(
         style: effectiveTextStyle,
@@ -94,7 +94,7 @@ class RealRichText extends Text {
         )));
 
     // pass the context to ImageSpan to create a ImageConfiguration
-    textSpan.children.forEach((f) {
+    textSpan.children!.forEach((f) {
       if (f is ImageSpan) {
         f.updateImageConfiguration(context);
       }
@@ -131,7 +131,7 @@ class RealRichText extends Text {
 class ImageSpan extends TextSpan {
   final double imageWidth;
   final double imageHeight;
-  final EdgeInsets margin;
+  final EdgeInsets? margin;
   final ImageProvider imageProvider;
   final ImageResolver imageResolver;
 
@@ -140,7 +140,7 @@ class ImageSpan extends TextSpan {
     this.imageWidth = 14.0,
     this.imageHeight = 14.0,
     this.margin,
-    GestureRecognizer recognizer,
+    GestureRecognizer? recognizer,
   })  : imageResolver = ImageResolver(imageProvider),
         super(
             style: TextStyle(
@@ -158,9 +158,9 @@ class ImageSpan extends TextSpan {
     imageResolver.updateImageConfiguration(context, imageWidth, imageHeight);
   }
 
-  double get width => imageWidth + (margin == null ? 0 : margin.horizontal);
+  double get width => imageWidth + (margin == null ? 0 : margin!.horizontal);
 
-  double get height => imageHeight + (margin == null ? 0 : margin.vertical);
+  double get height => imageHeight + (margin == null ? 0 : margin!.vertical);
 }
 
 typedef ImageResolverListener = void Function(
@@ -169,10 +169,10 @@ typedef ImageResolverListener = void Function(
 class ImageResolver {
   final ImageProvider imageProvider;
 
-  ImageStream _imageStream;
-  ImageConfiguration _imageConfiguration;
-  ui.Image image;
-  ImageResolverListener _listener;
+  ImageStream? _imageStream;
+  ImageConfiguration? _imageConfiguration;
+  ui.Image? image;
+  ImageResolverListener? _listener;
 
   ImageResolver(this.imageProvider);
 
@@ -185,22 +185,22 @@ class ImageResolver {
     );
   }
 
-  ImageStreamListener imageStreamListener;
+  ImageStreamListener? imageStreamListener;
 
   void resolve(ImageResolverListener listener) {
     assert(_imageConfiguration != null);
 
-    final ImageStream oldImageStream = _imageStream;
-    _imageStream = imageProvider.resolve(_imageConfiguration);
+    final ImageStream? oldImageStream = _imageStream;
+    _imageStream = imageProvider.resolve(_imageConfiguration!);
     assert(_imageStream != null);
 
     this._listener = listener;
-    if (_imageStream.key != oldImageStream?.key) {
+    if (_imageStream!.key != oldImageStream?.key) {
       if (imageStreamListener != null) {
-        oldImageStream?.removeListener(imageStreamListener);
+        oldImageStream?.removeListener(imageStreamListener!);
       }
       imageStreamListener ??= new ImageStreamListener(_handleImageChanged);
-      _imageStream.addListener(imageStreamListener);
+      _imageStream!.addListener(imageStreamListener!);
     }
   }
 
@@ -212,13 +212,13 @@ class ImageResolver {
   void addListening() {
     if (this._listener != null) {
       imageStreamListener ??= new ImageStreamListener(_handleImageChanged);
-      _imageStream?.addListener(imageStreamListener);
+      _imageStream?.addListener(imageStreamListener!);
     }
   }
 
   void stopListening() {
     if (imageStreamListener != null) {
-      _imageStream?.removeListener(imageStreamListener);
+      _imageStream?.removeListener(imageStreamListener!);
     }
   }
 }
@@ -229,15 +229,15 @@ class ImageResolver {
 /// No more special purpose.
 class _RichTextWrapper extends RichText {
   _RichTextWrapper({
-    Key key,
-    @required TextSpan text,
+    Key? key,
+    required TextSpan text,
     TextAlign textAlign = TextAlign.start,
-    TextDirection textDirection,
+    TextDirection? textDirection,
     bool softWrap = true,
     TextOverflow overflow = TextOverflow.clip,
     double textScaleFactor = 1.0,
-    int maxLines,
-    Locale locale,
+    int? maxLines,
+    Locale? locale,
   })  : assert(text != null),
         assert(textAlign != null),
         assert(softWrap != null),
@@ -259,7 +259,7 @@ class _RichTextWrapper extends RichText {
   RenderParagraph createRenderObject(BuildContext context) {
     assert(textDirection != null || debugCheckHasDirectionality(context));
     return _RealRichRenderParagraph(
-      text,
+      text as TextSpan,
       textAlign: textAlign,
       textDirection: textDirection ?? Directionality.of(context),
       softWrap: softWrap,
@@ -274,13 +274,13 @@ class _RichTextWrapper extends RichText {
 /// paint the image on the top of those ImageSpan's blank space
 class _RealRichRenderParagraph extends RenderParagraph {
   _RealRichRenderParagraph(TextSpan text,
-      {TextAlign textAlign,
-      TextDirection textDirection,
-      bool softWrap,
-      TextOverflow overflow,
-      double textScaleFactor,
-      int maxLines,
-      Locale locale})
+      {required TextAlign textAlign,
+      required TextDirection textDirection,
+      required bool softWrap,
+      required TextOverflow overflow,
+      required double textScaleFactor,
+      int? maxLines,
+      Locale? locale})
       : super(
           text,
           textAlign: textAlign,
@@ -302,8 +302,8 @@ class _RealRichRenderParagraph extends RenderParagraph {
 
   @override
   void attach(covariant Object owner) {
-    super.attach(owner);
-    (text as TextSpan).children.forEach((textSpan) {
+    super.attach(owner as PipelineOwner);
+    (text as TextSpan).children!.forEach((textSpan) {
       if (textSpan is ImageSpan) {
         textSpan.imageResolver.addListening();
       }
@@ -313,7 +313,7 @@ class _RealRichRenderParagraph extends RenderParagraph {
   @override
   void detach() {
     super.detach();
-    (text as TextSpan).children.forEach((textSpan) {
+    (text as TextSpan).children!.forEach((textSpan) {
       if (textSpan is ImageSpan) {
         textSpan.imageResolver.stopListening();
       }
@@ -337,7 +337,7 @@ class _RealRichRenderParagraph extends RenderParagraph {
     canvas.save();
 
     int textOffset = 0;
-    for (TextSpan textSpan in (text as TextSpan).children) {
+    for (TextSpan textSpan in (text as TextSpan).children as Iterable<TextSpan>) {
       if (textSpan is ImageSpan) {
         // this is the top-center point of the ImageSpan
         Offset offsetForCaret = getOffsetForCaret(
@@ -370,11 +370,11 @@ class _RealRichRenderParagraph extends RenderParagraph {
               paintImage(
                   canvas: canvas,
                   rect: topLeftOffset & Size(textSpan.width, textSpan.height),
-                  image: textSpan.imageResolver.image,
+                  image: textSpan.imageResolver.image!,
                   fit: BoxFit.scaleDown,
                   alignment: Alignment.center);
             } else {
-              if (owner == null || !owner.debugDoingPaint) {
+              if (owner == null || !owner!.debugDoingPaint) {
                 markNeedsPaint();
               }
             }
@@ -386,7 +386,7 @@ class _RealRichRenderParagraph extends RenderParagraph {
         paintImage(
             canvas: canvas,
             rect: topLeftOffset & Size(textSpan.width, textSpan.height),
-            image: textSpan.imageResolver.image,
+            image: textSpan.imageResolver.image!,
             fit: BoxFit.scaleDown,
             alignment: Alignment.center);
       }

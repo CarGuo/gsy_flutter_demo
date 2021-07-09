@@ -34,7 +34,7 @@ final redStroke = Paint()
 final black = Paint()..color = Colors.black;
 
 class Circle {
-  final Offset offset;
+  final Offset? offset;
   final double radius;
   final Color color;
 
@@ -47,13 +47,13 @@ class AnimBubbleGum extends StatefulWidget {
 }
 
 class _AnimBubbleGumState extends State<AnimBubbleGum> {
-  Timer timer;
+  late Timer timer;
 
   final circles = <Circle>[];
 
   Offset force = Offset(1, 1);
 
-  HSLColor hslColor = HSLColor.fromColor(Colors.pink[100]);
+  HSLColor hslColor = HSLColor.fromColor(Colors.pink[100]!);
 
   final StreamController<List<Circle>> _circleStreamer =
       StreamController<List<Circle>>.broadcast();
@@ -135,20 +135,20 @@ class _AnimBubbleGumState extends State<AnimBubbleGum> {
 }
 
 class Painter extends CustomPainter {
-  List<Circle> circles;
+  List<Circle>? circles;
 
   Painter({this.circles});
 
   @override
   void paint(Canvas canvas, Size size) {
-    for (int i = 0; i < circles.length - 1; i++) {
-      final c = circles[i];
+    for (int i = 0; i < circles!.length - 1; i++) {
+      final c = circles![i];
       final hsl = HSLColor.fromColor(c.color);
       final paint = Paint()
         ..color = c.color
         ..shader = ui.Gradient.linear(
-          c.offset,
-          c.offset + Offset(0, c.radius),
+          c.offset!,
+          c.offset! + Offset(0, c.radius),
           [
             hsl.withLightness(max(0, min(1, hsl.lightness + 0.7))).toColor(),
             c.color,
@@ -160,7 +160,7 @@ class Painter extends CustomPainter {
           light = Paint()
             ..color = c.color
             ..shader = ui.Gradient.radial(
-              c.offset - Offset(0, c.radius),
+              c.offset! - Offset(0, c.radius),
               c.radius,
               [
                 Color(0x53ffffff),
@@ -172,8 +172,8 @@ class Painter extends CustomPainter {
       //too heavy for mobile web rendering
 
       canvas
-        ..drawCircle(c.offset, c.radius, paint)
-        ..drawCircle(c.offset, c.radius, light)
+        ..drawCircle(c.offset!, c.radius, paint)
+        ..drawCircle(c.offset!, c.radius, light)
         ..rotate(pi / 10800);
     }
   }

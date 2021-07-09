@@ -139,22 +139,22 @@ class _SliverListDemoPageState extends State<SliverListDemoPage>
 ///动态头部处理
 class GSYSliverHeaderDelegate extends SliverPersistentHeaderDelegate {
   GSYSliverHeaderDelegate(
-      {@required this.minHeight,
-      @required this.maxHeight,
-      @required this.snapConfig,
-      @required this.vSync,
+      {required this.minHeight,
+      required this.maxHeight,
+      required this.snapConfig,
+      required this.vSync,
       this.child,
       this.builder,
       this.changeSize = false});
 
   final double minHeight;
   final double maxHeight;
-  final Widget child;
-  final Builder builder;
+  final Widget? child;
+  final Builder? builder;
   final bool changeSize;
   final TickerProvider vSync;
   final FloatingHeaderSnapConfiguration snapConfig;
-  AnimationController animationController;
+  AnimationController? animationController;
 
   @override
   double get minExtent => minHeight;
@@ -169,9 +169,9 @@ class GSYSliverHeaderDelegate extends SliverPersistentHeaderDelegate {
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
     if (builder != null) {
-      return builder(context, shrinkOffset, overlapsContent);
+      return builder!(context, shrinkOffset, overlapsContent);
     }
-    return child;
+    return child!;
   }
 
   @override

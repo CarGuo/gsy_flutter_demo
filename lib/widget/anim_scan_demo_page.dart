@@ -14,12 +14,12 @@ class _AnimScanDemoPageState extends State<AnimScanDemoPage>
     with TickerProviderStateMixin {
   List<RippleCircle> rippleCircles = [];
 
-  AnimationController animController;
-  Animation animAnimation;
+  late AnimationController animController;
+  Animation? animAnimation;
   int _sweepProgress = 0;
 
-  AnimationController imgAnimController;
-  Animation imgAnimation;
+  late AnimationController imgAnimController;
+  late Animation imgAnimation;
 
   int get sweepProgress => _sweepProgress;
 
@@ -109,7 +109,7 @@ class _AnimScanDemoPageState extends State<AnimScanDemoPage>
               },
               radius: 70,
               child: ScaleTransition(
-                scale: imgAnimation,
+                scale: imgAnimation as Animation<double>,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(70),
                   child: new Image.asset(
@@ -127,8 +127,8 @@ class _AnimScanDemoPageState extends State<AnimScanDemoPage>
 }
 
 class AnimScanPainter extends CustomPainter {
-  final List<RippleCircle> rippleCircles;
-  final int sweepProgress;
+  final List<RippleCircle>? rippleCircles;
+  final int? sweepProgress;
 
   AnimScanPainter({this.rippleCircles, this.sweepProgress});
 
@@ -159,7 +159,7 @@ class AnimScanPainter extends CustomPainter {
     ];
 
     var sweepGradient =
-        SweepGradient(colors: colors, stops: [0, 0.001, 0.9, 1]);
+        SweepGradient(colors: colors as List<Color>, stops: [0, 0.001, 0.9, 1]);
 
     /// shader 暂不支持 web
     if (Platform.isAndroid == true || Platform.isIOS == true) {
@@ -167,7 +167,7 @@ class AnimScanPainter extends CustomPainter {
     }
 
     canvas.translate(width / 2, height / 2);
-    double iDeg = 2 * Math.pi / 360 * sweepProgress.toDouble();
+    double iDeg = 2 * Math.pi / 360 * sweepProgress!.toDouble();
     canvas.rotate(iDeg);
     canvas.translate(-width / 2, -height / 2);
 
@@ -203,8 +203,8 @@ class AnimScanPainter extends CustomPainter {
 
     canvas.translate(0, height / 2);
     if (rippleCircles != null) {
-      for (int i = 0; i < rippleCircles.length; i++) {
-        var item = rippleCircles[i];
+      for (int i = 0; i < rippleCircles!.length; i++) {
+        var item = rippleCircles![i];
         bool result = item.draw(canvas, ripplePaint, rippleCircles);
         if (!result) {
           i--;
@@ -227,9 +227,9 @@ class RippleCircle {
 
   var progress = 0;
 
-  bool draw(Canvas canvas, Paint paint, List rippleCircles) {
+  bool draw(Canvas canvas, Paint paint, List? rippleCircles) {
     if (progress >= slice) {
-      rippleCircles.remove(this);
+      rippleCircles!.remove(this);
       return false;
     }
     progress++;
@@ -243,8 +243,8 @@ class RippleCircle {
 }
 
 class DebounceButton extends StatefulWidget {
-  final Widget child;
-  final GestureTapCallback onTap;
+  final Widget? child;
+  final GestureTapCallback? onTap;
   final double radius;
 
   DebounceButton({this.child, this.onTap, this.radius = 0});
@@ -255,7 +255,7 @@ class DebounceButton extends StatefulWidget {
 
 class _DebounceButtonState extends State<DebounceButton> {
   Duration durationTime = Duration(milliseconds: 500);
-  Timer timer;
+  Timer? timer;
 
   @override
   void initState() {

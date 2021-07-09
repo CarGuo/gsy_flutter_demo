@@ -11,8 +11,8 @@ typedef Widget MenuItemBuilder<T extends DropSelectObject>(
 const double kDropSelectMenuItemHeight = 45.0;
 
 class DropSelectListMenu<T extends DropSelectObject> extends DropSelectWidget {
-  final List<T> data;
-  final MenuItemBuilder itemBuilder;
+  final List<T>? data;
+  final MenuItemBuilder? itemBuilder;
   final bool singleSelected;
   final double itemExtent;
 
@@ -36,20 +36,20 @@ class _MenuListState<T extends DropSelectObject>
   }
 
   Widget buildItem(BuildContext context, int index) {
-    final List<T> list = widget.data;
+    final List<T> list = widget.data!;
 
     final T data = list[index];
     return new GestureDetector(
       behavior: HitTestBehavior.opaque,
-      child: widget.itemBuilder(context, data),
+      child: widget.itemBuilder!(context, data),
       onTap: () {
         if (widget.singleSelected) {
-          widget.data.forEach((item) {
+          widget.data!.forEach((item) {
             item.selected = false;
           });
         }
         if(data.selectedCleanOther) {
-          widget.data.forEach((item) {
+          widget.data!.forEach((item) {
             item.selected = false;
           });
         }
@@ -66,12 +66,12 @@ class _MenuListState<T extends DropSelectObject>
     return new ListView.builder(
       itemExtent: widget.itemExtent,
       itemBuilder: buildItem,
-      itemCount: widget.data.length,
+      itemCount: widget.data!.length,
     );
   }
 
   @override
-  void onEvent(DropSelectEvent event) {
+  void onEvent(DropSelectEvent? event) {
     switch (event) {
       case DropSelectEvent.SELECT:
       case DropSelectEvent.HIDE:

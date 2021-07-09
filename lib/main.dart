@@ -86,9 +86,9 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key? key, this.title}) : super(key: key);
 
-  final String title;
+  final String? title;
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -100,7 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
     var routeLists = routers.keys.toList();
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(widget.title!),
       ),
       body: new Container(
         child: new ListView.builder(
@@ -338,7 +338,7 @@ enum Cat {
 }
 
 extension CatExtension on Cat {
-  String get name {
+  String? get name {
     switch (this) {
       case Cat.black:
         return 'Mr Black Cat';

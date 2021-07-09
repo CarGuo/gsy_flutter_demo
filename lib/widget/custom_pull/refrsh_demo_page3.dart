@@ -76,7 +76,7 @@ class _RefreshDemoPageState3 extends State<RefreshDemoPage3> {
         child: new NotificationListener(
           onNotification: (ScrollNotification notification) {
             ///通知 CupertinoSliverRefreshControl 当前的拖拽状态
-            sliverRefreshKey.currentState
+            sliverRefreshKey.currentState!
                 .notifyScrollNotification(notification);
             ///判断当前滑动位置是不是到达底部，触发加载更多回调
             if (notification is ScrollEndNotification) {
@@ -143,7 +143,7 @@ class _RefreshDemoPageState3 extends State<RefreshDemoPage3> {
 
 Widget buildSimpleRefreshIndicator(
   BuildContext context,
-  RefreshIndicatorMode refreshState,
+  RefreshIndicatorMode? refreshState,
   double pulledExtent,
   double refreshTriggerPullDistance,
   double refreshIndicatorExtent,

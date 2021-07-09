@@ -4,8 +4,8 @@ import 'package:gsy_flutter_demo/widget/stick/stick_render.dart';
 class StickWidget extends MultiChildRenderObjectWidget {
   ///顺序添加 stickHeader 和 stickContent
   StickWidget({
-    @required stickHeader,
-    @required stickContent,
+    required stickHeader,
+    required stickContent,
   }) : super(
           ///如果反过来，会有意想不到的效果哦
           children: [stickContent, stickHeader],

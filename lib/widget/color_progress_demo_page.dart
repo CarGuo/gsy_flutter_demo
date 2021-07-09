@@ -88,10 +88,10 @@ class ColorProgress extends StatefulWidget {
   final double value;
 
   ColorProgress(
-      {@required this.colorList,
-      @required this.backgroundColor,
-      @required this.value,
-      @required this.bgBorder});
+      {required this.colorList,
+      required this.backgroundColor,
+      required this.value,
+      required this.bgBorder});
 
   @override
   _ColorProgressState createState() => _ColorProgressState();
@@ -376,10 +376,10 @@ class ProgressPainterAnim extends StatefulWidget {
   final double value;
 
   ProgressPainterAnim(
-      {@required this.colorList,
-      @required this.backgroundColor,
-      @required this.value,
-      @required this.bgBorder});
+      {required this.colorList,
+      required this.backgroundColor,
+      required this.value,
+      required this.bgBorder});
 
   @override
   _ProgressPainterAnimState createState() => _ProgressPainterAnimState();
@@ -387,8 +387,8 @@ class ProgressPainterAnim extends StatefulWidget {
 
 class _ProgressPainterAnimState extends State<ProgressPainterAnim>
     with SingleTickerProviderStateMixin {
-  AnimationController controller;
-  Animation<double> animation;
+  late AnimationController controller;
+  late Animation<double> animation;
 
   @override
   void initState() {
@@ -442,10 +442,10 @@ class ProgressPainter extends CustomPainter {
   final double value;
 
   ProgressPainter(
-      {@required this.colorList,
-      @required this.backgroundColor,
-      @required this.value,
-      @required this.bgBorder});
+      {required this.colorList,
+      required this.backgroundColor,
+      required this.value,
+      required this.bgBorder});
 
   @override
   void paint(Canvas canvas, Size size) {

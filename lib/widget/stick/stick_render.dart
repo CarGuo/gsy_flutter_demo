@@ -7,28 +7,28 @@ class StickRender extends RenderBox
     with
         ContainerRenderObjectMixin<RenderBox, StickParentData>,
         RenderBoxContainerDefaultsMixin<RenderBox, StickParentData> {
-  StickRender({@required ScrollableState scrollable}) {
+  StickRender({required ScrollableState? scrollable}) {
     this._scrollable = scrollable;
   }
 
-  ScrollableState _scrollable;
+  ScrollableState? _scrollable;
 
-  set scrollable(ScrollableState scrollableState) {
+  set scrollable(ScrollableState? scrollableState) {
     if (_scrollable == scrollableState) {
       return;
     }
-    final ScrollableState preScroll = _scrollable;
+    final ScrollableState? preScroll = _scrollable;
     _scrollable = scrollableState;
     if (attached) {
       ///这里触发更新
-      preScroll.position?.removeListener(markNeedsLayout);
-      scrollableState.position?.addListener(markNeedsLayout);
+      preScroll!.position?.removeListener(markNeedsLayout);
+      scrollableState!.position?.addListener(markNeedsLayout);
     }
     markNeedsLayout();
   }
 
   double getScrollAbleDy() {
-    RenderObject renderObject = _scrollable.context.findRenderObject();
+    RenderObject renderObject = _scrollable!.context.findRenderObject()!;
     if (!renderObject.attached) {
       return 0;
     }
@@ -43,13 +43,13 @@ class StickRender extends RenderBox
   @override
   void attach(_) {
     ///设置监听
-    _scrollable.position?.addListener(markNeedsLayout);
+    _scrollable!.position?.addListener(markNeedsLayout);
     super.attach(_);
   }
 
   @override
   void detach() {
-    _scrollable.position?.removeListener(markNeedsLayout);
+    _scrollable!.position?.removeListener(markNeedsLayout);
     super.detach();
   }
 
@@ -59,18 +59,18 @@ class StickRender extends RenderBox
 
   @override
   double computeMinIntrinsicHeight(double width) {
-    return (lastChild.getMinIntrinsicHeight(width) +
-        firstChild.getMinIntrinsicHeight(width));
+    return (lastChild!.getMinIntrinsicHeight(width) +
+        firstChild!.getMinIntrinsicHeight(width));
   }
 
   @override
   double computeMaxIntrinsicHeight(double width) {
-    return (lastChild.getMaxIntrinsicHeight(width) +
-        firstChild.getMaxIntrinsicHeight(width));
+    return (lastChild!.getMaxIntrinsicHeight(width) +
+        firstChild!.getMaxIntrinsicHeight(width));
   }
 
   @override
-  double computeDistanceToActualBaseline(TextBaseline baseline) {
+  double? computeDistanceToActualBaseline(TextBaseline baseline) {
     return defaultComputeDistanceToHighestActualBaseline(baseline);
   }
 
@@ -92,8 +92,8 @@ class StickRender extends RenderBox
 
   @override
   void performLayout() {
-    var header = lastChild;
-    var content = firstChild;
+    var header = lastChild!;
+    var content = firstChild!;
 
     ///取消最小宽高
     var loosenConstraints = constraints.loosen();
@@ -126,8 +126,8 @@ class StickRender extends RenderBox
   }
 
   @override
-  bool hitTestChildren(HitTestResult result, {Offset position}) {
-    return defaultHitTestChildren(result, position: position);
+  bool hitTestChildren(HitTestResult result, {required Offset position}) {
+    return defaultHitTestChildren(result as BoxHitTestResult, position: position);
   }
 
 }

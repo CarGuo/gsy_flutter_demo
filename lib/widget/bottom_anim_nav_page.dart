@@ -14,9 +14,9 @@ class _BottomAnimNavPageState extends State<BottomAnimNavPage>
     with SingleTickerProviderStateMixin {
   int index = 0;
 
-  AnimationController controller;
+  late AnimationController controller;
 
-  Animation animation;
+  late Animation animation;
 
   @override
   void initState() {
@@ -75,7 +75,7 @@ class _BottomAnimNavPageState extends State<BottomAnimNavPage>
                                 },
                                 itemBuilder: (BuildContext context, int index) {
                                   return ScaleTransition(
-                                    scale: animation,
+                                    scale: animation as Animation<double>,
                                     child: new Container(
                                       decoration: BoxDecoration(
                                           color: Colors.red,
@@ -141,7 +141,7 @@ class AngleTransformer extends PageTransformer {
 
   @override
   Widget transform(Widget item, TransformInfo info) {
-    double position = info.position;
+    double position = info.position!;
     Widget child = item;
 
     var dx = _horizontalOffset * (position.abs() * 10);
@@ -174,9 +174,9 @@ class AngleTransformer extends PageTransformer {
 
 class _RadiusPainter extends CustomPainter {
   final double width;
-  final Color color;
+  final Color? color;
 
-  _RadiusPainter({@required this.width, this.color});
+  _RadiusPainter({required this.width, this.color});
 
   @override
   void paint(Canvas canvas, Size size) {

@@ -14,11 +14,11 @@ class _BookPageState extends State<BookPage>
   CalPoint prePoint = CalPoint.data(-1, -1);
 
   PositionStyle style = PositionStyle.STYLE_LOWER_RIGHT;
-  double width;
-  double height;
-  AnimationController animationController;
-  Animation cancelAnim;
-  Tween cancelValue;
+  double? width;
+  double? height;
+  late AnimationController animationController;
+  late Animation cancelAnim;
+  late Tween cancelValue;
   bool needCancelAnim = true;
 
   toNormal([_]) {
@@ -46,22 +46,22 @@ class _BookPageState extends State<BookPage>
     var dy = d.localPosition.dy;
     var dx = d.localPosition.dx;
 
-    if (dx <= width / 3) {
+    if (dx <= width! / 3) {
       //左
       style = PositionStyle.STYLE_LEFT;
-    } else if (dx > width / 3 && dy <= height / 3) {
+    } else if (dx > width! / 3 && dy <= height! / 3) {
       //上
       style = PositionStyle.STYLE_TOP_RIGHT;
-    } else if (dx > width * 2 / 3 && dy > height / 3 && dy <= height * 2 / 3) {
+    } else if (dx > width! * 2 / 3 && dy > height! / 3 && dy <= height! * 2 / 3) {
       //右
       style = PositionStyle.STYLE_RIGHT;
-    } else if (dx > width / 3 && dy > height * 2 / 3) {
+    } else if (dx > width! / 3 && dy > height! * 2 / 3) {
       //下
       style = PositionStyle.STYLE_LOWER_RIGHT;
-    } else if (dx > width / 3 &&
-        dx < width * 2 / 3 &&
-        dy > height / 3 &&
-        dy < height * 2 / 3) {
+    } else if (dx > width! / 3 &&
+        dx < width! * 2 / 3 &&
+        dy > height! / 3 &&
+        dy < height! * 2 / 3) {
       //中
       style = PositionStyle.STYLE_MIDDLE;
     }
@@ -76,17 +76,17 @@ class _BookPageState extends State<BookPage>
   startCancelAnim() {
     double dx, dy;
     if (style == PositionStyle.STYLE_TOP_RIGHT) {
-      dx = (width - 1 - prePoint.x);
-      dy = (1 - prePoint.y);
+      dx = (width! - 1 - prePoint.x!);
+      dy = (1 - prePoint.y!);
     } else if (style == PositionStyle.STYLE_LOWER_RIGHT) {
-      dx = (width - 1 - prePoint.x);
-      dy = (height - 1 - prePoint.y);
+      dx = (width! - 1 - prePoint.x!);
+      dy = (height! - 1 - prePoint.y!);
     } else {
-      dx = prePoint.x - width;
-      dy = -prePoint.y;
+      dx = prePoint.x! - width!;
+      dy = -prePoint.y!;
     }
     cancelValue =
-        Tween(begin: Offset(prePoint.x, prePoint.y), end: Offset(dx, dy));
+        Tween(begin: Offset(prePoint.x!, prePoint.y!), end: Offset(dx, dy));
     animationController.forward();
   }
 
@@ -105,7 +105,7 @@ class _BookPageState extends State<BookPage>
             var edy = cancelValue.end.dy;
 
             curPoint = CalPoint.data(
-                bdx + edx * cancelAnim.value, bdy + edy * cancelAnim.value);
+                bdx + edx * cancelAnim!.value, bdy + edy * cancelAnim!.value);
           });
         }
       })

@@ -30,12 +30,12 @@ class _ScrollToIndexDemoPageState2 extends State<ScrollToIndexDemoPage2> {
 
     ///获取 renderBox
     RenderBox renderBox =
-    key.globalKey.currentContext.findRenderObject();
+    key.globalKey.currentContext!.findRenderObject() as RenderBox;
 
     ///获取位置偏移，基于 ancestor: SingleChildScrollView 的 RenderObject()
     double dy = renderBox
         .localToGlobal(Offset.zero,
-        ancestor: scrollKey.currentContext.findRenderObject())
+        ancestor: scrollKey.currentContext!.findRenderObject())
         .dy;
 
     ///计算真实位移

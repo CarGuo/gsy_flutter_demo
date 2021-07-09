@@ -10,8 +10,8 @@ class PlayAnimButton extends StatefulWidget {
 
 class _PlayAnimButtonState extends State<PlayAnimButton>
     with SingleTickerProviderStateMixin {
-  AnimationController playerButtonController;
-  Animation playerAnimation;
+  late AnimationController playerButtonController;
+  late Animation playerAnimation;
 
   @override
   void initState() {
@@ -55,24 +55,24 @@ class _PlayAnimButtonState extends State<PlayAnimButton>
 class PlayButtonPainter extends CustomPainter {
   final double fraction;
 
-  double width;
+  late double width;
 
-  double height;
+  late double height;
 
-  double circleRadius;
+  late double circleRadius;
 
-  double centerX;
-  double centerY;
-  Rect rect;
-  Rect bgRect;
+  late double centerX;
+  late double centerY;
+  late Rect rect;
+  late Rect bgRect;
 
   PlayButtonPainter({this.fraction = 1});
 
-  Paint painter;
-  Paint bgPainter;
+  late Paint painter;
+  late Paint bgPainter;
   Path path = Path();
   Path dstPath = Path();
-  PathMetric pathMetric;
+  late PathMetric pathMetric;
 
   initPaint() {
     init(Paint painter) {

@@ -3,17 +3,17 @@ import 'dart:math' as Math;
 
 ///绘制气泡背景
 class BubblePainter extends CustomPainter {
-  Rect mRect;
+  Rect? mRect;
   Path mPath = new Path();
   Paint mPaint = new Paint();
-  double mArrowWidth;
-  double mAngle;
-  double mArrowHeight;
-  double mArrowPosition;
-  ArrowLocation mArrowLocation;
-  BubbleType bubbleType;
+  late double mArrowWidth;
+  double? mAngle;
+  late double mArrowHeight;
+  late double mArrowPosition;
+  ArrowLocation? mArrowLocation;
+  BubbleType? bubbleType;
   bool mArrowCenter = true;
-  Color bubbleColor;
+  Color? bubbleColor;
 
   BubblePainter(BubbleBuilder builder) {
     this.mAngle = builder.mAngle;
@@ -35,19 +35,19 @@ class BubblePainter extends CustomPainter {
   bool shouldRepaint(CustomPainter oldDelegate) => true;
 
   ///设置绘制路径
-  void setUpPath(ArrowLocation mArrowLocation, Path path) {
+  void setUpPath(ArrowLocation? mArrowLocation, Path path) {
     switch (mArrowLocation) {
       case ArrowLocation.LEFT:
-        setUpLeftPath(mRect, path);
+        setUpLeftPath(mRect!, path);
         break;
       case ArrowLocation.RIGHT:
-        setUpRightPath(mRect, path);
+        setUpRightPath(mRect!, path);
         break;
       case ArrowLocation.TOP:
-        setUpTopPath(mRect, path);
+        setUpTopPath(mRect!, path);
         break;
       case ArrowLocation.BOTTOM:
-        setUpBottomPath(mRect, path);
+        setUpBottomPath(mRect!, path);
         break;
     }
   }
@@ -56,7 +56,7 @@ class BubblePainter extends CustomPainter {
   void setUp(Canvas canvas, Size size) {
     switch (bubbleType) {
       case BubbleType.COLOR:
-        mPaint.color = bubbleColor;
+        mPaint.color = bubbleColor!;
         break;
       case BubbleType.BITMAP:
         break;
@@ -75,10 +75,10 @@ class BubblePainter extends CustomPainter {
     path.lineTo(rect.left + mArrowWidth, mArrowHeight + mArrowPosition);
     path.lineTo(rect.left, mArrowPosition + mArrowHeight / 2);
     path.lineTo(rect.left + mArrowWidth, mArrowPosition);
-    path.lineTo(rect.left + mArrowWidth, rect.top + mAngle);
+    path.lineTo(rect.left + mArrowWidth, rect.top + mAngle!);
 
     path.addRRect(RRect.fromLTRBR(rect.left + mArrowHeight, rect.top,
-        rect.right, rect.bottom, Radius.circular(mAngle)));
+        rect.right, rect.bottom, Radius.circular(mAngle!)));
 
     path.close();
   }
@@ -90,14 +90,14 @@ class BubblePainter extends CustomPainter {
     }
 
     path.moveTo(
-        rect.left + Math.min(mArrowPosition, mAngle), rect.top + mArrowHeight);
+        rect.left + Math.min(mArrowPosition, mAngle!), rect.top + mArrowHeight);
     path.lineTo(rect.left + mArrowPosition, rect.top + mArrowHeight);
     path.lineTo(rect.left + mArrowWidth / 2 + mArrowPosition, rect.top);
     path.lineTo(
         rect.left + mArrowWidth + mArrowPosition, rect.top + mArrowHeight);
 
     path.addRRect(RRect.fromLTRBR(rect.left, rect.top + mArrowHeight,
-        rect.right, rect.bottom, Radius.circular(mAngle)));
+        rect.right, rect.bottom, Radius.circular(mAngle!)));
 
     path.close();
   }
@@ -114,10 +114,10 @@ class BubblePainter extends CustomPainter {
     path.lineTo(rect.right, mArrowPosition + mArrowHeight / 2);
     path.lineTo(rect.right - mArrowWidth, mArrowPosition + mArrowHeight);
 
-    path.moveTo(rect.left + mAngle, rect.top);
+    path.moveTo(rect.left + mAngle!, rect.top);
 
     path.addRRect(RRect.fromLTRBR(rect.left, rect.top,
-        rect.right - mArrowHeight, rect.bottom, Radius.circular(mAngle)));
+        rect.right - mArrowHeight, rect.bottom, Radius.circular(mAngle!)));
 
     path.close();
   }
@@ -135,7 +135,7 @@ class BubblePainter extends CustomPainter {
     path.lineTo(rect.left + mArrowPosition, rect.bottom - mArrowHeight);
 
     path.addRRect(RRect.fromLTRBR(rect.left, rect.top, rect.right,
-        rect.bottom - mArrowHeight, Radius.circular(mAngle)));
+        rect.bottom - mArrowHeight, Radius.circular(mAngle!)));
 
     path.close();
   }
@@ -149,7 +149,7 @@ class BubbleBuilder {
   static const Color DEFAULT_BUBBLE_COLOR = Colors.white;
 
   ///圆角
-  double mAngle = DEFAULT_ANGLE;
+  double? mAngle = DEFAULT_ANGLE;
 
   ///箭头宽度
   double mArrowWidth = DEFAULT_ARROW_WITH;

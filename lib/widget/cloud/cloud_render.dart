@@ -10,9 +10,9 @@ class RenderCloudWidget extends RenderBox
         ContainerRenderObjectMixin<RenderBox, RenderCloudParentData>,
         RenderBoxContainerDefaultsMixin<RenderBox, RenderCloudParentData> {
   RenderCloudWidget({
-    List<RenderBox> children,
+    List<RenderBox>? children,
     Clip overflow = Clip.none,
-    double ratio,
+    double? ratio,
   })  : _ratio = ratio,
         _overflow = overflow {
     addAll(children);
@@ -37,9 +37,9 @@ class RenderCloudWidget extends RenderBox
   }
 
   ///比例
-  double _ratio;
+  double? _ratio;
 
-  double get ratio => _ratio;
+  double get ratio => _ratio!;
 
   set ratio(double value) {
     assert(value != null);
@@ -53,14 +53,14 @@ class RenderCloudWidget extends RenderBox
   bool overlaps(RenderCloudParentData data) {
     Rect rect = data.content;
 
-    RenderBox child = data.previousSibling;
+    RenderBox? child = data.previousSibling;
 
     if (child == null) {
       return false;
     }
 
     do {
-      RenderCloudParentData childParentData = child.parentData;
+      RenderCloudParentData childParentData = child!.parentData as RenderCloudParentData;
       if (rect.overlaps(childParentData.content)) {
         return true;
       }
@@ -91,13 +91,13 @@ class RenderCloudWidget extends RenderBox
     var recordRect = Rect.zero;
     var previousChildRect = Rect.zero;
 
-    RenderBox child = firstChild;
+    RenderBox? child = firstChild;
 
     while (child != null) {
       var curIndex = -1;
 
       ///提出数据
-      final RenderCloudParentData childParentData = child.parentData;
+      final RenderCloudParentData childParentData = child.parentData as RenderCloudParentData;
 
       child.layout(constraints, parentUsesSize: true);
 
@@ -154,7 +154,7 @@ class RenderCloudWidget extends RenderBox
     var transCenter = contentCenter - recordRectCenter;
     child = firstChild;
     while (child != null) {
-      final RenderCloudParentData childParentData = child.parentData;
+      final RenderCloudParentData childParentData = child.parentData as RenderCloudParentData;
       childParentData.offset += transCenter;
       child = childParentData.nextSibling;
     }
@@ -180,20 +180,20 @@ class RenderCloudWidget extends RenderBox
   }
 
   @override
-  double computeDistanceToActualBaseline(TextBaseline baseline) {
+  double? computeDistanceToActualBaseline(TextBaseline baseline) {
     return defaultComputeDistanceToHighestActualBaseline(baseline);
   }
 
   @override
-  bool hitTestChildren(HitTestResult result, {Offset position}) {
-    return defaultHitTestChildren(result, position: position);
+  bool hitTestChildren(HitTestResult result, {required Offset position}) {
+    return defaultHitTestChildren(result as BoxHitTestResult, position: position);
   }
 }
 
 /// CloudParentData
 class RenderCloudParentData extends ContainerBoxParentData<RenderBox> {
-  double width;
-  double height;
+  late double width;
+  late double height;
 
   Rect get content => Rect.fromLTWH(
         offset.dx,

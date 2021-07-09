@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 
 class DropSelectController extends ChangeNotifier {
 
-  DropSelectEvent event;
+  DropSelectEvent? event;
 
-  int menuIndex;
+  int? menuIndex;
 
-  int index;
+  int? index;
 
   dynamic data;
 
@@ -23,7 +23,7 @@ class DropSelectController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void select(dynamic data, {int index}) {
+  void select(dynamic data, {int? index}) {
     event = DropSelectEvent.SELECT;
     this.data = data;
     this.index = index;

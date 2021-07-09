@@ -11,7 +11,7 @@ class SliverTabDemoPage extends StatefulWidget {
 
 class _SliverTabDemoPageState extends State<SliverTabDemoPage>
     with TickerProviderStateMixin {
-  TabController tabController;
+  TabController? tabController;
 
   final ScrollController scrollController = new ScrollController();
   final int tabLength = 4;
@@ -50,7 +50,7 @@ class _SliverTabDemoPageState extends State<SliverTabDemoPage>
   }
 
   renderListByIndex() {
-    int indexTab = tabController.index;
+    int indexTab = tabController!.index;
     var list = dataList[indexTab];
     return SliverList(
       delegate: SliverChildBuilderDelegate(
@@ -131,9 +131,9 @@ class _SliverTabDemoPageState extends State<SliverTabDemoPage>
 ///动态头部处理
 class GSYSliverHeaderDelegate extends SliverPersistentHeaderDelegate {
   GSYSliverHeaderDelegate(
-      {@required this.minHeight,
-      @required this.maxHeight,
-      @required this.snapConfig,
+      {required this.minHeight,
+      required this.maxHeight,
+      required this.snapConfig,
       this.child,
       this.builder,
       this.vSync,
@@ -141,12 +141,12 @@ class GSYSliverHeaderDelegate extends SliverPersistentHeaderDelegate {
 
   final double minHeight;
   final double maxHeight;
-  final Widget child;
-  final Builder builder;
-  final TickerProvider vSync;
+  final Widget? child;
+  final Builder? builder;
+  final TickerProvider? vSync;
   final bool changeSize;
   final FloatingHeaderSnapConfiguration snapConfig;
-  AnimationController animationController;
+  AnimationController? animationController;
 
   @override
   double get minExtent => minHeight;
@@ -155,15 +155,15 @@ class GSYSliverHeaderDelegate extends SliverPersistentHeaderDelegate {
   double get maxExtent => math.max(maxHeight, minHeight);
 
   @override
-  TickerProvider get vsync => vSync;
+  TickerProvider? get vsync => vSync;
 
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
     if (builder != null) {
-      return builder(context, shrinkOffset, overlapsContent);
+      return builder!(context, shrinkOffset, overlapsContent);
     }
-    return child;
+    return child!;
   }
 
   @override

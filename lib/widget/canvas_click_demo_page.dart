@@ -10,11 +10,11 @@ class CanvasClickDemoPage extends StatefulWidget {
 
 class _CanvasClickDemoPageState extends State<CanvasClickDemoPage>
     with SingleTickerProviderStateMixin {
-  Timer timer;
+  late Timer timer;
 
-  AnimationController controller;
+  late AnimationController controller;
 
-  Animation animation;
+  late Animation animation;
 
   @override
   void initState() {
@@ -58,7 +58,7 @@ class _CanvasClickDemoPageState extends State<CanvasClickDemoPage>
                 }
               },
               child: RotationTransition(
-                turns: animation,
+                turns: animation as Animation<double>,
                 child: SizedBox(
                   width: 300,
                   height: 300,
@@ -78,7 +78,7 @@ class _CanvasClickDemoPageState extends State<CanvasClickDemoPage>
 }
 
 class ClockPainter extends CustomPainter {
-  final int hour, minute, second;
+  final int? hour, minute, second;
 
   ClockPainter({this.hour, this.minute, this.second});
 
@@ -108,7 +108,7 @@ class ClockPainter extends CustomPainter {
   Color minuteHandColor = DEFAULT_SCALE_AND_HANDS_COLOR;
   Color secondHandColor = DEFAULT_SECOND_HAND_COLOR;
 
-  Paint clockCirclePaint,
+  late Paint clockCirclePaint,
       earPaint,
       footPaint,
       headLinePaint,
@@ -119,28 +119,28 @@ class ClockPainter extends CustomPainter {
       minHandPaint,
       secondHandPaint;
 
-  Rect earRectF;
-  Path earPath, earPath2;
+  late Rect earRectF;
+  late Path earPath, earPath2;
 
-  Offset footRightStartPointF,
+  late Offset footRightStartPointF,
       footRightEndPointF,
       footLeftStartPointF,
       footLeftEndPointF,
       earRightEndPointF,
       earLeftEndPointF;
 
-  double startScaleLength;
-  double stopScaleLength;
+  late double startScaleLength;
+  late double stopScaleLength;
 
-  double stopHeadLength;
+  late double stopHeadLength;
 
-  double stopHourHandLength;
-  double stopMinHandLength;
-  double stopSecondHandLength;
+  late double stopHourHandLength;
+  late double stopMinHandLength;
+  late double stopSecondHandLength;
 
-  double scaleStartX, scaleStartY, scaleStopX, scaleStopY;
+  late double scaleStartX, scaleStartY, scaleStopX, scaleStopY;
 
-  double centerX,
+  double? centerX,
       centerY,
       clockStrokeWidth,
       clockRadius,
@@ -233,90 +233,90 @@ class ClockPainter extends CustomPainter {
     int minSize = min(w, h);
 
     clockRadius = minSize / 3;
-    clockStrokeWidth = clockRadius / 7;
+    clockStrokeWidth = clockRadius! / 7;
 
     clockCirclePaint.strokeWidth =
-        clockCirclePaint.strokeWidth = clockStrokeWidth;
-    clockEarRadius = clockRadius / 3;
-    earRectF = Rect.fromLTRB(centerX - clockEarRadius, centerY - clockEarRadius,
-        centerX + clockEarRadius, centerY + clockEarRadius);
+        clockCirclePaint.strokeWidth = clockStrokeWidth!;
+    clockEarRadius = clockRadius! / 3;
+    earRectF = Rect.fromLTRB(centerX! - clockEarRadius!, centerY! - clockEarRadius!,
+        centerX! + clockEarRadius!, centerY! + clockEarRadius!);
 
     earPath.reset();
     earPath2.reset();
     earPath.addArc(earRectF, pi, pi);
     earPath2.addArc(earRectF, pi, pi);
 
-    footCalculateRadius = clockRadius + (minSize - clockRadius) / 4;
-    footPaint.strokeWidth = clockStrokeWidth * 2 / 3;
-    scalePaint.strokeWidth = clockStrokeWidth / 3;
+    footCalculateRadius = clockRadius! + (minSize - clockRadius!) / 4;
+    footPaint.strokeWidth = clockStrokeWidth! * 2 / 3;
+    scalePaint.strokeWidth = clockStrokeWidth! / 3;
 
-    hourHandPaint.strokeWidth = clockStrokeWidth / 3;
+    hourHandPaint.strokeWidth = clockStrokeWidth! / 3;
     minHandPaint.strokeWidth = hourHandPaint.strokeWidth;
     secondHandPaint.strokeWidth = hourHandPaint.strokeWidth / 2;
     headLinePaint.strokeWidth = footPaint.strokeWidth;
-    headCircleRadius = clockStrokeWidth / 2;
+    headCircleRadius = clockStrokeWidth! / 2;
     centerCircleRadius = headCircleRadius;
 
-    stopHeadLength = centerY - clockRadius - clockStrokeWidth * 1.5;
+    stopHeadLength = centerY! - clockRadius! - clockStrokeWidth! * 1.5;
 
-    startScaleLength = clockRadius * 5.2 / 7;
-    stopScaleLength = clockRadius * 5.6 / 7;
+    startScaleLength = clockRadius! * 5.2 / 7;
+    stopScaleLength = clockRadius! * 5.6 / 7;
 
-    stopHourHandLength = clockRadius * 3.2 / 7;
-    stopMinHandLength = clockRadius * 4.2 / 7;
-    stopSecondHandLength = clockRadius * 4.2 / 7;
+    stopHourHandLength = clockRadius! * 3.2 / 7;
+    stopMinHandLength = clockRadius! * 4.2 / 7;
+    stopSecondHandLength = clockRadius! * 4.2 / 7;
 
     initCoordinates();
   }
 
   void initCoordinates() {
     double earRightEndX =
-        ((clockRadius + clockStrokeWidth) * cos(earRightAngel) + centerX);
+        ((clockRadius! + clockStrokeWidth!) * cos(earRightAngel!) + centerX!);
     double earRightEndY =
-        ((clockRadius + clockStrokeWidth) * sin(earRightAngel) + centerY);
+        ((clockRadius! + clockStrokeWidth!) * sin(earRightAngel!) + centerY!);
     earRightEndPointF = Offset(earRightEndX, earRightEndY);
 
     double earLeftEndX =
-        ((clockRadius + clockStrokeWidth) * cos(earLeftAngel) + centerX);
+        ((clockRadius! + clockStrokeWidth!) * cos(earLeftAngel!) + centerX!);
     double earLeftEndY =
-        ((clockRadius + clockStrokeWidth) * sin(earLeftAngel) + centerY);
+        ((clockRadius! + clockStrokeWidth!) * sin(earLeftAngel!) + centerY!);
     earLeftEndPointF = Offset(earLeftEndX, earLeftEndY);
 
     double footRightStartX =
-        ((clockRadius + clockStrokeWidth / 2) * cos(footRightAngel) + centerX);
+        ((clockRadius! + clockStrokeWidth! / 2) * cos(footRightAngel!) + centerX!);
     double footRightStartY =
-        ((clockRadius + clockStrokeWidth / 2) * sin(footRightAngel) + centerY);
+        ((clockRadius! + clockStrokeWidth! / 2) * sin(footRightAngel!) + centerY!);
 
     footRightStartPointF = Offset(footRightStartX, footRightStartY);
 
     double footRightEndX =
-        (footCalculateRadius * cos(footRightAngel) + centerX);
+        (footCalculateRadius! * cos(footRightAngel!) + centerX!);
     double footRightEndY =
-        (footCalculateRadius * sin(footRightAngel) + centerY);
+        (footCalculateRadius! * sin(footRightAngel!) + centerY!);
 
     footRightEndPointF = Offset(footRightEndX, footRightEndY);
 
     double footLeftStartX =
-        ((clockRadius + clockStrokeWidth / 2) * cos(footLeftAngel) + centerX);
+        ((clockRadius! + clockStrokeWidth! / 2) * cos(footLeftAngel!) + centerX!);
     double footLeftStartY =
-        ((clockRadius + clockStrokeWidth / 2) * sin(footLeftAngel) + centerY);
+        ((clockRadius! + clockStrokeWidth! / 2) * sin(footLeftAngel!) + centerY!);
     footLeftStartPointF = Offset(footLeftStartX, footLeftStartY);
 
-    double footLeftEndX = (footCalculateRadius * cos(footLeftAngel) + centerX);
-    double footLeftEndY = (footCalculateRadius * sin(footLeftAngel) + centerY);
+    double footLeftEndX = (footCalculateRadius! * cos(footLeftAngel!) + centerX!);
+    double footLeftEndY = (footCalculateRadius! * sin(footLeftAngel!) + centerY!);
 
     footLeftEndPointF = Offset(footLeftEndX, footLeftEndY);
   }
 
   void drawClock(Canvas canvas) {
-    canvas.drawCircle(Offset(centerX, centerY), clockRadius, clockCirclePaint);
+    canvas.drawCircle(Offset(centerX!, centerY!), clockRadius!, clockCirclePaint);
 
     for (var a = 0.0; a <= ARC_LENGTH; a += SCALE_ARC_LENGTH_OFFSET) {
-      scaleStartX = startScaleLength * cos(a) + centerX;
-      scaleStartY = startScaleLength * sin(a) + centerY;
+      scaleStartX = startScaleLength * cos(a) + centerX!;
+      scaleStartY = startScaleLength * sin(a) + centerY!;
 
-      scaleStopX = stopScaleLength * cos(a) + centerX;
-      scaleStopY = stopScaleLength * sin(a) + centerY;
+      scaleStopX = stopScaleLength * cos(a) + centerX!;
+      scaleStopY = stopScaleLength * sin(a) + centerY!;
 
       canvas.drawLine(Offset(scaleStartX, scaleStartY),
           Offset(scaleStopX, scaleStopY), scalePaint);
@@ -326,66 +326,66 @@ class ClockPainter extends CustomPainter {
     drawMinute(canvas);
     drawSecond(canvas);
     canvas.drawCircle(
-        Offset(centerX, centerY), centerCircleRadius, centerCirclePaint);
+        Offset(centerX!, centerY!), centerCircleRadius!, centerCirclePaint);
   }
 
   void drawHour(Canvas canvas) {
-    double angle = ((hour % 12 + minute / 60) * CLOCK_HOUR_HAND_ARC_LENGTH -
+    double angle = ((hour! % 12 + minute! / 60) * CLOCK_HOUR_HAND_ARC_LENGTH -
         CLOCK_START_ARC);
 
-    double hourEndX = (stopHourHandLength * cos(angle) + centerX);
-    double hourEndY = (stopHourHandLength * sin(angle) + centerY);
+    double hourEndX = (stopHourHandLength * cos(angle) + centerX!);
+    double hourEndY = (stopHourHandLength * sin(angle) + centerY!);
 
     canvas.drawLine(
-        Offset(centerX, centerY), Offset(hourEndX, hourEndY), hourHandPaint);
+        Offset(centerX!, centerY!), Offset(hourEndX, hourEndY), hourHandPaint);
   }
 
   void drawMinute(Canvas canvas) {
-    double angle = (minute * CLOCK_MINUTE_HAND_ARC_LENGTH - CLOCK_START_ARC);
+    double angle = (minute! * CLOCK_MINUTE_HAND_ARC_LENGTH - CLOCK_START_ARC);
 
-    double minEndX = (stopMinHandLength * cos(angle) + centerX);
-    double minEndY = (stopMinHandLength * sin(angle) + centerY);
+    double minEndX = (stopMinHandLength * cos(angle) + centerX!);
+    double minEndY = (stopMinHandLength * sin(angle) + centerY!);
 
     canvas.drawLine(
-        Offset(centerX, centerY), Offset(minEndX, minEndY), minHandPaint);
+        Offset(centerX!, centerY!), Offset(minEndX, minEndY), minHandPaint);
   }
 
   void drawSecond(Canvas canvas) {
-    double angle = (second * CLOCK_SECOND_HAND_ARC_LENGTH - CLOCK_START_ARC);
+    double angle = (second! * CLOCK_SECOND_HAND_ARC_LENGTH - CLOCK_START_ARC);
 
-    double secondEndX = (stopSecondHandLength * cos(angle) + centerX);
-    double secondEndY = (stopSecondHandLength * sin(angle) + centerY);
+    double secondEndX = (stopSecondHandLength * cos(angle) + centerX!);
+    double secondEndY = (stopSecondHandLength * sin(angle) + centerY!);
 
-    canvas.drawLine(Offset(centerX, centerY), Offset(secondEndX, secondEndY),
+    canvas.drawLine(Offset(centerX!, centerY!), Offset(secondEndX, secondEndY),
         secondHandPaint);
   }
 
   void drawHead(Canvas canvas) {
-    canvas.drawLine(Offset(centerX, centerY - clockRadius),
-        Offset(centerX, stopHeadLength), headLinePaint);
+    canvas.drawLine(Offset(centerX!, centerY! - clockRadius!),
+        Offset(centerX!, stopHeadLength), headLinePaint);
 
     canvas.drawCircle(
-        Offset(centerX, stopHeadLength), headCircleRadius, headCirclePaint);
+        Offset(centerX!, stopHeadLength), headCircleRadius!, headCirclePaint);
   }
 
   void drawEars(Canvas canvas, Size size) {
     canvas.saveLayer(Offset.zero & size, new Paint());
-    canvas.translate(centerX, centerY);
-    canvas.rotate(-atan2(centerX, centerY));
-    canvas.translate(-centerX, -centerY);
+    canvas.translate(centerX!, centerY!);
+    canvas.rotate(-atan2(centerX!, centerY!));
+    canvas.translate(-centerX!, -centerY!);
     canvas.drawPath(
         earPath.transform(
-            Matrix4.translationValues(10, -(centerX - 20), 1).storage),
+            Matrix4.translationValues(10, -(centerX! - 20), 1).storage),
         earPaint);
     canvas.restore();
 
     canvas.save();
-    canvas.translate(centerX, centerY);
-    canvas.rotate(atan2(centerX, centerY));
-    canvas.translate(-centerX, -centerY);
+    canvas.translate(centerX!, centerY!);
+    canvas.rotate(atan2(centerX!, centerY!));
+    canvas.translate(-centerX!, -centerY!);
     canvas.drawPath(
         earPath2.transform(
-            Matrix4.translationValues(-10, -(centerX - 20), 1).storage),
+            Matrix4.translationValues(-10, -(centerX! - 20), 1).storage),
         earPaint);
     canvas.restore();
   }
@@ -413,8 +413,8 @@ class ClockPainter extends CustomPainter {
 }
 
 class DebounceButton extends StatefulWidget {
-  final Widget child;
-  final GestureTapCallback onTap;
+  final Widget? child;
+  final GestureTapCallback? onTap;
   final double radius;
 
   DebounceButton({this.child, this.onTap, this.radius = 0});
@@ -425,7 +425,7 @@ class DebounceButton extends StatefulWidget {
 
 class _DebounceButtonState extends State<DebounceButton> {
   Duration durationTime = Duration(milliseconds: 500);
-  Timer timer;
+  Timer? timer;
 
   @override
   void initState() {

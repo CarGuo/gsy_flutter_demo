@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class LinkFlexibleSpaceBar extends StatefulWidget {
   const LinkFlexibleSpaceBar({
-    Key key,
+    Key? key,
     this.title,
     this.background,
     this.centerTitle,
@@ -16,28 +16,28 @@ class LinkFlexibleSpaceBar extends StatefulWidget {
   })  : assert(collapseMode != null),
         super(key: key);
 
-  final Widget title;
+  final Widget? title;
 
-  final Widget background;
+  final Widget? background;
 
-  final List<Widget> bottom;
+  final List<Widget>? bottom;
 
-  final bool centerTitle;
+  final bool? centerTitle;
 
-  final String image;
+  final String? image;
 
   final CollapseMode collapseMode;
 
   final List<StretchMode> stretchModes;
 
-  final EdgeInsetsGeometry titlePadding;
+  final EdgeInsetsGeometry? titlePadding;
 
   @override
   _LinkFlexibleSpaceBarState createState() => _LinkFlexibleSpaceBarState();
 }
 
 class _LinkFlexibleSpaceBarState extends State<LinkFlexibleSpaceBar> {
-  bool _getEffectiveCenterTitle(ThemeData theme) {
+  bool? _getEffectiveCenterTitle(ThemeData theme) {
     if (widget.centerTitle != null) return widget.centerTitle;
     assert(theme.platform != null);
     switch (theme.platform) {
@@ -51,7 +51,7 @@ class _LinkFlexibleSpaceBarState extends State<LinkFlexibleSpaceBar> {
     }
   }
 
-  Alignment _getTitleAlignment(bool effectiveCenterTitle) {
+  Alignment? _getTitleAlignment(bool effectiveCenterTitle) {
     if (effectiveCenterTitle) return Alignment.bottomCenter;
     final TextDirection textDirection = Directionality.of(context);
     assert(textDirection != null);
@@ -64,7 +64,7 @@ class _LinkFlexibleSpaceBarState extends State<LinkFlexibleSpaceBar> {
     return null;
   }
 
-  double _getCollapsePadding(double t, FlexibleSpaceBarSettings settings) {
+  double? _getCollapsePadding(double t, FlexibleSpaceBarSettings settings) {
     switch (widget.collapseMode) {
       case CollapseMode.pin:
         return -(settings.maxExtent - settings.currentExtent);
@@ -82,7 +82,7 @@ class _LinkFlexibleSpaceBarState extends State<LinkFlexibleSpaceBar> {
     return LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
       final FlexibleSpaceBarSettings settings = context
-          .dependOnInheritedWidgetOfExactType<FlexibleSpaceBarSettings>();
+          .dependOnInheritedWidgetOfExactType<FlexibleSpaceBarSettings>()!;
       assert(
         settings != null,
         'A FlexibleSpaceBar must be wrapped in the widget returned by FlexibleSpaceBar.createSettings().',
@@ -147,7 +147,7 @@ class _LinkFlexibleSpaceBarState extends State<LinkFlexibleSpaceBar> {
       if (widget.title != null) {
         final ThemeData theme = Theme.of(context);
 
-        Widget title;
+        Widget? title;
         switch (theme.platform) {
           case TargetPlatform.iOS:
             title = widget.title;
@@ -173,10 +173,10 @@ class _LinkFlexibleSpaceBarState extends State<LinkFlexibleSpaceBar> {
 
         final double opacity = settings.toolbarOpacity;
         if (opacity > 0.0) {
-          TextStyle titleStyle = theme.primaryTextTheme.headline6;
+          TextStyle titleStyle = theme.primaryTextTheme.headline6!;
           titleStyle =
-              titleStyle.copyWith(color: titleStyle.color.withOpacity(opacity));
-          final bool effectiveCenterTitle = _getEffectiveCenterTitle(theme);
+              titleStyle.copyWith(color: titleStyle.color!.withOpacity(opacity));
+          final bool effectiveCenterTitle = _getEffectiveCenterTitle(theme)!;
           final EdgeInsetsGeometry padding = widget.titlePadding ??
               EdgeInsetsDirectional.only(
                 start: effectiveCenterTitle ? 0.0 : 72.0,
@@ -195,7 +195,7 @@ class _LinkFlexibleSpaceBarState extends State<LinkFlexibleSpaceBar> {
             ..scale(scaleValue, scaleValue, 1.0);
 
           final Alignment titleAlignment =
-              _getTitleAlignment(effectiveCenterTitle);
+              _getTitleAlignment(effectiveCenterTitle)!;
 
           children.add(
             Container(
@@ -213,7 +213,7 @@ class _LinkFlexibleSpaceBarState extends State<LinkFlexibleSpaceBar> {
                           alignment: titleAlignment,
                           child: DefaultTextStyle(
                             style: titleStyle,
-                            child: title,
+                            child: title!,
                           ),
                         ),
                       ),
@@ -227,7 +227,7 @@ class _LinkFlexibleSpaceBarState extends State<LinkFlexibleSpaceBar> {
                           decoration: BoxDecoration(
                               image: DecorationImage(
                                 image: AssetImage(
-                                  widget.image,
+                                  widget.image!,
                                 ),
                                 fit: BoxFit.cover,
                               ),
@@ -245,7 +245,7 @@ class _LinkFlexibleSpaceBarState extends State<LinkFlexibleSpaceBar> {
                         children: <Widget>[
                           new Expanded(
                             child: new Row(
-                              children: widget.bottom ?? Container(),
+                              children: widget.bottom ?? Container() as List<Widget>,
                             ),
                           ),
                         ],

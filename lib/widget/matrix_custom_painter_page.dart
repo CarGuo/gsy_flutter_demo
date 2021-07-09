@@ -10,7 +10,7 @@ class MatrixCustomPainterDemo extends StatefulWidget {
 
 class _MatrixCustomPainterDemoState extends State<MatrixCustomPainterDemo> {
   Matrix4 matrix = Matrix4.identity();
-  ValueNotifier<Matrix4> notifier;
+  ValueNotifier<Matrix4>? notifier;
 
   @override
   void initState() {
@@ -25,7 +25,7 @@ class _MatrixCustomPainterDemoState extends State<MatrixCustomPainterDemo> {
         title: Text('MatrixCustomPainterDemo Demo'),
       ),
       body: MatrixGestureDetector(
-        onMatrixUpdate: (m, tm, sm, rm) => notifier.value = m,
+        onMatrixUpdate: (m, tm, sm, rm) => notifier!.value = m,
         child: CustomPaint(
           foregroundPainter: TestCustomPainter(context, notifier),
           child: Container(
@@ -38,11 +38,11 @@ class _MatrixCustomPainterDemoState extends State<MatrixCustomPainterDemo> {
 }
 
 class TestCustomPainter extends CustomPainter {
-  ValueNotifier<Matrix4> notifier;
+  ValueNotifier<Matrix4>? notifier;
   Paint shapesPaint = Paint();
   Paint backgroundPaint = Paint();
-  Path path;
-  ui.Paragraph paragraph;
+  late Path path;
+  late ui.Paragraph paragraph;
   Size currentSize = Size.zero;
 
   TestCustomPainter(BuildContext context, this.notifier)
@@ -52,7 +52,7 @@ class TestCustomPainter extends CustomPainter {
     shapesPaint.style = PaintingStyle.stroke;
     ui.ParagraphBuilder builder = ui.ParagraphBuilder(ui.ParagraphStyle(
       textAlign: TextAlign.center,
-      fontSize: Theme.of(context).textTheme.headline3.fontSize *
+      fontSize: Theme.of(context).textTheme.headline3!.fontSize! *
           MediaQuery.of(context).textScaleFactor,
     ))
       ..pushStyle(ui.TextStyle(
@@ -96,14 +96,14 @@ class TestCustomPainter extends CustomPainter {
 
     shapesPaint.color = Color(0xffbb6600);
     Matrix4 inverted = Matrix4.zero();
-    inverted.copyInverse(notifier.value);
+    inverted.copyInverse(notifier!.value);
     canvas.save();
     canvas.transform(inverted.storage);
     canvas.drawPath(path, shapesPaint);
     canvas.restore();
 
     shapesPaint.color = Color(0xff008800);
-    canvas.drawPath(path.transform(notifier.value.storage), shapesPaint);
+    canvas.drawPath(path.transform(notifier!.value.storage), shapesPaint);
 
     paragraph.layout(ui.ParagraphConstraints(width: size.width - 64));
     canvas.drawParagraph(paragraph, Offset(32, size.height * 0.3));

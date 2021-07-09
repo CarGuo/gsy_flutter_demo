@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:ui' as ui show ImageFilter;
 import 'package:flutter/material.dart';
 
+import 'drop_rect_tween.dart';
 import 'drop_select_controller.dart';
 import 'drop_select_widget.dart';
 
@@ -21,27 +22,27 @@ class DropSelectMenu extends DropSelectWidget {
   final Curve showCurve;
   final Curve hideCurve;
 
-  final double blur;
+  final double? blur;
 
-  final VoidCallback onHide;
+  final VoidCallback? onHide;
 
   final DropSelectMenuSwitchStyle switchStyle;
 
-  final double maxMenuHeight;
+  final double? maxMenuHeight;
 
   DropSelectMenu(
-      {@required this.menus,
-        DropSelectController controller,
-      Duration hideDuration,
-      Duration showDuration,
+      {required this.menus,
+        DropSelectController? controller,
+      Duration? hideDuration,
+      Duration? showDuration,
       this.onHide,
       this.blur,
-      Key key,
+      Key? key,
       this.maxMenuHeight,
-      Curve hideCurve,
+      Curve? hideCurve,
       this.switchStyle: DropSelectMenuSwitchStyle
           .animationShowUntilAnimationHideComplete,
-      Curve showCurve})
+      Curve? showCurve})
       : hideDuration = hideDuration ?? new Duration(milliseconds: 150),
         showDuration = showDuration ?? new Duration(milliseconds: 300),
         showCurve = showCurve ?? Curves.fastOutSlowIn,
@@ -57,16 +58,16 @@ class DropSelectMenu extends DropSelectWidget {
 }
 
 class _DropSelectAnimation {
-  Animation<Rect> rect;
-  AnimationController animationController;
-  RectTween position;
+  late Animation<Rect> rect;
+  late AnimationController animationController;
+  late DropRectTween position;
 
   _DropSelectAnimation(TickerProvider provider) {
     animationController = new AnimationController(vsync: provider);
   }
 
   set height(double value) {
-    position = new RectTween(
+    position = new DropRectTween(
       begin: new Rect.fromLTRB(0.0, -value, 0.0, 0.0),
       end: new Rect.fromLTRB(0.0, 0.0, 0.0, 0.0),
     );
@@ -82,7 +83,7 @@ class _DropSelectAnimation {
     animationController.dispose();
   }
 
-  TickerFuture animateTo(double value, {Duration duration, Curve curve}) {
+  TickerFuture animateTo(double value, {Duration? duration, required Curve curve}) {
     return animationController.animateTo(value,
         duration: duration, curve: curve);
   }
@@ -102,12 +103,12 @@ class SizeClipper extends CustomClipper<Rect> {
 
 class _DropSelectMenuState extends DropSelectState<DropSelectMenu>
     with TickerProviderStateMixin {
-  List<_DropSelectAnimation> _dropSelectAnimations;
-  bool _show;
-  List<int> _showing;
+  late List<_DropSelectAnimation> _dropSelectAnimations;
+  late bool _show;
+  late List<int> _showing;
 
-  AnimationController _fadeController;
-  Animation<double> _fadeAnimation;
+  late AnimationController _fadeController;
+  late Animation<double> _fadeAnimation;
 
   @override
   void initState() {
@@ -142,7 +143,7 @@ class _DropSelectMenuState extends DropSelectState<DropSelectMenu>
   void _updateHeights() {
     for (int i = 0, c = widget.menus.length; i < c; ++i) {
       _dropSelectAnimations[i].height =
-          _ensureHeight(_getHeight(widget.menus[i]));
+          _ensureHeight(_getHeight(widget.menus[i]))!;
     }
   }
 
@@ -217,12 +218,12 @@ class _DropSelectMenuState extends DropSelectState<DropSelectMenu>
 
   TickerFuture onHide({bool dispatch: true}) {
     if (_activeIndex != null) {
-      int index = _activeIndex;
+      int index = _activeIndex!;
       _activeIndex = null;
       TickerFuture future = _hide(index);
       if (dispatch) {
         if (controller != null) {
-          controller.hide();
+          controller!.hide();
         }
 
         //if (widget.onHide != null) widget.onHide();
@@ -248,7 +249,7 @@ class _DropSelectMenuState extends DropSelectState<DropSelectMenu>
     return future;
   }
 
-  int _activeIndex;
+  int? _activeIndex;
 
   Future<void> onShow(int index) {
     //哪一个是要展示的
@@ -266,7 +267,7 @@ class _DropSelectMenuState extends DropSelectState<DropSelectMenu>
       switch (widget.switchStyle) {
         case DropSelectMenuSwitchStyle.directHideAnimationShow:
           {
-            _dropSelectAnimations[_activeIndex].value = 0.0;
+            _dropSelectAnimations[_activeIndex!].value = 0.0;
             _dropSelectAnimations[index].value = 1.0;
             _activeIndex = index;
 
@@ -280,18 +281,18 @@ class _DropSelectMenuState extends DropSelectState<DropSelectMenu>
           break;
         case DropSelectMenuSwitchStyle.animationHideAnimationShow:
           {
-            _hide(_activeIndex);
+            _hide(_activeIndex!);
           }
           break;
         case DropSelectMenuSwitchStyle.directHideDirectShow:
           {
-            _dropSelectAnimations[_activeIndex].value = 0.0;
+            _dropSelectAnimations[_activeIndex!].value = 0.0;
           }
           break;
         case DropSelectMenuSwitchStyle
             .animationShowUntilAnimationHideComplete:
           {
-            return _hide(_activeIndex).whenComplete(() {
+            return _hide(_activeIndex!).whenComplete(() {
               return _handleShow(index, true);
             });
           }
@@ -316,14 +317,14 @@ class _DropSelectMenuState extends DropSelectState<DropSelectMenu>
         .animateTo(1.0, duration: widget.showDuration, curve: widget.showCurve);
   }
 
-  double _getHeight(dynamic menu) {
+  double? _getHeight(dynamic menu) {
     DropSelectMenuBuilder builder = menu as DropSelectMenuBuilder;
 
     return builder.height;
   }
 
-  double _ensureHeight(double height) {
-    final double maxMenuHeight = widget.maxMenuHeight;
+  double? _ensureHeight(double? height) {
+    final double? maxMenuHeight = widget.maxMenuHeight;
     assert(height != null || maxMenuHeight != null,
         "DropSelectMenu.maxMenuHeight and DropSelectMenuBuilder.height must not both null");
     if (maxMenuHeight != null) {
@@ -334,7 +335,7 @@ class _DropSelectMenuState extends DropSelectState<DropSelectMenu>
   }
 
   @override
-  void onEvent(DropSelectEvent event) {
+  void onEvent(DropSelectEvent? event) {
     switch (event) {
       case DropSelectEvent.SELECT:
       case DropSelectEvent.HIDE:
@@ -344,7 +345,7 @@ class _DropSelectMenuState extends DropSelectState<DropSelectMenu>
         break;
       case DropSelectEvent.ACTIVE:
         {
-          onShow(controller.menuIndex);
+          onShow(controller!.menuIndex!);
         }
         break;
     }

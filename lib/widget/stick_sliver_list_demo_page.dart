@@ -7,7 +7,7 @@ final random = math.Random();
 final stickHeader = 50.0;
 
 class StickSliverListDemoPage extends StatefulWidget {
-  final List<ExpendedModel> dataList = List.generate(7, (index) {
+  final List<ExpendedModel?> dataList = List.generate(7, (index) {
     return ExpendedModel(false, List.filled(random.nextInt(100), null));
   });
 
@@ -41,13 +41,13 @@ class _StickSliverListDemoPageState extends State<StickSliverListDemoPage> {
       return;
     }
     var item = widget.dataList.lastWhere((item) {
-      if (item.globalKey.currentContext == null) {
+      if (item!.globalKey.currentContext == null) {
         return false;
       }
 
       ///获取 renderBox
-      RenderSliver renderSliver =
-          item.globalKey.currentContext.findRenderObject();
+      RenderSliver? renderSliver =
+          item.globalKey.currentContext!.findRenderObject() as RenderSliver?;
       if (renderSliver == null) {
         return false;
       }
@@ -98,9 +98,9 @@ class _StickSliverListDemoPageState extends State<StickSliverListDemoPage> {
             ),
             StickHeader("header $_titleIndex",
                 showTopButton: _showTitleTopButton, callback: () {
-              var item = widget.dataList[_titleIndex];
+              var item = widget.dataList[_titleIndex]!;
               RenderSliver renderSliver =
-                  item.globalKey.currentContext.findRenderObject();
+                  item.globalKey.currentContext!.findRenderObject() as RenderSliver;
               var position = _scrollController.position.pixels -
                   renderSliver.constraints.scrollOffset;
               _scrollController.position.jumpTo(position);
@@ -111,10 +111,10 @@ class _StickSliverListDemoPageState extends State<StickSliverListDemoPage> {
 }
 
 class SliverExpandedList extends StatefulWidget {
-  final ExpendedModel expendedModel;
+  final ExpendedModel? expendedModel;
   final String title;
   final int visibleCount;
-  final ValueChanged valueChanged;
+  final ValueChanged? valueChanged;
 
   SliverExpandedList(this.expendedModel, this.title,
       {this.visibleCount = 3, this.valueChanged});
@@ -128,14 +128,14 @@ class _SliverExpandedListState extends State<SliverExpandedList> {
 
   toTop() {
     ///获取 renderBox
-    RenderSliver render = context.findRenderObject();
+    RenderSliver? render = context.findRenderObject() as RenderSliver?;
     if (render == null) {
       return;
     }
-    var position = Scrollable.of(context).position.pixels -
+    var position = Scrollable.of(context)!.position.pixels -
         render.constraints.scrollOffset;
     if (position >= 0) {
-      Scrollable.of(context).position.jumpTo(position);
+      Scrollable.of(context)!.position.jumpTo(position);
     }
   }
 
@@ -172,23 +172,23 @@ class _SliverExpandedListState extends State<SliverExpandedList> {
   getListCount(bool needExpanded) {
     return (expanded)
         ? (needExpanded)
-            ? widget.expendedModel.dataList.length + 2
-            : widget.expendedModel.dataList.length + 1
+            ? widget.expendedModel!.dataList.length + 2
+            : widget.expendedModel!.dataList.length + 1
         : (needExpanded) ? widget.visibleCount + 2 : widget.visibleCount + 1;
   }
 
   @override
   Widget build(BuildContext context) {
-    bool needExpanded = (widget.expendedModel.dataList.length > 3);
+    bool needExpanded = (widget.expendedModel!.dataList.length > 3);
     return SliverList(
-      key: widget.expendedModel.globalKey,
+      key: widget.expendedModel!.globalKey,
       delegate: SliverChildBuilderDelegate(
         (BuildContext context, int index) {
           ///增加bottom
           if (!expanded && needExpanded && index == widget.visibleCount + 1) {
             return renderExpendedMore();
           }
-          if (index == widget.expendedModel.dataList.length + 1) {
+          if (index == widget.expendedModel!.dataList.length + 1) {
             return renderExpendedMore();
           }
 
@@ -213,9 +213,9 @@ class _SliverExpandedListState extends State<SliverExpandedList> {
 class StickHeader extends StatelessWidget {
   final String title;
   final bool showTopButton;
-  final VoidCallback callback;
+  final VoidCallback? callback;
 
-  StickHeader(this.title, {Key key, this.showTopButton = false, this.callback})
+  StickHeader(this.title, {Key? key, this.showTopButton = false, this.callback})
       : super(key: key);
 
   @override

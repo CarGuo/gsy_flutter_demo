@@ -14,7 +14,7 @@ class SliverTabDemoPage3 extends StatefulWidget {
 
 class _SliverTabDemoPageState extends State<SliverTabDemoPage3>
     with TickerProviderStateMixin {
-  TabController tabController;
+  TabController? tabController;
 
   final PageController pageController = new PageController();
   final int tabLength = 4;
@@ -148,7 +148,7 @@ class _SliverTabDemoPageState extends State<SliverTabDemoPage3>
               child: PageView(
                 //physics: NeverScrollableScrollPhysics(),
                 onPageChanged: (index) {
-                  tabController.animateTo(index);
+                  tabController!.animateTo(index);
                 },
                 controller: pageController,
                 children: renderPages(),
@@ -164,20 +164,20 @@ class _SliverTabDemoPageState extends State<SliverTabDemoPage3>
 ///动态头部处理
 class GSYSliverHeaderDelegate extends SliverPersistentHeaderDelegate {
   GSYSliverHeaderDelegate(
-      {@required this.minHeight,
-      @required this.maxHeight,
-      @required this.snapConfig,
+      {required this.minHeight,
+      required this.maxHeight,
+      required this.snapConfig,
       this.child,
       this.builder,
       this.changeSize = false});
 
   final double minHeight;
   final double maxHeight;
-  final Widget child;
-  final BuilderDelegate builder;
+  final Widget? child;
+  final BuilderDelegate? builder;
   final bool changeSize;
   final FloatingHeaderSnapConfiguration snapConfig;
-  AnimationController animationController;
+  AnimationController? animationController;
 
   @override
   double get minExtent => minHeight;
@@ -189,9 +189,9 @@ class GSYSliverHeaderDelegate extends SliverPersistentHeaderDelegate {
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
     if (builder != null) {
-      return builder(context, shrinkOffset, overlapsContent);
+      return builder!(context, shrinkOffset, overlapsContent);
     }
-    return child;
+    return child!;
   }
 
   @override

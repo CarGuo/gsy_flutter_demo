@@ -4,16 +4,16 @@ import 'package:gsy_flutter_demo/widget/drop_select_menu/drop_select_object.dart
 import 'drop_select_controller.dart';
 
 abstract class DropSelectWidget extends StatefulWidget {
-  final DropSelectController controller;
+  final DropSelectController? controller;
 
-  DropSelectWidget({Key key, this.controller}) : super(key: key);
+  DropSelectWidget({Key? key, this.controller}) : super(key: key);
 
   @override
   DropSelectState<DropSelectWidget> createState();
 }
 
 abstract class DropSelectState<T extends DropSelectWidget> extends State<T> {
-  DropSelectController controller;
+  DropSelectController? controller;
 
   @override
   void dispose() {
@@ -58,35 +58,35 @@ abstract class DropSelectState<T extends DropSelectWidget> extends State<T> {
   selectChildFirst(List<DropSelectObject> list) {
     list.forEach((item) {
       if (item.children != null) {
-        item.children[0].selected = true;
+        item.children![0].selected = true;
       }
     });
   }
 
   void _onEvent() {
-    onEvent(controller.event);
+    onEvent(controller!.event);
   }
 
-  void onEvent(DropSelectEvent event);
+  void onEvent(DropSelectEvent? event);
 }
 
 class DropSelectMenuContainer extends StatefulWidget {
   DropSelectMenuContainer({
-    Key key,
-    @required this.child,
+    Key? key,
+    required this.child,
     this.onSelected,
   }) : super(key: key);
 
   final Widget child;
 
-  final DropOnSelected onSelected;
+  final DropOnSelected? onSelected;
 
   @override
   _DropSelectMenuContainerState createState() =>
       new _DropSelectMenuContainerState();
 
-  static DropSelectController of(BuildContext context) {
-    final _DropSelectMenuInherited scope =
+  static DropSelectController? of(BuildContext context) {
+    final _DropSelectMenuInherited? scope =
         context.dependOnInheritedWidgetOfExactType<_DropSelectMenuInherited>();
     return scope?.controller;
   }
@@ -94,23 +94,23 @@ class DropSelectMenuContainer extends StatefulWidget {
 
 class _DropSelectMenuContainerState extends State<DropSelectMenuContainer>
     with SingleTickerProviderStateMixin {
-  DropSelectController _controller;
+  DropSelectController? _controller;
 
   @override
   void initState() {
     super.initState();
     _controller = new DropSelectController();
-    _controller.addListener(_onController);
+    _controller!.addListener(_onController);
   }
 
   void _onController() {
-    switch (_controller.event) {
+    switch (_controller!.event) {
       case DropSelectEvent.SELECT:
         if (widget.onSelected == null) return;
-        widget.onSelected(
-          data: _controller.data,
-          menuIndex: _controller.menuIndex,
-          index: _controller.index,
+        widget.onSelected!(
+          data: _controller!.data,
+          menuIndex: _controller!.menuIndex,
+          index: _controller!.index,
         );
 
         break;
@@ -123,8 +123,8 @@ class _DropSelectMenuContainerState extends State<DropSelectMenuContainer>
 
   @override
   void dispose() {
-    _controller.removeListener(_onController);
-    _controller.dispose();
+    _controller!.removeListener(_onController);
+    _controller!.dispose();
     super.dispose();
   }
 
@@ -140,11 +140,11 @@ class _DropSelectMenuContainerState extends State<DropSelectMenuContainer>
 
 class _DropSelectMenuInherited extends InheritedWidget {
   const _DropSelectMenuInherited(
-      {Key key, this.controller, this.enable, Widget child})
+      {Key? key, this.controller, this.enable, required Widget child})
       : super(key: key, child: child);
 
-  final bool enable;
-  final DropSelectController controller;
+  final bool? enable;
+  final DropSelectController? controller;
 
   @override
   bool updateShouldNotify(_DropSelectMenuInherited old) {
@@ -154,10 +154,10 @@ class _DropSelectMenuInherited extends InheritedWidget {
 
 class DropSelectMenuBuilder {
   final WidgetBuilder builder;
-  final double height;
+  final double? height;
 
-  DropSelectMenuBuilder({@required this.builder, this.height})
+  DropSelectMenuBuilder({required this.builder, this.height})
       : assert(builder != null);
 }
 
-typedef DropOnSelected({int menuIndex, int index, dynamic data});
+typedef DropOnSelected({int? menuIndex, int? index, dynamic data});

@@ -4,7 +4,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class LoadingAnimButton extends StatefulWidget {
-  final LoadingState loadingState;
+  final LoadingState? loadingState;
   final int loadingSpeed;
 
   LoadingAnimButton({this.loadingState, this.loadingSpeed = 2});
@@ -15,10 +15,10 @@ class LoadingAnimButton extends StatefulWidget {
 
 class _LoadingAnimButtonState extends State<LoadingAnimButton>
     with SingleTickerProviderStateMixin {
-  double currentRippleX;
+  double currentRippleX = 0;
 
-  AnimationController loadingButtonController;
-  Animation loadingAnimation;
+  late AnimationController loadingButtonController;
+  late Animation loadingAnimation;
 
   LoadingState loadingState = LoadingState.STATE_PRE;
 
@@ -49,7 +49,7 @@ class _LoadingAnimButtonState extends State<LoadingAnimButton>
   Widget build(BuildContext context) {
     return CustomPaint(
       painter: LoadingButtonPainter(
-          fraction: 1 - loadingAnimation.value,
+          fraction: 1 - loadingAnimation.value as double,
           currentState: widget.loadingState,
           currentRippleX: currentRippleX,
           loadingSpeed: widget.loadingSpeed,
@@ -65,36 +65,36 @@ enum LoadingState { STATE_PRE, STATE_DOWNLOADING, STATE_END, STATE_COMPLETE }
 class LoadingButtonPainter extends CustomPainter {
   final double fraction;
 
-  final LoadingState currentState;
-  final ValueChanged currentRippleXCallback;
+  final LoadingState? currentState;
+  final ValueChanged? currentRippleXCallback;
   final int loadingSpeed;
 
-  double width;
+  late double width;
 
-  double height;
+  late double height;
 
-  double circleRadius;
+  late double circleRadius;
 
-  double centerX;
-  double centerY;
-  double baseLength;
-  double baseRippleLength;
+  late double centerX;
+  late double centerY;
+  late double baseLength;
+  late double baseRippleLength;
   double currentRippleX;
-  Rect rect;
-  Rect clipRect;
+  late Rect rect;
+  late Rect clipRect;
 
   LoadingButtonPainter(
       {this.fraction = 1,
       this.currentState = LoadingState.STATE_PRE,
-      this.currentRippleX,
+      this.currentRippleX = 0,
       this.loadingSpeed = 2,
       this.currentRippleXCallback});
 
-  Paint painter;
-  Paint bgPainter;
+  late Paint painter;
+  late Paint bgPainter;
   Path path = Path();
   Path dstPath = Path();
-  PathMetric pathMetric;
+  PathMetric? pathMetric;
 
   initPaint() {
     init(Paint painter) {
@@ -204,10 +204,10 @@ class LoadingButtonPainter extends CustomPainter {
             rect, -0.5 * pi, 359.99 / 180 * pi * fraction, false, painter);
         path.reset();
         currentRippleX += loadingSpeed;
-        if (currentRippleX > centerX - baseRippleLength * 6)
+        if (currentRippleX! > centerX - baseRippleLength * 6)
           currentRippleX = centerX - baseRippleLength * 10;
         currentRippleXCallback?.call(currentRippleX);
-        path.moveTo(currentRippleX, centerY);
+        path.moveTo(currentRippleX!, centerY);
         for (int i = 0; i < 4; i++) {
           path.relativeQuadraticBezierTo(baseRippleLength,
               -(1 - fraction) * baseRippleLength, baseRippleLength * 2, 0);

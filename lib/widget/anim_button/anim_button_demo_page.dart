@@ -11,7 +11,7 @@ class AnimButtonDemoPage extends StatefulWidget {
 }
 
 class _AnimButtonDemoPageState extends State<AnimButtonDemoPage> {
-  LoadingState loadingState = LoadingState.STATE_PRE;
+  LoadingState? loadingState = LoadingState.STATE_PRE;
 
   updateState() {
     setState(() {});

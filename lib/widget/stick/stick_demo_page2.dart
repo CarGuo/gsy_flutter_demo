@@ -82,10 +82,10 @@ class _ExpandChildListState extends State<ExpandChildList> {
 
   ///获取 globalKey 在 Scrollable 内的相对 y 滚动偏移量
   getY(GlobalKey key) {
-    RenderBox renderBox = key.currentContext.findRenderObject();
+    RenderBox renderBox = key.currentContext!.findRenderObject() as RenderBox;
     double dy = renderBox
         .localToGlobal(Offset.zero,
-            ancestor: Scrollable.of(context).context.findRenderObject())
+            ancestor: Scrollable.of(context)!.context.findRenderObject())
         .dy;
     return dy;
   }
@@ -94,13 +94,13 @@ class _ExpandChildListState extends State<ExpandChildList> {
   ///所以使用滚动和notifyListeners解决
   fixCloseState() {
     var y = getY(globalKey);
-    Scrollable.of(context).position.jumpTo(
-        math.max(0, Scrollable.of(context).position.pixels + y) - stickHeader);
+    Scrollable.of(context)!.position.jumpTo(
+        math.max(0, Scrollable.of(context)!.position.pixels + y) - stickHeader);
     widget.expendedModel.expended = false;
 
     ///必须延时到收起动画结束后再更新UI
     Future.delayed(Duration(milliseconds: animMilliseconds + 50), () {
-      Scrollable.of(context).position.notifyListeners();
+      Scrollable.of(context)!.position.notifyListeners();
     });
   }
 
@@ -122,7 +122,7 @@ class _ExpandChildListState extends State<ExpandChildList> {
               widget.expendedModel.expended = true;
             },
           ),
-          builder: (BuildContext context, Widget collapsed, Widget expanded) {
+          builder: (BuildContext context, Widget? collapsed, Widget? expanded) {
             return Expandable(
               animationDuration: Duration(milliseconds: animMilliseconds),
               collapsed: collapsed,
@@ -149,10 +149,10 @@ class ExpandableVisibleContainer extends StatelessWidget {
   final double itemHeight;
   final int visibleCount;
   final List dataList;
-  final ExpandedStateChanged expandedStateChanged;
+  final ExpandedStateChanged? expandedStateChanged;
 
   ExpandableVisibleContainer(this.dataList,
-      {@required this.visibleCount,
+      {required this.visibleCount,
       this.itemHeight = 150,
       this.expandedStateChanged,
       key})
@@ -168,7 +168,7 @@ class ExpandableVisibleContainer extends StatelessWidget {
       child: new InkWell(
         onTap: () {
           ///展开，回调
-          ExpandableController.of(context).toggle();
+          ExpandableController.of(context)!.toggle();
           expandedStateChanged?.call(true);
         },
         child: Container(
@@ -189,9 +189,11 @@ class ExpandableVisibleContainer extends StatelessWidget {
     bool needExpended = (dataList.length > visibleCount);
 
     ///未展开时显示展开更多
-    int realVisibleCount = ExpandableController.of(context).expanded
+    int realVisibleCount = ExpandableController.of(context)!.expanded
         ? visibleCount
-        : (needExpended) ? visibleCount + 1 : visibleCount;
+        : (needExpended)
+            ? visibleCount + 1
+            : visibleCount;
 
     return new Container(
       child: new Align(
@@ -227,12 +229,12 @@ class ExpandableVisibleContainer extends StatelessWidget {
 ///点击展开区域
 class ExpandableContainer extends StatelessWidget {
   final double itemHeight;
-  final ExpandedStateChanged expandedStateChanged;
+  final ExpandedStateChanged? expandedStateChanged;
   final List dataList;
   final int visibleCount;
 
   ExpandableContainer(this.dataList,
-      {@required this.visibleCount,
+      {required this.visibleCount,
       this.itemHeight = 150,
       this.expandedStateChanged});
 
@@ -245,7 +247,7 @@ class ExpandableContainer extends StatelessWidget {
       child: new InkWell(
         onTap: () {
           ///收起，回调
-          ExpandableController.of(context).toggle();
+          ExpandableController.of(context)!.toggle();
           expandedStateChanged?.call(false);
         },
         child: Container(
@@ -265,9 +267,9 @@ class ExpandableContainer extends StatelessWidget {
     ///去除可视部分后的个数
     int decCount = dataList.length - visibleCount;
     int expandedCount =
-        !ExpandableController.of(context).expanded ? decCount : decCount + 1;
+        !ExpandableController.of(context)!.expanded ? decCount : decCount + 1;
 
-    if (!ExpandableController.of(context).expanded) {
+    if (!ExpandableController.of(context)!.expanded) {
       return Container();
     }
 

@@ -30,7 +30,7 @@ class _CustomMultiRenderDemoPageState extends State<CustomMultiRenderDemoPage> {
           ///使用 CustomMultiChildLayout
           child: CustomMultiChildLayout(
             ///使用 CircleLayoutDelegate 实现 child 的布局
-            delegate: CircleLayoutDelegate(customLayoutId,
+            delegate: CircleLayoutDelegate(customLayoutId as List<String>,
 
                 ///这里外部指定 child 的大小
                 childSize: Size(childSize, childSize),
@@ -92,7 +92,7 @@ class CircleLayoutDelegate extends MultiChildLayoutDelegate {
 
   final Offset center;
 
-  Size childSize;
+  Size? childSize;
 
   CircleLayoutDelegate(this.customLayoutId,
       {this.center = Offset.zero, this.childSize});
@@ -117,11 +117,11 @@ class CircleLayoutDelegate extends MultiChildLayoutDelegate {
             size.height / customLayoutId.length);
 
         ///设置 child 大小
-        layoutChild(item, BoxConstraints.loose(childSize));
+        layoutChild(item, BoxConstraints.loose(childSize!));
 
-        final double centerX = childSize.width / 2.0;
+        final double centerX = childSize!.width / 2.0;
 
-        final double centerY = childSize.height / 2.0;
+        final double centerY = childSize!.height / 2.0;
 
         var result = new Offset(x - centerX, y - centerY);
 
@@ -160,7 +160,7 @@ class ContentItem extends StatelessWidget {
               text,
               style: Theme.of(context)
                   .textTheme
-                  .headline6
+                  .headline6!
                   .copyWith(color: Colors.white),
             ),
           ),

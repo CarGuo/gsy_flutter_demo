@@ -16,13 +16,13 @@ class _ScrollToIndexDemoPageState extends State<ScrollToIndexDemoPage> {
   static const maxCount = 100;
 
   /// pub  scroll_to_index 项目的 controller
-  AutoScrollController controller;
+  AutoScrollController? controller;
 
   final random = math.Random();
 
   final scrollDirection = Axis.vertical;
 
-  List<List<int>> randomList;
+  late List<List<int>> randomList;
 
   @override
   void initState() {
@@ -50,9 +50,9 @@ class _ScrollToIndexDemoPageState extends State<ScrollToIndexDemoPage> {
         ));
   }
 
-  Widget _wrapScrollTag({int index, Widget child}) => AutoScrollTag(
+  Widget _wrapScrollTag({required int index, required Widget child}) => AutoScrollTag(
         key: ValueKey(index),
-        controller: controller,
+        controller: controller!,
         index: index,
         child: child,
         highlightColor: Colors.black.withOpacity(0.1),
@@ -80,9 +80,9 @@ class _ScrollToIndexDemoPageState extends State<ScrollToIndexDemoPage> {
         new TextButton(
           onPressed: () async {
             ///滑动到第13个的位置
-            await controller.scrollToIndex(13,
+            await controller!.scrollToIndex(13,
                 preferPosition: AutoScrollPosition.begin);
-            controller.highlight(13);
+            controller!.highlight(13);
           },
           child: new Text("Scroll to 13"),
         ),

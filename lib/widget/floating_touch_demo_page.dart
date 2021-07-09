@@ -13,8 +13,8 @@ class _FloatingTouchDemoPageState extends State<FloatingTouchDemoPage> {
 
   ///显示悬浮控件
   _showFloating() {
-    var overlayState = Overlay.of(context);
-    OverlayEntry overlayEntry;
+    var overlayState = Overlay.of(context)!;
+    OverlayEntry? overlayEntry;
     overlayEntry = new OverlayEntry(builder: (context) {
       return Stack(
         children: <Widget>[
@@ -32,20 +32,20 @@ class _FloatingTouchDemoPageState extends State<FloatingTouchDemoPage> {
   }
 
   ///绘制悬浮控件
-  _buildFloating(OverlayEntry overlayEntry) {
+  _buildFloating(OverlayEntry? overlayEntry) {
     return GestureDetector(
       behavior: HitTestBehavior.deferToChild,
       onPanDown: (details) {
         offset = details.globalPosition - Offset(height / 2, height / 2);
-        overlayEntry.markNeedsBuild();
+        overlayEntry!.markNeedsBuild();
       },
       onPanUpdate: (DragUpdateDetails details) {
         ///根据触摸修改悬浮控件偏移
         offset = offset + details.delta;
-        overlayEntry.markNeedsBuild();
+        overlayEntry!.markNeedsBuild();
       },
       onLongPress: () {
-        overlayEntry.remove();
+        overlayEntry!.remove();
       },
       child: new Material(
         color: Colors.transparent,

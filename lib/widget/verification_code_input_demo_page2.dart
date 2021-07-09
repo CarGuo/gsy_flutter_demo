@@ -44,17 +44,17 @@ class _VerificationCodeInputDemoPage2State
 ///PIN 码输入控件
 class PINInputWidget extends StatelessWidget {
   final String title;
-  final String tipTitle;
+  final String? tipTitle;
   final bool needTip;
 
-  final void Function(String value) onChanged;
+  final void Function(String value)? onChanged;
 
-  final void Function(String value) onFilled;
+  final void Function(String value)? onFilled;
 
   final GlobalKey tipGlobalKey = new GlobalKey();
-  final TextEditingController textEditingController;
-  final FocusNode node;
-  final EdgeInsetsGeometry margin;
+  final TextEditingController? textEditingController;
+  final FocusNode? node;
+  final EdgeInsetsGeometry? margin;
 
   PINInputWidget(
       {this.title = "",
@@ -85,7 +85,7 @@ class PINInputWidget extends StatelessWidget {
               ),
               new Expanded(child: new Container()),
               if (needTip)
-                Text(tipTitle,
+                Text(tipTitle!,
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 16,
@@ -117,11 +117,11 @@ class PINInputWidget extends StatelessWidget {
 
 ///PIN码输入框样式
 CodeInputBuilder pinRectangle(BuildContext context,
-    {EdgeInsetsGeometry edgeInsets, bool needApex = true}) {
+    {EdgeInsetsGeometry? edgeInsets, bool needApex = true}) {
   var codeSize = 6;
   var padding = 50.0;
   if (edgeInsets?.horizontal != null) {
-    padding = edgeInsets.horizontal / 2;
+    padding = edgeInsets!.horizontal / 2;
   }
 
   double width = MediaQuery.of(context).size.width;
@@ -141,12 +141,12 @@ CodeInputBuilder pinRectangle(BuildContext context,
 CodeInputBuilder _pinContainerized(
     // ignore: unused_element
     {Duration animationDuration = const Duration(milliseconds: 50),
-    @required Size totalSize,
-    @required Size emptySize,
-    @required Size filledSize,
-    @required TextStyle emptyTextStyle,
-    @required TextStyle filledTextStyle,
-    @required Color color}) {
+    required Size totalSize,
+    required Size emptySize,
+    required Size filledSize,
+    required TextStyle emptyTextStyle,
+    required TextStyle filledTextStyle,
+    required Color color}) {
   final width = 0.5;
   final borderRadiusSize = Radius.circular(4);
 
@@ -246,7 +246,7 @@ CodeInputBuilder pinLine(BuildContext context) {
 }
 
 renderTipIcon(BuildContext context, String title, GlobalKey key,
-    {expanded = true, double width, bool needIcon = true}) {
+    {expanded = true, double? width, bool needIcon = true}) {
   var titleWidget = new Container(
       alignment: Alignment.centerLeft,
       child: new RichText(
@@ -318,7 +318,7 @@ class UpWhitelistingTextInputFormatter extends TextInputFormatter {
       (String substring) {
         var result = whitelistedPattern
             .allMatches(substring.toUpperCase())
-            .map<String>((Match match) => match.group(0))
+            .map<String?>((Match match) => match.group(0))
             .join();
         if (result != null && result.length > 0) {
           return result;
@@ -344,7 +344,7 @@ class UpWhitelistingTextInputFormatter extends TextInputFormatter {
     final int selectionStartIndex = value.selection.baseOffset;
     final int selectionEndIndex = value.selection.extentOffset;
     String manipulatedText;
-    TextSelection manipulatedSelection;
+    TextSelection? manipulatedSelection;
     if (selectionStartIndex < 0 || selectionEndIndex < 0) {
       manipulatedText = substringManipulation(value.text);
     } else {
@@ -382,11 +382,11 @@ typedef CodeInputBuilder = Widget Function(
 
 class VerCodeInput extends StatefulWidget {
   const VerCodeInput._({
-    Key key,
-    @required this.length,
-    @required this.keyboardType,
-    @required this.inputFormatters,
-    @required this.builder,
+    Key? key,
+    required this.length,
+    required this.keyboardType,
+    required this.inputFormatters,
+    required this.builder,
     this.onChanged,
     this.controller,
     this.onFilled,
@@ -394,15 +394,15 @@ class VerCodeInput extends StatefulWidget {
   }) : super(key: key);
 
   factory VerCodeInput({
-    Key key,
-    @required int length,
+    Key? key,
+    required int length,
     TextInputType keyboardType = TextInputType.text,
-    List<TextInputFormatter> inputFormatters,
-    @required CodeInputBuilder builder,
-    void Function(String value) onChanged,
-    void Function(String value) onFilled,
-    TextEditingController controller,
-    FocusNode node,
+    List<TextInputFormatter>? inputFormatters,
+    required CodeInputBuilder builder,
+    void Function(String value)? onChanged,
+    void Function(String value)? onFilled,
+    TextEditingController? controller,
+    FocusNode? node,
   }) {
     assert(length != null);
     assert(length > 0, 'The length needs to be larger than zero.');
@@ -472,13 +472,13 @@ class VerCodeInput extends StatefulWidget {
   final CodeInputBuilder builder;
 
   /// A callback for changes to the input.
-  final void Function(String value) onChanged;
+  final void Function(String value)? onChanged;
 
   /// A callback for when the input is filled.
-  final void Function(String value) onFilled;
+  final void Function(String value)? onFilled;
 
-  final TextEditingController controller;
-  final FocusNode node;
+  final TextEditingController? controller;
+  final FocusNode? node;
 
   /// A helping function that creates input formatters for a given length and
   /// keyboardType.
@@ -505,12 +505,12 @@ class VerCodeInput extends StatefulWidget {
 class _VerCodeInputState extends State<VerCodeInput> {
   final nodeInner = FocusNode();
 
-  String get text => widget.controller.text;
+  String get text => widget.controller!.text;
 
   @override
   void initState() {
     super.initState();
-    widget.controller.addListener(() {
+    widget.controller!.addListener(() {
       if (mounted) {
         setState(() {});
       }
@@ -528,7 +528,7 @@ class _VerCodeInputState extends State<VerCodeInput> {
           width: 0.0,
           height: 0.0,
           child: EditableText(
-            controller: widget.controller,
+            controller: widget.controller!,
             focusNode: widget.node ?? nodeInner,
             inputFormatters: widget.inputFormatters,
             keyboardType: widget.keyboardType,
@@ -559,7 +559,7 @@ class _VerCodeInputState extends State<VerCodeInput> {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: List.generate(widget.length, (i) {
-                final hasFocus = widget.controller.selection.baseOffset == i;
+                final hasFocus = widget.controller!.selection.baseOffset == i;
                 final char = i < text.length ? text[i] : '';
                 final characterEntity = widget.builder(hasFocus, char, i);
 
@@ -591,13 +591,13 @@ abstract class CodeInputBuilders {
   /// Builds the input inside an animated container.
   static CodeInputBuilder containerized({
     Duration animationDuration = const Duration(milliseconds: 50),
-    @required Size totalSize,
-    @required Size emptySize,
-    @required Size filledSize,
-    @required BoxDecoration emptyDecoration,
-    @required BoxDecoration filledDecoration,
-    @required TextStyle emptyTextStyle,
-    @required TextStyle filledTextStyle,
+    required Size totalSize,
+    required Size emptySize,
+    required Size filledSize,
+    required BoxDecoration emptyDecoration,
+    required BoxDecoration filledDecoration,
+    required TextStyle emptyTextStyle,
+    required TextStyle filledTextStyle,
     Alignment alignment: Alignment.center,
   }) {
     return (bool hasFocus, String char, int index) => Container(
@@ -620,9 +620,9 @@ abstract class CodeInputBuilders {
       {double totalRadius = 30.0,
       double emptyRadius = 10.0,
       double filledRadius = 25.0,
-      @required Border border,
-      @required Color color,
-      @required TextStyle textStyle}) {
+      required Border border,
+      required Color color,
+      required TextStyle textStyle}) {
     final decoration = BoxDecoration(
       shape: BoxShape.circle,
       border: border,
@@ -644,10 +644,10 @@ abstract class CodeInputBuilders {
     Size totalSize = const Size(50.0, 60.0),
     Size emptySize = const Size(20.0, 20.0),
     Size filledSize = const Size(40.0, 60.0),
-    BorderRadius borderRadius = BorderRadius.zero,
-    @required Border border,
-    @required Color color,
-    @required TextStyle textStyle,
+    BorderRadius? borderRadius = BorderRadius.zero,
+    required Border border,
+    required Color color,
+    required TextStyle textStyle,
     Alignment alignment: Alignment.center,
   }) {
     final decoration = BoxDecoration(

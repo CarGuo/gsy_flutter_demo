@@ -7,7 +7,7 @@ class CloudWidget extends MultiChildRenderObjectWidget {
   final double ratio;
 
   CloudWidget({
-    Key key,
+    Key? key,
     this.ratio = 1,
     this.overflow = Clip.none,
     List<Widget> children = const <Widget>[],

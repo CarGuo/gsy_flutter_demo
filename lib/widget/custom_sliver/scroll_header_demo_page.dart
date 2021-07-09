@@ -32,9 +32,9 @@ class _ScrollHeaderDemoPageState extends State<ScrollHeaderDemoPage>
           if (notification is ScrollUpdateNotification) {
             if (initLayoutExtent > 0) {
               if (notification.metrics.pixels < -showPullDistance) {
-                globalKey.currentState.handleShow();
+                globalKey.currentState!.handleShow();
               } else if (notification.metrics.pixels > 5) {
-                globalKey.currentState.handleHide();
+                globalKey.currentState!.handleHide();
               }
             }
           }
@@ -101,7 +101,7 @@ class _ScrollHeaderDemoPageState extends State<ScrollHeaderDemoPage>
                 initLayoutExtent = 70;
               } else {
                 initLayoutExtent = 0;
-                globalKey.currentState.handleShow();
+                globalKey.currentState!.handleShow();
               }
             });
           },

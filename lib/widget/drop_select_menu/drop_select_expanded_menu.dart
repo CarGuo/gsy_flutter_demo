@@ -15,10 +15,10 @@ typedef Widget MenuItemExpandedBuilder<T extends DropSelectObject>(
 
 class DropSelectExpandedListMenu<T extends DropSelectObject>
     extends DropSelectWidget {
-  final List<T> data;
+  final List<T>? data;
   final double itemExtent;
   final bool singleSelected;
-  final MenuItemExpandedBuilder itemBuilder;
+  final MenuItemExpandedBuilder? itemBuilder;
 
   DropSelectExpandedListMenu(
       {this.data,
@@ -43,11 +43,11 @@ class _MenuListExpandedState<T extends DropSelectObject>
   @override
   void initState() {
     super.initState();
-    cloneDataList(widget.data, _cloneList);
+    cloneDataList(widget.data!, _cloneList);
 
     ///配置多个 ExpandableController 控制器
     _controllers.clear();
-    List.generate(widget.data.length, (index) {
+    List.generate(widget.data!.length, (index) {
       _controllers.add(ExpandableController(initialExpanded: false));
     });
   }
@@ -67,15 +67,15 @@ class _MenuListExpandedState<T extends DropSelectObject>
               child: new TextButton(
                   onPressed: () {
                     setState(() {
-                      resetList(widget.data);
+                      resetList(widget.data!);
                     });
-                    controller.hide();
+                    controller!.hide();
                   },
                   child: new Text("重置"))),
           new Expanded(
               child: new TextButton(
                   onPressed: () {
-                    controller.select(_cloneList);
+                    controller!.select(_cloneList);
                   },
                   child: new Text("确定"))),
         ],
@@ -118,7 +118,7 @@ class _MenuListExpandedState<T extends DropSelectObject>
                 child.selected = !child.selected;
               });
             },
-            child: widget.itemBuilder(context, child),
+            child: widget.itemBuilder!(context, child),
           );
         }),
       ),
@@ -143,12 +143,12 @@ class _MenuListExpandedState<T extends DropSelectObject>
                     child: new Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        _cloneList[index].title,
+                        _cloneList[index].title!,
                         style: TextStyle(fontSize: 16, color: Colors.black),
                       ),
                     ),
                   ),
-                  expanded: renderGrid(_cloneList[index].children.length,
+                  expanded: renderGrid(_cloneList[index].children!.length,
                       _cloneList[index], index),
                   tapHeaderToExpand: true,
                   hasIcon: true,
@@ -164,12 +164,12 @@ class _MenuListExpandedState<T extends DropSelectObject>
   }
 
   @override
-  void onEvent(DropSelectEvent event) {
+  void onEvent(DropSelectEvent? event) {
     switch (event) {
       case DropSelectEvent.SELECT:
         {
           ///选择时才使用目标
-          cloneDataList(_cloneList, widget.data);
+          cloneDataList(_cloneList, widget.data!);
           break;
         }
       case DropSelectEvent.HIDE:
@@ -180,7 +180,7 @@ class _MenuListExpandedState<T extends DropSelectObject>
       case DropSelectEvent.ACTIVE:
         {
           ///激活时备份列表
-          cloneDataList(widget.data, _cloneList);
+          cloneDataList(widget.data!, _cloneList);
         }
         break;
     }

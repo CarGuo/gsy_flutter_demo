@@ -53,8 +53,8 @@ class AnimBgDemoPage extends StatelessWidget {
 }
 
 class AnimatedWave extends StatelessWidget {
-  final double height;
-  final double speed;
+  final double? height;
+  final double? speed;
   final double offset;
 
   AnimatedWave({this.height, this.speed, this.offset = 0.0});
@@ -66,7 +66,7 @@ class AnimatedWave extends StatelessWidget {
         height: height,
         width: constraints.biggest.width,
         child: LoopAnimation<double>(
-            duration: (5000 / speed).round().milliseconds,
+            duration: (5000 / speed!).round().milliseconds,
             tween: 0.0.tweenTo(2 * pi),
             builder: (context, child, value) {
               return CustomPaint(

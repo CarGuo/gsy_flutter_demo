@@ -15,9 +15,9 @@ class AnimProgressImgDemoPage extends StatefulWidget {
 
 class _AnimProgressImgDemoPageState extends State<AnimProgressImgDemoPage>
     with TickerProviderStateMixin {
-  AnimationController animController;
-  Animation animAnimation;
-  Timer progressTimer;
+  late AnimationController animController;
+  late Animation animAnimation;
+  Timer? progressTimer;
   int progress = 0;
   AnimProgressStatus progressType = AnimProgressStatus.READY;
 
@@ -114,7 +114,7 @@ enum AnimProgressStatus {
 
 class AnimProgressPainter extends CustomPainter {
   final AnimProgressStatus status;
-  final int progress;
+  final int? progress;
 
   final double finishAnimValue;
 

@@ -5,27 +5,27 @@ import 'bubble_painter.dart';
 ///提示弹框
 class BubbleTipWidget extends StatefulWidget {
   ///控件高度
-  final double height;
+  final double? height;
 
   ///控件宽度
-  final double width;
+  final double? width;
 
   ///控件圆角
-  final double radius;
+  final double? radius;
 
   ///控件文本
   final String text;
 
   ///需要三角形指向的x坐标
-  final double x;
+  final double? x;
 
   ///需要三角形指向的y坐标
-  final double y;
+  final double? y;
 
   ///三角形的位置
   final ArrowLocation arrowLocation;
 
-  final VoidCallback voidCallback;
+  final VoidCallback? voidCallback;
 
   const BubbleTipWidget(
       {this.width,
@@ -43,7 +43,7 @@ class BubbleTipWidget extends StatefulWidget {
 
 class _BubbleTipWidgetState extends State<BubbleTipWidget>
     with SingleTickerProviderStateMixin {
-  AnimationController progressController;
+  AnimationController? progressController;
 
   final GlobalKey paintKey = GlobalKey();
 
@@ -62,34 +62,34 @@ class _BubbleTipWidgetState extends State<BubbleTipWidget>
     double arrowHeight = 10;
     double arrowWidth = 10;
 
-    double x = widget.x;
-    double y = widget.y;
+    double? x = widget.x;
+    double? y = widget.y;
     Size size = MediaQuery.of(context).size;
 
     ///计算出位置的中心点
     if (widget.arrowLocation == ArrowLocation.BOTTOM ||
         widget.arrowLocation == ArrowLocation.TOP) {
-      x = widget.x - widget.width / 2;
+      x = widget.x! - widget.width! / 2;
     } else {
-      y = widget.y - widget.height / 2;
+      y = widget.y! - widget.height! / 2;
     }
 
     ///宽度是否超出
-    bool widthOut = (widget.width + x) > size.width || x < 0;
+    bool widthOut = (widget.width! + x!) > size.width || x < 0;
 
     ///高度是否超出
-    bool heightOut = (widget.height + y) > size.height || y < 0;
+    bool heightOut = (widget.height! + y!) > size.height || y < 0;
 
     ///不能小于0
     if (x < 0) {
       x = 0;
     } else if (widthOut) {
-      x = size.width - widget.width;
+      x = size.width - widget.width!;
     }
     if (y < 0) {
       y = 0;
     } else if (heightOut) {
-      y = size.height - widget.height;
+      y = size.height - widget.height!;
     }
 
     ///箭头在这个状态下是否需要居中
@@ -101,22 +101,22 @@ class _BubbleTipWidgetState extends State<BubbleTipWidget>
     ///调整箭头状态，因为此时箭头会可能不是局中的
     double arrowPosition = (widget.arrowLocation == ArrowLocation.BOTTOM ||
             widget.arrowLocation == ArrowLocation.TOP)
-        ? (widget.x - x - arrowWidth / 2)
-        : (widget.y - y - arrowHeight / 2);
+        ? (widget.x! - x - arrowWidth / 2)
+        : (widget.y! - y - arrowHeight / 2);
 
     ///箭头的位置是按照弹出框的左边为起点计算的
     if (widget.arrowLocation == ArrowLocation.BOTTOM ||
         widget.arrowLocation == ArrowLocation.TOP) {
-      if (arrowPosition < widget.radius + 2) {
-        arrowPosition = widget.radius + 4;
-      } else if (arrowPosition > widget.width - widget.radius - 2) {
-        arrowPosition = widget.width - widget.radius - 4;
+      if (arrowPosition < widget.radius! + 2) {
+        arrowPosition = widget.radius! + 4;
+      } else if (arrowPosition > widget.width! - widget.radius! - 2) {
+        arrowPosition = widget.width! - widget.radius! - 4;
       }
     } else {
-      if (arrowPosition < widget.radius + 2) {
-        arrowPosition = widget.radius + 4;
-      } else if (x > widget.height - widget.radius - 2) {
-        arrowPosition = widget.height - widget.radius - 4;
+      if (arrowPosition < widget.radius! + 2) {
+        arrowPosition = widget.radius! + 4;
+      } else if (x > widget.height! - widget.radius! - 2) {
+        arrowPosition = widget.height! - widget.radius! - 4;
       }
     }
 
@@ -157,7 +157,7 @@ class _BubbleTipWidgetState extends State<BubbleTipWidget>
               ///绘制气泡背景
               CustomPaint(
                   key: paintKey,
-                  size: new Size(widget.width, widget.height),
+                  size: new Size(widget.width!, widget.height!),
                   painter: bubbleBuild.build()),
 
               Align(
@@ -167,7 +167,7 @@ class _BubbleTipWidgetState extends State<BubbleTipWidget>
                 child: new Container(
                   margin: margin,
                   width: widget.width,
-                  height: widget.height - arrowHeight,
+                  height: widget.height! - arrowHeight,
                   alignment: Alignment.centerLeft,
                   child: new Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -178,7 +178,7 @@ class _BubbleTipWidgetState extends State<BubbleTipWidget>
                         height: widget.height,
                         child: new Icon(
                           Icons.notifications,
-                          size: widget.height - 30,
+                          size: widget.height! - 30,
                           color: Theme.of(context).primaryColorDark,
                         ),
                       ),

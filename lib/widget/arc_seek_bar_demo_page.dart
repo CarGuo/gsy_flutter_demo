@@ -96,19 +96,19 @@ class ArcSeekBarPainter extends CustomPainter {
     this.openAngle = 120,
   });
 
-  Path seekPath;
-  Path borderPath;
-  Paint arcPaint;
-  Paint thumbPaint;
-  Paint borderPaint;
-  Paint shadowPaint;
-  Rect content;
-  double startAngle;
-  double sweepAngle;
+  late Path seekPath;
+  late Path borderPath;
+  late Paint arcPaint;
+  late Paint thumbPaint;
+  late Paint borderPaint;
+  late Paint shadowPaint;
+  late Rect content;
+  late double startAngle;
+  late double sweepAngle;
   Offset tempPos = Offset(0, 0);
   Offset tempTan = Offset(0, 0);
 
-  PathMetric seekPathMeasure;
+  PathMetric? seekPathMeasure;
 
   double arcWidth = 40;
   double borderWidth = 2;
@@ -116,13 +116,13 @@ class ArcSeekBarPainter extends CustomPainter {
   double thumbShadowRadius = 2;
   double thumbRadius = 15;
 
-  double thumbX;
-  double thumbY;
+  late double thumbX;
+  late double thumbY;
 
-  double centerX;
-  double centerY;
+  late double centerX;
+  late double centerY;
 
-  List<Color> arcColors;
+  late List<Color> arcColors;
 
   void initData() {
     seekPath = new Path();
@@ -211,8 +211,8 @@ class ArcSeekBarPainter extends CustomPainter {
     if (present < 0) present = 0;
     if (present > 1) present = 1;
     if (null == seekPathMeasure) return;
-    double distance = seekPathMeasure.length * present;
-    var tangent = seekPathMeasure.getTangentForOffset(distance);
+    double distance = seekPathMeasure!.length * present;
+    var tangent = seekPathMeasure!.getTangentForOffset(distance)!;
     tempPos = tangent.position;
     tempTan = tangent.vector;
     thumbX = tempPos.dx;

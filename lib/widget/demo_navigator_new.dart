@@ -33,7 +33,7 @@ class BookRouteInformationParser extends RouteInformationParser<BookRoutePath> {
   @override
   Future<BookRoutePath> parseRouteInformation(
       RouteInformation routeInformation) async {
-    final uri = Uri.parse(routeInformation.location);
+    final uri = Uri.parse(routeInformation.location!);
     // Handle '/'
     if (uri.pathSegments.length == 0) {
       return BookRoutePath.home();
@@ -53,7 +53,7 @@ class BookRouteInformationParser extends RouteInformationParser<BookRoutePath> {
   }
 
   @override
-  RouteInformation restoreRouteInformation(BookRoutePath path) {
+  RouteInformation? restoreRouteInformation(BookRoutePath path) {
     if (path.isUnknown) {
       return RouteInformation(location: '/404');
     }
@@ -71,10 +71,10 @@ class BookRouterDelegate extends RouterDelegate<BookRoutePath>
     with ChangeNotifier, PopNavigatorRouterDelegateMixin<BookRoutePath> {
   final GlobalKey<NavigatorState> navigatorKey;
 
-  Book _selectedBook;
+  Book? _selectedBook;
   bool show404 = false;
 
-  List<Book> books = [
+  List<Book?> books = [
     Book('Stranger in a Strange Land', 'Robert A. Heinlein'),
     Book('Foundation', 'Isaac Asimov'),
     Book('Fahrenheit 451', 'Ray Bradbury'),
@@ -132,12 +132,12 @@ class BookRouterDelegate extends RouterDelegate<BookRoutePath>
     }
 
     if (path.isDetailsPage) {
-      if (path.id < 0 || path.id > books.length - 1) {
+      if (path.id! < 0 || path.id! > books.length - 1) {
         show404 = true;
         return;
       }
 
-      _selectedBook = books[path.id];
+      _selectedBook = books[path.id!];
     } else {
       _selectedBook = null;
     }
@@ -145,14 +145,14 @@ class BookRouterDelegate extends RouterDelegate<BookRoutePath>
     show404 = false;
   }
 
-  void _handleBookTapped(Book book) {
+  void _handleBookTapped(Book? book) {
     _selectedBook = book;
     notifyListeners();
   }
 }
 
 class BookDetailsPage extends Page {
-  final Book book;
+  final Book? book;
 
   BookDetailsPage({
     this.book,
@@ -169,7 +169,7 @@ class BookDetailsPage extends Page {
 }
 
 class BookRoutePath {
-  final int id;
+  final int? id;
   final bool isUnknown;
 
   BookRoutePath.home()
@@ -188,12 +188,12 @@ class BookRoutePath {
 }
 
 class BooksListScreen extends StatelessWidget {
-  final List<Book> books;
-  final ValueChanged<Book> onTapped;
+  final List<Book?> books;
+  final ValueChanged<Book?> onTapped;
 
   BooksListScreen({
-    @required this.books,
-    @required this.onTapped,
+    required this.books,
+    required this.onTapped,
   });
 
   @override
@@ -204,7 +204,7 @@ class BooksListScreen extends StatelessWidget {
         children: [
           for (var book in books)
             ListTile(
-              title: Text(book.title),
+              title: Text(book!.title),
               subtitle: Text(book.author),
               onTap: () => onTapped(book),
             )
@@ -215,10 +215,10 @@ class BooksListScreen extends StatelessWidget {
 }
 
 class BookDetailsScreen extends StatelessWidget {
-  final Book book;
+  final Book? book;
 
   BookDetailsScreen({
-    @required this.book,
+    required this.book,
   });
 
   @override
@@ -231,8 +231,8 @@ class BookDetailsScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (book != null) ...[
-              Text(book.title, style: Theme.of(context).textTheme.headline6),
-              Text(book.author, style: Theme.of(context).textTheme.subtitle1),
+              Text(book!.title, style: Theme.of(context).textTheme.headline6),
+              Text(book!.author, style: Theme.of(context).textTheme.subtitle1),
             ],
           ],
         ),

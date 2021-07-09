@@ -4,6 +4,6 @@ class CalPoint {
 
   CalPoint.data(this.x, this.y);
 
-  double x = -1;
-  double y = -1;
+  double? x = -1;
+  double? y = -1;
 }

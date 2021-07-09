@@ -10,8 +10,8 @@ class AnimaDemoPage2 extends StatefulWidget {
 
 class _AnimaDemoPageState2 extends State<AnimaDemoPage2>
     with SingleTickerProviderStateMixin {
-  AnimationController controller;
-  Animation animation;
+  late AnimationController controller;
+  Animation? animation;
 
   @override
   void initState() {
@@ -47,7 +47,7 @@ class _AnimaDemoPageState2 extends State<AnimaDemoPage2>
           maxR: 250,
           offset: Offset(MediaQuery.of(context).size.width / 2,
               MediaQuery.of(context).size.height / 2),
-          animation: animation,
+          animation: animation as Animation<double>?,
           child: Center(
             child: Container(
               alignment: Alignment.center,
@@ -75,19 +75,19 @@ class _AnimaDemoPageState2 extends State<AnimaDemoPage2>
 }
 
 class CRAnimation extends StatelessWidget {
-  final Offset offset;
+  final Offset? offset;
 
-  final double minR;
+  final double? minR;
 
-  final double maxR;
+  final double? maxR;
 
   final Widget child;
 
-  final Animation<double> animation;
+  final Animation<double>? animation;
 
   CRAnimation({
-    @required this.child,
-    @required this.animation,
+    required this.child,
+    required this.animation,
     this.offset,
     this.minR,
     this.maxR,
@@ -96,11 +96,11 @@ class CRAnimation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
-      animation: animation,
+      animation: animation!,
       builder: (_, __) {
         return ClipPath(
           clipper: AnimationClipper(
-            value: animation.value,
+            value: animation!.value,
             minR: minR,
             maxR: maxR,
             offset: offset,
@@ -113,13 +113,13 @@ class CRAnimation extends StatelessWidget {
 }
 
 class AnimationClipper extends CustomClipper<Path> {
-  final double value;
+  final double? value;
 
-  final double minR;
+  final double? minR;
 
-  final double maxR;
+  final double? maxR;
 
-  final Offset offset;
+  final Offset? offset;
 
   AnimationClipper({
     this.value,
@@ -140,7 +140,7 @@ class AnimationClipper extends CustomClipper<Path> {
 
     var minRadius = maxR ?? 0;
 
-    var radius = lerpDouble(minRadius, maxRadius, value);
+    var radius = lerpDouble(minRadius, maxRadius, value!)!;
     var rect = Rect.fromCircle(
       radius: radius,
       center: offset,

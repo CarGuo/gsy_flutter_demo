@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 
 
 class ExpandableNotifier extends StatefulWidget {
-  final ExpandableController controller;
-  final bool initialExpanded;
-  final Duration animationDuration;
-  final Widget child;
+  final ExpandableController? controller;
+  final bool? initialExpanded;
+  final Duration? animationDuration;
+  final Widget? child;
 
   ExpandableNotifier(
-      {Key key,
+      {Key? key,
         this.controller,
         this.initialExpanded,
         this.animationDuration,
-        @required this.child})
+        required this.child})
       : assert(!(controller != null && animationDuration != null)),
         assert(!(controller != null && initialExpanded != null)),
         super(key: key);
@@ -22,7 +22,7 @@ class ExpandableNotifier extends StatefulWidget {
 }
 
 class _ExpandableNotifierState extends State<ExpandableNotifier> {
-  ExpandableController controller;
+  ExpandableController? controller;
 
   @override
   void initState() {
@@ -37,14 +37,14 @@ class _ExpandableNotifierState extends State<ExpandableNotifier> {
   @override
   Widget build(BuildContext context) {
     return _ExpandableInheritedNotifier(
-        controller: controller ?? widget.controller, child: widget.child);
+        controller: controller ?? widget.controller, child: widget.child!);
   }
 }
 
 class _ExpandableInheritedNotifier
     extends InheritedNotifier<ExpandableController> {
   _ExpandableInheritedNotifier(
-      {@required ExpandableController controller, @required Widget child})
+      {required ExpandableController? controller, required Widget child})
       : super(notifier: controller, child: child);
 }
 
@@ -52,7 +52,7 @@ class ExpandableController extends ValueNotifier<bool> {
   bool get expanded => value;
   final Duration animationDuration;
 
-  ExpandableController({bool initialExpanded, Duration animationDuration})
+  ExpandableController({bool? initialExpanded, Duration? animationDuration})
       : this.animationDuration =
       animationDuration ?? const Duration(milliseconds: 300),
         super(initialExpanded ?? false);
@@ -65,7 +65,7 @@ class ExpandableController extends ValueNotifier<bool> {
     expanded = !expanded;
   }
 
-  static ExpandableController of(BuildContext context,
+  static ExpandableController? of(BuildContext context,
       {bool rebuildOnChange = true}) {
     final notifier = rebuildOnChange
         ? context.dependOnInheritedWidgetOfExactType<_ExpandableInheritedNotifier>()
@@ -78,10 +78,10 @@ class ExpandableController extends ValueNotifier<bool> {
 /// The state is determined by an instance of [ExpandableController] provided by [ScopedModel]
 class Expandable extends StatelessWidget {
   // Whe widget to show when collapsed
-  final Widget collapsed;
+  final Widget? collapsed;
 
   // The widget to show when expanded
-  final Widget expanded;
+  final Widget? expanded;
   final Duration animationDuration;
   final double collapsedFadeStart;
   final double collapsedFadeEnd;
@@ -103,7 +103,7 @@ class Expandable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var controller = ExpandableController.of(context);
+    var controller = ExpandableController.of(context)!;
 
     return AnimatedCrossFade(
       firstChild: collapsed ?? Container(),
@@ -122,7 +122,7 @@ class Expandable extends StatelessWidget {
 }
 
 typedef Widget ExpandableBuilder(
-    BuildContext context, Widget collapsed, Widget expanded);
+    BuildContext context, Widget? collapsed, Widget? expanded);
 
 /// Determines the placement of the expand/collapse icon in [ExpandablePanel]
 enum ExpandablePanelIconPlacement {
@@ -136,14 +136,14 @@ enum ExpandablePanelIconPlacement {
 /// A configurable widget for showing user-expandable content with an optional expand button.
 class ExpandablePanel extends StatelessWidget {
   /// If specified, the header is always shown, and the expandable part is shown under the header
-  final Widget header;
+  final Widget? header;
 
   /// The widget shown in the collspaed state
-  final Widget collapsed;
+  final Widget? collapsed;
 
   /// The widget shown in the expanded state
-  final Widget expanded;
-  final Widget expandableIcon;
+  final Widget? expanded;
+  final Widget? expandableIcon;
 
   /// If true then the panel is expanded initially
   final bool initialExpanded;
@@ -161,10 +161,10 @@ class ExpandablePanel extends StatelessWidget {
 
   /// Expand/collspse icon placement
   final ExpandablePanelIconPlacement iconPlacement;
-  final ExpandableController controller;
+  final ExpandableController? controller;
 
   static Widget defaultExpandableBuilder(
-      BuildContext context, Widget collapsed, Widget expanded) {
+      BuildContext context, Widget? collapsed, Widget? expanded) {
     return Expandable(
       collapsed: collapsed,
       expanded: expanded,
@@ -210,12 +210,12 @@ class ExpandablePanel extends StatelessWidget {
       }
     }
 
-    Widget buildHeader(Widget child) {
+    Widget buildHeader(Widget? child) {
       return tapHeaderToExpand
           ? ExpandableButton(
               child: ConstrainedBox(
                   constraints: BoxConstraints(minHeight: 45.0), child: child))
-          : child;
+          : child ?? Container();
     }
 
     Widget buildWithHeader() {
@@ -227,7 +227,7 @@ class ExpandablePanel extends StatelessWidget {
       );
     }
 
-    Widget buildWithoutHeader() {
+    Widget? buildWithoutHeader() {
       return buildHeaderRow(builder(context, buildHeader(collapsed), expanded));
     }
 
@@ -243,7 +243,7 @@ class ExpandablePanel extends StatelessWidget {
 class ExpandableIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final controller = ExpandableController.of(context);
+    final controller = ExpandableController.of(context)!;
     return ExpandIcon(
       isExpanded: controller.expanded,
       onPressed: (exp) {
@@ -255,7 +255,7 @@ class ExpandableIcon extends StatelessWidget {
 
 /// Toggles the state of [ExpandableController] when the user clicks on it.
 class ExpandableButton extends StatelessWidget {
-  final Widget child;
+  final Widget? child;
 
   ExpandableButton({this.child});
 
@@ -264,7 +264,7 @@ class ExpandableButton extends StatelessWidget {
     final controller = ExpandableController.of(context);
     return InkWell(
         onTap: () {
-          controller.toggle();
+          controller!.toggle();
         },
         child: child);
   }
@@ -288,8 +288,8 @@ class ScrollOnExpand extends StatefulWidget {
   final bool scrollOnCollapse;
 
   ScrollOnExpand({
-    Key key,
-    @required
+    Key? key,
+    required
     this.child,
     this.scrollAnimationDuration = const Duration(milliseconds: 300),
     this.scrollOnExpand = true,
@@ -303,15 +303,15 @@ class ScrollOnExpand extends StatefulWidget {
 
 class _ScrollOnExpandState extends State<ScrollOnExpand> {
 
-  ExpandableController _controller;
+  ExpandableController? _controller;
   int _isAnimating = 0;
-  BuildContext _lastContext;
+  BuildContext? _lastContext;
 
   @override
   void initState() {
     super.initState();
     _controller = ExpandableController.of(context, rebuildOnChange: false);
-    _controller.addListener(_expandedStateChanged);
+    _controller!.addListener(_expandedStateChanged);
   }
 
   @override
@@ -319,9 +319,9 @@ class _ScrollOnExpandState extends State<ScrollOnExpand> {
     super.didUpdateWidget(oldWidget);
     final newController = ExpandableController.of(context, rebuildOnChange: false);
     if(newController != _controller) {
-      _controller.removeListener(_expandedStateChanged);
+      _controller!.removeListener(_expandedStateChanged);
       _controller = newController;
-      _controller.addListener(_expandedStateChanged);
+      _controller!.addListener(_expandedStateChanged);
     }
   }
 
@@ -334,8 +334,8 @@ class _ScrollOnExpandState extends State<ScrollOnExpand> {
   _animationComplete() {
     _isAnimating--;
     if(_isAnimating == 0 && _lastContext != null && mounted) {
-      if( (_controller.expanded && widget.scrollOnExpand) ||
-          (!_controller.expanded && widget.scrollOnCollapse)) {
+      if( (_controller!.expanded && widget.scrollOnExpand) ||
+          (!_controller!.expanded && widget.scrollOnCollapse)) {
         _lastContext?.findRenderObject()?.showOnScreen(duration: widget.scrollAnimationDuration);
       }
     }
@@ -343,7 +343,7 @@ class _ScrollOnExpandState extends State<ScrollOnExpand> {
 
   _expandedStateChanged() {
     _isAnimating++;
-    Future.delayed(_controller.animationDuration + Duration(milliseconds: 10), _animationComplete);
+    Future.delayed(_controller!.animationDuration + Duration(milliseconds: 10), _animationComplete);
   }
 
   @override

@@ -109,9 +109,9 @@ class _IndexStackDragCardDemoPage2State
 }
 
 class DraggableCard extends StatefulWidget {
-  final Widget child;
-  final ValueChanged removeCall;
-  final int index;
+  final Widget? child;
+  final ValueChanged? removeCall;
+  final int? index;
 
   DraggableCard({this.child, this.removeCall, this.index});
 
@@ -121,9 +121,9 @@ class DraggableCard extends StatefulWidget {
 
 class _DraggableCardState extends State<DraggableCard>
     with SingleTickerProviderStateMixin {
-  AnimationController _controller;
+  late AnimationController _controller;
   Alignment _dragAlignment = Alignment.center;
-  Animation<Alignment> _animation;
+  late Animation<Alignment> _animation;
   bool remove = false;
 
   void _runAnimation(Offset pixelsPerSecond, Size size) {
@@ -197,7 +197,7 @@ class _DraggableCardState extends State<DraggableCard>
       },
       onPanEnd: (details) {
         if (remove == true) {
-          widget.removeCall(widget.index);
+          widget.removeCall!(widget.index);
           remove = false;
           setState(() {
             _dragAlignment = Alignment.center;

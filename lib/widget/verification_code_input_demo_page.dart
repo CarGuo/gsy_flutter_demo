@@ -61,25 +61,25 @@ typedef CodeInputBuilder = Widget Function(bool hasFocus, String char);
 
 class VerCodeInput extends StatefulWidget {
   const VerCodeInput._({
-    Key key,
-    @required this.length,
-    @required this.keyboardType,
-    @required this.inputFormatters,
-    @required this.builder,
-    @required this.ctx,
+    Key? key,
+    required this.length,
+    required this.keyboardType,
+    required this.inputFormatters,
+    required this.builder,
+    required this.ctx,
     this.onChanged,
     this.onFilled,
   }) : super(key: key);
 
   factory VerCodeInput({
-    Key key,
-    @required int length,
+    Key? key,
+    required int length,
     TextInputType keyboardType = TextInputType.text,
-    List<TextInputFormatter> inputFormatters,
-    BuildContext ctx,
-    @required CodeInputBuilder builder,
-    void Function(String value) onChanged,
-    void Function(String value) onFilled,
+    List<TextInputFormatter>? inputFormatters,
+    BuildContext? ctx,
+    required CodeInputBuilder builder,
+    void Function(String value)? onChanged,
+    void Function(String value)? onFilled,
   }) {
     assert(length != null);
     assert(length > 0, 'The length needs to be larger than zero.');
@@ -147,13 +147,13 @@ class VerCodeInput extends StatefulWidget {
   final CodeInputBuilder builder;
 
   /// A callback for changes to the input.
-  final void Function(String value) onChanged;
+  final void Function(String value)? onChanged;
 
   /// A callback for when the input is filled.
-  final void Function(String value) onFilled;
+  final void Function(String value)? onFilled;
 
   /// context parent because of MediaQuery.of(widget.ctx)
-  final BuildContext ctx;
+  final BuildContext? ctx;
 
   /// A helping function that creates input formatters for a given length and
   /// keyboardType.
@@ -212,7 +212,7 @@ class _VerCodeInputState extends State<VerCodeInput> {
       // the ones between the character entities.
       GestureDetector(
           onTap: () {
-            if (MediaQuery.of(widget.ctx).viewInsets.bottom == 0) {
+            if (MediaQuery.of(widget.ctx!).viewInsets.bottom == 0) {
               final focusScope = FocusScope.of(context);
               focusScope.requestFocus(FocusNode());
               Future.delayed(Duration.zero, () => focusScope.requestFocus(node));
@@ -255,13 +255,13 @@ abstract class CodeInputBuilders {
   /// Builds the input inside an animated container.
   static CodeInputBuilder containerized({
     Duration animationDuration = const Duration(milliseconds: 50),
-    @required Size totalSize,
-    @required Size emptySize,
-    @required Size filledSize,
-    @required BoxDecoration emptyDecoration,
-    @required BoxDecoration filledDecoration,
-    @required TextStyle emptyTextStyle,
-    @required TextStyle filledTextStyle,
+    required Size totalSize,
+    required Size emptySize,
+    required Size filledSize,
+    required BoxDecoration emptyDecoration,
+    required BoxDecoration filledDecoration,
+    required TextStyle emptyTextStyle,
+    required TextStyle filledTextStyle,
   }) {
     return (bool hasFocus, String char) => Container(
         width: totalSize.width,
@@ -282,9 +282,9 @@ abstract class CodeInputBuilders {
       {double totalRadius = 30.0,
       double emptyRadius = 10.0,
       double filledRadius = 25.0,
-      @required Border border,
-      @required Color color,
-      @required TextStyle textStyle}) {
+      required Border border,
+      required Color color,
+      required TextStyle textStyle}) {
     final decoration = BoxDecoration(
       shape: BoxShape.circle,
       border: border,
@@ -307,9 +307,9 @@ abstract class CodeInputBuilders {
     Size emptySize = const Size(20.0, 20.0),
     Size filledSize = const Size(40.0, 60.0),
     BorderRadius borderRadius = BorderRadius.zero,
-    @required Border border,
-    @required Color color,
-    @required TextStyle textStyle,
+    required Border border,
+    required Color color,
+    required TextStyle textStyle,
   }) {
     final decoration = BoxDecoration(
       border: border,

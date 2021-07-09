@@ -7,12 +7,12 @@ import 'package:flutter/widgets.dart';
 
 class _TestCenterSliver extends SingleChildRenderObjectWidget {
   const _TestCenterSliver({
-    Key key,
+    Key? key,
     this.containerLayoutExtent = 0.0,
     this.initLayoutExtent = 0.0,
     this.hasLayoutExtent = false,
     this.pinned = false,
-    Widget child,
+    Widget? child,
   })  : assert(containerLayoutExtent != null),
         assert(containerLayoutExtent >= 0.0),
         assert(hasLayoutExtent != null),
@@ -47,11 +47,11 @@ class _TestCenterSliver extends SingleChildRenderObjectWidget {
 class _RenderCustomSliver extends RenderSliver
     with RenderObjectWithChildMixin<RenderBox> {
   _RenderCustomSliver({
-    @required double containerExtent,
-    @required double initLayoutExtent,
-    @required bool hasLayoutExtent,
-    @required bool pinned,
-    RenderBox child,
+    required double containerExtent,
+    required double initLayoutExtent,
+    required bool hasLayoutExtent,
+    required bool pinned,
+    RenderBox? child,
   })  : assert(containerExtent != null),
         assert(containerExtent >= 0.0),
         assert(hasLayoutExtent != null),
@@ -135,7 +135,7 @@ class _RenderCustomSliver extends RenderSliver
     final bool active = constraints.overlap < 0.0 || layoutExtent > 0.0;
     final double overscrolledExtent = 0.0;
 
-    child.layout(
+    child!.layout(
       constraints.asBoxConstraints(
         maxExtent: layoutExtent + overscrolledExtent,
       ),
@@ -174,7 +174,7 @@ class _RenderCustomSliver extends RenderSliver
           le = constraints.remainingPaintExtent;
         }
         var paintExtent = max(
-          max(child.size.height, layoutExtent) - constraints.scrollOffset,
+          max(child!.size.height, layoutExtent) - constraints.scrollOffset,
           0.0,
         );
 
@@ -188,7 +188,7 @@ class _RenderCustomSliver extends RenderSliver
           paintOrigin: -overscrolledExtent - constraints.scrollOffset,
           paintExtent: paintExtent,
           maxPaintExtent: max(
-            max(child.size.height, layoutExtent) - constraints.scrollOffset,
+            max(child!.size.height, layoutExtent) - constraints.scrollOffset,
             0.0,
           ),
           maxScrollObstructionExtent: _initLayoutExtent,
@@ -205,17 +205,17 @@ class _RenderCustomSliver extends RenderSliver
   @override
   void paint(PaintingContext paintContext, Offset offset) {
     if (constraints.overlap < 0.0 ||
-        constraints.scrollOffset + child.size.height > 0) {
-      paintContext.paintChild(child, offset);
+        constraints.scrollOffset + child!.size.height > 0) {
+      paintContext.paintChild(child!, offset);
     }
   }
 
   @override
   bool hitTestChildren(SliverHitTestResult result,
-      {double mainAxisPosition, double crossAxisPosition}) {
+      {double? mainAxisPosition, double? crossAxisPosition}) {
     if (child != null) {
-      return child.hitTest(BoxHitTestResult.wrap(result),
-          position: Offset(crossAxisPosition, mainAxisPosition));
+      return child!.hitTest(BoxHitTestResult.wrap(result),
+          position: Offset(crossAxisPosition!, mainAxisPosition!));
     }
     return false;
   }
@@ -233,7 +233,7 @@ typedef ContainerBuilder = Widget Function(
 
 class TestCenterSliver extends StatefulWidget {
   const TestCenterSliver({
-    Key key,
+    Key? key,
     this.triggerPullDistance = _defaultTriggerPullDistance,
     this.containerExtent = _defaultcontainerExtent,
     this.initLayoutExtent = 0,

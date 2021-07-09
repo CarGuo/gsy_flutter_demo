@@ -53,7 +53,7 @@ class _RefreshDemoPageState extends State<RefreshDemoPage> {
       }
     });
     Future.delayed(Duration(seconds: 0), (){
-      refreshKey.currentState.show();
+      refreshKey.currentState!.show();
     });
   }
 

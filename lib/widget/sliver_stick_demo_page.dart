@@ -97,7 +97,7 @@ class SliverHeaderItem extends StatefulWidget {
   final double contentHeight;
 
   SliverHeaderItem(this.index,
-      {@required this.child, this.headerHeight = 60, this.contentHeight = 120});
+      {required this.child, this.headerHeight = 60, this.contentHeight = 120});
 
   @override
   _SliverHeaderItemState createState() => _SliverHeaderItemState();
@@ -115,13 +115,13 @@ class _SliverHeaderItemState extends State<SliverHeaderItem>
 
     ///监听列表改变
     Future.delayed(Duration(seconds: 0), () {
-      Scrollable.of(context).position.addListener(scrollListener);
+      Scrollable.of(context)!.position.addListener(scrollListener);
     });
   }
 
   @override
   void deactivate() {
-    Scrollable.of(context).position.removeListener(scrollListener);
+    Scrollable.of(context)!.position.removeListener(scrollListener);
     super.deactivate();
   }
 
@@ -144,7 +144,7 @@ class _SliverHeaderItemState extends State<SliverHeaderItem>
             duration: const Duration(milliseconds: 10),
           ),
           builder: (context, shrinkOffset, overlapsContent) {
-            var state = Scrollable.of(context);
+            var state = Scrollable.of(context)!;
 
             ///整个 item 的大小
             var itemHeight = widget.headerHeight + widget.contentHeight;
@@ -180,9 +180,9 @@ class _SliverHeaderItemState extends State<SliverHeaderItem>
 ///动态头部处理
 class GSYSliverHeaderDelegate extends SliverPersistentHeaderDelegate {
   GSYSliverHeaderDelegate(
-      {@required this.minHeight,
-      @required this.maxHeight,
-      @required this.snapConfig,
+      {required this.minHeight,
+      required this.maxHeight,
+      required this.snapConfig,
       this.child,
       this.builder,
       this.vSync,
@@ -190,12 +190,12 @@ class GSYSliverHeaderDelegate extends SliverPersistentHeaderDelegate {
 
   final double minHeight;
   final double maxHeight;
-  final Widget child;
-  final Builder builder;
-  final TickerProvider vSync;
+  final Widget? child;
+  final Builder? builder;
+  final TickerProvider? vSync;
   final bool changeSize;
   final FloatingHeaderSnapConfiguration snapConfig;
-  AnimationController animationController;
+  AnimationController? animationController;
 
   @override
   double get minExtent => minHeight;
@@ -205,15 +205,15 @@ class GSYSliverHeaderDelegate extends SliverPersistentHeaderDelegate {
 
 
   @override
-  TickerProvider get vsync => vSync;
+  TickerProvider? get vsync => vSync;
 
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
     if (builder != null) {
-      return builder(context, shrinkOffset, overlapsContent);
+      return builder!(context, shrinkOffset, overlapsContent);
     }
-    return child;
+    return child!;
   }
 
   @override

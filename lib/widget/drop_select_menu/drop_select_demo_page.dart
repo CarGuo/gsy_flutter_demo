@@ -81,7 +81,7 @@ class _DropSelectDemoPageState extends State<DropSelectDemoPage> {
         child: new Row(
           children: <Widget>[
             new Text(
-              data.title,
+              data.title!,
               style: data.selected
                   ? new TextStyle(
                       fontSize: 14.0,
@@ -115,7 +115,7 @@ class _DropSelectDemoPageState extends State<DropSelectDemoPage> {
               width: 1.0),
         ),
         child: new Text(
-          data.title,
+          data.title!,
           style: data.selected
               ? new TextStyle(
                   fontSize: 14.0,

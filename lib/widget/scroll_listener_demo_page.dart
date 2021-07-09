@@ -35,7 +35,7 @@ class _ScrollListenerDemoPageState extends State<ScrollListenerDemoPage> {
       ),
       body: new Container(
         child: NotificationListener(
-          onNotification: (notification) {
+          onNotification: (dynamic notification) {
             String notify = "";
             if (notification is ScrollEndNotification) {
               notify = "ScrollEnd";

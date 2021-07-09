@@ -14,10 +14,10 @@ typedef Widget MenuItemGridBuilder<T extends DropSelectObject>(
 
 class DropSelectGridListMenu<T extends DropSelectObject>
     extends DropSelectWidget {
-  final List<T> data;
+  final List<T>? data;
   final double itemExtent;
   final bool singleSelected;
-  final MenuItemGridBuilder itemBuilder;
+  final MenuItemGridBuilder? itemBuilder;
 
   DropSelectGridListMenu(
       {this.data,
@@ -43,7 +43,7 @@ class _MenuListGridState<T extends DropSelectObject>
     super.initState();
 
     ///初始化 _cloneList
-    cloneDataList(widget.data, _cloneList);
+    cloneDataList(widget.data!, _cloneList);
   }
 
   ///绘制 grid 列表嵌套
@@ -92,7 +92,7 @@ class _MenuListGridState<T extends DropSelectObject>
                 child.selected = !child.selected;
               });
             },
-            child: widget.itemBuilder(context, child),
+            child: widget.itemBuilder!(context, child),
           );
         }),
       ),
@@ -109,15 +109,15 @@ class _MenuListGridState<T extends DropSelectObject>
               child: new TextButton(
                   onPressed: () {
                     setState(() {
-                      resetList(widget.data);
+                      resetList(widget.data!);
                     });
-                    controller.hide();
+                    controller!.hide();
                   },
                   child: new Text("重置"))),
           new Expanded(
               child: new TextButton(
                   onPressed: () {
-                    controller.select(_cloneList);
+                    controller!.select(_cloneList);
                   },
                   child: new Text("确定"))),
         ],
@@ -136,10 +136,10 @@ class _MenuListGridState<T extends DropSelectObject>
                 child: new Column(
                   children: <Widget>[
                     new Container(
-                      child: new Text(_cloneList[index].title),
+                      child: new Text(_cloneList[index].title!),
                       alignment: Alignment.centerLeft,
                     ),
-                    renderGrid(_cloneList[index].children.length,
+                    renderGrid(_cloneList[index].children!.length,
                         _cloneList[index], index)
                   ],
                 ),
@@ -154,12 +154,12 @@ class _MenuListGridState<T extends DropSelectObject>
   }
 
   @override
-  void onEvent(DropSelectEvent event) {
+  void onEvent(DropSelectEvent? event) {
     switch (event) {
       case DropSelectEvent.SELECT:
         {
           ///选择时才使用目标
-          cloneDataList(_cloneList, widget.data);
+          cloneDataList(_cloneList, widget.data!);
           break;
         }
       case DropSelectEvent.HIDE:
@@ -168,7 +168,7 @@ class _MenuListGridState<T extends DropSelectObject>
       case DropSelectEvent.ACTIVE:
         {
           ///激活时备份列表
-          cloneDataList(widget.data, _cloneList);
+          cloneDataList(widget.data!, _cloneList);
         }
         break;
     }

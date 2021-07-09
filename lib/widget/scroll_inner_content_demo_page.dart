@@ -18,7 +18,7 @@ class _ScrollInnerContentDemoPageState
 
   Future<double> getButtonPosition() {
     return Future.delayed(Duration(seconds: 0), () {
-      var renderBox = globalKey.currentContext.findRenderObject() as RenderBox;
+      var renderBox = globalKey.currentContext!.findRenderObject() as RenderBox;
       double dy = renderBox.localToGlobal(Offset.zero).dy;
       double height = renderBox.size.height;
       var outSize = false;
@@ -116,7 +116,7 @@ class _ScrollInnerContentDemoPageState
               ],
             ),
           ),
-          FutureBuilder(
+          FutureBuilder<double?>(
             future: getButtonPosition(),
             builder: (context, snap) {
               if (snap.data == null || snap.data == 0) {

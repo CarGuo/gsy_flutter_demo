@@ -99,13 +99,13 @@ class _AnimaDemoPageState extends State<AnimaDemoPage5>
 
 class AnimatedText extends AnimatedWidget {
   final Tween<double> _opacityAnim = Tween(begin: 0, end: 1);
-  final Widget child;
+  final Widget? child;
 
-  AnimatedText({Animation<double> animation, this.child})
+  AnimatedText({required Animation<double> animation, this.child})
       : super(listenable: animation);
 
   _getOpacity() {
-    var value = _opacityAnim.evaluate(listenable);
+    var value = _opacityAnim.evaluate(listenable as Animation<double>);
     if (value < 0) {
       return 0;
     } else if (value > 1) {
@@ -121,7 +121,7 @@ class AnimatedText extends AnimatedWidget {
       opacity: _getOpacity(),
       child: SlideTransition(
         position:
-            Tween(begin: Offset(0, 5), end: Offset(0, 0)).animate(listenable),
+            Tween(begin: Offset(0, 5), end: Offset(0, 0)).animate(listenable as Animation<double>),
         child: child,
       ),
     );

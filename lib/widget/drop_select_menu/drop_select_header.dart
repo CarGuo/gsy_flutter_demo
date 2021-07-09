@@ -5,23 +5,23 @@ import 'drop_select_controller.dart';
 
 typedef void DropdownMenuHeadTapCallback(int index);
 
-typedef String ShowTitle(dynamic data, int index);
+typedef String ShowTitle(dynamic data, int? index);
 
 class DropSelectHeader extends DropSelectWidget {
   final List titles;
-  final int activeIndex;
-  final DropdownMenuHeadTapCallback onTap;
+  final int? activeIndex;
+  final DropdownMenuHeadTapCallback? onTap;
 
   final double height;
 
-  final ShowTitle showTitle;
+  final ShowTitle? showTitle;
 
   DropSelectHeader({
-    @required this.titles,
+    required this.titles,
     this.activeIndex,
-    DropSelectController controller,
+    DropSelectController? controller,
     this.onTap,
-    Key key,
+    Key? key,
     this.height: 46.0,
     this.showTitle,
   })  : assert(titles != null && titles.length > 0),
@@ -38,7 +38,7 @@ class _DropSelectHeaderState extends DropSelectState<DropSelectHeader> {
       BuildContext context, dynamic title, bool selected, int index) {
     final Color primaryColor = Theme.of(context).primaryColor;
     final Color unselectedColor = Theme.of(context).unselectedWidgetColor;
-    final ShowTitle showTitle = widget.showTitle;
+    final ShowTitle showTitle = widget.showTitle!;
 
     return new GestureDetector(
       behavior: HitTestBehavior.opaque,
@@ -79,19 +79,19 @@ class _DropSelectHeaderState extends DropSelectState<DropSelectHeader> {
     );
   }
 
-  int _activeIndex;
-  List _titles;
+  int? _activeIndex;
+  List? _titles;
 
   @override
   Widget build(BuildContext context) {
     List<Widget> list = [];
 
-    final int activeIndex = _activeIndex;
-    final List titles = _titles;
+    final int? activeIndex = _activeIndex;
+    final List? titles = _titles;
     final double height = widget.height;
 
     for (int i = 0, c = widget.titles.length; i < c; ++i) {
-      list.add(buildItem(context, titles[i], i == activeIndex, i));
+      list.add(buildItem(context, titles![i], i == activeIndex, i));
     }
 
     list = list.map((Widget widget) {
@@ -123,7 +123,7 @@ class _DropSelectHeaderState extends DropSelectState<DropSelectHeader> {
   }
 
   @override
-  void onEvent(DropSelectEvent event) {
+  void onEvent(DropSelectEvent? event) {
     switch (event) {
       case DropSelectEvent.SELECT:
         {
@@ -131,8 +131,8 @@ class _DropSelectHeaderState extends DropSelectState<DropSelectHeader> {
 
           setState(() {
             _activeIndex = null;
-            String label = widget.showTitle(controller.data, _activeIndex);
-            _titles[controller.menuIndex] = label;
+            String label = widget.showTitle!(controller!.data, _activeIndex);
+            _titles![controller!.menuIndex!] = label;
           });
         }
         break;
@@ -146,9 +146,9 @@ class _DropSelectHeaderState extends DropSelectState<DropSelectHeader> {
         break;
       case DropSelectEvent.ACTIVE:
         {
-          if (_activeIndex == controller.menuIndex) return;
+          if (_activeIndex == controller!.menuIndex) return;
           setState(() {
-            _activeIndex = controller.menuIndex;
+            _activeIndex = controller!.menuIndex;
           });
         }
         break;

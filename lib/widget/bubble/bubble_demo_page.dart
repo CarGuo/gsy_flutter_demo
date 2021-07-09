@@ -17,24 +17,24 @@ class BubbleDemoPage extends StatelessWidget {
   final GlobalKey button4Key = GlobalKey();
 
   getX(GlobalKey key) {
-    RenderBox renderBox = key.currentContext.findRenderObject();
+    RenderBox renderBox = key.currentContext!.findRenderObject() as RenderBox;
     double dx = renderBox.localToGlobal(Offset.zero).dx;
     return dx;
   }
 
   getY(GlobalKey key) {
-    RenderBox renderBox = key.currentContext.findRenderObject();
+    RenderBox renderBox = key.currentContext!.findRenderObject() as RenderBox;
     double dy = renderBox.localToGlobal(Offset.zero).dy;
     return dy;
   }
 
   getWidth(GlobalKey key) {
-    RenderBox renderBox = key.currentContext.findRenderObject();
+    RenderBox renderBox = key.currentContext!.findRenderObject() as RenderBox;
     return renderBox.size.width;
   }
 
   getHeight(GlobalKey key) {
-    RenderBox renderBox = key.currentContext.findRenderObject();
+    RenderBox renderBox = key.currentContext!.findRenderObject() as RenderBox;
     return renderBox.size.height;
   }
 
@@ -50,7 +50,7 @@ class BubbleDemoPage extends StatelessWidget {
     if (isClient()) {
       return getY(button1Key) +
           getHeight(button1Key) -
-          MediaQueryData.fromWindow(WidgetsBinding.instance.window).padding.top;
+          MediaQueryData.fromWindow(WidgetsBinding.instance!.window).padding.top;
     } else {
       return getY(button1Key) + getHeight(button1Key);
     }
@@ -60,7 +60,7 @@ class BubbleDemoPage extends StatelessWidget {
     if (isClient()) {
       return getY(button2Key) +
           getHeight(button2Key) / 2 -
-          MediaQueryData.fromWindow(WidgetsBinding.instance.window).padding.top;
+          MediaQueryData.fromWindow(WidgetsBinding.instance!.window).padding.top;
     } else {
       return getY(button2Key) + getHeight(button2Key) / 2;
     }
@@ -70,7 +70,7 @@ class BubbleDemoPage extends StatelessWidget {
     if (isClient()) {
       return getY(button3Key) +
           getHeight(button3Key) / 2 -
-          MediaQueryData.fromWindow(WidgetsBinding.instance.window).padding.top;
+          MediaQueryData.fromWindow(WidgetsBinding.instance!.window).padding.top;
     } else {
       return getY(button3Key) + getHeight(button3Key) / 2;
     }
@@ -80,7 +80,7 @@ class BubbleDemoPage extends StatelessWidget {
     if (isClient()) {
       return getY(button4Key) -
           bubbleHeight -
-          MediaQueryData.fromWindow(WidgetsBinding.instance.window).padding.top;
+          MediaQueryData.fromWindow(WidgetsBinding.instance!.window).padding.top;
     } else {
       return getY(button4Key) - bubbleHeight;
     }
@@ -197,21 +197,21 @@ class BubbleDialog extends StatelessWidget {
   final ArrowLocation arrowLocation;
 
   ///控件高度
-  final double height;
+  final double? height;
 
   ///控件宽度
-  final double width;
+  final double? width;
 
   ///控件圆角
   final double radius;
 
   ///需要三角形指向的x坐标
-  final double x;
+  final double? x;
 
   ///需要三角形指向的y坐标
-  final double y;
+  final double? y;
 
-  final VoidCallback voidCallback;
+  final VoidCallback? voidCallback;
 
   BubbleDialog(this.text,
       {this.width,
