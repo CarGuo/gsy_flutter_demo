@@ -1,6 +1,7 @@
 import 'dart:math' as Math;
 import 'package:flutter/material.dart';
-import 'package:transformer_page_view/transformer_page_view.dart';
+import 'package:flutter_card_swipper/widgets/transformer_page_view/index_controller.dart';
+import 'package:flutter_card_swipper/widgets/transformer_page_view/transformer_page_view.dart';
 import 'package:vector_math/vector_math_64.dart' as vector;
 
 class ViewPagerDemoPage extends StatelessWidget {
@@ -27,6 +28,7 @@ class ViewPagerDemoPage extends StatelessWidget {
             new Expanded(
               child: new TransformerPageView(
                   loop: false,
+                  controller: IndexController(),
                   itemBuilder: (BuildContext context, int index) {
                     return new Container(
                       decoration: BoxDecoration(
@@ -46,6 +48,7 @@ class ViewPagerDemoPage extends StatelessWidget {
             new Expanded(
               child: new TransformerPageView(
                   loop: true,
+                  controller: IndexController(),
                   transformer: new AccordionTransformer(),
                   itemBuilder: (BuildContext context, int index) {
                     return new Container(
@@ -66,6 +69,7 @@ class ViewPagerDemoPage extends StatelessWidget {
             new Expanded(
               child: new TransformerPageView(
                   loop: true,
+                  controller: IndexController(),
                   transformer: new ThreeDTransformer(),
                   itemBuilder: (BuildContext context, int index) {
                     return new Container(
@@ -86,6 +90,7 @@ class ViewPagerDemoPage extends StatelessWidget {
             new Expanded(
               child: new TransformerPageView(
                   loop: true,
+                  controller: IndexController(),
                   transformer: new DeepthPageTransformer(),
                   itemBuilder: (BuildContext context, int index) {
                     return new Container(

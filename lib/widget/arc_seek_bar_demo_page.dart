@@ -225,7 +225,7 @@ class ArcSeekBarPainter extends CustomPainter {
     double stopPos = (CIRCLE_ANGLE - (openAngle / 2)) / CIRCLE_ANGLE;
     int len = arcColors.length - 1;
     double distance = (stopPos - startPos) / len;
-    var pos = List.filled(arcColors.length, null);
+    var pos = List.filled(arcColors.length, 0.0);
     for (int i = 0; i < arcColors.length; i++) {
       pos[i] = startPos + (distance * i);
     }
