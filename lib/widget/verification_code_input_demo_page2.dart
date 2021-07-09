@@ -299,8 +299,7 @@ class UpWhitelistingTextInputFormatter extends TextInputFormatter {
   /// Creates a formatter that allows only the insertion of whitelisted characters patterns.
   ///
   /// The [whitelistedPattern] must not be null.
-  UpWhitelistingTextInputFormatter(this.whitelistedPattern)
-      : assert(whitelistedPattern != null);
+  UpWhitelistingTextInputFormatter(this.whitelistedPattern);
 
   /// A [Pattern] to extract all instances of allowed characters.
   ///
@@ -320,7 +319,7 @@ class UpWhitelistingTextInputFormatter extends TextInputFormatter {
             .allMatches(substring.toUpperCase())
             .map<String?>((Match match) => match.group(0))
             .join();
-        if (result != null && result.length > 0) {
+        if (result.length > 0) {
           return result;
         }
         return "";
@@ -404,12 +403,8 @@ class VerCodeInput extends StatefulWidget {
     TextEditingController? controller,
     FocusNode? node,
   }) {
-    assert(length != null);
     assert(length > 0, 'The length needs to be larger than zero.');
     assert(length.isFinite, 'The length needs to be finite.');
-    assert(keyboardType != null);
-    assert(builder != null,
-        'The builder is required for rendering the character segments.');
 
     inputFormatters ??= _createInputFormatters(length, keyboardType);
 
@@ -562,13 +557,6 @@ class _VerCodeInputState extends State<VerCodeInput> {
                 final hasFocus = widget.controller!.selection.baseOffset == i;
                 final char = i < text.length ? text[i] : '';
                 final characterEntity = widget.builder(hasFocus, char, i);
-
-                assert(
-                    characterEntity != null,
-                    'The builder for the character entity at position $i '
-                    'returned null. It did${hasFocus ? ' not' : ''} have the '
-                    'focus and the character passed to it was \'$char\'.');
-
                 return characterEntity;
               }),
             ),

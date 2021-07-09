@@ -238,12 +238,7 @@ class _RichTextWrapper extends RichText {
     double textScaleFactor = 1.0,
     int? maxLines,
     Locale? locale,
-  })  : assert(text != null),
-        assert(textAlign != null),
-        assert(softWrap != null),
-        assert(overflow != null),
-        assert(textScaleFactor != null),
-        assert(maxLines == null || maxLines > 0),
+  })  : assert(maxLines == null || maxLines > 0),
         super(
             key: key,
             text: text,
@@ -337,7 +332,8 @@ class _RealRichRenderParagraph extends RenderParagraph {
     canvas.save();
 
     int textOffset = 0;
-    for (TextSpan textSpan in (text as TextSpan).children as Iterable<TextSpan>) {
+    for (TextSpan textSpan
+        in (text as TextSpan).children as Iterable<TextSpan>) {
       if (textSpan is ImageSpan) {
         // this is the top-center point of the ImageSpan
         Offset offsetForCaret = getOffsetForCaret(

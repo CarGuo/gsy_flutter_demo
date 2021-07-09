@@ -24,7 +24,7 @@ class VerificationCodeInputDemoPage extends StatelessWidget {
               keyboardType: TextInputType.number,
               builder: staticRectangle(context),
               onChanged: (value) {
-                print(value ?? "");
+                print(value);
               },
 
               ///输入完成时
@@ -51,7 +51,10 @@ class VerificationCodeInputDemoPage extends StatelessWidget {
         borderRadius: BorderRadius.zero,
         border: Border.all(color: Theme.of(context).primaryColor, width: 1.0),
         color: Colors.transparent,
-        textStyle: TextStyle(color: Theme.of(context).primaryColor, fontSize: 16.0, fontWeight: FontWeight.bold));
+        textStyle: TextStyle(
+            color: Theme.of(context).primaryColor,
+            fontSize: 16.0,
+            fontWeight: FontWeight.bold));
   }
 }
 
@@ -81,11 +84,8 @@ class VerCodeInput extends StatefulWidget {
     void Function(String value)? onChanged,
     void Function(String value)? onFilled,
   }) {
-    assert(length != null);
     assert(length > 0, 'The length needs to be larger than zero.');
     assert(length.isFinite, 'The length needs to be finite.');
-    assert(keyboardType != null);
-    assert(builder != null, 'The builder is required for rendering the character segments.');
 
     inputFormatters ??= _createInputFormatters(length, keyboardType);
 
@@ -157,8 +157,11 @@ class VerCodeInput extends StatefulWidget {
 
   /// A helping function that creates input formatters for a given length and
   /// keyboardType.
-  static List<TextInputFormatter> _createInputFormatters(int length, TextInputType keyboardType) {
-    final formatters = <TextInputFormatter>[LengthLimitingTextInputFormatter(length)];
+  static List<TextInputFormatter> _createInputFormatters(
+      int length, TextInputType keyboardType) {
+    final formatters = <TextInputFormatter>[
+      LengthLimitingTextInputFormatter(length)
+    ];
 
     // Add keyboard specific formatters.
     // For example, a code input with a number keyboard type probably doesn't
@@ -201,11 +204,11 @@ class _VerCodeInputState extends State<VerCodeInput> {
             cursorColor: Colors.black,
             // Doesn't really matter.
             onChanged: (value) => setState(() {
-                  widget.onChanged?.call(value);
-                  if (value.length == widget.length) {
-                    widget.onFilled?.call(value);
-                  }
-                }),
+              widget.onChanged?.call(value);
+              if (value.length == widget.length) {
+                widget.onFilled?.call(value);
+              }
+            }),
           )),
       // These are the actual character widgets. A transparent container lies
       // right below the gesture detector, so all taps get collected, even
@@ -215,7 +218,8 @@ class _VerCodeInputState extends State<VerCodeInput> {
             if (MediaQuery.of(widget.ctx!).viewInsets.bottom == 0) {
               final focusScope = FocusScope.of(context);
               focusScope.requestFocus(FocusNode());
-              Future.delayed(Duration.zero, () => focusScope.requestFocus(node));
+              Future.delayed(
+                  Duration.zero, () => focusScope.requestFocus(node));
             }
           },
           child: Container(
@@ -227,11 +231,6 @@ class _VerCodeInputState extends State<VerCodeInput> {
                 final char = i < text.length ? text[i] : '';
                 final characterEntity = widget.builder(hasFocus, char);
 
-                assert(
-                    characterEntity != null,
-                    'The builder for the character entity at position $i '
-                    'returned null. It did${hasFocus ? ' not' : ''} have the '
-                    'focus and the character passed to it was \'$char\'.');
 
                 return characterEntity;
               }),
@@ -273,7 +272,8 @@ abstract class CodeInputBuilders {
           width: char.isEmpty ? emptySize.width : filledSize.width,
           height: char.isEmpty ? emptySize.height : filledSize.height,
           alignment: Alignment.center,
-          child: Text(char, style: char.isEmpty ? emptyTextStyle : filledTextStyle),
+          child: Text(char,
+              style: char.isEmpty ? emptyTextStyle : filledTextStyle),
         ));
   }
 
@@ -339,7 +339,8 @@ abstract class CodeInputBuilders {
         filledRadius: filledRadius,
         border: Border.all(color: Colors.white, width: 2.0),
         color: Colors.white10,
-        textStyle: TextStyle(color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.bold));
+        textStyle: TextStyle(
+            color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.bold));
   }
 
   /// Builds the input inside a light circle.
@@ -354,7 +355,8 @@ abstract class CodeInputBuilders {
         filledRadius: filledRadius,
         border: Border.all(color: Colors.black, width: 2.0),
         color: Colors.black12,
-        textStyle: TextStyle(color: Colors.black, fontSize: 20.0, fontWeight: FontWeight.bold));
+        textStyle: TextStyle(
+            color: Colors.black, fontSize: 20.0, fontWeight: FontWeight.bold));
   }
 
   /// Builds the input inside a light rectangle.
@@ -371,7 +373,8 @@ abstract class CodeInputBuilders {
         borderRadius: borderRadius,
         border: Border.all(color: Colors.white, width: 2.0),
         color: Colors.white10,
-        textStyle: TextStyle(color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.bold));
+        textStyle: TextStyle(
+            color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.bold));
   }
 
   static CodeInputBuilder staticRectangle({
@@ -387,7 +390,8 @@ abstract class CodeInputBuilders {
         borderRadius: borderRadius,
         border: Border.all(color: Colors.white, width: 1.0),
         color: Colors.transparent,
-        textStyle: TextStyle(color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.bold));
+        textStyle: TextStyle(
+            color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.bold));
   }
 
   /// Builds the input inside a dark rectangle.
@@ -404,6 +408,7 @@ abstract class CodeInputBuilders {
         borderRadius: borderRadius,
         border: Border.all(color: Colors.black, width: 2.0),
         color: Colors.black12,
-        textStyle: TextStyle(color: Colors.black, fontSize: 20.0, fontWeight: FontWeight.bold));
+        textStyle: TextStyle(
+            color: Colors.black, fontSize: 20.0, fontWeight: FontWeight.bold));
   }
 }

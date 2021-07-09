@@ -13,9 +13,7 @@ class _CustomSliver extends SingleChildRenderObjectWidget {
     this.hasLayoutExtent = false,
     this.pinned = false,
     Widget? child,
-  })  : assert(containerLayoutExtent != null),
-        assert(containerLayoutExtent >= 0.0),
-        assert(hasLayoutExtent != null),
+  })  : assert(containerLayoutExtent >= 0.0),
         super(key: key, child: child);
 
   final double initLayoutExtent;
@@ -52,9 +50,7 @@ class _RenderCustomSliver extends RenderSliver
     required bool hasLayoutExtent,
     required bool pinned,
     RenderBox? child,
-  })  : assert(containerExtent != null),
-        assert(containerExtent >= 0.0),
-        assert(hasLayoutExtent != null),
+  })  : assert(containerExtent >= 0.0),
         _containerExtent = containerExtent,
         _initLayoutExtent = initLayoutExtent,
         _pinned = pinned,
@@ -66,7 +62,6 @@ class _RenderCustomSliver extends RenderSliver
   double _containerExtent;
 
   set containerLayoutExtent(double value) {
-    assert(value != null);
     assert(value >= 0.0);
     if (value == _containerExtent) return;
     _containerExtent = value;
@@ -76,7 +71,6 @@ class _RenderCustomSliver extends RenderSliver
   bool _pinned;
 
   set pinned(bool value) {
-    assert(value != null);
     if (value == _pinned) return;
     _pinned = value;
     markNeedsLayout();
@@ -85,7 +79,6 @@ class _RenderCustomSliver extends RenderSliver
   double _initLayoutExtent;
 
   set initLayoutExtent(double value) {
-    assert(value != null);
     assert(value >= 0.0);
     if (value == _initLayoutExtent) return;
     _initLayoutExtent = value;
@@ -96,7 +89,6 @@ class _RenderCustomSliver extends RenderSliver
   bool _hasLayoutExtent;
 
   set hasLayoutExtent(bool value) {
-    assert(value != null);
     if (value == _hasLayoutExtent) return;
     _hasLayoutExtent = value;
     markNeedsLayout();
@@ -116,7 +108,6 @@ class _RenderCustomSliver extends RenderSliver
     assert(constraints.growthDirection == GrowthDirection.forward);
     double layoutExtent = (_hasLayoutExtent ? 1.0 : 0.0) * _containerExtent;
     if (_hasLayoutExtent == false &&
-        _initLayoutExtent != null &&
         _initLayoutExtent > 0) {
       layoutExtent += _initLayoutExtent;
     }
@@ -240,9 +231,7 @@ class CustomSliver extends StatefulWidget {
     this.initLayoutExtent = 0,
     this.pinned = false,
     this.builder = buildSimplecontainer,
-  })  : assert(triggerPullDistance != null),
-        assert(triggerPullDistance > 0.0),
-        assert(containerExtent != null),
+  })  : assert(triggerPullDistance > 0.0),
         assert(containerExtent >= 0.0),
         assert(
             triggerPullDistance >= containerExtent,
@@ -337,7 +326,7 @@ class CustomSliverState extends State<CustomSliver> {
       child: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
           latestcontainerBoxExtent = constraints.maxHeight;
-          if (widget.builder != null && latestcontainerBoxExtent > 0) {
+          if (latestcontainerBoxExtent > 0) {
             return widget.builder(
               context,
               latestcontainerBoxExtent,

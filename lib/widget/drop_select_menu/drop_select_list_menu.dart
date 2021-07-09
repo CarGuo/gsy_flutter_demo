@@ -78,6 +78,7 @@ class _MenuListState<T extends DropSelectObject>
         {}
         break;
       case DropSelectEvent.ACTIVE:
+      default:
         {}
         break;
     }

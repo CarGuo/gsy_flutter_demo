@@ -172,15 +172,16 @@ class _MenuListExpandedState<T extends DropSelectObject>
           cloneDataList(_cloneList, widget.data!);
           break;
         }
-      case DropSelectEvent.HIDE:
-        {
-          hideAllExpandController();
-        }
-        break;
       case DropSelectEvent.ACTIVE:
         {
           ///激活时备份列表
           cloneDataList(widget.data!, _cloneList);
+        }
+        break;
+      case DropSelectEvent.HIDE:
+      default:
+        {
+          hideAllExpandController();
         }
         break;
     }

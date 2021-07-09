@@ -13,8 +13,7 @@ class LinkFlexibleSpaceBar extends StatefulWidget {
     this.titlePadding,
     this.collapseMode = CollapseMode.parallax,
     this.stretchModes = const <StretchMode>[StretchMode.zoomBackground],
-  })  : assert(collapseMode != null),
-        super(key: key);
+  })  : super(key: key);
 
   final Widget? title;
 
@@ -39,7 +38,6 @@ class LinkFlexibleSpaceBar extends StatefulWidget {
 class _LinkFlexibleSpaceBarState extends State<LinkFlexibleSpaceBar> {
   bool? _getEffectiveCenterTitle(ThemeData theme) {
     if (widget.centerTitle != null) return widget.centerTitle;
-    assert(theme.platform != null);
     switch (theme.platform) {
       case TargetPlatform.android:
       case TargetPlatform.fuchsia:
@@ -54,14 +52,12 @@ class _LinkFlexibleSpaceBarState extends State<LinkFlexibleSpaceBar> {
   Alignment? _getTitleAlignment(bool effectiveCenterTitle) {
     if (effectiveCenterTitle) return Alignment.bottomCenter;
     final TextDirection textDirection = Directionality.of(context);
-    assert(textDirection != null);
     switch (textDirection) {
       case TextDirection.rtl:
         return Alignment.bottomRight;
       case TextDirection.ltr:
         return Alignment.bottomLeft;
     }
-    return null;
   }
 
   double? _getCollapsePadding(double t, FlexibleSpaceBarSettings settings) {
@@ -74,7 +70,6 @@ class _LinkFlexibleSpaceBarState extends State<LinkFlexibleSpaceBar> {
         final double deltaExtent = settings.maxExtent - settings.minExtent;
         return -Tween<double>(begin: 0.0, end: deltaExtent / 4.0).transform(t);
     }
-    return null;
   }
 
   @override
@@ -83,10 +78,6 @@ class _LinkFlexibleSpaceBarState extends State<LinkFlexibleSpaceBar> {
         builder: (BuildContext context, BoxConstraints constraints) {
       final FlexibleSpaceBarSettings settings = context
           .dependOnInheritedWidgetOfExactType<FlexibleSpaceBarSettings>()!;
-      assert(
-        settings != null,
-        'A FlexibleSpaceBar must be wrapped in the widget returned by FlexibleSpaceBar.createSettings().',
-      );
 
       final List<Widget> children = <Widget>[];
 
@@ -136,8 +127,8 @@ class _LinkFlexibleSpaceBarState extends State<LinkFlexibleSpaceBar> {
                       color: Colors.transparent,
                     ),
                     filter: ui.ImageFilter.blur(
-                      sigmaX: blurAmount ?? 0,
-                      sigmaY: blurAmount ?? 0,
+                      sigmaX: blurAmount,
+                      sigmaY: blurAmount,
                     ))));
           }
         }
@@ -174,8 +165,8 @@ class _LinkFlexibleSpaceBarState extends State<LinkFlexibleSpaceBar> {
         final double opacity = settings.toolbarOpacity;
         if (opacity > 0.0) {
           TextStyle titleStyle = theme.primaryTextTheme.headline6!;
-          titleStyle =
-              titleStyle.copyWith(color: titleStyle.color!.withOpacity(opacity));
+          titleStyle = titleStyle.copyWith(
+              color: titleStyle.color!.withOpacity(opacity));
           final bool effectiveCenterTitle = _getEffectiveCenterTitle(theme)!;
           final EdgeInsetsGeometry padding = widget.titlePadding ??
               EdgeInsetsDirectional.only(
@@ -245,7 +236,8 @@ class _LinkFlexibleSpaceBarState extends State<LinkFlexibleSpaceBar> {
                         children: <Widget>[
                           new Expanded(
                             child: new Row(
-                              children: widget.bottom ?? Container() as List<Widget>,
+                              children:
+                                  widget.bottom ?? Container() as List<Widget>,
                             ),
                           ),
                         ],

@@ -24,7 +24,7 @@ class DropSelectHeader extends DropSelectWidget {
     Key? key,
     this.height: 46.0,
     this.showTitle,
-  })  : assert(titles != null && titles.length > 0),
+  })  : assert(titles.length > 0),
         super(key: key, controller: controller);
 
   @override
@@ -145,6 +145,7 @@ class _DropSelectHeaderState extends DropSelectState<DropSelectHeader> {
         }
         break;
       case DropSelectEvent.ACTIVE:
+      default:
         {
           if (_activeIndex == controller!.menuIndex) return;
           setState(() {

@@ -105,7 +105,7 @@ class _BookPageState extends State<BookPage>
             var edy = cancelValue.end.dy;
 
             curPoint = CalPoint.data(
-                bdx + edx * cancelAnim!.value, bdy + edy * cancelAnim!.value);
+                bdx + edx * cancelAnim.value, bdy + edy * cancelAnim.value);
           });
         }
       })

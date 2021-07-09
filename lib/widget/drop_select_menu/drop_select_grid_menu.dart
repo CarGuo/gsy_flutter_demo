@@ -166,6 +166,7 @@ class _MenuListGridState<T extends DropSelectObject>
         {}
         break;
       case DropSelectEvent.ACTIVE:
+      default:
         {
           ///激活时备份列表
           cloneDataList(widget.data!, _cloneList);

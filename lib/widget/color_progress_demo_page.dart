@@ -102,7 +102,7 @@ class _ColorProgressState extends State<ColorProgress> {
 
   List<Widget> renderColorList() {
     List<Widget> widgetList = [];
-    widget.colorList?.forEach((element) {
+    widget.colorList.forEach((element) {
       widgetList.add(
         Container(
           decoration: BoxDecoration(

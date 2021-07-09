@@ -129,7 +129,7 @@ class BookPainter extends CustomPainter {
           (limitAngle != null && limitAngle)) {
         ///如果大于0则设置a点坐标重新计算各标识点位置，否则a点坐标不变
         if (_calcPointCX(touchPoint, f) > 0) {
-          changedPoint?.call(cur);
+          changedPoint.call(cur);
           _calcPointsXY(a, f);
         } else {
           a.x = pre.x;

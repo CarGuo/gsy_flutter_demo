@@ -154,14 +154,12 @@ class AngleTransformer extends PageTransformer {
 
     dx = 0;
 
-    if (_fade != null) {
-      double fadeFactor = (1 - position.abs()) * (1 - _fade);
-      double opacity = _fade + fadeFactor;
-      child = new Opacity(
-        opacity: opacity,
-        child: child,
-      );
-    }
+    double fadeFactor = (1 - position.abs()) * (1 - _fade);
+    double opacity = _fade + fadeFactor;
+    child = new Opacity(
+      opacity: opacity,
+      child: child,
+    );
 
     child = new Transform.translate(
       offset: Offset(position.isNegative ? -dx : dx, dy),

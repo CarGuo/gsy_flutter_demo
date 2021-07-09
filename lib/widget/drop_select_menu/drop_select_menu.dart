@@ -47,9 +47,7 @@ class DropSelectMenu extends DropSelectWidget {
         showDuration = showDuration ?? new Duration(milliseconds: 300),
         showCurve = showCurve ?? Curves.fastOutSlowIn,
         hideCurve = hideCurve ?? Curves.fastOutSlowIn,
-        super(key: key, controller: controller) {
-    assert(menus != null);
-  }
+        super(key: key, controller: controller);
 
   @override
   DropSelectState<DropSelectMenu> createState() {
@@ -277,8 +275,6 @@ class _DropSelectMenuState extends DropSelectState<DropSelectMenu>
 
             return new Future.value(null);
           }
-
-          break;
         case DropSelectMenuSwitchStyle.animationHideAnimationShow:
           {
             _hide(_activeIndex!);
@@ -296,7 +292,6 @@ class _DropSelectMenuState extends DropSelectState<DropSelectMenu>
               return _handleShow(index, true);
             });
           }
-          break;
       }
     }
 
@@ -344,6 +339,7 @@ class _DropSelectMenuState extends DropSelectState<DropSelectMenu>
         }
         break;
       case DropSelectEvent.ACTIVE:
+      default:
         {
           onShow(controller!.menuIndex!);
         }

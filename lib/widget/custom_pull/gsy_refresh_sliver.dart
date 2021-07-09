@@ -17,9 +17,7 @@ class _CupertinoSliverRefresh extends SingleChildRenderObjectWidget {
     this.refreshIndicatorLayoutExtent = 0.0,
     this.hasLayoutExtent = false,
     Widget? child,
-  }) : assert(refreshIndicatorLayoutExtent != null),
-        assert(refreshIndicatorLayoutExtent >= 0.0),
-        assert(hasLayoutExtent != null),
+  }) : assert(refreshIndicatorLayoutExtent >= 0.0),
         super(key: key, child: child);
 
   // The amount of space the indicator should occupy in the sliver in a
@@ -59,9 +57,7 @@ class _RenderCupertinoSliverRefresh extends RenderSliver
     required double refreshIndicatorExtent,
     required bool hasLayoutExtent,
     RenderBox? child,
-  }) : assert(refreshIndicatorExtent != null),
-        assert(refreshIndicatorExtent >= 0.0),
-        assert(hasLayoutExtent != null),
+  }) : assert(refreshIndicatorExtent >= 0.0),
         _refreshIndicatorExtent = refreshIndicatorExtent,
         _hasLayoutExtent = hasLayoutExtent {
     this.child = child;
@@ -72,7 +68,6 @@ class _RenderCupertinoSliverRefresh extends RenderSliver
   double get refreshIndicatorLayoutExtent => _refreshIndicatorExtent;
   double _refreshIndicatorExtent;
   set refreshIndicatorLayoutExtent(double value) {
-    assert(value != null);
     assert(value >= 0.0);
     if (value == _refreshIndicatorExtent)
       return;
@@ -86,7 +81,6 @@ class _RenderCupertinoSliverRefresh extends RenderSliver
   bool get hasLayoutExtent => _hasLayoutExtent;
   bool _hasLayoutExtent;
   set hasLayoutExtent(bool value) {
-    assert(value != null);
     if (value == _hasLayoutExtent)
       return;
     _hasLayoutExtent = value;
@@ -290,9 +284,7 @@ class CupertinoSliverRefreshControl extends StatefulWidget {
     this.refreshIndicatorExtent = _defaultRefreshIndicatorExtent,
     this.builder = buildSimpleRefreshIndicator,
     this.onRefresh,
-  }) : assert(refreshTriggerPullDistance != null),
-        assert(refreshTriggerPullDistance > 0.0),
-        assert(refreshIndicatorExtent != null),
+  }) : assert(refreshTriggerPullDistance > 0.0),
         assert(refreshIndicatorExtent >= 0.0),
         assert(
         refreshTriggerPullDistance >= refreshIndicatorExtent,
@@ -467,7 +459,6 @@ class CupertinoSliverRefreshControlState extends State<CupertinoSliverRefreshCon
           }
           return RefreshIndicatorMode.armed;
         }
-        break;
       case RefreshIndicatorMode.armed:
         if (refreshState == RefreshIndicatorMode.armed && !needRefresh) {
           goToDone();
@@ -515,6 +506,7 @@ class CupertinoSliverRefreshControlState extends State<CupertinoSliverRefreshCon
         continue done;
       done:
       case RefreshIndicatorMode.done:
+      default:
         ///结束状态
         if (latestIndicatorBoxExtent >
             widget.refreshTriggerPullDistance * _inactiveResetOverscrollFraction) {
@@ -536,14 +528,12 @@ class CupertinoSliverRefreshControlState extends State<CupertinoSliverRefreshCon
         draging = false;
       }
     } else if (notification is UserScrollNotification) {
-      if(notification.direction != null) {
-        if(notification.direction != ScrollDirection.idle) {
-          /// 手还在拖动
-          draging = true;
-        } else {
-          /// 放手了
-          draging = false;
-        }
+      if(notification.direction != ScrollDirection.idle) {
+        /// 手还在拖动
+        draging = true;
+      } else {
+        /// 放手了
+        draging = false;
       }
     }
   }
@@ -557,7 +547,7 @@ class CupertinoSliverRefreshControlState extends State<CupertinoSliverRefreshCon
         builder: (BuildContext context, BoxConstraints constraints) {
           latestIndicatorBoxExtent = constraints.maxHeight;
           refreshState = transitionNextState();
-          if (widget.builder != null && latestIndicatorBoxExtent > 0) {
+          if (latestIndicatorBoxExtent > 0) {
             return widget.builder(
               context,
               refreshState,

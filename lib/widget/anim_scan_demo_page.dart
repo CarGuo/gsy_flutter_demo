@@ -276,7 +276,7 @@ class _DebounceButtonState extends State<DebounceButton> {
       onTap: () {
         setState(() {
           if (timer == null) {
-            widget?.onTap?.call();
+            widget.onTap?.call();
             timer = new Timer(durationTime, () {
               timer = null;
             });

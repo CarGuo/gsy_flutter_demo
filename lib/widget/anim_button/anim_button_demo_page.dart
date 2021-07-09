@@ -76,14 +76,15 @@ class _AnimButtonDemoPageState extends State<AnimButtonDemoPage> {
                     case LoadingState.STATE_PRE:
                       nextState = LoadingState.STATE_COMPLETE;
                       break;
-                    case LoadingState.STATE_COMPLETE:
-                      nextState = LoadingState.STATE_END;
-                      break;
                     case LoadingState.STATE_END:
                       nextState = LoadingState.STATE_DOWNLOADING;
                       break;
                     case LoadingState.STATE_DOWNLOADING:
                       nextState = LoadingState.STATE_PRE;
+                      break;
+                    case LoadingState.STATE_COMPLETE:
+                    default:
+                      nextState = LoadingState.STATE_END;
                       break;
                   }
                   setState(() {

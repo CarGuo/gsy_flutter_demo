@@ -21,8 +21,8 @@ class StickRender extends RenderBox
     _scrollable = scrollableState;
     if (attached) {
       ///这里触发更新
-      preScroll!.position?.removeListener(markNeedsLayout);
-      scrollableState!.position?.addListener(markNeedsLayout);
+      preScroll!.position.removeListener(markNeedsLayout);
+      scrollableState!.position.addListener(markNeedsLayout);
     }
     markNeedsLayout();
   }
@@ -43,13 +43,13 @@ class StickRender extends RenderBox
   @override
   void attach(_) {
     ///设置监听
-    _scrollable!.position?.addListener(markNeedsLayout);
+    _scrollable!.position.addListener(markNeedsLayout);
     super.attach(_);
   }
 
   @override
   void detach() {
-    _scrollable!.position?.removeListener(markNeedsLayout);
+    _scrollable!.position.removeListener(markNeedsLayout);
     super.detach();
   }
 

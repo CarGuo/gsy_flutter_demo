@@ -121,7 +121,7 @@ class LoadingButtonPainter extends CustomPainter {
     baseRippleLength = 4.4 * baseLength / 12;
     centerX = w / 2;
     centerY = h / 2;
-    currentRippleX ??= centerX - baseRippleLength * 10;
+    currentRippleX = centerX - baseRippleLength * 10;
     rect = new Rect.fromLTRB(
         centerX - circleRadius,
         centerY + 0.6 * circleRadius,
@@ -204,10 +204,10 @@ class LoadingButtonPainter extends CustomPainter {
             rect, -0.5 * pi, 359.99 / 180 * pi * fraction, false, painter);
         path.reset();
         currentRippleX += loadingSpeed;
-        if (currentRippleX! > centerX - baseRippleLength * 6)
+        if (currentRippleX > centerX - baseRippleLength * 6)
           currentRippleX = centerX - baseRippleLength * 10;
         currentRippleXCallback?.call(currentRippleX);
-        path.moveTo(currentRippleX!, centerY);
+        path.moveTo(currentRippleX, centerY);
         for (int i = 0; i < 4; i++) {
           path.relativeQuadraticBezierTo(baseRippleLength,
               -(1 - fraction) * baseRippleLength, baseRippleLength * 2, 0);
@@ -236,6 +236,7 @@ class LoadingButtonPainter extends CustomPainter {
             painter);
         break;
       case LoadingState.STATE_COMPLETE:
+      default:
         canvas.drawCircle(Offset(centerX, centerY), circleRadius, bgPainter);
         canvas.drawLine(
             Offset(centerX - baseLength, centerY),

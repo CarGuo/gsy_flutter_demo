@@ -29,7 +29,6 @@ class RenderCloudWidget extends RenderBox
   Clip _overflow;
 
   set overflow(Clip value) {
-    assert(value != null);
     if (_overflow != value) {
       _overflow = value;
       markNeedsPaint();
@@ -42,7 +41,6 @@ class RenderCloudWidget extends RenderBox
   double get ratio => _ratio!;
 
   set ratio(double value) {
-    assert(value != null);
     if (_ratio != value) {
       _ratio = value;
       markNeedsPaint();

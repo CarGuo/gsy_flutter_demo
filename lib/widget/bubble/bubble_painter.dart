@@ -47,6 +47,7 @@ class BubblePainter extends CustomPainter {
         setUpTopPath(mRect!, path);
         break;
       case ArrowLocation.BOTTOM:
+      default:
         setUpBottomPath(mRect!, path);
         break;
     }
@@ -59,6 +60,7 @@ class BubblePainter extends CustomPainter {
         mPaint.color = bubbleColor!;
         break;
       case BubbleType.BITMAP:
+      default:
         break;
     }
     mRect ??= new Rect.fromLTRB(0, 0, size.width, size.height);

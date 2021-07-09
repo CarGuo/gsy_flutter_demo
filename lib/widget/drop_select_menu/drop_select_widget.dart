@@ -117,6 +117,7 @@ class _DropSelectMenuContainerState extends State<DropSelectMenuContainer>
       case DropSelectEvent.ACTIVE:
         break;
       case DropSelectEvent.HIDE:
+      default:
         break;
     }
   }
@@ -156,8 +157,7 @@ class DropSelectMenuBuilder {
   final WidgetBuilder builder;
   final double? height;
 
-  DropSelectMenuBuilder({required this.builder, this.height})
-      : assert(builder != null);
+  DropSelectMenuBuilder({required this.builder, this.height});
 }
 
 typedef DropOnSelected({int? menuIndex, int? index, dynamic data});
