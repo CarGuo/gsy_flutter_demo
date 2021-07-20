@@ -66,6 +66,7 @@ import 'package:gsy_flutter_demo/widget/transform_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/verification_code_input_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/verification_code_input_demo_page2.dart';
 import 'package:gsy_flutter_demo/widget/viewpager_demo_page.dart';
+import 'package:window_location_href/window_location_href.dart';
 
 void main() => runApp(MyApp());
 
@@ -73,7 +74,6 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    print("######## ${ Cat.black.name}");
     return MaterialApp(
       title: 'GSY Flutter Demo',
       theme: ThemeData(
@@ -95,6 +95,25 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  @override
+  void initState() {
+    super.initState();
+    final href = getHref();
+    int? index = href?.indexOf("#");
+    if (href != null && index != null && index > 0) {
+      String uri = href;
+      String key = uri.substring(index + 1, uri.length);
+      if (key.isNotEmpty && key.length > 3) {
+        var result = Uri.decodeFull(key);
+        if (routers.keys.contains(result) && result != "/") {
+          Future(() {
+            Navigator.pushNamed(context, result);
+          });
+        }
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     var routeLists = routers.keys.toList();
@@ -328,14 +347,9 @@ Map<String, WidgetBuilder> routers = {
   "第三方的动画字体": (context) {
     return new AnimTextDemoPage();
   },
-
 };
 
-
-enum Cat {
-  black,
-  white
-}
+enum Cat { black, white }
 
 extension CatExtension on Cat {
   String? get name {

@@ -534,6 +534,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.1.0"
+  window_location_href:
+    dependency: "direct main"
+    description:
+      name: window_location_href
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.0"
   yaml:
     dependency: transitive
     description:
