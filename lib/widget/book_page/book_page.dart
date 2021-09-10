@@ -18,7 +18,7 @@ class _BookPageState extends State<BookPage>
   double? height;
   late AnimationController animationController;
   late Animation cancelAnim;
-  late Tween cancelValue;
+  late Tween<Offset?> cancelValue;
   bool needCancelAnim = true;
 
   toNormal([_]) {
@@ -52,7 +52,9 @@ class _BookPageState extends State<BookPage>
     } else if (dx > width! / 3 && dy <= height! / 3) {
       //上
       style = PositionStyle.STYLE_TOP_RIGHT;
-    } else if (dx > width! * 2 / 3 && dy > height! / 3 && dy <= height! * 2 / 3) {
+    } else if (dx > width! * 2 / 3 &&
+        dy > height! / 3 &&
+        dy <= height! * 2 / 3) {
       //右
       style = PositionStyle.STYLE_RIGHT;
     } else if (dx > width! / 3 && dy > height! * 2 / 3) {
@@ -98,11 +100,11 @@ class _BookPageState extends State<BookPage>
       ..addListener(() {
         if (animationController.isAnimating) {
           setState(() {
-            var bdx = cancelValue.begin.dx;
-            var bdy = cancelValue.begin.dy;
+            var bdx = cancelValue.begin!.dx;
+            var bdy = cancelValue.begin!.dy;
 
-            var edx = cancelValue.end.dx;
-            var edy = cancelValue.end.dy;
+            var edx = cancelValue.end!.dx;
+            var edy = cancelValue.end!.dy;
 
             curPoint = CalPoint.data(
                 bdx + edx * cancelAnim.value, bdy + edy * cancelAnim.value);
