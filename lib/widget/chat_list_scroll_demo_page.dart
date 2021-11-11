@@ -21,7 +21,7 @@ class _ChatListScrollDemoPageState extends State<ChatListScrollDemoPage> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          newData.insert(0, "#### new Send");
+          newData.add("#### new Send");
           setState(() {});
           Future.delayed(Duration(milliseconds: 1000), () {
             scroller.jumpTo(scroller.position.minScrollExtent);
