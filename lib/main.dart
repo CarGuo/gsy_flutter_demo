@@ -7,6 +7,7 @@ import 'package:gsy_flutter_demo/widget/anim_text_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/arc_seek_bar_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/bottom_anim_nav_page.dart';
 import 'package:gsy_flutter_demo/widget/canvas_click_demo_page.dart';
+import 'package:gsy_flutter_demo/widget/chat_list_scroll_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/color_progress_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/drag_img_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/index_stack_drag_card_demo_page.dart';
@@ -347,6 +348,10 @@ Map<String, WidgetBuilder> routers = {
   "第三方的动画字体": (context) {
     return new AnimTextDemoPage();
   },
+  "首尾添加数据不会抖动": (context) {
+    return new ChatListScrollDemoPage();
+  },
+
 };
 
 enum Cat { black, white }
