@@ -10,18 +10,57 @@ class ChatListScrollDemoPage extends StatefulWidget {
 }
 
 class _ChatListScrollDemoPageState extends State<ChatListScrollDemoPage> {
-  var loadMoreData = ["ddd1", "ddd2", "ddd3"];
-  var newData = [];
+  List<ItemData> loadMoreData = [
+    new ItemData(txt: "aaa11", type: "Right"),
+    new ItemData(txt: "aaa22", type: "Right"),
+    new ItemData(txt: "aaa33", type: "Right")
+  ];
+  List<ItemData> newData = [];
 
   var centerKey = GlobalKey();
   var scroller = ScrollController();
+
+  renderRightItem(ItemData data) {
+    return Container(
+      height: 50,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(4),
+        color: Colors.red,
+      ),
+      margin: EdgeInsets.only(left: 50, right: 10, top: 5, bottom: 5),
+      padding: EdgeInsets.all(10),
+      alignment: Alignment.centerRight,
+      child: new Text(
+        data.txt,
+        maxLines: 10,
+      ),
+    );
+  }
+
+  renderLeftItem(ItemData data) {
+    return Container(
+      height: 50,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(4),
+        color: Colors.green,
+      ),
+      margin: EdgeInsets.only(right: 50, left: 10, top: 5, bottom: 5),
+      padding: EdgeInsets.all(10),
+      alignment: Alignment.centerLeft,
+      child: new Text(
+        data.txt,
+        maxLines: 10,
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          newData.add("#### new Send");
+          newData.add(
+              ItemData(txt: "#### new Send ${newData.length}", type: "Right"));
           setState(() {});
           Future.delayed(Duration(milliseconds: 1000), () {
             scroller.jumpTo(scroller.position.minScrollExtent);
@@ -38,7 +77,8 @@ class _ChatListScrollDemoPageState extends State<ChatListScrollDemoPage> {
           new TextButton.icon(
               onPressed: () {
                 for (int i = 0; i < 20; i++) {
-                  loadMoreData.add("#### old ${loadMoreData.length}$i");
+                  loadMoreData.add(ItemData(
+                      txt: "Old ${loadMoreData.length}$i", type: "Right"));
                 }
                 setState(() {});
               },
@@ -53,7 +93,8 @@ class _ChatListScrollDemoPageState extends State<ChatListScrollDemoPage> {
           new TextButton.icon(
               onPressed: () {
                 for (int i = 0; i < 20; i++) {
-                  newData.insert(0, "#### new ${newData.length - i}");
+                  newData.add(
+                      ItemData(txt: "New ${newData.length}$i", type: "Left"));
                 }
                 setState(() {});
               },
@@ -76,12 +117,11 @@ class _ChatListScrollDemoPageState extends State<ChatListScrollDemoPage> {
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
-                return Container(
-                  height: 50,
-                  margin: EdgeInsets.all(5),
-                  color: Colors.yellow,
-                  child: new Text(newData[index]),
-                );
+                var item = newData[index];
+                if (item.type == "Right")
+                  return renderRightItem(item);
+                else
+                  return renderLeftItem(item);
               },
               childCount: newData.length,
             ),
@@ -93,12 +133,11 @@ class _ChatListScrollDemoPageState extends State<ChatListScrollDemoPage> {
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
-                return Container(
-                  height: 50,
-                  margin: EdgeInsets.all(5),
-                  color: Colors.red,
-                  child: new Text(loadMoreData[index]),
-                );
+                var item = loadMoreData[index];
+                if (item.type == "Right")
+                  return renderRightItem(item);
+                else
+                  return renderLeftItem(item);
               },
               childCount: loadMoreData.length,
             ),
@@ -107,4 +146,14 @@ class _ChatListScrollDemoPageState extends State<ChatListScrollDemoPage> {
       ),
     );
   }
+}
+
+class ItemData {
+  String txt = "";
+  String type = "";
+
+  ItemData({
+    required this.txt,
+    required this.type,
+  });
 }
