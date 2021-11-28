@@ -1,6 +1,9 @@
 # GSY Flutter Demo
 
+
 ### 不同于 [GSYGithubAppFlutter](https://github.com/CarGuo/GSYGithubAppFlutter) 项目，本项目将逐步完善各种 Flutter 独立例子，方便新手学习上手。
+
+[![Github Actions](https://github.com/CarGuo/gsy_flutter_demo/workflows/CI/badge.svg)](https://github.com/CarGuo/gsy_flutter_demo/actions)
 
 
 ### [Web 版在线测试](https://guoshuyu.cn/home/web/#/)
