@@ -49,6 +49,7 @@ import 'package:gsy_flutter_demo/widget/rich_text_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/scroll_listener_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/scroll_to_index_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/scroll_to_index_demo_page2.dart';
+import 'package:gsy_flutter_demo/widget/silder_verify_page.dart';
 import 'package:gsy_flutter_demo/widget/sliver_list_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/sliver_stick_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/sliver_tab_demo_page.dart';
@@ -67,6 +68,7 @@ import 'package:gsy_flutter_demo/widget/transform_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/verification_code_input_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/verification_code_input_demo_page2.dart';
 import 'package:gsy_flutter_demo/widget/viewpager_demo_page.dart';
+import 'package:gsy_flutter_demo/widget/wrap_content_page.dart';
 import 'package:window_location_href/window_location_href.dart';
 
 void main() => runApp(MyApp());
@@ -188,6 +190,12 @@ Map<String, WidgetBuilder> routers = {
   },
   "共享元素跳转效果": (context) {
     return new HonorDemoPage();
+  },
+  "滑动验证": (context) {
+    return new SlideVerifyPage();
+  },
+  "warpContent实现": (context) {
+    return new WrapContentPage();
   },
   "状态栏颜色修改（仅 App）": (context) {
     return new StatusBarDemoPage();
