@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 ///一个有趣的底部跟随例子
 class ScrollInnerContentDemoPage extends StatefulWidget {

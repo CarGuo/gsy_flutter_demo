@@ -3,8 +3,6 @@ import 'dart:ui' as ui show Image;
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 
 /// According to the related Flutter Issues(#2022) ,
 /// Inline-Image-In-Text is a long-time(2 years) missing feature since RichText(or the underlying Paragraph) does only support pure text.

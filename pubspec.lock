@@ -42,7 +42,7 @@ packages:
       name: async
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "2.8.1"
+    version: "2.8.2"
   bazel_worker:
     dependency: transitive
     description:
@@ -133,7 +133,7 @@ packages:
       name: characters
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "1.1.0"
+    version: "1.2.0"
   charcode:
     dependency: transitive
     description:
@@ -311,7 +311,7 @@ packages:
       name: matcher
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.12.10"
+    version: "0.12.11"
   matrix_gesture_detector:
     dependency: "direct main"
     description:
@@ -382,6 +382,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.0.0"
+  riverpod:
+    dependency: "direct main"
+    description:
+      name: riverpod
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.2"
   scratch_space:
     dependency: transitive
     description:
@@ -443,6 +450,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.10.0"
+  state_notifier:
+    dependency: transitive
+    description:
+      name: state_notifier
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.7.1"
   stream_channel:
     dependency: transitive
     description:
@@ -491,7 +505,7 @@ packages:
       name: test_api
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.4.2"
+    version: "0.4.3"
   timing:
     dependency: transitive
     description:
@@ -519,7 +533,7 @@ packages:
       name: vector_math
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "2.1.0"
+    version: "2.1.1"
   watcher:
     dependency: transitive
     description:
@@ -549,5 +563,5 @@ packages:
     source: hosted
     version: "3.1.0"
 sdks:
-  dart: ">=2.12.0 <3.0.0"
+  dart: ">=2.14.0 <3.0.0"
   flutter: ">=1.22.0"
