@@ -101,6 +101,9 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
+    print("get enum value with 2.15 ${Cat.white.name}");
+    print("get enum value with 2.15 ${Cat.values.byName("black")}");
+    
     final href = getHref();
     int? index = href?.indexOf("#");
     if (href != null && index != null && index > 0) {
@@ -364,17 +367,18 @@ Map<String, WidgetBuilder> routers = {
 
 enum Cat { black, white }
 
+///低版本才需要这个，2.15 之后可以直接使用 .name 和  .values.byName
 extension CatExtension on Cat {
-  String? get name {
-    switch (this) {
-      case Cat.black:
-        return 'Mr Black Cat';
-      case Cat.white:
-        return 'Ms White Cat';
-      default:
-        return null;
-    }
-  }
+  // String? get name {
+  //   switch (this) {
+  //     case Cat.black:
+  //       return 'Mr Black Cat';
+  //     case Cat.white:
+  //       return 'Ms White Cat';
+  //     default:
+  //       return null;
+  //   }
+  // }
 
   void talk() {
     print('meow');
