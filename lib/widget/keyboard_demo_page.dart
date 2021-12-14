@@ -70,6 +70,10 @@ class _KeyBoardDemoPageState extends State<KeyBoardDemoPage> {
                     margin: EdgeInsets.symmetric(horizontal: 10),
                     child: new TextField(
                       focusNode: _focusNode,
+                      maxLines: 7,
+                      minLines: 1,
+                      decoration:
+                          const InputDecoration(border: OutlineInputBorder()),
                     ),
                   ),
                 )
