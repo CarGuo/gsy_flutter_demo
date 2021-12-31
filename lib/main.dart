@@ -10,6 +10,7 @@ import 'package:gsy_flutter_demo/widget/canvas_click_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/chat_list_scroll_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/color_progress_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/drag_img_demo_page.dart';
+import 'package:gsy_flutter_demo/widget/gradient_text_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/index_stack_drag_card_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/index_stack_drag_card_demo_page2.dart';
 import 'package:gsy_flutter_demo/widget/link_sliver/link_sliver_demo_page.dart';
@@ -166,6 +167,9 @@ Map<String, WidgetBuilder> routers = {
   },
   "滑动到指定位置2": (context) {
     return new ScrollToIndexDemoPage2();
+  },
+  "展示渐变带边框的文本": (context) {
+    return new GradientTextDemoPage();
   },
   "Transform 效果展示": (context) {
     return new TransformDemoPage();
