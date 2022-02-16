@@ -6,6 +6,17 @@
 [![Github Actions](https://github.com/CarGuo/gsy_flutter_demo/workflows/CI/badge.svg)](https://github.com/CarGuo/gsy_flutter_demo/actions)
 
 
+
+## 相关文章
+
+- ## [Flutter系列文章专栏](https://juejin.cn/column/6960546078202527774)
+
+----
+- ## [Flutter 独立简单学习演示项目](https://github.com/CarGuo/gsy_flutter_demo)
+- ## [Flutter 完整开发实战详解 Gitbook 预览下载](https://github.com/CarGuo/gsy_flutter_book)
+- ## [所有运行问题请点击这里](https://github.com/CarGuo/gsy_github_app_flutter/issues/13)
+
+
 ### [Web 版在线测试](https://guoshuyu.cn/home/web/#/)
 
 > 目前开始逐步补全完善，主要提供一些有用或者有趣的例子，如果你也有好例子，环境提交 PR 。
