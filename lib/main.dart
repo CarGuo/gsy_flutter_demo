@@ -8,6 +8,7 @@ import 'package:gsy_flutter_demo/widget/arc_seek_bar_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/bottom_anim_nav_page.dart';
 import 'package:gsy_flutter_demo/widget/canvas_click_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/chat_list_scroll_demo_page.dart';
+import 'package:gsy_flutter_demo/widget/chat_list_scroll_demo_page_2.dart';
 import 'package:gsy_flutter_demo/widget/color_progress_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/drag_img_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/gradient_text_demo_page.dart';
@@ -104,7 +105,7 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
     print("get enum value with 2.15 ${Cat.white.name}");
     print("get enum value with 2.15 ${Cat.values.byName("black")}");
-    
+
     final href = getHref();
     int? index = href?.indexOf("#");
     if (href != null && index != null && index > 0) {
@@ -366,7 +367,9 @@ Map<String, WidgetBuilder> routers = {
   "首尾添加数据不会抖动": (context) {
     return new ChatListScrollDemoPage();
   },
-
+  "首尾添加数据不会抖动2": (context) {
+    return new ChatListScrollDemoPage2();
+  },
 };
 
 enum Cat { black, white }
