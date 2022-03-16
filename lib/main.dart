@@ -16,6 +16,7 @@ import 'package:gsy_flutter_demo/widget/index_stack_drag_card_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/index_stack_drag_card_demo_page2.dart';
 import 'package:gsy_flutter_demo/widget/link_sliver/link_sliver_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/rich_text_demo_page2.dart';
+import 'package:gsy_flutter_demo/widget/route_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/scroll_inner_content_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/align_demo_page.dart';
 import 'package:gsy_flutter_demo/widget/anim_bg_demo_page.dart';
@@ -369,6 +370,9 @@ Map<String, WidgetBuilder> routers = {
   },
   "首尾添加数据不会抖动2": (context) {
     return new ChatListScrollDemoPage2();
+  },
+  "测试路由嵌套": (context) {
+    return new RouteDemoPage();
   },
 };
 
