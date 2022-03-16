@@ -14,14 +14,7 @@ class _RouteDemoPageState extends State<RouteDemoPage> {
   getRouter(index) {
     return new CupertinoPageRoute(
         builder: (context) {
-          return Container(
-            alignment: Alignment.center,
-            color: Colors.white,
-            child: new Text(
-              "$index",
-              style: TextStyle(fontSize: 100, color: Colors.red),
-            ),
-          );
+          return RoutePage(index);
         },
         maintainState: false,
         fullscreenDialog: true);
@@ -43,8 +36,7 @@ class _RouteDemoPageState extends State<RouteDemoPage> {
                   children: List.generate(10, (index) {
                     return InkWell(
                         onTap: () {
-                          _navigator.currentState!
-                              .pushReplacement(getRouter(index));
+                          _navigator.currentState!.push(getRouter(index));
                         },
                         child: Container(
                             height: 30,
@@ -102,9 +94,20 @@ class _RoutePageState extends State<RoutePage> {
     return Container(
       alignment: Alignment.center,
       color: Colors.white,
-      child: new Text(
-        "${widget.index}",
-        style: TextStyle(fontSize: 100, color: Colors.red),
+      child: InkWell(
+        onTap: () {
+          if (Navigator.of(context).canPop()) Navigator.of(context).pop();
+        },
+        child: Container(
+          width: 200,
+          height: 200,
+          alignment: Alignment.center,
+          color: Colors.amber,
+          child: new Text(
+            "${widget.index}",
+            style: TextStyle(fontSize: 100, color: Colors.red),
+          ),
+        ),
       ),
     );
   }
