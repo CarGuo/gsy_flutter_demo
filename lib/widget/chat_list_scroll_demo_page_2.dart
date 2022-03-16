@@ -154,6 +154,45 @@ class _ChatListScrollDemoPageState2 extends State<ChatListScrollDemoPage2> {
                 "add new",
                 style: TextStyle(color: Colors.yellow),
               )),
+
+          ///先加载一页满的数据 然后再拉一页老数据
+          ///相当于两个sliverlist都有数据
+          ///然后对底下的sliverlist删除数据 就会出现底下空白
+          ///这里测试删除时，用偏移来解决底部空白
+          // new TextButton.icon(
+          //     onPressed: () {
+          //       newData.removeLast();
+          //       newData.removeLast();
+          //       newData.removeLast();
+          //       newData.removeLast();
+          //       newData.removeLast();
+          //
+          //       newData.insert(0, loadMoreData[0]);
+          //       newData.insert(0,loadMoreData[1]);
+          //       newData.insert(0,loadMoreData[2]);
+          //       newData.insert(0,loadMoreData[4]);
+          //       newData.insert(0,loadMoreData[5]);
+          //
+          //       loadMoreData.removeAt(0);
+          //       loadMoreData.removeAt(1);
+          //       loadMoreData.removeAt(2);
+          //       loadMoreData.removeAt(3);
+          //       loadMoreData.removeAt(4);
+          //
+          //       setState(() {
+          //
+          //       });
+          //
+          //
+          //     },
+          //     icon: Icon(
+          //       Icons.delete,
+          //       color: Colors.yellow,
+          //     ),
+          //     label: Text(
+          //       "Delete",
+          //       style: TextStyle(color: Colors.yellow),
+          //     )),
         ],
       ),
       extendBody: true,
