@@ -16,13 +16,90 @@ version: 1.0.0+1
 environment:
   sdk: '>=2.15.0 <3.0.0'
 
+deferred-components:
+  - name: crane
+    libraries:
+      - package:gsy_flutter_demo/widget/anim_bubble_gum.dart
+      - package:gsy_flutter_demo/widget/anim_button/anim_button_demo_page.dart
+      - package:gsy_flutter_demo/widget/anim_progress_img_demo_page.dart
+      - package:gsy_flutter_demo/widget/anim_scan_demo_page.dart
+      - package:gsy_flutter_demo/widget/anim_text_demo_page.dart
+      - package:gsy_flutter_demo/widget/arc_seek_bar_demo_page.dart
+      - package:gsy_flutter_demo/widget/bottom_anim_nav_page.dart
+      - package:gsy_flutter_demo/widget/canvas_click_demo_page.dart
+      - package:gsy_flutter_demo/widget/chat_list_scroll_demo_page.dart
+      - package:gsy_flutter_demo/widget/chat_list_scroll_demo_page_2.dart
+      - package:gsy_flutter_demo/widget/color_progress_demo_page.dart
+      - package:gsy_flutter_demo/widget/drag_img_demo_page.dart
+      - package:gsy_flutter_demo/widget/gradient_text_demo_page.dart
+      - package:gsy_flutter_demo/widget/index_stack_drag_card_demo_page.dart
+      - package:gsy_flutter_demo/widget/index_stack_drag_card_demo_page2.dart
+      - package:gsy_flutter_demo/widget/link_sliver/link_sliver_demo_page.dart
+      - package:gsy_flutter_demo/widget/rich_text_demo_page2.dart
+      - package:gsy_flutter_demo/widget/route_demo_page.dart
+      - package:gsy_flutter_demo/widget/scroll_inner_content_demo_page.dart
+      - package:gsy_flutter_demo/widget/align_demo_page.dart
+      - package:gsy_flutter_demo/widget/anim_bg_demo_page.dart
+      - package:gsy_flutter_demo/widget/anim_tip_demo_page.dart
+      - package:gsy_flutter_demo/widget/anima_demo_page.dart
+      - package:gsy_flutter_demo/widget/anima_demo_page2.dart
+      - package:gsy_flutter_demo/widget/anima_demo_page4.dart
+      - package:gsy_flutter_demo/widget/anima_demo_page5.dart
+      - package:gsy_flutter_demo/widget/animation_container_demo_page.dart
+      - package:gsy_flutter_demo/widget/blur_demo_page.dart
+      - package:gsy_flutter_demo/widget/book_page/book_page.dart
+      - package:gsy_flutter_demo/widget/bubble/bubble_demo_page.dart
+      - package:gsy_flutter_demo/widget/card_item_page.dart
+      - package:gsy_flutter_demo/widget/clip_demo_page.dart
+      - package:gsy_flutter_demo/widget/cloud/cloud_demo_page.dart
+      - package:gsy_flutter_demo/widget/controller_demo_page.dart
+      - package:gsy_flutter_demo/widget/custom_multi_render_demo_page.dart
+      - package:gsy_flutter_demo/widget/custom_pull/refrsh_demo_page3.dart
+      - package:gsy_flutter_demo/widget/custom_sliver/scroll_header_demo_page.dart
+      - package:gsy_flutter_demo/widget/drop_select_menu/drop_select_demo_page.dart
+      - package:gsy_flutter_demo/widget/floating_touch_demo_page.dart
+      - package:gsy_flutter_demo/widget/honor_demo_page.dart
+      - package:gsy_flutter_demo/widget/input_bottom_demo_page.dart
+      - package:gsy_flutter_demo/widget/keyboard_demo_page.dart
+      - package:gsy_flutter_demo/widget/list_anim/list_anim_demo_page.dart
+      - package:gsy_flutter_demo/widget/list_anim_2/list_anim_demo_page.dart
+      - package:gsy_flutter_demo/widget/overflow_image_page.dart
+      - package:gsy_flutter_demo/widget/particle/particle_page.dart
+      - package:gsy_flutter_demo/widget/positioned_demo_page.dart
+      - package:gsy_flutter_demo/widget/refrsh_demo_page.dart
+      - package:gsy_flutter_demo/widget/refrsh_demo_page2.dart
+      - package:gsy_flutter_demo/widget/rich_text_demo_page.dart
+      - package:gsy_flutter_demo/widget/scroll_listener_demo_page.dart
+      - package:gsy_flutter_demo/widget/scroll_to_index_demo_page.dart
+      - package:gsy_flutter_demo/widget/scroll_to_index_demo_page2.dart
+      - package:gsy_flutter_demo/widget/silder_verify_page.dart
+      - package:gsy_flutter_demo/widget/sliver_list_demo_page.dart
+      - package:gsy_flutter_demo/widget/sliver_stick_demo_page.dart
+      - package:gsy_flutter_demo/widget/sliver_tab_demo_page.dart
+      - package:gsy_flutter_demo/widget/sliver_tab_demo_page2.dart
+      - package:gsy_flutter_demo/widget/sliver_tab/sliver_tab_demo_page3.dart
+      - package:gsy_flutter_demo/widget/statusbar_demo_page.dart
+      - package:gsy_flutter_demo/widget/stick/stick_demo_page.dart
+      - package:gsy_flutter_demo/widget/stick/stick_demo_page2.dart
+      - package:gsy_flutter_demo/widget/stick_sliver_list_demo_page.dart
+      - package:gsy_flutter_demo/widget/tag_demo_page.dart
+      - package:gsy_flutter_demo/widget/matrix_custom_painter_page.dart
+      - package:gsy_flutter_demo/widget/text_line_height_demo_page.dart
+      - package:gsy_flutter_demo/widget/text_size_demo_page.dart
+      - package:gsy_flutter_demo/widget/tick_click_demo_page.dart
+      - package:gsy_flutter_demo/widget/transform_demo_page.dart
+      - package:gsy_flutter_demo/widget/verification_code_input_demo_page.dart
+      - package:gsy_flutter_demo/widget/verification_code_input_demo_page2.dart
+      - package:gsy_flutter_demo/widget/viewpager_demo_page.dart
+      - package:gsy_flutter_demo/widget/wrap_content_page.dart
+
 dependencies:
   flutter:
     sdk: flutter
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.3
+  #cupertino_icons: ^1.0.3
   scroll_to_index: ^2.0.0
   transformer_page_view_tv: 0.1.7-nullsafety
   simple_animations: 3.1.1
