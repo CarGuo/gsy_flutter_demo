@@ -176,25 +176,26 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
-    loadLibrary();
     super.initState();
     print("get enum value with 2.15 ${Cat.white.name}");
     print("get enum value with 2.15 ${Cat.values.byName("black")}");
 
-    final href = getHref();
-    int? index = href?.indexOf("#");
-    if (href != null && index != null && index > 0) {
-      String uri = href;
-      String key = uri.substring(index + 1, uri.length);
-      if (key.isNotEmpty && key.length > 3) {
-        var result = Uri.decodeFull(key);
-        if (routers.keys.contains(result) && result != "/") {
-          Future(() {
-            Navigator.pushNamed(context, result);
-          });
+    loadLibrary().then((_) {
+      final href = getHref();
+      int? index = href?.indexOf("#");
+      if (href != null && index != null && index > 0) {
+        String uri = href;
+        String key = uri.substring(index + 1, uri.length);
+        if (key.isNotEmpty && key.length > 3) {
+          var result = Uri.decodeFull(key);
+          if (routers.keys.contains(result) && result != "/") {
+            Future(() {
+              Navigator.pushNamed(context, result);
+            });
+          }
         }
       }
-    }
+    });
   }
 
   @override
@@ -472,80 +473,79 @@ extension CatExtension on Cat {
   }
 }
 
-loadLibrary() {
-  controller_demo_page.loadLibrary();
-
-  anim_bubble_gum.loadLibrary();
-  anim_button_demo_page.loadLibrary();
-  anim_progress_img_demo_page.loadLibrary();
-  anim_scan_demo_page.loadLibrary();
-  anim_text_demo_page.loadLibrary();
-  arc_seek_bar_demo_page.loadLibrary();
-  bottom_anim_nav_page.loadLibrary();
-  canvas_click_demo_page.loadLibrary();
-  chat_list_scroll_demo_page.loadLibrary();
-  chat_list_scroll_demo_page_2.loadLibrary();
-  color_progress_demo_page.loadLibrary();
-  drag_img_demo_page.loadLibrary();
-  gradient_text_demo_page.loadLibrary();
-  index_stack_drag_card_demo_page.loadLibrary();
-  index_stack_drag_card_demo_page2.loadLibrary();
-  link_sliver_demo_page.loadLibrary();
-  rich_text_demo_page2.loadLibrary();
-  route_demo_page.loadLibrary();
-  scroll_inner_content_demo_page.loadLibrary();
-  align_demo_page.loadLibrary();
-  anim_bg_demo_page.loadLibrary();
-  anim_tip_demo_page.loadLibrary();
-  anima_demo_page.loadLibrary();
-  anima_demo_page2.loadLibrary();
-  anima_demo_page4.loadLibrary();
-  anima_demo_page5.loadLibrary();
-  animation_container_demo_page.loadLibrary();
-  blur_demo_page.loadLibrary();
-  book_page.loadLibrary();
-  bubble_demo_page.loadLibrary();
-  card_item_page.loadLibrary();
-  clip_demo_page.loadLibrary();
-  cloud_demo_page.loadLibrary();
-  controller_demo_page.loadLibrary();
-  custom_multi_render_demo_page.loadLibrary();
-  refrsh_demo_page3.loadLibrary();
-  scroll_header_demo_page.loadLibrary();
-  drop_select_demo_page.loadLibrary();
-  floating_touch_demo_page.loadLibrary();
-  honor_demo_page.loadLibrary();
-  input_bottom_demo_page.loadLibrary();
-  keyboard_demo_page.loadLibrary();
-  list_anim_demo_page.loadLibrary();
-  list_anim_demo_page.loadLibrary();
-  overflow_image_page.loadLibrary();
-  particle_page.loadLibrary();
-  positioned_demo_page.loadLibrary();
-  refrsh_demo_page.loadLibrary();
-  refrsh_demo_page2.loadLibrary();
-  rich_text_demo_page.loadLibrary();
-  scroll_listener_demo_page.loadLibrary();
-  scroll_to_index_demo_page.loadLibrary();
-  scroll_to_index_demo_page2.loadLibrary();
-  silder_verify_page.loadLibrary();
-  sliver_list_demo_page.loadLibrary();
-  sliver_stick_demo_page.loadLibrary();
-  sliver_tab_demo_page.loadLibrary();
-  sliver_tab_demo_page2.loadLibrary();
-  sliver_tab_demo_page3.loadLibrary();
-  statusbar_demo_page.loadLibrary();
-  stick_demo_page.loadLibrary();
-  stick_demo_page2.loadLibrary();
-  stick_sliver_list_demo_page.loadLibrary();
-  tag_demo_page.loadLibrary();
-  matrix_custom_painter_page.loadLibrary();
-  text_line_height_demo_page.loadLibrary();
-  text_size_demo_page.loadLibrary();
-  tick_click_demo_page.loadLibrary();
-  transform_demo_page.loadLibrary();
-  verification_code_input_demo_page.loadLibrary();
-  verification_code_input_demo_page2.loadLibrary();
-  viewpager_demo_page.loadLibrary();
-  wrap_content_page.loadLibrary();
+loadLibrary() async {
+  await controller_demo_page.loadLibrary();
+  await await anim_bubble_gum.loadLibrary();
+  await anim_button_demo_page.loadLibrary();
+  await anim_progress_img_demo_page.loadLibrary();
+  await anim_scan_demo_page.loadLibrary();
+  await anim_text_demo_page.loadLibrary();
+  await arc_seek_bar_demo_page.loadLibrary();
+  await bottom_anim_nav_page.loadLibrary();
+  await canvas_click_demo_page.loadLibrary();
+  await chat_list_scroll_demo_page.loadLibrary();
+  await chat_list_scroll_demo_page_2.loadLibrary();
+  await color_progress_demo_page.loadLibrary();
+  await drag_img_demo_page.loadLibrary();
+  await gradient_text_demo_page.loadLibrary();
+  await index_stack_drag_card_demo_page.loadLibrary();
+  await index_stack_drag_card_demo_page2.loadLibrary();
+  await link_sliver_demo_page.loadLibrary();
+  await rich_text_demo_page2.loadLibrary();
+  await route_demo_page.loadLibrary();
+  await scroll_inner_content_demo_page.loadLibrary();
+  await align_demo_page.loadLibrary();
+  await anim_bg_demo_page.loadLibrary();
+  await anim_tip_demo_page.loadLibrary();
+  await anima_demo_page.loadLibrary();
+  await anima_demo_page2.loadLibrary();
+  await anima_demo_page4.loadLibrary();
+  await anima_demo_page5.loadLibrary();
+  await animation_container_demo_page.loadLibrary();
+  await blur_demo_page.loadLibrary();
+  await book_page.loadLibrary();
+  await bubble_demo_page.loadLibrary();
+  await card_item_page.loadLibrary();
+  await clip_demo_page.loadLibrary();
+  await cloud_demo_page.loadLibrary();
+  await controller_demo_page.loadLibrary();
+  await custom_multi_render_demo_page.loadLibrary();
+  await refrsh_demo_page3.loadLibrary();
+  await scroll_header_demo_page.loadLibrary();
+  await drop_select_demo_page.loadLibrary();
+  await floating_touch_demo_page.loadLibrary();
+  await honor_demo_page.loadLibrary();
+  await input_bottom_demo_page.loadLibrary();
+  await keyboard_demo_page.loadLibrary();
+  await list_anim_demo_page.loadLibrary();
+  await list_anim_demo_page.loadLibrary();
+  await overflow_image_page.loadLibrary();
+  await particle_page.loadLibrary();
+  await positioned_demo_page.loadLibrary();
+  await refrsh_demo_page.loadLibrary();
+  await refrsh_demo_page2.loadLibrary();
+  await rich_text_demo_page.loadLibrary();
+  await scroll_listener_demo_page.loadLibrary();
+  await scroll_to_index_demo_page.loadLibrary();
+  await scroll_to_index_demo_page2.loadLibrary();
+  await silder_verify_page.loadLibrary();
+  await sliver_list_demo_page.loadLibrary();
+  await sliver_stick_demo_page.loadLibrary();
+  await sliver_tab_demo_page.loadLibrary();
+  await sliver_tab_demo_page2.loadLibrary();
+  await sliver_tab_demo_page3.loadLibrary();
+  await statusbar_demo_page.loadLibrary();
+  await stick_demo_page.loadLibrary();
+  await stick_demo_page2.loadLibrary();
+  await stick_sliver_list_demo_page.loadLibrary();
+  await tag_demo_page.loadLibrary();
+  await matrix_custom_painter_page.loadLibrary();
+  await text_line_height_demo_page.loadLibrary();
+  await text_size_demo_page.loadLibrary();
+  await tick_click_demo_page.loadLibrary();
+  await transform_demo_page.loadLibrary();
+  await verification_code_input_demo_page.loadLibrary();
+  await verification_code_input_demo_page2.loadLibrary();
+  await viewpager_demo_page.loadLibrary();
+  await wrap_content_page.loadLibrary();
 }
