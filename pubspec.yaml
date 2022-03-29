@@ -56,6 +56,7 @@ deferred-components:
       - package:gsy_flutter_demo/widget/custom_multi_render_demo_page.dart
       - package:gsy_flutter_demo/widget/custom_pull/refrsh_demo_page3.dart
       - package:gsy_flutter_demo/widget/custom_sliver/scroll_header_demo_page.dart
+      - package:gsy_flutter_demo/widget/custom_viewport/custom_viewport_page.dart
       - package:gsy_flutter_demo/widget/drop_select_menu/drop_select_demo_page.dart
       - package:gsy_flutter_demo/widget/floating_touch_demo_page.dart
       - package:gsy_flutter_demo/widget/honor_demo_page.dart
