@@ -50,7 +50,7 @@ class BubbleDemoPage extends StatelessWidget {
     if (isClient()) {
       return getY(button1Key) +
           getHeight(button1Key) -
-          MediaQueryData.fromWindow(WidgetsBinding.instance!.window).padding.top;
+          MediaQueryData.fromWindow(WidgetsBinding.instance.window).padding.top;
     } else {
       return getY(button1Key) + getHeight(button1Key);
     }
@@ -60,7 +60,7 @@ class BubbleDemoPage extends StatelessWidget {
     if (isClient()) {
       return getY(button2Key) +
           getHeight(button2Key) / 2 -
-          MediaQueryData.fromWindow(WidgetsBinding.instance!.window).padding.top;
+          MediaQueryData.fromWindow(WidgetsBinding.instance.window).padding.top;
     } else {
       return getY(button2Key) + getHeight(button2Key) / 2;
     }
@@ -70,7 +70,7 @@ class BubbleDemoPage extends StatelessWidget {
     if (isClient()) {
       return getY(button3Key) +
           getHeight(button3Key) / 2 -
-          MediaQueryData.fromWindow(WidgetsBinding.instance!.window).padding.top;
+          MediaQueryData.fromWindow(WidgetsBinding.instance.window).padding.top;
     } else {
       return getY(button3Key) + getHeight(button3Key) / 2;
     }
@@ -80,7 +80,7 @@ class BubbleDemoPage extends StatelessWidget {
     if (isClient()) {
       return getY(button4Key) -
           bubbleHeight -
-          MediaQueryData.fromWindow(WidgetsBinding.instance!.window).padding.top;
+          MediaQueryData.fromWindow(WidgetsBinding.instance.window).padding.top;
     } else {
       return getY(button4Key) - bubbleHeight;
     }

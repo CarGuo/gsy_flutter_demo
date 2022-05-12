@@ -16,7 +16,7 @@ class _TextSizeDemoPageState extends State<TextSizeDemoPage> {
   @override
   Widget build(BuildContext context) {
     return MediaQuery(
-        data: MediaQueryData.fromWindow(WidgetsBinding.instance!.window)
+        data: MediaQueryData.fromWindow(WidgetsBinding.instance.window)
             .copyWith(textScaleFactor: textScaleFactor),
         child: Scaffold(
           appBar: AppBar(
