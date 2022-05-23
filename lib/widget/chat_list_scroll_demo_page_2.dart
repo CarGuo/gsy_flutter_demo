@@ -20,11 +20,13 @@ class _ChatListScrollDemoPageState2 extends State<ChatListScrollDemoPage2> {
 
   var centerKey = GlobalKey();
   var scroller = ScrollController();
+  final random = math.Random(10);
   double extentAfter = 0;
 
   renderRightItem(ItemData data) {
+   var height =  random.nextInt(60);
     return Container(
-      height: 50,
+      height: 50 + height.toDouble(),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(4),
         color: Colors.red,
@@ -40,8 +42,9 @@ class _ChatListScrollDemoPageState2 extends State<ChatListScrollDemoPage2> {
   }
 
   renderLeftItem(ItemData data) {
+    var height =  random.nextInt(60);
     return Container(
-      height: 50,
+      height: 50 + height.toDouble(),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(4),
         color: Colors.green,
@@ -111,11 +114,11 @@ class _ChatListScrollDemoPageState2 extends State<ChatListScrollDemoPage2> {
                   var type = randomInt + i * 3;
                   if (type % 4 == 0) {
                     newData.add(ItemData(
-                        txt: "##########  New ${newData.length}$i",
+                        txt: "##########  New ${newData.length} $i",
                         type: "Left"));
                   } else {
                     newData.add(ItemData(
-                        txt: "##########   New ${newData.length}$i",
+                        txt: "##########   New ${newData.length} $i",
                         type: "Right"));
                   }
                 }
@@ -127,6 +130,9 @@ class _ChatListScrollDemoPageState2 extends State<ChatListScrollDemoPage2> {
                   ));
                   Future.delayed(Duration(milliseconds: 200), () {
                     scroller.jumpTo(scroller.position.maxScrollExtent);
+                    Future.delayed(Duration(milliseconds: 400), () {
+                      scroller.jumpTo(scroller.position.maxScrollExtent);
+                    });
                   });
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
