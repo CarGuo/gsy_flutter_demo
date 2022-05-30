@@ -43,10 +43,8 @@ class _BottomAnimNavPageState extends State<BottomAnimNavPage>
           child: Builder(
             builder: (context) {
               return TextButton(
-                style: ButtonStyle(
-                  backgroundColor: ButtonStyleButton.allOrNull<Color>(
-                    Colors.red,
-                  ),
+                style: TextButton.styleFrom(
+                  backgroundColor: Colors.red,
                 ),
                 onPressed: () {
                   index = 0;

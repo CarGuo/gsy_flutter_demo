@@ -49,11 +49,8 @@ class _TextSizeDemoPageState extends State<TextSizeDemoPage> {
                             });
                           }
                         },
-                        style: ButtonStyle(
-                          backgroundColor: ButtonStyleButton.allOrNull<Color>(
-                            Colors.redAccent,
-                          ),
-                        ),
+                        style: TextButton.styleFrom(
+                            backgroundColor: Colors.redAccent),
                         child: new Text("-"),
                       ),
                       new SizedBox(
@@ -65,11 +62,8 @@ class _TextSizeDemoPageState extends State<TextSizeDemoPage> {
                             textScaleFactor++;
                           });
                         },
-                        style: ButtonStyle(
-                          backgroundColor: ButtonStyleButton.allOrNull<Color>(
-                            Colors.greenAccent,
-                          ),
-                        ),
+                        style: TextButton.styleFrom(
+                            backgroundColor: Colors.greenAccent),
                         child: new Text("+"),
                       )
                     ],
