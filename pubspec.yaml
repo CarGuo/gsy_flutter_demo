@@ -93,6 +93,7 @@ deferred-components:
       - package:gsy_flutter_demo/widget/verification_code_input_demo_page2.dart
       - package:gsy_flutter_demo/widget/viewpager_demo_page.dart
       - package:gsy_flutter_demo/widget/wrap_content_page.dart
+      - package:gsy_flutter_demo/widget/shader_canvas_demo_page.dart
 
 dependencies:
   flutter:

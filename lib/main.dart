@@ -147,6 +147,10 @@ import 'package:gsy_flutter_demo/widget/viewpager_demo_page.dart'
     deferred as viewpager_demo_page;
 import 'package:gsy_flutter_demo/widget/wrap_content_page.dart'
     deferred as wrap_content_page;
+
+import 'package:gsy_flutter_demo/widget/shader_canvas_demo_page.dart'
+    deferred as shader_canvas_demo_page;
+
 import 'package:window_location_href/window_location_href.dart';
 
 void main() => runApp(MyApp());
@@ -159,6 +163,10 @@ class MyApp extends StatelessWidget {
       title: 'GSY Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        textButtonTheme: TextButtonThemeData(
+          // 去掉 TextButton 的水波纹效果
+          style: ButtonStyle(splashFactory: NoSplash.splashFactory),
+        ),
       ),
       home: MyHomePage(title: 'GSY Flutter Demo'),
       routes: routers,
@@ -691,6 +699,11 @@ Map<String, WidgetBuilder> routers = {
   "测试路由嵌套": (context) {
     return ContainerAsyncRouterPage(route_demo_page.loadLibrary(), (context) {
       return route_demo_page.RouteDemoPage();
+    });
+  },
+  "测试 canvas 阴影": (context) {
+    return ContainerAsyncRouterPage(shader_canvas_demo_page.loadLibrary(), (context) {
+      return shader_canvas_demo_page.ShaderCanvasDemoPage();
     });
   },
 };
