@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
-
-
 class AnimSwitchLayoutDemoPage extends StatefulWidget {
   const AnimSwitchLayoutDemoPage({Key? key}) : super(key: key);
 
   @override
-  State<AnimSwitchLayoutDemoPage> createState() => _AnimSwitchLayoutDemoPageState();
+  State<AnimSwitchLayoutDemoPage> createState() =>
+      _AnimSwitchLayoutDemoPageState();
 }
 
 class _AnimSwitchLayoutDemoPageState extends State<AnimSwitchLayoutDemoPage>
@@ -66,57 +65,27 @@ class _AnimSwitchLayoutDemoPageState extends State<AnimSwitchLayoutDemoPage>
               return Stack(
                 fit: StackFit.expand,
                 children: [
-                  new AnimatedPositioned(
-                    // Define how long the animation should take.
-                    duration: Duration(seconds: 1),
-                    // Provide an optional curve to make the animation feel smoother.
-                    curve: Curves.fastOutSlowIn,
-                    child: new AnimatedContainer(
-                      color: Colors.greenAccent,
-                      // Define how long the animation should take.
-                      duration: Duration(seconds: 1),
-                      // Provide an optional curve to make the animation feel smoother.
-                      curve: Curves.fastOutSlowIn,
-                      width: f.width,
-                      height: f.height,
-                    ),
-                    left: f.left,
-                    top: f.top,
-                  ),
-                  new AnimatedPositioned(
-                    // Define how long the animation should take.
-                    duration: Duration(seconds: 1),
-                    // Provide an optional curve to make the animation feel smoother.
-                    curve: Curves.fastOutSlowIn,
-                    child: new AnimatedContainer(
-                      color: Colors.redAccent,
-                      // Define how long the animation should take.
-                      duration: Duration(seconds: 1),
-                      // Provide an optional curve to make the animation feel smoother.
-                      curve: Curves.fastOutSlowIn,
-                      width: s.width,
-                      height: s.height,
-                    ),
-                    left: s.left,
-                    top: s.top,
-                  ),
-                  new AnimatedPositioned(
-                    // Define how long the animation should take.
-                    duration: Duration(seconds: 1),
-                    // Provide an optional curve to make the animation feel smoother.
-                    curve: Curves.fastOutSlowIn,
-                    child: new AnimatedContainer(
-                      color: Colors.yellowAccent,
-                      // Define how long the animation should take.
-                      duration: Duration(seconds: 1),
-                      // Provide an optional curve to make the animation feel smoother.
-                      curve: Curves.fastOutSlowIn,
-                      width: t.width,
-                      height: t.height,
-                    ),
-                    left: t.left,
-                    top: t.top,
-                  ),
+                  PositionItem(f,
+                      child: InkWell(
+                        onTap: () {
+                          print("red");
+                        },
+                        child: Container(color: Colors.redAccent),
+                      )),
+                  PositionItem(s,
+                      child: InkWell(
+                        onTap: () {
+                          print("green");
+                        },
+                        child: Container(color: Colors.greenAccent),
+                      )),
+                  PositionItem(t,
+                      child: InkWell(
+                        onTap: () {
+                          print("yello");
+                        },
+                        child: Container(color: Colors.yellowAccent),
+                      )),
                 ],
               );
             },
@@ -130,6 +99,30 @@ class _AnimSwitchLayoutDemoPageState extends State<AnimSwitchLayoutDemoPage>
           });
         },
       ),
+    );
+  }
+}
+
+class PositionItem extends StatelessWidget {
+  final PositionedItemData data;
+  final Widget child;
+
+  const PositionItem(this.data, {required this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    return new AnimatedPositioned(
+      duration: Duration(seconds: 1),
+      curve: Curves.fastOutSlowIn,
+      child: new AnimatedContainer(
+        duration: Duration(seconds: 1),
+        curve: Curves.fastOutSlowIn,
+        width: data.width,
+        height: data.height,
+        child: child,
+      ),
+      left: data.left,
+      top: data.top,
     );
   }
 }
