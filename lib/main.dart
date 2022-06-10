@@ -151,6 +151,9 @@ import 'package:gsy_flutter_demo/widget/wrap_content_page.dart'
 import 'package:gsy_flutter_demo/widget/shader_canvas_demo_page.dart'
     deferred as shader_canvas_demo_page;
 
+import 'package:gsy_flutter_demo/widget/anim_switch_layout_demo_page.dart'
+    deferred as anim_switch_layout_demo_page;
+
 import 'package:window_location_href/window_location_href.dart';
 
 void main() => runApp(MyApp());
@@ -702,8 +705,15 @@ Map<String, WidgetBuilder> routers = {
     });
   },
   "测试 canvas 阴影": (context) {
-    return ContainerAsyncRouterPage(shader_canvas_demo_page.loadLibrary(), (context) {
+    return ContainerAsyncRouterPage(shader_canvas_demo_page.loadLibrary(),
+        (context) {
       return shader_canvas_demo_page.ShaderCanvasDemoPage();
+    });
+  },
+  "控件动画切换效果": (context) {
+    return ContainerAsyncRouterPage(anim_switch_layout_demo_page.loadLibrary(),
+        (context) {
+      return anim_switch_layout_demo_page.AnimSwitchLayoutDemoPage();
     });
   },
 };
