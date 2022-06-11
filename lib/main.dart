@@ -154,6 +154,9 @@ import 'package:gsy_flutter_demo/widget/shader_canvas_demo_page.dart'
 import 'package:gsy_flutter_demo/widget/anim_switch_layout_demo_page.dart'
     deferred as anim_switch_layout_demo_page;
 
+import 'package:gsy_flutter_demo/widget/vp_list_demo_page.dart'
+    deferred as vp_list_demo_page;
+
 import 'package:window_location_href/window_location_href.dart';
 
 void main() => runApp(MyApp());
@@ -714,6 +717,11 @@ Map<String, WidgetBuilder> routers = {
     return ContainerAsyncRouterPage(anim_switch_layout_demo_page.loadLibrary(),
         (context) {
       return anim_switch_layout_demo_page.AnimSwitchLayoutDemoPage();
+    });
+  },
+  "ListView 嵌套 ViewPager": (context) {
+    return ContainerAsyncRouterPage(vp_list_demo_page.loadLibrary(), (context) {
+      return vp_list_demo_page.VPListView();
     });
   },
 };
