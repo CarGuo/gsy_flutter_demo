@@ -196,6 +196,7 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
     print("get enum value with 2.15 ${Cat.white.name}");
     print("get enum value with 2.15 ${Cat.values.byName("black")}");
+    print("get enum value with 2.17 ${Cat.white.value} ${Cat.white}");
 
     final href = getHref();
     int? index = href?.indexOf("#");
@@ -719,14 +720,31 @@ Map<String, WidgetBuilder> routers = {
       return anim_switch_layout_demo_page.AnimSwitchLayoutDemoPage();
     });
   },
-  "ListView 嵌套 ViewPager": (context) {
+  "ListView 嵌套 ViewPager 解决斜着滑动问题": (context) {
     return ContainerAsyncRouterPage(vp_list_demo_page.loadLibrary(), (context) {
       return vp_list_demo_page.VPListView();
     });
   },
+  "垂直  ViewPager 嵌套垂直 ListView ": (context) {
+    return ContainerAsyncRouterPage(vp_list_demo_page.loadLibrary(), (context) {
+      return vp_list_demo_page.VPNestListView();
+    });
+  },
+  "垂直  ListView 嵌套垂直  ViewPager": (context) {
+    return ContainerAsyncRouterPage(vp_list_demo_page.loadLibrary(), (context) {
+      return vp_list_demo_page.ListViewNestVP();
+    });
+  },
 };
 
-enum Cat { black, white }
+enum Cat {
+  black(1),
+  white(2);
+
+  ///2.17 之后可以直接添加 value
+  const Cat(this.value);
+  final int value;
+}
 
 ///低版本才需要这个，2.15 之后可以直接使用 .name 和  .values.byName
 extension CatExtension on Cat {
