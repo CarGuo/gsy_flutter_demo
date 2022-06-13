@@ -69,8 +69,6 @@ class _MyListViewState extends State<HandlerListView> {
   }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 ///垂直滑动的 ViewPage 里嵌套垂直滑动的 ListView
 class VPNestListView extends StatefulWidget {
   @override
