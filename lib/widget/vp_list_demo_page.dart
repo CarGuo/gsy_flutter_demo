@@ -69,6 +69,8 @@ class _MyListViewState extends State<HandlerListView> {
   }
 }
 
+////////////////////////////////////////////////////////////////////////////////
+
 ///垂直滑动的 ViewPage 里嵌套垂直滑动的 ListView
 class VPNestListView extends StatefulWidget {
   @override
@@ -199,14 +201,8 @@ class _VPNestListViewState extends State<VPNestListView> {
                 ///去掉 Android 上默认的边缘拖拽效果
                 behavior:
                     ScrollConfiguration.of(context).copyWith(overscroll: false),
-                child: ListView.builder(
-                  controller: _listScrollController,
-
-                  ///屏蔽默认的滑动响应
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemBuilder: (context, index) {
-                    return ListTile(title: Text('List Item $index'));
-                  },
+                child: KeepAliveListView(
+                  listScrollController: _listScrollController,
                   itemCount: 30,
                 )),
             Container(
@@ -224,6 +220,43 @@ class _VPNestListViewState extends State<VPNestListView> {
     );
   }
 }
+
+///对 PageView 里的 ListView 做 KeepAlive 记住位置
+class KeepAliveListView extends StatefulWidget {
+  final ScrollController? listScrollController;
+  final int itemCount;
+
+  KeepAliveListView({
+    required this.listScrollController,
+    required this.itemCount,
+  });
+
+  @override
+  KeepAliveListViewState createState() => KeepAliveListViewState();
+}
+
+class KeepAliveListViewState extends State<KeepAliveListView>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  Widget build(BuildContext context) {
+    super.build(context);
+    return ListView.builder(
+      controller: widget.listScrollController,
+
+      ///屏蔽默认的滑动响应
+      physics: const NeverScrollableScrollPhysics(),
+      itemBuilder: (context, index) {
+        return ListTile(title: Text('List Item $index'));
+      },
+      itemCount: widget.itemCount,
+    );
+  }
+
+  @override
+  bool get wantKeepAlive => true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
 
 ///listView 里嵌套 PageView
 class ListViewNestVP extends StatefulWidget {
@@ -267,10 +300,12 @@ class _ListViewNestVPState extends State<ListViewNestVP> {
       final RenderBox renderBox =
           _pageController.position.context.storageContext.findRenderObject()
               as RenderBox;
+
       ///判断触摸范围是不是在 PageView
       final isDragPageView = renderBox.paintBounds
           .shift(renderBox.localToGlobal(Offset.zero))
           .contains(details.globalPosition);
+
       ///如果在 PageView 里就切换到 PageView
       if (isDragPageView) {
         _activeScrollController = _pageController;
@@ -278,6 +313,7 @@ class _ListViewNestVPState extends State<ListViewNestVP> {
         return;
       }
     }
+
     ///不在 PageView 里就继续响应 ListView
     _activeScrollController = _listScrollController;
     _drag = _listScrollController.position.drag(details, _disposeDrag);
@@ -285,9 +321,11 @@ class _ListViewNestVPState extends State<ListViewNestVP> {
 
   void _handleDragUpdate(DragUpdateDetails details) {
     var scrollDirection = _activeScrollController.position.userScrollDirection;
+
     ///判断此时响应的如果还是 _pageController，是不是到了最后一页
     if (_activeScrollController == _pageController &&
         scrollDirection == ScrollDirection.reverse &&
+
         ///是不是到最后一页了，到最后一页就切换回 pageController
         (_pageController.page != null &&
             _pageController.page! >= (itemCount - 1))) {
