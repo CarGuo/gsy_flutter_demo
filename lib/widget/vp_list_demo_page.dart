@@ -454,3 +454,136 @@ class KeepAlivePageViewState extends State<KeepAlivePageView>
   @override
   bool get wantKeepAlive => true;
 }
+
+///listView 联动 listView
+class ListViewLinkListView extends StatefulWidget {
+  @override
+  _ListViewLinkListViewState createState() => _ListViewLinkListViewState();
+}
+
+class _ListViewLinkListViewState extends State<ListViewLinkListView> {
+  ScrollController _primaryScrollController = ScrollController();
+  ScrollController _subScrollController = ScrollController();
+
+  Drag? _primaryDrag;
+  Drag? _subDrag;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _primaryScrollController.dispose();
+    _subScrollController.dispose();
+    super.dispose();
+  }
+
+  void _handleDragStart(DragStartDetails details) {
+    _primaryDrag =
+        _primaryScrollController.position.drag(details, _disposeDrag);
+    _subDrag = _subScrollController.position.drag(details, _disposeDrag);
+  }
+
+  void _handleDragUpdate(DragUpdateDetails details) {
+    _primaryDrag?.update(details);
+    ///除以10实现差量效果
+    _subDrag?.update(DragUpdateDetails(
+        sourceTimeStamp: details.sourceTimeStamp,
+        delta: details.delta / 10,
+        primaryDelta: (details.primaryDelta ?? 0) / 10,
+        globalPosition: details.globalPosition,
+        localPosition: details.localPosition));
+  }
+
+  void _handleDragEnd(DragEndDetails details) {
+    _primaryDrag?.end(details);
+    _subDrag?.end(details);
+  }
+
+  void _handleDragCancel() {
+    _primaryDrag?.cancel();
+    _subDrag?.cancel();
+  }
+
+  void _disposeDrag() {
+    //_primaryDrag = null;
+    //_subDrag = null;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: Text("ListViewLinkListView"),
+        ),
+        body: RawGestureDetector(
+          gestures: <Type, GestureRecognizerFactory>{
+            VerticalDragGestureRecognizer: GestureRecognizerFactoryWithHandlers<
+                    VerticalDragGestureRecognizer>(
+                () => VerticalDragGestureRecognizer(),
+                (VerticalDragGestureRecognizer instance) {
+              instance
+                ..onStart = _handleDragStart
+                ..onUpdate = _handleDragUpdate
+                ..onEnd = _handleDragEnd
+                ..onCancel = _handleDragCancel;
+            })
+          },
+          behavior: HitTestBehavior.opaque,
+          child: ScrollConfiguration(
+            ///去掉 Android 上默认的边缘拖拽效果
+            behavior:
+                ScrollConfiguration.of(context).copyWith(overscroll: false),
+            child: Row(
+              children: [
+                new Expanded(
+                    child: ListView.builder(
+
+                        ///屏蔽默认的滑动响应
+                        physics: NeverScrollableScrollPhysics(),
+                        controller: _primaryScrollController,
+                        itemCount: 55,
+                        itemBuilder: (context, index) {
+                          return Container(
+                              height: 300,
+                              color: Colors.greenAccent,
+                              child: Center(
+                                child: Text(
+                                  "Item $index",
+                                  style: TextStyle(
+                                      fontSize: 40, color: Colors.blue),
+                                ),
+                              ));
+                        })),
+                new SizedBox(
+                  width: 5,
+                ),
+                new Expanded(
+                  child: ListView.builder(
+
+                      ///屏蔽默认的滑动响应
+                      physics: NeverScrollableScrollPhysics(),
+                      controller: _subScrollController,
+                      itemCount: 55,
+                      itemBuilder: (context, index) {
+                        return Container(
+                          height: 300,
+                          color: Colors.deepOrange,
+                          child: Center(
+                            child: Text(
+                              "Item $index",
+                              style:
+                                  TextStyle(fontSize: 40, color: Colors.white),
+                            ),
+                          ),
+                        );
+                      }),
+                ),
+              ],
+            ),
+          ),
+        ));
+  }
+}

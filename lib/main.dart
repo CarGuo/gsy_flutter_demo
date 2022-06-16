@@ -735,6 +735,11 @@ Map<String, WidgetBuilder> routers = {
       return vp_list_demo_page.ListViewNestVP();
     });
   },
+  "垂直  ListView 联动  ListView": (context) {
+    return ContainerAsyncRouterPage(vp_list_demo_page.loadLibrary(), (context) {
+      return vp_list_demo_page.ListViewLinkListView();
+    });
+  },
 };
 
 enum Cat {
@@ -743,6 +748,7 @@ enum Cat {
 
   ///2.17 之后可以直接添加 value
   const Cat(this.value);
+
   final int value;
 }
 
