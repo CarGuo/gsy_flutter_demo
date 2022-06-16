@@ -482,17 +482,18 @@ class _ListViewLinkListViewState extends State<ListViewLinkListView> {
 
   void _handleDragStart(DragStartDetails details) {
     _primaryDrag =
-        _primaryScrollController.position.drag(details, _disposeDrag);
-    _subDrag = _subScrollController.position.drag(details, _disposeDrag);
+        _primaryScrollController.position.drag(details, _disposePrimaryDrag);
+    _subDrag = _subScrollController.position.drag(details, _disposeSubDrag);
   }
 
   void _handleDragUpdate(DragUpdateDetails details) {
     _primaryDrag?.update(details);
+
     ///除以10实现差量效果
     _subDrag?.update(DragUpdateDetails(
         sourceTimeStamp: details.sourceTimeStamp,
-        delta: details.delta / 10,
-        primaryDelta: (details.primaryDelta ?? 0) / 10,
+        delta: details.delta / 30,
+        primaryDelta: (details.primaryDelta ?? 0) / 30,
         globalPosition: details.globalPosition,
         localPosition: details.localPosition));
   }
@@ -507,9 +508,12 @@ class _ListViewLinkListViewState extends State<ListViewLinkListView> {
     _subDrag?.cancel();
   }
 
-  void _disposeDrag() {
-    //_primaryDrag = null;
-    //_subDrag = null;
+  void _disposePrimaryDrag() {
+    _primaryDrag = null;
+  }
+
+  void _disposeSubDrag() {
+    _subDrag = null;
   }
 
   @override
