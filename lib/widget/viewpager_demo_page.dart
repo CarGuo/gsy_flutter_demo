@@ -1,7 +1,6 @@
 import 'dart:math' as Math;
+import 'package:another_transformer_page_view/another_transformer_page_view.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_card_swipper/widgets/transformer_page_view/index_controller.dart';
-import 'package:flutter_card_swipper/widgets/transformer_page_view/transformer_page_view.dart';
 import 'package:vector_math/vector_math_64.dart' as vector;
 
 class ViewPagerDemoPage extends StatelessWidget {

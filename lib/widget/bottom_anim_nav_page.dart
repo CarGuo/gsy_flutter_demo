@@ -1,8 +1,8 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
-import 'package:flutter_card_swipper/flutter_card_swiper.dart';
-import 'package:flutter_card_swipper/widgets/transformer_page_view/transformer_page_view.dart';
+import 'package:flutter_swiper_view/flutter_swiper_view.dart';
+import 'package:flutter_swiper_view/src/transformer_page_view.dart';
 
 class BottomAnimNavPage extends StatefulWidget {
   @override
