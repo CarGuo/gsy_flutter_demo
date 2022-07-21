@@ -157,6 +157,9 @@ import 'package:gsy_flutter_demo/widget/anim_switch_layout_demo_page.dart'
 import 'package:gsy_flutter_demo/widget/vp_list_demo_page.dart'
     deferred as vp_list_demo_page;
 
+import 'package:gsy_flutter_demo/widget/card_perspective_demo_page.dart'
+    deferred as card_perspective_demo_page;
+
 import 'package:window_location_href/window_location_href.dart';
 
 void main() => runApp(MyApp());
@@ -738,6 +741,12 @@ Map<String, WidgetBuilder> routers = {
   "垂直  ListView 联动  ListView": (context) {
     return ContainerAsyncRouterPage(vp_list_demo_page.loadLibrary(), (context) {
       return vp_list_demo_page.ListViewLinkListView();
+    });
+  },
+  "3D 透视卡片": (context) {
+    return ContainerAsyncRouterPage(card_perspective_demo_page.loadLibrary(),
+        (context) {
+      return card_perspective_demo_page.CardPerspectiveDemoPage();
     });
   },
 };
