@@ -154,6 +154,37 @@ class _Card3DDemoPageState extends State<Card3DDemoPage> {
                         )
                       ],
                     ),
+                    child: Column(
+                      children: [
+                        new Spacer(),
+                        new Spacer(),
+                        new Expanded(
+                          child: Text(
+                            "8888 8888 8888 8888",
+                            style: TextStyle(
+                              fontSize: 25,
+                              fontFamily: 'bglbt',
+                              shadows: [
+                                Shadow(
+                                    color: Colors.black54,
+                                    blurRadius: 2,
+                                    offset: Offset(1, 1)),
+                              ],
+                              foreground: Paint()
+                                ..style = PaintingStyle.stroke
+                                ..strokeWidth = 0.3
+                                ..shader = LinearGradient(
+                                        begin: Alignment.centerLeft,
+                                        end: Alignment.bottomRight,
+                                        colors: [Colors.white, Colors.blueAccent, Colors.black54])
+                                    .createShader(
+                                  Rect.fromLTWH(0, 0, 1000, 100),
+                                ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],

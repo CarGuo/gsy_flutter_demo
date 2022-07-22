@@ -180,3 +180,7 @@ flutter:
     - family: Agne
       fonts:
         - asset: assets/Agne.otf
+
+    - family: bglbt
+      fonts:
+        - asset: assets/bglbt.ttf
