@@ -160,6 +160,9 @@ import 'package:gsy_flutter_demo/widget/vp_list_demo_page.dart'
 import 'package:gsy_flutter_demo/widget/card_perspective_demo_page.dart'
     deferred as card_perspective_demo_page;
 
+import 'package:gsy_flutter_demo/widget/card_3d_demo_page.dart'
+    deferred as card_3d_demo_page;
+
 import 'package:window_location_href/window_location_href.dart';
 
 void main() => runApp(MyApp());
@@ -747,6 +750,12 @@ Map<String, WidgetBuilder> routers = {
     return ContainerAsyncRouterPage(card_perspective_demo_page.loadLibrary(),
         (context) {
       return card_perspective_demo_page.CardPerspectiveDemoPage();
+    });
+  },
+  "3D 卡片旋转": (context) {
+    return ContainerAsyncRouterPage(card_3d_demo_page.loadLibrary(),
+        (context) {
+      return card_3d_demo_page.Card3DDemoPage();
     });
   },
 };
