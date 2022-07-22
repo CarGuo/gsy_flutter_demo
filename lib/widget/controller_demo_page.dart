@@ -8,9 +8,11 @@ import 'package:flutter/material.dart';
 class ControllerDemoPage extends StatelessWidget {
   final TextEditingController controller =
       new TextEditingController(text: "init Text");
+
   @override
   Widget build(BuildContext context) {
-    print("Main MediaQuery padding: ${MediaQuery.of(context).padding} viewInsets.bottom: ${MediaQuery.of(context).viewInsets.bottom}");
+    print(
+        "Main MediaQuery padding: ${MediaQuery.of(context).padding} viewInsets.bottom: ${MediaQuery.of(context).viewInsets.bottom}");
     return Scaffold(
       appBar: AppBar(
         title: new Text("ControllerDemoPage"),
@@ -18,9 +20,10 @@ class ControllerDemoPage extends StatelessWidget {
       extendBody: true,
       body: Column(
         children: [
-          new Expanded(child: InkWell(onTap: (){
+          new Expanded(child: InkWell(onTap: () {
             FocusScope.of(context).requestFocus(FocusNode());
           })),
+
           ///增加 CustomWidget
           CustomWidget(),
           new Container(
@@ -28,6 +31,16 @@ class ControllerDemoPage extends StatelessWidget {
             child: new Center(
               child: new TextField(
                 controller: controller,
+                onChanged: (value) {
+                  var filterPattern = RegExp(
+                      r'(?![a-zA-Z.]+$)(?![0-9A-Z.]+$)(?![0-9a-z.]+$)(?![0-9a-zA-Z]+$)[0-9a-zA-Z.]{6,8}');
+                  final Iterable<Match> matches =
+                      filterPattern.allMatches(value);
+                  if (matches.isNotEmpty) {
+                    print(
+                        "######################3符合必须包含数字，小写，长度，大写，符号########################3");
+                  }
+                },
               ),
             ),
           ),
@@ -37,10 +50,12 @@ class ControllerDemoPage extends StatelessWidget {
     );
   }
 }
+
 class CustomWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    print("Custom MediaQuery padding: ${MediaQuery.of(context).padding} viewInsets.bottom: ${MediaQuery.of(context).viewInsets.bottom}\n  \n");
+    print(
+        "Custom MediaQuery padding: ${MediaQuery.of(context).padding} viewInsets.bottom: ${MediaQuery.of(context).viewInsets.bottom}\n  \n");
     return Container();
   }
 }
