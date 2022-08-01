@@ -109,7 +109,7 @@ dependencies:
   flutter_swiper_view : 1.1.8
   animated_text_kit : 4.2.1
   window_location_href: 1.0.0
-  riverpod: 1.0.2
+  rive: 0.9.1
 
 dev_dependencies:
   build_runner: ^2.0.5

@@ -256,6 +256,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.1.0"
+  http:
+    dependency: transitive
+    description:
+      name: http
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.13.4"
   http_multi_server:
     dependency: transitive
     description:
@@ -382,13 +389,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.2.0"
-  riverpod:
+  rive:
     dependency: "direct main"
     description:
-      name: riverpod
+      name: rive
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "1.0.2"
+    version: "0.9.1"
   scratch_space:
     dependency: transitive
     description:
@@ -450,13 +457,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.10.0"
-  state_notifier:
-    dependency: transitive
-    description:
-      name: state_notifier
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "0.7.2+1"
   stream_channel:
     dependency: transitive
     description:
