@@ -163,6 +163,9 @@ import 'package:gsy_flutter_demo/widget/card_perspective_demo_page.dart'
 import 'package:gsy_flutter_demo/widget/card_3d_demo_page.dart'
     deferred as card_3d_demo_page;
 
+import 'package:gsy_flutter_demo/widget/card_real_3d_demo_page.dart'
+    deferred as card_real_3d_demo_page;
+
 import 'package:gsy_flutter_demo/widget/anim_juejin_logo_demo_page.dart'
     deferred as anim_juejin_logo_demo_page;
 
@@ -758,6 +761,12 @@ Map<String, WidgetBuilder> routers = {
   "3D 卡片旋转": (context) {
     return ContainerAsyncRouterPage(card_3d_demo_page.loadLibrary(), (context) {
       return card_3d_demo_page.Card3DDemoPage();
+    });
+  },
+  "真 3D 卡片旋转": (context) {
+    return ContainerAsyncRouterPage(card_real_3d_demo_page.loadLibrary(),
+        (context) {
+      return card_real_3d_demo_page.CardReal3DDemoPage();
     });
   },
   "rive 掘金 logo": (context) {

@@ -110,6 +110,9 @@ dependencies:
   animated_text_kit : 4.2.1
   window_location_href: 1.0.0
   rive: 0.9.1
+  zflutter:
+    path: ../zflutter/zflutter/
+
 
 dev_dependencies:
   build_runner: ^2.0.5

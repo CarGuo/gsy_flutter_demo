@@ -389,6 +389,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.2.0"
+  quiver:
+    dependency: transitive
+    description:
+      name: quiver
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.1.0"
   rive:
     dependency: "direct main"
     description:
@@ -555,6 +562,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "3.1.0"
+  zflutter:
+    dependency: "direct main"
+    description:
+      path: "../zflutter/zflutter"
+      relative: true
+    source: path
+    version: "0.0.1+2"
 sdks:
   dart: ">=2.17.0 <3.0.0"
   flutter: ">=3.0.0"
