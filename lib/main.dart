@@ -172,6 +172,9 @@ import 'package:gsy_flutter_demo/widget/anim_juejin_logo_demo_page.dart'
 import 'package:gsy_flutter_demo/widget/dash_3d_demo_page.dart'
     deferred as dash_3d_demo_page;
 
+import 'package:gsy_flutter_demo/widget/png_shadow_demo_page.dart'
+    deferred as png_shadow_demo_page;
+
 import 'package:window_location_href/window_location_href.dart';
 
 void main() => runApp(MyApp());
@@ -781,6 +784,12 @@ Map<String, WidgetBuilder> routers = {
     return ContainerAsyncRouterPage(anim_juejin_logo_demo_page.loadLibrary(),
         (context) {
       return anim_juejin_logo_demo_page.AnimJueJinLogoDemoPage();
+    });
+  },
+  "png shadow": (context) {
+    return ContainerAsyncRouterPage(png_shadow_demo_page.loadLibrary(),
+        (context) {
+      return png_shadow_demo_page.PngShadowDemoPage();
     });
   },
 };
