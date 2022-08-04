@@ -169,6 +169,9 @@ import 'package:gsy_flutter_demo/widget/card_real_3d_demo_page.dart'
 import 'package:gsy_flutter_demo/widget/anim_juejin_logo_demo_page.dart'
     deferred as anim_juejin_logo_demo_page;
 
+import 'package:gsy_flutter_demo/widget/dash_3d_demo_page.dart'
+    deferred as dash_3d_demo_page;
+
 import 'package:window_location_href/window_location_href.dart';
 
 void main() => runApp(MyApp());
@@ -767,6 +770,11 @@ Map<String, WidgetBuilder> routers = {
     return ContainerAsyncRouterPage(card_real_3d_demo_page.loadLibrary(),
         (context) {
       return card_real_3d_demo_page.CardReal3DDemoPage();
+    });
+  },
+  "3D Dash": (context) {
+    return ContainerAsyncRouterPage(dash_3d_demo_page.loadLibrary(), (context) {
+      return dash_3d_demo_page.Dash3dDemoPage();
     });
   },
   "rive 掘金 logo": (context) {

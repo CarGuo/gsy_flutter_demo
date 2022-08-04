@@ -94,6 +94,13 @@ deferred-components:
       - package:gsy_flutter_demo/widget/viewpager_demo_page.dart
       - package:gsy_flutter_demo/widget/wrap_content_page.dart
       - package:gsy_flutter_demo/widget/shader_canvas_demo_page.dart
+      - package:gsy_flutter_demo/widget/anim_switch_layout_demo_page.dart
+      - package:gsy_flutter_demo/widget/vp_list_demo_page.dart
+      - package:gsy_flutter_demo/widget/card_perspective_demo_page.dart
+      - package:gsy_flutter_demo/widget/card_3d_demo_page.dart
+      - package:gsy_flutter_demo/widget/card_real_3d_demo_page.dart
+      - package:gsy_flutter_demo/widget/anim_juejin_logo_demo_page.dart
+      - package:gsy_flutter_demo/widget/dash_3d_demo_page.dart
 
 dependencies:
   flutter:

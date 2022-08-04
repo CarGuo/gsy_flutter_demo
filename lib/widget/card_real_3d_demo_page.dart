@@ -58,7 +58,7 @@ class _CardReal3DDemoPageState extends State<CardReal3DDemoPage> {
             zoom: 1.0,
             children: [
               ZPositioned(
-                rotate: controller!.rotate,
+                rotate: controller.rotate,
                 child: ZGroup(
                   children: [
                     ZGroup(
