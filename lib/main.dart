@@ -175,6 +175,9 @@ import 'package:gsy_flutter_demo/widget/dash_3d_demo_page.dart'
 import 'package:gsy_flutter_demo/widget/png_shadow_demo_page.dart'
     deferred as png_shadow_demo_page;
 
+import 'package:gsy_flutter_demo/widget/transform_canvas_demo_page.dart'
+    deferred as transform_canvas_demo_page;
+
 import 'package:window_location_href/window_location_href.dart';
 
 void main() => runApp(MyApp());
@@ -778,6 +781,12 @@ Map<String, WidgetBuilder> routers = {
   "3D Dash": (context) {
     return ContainerAsyncRouterPage(dash_3d_demo_page.loadLibrary(), (context) {
       return dash_3d_demo_page.Dash3dDemoPage();
+    });
+  },
+  "展示 canvas transform": (context) {
+    return ContainerAsyncRouterPage(transform_canvas_demo_page.loadLibrary(),
+        (context) {
+      return transform_canvas_demo_page.TransformCanvasDemoPage();
     });
   },
   "rive 掘金 logo": (context) {

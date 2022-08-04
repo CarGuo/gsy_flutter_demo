@@ -102,6 +102,7 @@ deferred-components:
       - package:gsy_flutter_demo/widget/anim_juejin_logo_demo_page.dart
       - package:gsy_flutter_demo/widget/dash_3d_demo_page.dart
       - package:gsy_flutter_demo/widget/png_shadow_demo_page.dart
+      - package:gsy_flutter_demo/widget/transform_canvas_demo_page.dart
 
 dependencies:
   flutter:
