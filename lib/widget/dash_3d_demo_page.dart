@@ -48,9 +48,6 @@ class _Dash3dDemoPageState extends State<Dash3dDemoPage>
                 ),
               ),
             ));
-
-    final dash = dashAnimations.fold<double>(
-        0, (previousValue, element) => previousValue + element.value);
     return Scaffold(
       appBar: AppBar(
         title: Text("Dash3dDemoPage"),
