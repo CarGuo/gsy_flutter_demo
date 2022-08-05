@@ -181,6 +181,9 @@ import 'package:gsy_flutter_demo/widget/transform_canvas_demo_page.dart'
 import 'package:gsy_flutter_demo/widget/juejin_3d_logo_demo_page.dart'
     deferred as juejin_3d_logo_demo_page;
 
+import 'package:gsy_flutter_demo/widget/juejin_3d_box_logo_demo_page.dart'
+    deferred as juejin_3d_box_logo_demo_page;
+
 import 'package:window_location_href/window_location_href.dart';
 
 void main() => runApp(MyApp());
@@ -802,6 +805,12 @@ Map<String, WidgetBuilder> routers = {
     return ContainerAsyncRouterPage(juejin_3d_logo_demo_page.loadLibrary(),
         (context) {
       return juejin_3d_logo_demo_page.JueJin3DLogoDemoPage();
+    });
+  },
+  "掘金更 3d logo": (context) {
+    return ContainerAsyncRouterPage(juejin_3d_box_logo_demo_page.loadLibrary(),
+        (context) {
+      return juejin_3d_box_logo_demo_page.JueJin3DBoxLogoDemoPage();
     });
   },
   "png shadow": (context) {
