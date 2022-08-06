@@ -2,6 +2,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
+
+///对应文章解析 https://juejin.cn/post/7116267156655833102
 ///简单处理处理 pageview 嵌套 listview 的斜滑问题
 class VPListView extends StatefulWidget {
   const VPListView({Key? key}) : super(key: key);
@@ -69,6 +71,7 @@ class _MyListViewState extends State<HandlerListView> {
   }
 }
 
+///对应文章解析 https://juejin.cn/post/7116267156655833102
 ///垂直滑动的 ViewPage 里嵌套垂直滑动的 ListView
 class VPNestListView extends StatefulWidget {
   @override
@@ -256,6 +259,7 @@ class KeepAliveListViewState extends State<KeepAliveListView>
 
 ////////////////////////////////////////////////////////////////////////////////
 
+///对应文章解析 https://juejin.cn/post/7116267156655833102
 ///listView 里嵌套 PageView
 class ListViewNestVP extends StatefulWidget {
   @override

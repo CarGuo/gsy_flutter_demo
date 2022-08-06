@@ -742,72 +742,85 @@ Map<String, WidgetBuilder> routers = {
     });
   },
   "控件动画切换效果": (context) {
+    ///对应文章解析  https://juejin.cn/post/7111071430292275213
     return ContainerAsyncRouterPage(anim_switch_layout_demo_page.loadLibrary(),
         (context) {
       return anim_switch_layout_demo_page.AnimSwitchLayoutDemoPage();
     });
   },
   "ListView 嵌套 ViewPager 解决斜着滑动问题": (context) {
+    ///对应文章解析 https://juejin.cn/post/7116267156655833102
     return ContainerAsyncRouterPage(vp_list_demo_page.loadLibrary(), (context) {
       return vp_list_demo_page.VPListView();
     });
   },
   "垂直  ViewPager 嵌套垂直 ListView ": (context) {
+    ///对应文章解析 https://juejin.cn/post/7116267156655833102
     return ContainerAsyncRouterPage(vp_list_demo_page.loadLibrary(), (context) {
       return vp_list_demo_page.VPNestListView();
     });
   },
   "垂直  ListView 嵌套垂直  ViewPager": (context) {
+    ///对应文章解析 https://juejin.cn/post/7116267156655833102
     return ContainerAsyncRouterPage(vp_list_demo_page.loadLibrary(), (context) {
       return vp_list_demo_page.ListViewNestVP();
     });
   },
   "垂直  ListView 联动  ListView": (context) {
+    ///对应文章解析 https://juejin.cn/post/7116267156655833102
     return ContainerAsyncRouterPage(vp_list_demo_page.loadLibrary(), (context) {
       return vp_list_demo_page.ListViewLinkListView();
     });
   },
   "3D 透视卡片": (context) {
+    ///对应文章解析  https://juejin.cn/post/7124064789763981326
     return ContainerAsyncRouterPage(card_perspective_demo_page.loadLibrary(),
         (context) {
       return card_perspective_demo_page.CardPerspectiveDemoPage();
     });
   },
   "3D 卡片旋转": (context) {
+    ///对应文章解析  https://juejin.cn/post/7124064789763981326
     return ContainerAsyncRouterPage(card_3d_demo_page.loadLibrary(), (context) {
       return card_3d_demo_page.Card3DDemoPage();
     });
   },
-  "真 3D 卡片旋转": (context) {
+  "硬核 3D 卡片旋转": (context) {
+    ///对应文章解析
     return ContainerAsyncRouterPage(card_real_3d_demo_page.loadLibrary(),
         (context) {
       return card_real_3d_demo_page.CardReal3DDemoPage();
     });
   },
   "3D Dash": (context) {
+    ///对应文章解析
     return ContainerAsyncRouterPage(dash_3d_demo_page.loadLibrary(), (context) {
       return dash_3d_demo_page.Dash3dDemoPage();
     });
   },
   "展示 canvas transform": (context) {
+    ///对应文章解析
     return ContainerAsyncRouterPage(transform_canvas_demo_page.loadLibrary(),
         (context) {
       return transform_canvas_demo_page.TransformCanvasDemoPage();
     });
   },
   "rive 掘金 logo": (context) {
+    ///对应文章解析  https://juejin.cn/post/7126661045564735519
     return ContainerAsyncRouterPage(anim_juejin_logo_demo_page.loadLibrary(),
         (context) {
       return anim_juejin_logo_demo_page.AnimJueJinLogoDemoPage();
     });
   },
   "掘金 3d logo": (context) {
+    ///对应文章解析
     return ContainerAsyncRouterPage(juejin_3d_logo_demo_page.loadLibrary(),
         (context) {
       return juejin_3d_logo_demo_page.JueJin3DLogoDemoPage();
     });
   },
   "掘金更 3d logo": (context) {
+    ///对应文章解析
     return ContainerAsyncRouterPage(juejin_3d_box_logo_demo_page.loadLibrary(),
         (context) {
       return juejin_3d_box_logo_demo_page.JueJin3DBoxLogoDemoPage();

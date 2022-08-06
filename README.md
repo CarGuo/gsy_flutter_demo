@@ -35,16 +35,17 @@
 
 ![公众号](http://img.cdn.guoshuyu.cn/wechat_qq.png)
 
+![](demo.jpg)
+
 ### 已有例子
 
 ```dart
-
 Map<String, WidgetBuilder> routers = {
   "文本输入框简单的 Controller": (context) {
     return ContainerAsyncRouterPage(controller_demo_page.loadLibrary(),
-        (context) {
-      return controller_demo_page.ControllerDemoPage();
-    });
+            (context) {
+          return controller_demo_page.ControllerDemoPage();
+        });
   },
   "实现控件圆角不同组合": (context) {
     return ContainerAsyncRouterPage(clip_demo_page.loadLibrary(), (context) {
@@ -53,39 +54,39 @@ Map<String, WidgetBuilder> routers = {
   },
   "列表滑动监听": (context) {
     return ContainerAsyncRouterPage(scroll_listener_demo_page.loadLibrary(),
-        (context) {
-      return scroll_listener_demo_page.ScrollListenerDemoPage();
-    });
+            (context) {
+          return scroll_listener_demo_page.ScrollListenerDemoPage();
+        });
   },
   "滑动到指定位置": (context) {
     return ContainerAsyncRouterPage(scroll_to_index_demo_page.loadLibrary(),
-        (context) {
-      return scroll_to_index_demo_page.ScrollToIndexDemoPage();
-    });
+            (context) {
+          return scroll_to_index_demo_page.ScrollToIndexDemoPage();
+        });
   },
   "滑动到指定位置2": (context) {
     return ContainerAsyncRouterPage(scroll_to_index_demo_page2.loadLibrary(),
-        (context) {
-      return scroll_to_index_demo_page2.ScrollToIndexDemoPage2();
-    });
+            (context) {
+          return scroll_to_index_demo_page2.ScrollToIndexDemoPage2();
+        });
   },
   "展示渐变带边框的文本": (context) {
     return ContainerAsyncRouterPage(gradient_text_demo_page.loadLibrary(),
-        (context) {
-      return gradient_text_demo_page.GradientTextDemoPage();
-    });
+            (context) {
+          return gradient_text_demo_page.GradientTextDemoPage();
+        });
   },
   "Transform 效果展示": (context) {
     return ContainerAsyncRouterPage(transform_demo_page.loadLibrary(),
-        (context) {
-      return transform_demo_page.TransformDemoPage();
-    });
+            (context) {
+          return transform_demo_page.TransformDemoPage();
+        });
   },
   "计算另类文本行间距展示": (context) {
     return ContainerAsyncRouterPage(text_line_height_demo_page.loadLibrary(),
-        (context) {
-      return text_line_height_demo_page.TextLineHeightDemoPage();
-    });
+            (context) {
+          return text_line_height_demo_page.TextLineHeightDemoPage();
+        });
   },
   "简单上下刷新": (context) {
     return ContainerAsyncRouterPage(refrsh_demo_page.loadLibrary(), (context) {
@@ -104,9 +105,9 @@ Map<String, WidgetBuilder> routers = {
   },
   "通过绝对定位布局": (context) {
     return ContainerAsyncRouterPage(positioned_demo_page.loadLibrary(),
-        (context) {
-      return positioned_demo_page.PositionedDemoPage();
-    });
+            (context) {
+          return positioned_demo_page.PositionedDemoPage();
+        });
   },
   "气泡提示框": (context) {
     return ContainerAsyncRouterPage(bubble_demo_page.loadLibrary(), (context) {
@@ -125,9 +126,9 @@ Map<String, WidgetBuilder> routers = {
   },
   "滑动验证": (context) {
     return ContainerAsyncRouterPage(silder_verify_page.loadLibrary(),
-        (context) {
-      return silder_verify_page.SlideVerifyPage();
-    });
+            (context) {
+          return silder_verify_page.SlideVerifyPage();
+        });
   },
   "warpContent实现": (context) {
     return ContainerAsyncRouterPage(wrap_content_page.loadLibrary(), (context) {
@@ -136,15 +137,15 @@ Map<String, WidgetBuilder> routers = {
   },
   "状态栏颜色修改（仅 App）": (context) {
     return ContainerAsyncRouterPage(statusbar_demo_page.loadLibrary(),
-        (context) {
-      return statusbar_demo_page.StatusBarDemoPage();
-    });
+            (context) {
+          return statusbar_demo_page.StatusBarDemoPage();
+        });
   },
   "键盘弹出与监听（仅 App）": (context) {
     return ContainerAsyncRouterPage(keyboard_demo_page.loadLibrary(),
-        (context) {
-      return keyboard_demo_page.KeyBoardDemoPage();
-    });
+            (context) {
+          return keyboard_demo_page.KeyBoardDemoPage();
+        });
   },
   "控件动画组合展示（旋转加放大圆）": (context) {
     return ContainerAsyncRouterPage(anima_demo_page.loadLibrary(), (context) {
@@ -158,39 +159,39 @@ Map<String, WidgetBuilder> routers = {
   },
   "全局悬浮按键效果": (context) {
     return ContainerAsyncRouterPage(floating_touch_demo_page.loadLibrary(),
-        (context) {
-      return floating_touch_demo_page.FloatingTouchDemoPage();
-    });
+            (context) {
+          return floating_touch_demo_page.FloatingTouchDemoPage();
+        });
   },
   "全局设置字体大小": (context) {
     return ContainerAsyncRouterPage(text_size_demo_page.loadLibrary(),
-        (context) {
-      return text_size_demo_page.TextSizeDemoPage();
-    });
+            (context) {
+          return text_size_demo_page.TextSizeDemoPage();
+        });
   },
   "旧版实现富文本": (context) {
     return ContainerAsyncRouterPage(rich_text_demo_page.loadLibrary(),
-        (context) {
-      return rich_text_demo_page.RichTextDemoPage();
-    });
+            (context) {
+          return rich_text_demo_page.RichTextDemoPage();
+        });
   },
   "官方实现富文本": (context) {
     return ContainerAsyncRouterPage(rich_text_demo_page2.loadLibrary(),
-        (context) {
-      return rich_text_demo_page2.RichTextDemoPage2();
-    });
+            (context) {
+          return rich_text_demo_page2.RichTextDemoPage2();
+        });
   },
   "第三方 viewpager 封装实现": (context) {
     return ContainerAsyncRouterPage(viewpager_demo_page.loadLibrary(),
-        (context) {
-      return viewpager_demo_page.ViewPagerDemoPage();
-    });
+            (context) {
+          return viewpager_demo_page.ViewPagerDemoPage();
+        });
   },
   "列表滑动过程控件停靠效果": (context) {
     return ContainerAsyncRouterPage(sliver_list_demo_page.loadLibrary(),
-        (context) {
-      return sliver_list_demo_page.SliverListDemoPage();
-    });
+            (context) {
+          return sliver_list_demo_page.SliverListDemoPage();
+        });
   },
   "验证码输入框": (context) {
     return ContainerAsyncRouterPage(
@@ -207,9 +208,9 @@ Map<String, WidgetBuilder> routers = {
   },
   "自定义布局展示效果": (context) {
     return ContainerAsyncRouterPage(custom_multi_render_demo_page.loadLibrary(),
-        (context) {
-      return custom_multi_render_demo_page.CustomMultiRenderDemoPage();
-    });
+            (context) {
+          return custom_multi_render_demo_page.CustomMultiRenderDemoPage();
+        });
   },
   "自定义布局实现云词图展示": (context) {
     return ContainerAsyncRouterPage(cloud_demo_page.loadLibrary(), (context) {
@@ -228,15 +229,15 @@ Map<String, WidgetBuilder> routers = {
   },
   "列表滑动停靠效果2 （Stick": (context) {
     return ContainerAsyncRouterPage(sliver_stick_demo_page.loadLibrary(),
-        (context) {
-      return sliver_stick_demo_page.SliverStickListDemoPage();
-    });
+            (context) {
+          return sliver_stick_demo_page.SliverStickListDemoPage();
+        });
   },
   "键盘顶起展示（仅 App）": (context) {
     return ContainerAsyncRouterPage(input_bottom_demo_page.loadLibrary(),
-        (context) {
-      return input_bottom_demo_page.InputBottomDemoPage();
-    });
+            (context) {
+          return input_bottom_demo_page.InputBottomDemoPage();
+        });
   },
   "Blur 高斯模糊效果": (context) {
     return ContainerAsyncRouterPage(blur_demo_page.loadLibrary(), (context) {
@@ -245,15 +246,15 @@ Map<String, WidgetBuilder> routers = {
   },
   "控件动画变形效果": (context) {
     return ContainerAsyncRouterPage(animation_container_demo_page.loadLibrary(),
-        (context) {
-      return animation_container_demo_page.AnimationContainerDemoPage();
-    });
+            (context) {
+          return animation_container_demo_page.AnimationContainerDemoPage();
+        });
   },
   "时钟动画绘制展示": (context) {
     return ContainerAsyncRouterPage(tick_click_demo_page.loadLibrary(),
-        (context) {
-      return tick_click_demo_page.TickClickDemoPage();
-    });
+            (context) {
+          return tick_click_demo_page.TickClickDemoPage();
+        });
   },
   "按键切换动画效果": (context) {
     return ContainerAsyncRouterPage(anima_demo_page4.loadLibrary(), (context) {
@@ -262,21 +263,21 @@ Map<String, WidgetBuilder> routers = {
   },
   "列表滑动过程 item 停靠动画效果": (context) {
     return ContainerAsyncRouterPage(list_anim_demo_page.loadLibrary(),
-        (context) {
-      return list_anim_demo_page.ListAnimDemoPage();
-    });
+            (context) {
+          return list_anim_demo_page.ListAnimDemoPage();
+        });
   },
   "列表滑动过程 item 停靠动画效果2": (context) {
     return ContainerAsyncRouterPage(list_anim_demo_page2.loadLibrary(),
-        (context) {
-      return list_anim_demo_page2.ListAnimDemoPage2();
-    });
+            (context) {
+          return list_anim_demo_page2.ListAnimDemoPage2();
+        });
   },
   "下弹筛选展示效果": (context) {
     return ContainerAsyncRouterPage(drop_select_demo_page.loadLibrary(),
-        (context) {
-      return drop_select_demo_page.DropSelectDemoPage();
-    });
+            (context) {
+          return drop_select_demo_page.DropSelectDemoPage();
+        });
   },
   "文本弹出动画效果": (context) {
     return ContainerAsyncRouterPage(anima_demo_page5.loadLibrary(), (context) {
@@ -285,33 +286,33 @@ Map<String, WidgetBuilder> routers = {
   },
   "强大的自定义滑动与停靠结合展示": (context) {
     return ContainerAsyncRouterPage(scroll_header_demo_page.loadLibrary(),
-        (context) {
-      return scroll_header_demo_page.ScrollHeaderDemoPage();
-    });
+            (context) {
+          return scroll_header_demo_page.ScrollHeaderDemoPage();
+        });
   },
   "自定义列表内sliver渲染顺序": (context) {
     return ContainerAsyncRouterPage(custom_viewport_page.loadLibrary(),
-        (context) {
-      return custom_viewport_page.CustomViewportPage();
-    });
+            (context) {
+          return custom_viewport_page.CustomViewportPage();
+        });
   },
   "点击弹出动画提示": (context) {
     return ContainerAsyncRouterPage(anim_tip_demo_page.loadLibrary(),
-        (context) {
-      return anim_tip_demo_page.AnimTipDemoPage();
-    });
+            (context) {
+          return anim_tip_demo_page.AnimTipDemoPage();
+        });
   },
   "列表停靠展开+回到当前头部": (context) {
     return ContainerAsyncRouterPage(stick_sliver_list_demo_page.loadLibrary(),
-        (context) {
-      return stick_sliver_list_demo_page.StickSliverListDemoPage();
-    });
+            (context) {
+          return stick_sliver_list_demo_page.StickSliverListDemoPage();
+        });
   },
   "使用 overflow 处理图片": (context) {
     return ContainerAsyncRouterPage(overflow_image_page.loadLibrary(),
-        (context) {
-      return overflow_image_page.OverflowImagePage();
-    });
+            (context) {
+          return overflow_image_page.OverflowImagePage();
+        });
   },
   "展示 Align 排布控件": (context) {
     return ContainerAsyncRouterPage(align_demo_page.loadLibrary(), (context) {
@@ -325,21 +326,21 @@ Map<String, WidgetBuilder> routers = {
   },
   "多列表+顶部Tab效果展示": (context) {
     return ContainerAsyncRouterPage(sliver_tab_demo_page.loadLibrary(),
-        (context) {
-      return sliver_tab_demo_page.SliverTabDemoPage();
-    });
+            (context) {
+          return sliver_tab_demo_page.SliverTabDemoPage();
+        });
   },
   "多列表+顶部Tab效果展示2": (context) {
     return ContainerAsyncRouterPage(sliver_tab_demo_page2.loadLibrary(),
-        (context) {
-      return sliver_tab_demo_page2.SliverTabDemoPage2();
-    });
+            (context) {
+          return sliver_tab_demo_page2.SliverTabDemoPage2();
+        });
   },
   "多列表+顶部Tab效果展示3": (context) {
     return ContainerAsyncRouterPage(sliver_tab_demo_page3.loadLibrary(),
-        (context) {
-      return sliver_tab_demo_page3.SliverTabDemoPage3();
-    });
+            (context) {
+          return sliver_tab_demo_page3.SliverTabDemoPage3();
+        });
   },
   "仿真书本翻页动画（仅APP）": (context) {
     return ContainerAsyncRouterPage(book_page.loadLibrary(), (context) {
@@ -358,9 +359,9 @@ Map<String, WidgetBuilder> routers = {
   },
   "手势效果": (context) {
     return ContainerAsyncRouterPage(matrix_custom_painter_page.loadLibrary(),
-        (context) {
-      return matrix_custom_painter_page.MatrixCustomPainterDemo();
-    });
+            (context) {
+          return matrix_custom_painter_page.MatrixCustomPainterDemo();
+        });
   },
   "一个有趣的底部跟随和停靠例子": (context) {
     return ContainerAsyncRouterPage(
@@ -370,9 +371,9 @@ Map<String, WidgetBuilder> routers = {
   },
   "一个有趣的圆形选择器": (context) {
     return ContainerAsyncRouterPage(bottom_anim_nav_page.loadLibrary(),
-        (context) {
-      return bottom_anim_nav_page.BottomAnimNavPage();
-    });
+            (context) {
+          return bottom_anim_nav_page.BottomAnimNavPage();
+        });
   },
   "一个类似探探堆叠卡片例子": (context) {
     return ContainerAsyncRouterPage(
@@ -388,27 +389,27 @@ Map<String, WidgetBuilder> routers = {
   },
   "动画按键例子": (context) {
     return ContainerAsyncRouterPage(anim_button_demo_page.loadLibrary(),
-        (context) {
-      return anim_button_demo_page.AnimButtonDemoPage();
-    });
+            (context) {
+          return anim_button_demo_page.AnimButtonDemoPage();
+        });
   },
   "类似QQ发送图片的动画": (context) {
     return ContainerAsyncRouterPage(anim_progress_img_demo_page.loadLibrary(),
-        (context) {
-      return anim_progress_img_demo_page.AnimProgressImgDemoPage();
-    });
+            (context) {
+          return anim_progress_img_demo_page.AnimProgressImgDemoPage();
+        });
   },
   "类似探探扫描的动画效果": (context) {
     return ContainerAsyncRouterPage(anim_scan_demo_page.loadLibrary(),
-        (context) {
-      return anim_scan_demo_page.AnimScanDemoPage();
-    });
+            (context) {
+          return anim_scan_demo_page.AnimScanDemoPage();
+        });
   },
   "圆弧形的 SeekBar（仅APP）": (context) {
     return ContainerAsyncRouterPage(arc_seek_bar_demo_page.loadLibrary(),
-        (context) {
-      return arc_seek_bar_demo_page.ArcSeekBarDemoPage();
-    });
+            (context) {
+          return arc_seek_bar_demo_page.ArcSeekBarDemoPage();
+        });
   },
   "一个国外友人很惊艳的动画效果": (context) {
     return ContainerAsyncRouterPage(anim_bubble_gum.loadLibrary(), (context) {
@@ -417,57 +418,151 @@ Map<String, WidgetBuilder> routers = {
   },
   "纯 Canvas 绘制闹钟": (context) {
     return ContainerAsyncRouterPage(canvas_click_demo_page.loadLibrary(),
-        (context) {
-      return canvas_click_demo_page.CanvasClickDemoPage();
-    });
+            (context) {
+          return canvas_click_demo_page.CanvasClickDemoPage();
+        });
   },
   "类似 boss 直聘我的页面联动效果": (context) {
     return ContainerAsyncRouterPage(link_sliver_demo_page.loadLibrary(),
-        (context) {
-      return link_sliver_demo_page.LinkSliverDemoPage();
-    });
+            (context) {
+          return link_sliver_demo_page.LinkSliverDemoPage();
+        });
   },
   "结合 Matrix 的拖拽": (context) {
     return ContainerAsyncRouterPage(drag_img_demo_page.loadLibrary(),
-        (context) {
-      return drag_img_demo_page.DragImgDemoPage();
-    });
+            (context) {
+          return drag_img_demo_page.DragImgDemoPage();
+        });
   },
   "彩色进度条": (context) {
     return ContainerAsyncRouterPage(color_progress_demo_page.loadLibrary(),
-        (context) {
-      return color_progress_demo_page.ColorProgressDemoPage();
-    });
+            (context) {
+          return color_progress_demo_page.ColorProgressDemoPage();
+        });
   },
   "第三方的动画字体": (context) {
     return ContainerAsyncRouterPage(anim_text_demo_page.loadLibrary(),
-        (context) {
-      return anim_text_demo_page.AnimTextDemoPage();
-    });
+            (context) {
+          return anim_text_demo_page.AnimTextDemoPage();
+        });
   },
   "首尾添加数据不会抖动": (context) {
     return ContainerAsyncRouterPage(chat_list_scroll_demo_page.loadLibrary(),
-        (context) {
-      return chat_list_scroll_demo_page.ChatListScrollDemoPage();
-    });
+            (context) {
+          return chat_list_scroll_demo_page.ChatListScrollDemoPage();
+        });
   },
   "首尾添加数据不会抖动2": (context) {
     return ContainerAsyncRouterPage(chat_list_scroll_demo_page_2.loadLibrary(),
-        (context) {
-      return chat_list_scroll_demo_page_2.ChatListScrollDemoPage2();
-    });
+            (context) {
+          return chat_list_scroll_demo_page_2.ChatListScrollDemoPage2();
+        });
   },
   "测试路由嵌套": (context) {
     return ContainerAsyncRouterPage(route_demo_page.loadLibrary(), (context) {
       return route_demo_page.RouteDemoPage();
     });
   },
+  "测试 canvas 阴影": (context) {
+    return ContainerAsyncRouterPage(shader_canvas_demo_page.loadLibrary(),
+            (context) {
+          return shader_canvas_demo_page.ShaderCanvasDemoPage();
+        });
+  },
+  "控件动画切换效果": (context) {
+    ///对应文章解析  https://juejin.cn/post/7111071430292275213
+    return ContainerAsyncRouterPage(anim_switch_layout_demo_page.loadLibrary(),
+            (context) {
+          return anim_switch_layout_demo_page.AnimSwitchLayoutDemoPage();
+        });
+  },
+  "ListView 嵌套 ViewPager 解决斜着滑动问题": (context) {
+    ///对应文章解析 https://juejin.cn/post/7116267156655833102
+    return ContainerAsyncRouterPage(vp_list_demo_page.loadLibrary(), (context) {
+      return vp_list_demo_page.VPListView();
+    });
+  },
+  "垂直  ViewPager 嵌套垂直 ListView ": (context) {
+    ///对应文章解析 https://juejin.cn/post/7116267156655833102
+    return ContainerAsyncRouterPage(vp_list_demo_page.loadLibrary(), (context) {
+      return vp_list_demo_page.VPNestListView();
+    });
+  },
+  "垂直  ListView 嵌套垂直  ViewPager": (context) {
+    ///对应文章解析 https://juejin.cn/post/7116267156655833102
+    return ContainerAsyncRouterPage(vp_list_demo_page.loadLibrary(), (context) {
+      return vp_list_demo_page.ListViewNestVP();
+    });
+  },
+  "垂直  ListView 联动  ListView": (context) {
+    ///对应文章解析 https://juejin.cn/post/7116267156655833102
+    return ContainerAsyncRouterPage(vp_list_demo_page.loadLibrary(), (context) {
+      return vp_list_demo_page.ListViewLinkListView();
+    });
+  },
+  "3D 透视卡片": (context) {
+    ///对应文章解析  https://juejin.cn/post/7124064789763981326
+    return ContainerAsyncRouterPage(card_perspective_demo_page.loadLibrary(),
+            (context) {
+          return card_perspective_demo_page.CardPerspectiveDemoPage();
+        });
+  },
+  "3D 卡片旋转": (context) {
+    ///对应文章解析  https://juejin.cn/post/7124064789763981326
+    return ContainerAsyncRouterPage(card_3d_demo_page.loadLibrary(), (context) {
+      return card_3d_demo_page.Card3DDemoPage();
+    });
+  },
+  "硬核 3D 卡片旋转": (context) {
+    ///对应文章解析
+    return ContainerAsyncRouterPage(card_real_3d_demo_page.loadLibrary(),
+            (context) {
+          return card_real_3d_demo_page.CardReal3DDemoPage();
+        });
+  },
+  "3D Dash": (context) {
+    ///对应文章解析
+    return ContainerAsyncRouterPage(dash_3d_demo_page.loadLibrary(), (context) {
+      return dash_3d_demo_page.Dash3dDemoPage();
+    });
+  },
+  "展示 canvas transform": (context) {
+    ///对应文章解析
+    return ContainerAsyncRouterPage(transform_canvas_demo_page.loadLibrary(),
+            (context) {
+          return transform_canvas_demo_page.TransformCanvasDemoPage();
+        });
+  },
+  "rive 掘金 logo": (context) {
+    ///对应文章解析  https://juejin.cn/post/7126661045564735519
+    return ContainerAsyncRouterPage(anim_juejin_logo_demo_page.loadLibrary(),
+            (context) {
+          return anim_juejin_logo_demo_page.AnimJueJinLogoDemoPage();
+        });
+  },
+  "掘金 3d logo": (context) {
+    ///对应文章解析
+    return ContainerAsyncRouterPage(juejin_3d_logo_demo_page.loadLibrary(),
+            (context) {
+          return juejin_3d_logo_demo_page.JueJin3DLogoDemoPage();
+        });
+  },
+  "掘金更 3d logo": (context) {
+    ///对应文章解析
+    return ContainerAsyncRouterPage(juejin_3d_box_logo_demo_page.loadLibrary(),
+            (context) {
+          return juejin_3d_box_logo_demo_page.JueJin3DBoxLogoDemoPage();
+        });
+  },
+  "png shadow": (context) {
+    return ContainerAsyncRouterPage(png_shadow_demo_page.loadLibrary(),
+            (context) {
+          return png_shadow_demo_page.PngShadowDemoPage();
+        });
+  },
 };
-
 ```
 
-
-![](demo.jpg)
 
 
 ### 指定web地址而不是 localhost 的运行命令
@@ -481,10 +576,10 @@ flutter build web --web-renderer canvaskit 指定渲染模式
 
 ### 相关文章
 
-
+- ### [各种最新 Flutter 文章](https://juejin.im/user/582aca2ba22b9d006b59ae68/posts)
 - ### [Flutter 完整实战实战系列文章专栏](http://mp.weixin.qq.com/mp/homepage?__biz=Mzg3NTA3MDIxOA==&hid=2&sn=679ad0212470f5155c4412e678411374&scene=18#wechat_redirect)
 - ### [Flutter 番外的世界系列文章专栏](http://mp.weixin.qq.com/mp/homepage?__biz=Mzg3NTA3MDIxOA==&hid=3&sn=bf37119ae2b741a1c71125538bf0cd8d&scene=18#wechat_redirect)
-* ### [目前各种主流状态管理演示Demo](https://github.com/CarGuo/state_manager_demo)
+
 
 ----
 
