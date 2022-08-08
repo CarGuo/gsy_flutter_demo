@@ -514,20 +514,20 @@ Map<String, WidgetBuilder> routers = {
     });
   },
   "硬核 3D 卡片旋转": (context) {
-    ///对应文章解析
+    ///对应文章解析 https://juejin.cn/post/7129239231473385503
     return ContainerAsyncRouterPage(card_real_3d_demo_page.loadLibrary(),
             (context) {
           return card_real_3d_demo_page.CardReal3DDemoPage();
         });
   },
   "3D Dash": (context) {
-    ///对应文章解析
+    ///对应文章解析 https://juejin.cn/post/7129239231473385503
     return ContainerAsyncRouterPage(dash_3d_demo_page.loadLibrary(), (context) {
       return dash_3d_demo_page.Dash3dDemoPage();
     });
   },
   "展示 canvas transform": (context) {
-    ///对应文章解析
+    ///对应文章解析 https://juejin.cn/post/7129239231473385503
     return ContainerAsyncRouterPage(transform_canvas_demo_page.loadLibrary(),
             (context) {
           return transform_canvas_demo_page.TransformCanvasDemoPage();
@@ -541,14 +541,14 @@ Map<String, WidgetBuilder> routers = {
         });
   },
   "掘金 3d logo": (context) {
-    ///对应文章解析
+    ///对应文章解析 https://juejin.cn/post/7129239231473385503
     return ContainerAsyncRouterPage(juejin_3d_logo_demo_page.loadLibrary(),
             (context) {
           return juejin_3d_logo_demo_page.JueJin3DLogoDemoPage();
         });
   },
   "掘金更 3d logo": (context) {
-    ///对应文章解析
+    ///对应文章解析 https://juejin.cn/post/7129239231473385503
     return ContainerAsyncRouterPage(juejin_3d_box_logo_demo_page.loadLibrary(),
             (context) {
           return juejin_3d_box_logo_demo_page.JueJin3DBoxLogoDemoPage();
