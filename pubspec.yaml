@@ -122,7 +122,10 @@ dependencies:
   window_location_href: 1.0.0
   rive: 0.9.1
   zflutter:
-    path: ../zflutter/zflutter/
+    git:
+      url: https://github.com/CarGuo/zflutter.git
+      ref: fd242237657f8b98a70127a09d26661028fa9ed6
+      path: zflutter/
 
 
 dev_dependencies:
