@@ -32,35 +32,42 @@ class _RichTextDemoState2 extends State<RichTextDemoPage2> {
           )
         ],
       ),
-      body: new Container(
-        margin: EdgeInsets.all(10),
-        child: Builder(builder: (context) {
-          return Center(
-            child: Text.rich(TextSpan(
-              children: <InlineSpan>[
-                TextSpan(text: 'Flutter is'),
-                WidgetSpan(
-                    child: SizedBox(
-                  width: 120,
-                  height: 50,
-                  child: Card(
-                      color: Colors.blue,
-                      child: Center(child: Text('Hello World!'))),
-                )),
-                WidgetSpan(
-                    child: SizedBox(
-                  width: size > 0 ? size : 0,
-                  height: size > 0 ? size : 0,
-                  child: new Image.asset(
-                    "static/gsy_cat.png",
-                    fit: BoxFit.cover,
+      body: SelectionArea(
+        child: new Container(
+          margin: EdgeInsets.all(10),
+          child: Builder(builder: (context) {
+            return Center(
+              child: Text.rich(TextSpan(
+                children: <InlineSpan>[
+                  TextSpan(text: 'Flutter is'),
+                  WidgetSpan(
+                      child: SizedBox(
+                    width: 120,
+                    height: 50,
+                    child: Card(
+                        color: Colors.blue,
+                        child: Center(child: Text('Hello World!'))),
+                  )),
+                  WidgetSpan(
+                      child: SizedBox(
+                    width: size > 0 ? size : 0,
+                    height: size > 0 ? size : 0,
+                    child: new Image.asset(
+                      "static/gsy_cat.png",
+                      fit: BoxFit.cover,
+                    ),
+                  )),
+                  TextSpan(text: 'the best!'),
+                  WidgetSpan(
+                    child: SelectionContainer.disabled(
+                      child: Text(' not copy'),
+                    ),
                   ),
-                )),
-                TextSpan(text: 'the best!'),
-              ],
-            )),
-          );
-        }),
+                ],
+              )),
+            );
+          }),
+        ),
       ),
     );
   }
