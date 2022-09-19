@@ -22,6 +22,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "4.2.1"
+  animations:
+    dependency: "direct main"
+    description:
+      name: animations
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.0.4"
   another_transformer_page_view:
     dependency: "direct main"
     description:
@@ -354,13 +361,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.8.2"
-  pedantic:
-    dependency: transitive
-    description:
-      name: pedantic
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "1.11.1"
   pool:
     dependency: transitive
     description:
@@ -430,7 +430,7 @@ packages:
       name: simple_animations
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "3.1.1"
+    version: "5.0.0+2"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -479,7 +479,7 @@ packages:
     source: hosted
     version: "1.1.1"
   supercharged:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: supercharged
       url: "https://pub.flutter-io.cn"

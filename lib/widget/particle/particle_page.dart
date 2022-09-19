@@ -35,22 +35,22 @@ class ParticlePage extends StatelessWidget {
 class AnimatedBackground extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final tween = MultiTween<_ColorTween>()
-      ..add(
+    final tween = MovieTween()
+      ..tween(
         _ColorTween.color1,
         Color(0xffD38312).tweenTo(Colors.lightBlue.shade900),
-        3.seconds,
+        duration: 3.seconds,
       )
-      ..add(
+      ..tween(
         _ColorTween.color2,
         Color(0xffA83279).tweenTo(Colors.blue.shade600),
-        3.seconds,
+        duration: 3.seconds,
       );
 
-    return MirrorAnimation<MultiTweenValues<_ColorTween>>(
+    return MirrorAnimationBuilder<Movie>(
       tween: tween,
       duration: tween.duration,
-      builder: (context, child, value) {
+      builder: (context, value, child) {
         return Container(
           decoration: BoxDecoration(
               gradient: LinearGradient(

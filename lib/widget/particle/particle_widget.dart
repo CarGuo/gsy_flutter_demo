@@ -28,7 +28,8 @@ class _ParticlesWidgetState extends State<ParticlesWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return LoopAnimation(
+    return LoopAnimationBuilder(
+      duration: Duration(seconds: 1),
       tween: ConstantTween(1),
       builder: (context, child, dynamic _) {
         _simulateParticles();
