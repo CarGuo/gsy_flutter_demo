@@ -187,6 +187,9 @@ import 'package:gsy_flutter_demo/widget/juejin_3d_box_logo_demo_page.dart'
 import 'package:gsy_flutter_demo/widget/custom_shader_path_demo_page.dart'
     deferred as custom_shader_path_demo_page;
 
+import 'package:gsy_flutter_demo/widget/list_link_bottomsheet_demo_page.dart'
+    deferred as list_link_bottomsheet_demo_page;
+
 import 'package:window_location_href/window_location_href.dart';
 
 void main() => runApp(MyApp());
@@ -839,6 +842,12 @@ Map<String, WidgetBuilder> routers = {
     return ContainerAsyncRouterPage(custom_shader_path_demo_page.loadLibrary(),
         (context) {
       return custom_shader_path_demo_page.CustomShaderPathDemoPage();
+    });
+  },
+  "列表联动 BottomSheet 效果": (context) {
+    return ContainerAsyncRouterPage(
+        list_link_bottomsheet_demo_page.loadLibrary(), (context) {
+      return list_link_bottomsheet_demo_page.ListLinkBottomSheetDemoPage();
     });
   },
 };
