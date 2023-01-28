@@ -40,7 +40,7 @@ class DropSelectMenu extends DropSelectWidget {
       Key? key,
       this.maxMenuHeight,
       Curve? hideCurve,
-      this.switchStyle: DropSelectMenuSwitchStyle
+      this.switchStyle = DropSelectMenuSwitchStyle
           .animationShowUntilAnimationHideComplete,
       Curve? showCurve})
       : hideDuration = hideDuration ?? new Duration(milliseconds: 150),
@@ -214,7 +214,7 @@ class _DropSelectMenuState extends DropSelectState<DropSelectMenu>
     );
   }
 
-  TickerFuture onHide({bool dispatch: true}) {
+  TickerFuture onHide({bool dispatch = true}) {
     if (_activeIndex != null) {
       int index = _activeIndex!;
       _activeIndex = null;

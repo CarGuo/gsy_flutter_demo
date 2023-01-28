@@ -586,7 +586,7 @@ abstract class CodeInputBuilders {
     required BoxDecoration filledDecoration,
     required TextStyle emptyTextStyle,
     required TextStyle filledTextStyle,
-    Alignment alignment: Alignment.center,
+    Alignment alignment = Alignment.center,
   }) {
     return (bool hasFocus, String char, int index) => Container(
         width: totalSize.width,
@@ -636,7 +636,7 @@ abstract class CodeInputBuilders {
     required Border border,
     required Color color,
     required TextStyle textStyle,
-    Alignment alignment: Alignment.center,
+    Alignment alignment = Alignment.center,
   }) {
     final decoration = BoxDecoration(
       border: border,

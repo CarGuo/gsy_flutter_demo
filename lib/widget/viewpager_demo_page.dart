@@ -267,7 +267,7 @@ class ScaleAndFadeTransformer extends PageTransformer {
   final double _scale;
   final double _fade;
 
-  ScaleAndFadeTransformer({double fade: 0.3, double scale: 0.8})
+  ScaleAndFadeTransformer({double fade = 0.3, double scale = 0.8})
       : _fade = fade,
         _scale = scale;
 

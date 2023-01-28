@@ -22,7 +22,7 @@ class DropSelectHeader extends DropSelectWidget {
     DropSelectController? controller,
     this.onTap,
     Key? key,
-    this.height: 46.0,
+    this.height = 46.0,
     this.showTitle,
   })  : assert(titles.length > 0),
         super(key: key, controller: controller);

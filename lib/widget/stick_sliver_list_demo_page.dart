@@ -132,10 +132,10 @@ class _SliverExpandedListState extends State<SliverExpandedList> {
     if (render == null) {
       return;
     }
-    var position = Scrollable.of(context)!.position.pixels -
+    var position = Scrollable.of(context).position.pixels -
         render.constraints.scrollOffset;
     if (position >= 0) {
-      Scrollable.of(context)!.position.jumpTo(position);
+      Scrollable.of(context).position.jumpTo(position);
     }
   }
 

@@ -115,13 +115,13 @@ class _SliverHeaderItemState extends State<SliverHeaderItem>
 
     ///监听列表改变
     Future.delayed(Duration(seconds: 0), () {
-      Scrollable.of(context)!.position.addListener(scrollListener);
+      Scrollable.of(context).position.addListener(scrollListener);
     });
   }
 
   @override
   void deactivate() {
-    Scrollable.of(context)!.position.removeListener(scrollListener);
+    Scrollable.of(context).position.removeListener(scrollListener);
     super.deactivate();
   }
 
@@ -144,7 +144,7 @@ class _SliverHeaderItemState extends State<SliverHeaderItem>
             duration: const Duration(milliseconds: 10),
           ),
           builder: (context, shrinkOffset, overlapsContent) {
-            var state = Scrollable.of(context)!;
+            var state = Scrollable.of(context);
 
             ///整个 item 的大小
             var itemHeight = widget.headerHeight + widget.contentHeight;

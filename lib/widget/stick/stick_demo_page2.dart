@@ -85,7 +85,7 @@ class _ExpandChildListState extends State<ExpandChildList> {
     RenderBox renderBox = key.currentContext!.findRenderObject() as RenderBox;
     double dy = renderBox
         .localToGlobal(Offset.zero,
-            ancestor: Scrollable.of(context)!.context.findRenderObject())
+            ancestor: Scrollable.of(context).context.findRenderObject())
         .dy;
     return dy;
   }
@@ -94,13 +94,13 @@ class _ExpandChildListState extends State<ExpandChildList> {
   ///所以使用滚动和notifyListeners解决
   fixCloseState() {
     var y = getY(globalKey);
-    Scrollable.of(context)!.position.jumpTo(
-        math.max(0, Scrollable.of(context)!.position.pixels + y) - stickHeader);
+    Scrollable.of(context).position.jumpTo(
+        math.max(0, Scrollable.of(context).position.pixels + y) - stickHeader);
     widget.expendedModel.expended = false;
 
     ///必须延时到收起动画结束后再更新UI
     Future.delayed(Duration(milliseconds: animMilliseconds + 50), () {
-      Scrollable.of(context)!.position.notifyListeners();
+      Scrollable.of(context).position.notifyListeners();
     });
   }
 

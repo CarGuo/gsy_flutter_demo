@@ -132,7 +132,7 @@ class AngleTransformer extends PageTransformer {
   final double _radius;
   final double _horizontalOffset = 20;
 
-  AngleTransformer({double fade: 1, double radius = 140})
+  AngleTransformer({double fade = 1, double radius = 140})
       : _fade = fade,
         _radius = radius;
 

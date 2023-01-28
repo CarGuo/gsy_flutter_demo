@@ -13,7 +13,7 @@ class _FloatingTouchDemoPageState extends State<FloatingTouchDemoPage> {
 
   ///显示悬浮控件
   _showFloating() {
-    var overlayState = Overlay.of(context)!;
+    var overlayState = Overlay.of(context);
     OverlayEntry? overlayEntry;
     overlayEntry = new OverlayEntry(builder: (context) {
       return Stack(

@@ -61,7 +61,6 @@ class _AnimationPainter extends CustomPainter {
   final Paint _paint = new Paint();
 
   final ui.Image img;
-  static const double CIRCLE_ANGLE = 360;
 
   _AnimationPainter(this.img);
 

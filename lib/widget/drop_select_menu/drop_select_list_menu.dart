@@ -20,7 +20,7 @@ class DropSelectListMenu<T extends DropSelectObject> extends DropSelectWidget {
       {this.data,
       this.singleSelected = false,
       this.itemBuilder,
-      this.itemExtent: kDropSelectMenuItemHeight});
+      this.itemExtent = kDropSelectMenuItemHeight});
 
   @override
   DropSelectState<DropSelectWidget> createState() {
