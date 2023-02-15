@@ -190,6 +190,9 @@ import 'package:gsy_flutter_demo/widget/custom_shader_path_demo_page.dart'
 import 'package:gsy_flutter_demo/widget/list_link_bottomsheet_demo_page.dart'
     deferred as list_link_bottomsheet_demo_page;
 
+import 'package:gsy_flutter_demo/widget/demo_draggable_sheet_stick_page.dart'
+    deferred as demo_draggable_sheet_stick_page;
+
 import 'package:window_location_href/window_location_href.dart';
 
 void main() => runApp(MyApp());
@@ -850,6 +853,13 @@ Map<String, WidgetBuilder> routers = {
       return list_link_bottomsheet_demo_page.ListLinkBottomSheetDemoPage();
     });
   },
+  "DraggableSheet 的 stick 效果": (context) {
+    return ContainerAsyncRouterPage(
+        demo_draggable_sheet_stick_page.loadLibrary(), (context) {
+      return demo_draggable_sheet_stick_page.DemoDraggableSheetStickPage();
+    });
+  },
+
 };
 
 enum Cat {
