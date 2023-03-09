@@ -193,6 +193,9 @@ import 'package:gsy_flutter_demo/widget/list_link_bottomsheet_demo_page.dart'
 import 'package:gsy_flutter_demo/widget/demo_draggable_sheet_stick_page.dart'
     deferred as demo_draggable_sheet_stick_page;
 
+import 'package:gsy_flutter_demo/widget/async_to_sync_call_page.dart'
+    deferred as async_to_sync_call_page;
+
 import 'package:window_location_href/window_location_href.dart';
 
 void main() => runApp(MyApp());
@@ -859,7 +862,12 @@ Map<String, WidgetBuilder> routers = {
       return demo_draggable_sheet_stick_page.DemoDraggableSheetStickPage();
     });
   },
-
+  "异步调用的顺序执行": (context) {
+    return ContainerAsyncRouterPage(async_to_sync_call_page.loadLibrary(),
+        (context) {
+      return async_to_sync_call_page.AsyncToSyncCallPage();
+    });
+  },
 };
 
 enum Cat {
