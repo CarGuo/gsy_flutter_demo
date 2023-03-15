@@ -196,6 +196,9 @@ import 'package:gsy_flutter_demo/widget/demo_draggable_sheet_stick_page.dart'
 import 'package:gsy_flutter_demo/widget/async_to_sync_call_page.dart'
     deferred as async_to_sync_call_page;
 
+import 'package:gsy_flutter_demo/widget/star_bomb_button_page.dart'
+    deferred as star_bomb_button_page;
+
 import 'package:window_location_href/window_location_href.dart';
 
 void main() => runApp(MyApp());
@@ -866,6 +869,12 @@ Map<String, WidgetBuilder> routers = {
     return ContainerAsyncRouterPage(async_to_sync_call_page.loadLibrary(),
         (context) {
       return async_to_sync_call_page.AsyncToSyncCallPage();
+    });
+  },
+  "点击爆炸的五角星（ChatGPT 生成代码）": (context) {
+    return ContainerAsyncRouterPage(star_bomb_button_page.loadLibrary(),
+        (context) {
+      return star_bomb_button_page.StarBombButtonPage();
     });
   },
 };
