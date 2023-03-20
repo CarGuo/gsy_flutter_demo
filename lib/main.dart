@@ -199,6 +199,9 @@ import 'package:gsy_flutter_demo/widget/async_to_sync_call_page.dart'
 import 'package:gsy_flutter_demo/widget/star_bomb_button_page.dart'
     deferred as star_bomb_button_page;
 
+import 'package:gsy_flutter_demo/widget/photo_gallery_demo_page.dart'
+    deferred as photo_gallery_demo_page;
+
 import 'package:window_location_href/window_location_href.dart';
 
 void main() => runApp(MyApp());
@@ -877,6 +880,12 @@ Map<String, WidgetBuilder> routers = {
       return star_bomb_button_page.StarBombButtonPage();
     });
   },
+  "有趣画廊": (context) {
+    return ContainerAsyncRouterPage(photo_gallery_demo_page.loadLibrary(),
+        (context) {
+      return photo_gallery_demo_page.PhotoGalleryDemoPage();
+    });
+  }
 };
 
 enum Cat {
