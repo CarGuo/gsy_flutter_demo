@@ -40,6 +40,7 @@
 ### 已有例子
 
 ```dart
+
 Map<String, WidgetBuilder> routers = {
   "文本输入框简单的 Controller": (context) {
     return ContainerAsyncRouterPage(controller_demo_page.loadLibrary(),
@@ -560,6 +561,42 @@ Map<String, WidgetBuilder> routers = {
           return png_shadow_demo_page.PngShadowDemoPage();
         });
   },
+  "path 路径 png 效果": (context) {
+    return ContainerAsyncRouterPage(custom_shader_path_demo_page.loadLibrary(),
+            (context) {
+          return custom_shader_path_demo_page.CustomShaderPathDemoPage();
+        });
+  },
+  "列表联动 BottomSheet 效果": (context) {
+    return ContainerAsyncRouterPage(
+        list_link_bottomsheet_demo_page.loadLibrary(), (context) {
+      return list_link_bottomsheet_demo_page.ListLinkBottomSheetDemoPage();
+    });
+  },
+  "DraggableSheet 的 stick 效果": (context) {
+    return ContainerAsyncRouterPage(
+        demo_draggable_sheet_stick_page.loadLibrary(), (context) {
+      return demo_draggable_sheet_stick_page.DemoDraggableSheetStickPage();
+    });
+  },
+  "异步调用的顺序执行": (context) {
+    return ContainerAsyncRouterPage(async_to_sync_call_page.loadLibrary(),
+            (context) {
+          return async_to_sync_call_page.AsyncToSyncCallPage();
+        });
+  },
+  "点击爆炸的五角星（ChatGPT 生成代码）": (context) {
+    return ContainerAsyncRouterPage(star_bomb_button_page.loadLibrary(),
+            (context) {
+          return star_bomb_button_page.StarBombButtonPage();
+        });
+  },
+  "有趣画廊": (context) {
+    return ContainerAsyncRouterPage(photo_gallery_demo_page.loadLibrary(),
+            (context) {
+          return photo_gallery_demo_page.PhotoGalleryDemoPage();
+        });
+  }
 };
 ```
 
