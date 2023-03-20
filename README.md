@@ -18,6 +18,7 @@
 
 
 ### [Web 版在线测试](https://guoshuyu.cn/home/web/#/)
+### [APK 下载](https://github.com/CarGuo/gsy_flutter_demo/releases)
 
 > 目前开始逐步补全完善，主要提供一些有用或者有趣的例子，如果你也有好例子，环境提交 PR 。
 >
@@ -608,6 +609,9 @@ Map<String, WidgetBuilder> routers = {
 flutter run -d web-server --web-hostname 127.0.0.1 --web-port 8989
 
 flutter build web --web-renderer canvaskit 指定渲染模式
+flutter build web --release --web-renderer html 
+
+cp -r ./build/app/intermediates/flutter/release/flutter_assets/ ./build/web/assets
 
 ```
 
