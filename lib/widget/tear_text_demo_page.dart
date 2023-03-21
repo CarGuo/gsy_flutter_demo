@@ -167,6 +167,7 @@ class _TearingTextState extends State<TearingText> {
     var clipper = RandomTearingClipper(tear);
     return Stack(
       children: [
+        if (!tear)
         renderMainText(clipper),
         if (tear && status) renderTearText1(clipper),
         if (tear && !status) renderTearText2(clipper),
