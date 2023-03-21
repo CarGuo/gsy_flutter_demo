@@ -419,6 +419,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.8.2"
+  polygon:
+    dependency: "direct main"
+    description:
+      name: polygon
+      sha256: "9ebff01019574fb77662c5c9a9fa13df63176e9da6850dc594858a3dc0ac53ea"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.1.0"
   pool:
     dependency: transitive
     description:

@@ -202,6 +202,9 @@ import 'package:gsy_flutter_demo/widget/star_bomb_button_page.dart'
 import 'package:gsy_flutter_demo/widget/photo_gallery_demo_page.dart'
     deferred as photo_gallery_demo_page;
 
+import 'package:gsy_flutter_demo/widget/tear_text_demo_page.dart'
+    deferred as tear_text_demo_page;
+
 import 'package:window_location_href/window_location_href.dart';
 
 void main() => runApp(MyApp());
@@ -884,6 +887,12 @@ Map<String, WidgetBuilder> routers = {
     return ContainerAsyncRouterPage(photo_gallery_demo_page.loadLibrary(),
         (context) {
       return photo_gallery_demo_page.PhotoGalleryDemoPage();
+    });
+  },
+  "有趣的文本撕裂动画": (context) {
+    return ContainerAsyncRouterPage(tear_text_demo_page.loadLibrary(),
+        (context) {
+      return tear_text_demo_page.TearTextDemoPage();
     });
   }
 };
