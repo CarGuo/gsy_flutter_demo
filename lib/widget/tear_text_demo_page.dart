@@ -60,7 +60,7 @@ class _TearingTextState extends State<TearingText> {
     tear = count % 2 == 0;
     if (tear == true) {
       setState(() {});
-      Future.delayed(Duration(milliseconds: 200), () {
+      Future.delayed(Duration(milliseconds: 300), () {
         setState(() {
           tear = false;
         });
@@ -78,8 +78,20 @@ class _TearingTextState extends State<TearingText> {
             fontWeight: FontWeight.bold,
             foreground: Paint()
               ..style = PaintingStyle.fill
-              ..strokeWidth = 10
+              ..strokeWidth = 5
               ..color = Colors.white,
+            shadows: [
+              Shadow(
+                blurRadius: 10,
+                color: Colors.white,
+                offset: Offset(0, 0),
+              ),
+              Shadow(
+                blurRadius: 20,
+                color: Colors.white30,
+                offset: Offset(0, 0),
+              ),
+            ],
           ),
         ),
       ),
@@ -96,32 +108,37 @@ class _TearingTextState extends State<TearingText> {
           stops: [0.0, 0.5, 1.0],
         ).createShader(bounds);
       },
-      child: ClipPath(
-        child: Align(
-          child: Text(
-            widget.text,
-            style: TextStyle(
-              fontSize: 48,
-              foreground: Paint()
-                ..style = PaintingStyle.stroke
-                ..strokeWidth = 5
-                ..color = Colors.white30,
-              shadows: [
-                Shadow(
-                  blurRadius: 10,
-                  color: Colors.white30,
-                  offset: Offset(0, 0),
-                ),
-                Shadow(
-                  blurRadius: 30,
-                  color: Colors.white30,
-                  offset: Offset(0, 0),
-                ),
-              ],
+      child: Padding(
+        padding: EdgeInsets.only(
+            top: Random().nextInt(30).toDouble(),
+            left: Random().nextInt(25).toDouble()),
+        child: ClipPath(
+          child: Align(
+            child: Text(
+              widget.text,
+              style: TextStyle(
+                fontSize: 48,
+                foreground: Paint()
+                  ..style = PaintingStyle.stroke
+                  ..strokeWidth = 5
+                  ..color = Colors.white30,
+                shadows: [
+                  Shadow(
+                    blurRadius: 10,
+                    color: Colors.white30,
+                    offset: Offset(0, 0),
+                  ),
+                  Shadow(
+                    blurRadius: 30,
+                    color: Colors.white30,
+                    offset: Offset(0, 0),
+                  ),
+                ],
+              ),
             ),
           ),
+          clipper: clipper,
         ),
-        clipper: clipper,
       ),
     );
   }
@@ -131,7 +148,7 @@ class _TearingTextState extends State<TearingText> {
       child: Container(
         alignment: Alignment.center,
         margin: EdgeInsets.only(
-            top: Random().nextInt(10).toDouble(),
+            bottom: Random().nextInt(30).toDouble(),
             left: Random().nextInt(20).toDouble()),
         child: Text(
           widget.text,
@@ -164,13 +181,11 @@ class _TearingTextState extends State<TearingText> {
   @override
   Widget build(BuildContext context) {
     var status = Random().nextBool();
-    var clipper = RandomTearingClipper(tear);
     return Stack(
       children: [
-        if (!tear)
-        renderMainText(clipper),
-        if (tear && status) renderTearText1(clipper),
-        if (tear && !status) renderTearText2(clipper),
+        if (!tear) renderMainText(RandomTearingClipper(tear)),
+        if (tear && status) renderTearText1(RandomTearingClipper(tear)),
+        if (tear && !status) renderTearText2(RandomTearingClipper(tear)),
       ],
     );
   }
