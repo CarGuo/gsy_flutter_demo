@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:polygon/polygon.dart';
 
 ///类似 https://codepen.io/mattgrosswork/pen/VwprebG
+///内容 讲解 https://juejin.cn/post/7214858677173289017
 class TearTextDemoPage extends StatelessWidget {
   const TearTextDemoPage({Key? key}) : super(key: key);
 
