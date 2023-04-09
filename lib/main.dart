@@ -296,7 +296,7 @@ class _MyHomePageState extends State<MyHomePage> {
 class ContainerAsyncRouterPage extends StatelessWidget {
   final Future libraryFuture;
 
-  ///不能直接传widget，因为 release 打包时 dart2js 优化会导致时许不对
+  ///不能直接传widget，因为 release 打包时 dart2js 优化会导致时序不对
   ///稍后更新文章到掘金
   final WidgetBuilder child;
 
