@@ -205,6 +205,9 @@ import 'package:gsy_flutter_demo/widget/photo_gallery_demo_page.dart'
 import 'package:gsy_flutter_demo/widget/tear_text_demo_page.dart'
     deferred as tear_text_demo_page;
 
+import 'package:gsy_flutter_demo/widget/un_bounded_listview.dart'
+    deferred as un_bounded_listview;
+
 import 'package:window_location_href/window_location_href.dart';
 
 void main() => runApp(MyApp());
@@ -894,7 +897,14 @@ Map<String, WidgetBuilder> routers = {
         (context) {
       return tear_text_demo_page.TearTextDemoPage();
     });
-  }
+  },
+  "自适应横竖列表": (context) {
+    return ContainerAsyncRouterPage(un_bounded_listview.loadLibrary(),
+            (context) {
+          return un_bounded_listview.UnboundedListViewDemoPage();
+        });
+  },
+
 };
 
 enum Cat {
