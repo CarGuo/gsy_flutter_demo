@@ -9,7 +9,8 @@ class UnboundedListViewDemoPage extends StatefulWidget {
   const UnboundedListViewDemoPage({Key? key}) : super(key: key);
 
   @override
-  State<UnboundedListViewDemoPage> createState() => _UnboundedListViewDemoPageState();
+  State<UnboundedListViewDemoPage> createState() =>
+      _UnboundedListViewDemoPageState();
 }
 
 class _UnboundedListViewDemoPageState extends State<UnboundedListViewDemoPage> {
@@ -50,7 +51,7 @@ class _UnboundedListViewDemoPageState extends State<UnboundedListViewDemoPage> {
                         alignment: Alignment.bottomCenter,
                         color: Colors.blue,
                         child: Text(List.generate(
-                            math.Random().nextInt(10), (index) => "TEST\n")
+                                math.Random().nextInt(10), (index) => "TEST\n")
                             .toString()),
                       ),
                     );
@@ -134,11 +135,11 @@ mixin UnboundedListViewMixin on ListView {
 
   @protected
   Widget buildViewport(
-      BuildContext context,
-      ViewportOffset offset,
-      AxisDirection axisDirection,
-      List<Widget> slivers,
-      ) {
+    BuildContext context,
+    ViewportOffset offset,
+    AxisDirection axisDirection,
+    List<Widget> slivers,
+  ) {
     // TODO: support shrinkWrap
 //    if (shrinkWrap) {
 //      return UnboundedShrinkWrappingViewport(
@@ -164,9 +165,9 @@ mixin UnboundedListViewMixin on ListView {
       if (mediaQuery != null) {
         // Automatically pad sliver with padding from MediaQuery.
         final EdgeInsets mediaQueryHorizontalPadding =
-        mediaQuery.padding.copyWith(top: 0.0, bottom: 0.0);
+            mediaQuery.padding.copyWith(top: 0.0, bottom: 0.0);
         final EdgeInsets mediaQueryVerticalPadding =
-        mediaQuery.padding.copyWith(left: 0.0, right: 0.0);
+            mediaQuery.padding.copyWith(left: 0.0, right: 0.0);
         // Consume the main axis padding with SliverPadding.
         effectivePadding = scrollDirection == Axis.vertical
             ? mediaQueryVerticalPadding
@@ -214,7 +215,7 @@ mixin UnboundedRenderSliverPaddingMixin on RenderSliverPadding {
     }
 
     UnboundedSliverGeometry childGeometry =
-    child!.geometry! as UnboundedSliverGeometry;
+        child!.geometry! as UnboundedSliverGeometry;
     geometry = UnboundedSliverGeometry(
         existing: geometry,
         crossAxisSize: childGeometry.crossAxisSize + padding.vertical);
@@ -226,7 +227,7 @@ mixin UnboundedSliverListMixin on SliverList {
   @override
   RenderSliverList createRenderObject(BuildContext context) {
     final SliverMultiBoxAdaptorElement element =
-    context as SliverMultiBoxAdaptorElement;
+        context as SliverMultiBoxAdaptorElement;
     return UnboundedRenderSliverList(childManager: element);
   }
 }
@@ -346,15 +347,15 @@ class UnboundedRenderSliverList extends RenderSliverList {
     // Find the last child that is at or before the scrollOffset.
     earliestUsefulChild = firstChild;
     for (double earliestScrollOffset = childScrollOffset(earliestUsefulChild!)!;
-    earliestScrollOffset > scrollOffset;
-    earliestScrollOffset = childScrollOffset(earliestUsefulChild)!) {
+        earliestScrollOffset > scrollOffset;
+        earliestScrollOffset = childScrollOffset(earliestUsefulChild)!) {
       // We have to add children before the earliestUsefulChild.
       earliestUsefulChild =
           insertAndLayoutLeadingChild(childConstraints, parentUsesSize: true);
       updateUnboundedSize(earliestUsefulChild);
       if (earliestUsefulChild == null) {
         final SliverMultiBoxAdaptorParentData childParentData =
-        firstChild!.parentData! as SliverMultiBoxAdaptorParentData;
+            firstChild!.parentData! as SliverMultiBoxAdaptorParentData;
         childParentData.layoutOffset = 0.0;
 
         if (scrollOffset == 0.0) {
@@ -388,13 +389,13 @@ class UnboundedRenderSliverList extends RenderSliverList {
           scrollOffsetCorrection: -firstChildScrollOffset,
         ));
         final SliverMultiBoxAdaptorParentData childParentData =
-        firstChild!.parentData! as SliverMultiBoxAdaptorParentData;
+            firstChild!.parentData! as SliverMultiBoxAdaptorParentData;
         childParentData.layoutOffset = 0.0;
         return;
       }
 
       final SliverMultiBoxAdaptorParentData childParentData =
-      earliestUsefulChild.parentData! as SliverMultiBoxAdaptorParentData;
+          earliestUsefulChild.parentData! as SliverMultiBoxAdaptorParentData;
       childParentData.layoutOffset = firstChildScrollOffset;
       assert(earliestUsefulChild == firstChild);
       leadingChildWithLayout = earliestUsefulChild;
@@ -420,7 +421,7 @@ class UnboundedRenderSliverList extends RenderSliverList {
         final double firstChildScrollOffset =
             earliestScrollOffset - paintExtentOf(firstChild!);
         final SliverMultiBoxAdaptorParentData childParentData =
-        firstChild!.parentData! as SliverMultiBoxAdaptorParentData;
+            firstChild!.parentData! as SliverMultiBoxAdaptorParentData;
         childParentData.layoutOffset = 0.0;
         // We only need to correct if the leading child actually has a
         // paint extent.
@@ -490,7 +491,7 @@ class UnboundedRenderSliverList extends RenderSliverList {
       }
       assert(child != null);
       final SliverMultiBoxAdaptorParentData childParentData =
-      child!.parentData! as SliverMultiBoxAdaptorParentData;
+          child!.parentData! as SliverMultiBoxAdaptorParentData;
       childParentData.layoutOffset = endScrollOffset;
       assert(childParentData.index == index);
       endScrollOffset = childScrollOffset(child!)! + paintExtentOf(child!);
@@ -613,8 +614,6 @@ mixin UnboundedViewportMixin on Viewport {
 class UnboundedRenderViewport = RenderViewport
     with UnboundedRenderViewportMixin;
 mixin UnboundedRenderViewportMixin on RenderViewport {
-
-
   double unboundedSize = 0;
 
   @override
@@ -647,70 +646,70 @@ mixin UnboundedRenderViewportMixin on RenderViewport {
 
   @override
   double layoutChildSequence({
-  required RenderSliver? child,
-  required double scrollOffset,
-  required double overlap,
-  required double layoutOffset,
-  required double remainingPaintExtent,
-  required double mainAxisExtent,
-  required double crossAxisExtent,
-  required GrowthDirection growthDirection,
-  required RenderSliver? advance(RenderSliver child),
-  required double remainingCacheExtent,
-  required double cacheOrigin,
-}) {
-crossAxisExtent = _unboundedSize;
-var firstChild = child;
+    required RenderSliver? child,
+    required double scrollOffset,
+    required double overlap,
+    required double layoutOffset,
+    required double remainingPaintExtent,
+    required double mainAxisExtent,
+    required double crossAxisExtent,
+    required GrowthDirection growthDirection,
+    required RenderSliver? advance(RenderSliver child),
+    required double remainingCacheExtent,
+    required double cacheOrigin,
+  }) {
+    crossAxisExtent = _unboundedSize;
+    var firstChild = child;
 
-final result = super.layoutChildSequence(
-child: child,
-scrollOffset: scrollOffset,
-overlap: overlap,
-layoutOffset: layoutOffset,
-remainingPaintExtent: remainingPaintExtent,
-mainAxisExtent: mainAxisExtent,
-crossAxisExtent: crossAxisExtent,
-growthDirection: growthDirection,
-advance: advance,
-remainingCacheExtent: remainingCacheExtent,
-cacheOrigin: cacheOrigin,
-);
+    final result = super.layoutChildSequence(
+      child: child,
+      scrollOffset: scrollOffset,
+      overlap: overlap,
+      layoutOffset: layoutOffset,
+      remainingPaintExtent: remainingPaintExtent,
+      mainAxisExtent: mainAxisExtent,
+      crossAxisExtent: crossAxisExtent,
+      growthDirection: growthDirection,
+      advance: advance,
+      remainingCacheExtent: remainingCacheExtent,
+      cacheOrigin: cacheOrigin,
+    );
 
-while (firstChild != null) {
-if (firstChild.geometry is UnboundedSliverGeometry) {
-final UnboundedSliverGeometry childGeometry =
-firstChild.geometry as UnboundedSliverGeometry;
-unboundedSize = math.max(unboundedSize, childGeometry.crossAxisSize);
-}
-firstChild = advance(firstChild);
-}
-if (axis == Axis.horizontal) {
-size = Size(size.width, unboundedSize);
-} else {
-size = Size(unboundedSize, size.height);
-}
+    while (firstChild != null) {
+      if (firstChild.geometry is UnboundedSliverGeometry) {
+        final UnboundedSliverGeometry childGeometry =
+            firstChild.geometry as UnboundedSliverGeometry;
+        unboundedSize = math.max(unboundedSize, childGeometry.crossAxisSize);
+      }
+      firstChild = advance(firstChild);
+    }
+    if (axis == Axis.horizontal) {
+      size = Size(size.width, unboundedSize);
+    } else {
+      size = Size(unboundedSize, size.height);
+    }
 
-return result;
-}
+    return result;
+  }
 }
 
 class UnboundedSliverGeometry extends SliverGeometry {
   UnboundedSliverGeometry(
       {SliverGeometry? existing, required this.crossAxisSize})
       : super(
-    scrollExtent: existing?.scrollExtent ?? 0.0,
-    paintExtent: existing?.paintExtent ?? 0.0,
-    paintOrigin: existing?.paintOrigin ?? 0.0,
-    layoutExtent: existing?.layoutExtent,
-    maxPaintExtent: existing?.maxPaintExtent ?? 0.0,
-    maxScrollObstructionExtent:
-    existing?.maxScrollObstructionExtent ?? 0.0,
-    hitTestExtent: existing?.hitTestExtent,
-    visible: existing?.visible,
-    hasVisualOverflow: existing?.hasVisualOverflow ?? false,
-    scrollOffsetCorrection: existing?.scrollOffsetCorrection,
-    cacheExtent: existing?.cacheExtent,
-  );
+          scrollExtent: existing?.scrollExtent ?? 0.0,
+          paintExtent: existing?.paintExtent ?? 0.0,
+          paintOrigin: existing?.paintOrigin ?? 0.0,
+          layoutExtent: existing?.layoutExtent,
+          maxPaintExtent: existing?.maxPaintExtent ?? 0.0,
+          maxScrollObstructionExtent:
+              existing?.maxScrollObstructionExtent ?? 0.0,
+          hitTestExtent: existing?.hitTestExtent,
+          visible: existing?.visible,
+          hasVisualOverflow: existing?.hasVisualOverflow ?? false,
+          scrollOffsetCorrection: existing?.scrollOffsetCorrection,
+          cacheExtent: existing?.cacheExtent,
+        );
 
   final double crossAxisSize;
 }
