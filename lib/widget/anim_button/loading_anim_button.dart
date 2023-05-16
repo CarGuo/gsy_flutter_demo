@@ -136,66 +136,83 @@ class LoadingButtonPainter extends CustomPainter {
   void draw(Canvas canvas) {
     switch (currentState) {
       case LoadingState.STATE_PRE:
-        if (fraction <= 0.4) {
-          canvas.drawCircle(Offset(centerX, centerY), circleRadius, bgPainter);
-          canvas.drawLine(Offset(centerX - baseLength, centerY),
-              Offset(centerX, centerY + baseLength), painter);
-          canvas.drawLine(Offset(centerX, centerY + baseLength),
-              Offset(centerX + baseLength, centerY), painter);
-          canvas.drawLine(
-              Offset(centerX,
-                  centerY + baseLength - 1.3 * baseLength / 0.4 * fraction),
-              Offset(
-                  centerX,
-                  centerY -
-                      1.6 * baseLength +
-                      1.3 * baseLength / 0.4 * fraction),
-              painter);
-        } else if (fraction <= 0.6) {
-          canvas.drawCircle(Offset(centerX, centerY), circleRadius, bgPainter);
-          canvas.drawCircle(
-              Offset(centerX, centerY - 0.3 * baseLength), 2, painter);
-          canvas.drawLine(
-              Offset(
-                  centerX -
-                      baseLength -
-                      baseLength * 1.2 / 0.2 * (fraction - 0.4),
-                  centerY),
-              Offset(centerX,
-                  centerY + baseLength - baseLength / 0.2 * (fraction - 0.4)),
-              painter);
-          canvas.drawLine(
-              Offset(centerX,
-                  centerY + baseLength - baseLength / 0.2 * (fraction - 0.4)),
-              Offset(
-                  centerX +
-                      baseLength +
-                      baseLength * 1.2 / 0.2 * (fraction - 0.4),
-                  centerY),
-              painter);
-        } else if (fraction <= 1) {
-          canvas.drawCircle(Offset(centerX, centerY), circleRadius, bgPainter);
-          canvas.drawCircle(
-              Offset(
-                  centerX,
-                  centerY -
-                      0.3 * baseLength -
-                      (circleRadius - 0.3 * baseLength) /
-                          0.4 *
-                          (fraction - 0.6)),
-              2,
-              painter);
-          canvas.drawLine(Offset(centerX - baseLength * 2.2, centerY),
-              Offset(centerX + baseLength * 2.2, centerY), painter);
-        } else {
-          canvas.drawCircle(Offset(centerX, centerY), circleRadius, bgPainter);
-          canvas.drawCircle(
-              Offset(centerX,
-                  centerY - circleRadius - baseLength * 3 * (fraction - 1)),
-              3,
-              painter);
-          canvas.drawLine(Offset(centerX - baseLength * 2.2, centerY),
-              Offset(centerX + baseLength * 2.2, centerY), painter);
+        switch (fraction) {
+          case <= 0.4:
+            canvas.drawCircle(
+                Offset(centerX, centerY), circleRadius, bgPainter);
+            canvas.drawLine(Offset(centerX - baseLength, centerY),
+                Offset(centerX, centerY + baseLength), painter);
+            canvas.drawLine(Offset(centerX, centerY + baseLength),
+                Offset(centerX + baseLength, centerY), painter);
+            canvas.drawLine(
+                Offset(centerX,
+                    centerY + baseLength - 1.3 * baseLength / 0.4 * fraction),
+                Offset(
+                    centerX,
+                    centerY -
+                        1.6 * baseLength +
+                        1.3 * baseLength / 0.4 * fraction),
+                painter);
+            break;
+
+          case <= 0.6:
+            {
+              canvas.drawCircle(
+                  Offset(centerX, centerY), circleRadius, bgPainter);
+              canvas.drawCircle(
+                  Offset(centerX, centerY - 0.3 * baseLength), 2, painter);
+              canvas.drawLine(
+                  Offset(
+                      centerX -
+                          baseLength -
+                          baseLength * 1.2 / 0.2 * (fraction - 0.4),
+                      centerY),
+                  Offset(
+                      centerX,
+                      centerY +
+                          baseLength -
+                          baseLength / 0.2 * (fraction - 0.4)),
+                  painter);
+              canvas.drawLine(
+                  Offset(
+                      centerX,
+                      centerY +
+                          baseLength -
+                          baseLength / 0.2 * (fraction - 0.4)),
+                  Offset(
+                      centerX +
+                          baseLength +
+                          baseLength * 1.2 / 0.2 * (fraction - 0.4),
+                      centerY),
+                  painter);
+              break;
+            }
+          case <= 1:
+            canvas.drawCircle(
+                Offset(centerX, centerY), circleRadius, bgPainter);
+            canvas.drawCircle(
+                Offset(
+                    centerX,
+                    centerY -
+                        0.3 * baseLength -
+                        (circleRadius - 0.3 * baseLength) /
+                            0.4 *
+                            (fraction - 0.6)),
+                2,
+                painter);
+            canvas.drawLine(Offset(centerX - baseLength * 2.2, centerY),
+                Offset(centerX + baseLength * 2.2, centerY), painter);
+            break;
+          case _:
+            canvas.drawCircle(
+                Offset(centerX, centerY), circleRadius, bgPainter);
+            canvas.drawCircle(
+                Offset(centerX,
+                    centerY - circleRadius - baseLength * 3 * (fraction - 1)),
+                3,
+                painter);
+            canvas.drawLine(Offset(centerX - baseLength * 2.2, centerY),
+                Offset(centerX + baseLength * 2.2, centerY), painter);
         }
         break;
       case LoadingState.STATE_DOWNLOADING:
