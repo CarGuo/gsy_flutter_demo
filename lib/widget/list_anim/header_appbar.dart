@@ -8,8 +8,10 @@ class HeaderAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double statusBarHeight =
-        MediaQueryData.fromWindow(WidgetsBinding.instance.window).padding.top;
+    double statusBarHeight = MediaQueryData.fromView(
+            WidgetsBinding.instance.platformDispatcher.views.first)
+        .padding
+        .top;
 
     double reactHeight = 30;
 

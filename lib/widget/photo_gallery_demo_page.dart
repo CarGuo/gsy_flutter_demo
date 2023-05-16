@@ -345,7 +345,6 @@ class _AnimatedCutoutOverlay extends StatelessWidget {
       cutoutSize.width * (1 - scaleAmt * anim * swipeDir.dx.abs()),
       cutoutSize.height * (1 - scaleAmt * anim * swipeDir.dy.abs()),
     );
-    print("### anim ${anim}   ");
     return ClipPath(clipper: _CutoutClipper(size), child: child);
   }
 }

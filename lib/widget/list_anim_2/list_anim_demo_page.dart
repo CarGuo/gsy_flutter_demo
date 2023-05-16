@@ -27,12 +27,14 @@ class _ListAnimDemoPageState2 extends State<ListAnimDemoPage2> {
   ///头部信息框高度
   double headerRectHeight = 60;
 
-
   ///头部区域
   _buildHeader() {
     ///状态栏高度
-    double statusBarHeight =
-        MediaQueryData.fromWindow(WidgetsBinding.instance.window).padding.top;
+    double statusBarHeight = MediaQueryData.fromView(
+            WidgetsBinding.instance.platformDispatcher.views.first)
+        .padding
+        .top;
+
     ///头部区域去除marin、appbar、状态栏之后的高度
     double dynamicValue =
         headerHeight - headerRectMargin - kToolbarHeight - statusBarHeight;

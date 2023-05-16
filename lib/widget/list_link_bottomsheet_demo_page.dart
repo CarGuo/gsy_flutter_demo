@@ -177,7 +177,8 @@ class _ListLinkBottomSheetDemoPageState
           key: btKey,
           controller: _btController,
           maxHeight: MediaQuery.of(context).size.height -
-              MediaQueryData.fromWindow(WidgetsBinding.instance.window)
+              MediaQueryData.fromView(
+                      WidgetsBinding.instance.platformDispatcher.views.first)
                   .padding
                   .top -
               kToolbarHeight -

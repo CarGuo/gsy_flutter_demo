@@ -900,11 +900,10 @@ Map<String, WidgetBuilder> routers = {
   },
   "自适应横竖列表": (context) {
     return ContainerAsyncRouterPage(un_bounded_listview.loadLibrary(),
-            (context) {
-          return un_bounded_listview.UnboundedListViewDemoPage();
-        });
+        (context) {
+      return un_bounded_listview.UnboundedListViewDemoPage();
+    });
   },
-
 };
 
 enum Cat {

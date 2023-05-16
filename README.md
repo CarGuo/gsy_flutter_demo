@@ -22,7 +22,7 @@
 
 > 目前开始逐步补全完善，主要提供一些有用或者有趣的例子，如果你也有好例子，环境提交 PR 。
 >
-> **运行须知：配置好Flutter开发环境(目前Flutter SDK 版本 *3.7* 以上版本)。**
+> **运行须知：配置好Flutter开发环境(目前Flutter SDK 版本 *3.10* 以上版本)。**
 >
 > **[如果克隆太慢或者图片看不到，可尝试从码云地址下载](https://gitee.com/CarGuo/GSYFlutterDemo)**
 
@@ -597,8 +597,21 @@ Map<String, WidgetBuilder> routers = {
             (context) {
           return photo_gallery_demo_page.PhotoGalleryDemoPage();
         });
-  }
+  },
+  "有趣的文本撕裂动画": (context) {
+    return ContainerAsyncRouterPage(tear_text_demo_page.loadLibrary(),
+            (context) {
+          return tear_text_demo_page.TearTextDemoPage();
+        });
+  },
+  "自适应横竖列表": (context) {
+    return ContainerAsyncRouterPage(un_bounded_listview.loadLibrary(),
+            (context) {
+          return un_bounded_listview.UnboundedListViewDemoPage();
+        });
+  },
 };
+
 ```
 
 
