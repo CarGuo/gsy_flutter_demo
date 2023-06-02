@@ -105,8 +105,8 @@ class BubbleDemoPage extends StatelessWidget {
         title: new Text("BubbleDemoPage"),
       ),
       body: Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.sizeOf(context).width,
+        height: MediaQuery.sizeOf(context).height,
         margin: EdgeInsets.all(15),
         child: new Stack(
           key: contentKey,
@@ -148,7 +148,7 @@ class BubbleDemoPage extends StatelessWidget {
                   },
                   color: Colors.greenAccent,
                 ),
-                left: MediaQuery.of(context).size.width / 2),
+                left: MediaQuery.sizeOf(context).width / 2),
             new Positioned(
               child: new MaterialButton(
                 key: button3Key,
@@ -168,8 +168,8 @@ class BubbleDemoPage extends StatelessWidget {
                 },
                 color: Colors.yellow,
               ),
-              left: MediaQuery.of(context).size.width / 5,
-              top: MediaQuery.of(context).size.height / 4 * 3,
+              left: MediaQuery.sizeOf(context).width / 5,
+              top: MediaQuery.sizeOf(context).height / 4 * 3,
             ),
             new Positioned(
               child: new MaterialButton(
@@ -190,10 +190,10 @@ class BubbleDemoPage extends StatelessWidget {
                 },
                 color: Colors.redAccent,
               ),
-              left: MediaQuery.of(context).size.width / 2 -
+              left: MediaQuery.sizeOf(context).width / 2 -
                   Theme.of(context).buttonTheme.minWidth / 2,
-              top: MediaQuery.of(context).size.height / 2 -
-                  MediaQuery.of(context).padding.top -
+              top: MediaQuery.sizeOf(context).height / 2 -
+                  MediaQuery.paddingOf(context).top -
                   kToolbarHeight,
             ),
           ],

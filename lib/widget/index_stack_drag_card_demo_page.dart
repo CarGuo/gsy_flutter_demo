@@ -92,10 +92,10 @@ class IndexStackDragCardDemoPageState
 
                 ///往下斜着拖
                 if (drag.offset.dx.abs() >
-                        MediaQuery.of(context).size.width / 2 ||
-                    drag.offset.dx < -MediaQuery.of(context).size.width / 4 ||
+                        MediaQuery.sizeOf(context).width / 2 ||
+                    drag.offset.dx < -MediaQuery.sizeOf(context).width / 4 ||
                     drag.offset.dy.abs() >
-                        MediaQuery.of(context).size.height / 2) {
+                        MediaQuery.sizeOf(context).height / 2) {
                   removeThis(i);
                 }
               },

@@ -50,7 +50,7 @@ class HeaderAppBar2 extends StatelessWidget {
                 child: showStickItem
                     ? Container(
                         alignment: Alignment.centerLeft,
-                        width: MediaQuery.of(context).size.width,
+                        width: MediaQuery.sizeOf(context).width,
                         height: reactHeight,
                         key: ValueKey("stickItem"),
                         color: Colors.amber,

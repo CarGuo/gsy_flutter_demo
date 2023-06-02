@@ -64,7 +64,7 @@ class _BubbleTipWidgetState extends State<BubbleTipWidget>
 
     double? x = widget.x;
     double? y = widget.y;
-    Size size = MediaQuery.of(context).size;
+    Size size = MediaQuery.sizeOf(context);
 
     ///计算出位置的中心点
     if (widget.arrowLocation == ArrowLocation.BOTTOM ||

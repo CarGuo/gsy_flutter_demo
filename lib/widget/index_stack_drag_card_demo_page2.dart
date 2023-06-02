@@ -171,7 +171,7 @@ class _DraggableCardState extends State<DraggableCard>
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    final size = MediaQuery.sizeOf(context);
     return GestureDetector(
       onPanDown: (details) {
         _controller.stop();
@@ -181,9 +181,9 @@ class _DraggableCardState extends State<DraggableCard>
 
         ///往下斜着拖
         if ((details.localPosition.dx.abs() >
-                    MediaQuery.of(context).size.width / 3 * 2 ||
+                    MediaQuery.sizeOf(context).width / 3 * 2 ||
                 details.localPosition.dx <= 20) &&
-            details.localPosition.dy > MediaQuery.of(context).size.height / 2) {
+            details.localPosition.dy > MediaQuery.sizeOf(context).height / 2) {
           remove = true;
         } else {
           remove = false;

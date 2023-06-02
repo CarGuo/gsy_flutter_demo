@@ -47,13 +47,13 @@ class TestCustomPainter extends CustomPainter {
 
   TestCustomPainter(BuildContext context, this.notifier)
       : super(repaint: notifier) {
-    var _ = MediaQuery.of(context).size.shortestSide / 40;
+    var _ = MediaQuery.sizeOf(context).shortestSide / 40;
     shapesPaint.strokeWidth = _;
     shapesPaint.style = PaintingStyle.stroke;
     ui.ParagraphBuilder builder = ui.ParagraphBuilder(ui.ParagraphStyle(
       textAlign: TextAlign.center,
       fontSize: Theme.of(context).textTheme.displaySmall!.fontSize! *
-          MediaQuery.of(context).textScaleFactor,
+          MediaQuery.textScaleFactorOf(context),
     ))
       ..pushStyle(ui.TextStyle(
         color: Colors.white,

@@ -21,10 +21,10 @@ class _ScrollInnerContentDemoPageState
       double dy = renderBox.localToGlobal(Offset.zero).dy;
       double height = renderBox.size.height;
       var outSize = false;
-      var topPadding = kToolbarHeight + MediaQuery.of(context).padding.top;
+      var topPadding = kToolbarHeight + MediaQuery.paddingOf(context).top;
 
       var maxHeight =
-          MediaQuery.of(context).size.height - buttonHeight - topPadding;
+          MediaQuery.sizeOf(context).height - buttonHeight - topPadding;
 
       var buttonPosition = dy + height - topPadding;
 
@@ -101,7 +101,7 @@ class _ScrollInnerContentDemoPageState
                           EdgeInsets.only(bottom: outSize ? (buttonHeight) : 0),
                       physics: ClampingScrollPhysics(),
                       child: new Container(
-                        width: MediaQuery.of(context).size.width,
+                        width: MediaQuery.sizeOf(context).width,
                         key: globalKey,
                         color: Colors.red,
                         child: new Text(
@@ -124,7 +124,7 @@ class _ScrollInnerContentDemoPageState
               return new Positioned(
                 top: snap.data,
                 child: new Container(
-                  width: MediaQuery.of(context).size.width,
+                  width: MediaQuery.sizeOf(context).width,
                   height: buttonHeight,
                   child: new InkWell(
                     onTap: () {},

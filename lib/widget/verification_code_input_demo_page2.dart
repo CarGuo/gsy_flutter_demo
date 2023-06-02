@@ -124,7 +124,7 @@ CodeInputBuilder pinRectangle(BuildContext context,
     padding = edgeInsets!.horizontal / 2;
   }
 
-  double width = MediaQuery.of(context).size.width;
+  double width = MediaQuery.sizeOf(context).width;
   double codeFullSize = ((width - 2 * padding) / codeSize);
   double codeNormalSize = codeFullSize;
   final textStyle =
@@ -228,7 +228,7 @@ CodeInputBuilder _pinContainerized(
 ///PIN码输入框样式，底部线条
 CodeInputBuilder pinLine(BuildContext context) {
   var codeSize = 4;
-  double width = MediaQuery.of(context).size.width / 2;
+  double width = MediaQuery.sizeOf(context).width / 2;
   double codeFullSize = ((width) / codeSize);
   double codeNormalSize = codeFullSize - 10;
   return CodeInputBuilders.rectangle(

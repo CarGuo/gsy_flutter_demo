@@ -32,7 +32,7 @@ class _AnimTipDemoPageState extends State<AnimTipDemoPage> {
               child: showTipItem
                   ? Container(
                       alignment: Alignment.centerLeft,
-                      width: MediaQuery.of(context).size.width,
+                      width: MediaQuery.sizeOf(context).width,
                       height: 70,
                       key: ValueKey("TipItem"),
                       color: Colors.amber,

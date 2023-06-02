@@ -15,7 +15,7 @@ class OverflowImagePage extends StatelessWidget {
           if (index == 1) {
             return Container(
               color: Colors.blue,
-              height: MediaQuery.of(context).size.height,
+              height: MediaQuery.sizeOf(context).height,
             );
           }
 
@@ -25,12 +25,12 @@ class OverflowImagePage extends StatelessWidget {
             child: OverflowBox(
                 alignment: Alignment.center,
                 child: Image(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.width * 220 / 247,
+                  width: MediaQuery.sizeOf(context).width,
+                  height: MediaQuery.sizeOf(context).width * 220 / 247,
                   image: AssetImage("static/gsy_cat.png"),
                   fit: BoxFit.fill,
                 ),
-                maxHeight: MediaQuery.of(context).size.height),
+                maxHeight: MediaQuery.sizeOf(context).height),
           );
         },
         itemCount: 2,

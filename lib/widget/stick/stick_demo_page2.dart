@@ -173,7 +173,7 @@ class ExpandableVisibleContainer extends StatelessWidget {
         },
         child: Container(
           alignment: Alignment.center,
-          width: MediaQuery.of(context).size.width,
+          width: MediaQuery.sizeOf(context).width,
           child: new Text(
             '查看更多',
             style: TextStyle(color: Colors.black),
@@ -252,7 +252,7 @@ class ExpandableContainer extends StatelessWidget {
         },
         child: Container(
           alignment: Alignment.center,
-          width: MediaQuery.of(context).size.width,
+          width: MediaQuery.sizeOf(context).width,
           child: new Text(
             '收起',
             style: TextStyle(color: Colors.black),

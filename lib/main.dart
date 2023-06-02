@@ -208,6 +208,9 @@ import 'package:gsy_flutter_demo/widget/tear_text_demo_page.dart'
 import 'package:gsy_flutter_demo/widget/un_bounded_listview.dart'
     deferred as un_bounded_listview;
 
+import 'package:gsy_flutter_demo/widget/pageview_in_pageview_demo_page.dart'
+    deferred as pageview_in_pageview_demo_page;
+
 import 'package:window_location_href/window_location_href.dart';
 
 void main() => runApp(MyApp());
@@ -902,6 +905,12 @@ Map<String, WidgetBuilder> routers = {
     return ContainerAsyncRouterPage(un_bounded_listview.loadLibrary(),
         (context) {
       return un_bounded_listview.UnboundedListViewDemoPage();
+    });
+  },
+  "PageView嵌套PageView": (context) {
+    return ContainerAsyncRouterPage(
+        pageview_in_pageview_demo_page.loadLibrary(), (context) {
+      return pageview_in_pageview_demo_page.PageViewInPageViewDemoPage();
     });
   },
 };

@@ -24,8 +24,8 @@ class _CustomMultiRenderDemoPageState extends State<CustomMultiRenderDemoPage> {
       body: new Center(
         child: new Container(
           color: Colors.greenAccent,
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.width,
+          width: MediaQuery.sizeOf(context).width,
+          height: MediaQuery.sizeOf(context).width,
 
           ///使用 CustomMultiChildLayout
           child: CustomMultiChildLayout(
@@ -36,8 +36,8 @@ class _CustomMultiRenderDemoPageState extends State<CustomMultiRenderDemoPage> {
                 childSize: Size(childSize, childSize),
 
                 ///中心点位置
-                center: Offset(MediaQuery.of(context).size.width / 2,
-                    MediaQuery.of(context).size.width / 2)),
+                center: Offset(MediaQuery.sizeOf(context).width / 2,
+                    MediaQuery.sizeOf(context).width / 2)),
             children: <Widget>[
               ///使用 LayoutId 指定 childId
               for (var item in customLayoutId)

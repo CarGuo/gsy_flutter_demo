@@ -131,8 +131,8 @@ class _BookPageState extends State<BookPage>
 
   @override
   Widget build(BuildContext context) {
-    width = MediaQuery.of(context).size.width;
-    height = MediaQuery.of(context).size.height - kToolbarHeight;
+    width = MediaQuery.sizeOf(context).width;
+    height = MediaQuery.sizeOf(context).height - kToolbarHeight;
     Color bgColor = Colors.tealAccent;
     return Scaffold(
       appBar: AppBar(

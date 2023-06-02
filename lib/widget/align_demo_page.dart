@@ -31,8 +31,8 @@ class _AlignDemoPageState extends State<AlignDemoPage>
       body: new Container(
         alignment: Alignment(0, 0),
         child: Container(
-          height: MediaQuery.of(context).size.width,
-          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.sizeOf(context).width,
+          width: MediaQuery.sizeOf(context).width,
           child: Stack(
             children: List.generate(size, (index) {
               return getAlign(index.toDouble() / size / 2);

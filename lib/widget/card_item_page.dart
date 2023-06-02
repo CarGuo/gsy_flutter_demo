@@ -59,10 +59,10 @@ class CardItemPage extends StatelessWidget {
 
   renderImageRatio(context, image) {
     ///大概是屏幕 6 分之一的宽度
-    double itemHeight = MediaQuery.of(context).size.width / 6;
+    double itemHeight = MediaQuery.sizeOf(context).width / 6;
 
     /// iphone xs max 的比例是 2688 * 1242; 拿到的 size 是 896.0 * 414.0
-    double textSize = 15.0 * MediaQuery.of(context).size.width / 414.0;
+    double textSize = 15.0 * MediaQuery.sizeOf(context).width / 414.0;
 
     /// 注意，这是在 data.textScaleFactor = 1 的情况下
     //var data = MediaQueryData.fromWindow(WidgetsBinding.instance.window);

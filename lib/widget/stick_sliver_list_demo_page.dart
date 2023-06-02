@@ -159,7 +159,7 @@ class _SliverExpandedListState extends State<SliverExpandedList> {
         },
         child: Container(
           alignment: Alignment.center,
-          width: MediaQuery.of(context).size.width,
+          width: MediaQuery.sizeOf(context).width,
           child: new Text(
             expanded ? "收起" : '查看更多',
             style: TextStyle(color: Colors.black),

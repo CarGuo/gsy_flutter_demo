@@ -29,7 +29,7 @@ class _ScrollToIndexDemoPageState extends State<ScrollToIndexDemoPage> {
     super.initState();
     controller = AutoScrollController(
         viewportBoundaryGetter: () =>
-            Rect.fromLTRB(0, 0, 0, MediaQuery.of(context).padding.bottom),
+            Rect.fromLTRB(0, 0, 0, MediaQuery.paddingOf(context).bottom),
         axis: scrollDirection);
     ///一个 index 和 item 高度的数组
     randomList = List.generate(maxCount,

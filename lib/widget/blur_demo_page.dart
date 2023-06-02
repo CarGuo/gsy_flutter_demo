@@ -20,8 +20,8 @@ class BlurDemoPage extends StatelessWidget {
               child: new Image.asset(
                 "static/gsy_cat.png",
                 fit: BoxFit.cover,
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.sizeOf(context).width,
+                height: MediaQuery.sizeOf(context).height,
               ),
             ),
             new Center(

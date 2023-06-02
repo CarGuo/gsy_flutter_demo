@@ -45,8 +45,8 @@ class _AnimaDemoPageState2 extends State<AnimaDemoPage2>
         child: CRAnimation(
           minR: 0,
           maxR: 250,
-          offset: Offset(MediaQuery.of(context).size.width / 2,
-              MediaQuery.of(context).size.height / 2),
+          offset: Offset(MediaQuery.sizeOf(context).width / 2,
+              MediaQuery.sizeOf(context).height / 2),
           animation: animation as Animation<double>?,
           child: Center(
             child: Container(

@@ -59,7 +59,7 @@ class _BottomAnimNavPageState extends State<BottomAnimNavPage>
                               SizedBox.expand(
                                 child: CustomPaint(
                                   painter: _RadiusPainter(
-                                    width: MediaQuery.of(context).size.width,
+                                    width: MediaQuery.sizeOf(context).width,
                                     color: Colors.redAccent.withAlpha(190),
                                   ),
                                 ),

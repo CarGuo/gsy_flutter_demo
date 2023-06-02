@@ -114,7 +114,7 @@ class _KeyboardDetectorState extends State<KeyboardDetector>
     WidgetsBinding.instance.addPostFrameCallback((_) {
       setState(() {
         widget.keyboardShowCallback
-            ?.call(MediaQuery.of(context).viewInsets.bottom > 0);
+            ?.call(MediaQuery.viewInsetsOf(context).bottom > 0);
       });
     });
   }

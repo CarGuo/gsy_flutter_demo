@@ -176,7 +176,7 @@ class _ListLinkBottomSheetDemoPageState
       bottomSheet: _LinkBottomSheet(
           key: btKey,
           controller: _btController,
-          maxHeight: MediaQuery.of(context).size.height -
+          maxHeight: MediaQuery.sizeOf(context).height -
               MediaQueryData.fromView(
                       WidgetsBinding.instance.platformDispatcher.views.first)
                   .padding
@@ -384,7 +384,7 @@ class _LinkBottomSheetState extends State<_LinkBottomSheet> {
                     ),
                   ])
                 : null,
-            width: MediaQuery.of(context).size.width,
+            width: MediaQuery.sizeOf(context).width,
             child: widget.headerBar,
           ),
         ),

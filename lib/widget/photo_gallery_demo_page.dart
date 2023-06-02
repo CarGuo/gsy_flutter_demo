@@ -153,17 +153,17 @@ class _PhotoGalleryState extends State<PhotoGallery> {
 
   @override
   Widget build(BuildContext context) {
-    var mq = MediaQuery.of(context);
-    var width = mq.size.width;
-    var height = mq.size.height;
-    bool isLandscape = mq.orientation == Orientation.landscape;
+    var size = MediaQuery.sizeOf(context);
+    var width = size.width;
+    var height = size.height;
+    bool isLandscape = MediaQuery.orientationOf(context) == Orientation.landscape;
 
     ///根据横竖屏状态决定 Item 大小
     Size imgSize = isLandscape
         ? Size(width * .5, height * .66)
         : Size(width * .66, height * .5);
 
-    var padding = _getPadding(mq.size);
+    var padding = _getPadding(MediaQuery.sizeOf(context));
 
     final cutoutTweenDuration =
         _skipNextOffsetTween ? Duration.zero : Duration(milliseconds: 600) * .5;
@@ -172,7 +172,7 @@ class _PhotoGalleryState extends State<PhotoGallery> {
         _skipNextOffsetTween ? Duration.zero : Duration(milliseconds: 600) * .4;
 
     var gridOffset = _calculateCurrentOffset(padding, imgSize);
-    gridOffset += Offset(0, -mq.padding.top / 2);
+    gridOffset += Offset(0, -MediaQuery.paddingOf(context).top / 2);
 
     //动画效果
     return _AnimatedCutoutOverlay(

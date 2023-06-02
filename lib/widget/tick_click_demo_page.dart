@@ -50,8 +50,8 @@ class _TickClickPageState extends State<TickClickDemoPage>
       body: new Container(
         child: Center(
           child: new Container(
-            height: MediaQuery.of(context).size.width,
-            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.sizeOf(context).width,
+            width: MediaQuery.sizeOf(context).width,
             color: Colors.greenAccent,
             child: CustomPaint(
               ///直接使用值做动画

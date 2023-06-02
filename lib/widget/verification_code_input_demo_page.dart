@@ -41,7 +41,7 @@ class VerificationCodeInputDemoPage extends StatelessWidget {
   staticRectangle(BuildContext context) {
     var codeSize = 6;
     double padding = 16;
-    double width = MediaQuery.of(context).size.width;
+    double width = MediaQuery.sizeOf(context).width;
     double codeFullSize = ((width - 2 * padding) / codeSize);
     double codeNormalSize = codeFullSize - 20;
     return CodeInputBuilders.rectangle(
@@ -215,7 +215,7 @@ class _VerCodeInputState extends State<VerCodeInput> {
       // the ones between the character entities.
       GestureDetector(
           onTap: () {
-            if (MediaQuery.of(widget.ctx!).viewInsets.bottom == 0) {
+            if (MediaQuery.viewInsetsOf(context).bottom == 0) {
               final focusScope = FocusScope.of(context);
               focusScope.requestFocus(FocusNode());
               Future.delayed(

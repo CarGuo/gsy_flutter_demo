@@ -48,12 +48,12 @@ class _InputBottomDemoPageState extends State<InputBottomDemoPage> {
                 new Align(
                   alignment: Alignment.bottomCenter,
                   child: new Container(
-                    width: MediaQuery.of(context).size.width,
+                    width: MediaQuery.sizeOf(context).width,
                     child: new Column(
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         new Container(
-                          width: MediaQuery.of(context).size.width,
+                          width: MediaQuery.sizeOf(context).width,
                           padding: EdgeInsets.symmetric(horizontal: 10),
                           decoration: BoxDecoration(
                               border: Border.all(color: Colors.blueAccent)),
@@ -77,7 +77,7 @@ class _InputBottomDemoPageState extends State<InputBottomDemoPage> {
                             alignment: Alignment.center,
                             color: Colors.grey,
                             height: 40,
-                            width: MediaQuery.of(context).size.width,
+                            width: MediaQuery.sizeOf(context).width,
                             child: new Text("bottom bar"),
                           ),
                         ),
@@ -122,7 +122,7 @@ class _KeyboardDetectorState extends State<KeyboardDetector>
     WidgetsBinding.instance.addPostFrameCallback((_) {
       setState(() {
         widget.keyboardShowCallback
-            ?.call(MediaQuery.of(context).viewInsets.bottom > 0);
+            ?.call(MediaQuery.viewInsetsOf(context).bottom > 0);
       });
     });
   }

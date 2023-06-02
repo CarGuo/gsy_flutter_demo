@@ -64,8 +64,8 @@ class _CloudDemoPageState extends State<CloudDemoPage> {
       ),
       body: new Center(
         child: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.width,
+          width: MediaQuery.sizeOf(context).width,
+          height: MediaQuery.sizeOf(context).width,
 
           ///利用 FittedBox 约束 child
           child: new FittedBox(
