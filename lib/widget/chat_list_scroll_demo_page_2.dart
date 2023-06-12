@@ -24,7 +24,7 @@ class _ChatListScrollDemoPageState2 extends State<ChatListScrollDemoPage2> {
   double extentAfter = 0;
 
   renderRightItem(ItemData data) {
-   var height =  random.nextInt(60);
+    var height = random.nextInt(60);
     return Container(
       height: 50 + height.toDouble(),
       decoration: BoxDecoration(
@@ -42,7 +42,7 @@ class _ChatListScrollDemoPageState2 extends State<ChatListScrollDemoPage2> {
   }
 
   renderLeftItem(ItemData data) {
-    var height =  random.nextInt(60);
+    var height = random.nextInt(60);
     return Container(
       height: 50 + height.toDouble(),
       decoration: BoxDecoration(
@@ -58,6 +58,8 @@ class _ChatListScrollDemoPageState2 extends State<ChatListScrollDemoPage2> {
       ),
     );
   }
+
+  ScrollPhysics _physics = BouncingScrollPhysics();
 
   @override
   Widget build(BuildContext context) {
@@ -138,7 +140,13 @@ class _ChatListScrollDemoPageState2 extends State<ChatListScrollDemoPage2> {
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                     content: InkWell(
                       onTap: () {
-                        scroller.jumpTo(scroller.position.maxScrollExtent);
+                        scroller.jumpTo(
+                            scroller.position.maxScrollExtent * 0.7);
+                        Future.delayed(Duration(milliseconds: 400), () {
+                          scroller.animateTo(scroller.position.maxScrollExtent,
+                              duration: Duration(milliseconds: 500),
+                              curve: Curves.linear);
+                        });
                       },
                       child: Container(
                         height: 50,
@@ -221,10 +229,11 @@ class _ChatListScrollDemoPageState2 extends State<ChatListScrollDemoPage2> {
         child: CustomScrollView(
           controller: scroller,
           center: centerKey,
+          physics: _physics,
           slivers: [
             SliverList(
               delegate: SliverChildBuilderDelegate(
-                (BuildContext context, int index) {
+                    (BuildContext context, int index) {
                   var item = loadMoreData[index];
                   if (item.type == "Right")
                     return renderRightItem(item);
@@ -240,7 +249,7 @@ class _ChatListScrollDemoPageState2 extends State<ChatListScrollDemoPage2> {
             ),
             SliverList(
               delegate: SliverChildBuilderDelegate(
-                (BuildContext context, int index) {
+                    (BuildContext context, int index) {
                   var item = newData[index];
                   if (item.type == "Right")
                     return renderRightItem(item);
