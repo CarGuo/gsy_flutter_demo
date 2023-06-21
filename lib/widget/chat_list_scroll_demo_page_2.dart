@@ -11,22 +11,22 @@ class ChatListScrollDemoPage2 extends StatefulWidget {
 }
 
 class _ChatListScrollDemoPageState2 extends State<ChatListScrollDemoPage2> {
+  final random = math.Random(10);
+
   List<ItemData> newData = [
-    new ItemData(txt: "*********init 1*********", type: "Right"),
-    new ItemData(txt: "*********init 2*********", type: "Right"),
-    new ItemData(txt: "*********init 3*********", type: "Right")
+    new ItemData(txt: "*********init 1*********", type: "Left", size: 60),
+    new ItemData(txt: "*********init 2*********", type: "Left", size: 70),
+    new ItemData(txt: "*********init 3*********", type: "Left", size: 100)
   ];
   List<ItemData> loadMoreData = [];
 
   var centerKey = GlobalKey();
   var scroller = ScrollController();
-  final random = math.Random(10);
   double extentAfter = 0;
 
-  renderRightItem(ItemData data) {
-    var height = random.nextInt(60);
+  renderRightItem(ItemData data, double height) {
     return Container(
-      height: 50 + height.toDouble(),
+      height: 50 + height,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(4),
         color: Colors.red,
@@ -41,10 +41,9 @@ class _ChatListScrollDemoPageState2 extends State<ChatListScrollDemoPage2> {
     );
   }
 
-  renderLeftItem(ItemData data) {
-    var height = random.nextInt(60);
+  renderLeftItem(ItemData data, double height) {
     return Container(
-      height: 50 + height.toDouble(),
+      height: 50 + height,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(4),
         color: Colors.green,
@@ -68,7 +67,8 @@ class _ChatListScrollDemoPageState2 extends State<ChatListScrollDemoPage2> {
         onPressed: () {
           newData.add(ItemData(
               txt: "#### new Send ${newData.length} #### #### #### #### ",
-              type: "Right"));
+              type: "Right",
+              size: random.nextInt(60)));
           setState(() {});
           Future.delayed(Duration(milliseconds: 1000), () {
             scroller.jumpTo(scroller.position.maxScrollExtent);
@@ -91,11 +91,13 @@ class _ChatListScrollDemoPageState2 extends State<ChatListScrollDemoPage2> {
                   if (type % 4 == 0) {
                     loadMoreData.add(ItemData(
                         txt: "--------Old ${loadMoreData.length}$i",
-                        type: "Right"));
+                        type: "Right",
+                        size: random.nextInt(60)));
                   } else {
                     loadMoreData.add(ItemData(
                         txt: "---------Old ${loadMoreData.length}$i",
-                        type: "Left"));
+                        type: "Left",
+                        size: random.nextInt(60)));
                   }
                 }
                 setState(() {});
@@ -117,11 +119,13 @@ class _ChatListScrollDemoPageState2 extends State<ChatListScrollDemoPage2> {
                   if (type % 4 == 0) {
                     newData.add(ItemData(
                         txt: "##########  New ${newData.length} $i",
-                        type: "Left"));
+                        type: "Left",
+                        size: random.nextInt(60)));
                   } else {
                     newData.add(ItemData(
                         txt: "##########   New ${newData.length} $i",
-                        type: "Right"));
+                        type: "Right",
+                        size: random.nextInt(60)));
                   }
                 }
                 setState(() {});
@@ -140,8 +144,8 @@ class _ChatListScrollDemoPageState2 extends State<ChatListScrollDemoPage2> {
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                     content: InkWell(
                       onTap: () {
-                        scroller.jumpTo(
-                            scroller.position.maxScrollExtent * 0.7);
+                        scroller
+                            .jumpTo(scroller.position.maxScrollExtent * 0.7);
                         Future.delayed(Duration(milliseconds: 400), () {
                           scroller.animateTo(scroller.position.maxScrollExtent,
                               duration: Duration(milliseconds: 500),
@@ -233,12 +237,12 @@ class _ChatListScrollDemoPageState2 extends State<ChatListScrollDemoPage2> {
           slivers: [
             SliverList(
               delegate: SliverChildBuilderDelegate(
-                    (BuildContext context, int index) {
+                (BuildContext context, int index) {
                   var item = loadMoreData[index];
                   if (item.type == "Right")
-                    return renderRightItem(item);
+                    return renderRightItem(item, random.nextInt(60).toDouble());
                   else
-                    return renderLeftItem(item);
+                    return renderLeftItem(item, random.nextInt(60).toDouble());
                 },
                 childCount: loadMoreData.length,
               ),
@@ -249,12 +253,12 @@ class _ChatListScrollDemoPageState2 extends State<ChatListScrollDemoPage2> {
             ),
             SliverList(
               delegate: SliverChildBuilderDelegate(
-                    (BuildContext context, int index) {
+                (BuildContext context, int index) {
                   var item = newData[index];
                   if (item.type == "Right")
-                    return renderRightItem(item);
+                    return renderRightItem(item, item.size.toDouble());
                   else
-                    return renderLeftItem(item);
+                    return renderLeftItem(item, item.size.toDouble());
                 },
                 childCount: newData.length,
               ),
@@ -269,9 +273,11 @@ class _ChatListScrollDemoPageState2 extends State<ChatListScrollDemoPage2> {
 class ItemData {
   String txt = "";
   String type = "";
+  int size;
 
   ItemData({
     required this.txt,
     required this.type,
+    required this.size,
   });
 }
