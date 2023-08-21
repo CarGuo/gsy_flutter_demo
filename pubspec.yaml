@@ -115,7 +115,7 @@ dependencies:
   #cupertino_icons: ^1.0.3
   scroll_to_index: 3.0.1
   another_transformer_page_view: 2.0.0
-  simple_animations: 5.0.0+2
+  simple_animations: 5.0.2
   supercharged: 2.1.1
   matrix_gesture_detector : 0.2.0-nullsafety.1
   flutter_swiper_view : 1.1.8
@@ -128,7 +128,7 @@ dependencies:
   zflutter:
     git:
       url: https://github.com/CarGuo/zflutter.git
-      ref: fd242237657f8b98a70127a09d26661028fa9ed6
+      ref: 3f5e569ba96f4c94a5847aad96617f273d88629d
       path: zflutter/
 
 
