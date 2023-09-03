@@ -11,6 +11,9 @@ class ControllerDemoPage extends StatelessWidget {
   Widget build(BuildContext context) {
     print("######### MyHomePage ${MediaQuery.of(context).size}");
     return Scaffold(
+      appBar: AppBar(
+        title: new Text("ControllerDemoPage"),
+      ),
       body: Container(
         alignment: Alignment.center,
         child: InkWell(
@@ -29,13 +32,12 @@ class ControllerDemoPage extends StatelessWidget {
   }
 }
 
-
 class EditPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: new Text("ControllerDemoPage"),
+        title: new Text("EditDemoPage"),
       ),
       extendBody: true,
       body: Column(
