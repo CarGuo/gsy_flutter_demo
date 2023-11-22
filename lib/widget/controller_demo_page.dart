@@ -11,6 +11,7 @@ class ControllerDemoPage extends StatelessWidget {
   Widget build(BuildContext context) {
     print("######### MyHomePage ${MediaQuery.of(context).size}");
     return Scaffold(
+      appBar: AppBar(),
       body: Container(
         alignment: Alignment.center,
         child: InkWell(

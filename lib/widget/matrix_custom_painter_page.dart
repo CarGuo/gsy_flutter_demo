@@ -53,7 +53,7 @@ class TestCustomPainter extends CustomPainter {
     ui.ParagraphBuilder builder = ui.ParagraphBuilder(ui.ParagraphStyle(
       textAlign: TextAlign.center,
       fontSize: Theme.of(context).textTheme.displaySmall!.fontSize! *
-          MediaQuery.textScaleFactorOf(context),
+          MediaQuery.textScalerOf(context).textScaleFactor,
     ))
       ..pushStyle(ui.TextStyle(
         color: Colors.white,

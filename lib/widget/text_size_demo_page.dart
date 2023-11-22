@@ -6,7 +6,7 @@ class TextSizeDemoPage extends StatefulWidget {
 }
 
 class _TextSizeDemoPageState extends State<TextSizeDemoPage> {
-  double textScaleFactor = 1;
+  TextScaler textScaler = TextScaler.noScaling;
 
   @override
   void initState() {
@@ -18,7 +18,7 @@ class _TextSizeDemoPageState extends State<TextSizeDemoPage> {
     return MediaQuery(
         data: MediaQueryData.fromView(
                 WidgetsBinding.instance.platformDispatcher.views.first)
-            .copyWith(textScaleFactor: textScaleFactor),
+            .copyWith(textScaler: textScaler),
         child: Scaffold(
           appBar: AppBar(
             title: new Text("TextLineHeightDemoPage"),
@@ -44,9 +44,9 @@ class _TextSizeDemoPageState extends State<TextSizeDemoPage> {
                     children: <Widget>[
                       new TextButton(
                         onPressed: () {
-                          if (textScaleFactor > 1) {
+                          if (textScaler.textScaleFactor > 1) {
                             setState(() {
-                              textScaleFactor--;
+                              textScaler.scale(textScaler.textScaleFactor - 1);
                             });
                           }
                         },
@@ -60,7 +60,7 @@ class _TextSizeDemoPageState extends State<TextSizeDemoPage> {
                       new TextButton(
                         onPressed: () {
                           setState(() {
-                            textScaleFactor++;
+                            textScaler.scale(textScaler.textScaleFactor + 1);
                           });
                         },
                         style: TextButton.styleFrom(

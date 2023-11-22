@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-
-
 class Book {
   final String title;
   final String author;
@@ -17,7 +15,7 @@ class BooksApp extends StatefulWidget {
 class _BooksAppState extends State<BooksApp> {
   BookRouterDelegate _routerDelegate = BookRouterDelegate();
   BookRouteInformationParser _routeInformationParser =
-  BookRouteInformationParser();
+      BookRouteInformationParser();
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +31,7 @@ class BookRouteInformationParser extends RouteInformationParser<BookRoutePath> {
   @override
   Future<BookRoutePath> parseRouteInformation(
       RouteInformation routeInformation) async {
-    final uri = Uri.parse(routeInformation.location!);
+    final uri = routeInformation.uri;
     // Handle '/'
     if (uri.pathSegments.length == 0) {
       return BookRoutePath.home();
@@ -55,13 +53,13 @@ class BookRouteInformationParser extends RouteInformationParser<BookRoutePath> {
   @override
   RouteInformation? restoreRouteInformation(BookRoutePath path) {
     if (path.isUnknown) {
-      return RouteInformation(location: '/404');
+      return RouteInformation(uri: Uri.parse('/404'));
     }
     if (path.isHomePage) {
-      return RouteInformation(location: '/');
+      return RouteInformation(uri: Uri.parse('/'));
     }
     if (path.isDetailsPage) {
-      return RouteInformation(location: '/book/${path.id}');
+      return RouteInformation(uri: Uri.parse('/book/${path.id}'));
     }
     return null;
   }
@@ -232,7 +230,8 @@ class BookDetailsScreen extends StatelessWidget {
           children: [
             if (book != null) ...[
               Text(book!.title, style: Theme.of(context).textTheme.titleLarge),
-              Text(book!.author, style: Theme.of(context).textTheme.titleMedium),
+              Text(book!.author,
+                  style: Theme.of(context).textTheme.titleMedium),
             ],
           ],
         ),
@@ -252,4 +251,3 @@ class UnknownScreen extends StatelessWidget {
     );
   }
 }
-

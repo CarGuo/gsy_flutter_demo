@@ -48,7 +48,7 @@ class RealRichText extends Text {
     TextDirection? textDirection,
     bool softWrap = true,
     TextOverflow overflow = TextOverflow.clip,
-    double textScaleFactor = 1.0,
+    TextScaler? textScaler,
     int? maxLines,
     Locale? locale,
   }) : super("",
@@ -57,7 +57,7 @@ class RealRichText extends Text {
             textDirection: textDirection,
             softWrap: softWrap,
             overflow: overflow,
-            textScaleFactor: textScaleFactor,
+            textScaler: textScaler,
             maxLines: maxLines,
             locale: locale);
 
@@ -106,8 +106,7 @@ class RealRichText extends Text {
         // RichText uses Localizations.localeOf to obtain a default if this is null
         softWrap: softWrap ?? defaultTextStyle.softWrap,
         overflow: overflow ?? defaultTextStyle.overflow,
-        textScaleFactor:
-            textScaleFactor ?? MediaQuery.textScaleFactorOf(context),
+        textScaler: textScaler ?? MediaQuery.textScalerOf(context),
         maxLines: maxLines ?? defaultTextStyle.maxLines,
         text: textSpan);
     if (semanticsLabel != null) {
@@ -233,7 +232,7 @@ class _RichTextWrapper extends RichText {
     TextDirection? textDirection,
     bool softWrap = true,
     TextOverflow overflow = TextOverflow.clip,
-    double textScaleFactor = 1.0,
+    TextScaler textScaler = TextScaler.noScaling,
     int? maxLines,
     Locale? locale,
   })  : assert(maxLines == null || maxLines > 0),
@@ -244,7 +243,7 @@ class _RichTextWrapper extends RichText {
             textDirection: textDirection,
             softWrap: softWrap,
             overflow: overflow,
-            textScaleFactor: textScaleFactor,
+            textScaler: textScaler,
             maxLines: maxLines,
             locale: locale);
 
@@ -257,7 +256,7 @@ class _RichTextWrapper extends RichText {
       textDirection: textDirection ?? Directionality.of(context),
       softWrap: softWrap,
       overflow: overflow,
-      textScaleFactor: textScaleFactor,
+      textScaler: textScaler,
       maxLines: maxLines,
       locale: locale ?? Localizations.localeOf(context),
     );
@@ -271,7 +270,7 @@ class _RealRichRenderParagraph extends RenderParagraph {
       required TextDirection textDirection,
       required bool softWrap,
       required TextOverflow overflow,
-      required double textScaleFactor,
+      required TextScaler textScaler,
       int? maxLines,
       Locale? locale})
       : super(
@@ -280,7 +279,7 @@ class _RealRichRenderParagraph extends RenderParagraph {
           textDirection: textDirection,
           softWrap: softWrap,
           overflow: overflow,
-          textScaleFactor: textScaleFactor,
+          textScaler: textScaler,
           maxLines: maxLines,
           locale: locale,
         );
