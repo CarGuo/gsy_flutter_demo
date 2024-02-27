@@ -31,7 +31,11 @@ class _ScrollHeaderDemoPageState extends State<ScrollHeaderDemoPage>
           if (notification is ScrollUpdateNotification) {
             if (initLayoutExtent > 0) {
               if (notification.metrics.pixels < -showPullDistance) {
-                globalKey.currentState!.handleShow();
+                ///用户松手之后才触发完全展开显示
+                if (notification.dragDetails == null) {
+                  globalKey.currentState?.handleShow();
+                  controller.jumpTo(-(showPullDistance + 1));
+                }
               } else if (notification.metrics.pixels > 5) {
                 globalKey.currentState!.handleHide();
               }
