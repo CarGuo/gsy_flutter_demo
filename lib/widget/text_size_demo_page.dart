@@ -7,6 +7,7 @@ class TextSizeDemoPage extends StatefulWidget {
 
 class _TextSizeDemoPageState extends State<TextSizeDemoPage> {
   TextScaler textScaler = TextScaler.noScaling;
+  int scale = 1;
 
   @override
   void initState() {
@@ -44,9 +45,10 @@ class _TextSizeDemoPageState extends State<TextSizeDemoPage> {
                     children: <Widget>[
                       new TextButton(
                         onPressed: () {
-                          if (textScaler.textScaleFactor > 1) {
+                          if (scale > 1) {
                             setState(() {
-                              textScaler.scale(textScaler.textScaleFactor - 1);
+                              textScaler.scale(scale - 1);
+                              scale--;
                             });
                           }
                         },
@@ -60,7 +62,8 @@ class _TextSizeDemoPageState extends State<TextSizeDemoPage> {
                       new TextButton(
                         onPressed: () {
                           setState(() {
-                            textScaler.scale(textScaler.textScaleFactor + 1);
+                            textScaler.scale(scale + 1);
+                            scale++;
                           });
                         },
                         style: TextButton.styleFrom(

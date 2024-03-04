@@ -20,8 +20,6 @@ class AnimBubbleGumDemoPage extends StatelessWidget {
   }
 }
 
-final size = ui.window.physicalSize / ui.window.devicePixelRatio;
-
 const frequency = Duration(milliseconds: 50);
 
 const numCircles = 299;
@@ -51,6 +49,8 @@ class _AnimBubbleGumState extends State<AnimBubbleGum> {
 
   final circles = <Circle>[];
 
+  late Size size;
+
   Offset force = Offset(1, 1);
 
   HSLColor hslColor = HSLColor.fromColor(Colors.pink[100]!);
@@ -66,6 +66,7 @@ class _AnimBubbleGumState extends State<AnimBubbleGum> {
 
   @override
   void initState() {
+    size = View.of(context).physicalSize / View.of(context).devicePixelRatio;
     timer = Timer.periodic(
       frequency,
       (t) {
@@ -156,7 +157,7 @@ class Painter extends CustomPainter {
         );
       var light = Paint();
       try {
-        if (Platform.isAndroid  == true|| Platform.isIOS == true) {
+        if (Platform.isAndroid == true || Platform.isIOS == true) {
           light = Paint()
             ..color = c.color
             ..shader = ui.Gradient.radial(

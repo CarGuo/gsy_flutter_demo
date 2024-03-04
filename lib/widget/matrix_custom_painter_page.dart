@@ -52,8 +52,7 @@ class TestCustomPainter extends CustomPainter {
     shapesPaint.style = PaintingStyle.stroke;
     ui.ParagraphBuilder builder = ui.ParagraphBuilder(ui.ParagraphStyle(
       textAlign: TextAlign.center,
-      fontSize: Theme.of(context).textTheme.displaySmall!.fontSize! *
-          MediaQuery.textScalerOf(context).textScaleFactor,
+      fontSize: Theme.of(context).textTheme.displaySmall!.fontSize!,
     ))
       ..pushStyle(ui.TextStyle(
         color: Colors.white,
