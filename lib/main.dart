@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:gsy_flutter_demo/widget/align_demo_page.dart'
     deferred as align_demo_page;
@@ -213,9 +214,11 @@ import 'package:gsy_flutter_demo/widget/pageview_in_pageview_demo_page.dart'
 
 import 'package:window_location_href/window_location_href.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -224,34 +227,36 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: false,
         primarySwatch: Colors.blue,
-        textButtonTheme: TextButtonThemeData(
+        textButtonTheme: const TextButtonThemeData(
           // 去掉 TextButton 的水波纹效果
           style: ButtonStyle(splashFactory: NoSplash.splashFactory),
         ),
       ),
-      home: MyHomePage(title: 'GSY Flutter Demo'),
+      home: const MyHomePage(title: 'GSY Flutter Demo'),
       routes: routers,
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, this.title}) : super(key: key);
+  const MyHomePage({super.key, this.title});
 
   final String? title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  MyHomePageState createState() => MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     //loadLibrary();
     super.initState();
-    print("get enum value with 2.15 ${Cat.white.name}");
-    print("get enum value with 2.15 ${Cat.values.byName("black")}");
-    print("get enum value with 2.17 ${Cat.white.value} ${Cat.white}");
+    if (kDebugMode) {
+      print("get enum value with 2.15 ${Cat.white.name}");
+      print("get enum value with 2.15 ${Cat.values.byName("black")}");
+      print("get enum value with 2.17 ${Cat.white.value} ${Cat.white}");
+    }
 
     final href = getHref();
     int? index = href?.indexOf("#");
@@ -276,25 +281,23 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title!),
       ),
-      body: new Container(
-        child: new ListView.builder(
-          itemBuilder: (context, index) {
-            return new InkWell(
-              onTap: () {
-                Navigator.of(context).pushNamed(routeLists[index]);
-              },
-              child: new Card(
-                child: new Container(
-                  alignment: Alignment.centerLeft,
-                  margin: EdgeInsets.symmetric(horizontal: 10),
-                  height: 50,
-                  child: new Text(routers.keys.toList()[index]),
-                ),
+      body: ListView.builder(
+        itemBuilder: (context, index) {
+          return InkWell(
+            onTap: () {
+              Navigator.of(context).pushNamed(routeLists[index]);
+            },
+            child: Card(
+              child: Container(
+                alignment: Alignment.centerLeft,
+                margin: const EdgeInsets.symmetric(horizontal: 10),
+                height: 50,
+                child: Text(routers.keys.toList()[index]),
               ),
-            );
-          },
-          itemCount: routers.length,
-        ),
+            ),
+          );
+        },
+        itemCount: routers.length,
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
@@ -307,7 +310,7 @@ class ContainerAsyncRouterPage extends StatelessWidget {
   ///稍后更新文章到掘金
   final WidgetBuilder child;
 
-  ContainerAsyncRouterPage(this.libraryFuture, this.child);
+  const ContainerAsyncRouterPage(this.libraryFuture, this.child, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -322,7 +325,7 @@ class ContainerAsyncRouterPage extends StatelessWidget {
                   alignment: Alignment.center,
                   child: Text(
                     'Error: ${s.error}',
-                    style: TextStyle(color: Colors.red),
+                    style: const TextStyle(color: Colors.red),
                   ),
                 ),
               );
@@ -333,7 +336,7 @@ class ContainerAsyncRouterPage extends StatelessWidget {
             appBar: AppBar(),
             body: Container(
               alignment: Alignment.center,
-              child: CircularProgressIndicator(),
+              child: const CircularProgressIndicator(),
             ),
           );
         });
@@ -940,6 +943,8 @@ extension CatExtension on Cat {
   // }
 
   void talk() {
-    print('meow');
+    if (kDebugMode) {
+      print('meow');
+    }
   }
 }

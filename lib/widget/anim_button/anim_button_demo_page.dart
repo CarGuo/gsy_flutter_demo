@@ -6,11 +6,13 @@ import 'package:gsy_flutter_demo/widget/anim_button/play_anim_button.dart';
 import 'loading_anim_button.dart';
 
 class AnimButtonDemoPage extends StatefulWidget {
+  const AnimButtonDemoPage({super.key});
+
   @override
-  _AnimButtonDemoPageState createState() => _AnimButtonDemoPageState();
+  AnimButtonDemoPageState createState() => AnimButtonDemoPageState();
 }
 
-class _AnimButtonDemoPageState extends State<AnimButtonDemoPage> {
+class AnimButtonDemoPageState extends State<AnimButtonDemoPage> {
   LoadingState? loadingState = LoadingState.STATE_PRE;
 
   updateState() {
@@ -19,33 +21,29 @@ class _AnimButtonDemoPageState extends State<AnimButtonDemoPage> {
 
   @override
   Widget build(BuildContext context) {
-    var playButton;
+    Widget playButton;
     try {
       if (Platform.isAndroid == true || Platform.isIOS == true) {
-        playButton = SizedBox(
+        playButton = const SizedBox(
           height: 50,
           width: 50,
           child: PlayAnimButton(),
         );
       } else {
-        playButton = new Container(
-          child: new Text(
-            "该控件效果暂不支持 Web，已隐藏",
-            style: new TextStyle(color: Colors.white, fontSize: 16),
-          ),
+        playButton = const Text(
+          "该控件效果暂不支持 Web，已隐藏",
+          style: TextStyle(color: Colors.white, fontSize: 16),
         );
       }
     } catch (e) {
-      playButton = new Container(
-        child: new Text(
-          "该效果暂不支持 Web",
-          style: new TextStyle(color: Colors.white, fontSize: 16),
-        ),
+      playButton = const Text(
+        "该效果暂不支持 Web",
+        style: TextStyle(color: Colors.white, fontSize: 16),
       );
     }
     return Scaffold(
       appBar: AppBar(
-        title: new Text("AnimButtonDemoPage"),
+        title: const Text("AnimButtonDemoPage"),
       ),
       body: Container(
         color: Colors.blueAccent,
@@ -53,17 +51,15 @@ class _AnimButtonDemoPageState extends State<AnimButtonDemoPage> {
             child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            new Container(
-              child: new Text(
-                "点击下方按键切换动画效果",
-                style: new TextStyle(color: Colors.white, fontSize: 16),
-              ),
+            const Text(
+              "点击下方按键切换动画效果",
+              style: TextStyle(color: Colors.white, fontSize: 16),
             ),
-            new SizedBox(
+            const SizedBox(
               height: 50,
             ),
             playButton,
-            new SizedBox(
+            const SizedBox(
               height: 50,
             ),
             SizedBox(
@@ -71,7 +67,7 @@ class _AnimButtonDemoPageState extends State<AnimButtonDemoPage> {
               width: 50,
               child: InkWell(
                 onTap: () {
-                  var nextState;
+                  LoadingState nextState;
                   switch (loadingState) {
                     case LoadingState.STATE_PRE:
                       nextState = LoadingState.STATE_COMPLETE;

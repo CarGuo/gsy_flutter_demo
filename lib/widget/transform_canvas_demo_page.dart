@@ -3,6 +3,8 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 class TransformCanvasDemoPage extends StatefulWidget {
+  const TransformCanvasDemoPage({super.key});
+
   @override
   _TransformCanvasDemoPageState createState() =>
       _TransformCanvasDemoPageState();
@@ -15,7 +17,7 @@ class _TransformCanvasDemoPageState extends State<TransformCanvasDemoPage> {
   @override
   void initState() {
     super.initState();
-    timer = Timer.periodic(Duration(milliseconds: 300), (_) {
+    timer = Timer.periodic(const Duration(milliseconds: 300), (_) {
       setState(() {
         angle = angle + math.pi / 10;
       });
@@ -32,12 +34,12 @@ class _TransformCanvasDemoPageState extends State<TransformCanvasDemoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: new Text("TransformCanvasDemoPage"),
+        title: const Text("TransformCanvasDemoPage"),
       ),
-      body: new Container(
+      body: Container(
         alignment: Alignment.center,
         child: Center(
-          child: new Container(
+          child: SizedBox(
             height: 200,
             width: 200,
             child: CustomPaint(
@@ -51,7 +53,7 @@ class _TransformCanvasDemoPageState extends State<TransformCanvasDemoPage> {
 }
 
 class _AnimationPainter extends CustomPainter {
-  Paint _paint = new Paint();
+  final Paint _paint = Paint();
   double angle;
 
   _AnimationPainter(this.angle);
@@ -125,7 +127,7 @@ class _AnimationPainter extends CustomPainter {
 
   renderPath(double angleX, double angleY, Canvas canvas,
       [double positionX = 0, double positionY = 0]) {
-    Path path = new Path();
+    Path path = Path();
     var t = Matrix4.identity()..rotateX(angleX)..rotateY(angleY);
     t.leftTranslate(positionX, positionY);
     t.translate(-positionX, -positionY);

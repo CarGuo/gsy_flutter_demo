@@ -5,6 +5,8 @@ import 'package:flutter/rendering.dart';
 
 /// 高级版 Sliver Tab
 class SliverTabDemoPage2 extends StatefulWidget {
+  const SliverTabDemoPage2({super.key});
+
   @override
   _SliverTabDemoPageState createState() => _SliverTabDemoPageState();
 }
@@ -13,8 +15,8 @@ class _SliverTabDemoPageState extends State<SliverTabDemoPage2>
     with TickerProviderStateMixin {
   TabController? tabController;
 
-  final PageController pageController = new PageController();
-  final ScrollController scrollController = new ScrollController();
+  final PageController pageController = PageController();
+  final ScrollController scrollController = ScrollController();
   final int tabLength = 4;
   final double maxHeight = kToolbarHeight;
   final double minHeight = 30;
@@ -38,9 +40,9 @@ class _SliverTabDemoPageState extends State<SliverTabDemoPage2>
               size: tabIconSize - offset,
             ),
           ),
-          new Expanded(
-            child: new Center(
-              child: new Text(
+          Expanded(
+            child: Center(
+              child: Text(
                 "Tab$index",
               ),
             ),
@@ -57,7 +59,7 @@ class _SliverTabDemoPageState extends State<SliverTabDemoPage2>
       child: Builder(
         builder: (BuildContext context) {
           return CustomScrollView(
-            physics: BouncingScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
             key: PageStorageKey<String>(tabIndex.toString()),
             slivers: <Widget>[
               SliverOverlapInjector(
@@ -93,7 +95,7 @@ class _SliverTabDemoPageState extends State<SliverTabDemoPage2>
 
   @override
   void initState() {
-    tabController = new TabController(length: tabLength, vsync: this);
+    tabController = TabController(length: tabLength, vsync: this);
     super.initState();
   }
 
@@ -101,7 +103,7 @@ class _SliverTabDemoPageState extends State<SliverTabDemoPage2>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: new Text("SliverTabDemoPage2"),
+        title: const Text("SliverTabDemoPage2"),
       ),
       body: NestedScrollView(
         controller: scrollController,
@@ -134,7 +136,7 @@ class _SliverTabDemoPageState extends State<SliverTabDemoPage2>
                           onTap: (index) {
                             setState(() {});
                             scrollController.animateTo(0,
-                                duration: Duration(milliseconds: 100),
+                                duration: const Duration(milliseconds: 100),
                                 curve: Curves.fastOutSlowIn);
                             pageController.jumpToPage(index);
                           },
@@ -204,5 +206,5 @@ class GSYSliverHeaderDelegate extends SliverPersistentHeaderDelegate {
   FloatingHeaderSnapConfiguration get snapConfiguration => snapConfig;
 }
 
-typedef Widget BuilderDelegate(
+typedef BuilderDelegate = Widget Function(
     BuildContext context, double shrinkOffset, bool overlapsContent);

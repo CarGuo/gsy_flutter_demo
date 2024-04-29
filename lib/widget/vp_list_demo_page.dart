@@ -6,7 +6,7 @@ import 'package:flutter/rendering.dart';
 ///对应文章解析 https://juejin.cn/post/7116267156655833102
 ///简单处理处理 pageview 嵌套 listview 的斜滑问题
 class VPListView extends StatefulWidget {
-  const VPListView({Key? key}) : super(key: key);
+  const VPListView({super.key});
 
   @override
   State<VPListView> createState() => _VPListViewState();
@@ -17,20 +17,20 @@ class _VPListViewState extends State<VPListView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: new Text("VPListView"),
+        title: const Text("VPListView"),
       ),
       extendBody: true,
       body: MediaQuery(
         ///调高 touchSlop 到 50 ，这样 pageview 滑动可能有点点影响，
         ///但是大概率处理了斜着滑动触发的问题
         data: MediaQuery.of(context).copyWith(
-            gestureSettings: DeviceGestureSettings(
+            gestureSettings: const DeviceGestureSettings(
           touchSlop: 50,
         )),
         child: PageView(
           scrollDirection: Axis.horizontal,
           pageSnapping: true,
-          children: [
+          children: const [
             HandlerListView(),
             HandlerListView(),
           ],
@@ -41,6 +41,8 @@ class _VPListViewState extends State<VPListView> {
 }
 
 class HandlerListView extends StatefulWidget {
+  const HandlerListView({super.key});
+
   @override
   _MyListViewState createState() => _MyListViewState();
 }
@@ -51,7 +53,7 @@ class _MyListViewState extends State<HandlerListView> {
     return MediaQuery(
       ///这里 touchSlop  需要调回默认
       data: MediaQuery.of(context).copyWith(
-          gestureSettings: DeviceGestureSettings(
+          gestureSettings: const DeviceGestureSettings(
         touchSlop: kTouchSlop,
       )),
       child: ListView.separated(
@@ -74,6 +76,8 @@ class _MyListViewState extends State<HandlerListView> {
 ///对应文章解析 https://juejin.cn/post/7116267156655833102
 ///垂直滑动的 ViewPage 里嵌套垂直滑动的 ListView
 class VPNestListView extends StatefulWidget {
+  const VPNestListView({super.key});
+
   @override
   _VPNestListViewState createState() => _VPNestListViewState();
 }
@@ -104,13 +108,13 @@ class _VPNestListViewState extends State<VPNestListView> {
     if (_listScrollController?.hasClients == true &&
         _listScrollController?.position.context.storageContext != null) {
       ///获取 ListView 的  renderBox
-      final RenderBox? renderBox = _listScrollController
+      final RenderBox renderBox = _listScrollController
           ?.position.context.storageContext
           .findRenderObject() as RenderBox;
 
       ///判断触摸的位置是否在 ListView 内
       ///不在范围内一般是因为 ListView 已经滑动上去了，坐标位置和触摸位置不一致
-      if (renderBox?.paintBounds
+      if (renderBox.paintBounds
               .shift(renderBox.localToGlobal(Offset.zero))
               .contains(details.globalPosition) ==
           true) {
@@ -169,7 +173,7 @@ class _VPNestListViewState extends State<VPNestListView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: new Text("VPNestListView"),
+        title: const Text("VPNestListView"),
       ),
       extendBody: true,
       body: RawGestureDetector(
@@ -208,7 +212,7 @@ class _VPNestListViewState extends State<VPNestListView> {
                 )),
             Container(
               color: Colors.green,
-              child: Center(
+              child: const Center(
                 child: Text(
                   'Page View',
                   style: TextStyle(fontSize: 50),
@@ -227,7 +231,7 @@ class KeepAliveListView extends StatefulWidget {
   final ScrollController? listScrollController;
   final int itemCount;
 
-  KeepAliveListView({
+  const KeepAliveListView({super.key, 
     required this.listScrollController,
     required this.itemCount,
   });
@@ -262,6 +266,8 @@ class KeepAliveListViewState extends State<KeepAliveListView>
 ///对应文章解析 https://juejin.cn/post/7116267156655833102
 ///listView 里嵌套 PageView
 class ListViewNestVP extends StatefulWidget {
+  const ListViewNestVP({super.key});
+
   @override
   _ListViewNestVPState createState() => _ListViewNestVPState();
 }
@@ -359,7 +365,7 @@ class _ListViewNestVPState extends State<ListViewNestVP> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("ListViewNestVP"),
+          title: const Text("ListViewNestVP"),
         ),
         body: RawGestureDetector(
           gestures: <Type, GestureRecognizerFactory>{
@@ -382,12 +388,12 @@ class _ListViewNestVPState extends State<ListViewNestVP> {
             child: ListView.builder(
 
                 ///屏蔽默认的滑动响应
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 controller: _listScrollController,
                 itemCount: 5,
                 itemBuilder: (context, index) {
                   if (index == 0) {
-                    return Container(
+                    return SizedBox(
                       height: 300,
                       child: KeepAlivePageView(
                         pageController: _pageController,
@@ -401,7 +407,7 @@ class _ListViewNestVPState extends State<ListViewNestVP> {
                       child: Center(
                         child: Text(
                           "Item $index",
-                          style: TextStyle(fontSize: 40, color: Colors.blue),
+                          style: const TextStyle(fontSize: 40, color: Colors.blue),
                         ),
                       ));
                 }),
@@ -415,7 +421,7 @@ class KeepAlivePageView extends StatefulWidget {
   final PageController pageController;
   final int itemCount;
 
-  KeepAlivePageView({
+  const KeepAlivePageView({super.key, 
     required this.pageController,
     required this.itemCount,
   });
@@ -438,18 +444,18 @@ class KeepAlivePageViewState extends State<KeepAlivePageView>
           ScrollConfiguration.of(context).copyWith(overscroll: false),
 
       ///屏蔽默认的滑动响应
-      physics: NeverScrollableScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       itemCount: widget.itemCount,
       itemBuilder: (context, index) {
         return Container(
           height: 300,
+          color: Colors.redAccent,
           child: Center(
             child: Text(
               "$index",
-              style: TextStyle(fontSize: 40, color: Colors.yellowAccent),
+              style: const TextStyle(fontSize: 40, color: Colors.yellowAccent),
             ),
           ),
-          color: Colors.redAccent,
         );
       },
     );
@@ -461,13 +467,15 @@ class KeepAlivePageViewState extends State<KeepAlivePageView>
 
 ///listView 联动 listView
 class ListViewLinkListView extends StatefulWidget {
+  const ListViewLinkListView({super.key});
+
   @override
   _ListViewLinkListViewState createState() => _ListViewLinkListViewState();
 }
 
 class _ListViewLinkListViewState extends State<ListViewLinkListView> {
-  ScrollController _primaryScrollController = ScrollController();
-  ScrollController _subScrollController = ScrollController();
+  final ScrollController _primaryScrollController = ScrollController();
+  final ScrollController _subScrollController = ScrollController();
 
   Drag? _primaryDrag;
   Drag? _subDrag;
@@ -524,7 +532,7 @@ class _ListViewLinkListViewState extends State<ListViewLinkListView> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("ListViewLinkListView"),
+          title: const Text("ListViewLinkListView"),
         ),
         body: RawGestureDetector(
           gestures: <Type, GestureRecognizerFactory>{
@@ -546,11 +554,11 @@ class _ListViewLinkListViewState extends State<ListViewLinkListView> {
                 ScrollConfiguration.of(context).copyWith(overscroll: false),
             child: Row(
               children: [
-                new Expanded(
+                Expanded(
                     child: ListView.builder(
 
                         ///屏蔽默认的滑动响应
-                        physics: NeverScrollableScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         controller: _primaryScrollController,
                         itemCount: 55,
                         itemBuilder: (context, index) {
@@ -560,19 +568,19 @@ class _ListViewLinkListViewState extends State<ListViewLinkListView> {
                               child: Center(
                                 child: Text(
                                   "Item $index",
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       fontSize: 40, color: Colors.blue),
                                 ),
                               ));
                         })),
-                new SizedBox(
+                const SizedBox(
                   width: 5,
                 ),
-                new Expanded(
+                Expanded(
                   child: ListView.builder(
 
                       ///屏蔽默认的滑动响应
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       controller: _subScrollController,
                       itemCount: 55,
                       itemBuilder: (context, index) {
@@ -583,7 +591,7 @@ class _ListViewLinkListViewState extends State<ListViewLinkListView> {
                             child: Text(
                               "Item $index",
                               style:
-                                  TextStyle(fontSize: 40, color: Colors.white),
+                                  const TextStyle(fontSize: 40, color: Colors.white),
                             ),
                           ),
                         );

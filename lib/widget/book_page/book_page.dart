@@ -4,6 +4,8 @@ import 'package:gsy_flutter_demo/widget/book_page/cal_point.dart';
 import 'book_painter.dart';
 
 class BookPage extends StatefulWidget {
+  const BookPage({super.key});
+
   @override
   _BookPageState createState() => _BookPageState();
 }
@@ -93,8 +95,8 @@ class _BookPageState extends State<BookPage>
   }
 
   _initCancelAnim() {
-    animationController = new AnimationController(
-        vsync: this, duration: Duration(milliseconds: 300));
+    animationController = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 300));
     cancelAnim = animationController.drive(CurveTween(curve: Curves.linear));
     cancelAnim
       ..addListener(() {
@@ -136,9 +138,9 @@ class _BookPageState extends State<BookPage>
     Color bgColor = Colors.tealAccent;
     return Scaffold(
       appBar: AppBar(
-        title: new Text("BookPage"),
+        title: const Text("BookPage"),
       ),
-      body: Container(
+      body: SizedBox(
         height: height,
         width: width,
         child: GestureDetector(

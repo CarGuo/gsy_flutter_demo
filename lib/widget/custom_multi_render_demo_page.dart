@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 
 ///通过 CustomMultiChildLayout 自定义控件
 class CustomMultiRenderDemoPage extends StatefulWidget {
+  const CustomMultiRenderDemoPage({super.key});
+
   @override
   _CustomMultiRenderDemoPageState createState() =>
       _CustomMultiRenderDemoPageState();
@@ -19,10 +21,10 @@ class _CustomMultiRenderDemoPageState extends State<CustomMultiRenderDemoPage> {
     double childSize = 66;
     return Scaffold(
       appBar: AppBar(
-        title: new Text("CustomMultiRenderDemoPage"),
+        title: const Text("CustomMultiRenderDemoPage"),
       ),
-      body: new Center(
-        child: new Container(
+      body: Center(
+        child: Container(
           color: Colors.greenAccent,
           width: MediaQuery.sizeOf(context).width,
           height: MediaQuery.sizeOf(context).width,
@@ -41,7 +43,7 @@ class _CustomMultiRenderDemoPageState extends State<CustomMultiRenderDemoPage> {
             children: <Widget>[
               ///使用 LayoutId 指定 childId
               for (var item in customLayoutId)
-                new LayoutId(id: item, child: ContentItem(item, childSize)),
+                LayoutId(id: item, child: ContentItem(item, childSize)),
             ],
           ),
         ),
@@ -56,7 +58,7 @@ class _CustomMultiRenderDemoPageState extends State<CustomMultiRenderDemoPage> {
               customLayoutId.add("${customLayoutId.length}");
             });
           },
-          child: new Text(
+          child: const Text(
             "加",
             style: TextStyle(color: Colors.white),
           ),
@@ -70,7 +72,7 @@ class _CustomMultiRenderDemoPageState extends State<CustomMultiRenderDemoPage> {
               }
             });
           },
-          child: new Text(
+          child: const Text(
             "减",
             style: TextStyle(color: Colors.white),
           ),
@@ -117,7 +119,7 @@ class CircleLayoutDelegate extends MultiChildLayoutDelegate {
 
         final double centerY = childSize!.height / 2.0;
 
-        var result = new Offset(x - centerX, y - centerY);
+        var result = Offset(x - centerX, y - centerY);
 
         ///设置 child 位置
         positionChild(item, result);
@@ -135,7 +137,7 @@ class ContentItem extends StatelessWidget {
 
   final double childSize;
 
-  ContentItem(this.text, this.childSize);
+  const ContentItem(this.text, this.childSize, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -144,9 +146,9 @@ class ContentItem extends StatelessWidget {
       borderRadius: BorderRadius.circular(childSize / 2.0),
       child: InkWell(
         radius: childSize / 2.0,
-        customBorder: CircleBorder(),
+        customBorder: const CircleBorder(),
         onTap: () {},
-        child: Container(
+        child: SizedBox(
           width: childSize,
           height: childSize,
           child: Center(

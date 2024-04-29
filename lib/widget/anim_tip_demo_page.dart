@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class AnimTipDemoPage extends StatefulWidget {
+  const AnimTipDemoPage({super.key});
+
   @override
   _AnimTipDemoPageState createState() => _AnimTipDemoPageState();
 }
@@ -12,70 +14,64 @@ class _AnimTipDemoPageState extends State<AnimTipDemoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: new Text("AnimTipDemoPage"),
+        title: const Text("AnimTipDemoPage"),
       ),
-      body: Container(
-        child: new Column(children: [
-          Container(
-            child: AnimatedSwitcher(
-              switchInCurve: Cubic(0.4, 0.0, 0.2, 1.0),
-              switchOutCurve: Cubic(1.0, 0.1, 1.0, 0.1),
-              transitionBuilder: (child, anim) {
-                return SlideTransition(
-                    child: child,
-                    position: Tween<Offset>(
-                      begin: Offset(0.0, -1.0),
-                      end: Offset(0.0, 0.0),
-                    ).animate(anim));
-              },
-              duration: Duration(milliseconds: 500),
-              child: showTipItem
-                  ? Container(
-                      alignment: Alignment.centerLeft,
-                      width: MediaQuery.sizeOf(context).width,
-                      height: 70,
-                      key: ValueKey("TipItem"),
-                      color: Colors.amber,
-                      child: new Row(
-                        children: <Widget>[
-                          new Icon(Icons.ac_unit,
-                              color: Colors.white, size: 13),
-                          new SizedBox(
-                            width: 10,
-                          ),
-                          new Text(
-                            "StickText",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ],
+      body: Column(children: [
+        AnimatedSwitcher(
+          switchInCurve: const Cubic(0.4, 0.0, 0.2, 1.0),
+          switchOutCurve: const Cubic(1.0, 0.1, 1.0, 0.1),
+          transitionBuilder: (child, anim) {
+            return SlideTransition(
+                position: Tween<Offset>(
+                  begin: const Offset(0.0, -1.0),
+                  end: const Offset(0.0, 0.0),
+                ).animate(anim),
+                child: child);
+          },
+          duration: const Duration(milliseconds: 500),
+          child: showTipItem
+              ? Container(
+                  alignment: Alignment.centerLeft,
+                  width: MediaQuery.sizeOf(context).width,
+                  height: 70,
+                  key: const ValueKey("TipItem"),
+                  color: Colors.amber,
+                  child: const Row(
+                    children: <Widget>[
+                      Icon(Icons.ac_unit,
+                          color: Colors.white, size: 13),
+                      SizedBox(
+                        width: 10,
                       ),
-                    )
-                  : new Container(
-                      key: ValueKey("hideItem"),
-                    ),
+                      Text(
+                        "StickText",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ],
+                  ),
+                )
+              : Container(
+                  key: const ValueKey("hideItem"),
+                ),
+        ),
+        Expanded(
+          child: Center(
+            child: TextButton(
+              onPressed: () {
+                setState(() {
+                  showTipItem = true;
+                });
+                Future.delayed(const Duration(seconds: 1), () {
+                  setState(() {
+                    showTipItem = false;
+                  });
+                });
+              },
+              child: const Text("Click Me"),
             ),
           ),
-          new Expanded(
-            child: new Container(
-              child: new Center(
-                child: new TextButton(
-                  onPressed: () {
-                    setState(() {
-                      showTipItem = true;
-                    });
-                    Future.delayed(Duration(seconds: 1), () {
-                      setState(() {
-                        showTipItem = false;
-                      });
-                    });
-                  },
-                  child: new Text("Click Me"),
-                ),
-              ),
-            ),
-          )
-        ]),
-      ),
+        )
+      ]),
     );
   }
 }

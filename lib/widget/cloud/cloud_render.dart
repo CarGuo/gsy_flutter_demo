@@ -18,7 +18,7 @@ class RenderCloudWidget extends RenderBox
   }
 
   ///圆周
-  double _mathPi = math.pi * 2;
+  final double _mathPi = math.pi * 2;
 
   ///是否需要裁剪
   bool _needClip = false;
@@ -69,8 +69,9 @@ class RenderCloudWidget extends RenderBox
   ///设置为我们的数据
   @override
   void setupParentData(RenderBox child) {
-    if (child.parentData is! RenderCloudParentData)
+    if (child.parentData is! RenderCloudParentData) {
       child.parentData = RenderCloudParentData();
+    }
   }
 
   @override

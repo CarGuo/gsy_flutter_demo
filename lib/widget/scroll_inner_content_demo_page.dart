@@ -1,7 +1,10 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 ///一个有趣的底部跟随例子
 class ScrollInnerContentDemoPage extends StatefulWidget {
+  const ScrollInnerContentDemoPage({super.key});
+
   @override
   _ScrollInnerContentDemoPageState createState() =>
       _ScrollInnerContentDemoPageState();
@@ -9,14 +12,14 @@ class ScrollInnerContentDemoPage extends StatefulWidget {
 
 class _ScrollInnerContentDemoPageState
     extends State<ScrollInnerContentDemoPage> {
-  GlobalKey globalKey = new GlobalKey();
+  GlobalKey globalKey = GlobalKey();
 
   final double buttonHeight = 40;
   bool outSize = false;
   String content = "这是可滑动文本区域";
 
   Future<double> getButtonPosition() {
-    return Future.delayed(Duration(seconds: 0), () {
+    return Future.delayed(const Duration(seconds: 0), () {
       var renderBox = globalKey.currentContext!.findRenderObject() as RenderBox;
       double dy = renderBox.localToGlobal(Offset.zero).dy;
       double height = renderBox.size.height;
@@ -37,7 +40,9 @@ class _ScrollInnerContentDemoPageState
           this.outSize = outSize;
         });
       }
-      print("##### $buttonPosition $outSize");
+      if (kDebugMode) {
+        print("##### $buttonPosition $outSize");
+      }
 
       return buttonPosition;
     });
@@ -47,7 +52,7 @@ class _ScrollInnerContentDemoPageState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: new Text("ScrollDemoPage"),
+        title: const Text("ScrollDemoPage"),
         actions: <Widget>[
           IconButton(
             onPressed: () {
@@ -55,7 +60,7 @@ class _ScrollInnerContentDemoPageState
                 content += "=｜-动态文本-｜=";
               });
             },
-            icon: Icon(Icons.add_circle_outline),
+            icon: const Icon(Icons.add_circle_outline),
           ),
           IconButton(
             onPressed: () {
@@ -65,55 +70,51 @@ class _ScrollInnerContentDemoPageState
                 }
               });
             },
-            icon: Icon(Icons.remove_circle_outline),
+            icon: const Icon(Icons.remove_circle_outline),
           )
         ],
       ),
-      body: new Stack(
+      body: Stack(
         children: <Widget>[
-          new Container(
-            child: Column(
-              children: <Widget>[
-                new Container(
-                  color: Colors.redAccent,
-                  child: Column(
-                    children: <Widget>[
-                      new Container(
-                        height: 60,
-                        alignment: Alignment.centerLeft,
-                        child: new Text(
-                          "点击右上角加减查看效果",
-                          style: TextStyle(fontSize: 18),
-                        ),
+          Column(
+            children: <Widget>[
+              Container(
+                color: Colors.redAccent,
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      height: 60,
+                      alignment: Alignment.centerLeft,
+                      child: const Text(
+                        "点击右上角加减查看效果",
+                        style: TextStyle(fontSize: 18),
                       ),
-                      new Container(
-                        height: 60,
-                        alignment: Alignment.centerLeft,
-                        child: new Text("我是文本2"),
-                      ),
-                    ],
-                  ),
+                    ),
+                    Container(
+                      height: 60,
+                      alignment: Alignment.centerLeft,
+                      child: const Text("我是文本2"),
+                    ),
+                  ],
                 ),
-                new Expanded(
+              ),
+              Expanded(
+                child: SingleChildScrollView(
+                  padding:
+                      EdgeInsets.only(bottom: outSize ? (buttonHeight) : 0),
+                  physics: const ClampingScrollPhysics(),
                   child: Container(
-                    child: SingleChildScrollView(
-                      padding:
-                          EdgeInsets.only(bottom: outSize ? (buttonHeight) : 0),
-                      physics: ClampingScrollPhysics(),
-                      child: new Container(
-                        width: MediaQuery.sizeOf(context).width,
-                        key: globalKey,
-                        color: Colors.red,
-                        child: new Text(
-                          content,
-                          style: TextStyle(fontSize: 44),
-                        ),
-                      ),
+                    width: MediaQuery.sizeOf(context).width,
+                    key: globalKey,
+                    color: Colors.red,
+                    child: Text(
+                      content,
+                      style: const TextStyle(fontSize: 44),
                     ),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
           FutureBuilder<double?>(
             future: getButtonPosition(),
@@ -121,21 +122,21 @@ class _ScrollInnerContentDemoPageState
               if (snap.data == null || snap.data == 0) {
                 return Container();
               }
-              return new Positioned(
+              return Positioned(
                 top: snap.data,
-                child: new Container(
+                child: SizedBox(
                   width: MediaQuery.sizeOf(context).width,
                   height: buttonHeight,
-                  child: new InkWell(
+                  child: InkWell(
                     onTap: () {},
-                    child: new Container(
+                    child: Container(
                       height: buttonHeight,
                       alignment: Alignment.center,
-                      margin: EdgeInsets.symmetric(
+                      margin: const EdgeInsets.symmetric(
                         horizontal: 20,
                       ),
                       color: Colors.blue,
-                      child: new Text("#########"),
+                      child: const Text("#########"),
                     ),
                   ),
                 ),

@@ -1,9 +1,10 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class AsyncToSyncCallPage extends StatefulWidget {
-  const AsyncToSyncCallPage({Key? key}) : super(key: key);
+  const AsyncToSyncCallPage({super.key});
 
   @override
   State<AsyncToSyncCallPage> createState() => _AsyncToSyncCallPageState();
@@ -43,24 +44,32 @@ class _AsyncToSyncCallPageState extends State<AsyncToSyncCallPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("AsyncToSyncCallPage"),
+        title: const Text("AsyncToSyncCallPage"),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          print("Start······Waiting");
+          if (kDebugMode) {
+            print("Start······Waiting");
+          }
           _syncWait(() async {
-            await Future.delayed(Duration(seconds: 4));
-            print("Finish First");
+            await Future.delayed(const Duration(seconds: 4));
+            if (kDebugMode) {
+              print("Finish First");
+            }
           });
 
           _syncWait(() async {
-            await Future.delayed(Duration(seconds: 2));
-            print("Finish Tow");
+            await Future.delayed(const Duration(seconds: 2));
+            if (kDebugMode) {
+              print("Finish Tow");
+            }
           });
 
           _syncWait(() async {
-            await Future.delayed(Duration(seconds: 1));
-            print("Finish Three");
+            await Future.delayed(const Duration(seconds: 1));
+            if (kDebugMode) {
+              print("Finish Three");
+            }
           });
         },
       ),

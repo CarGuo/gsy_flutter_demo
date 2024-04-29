@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 ///比较粗略，没有做互斥等
 ///详细使用还请查看 https://github.com/CarGuo/GSYGithubAppFlutter
 class RefreshDemoPage extends StatefulWidget {
+  const RefreshDemoPage({super.key});
+
   @override
   _RefreshDemoPageState createState() => _RefreshDemoPageState();
 }
@@ -15,12 +17,12 @@ class _RefreshDemoPageState extends State<RefreshDemoPage> {
 
   List<String> dataList = [];
 
-  final ScrollController _scrollController = new ScrollController();
+  final ScrollController _scrollController = ScrollController();
 
-  final GlobalKey<RefreshIndicatorState> refreshKey = new GlobalKey();
+  final GlobalKey<RefreshIndicatorState> refreshKey = GlobalKey();
 
   Future<void> onRefresh() async {
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 2));
     dataList.clear();
     for (int i = 0; i < pageSize; i++) {
       dataList.add("refresh");
@@ -32,7 +34,7 @@ class _RefreshDemoPageState extends State<RefreshDemoPage> {
   }
 
   Future<void> loadMore() async {
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 2));
     for (int i = 0; i < pageSize; i++) {
       dataList.add("loadmore");
     }
@@ -52,7 +54,7 @@ class _RefreshDemoPageState extends State<RefreshDemoPage> {
         loadMore();
       }
     });
-    Future.delayed(Duration(seconds: 0), (){
+    Future.delayed(const Duration(seconds: 0), (){
       refreshKey.currentState!.show();
     });
   }
@@ -67,46 +69,44 @@ class _RefreshDemoPageState extends State<RefreshDemoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: new Text("RefreshDemoPage"),
+        title: const Text("RefreshDemoPage"),
       ),
-      body: Container(
-        child: new RefreshIndicator(
-          ///GlobalKey，用户外部获取RefreshIndicator的State，做显示刷新
-          key: refreshKey,
+      body: RefreshIndicator(
+        ///GlobalKey，用户外部获取RefreshIndicator的State，做显示刷新
+        key: refreshKey,
 
-          ///下拉刷新触发，返回的是一个Future
-          onRefresh: onRefresh,
-          child: new ListView.builder(
-            ///保持ListView任何情况都能滚动，解决在RefreshIndicator的兼容问题。
-            physics: const AlwaysScrollableScrollPhysics(),
+        ///下拉刷新触发，返回的是一个Future
+        onRefresh: onRefresh,
+        child: ListView.builder(
+          ///保持ListView任何情况都能滚动，解决在RefreshIndicator的兼容问题。
+          physics: const AlwaysScrollableScrollPhysics(),
 
-            ///根据状态返回
-            itemBuilder: (context, index) {
-              if (index == dataList.length) {
-                return new Container(
-                  margin: EdgeInsets.all(10),
-                  child: Align(
-                    child: CircularProgressIndicator(),
-                  ),
-                );
-              }
-              return Card(
-                child: new Container(
-                  height: 60,
-                  alignment: Alignment.centerLeft,
-                  child: new Text("Item ${dataList[index]} $index"),
+          ///根据状态返回
+          itemBuilder: (context, index) {
+            if (index == dataList.length) {
+              return Container(
+                margin: const EdgeInsets.all(10),
+                child: const Align(
+                  child: CircularProgressIndicator(),
                 ),
               );
-            },
+            }
+            return Card(
+              child: Container(
+                height: 60,
+                alignment: Alignment.centerLeft,
+                child: Text("Item ${dataList[index]} $index"),
+              ),
+            );
+          },
 
-            ///根据状态返回数量
-            itemCount: (dataList.length >= pageSize)
-                ? dataList.length + 1
-                : dataList.length,
+          ///根据状态返回数量
+          itemCount: (dataList.length >= pageSize)
+              ? dataList.length + 1
+              : dataList.length,
 
-            ///滑动监听
-            controller: _scrollController,
-          ),
+          ///滑动监听
+          controller: _scrollController,
         ),
       ),
     );

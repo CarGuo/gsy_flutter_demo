@@ -1,6 +1,9 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class IndexStackDragCardDemoPage extends StatefulWidget {
+  const IndexStackDragCardDemoPage({super.key});
+
   @override
   State<StatefulWidget> createState() => IndexStackDragCardDemoPageState();
 }
@@ -19,7 +22,7 @@ class IndexStackDragCardDemoPageState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("IndexStackDragCardDemoPage"),
+        title: const Text("IndexStackDragCardDemoPage"),
       ),
       body: Stack(alignment: Alignment.center, children: getCardList()),
     );
@@ -29,8 +32,8 @@ class IndexStackDragCardDemoPageState
     setState(() {
       dataList.removeAt(index);
     });
-    if (dataList.length == 0) {
-      Future.delayed(Duration(seconds: 0), () {
+    if (dataList.isEmpty) {
+      Future.delayed(const Duration(seconds: 0), () {
         setState(() {
           dataList = getDataList();
         });
@@ -41,7 +44,9 @@ class IndexStackDragCardDemoPageState
   getCardItem(index, data) {
     return GestureDetector(
       onTap: () {
-        print("###### ${data.name}");
+        if (kDebugMode) {
+          print("###### ${data.name}");
+        }
       },
       child: Card(
           elevation: 8.0,
@@ -52,7 +57,7 @@ class IndexStackDragCardDemoPageState
             children: <Widget>[
               Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(20.0),
                       topRight: Radius.circular(20.0)),
                   image: DecorationImage(
@@ -62,10 +67,10 @@ class IndexStackDragCardDemoPageState
                 width: 300.0,
               ),
               Container(
-                padding: EdgeInsets.symmetric(vertical: 10),
+                padding: const EdgeInsets.symmetric(vertical: 10),
                 child: Text(
                   data.name,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 18.0,
                     color: Colors.blue,
                   ),
@@ -86,9 +91,14 @@ class IndexStackDragCardDemoPageState
       cardList.add(Positioned.fill(
         child: UnconstrainedBox(
             child: Container(
+          margin: EdgeInsets.only(
+              top: (i < 5) ? 10 * i.toDouble() : 40,
+              left: (i < 5) ? 8 * i.toDouble() : 32),
           child: Draggable(
               onDragEnd: (drag) {
-                print("#### ${drag.velocity.pixelsPerSecond} ${drag.offset}");
+                if (kDebugMode) {
+                  print("#### ${drag.velocity.pixelsPerSecond} ${drag.offset}");
+                }
 
                 ///往下斜着拖
                 if (drag.offset.dx.abs() >
@@ -102,9 +112,6 @@ class IndexStackDragCardDemoPageState
               childWhenDragging: Container(),
               feedback: getCardItem(i, dataList[i]),
               child: getCardItem(i, dataList[i])),
-          margin: EdgeInsets.only(
-              top: (i < 5) ? 10 * i.toDouble() : 40,
-              left: (i < 5) ? 8 * i.toDouble() : 32),
         )),
       ));
     }

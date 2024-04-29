@@ -3,8 +3,8 @@ import 'package:gsy_flutter_demo/widget/custom_viewport/secondary_tab_bar_sliver
 
 class SecondaryTabBar extends StatelessWidget {
   const SecondaryTabBar({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class SecondaryTabBar extends StatelessWidget {
     return Container(
       height: 66,
       color: Colors.red.withOpacity(0.8),
-      child: Center(child: Text('二级tab')),
+      child: const Center(child: Text('二级tab')),
     );
   }
 }

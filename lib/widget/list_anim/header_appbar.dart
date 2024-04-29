@@ -4,7 +4,7 @@ class HeaderAppBar extends StatelessWidget {
   final int alphaBg;
   final bool showStickItem;
 
-  HeaderAppBar({this.alphaBg = 0, this.showStickItem = false});
+  const HeaderAppBar({super.key, this.alphaBg = 0, this.showStickItem = false});
 
   @override
   Widget build(BuildContext context) {
@@ -20,50 +20,50 @@ class HeaderAppBar extends StatelessWidget {
 
     var color = Theme.of(context).primaryColor.withAlpha(alphaBg);
 
-    return new Material(
+    return Material(
       color: Colors.transparent,
-      child: new Container(
+      child: Container(
         alignment: Alignment.centerLeft,
         height: containerHeight,
-        child: new Column(
+        child: Column(
           mainAxisSize: MainAxisSize.max,
           children: <Widget>[
             ///撑满状态栏颜色
-            new Container(
+            Container(
               height: statusBarHeight,
               color: color,
             ),
-            new Container(
+            Container(
               color: color,
               height: kToolbarHeight,
-              child: new Row(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  new Container(
+                  Container(
                     width: 36,
                     height: 36,
                     alignment: Alignment.center,
-                    margin: EdgeInsets.only(right: 10, left: 10),
+                    margin: const EdgeInsets.only(right: 10, left: 10),
                     decoration: BoxDecoration(
                         color: Colors.white.withAlpha(125),
-                        borderRadius: BorderRadius.all(Radius.circular(18))),
+                        borderRadius: const BorderRadius.all(Radius.circular(18))),
                     child: InkWell(
                       onTap: () {
                         Navigator.of(context).pop();
                       },
-                      child: Icon(
+                      child: const Icon(
                         Icons.arrow_back_ios,
                         color: Colors.white,
                       ),
                     ),
                   ),
-                  new Expanded(
-                    child: new Container(
+                  Expanded(
+                    child: Container(
                       height: kToolbarHeight - 15,
-                      margin: EdgeInsets.only(right: 20, left: 20),
+                      margin: const EdgeInsets.only(right: 20, left: 20),
                       decoration: BoxDecoration(
                           color: Colors.white.withAlpha(125),
-                          borderRadius: BorderRadius.all(Radius.circular(10))),
+                          borderRadius: const BorderRadius.all(Radius.circular(10))),
                     ),
                   ),
                 ],
@@ -73,23 +73,23 @@ class HeaderAppBar extends StatelessWidget {
                 ? Container(
                     alignment: Alignment.centerLeft,
                     width: MediaQuery.sizeOf(context).width,
-                    padding: EdgeInsets.only(left: 10),
+                    padding: const EdgeInsets.only(left: 10),
                     height: reactHeight,
                     color: Colors.amber,
-                    child: new Row(
+                    child: const Row(
                       children: <Widget>[
-                        new Icon(Icons.ac_unit, color: Colors.white, size: 13),
-                        new SizedBox(
+                        Icon(Icons.ac_unit, color: Colors.white, size: 13),
+                        SizedBox(
                           width: 10,
                         ),
-                        new Text(
+                        Text(
                           "StickText",
                           style: TextStyle(color: Colors.white),
                         ),
                       ],
                     ),
                   )
-                : new Container()
+                : Container()
           ],
         ),
       ),

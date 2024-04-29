@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class InputBottomDemoPage extends StatefulWidget {
+  const InputBottomDemoPage({super.key});
+
   @override
   _InputBottomDemoPageState createState() => _InputBottomDemoPageState();
 }
@@ -8,7 +10,7 @@ class InputBottomDemoPage extends StatefulWidget {
 class _InputBottomDemoPageState extends State<InputBottomDemoPage> {
   bool isKeyboardShowing = false;
 
-  TextEditingController textEditingController = new TextEditingController();
+  TextEditingController textEditingController = TextEditingController();
 
   @override
   void didChangeDependencies() {
@@ -26,68 +28,66 @@ class _InputBottomDemoPageState extends State<InputBottomDemoPage> {
       },
       content: Scaffold(
         appBar: AppBar(
-          title: new Text("KeyBoardDemoPage"),
+          title: const Text("KeyBoardDemoPage"),
         ),
-        body: new GestureDetector(
+        body: GestureDetector(
           ///透明可以触摸
           behavior: HitTestBehavior.translucent,
           onTap: () {
             /// 触摸收起键盘
-            FocusScope.of(context).requestFocus(new FocusNode());
+            FocusScope.of(context).requestFocus(FocusNode());
           },
-          child: new SafeArea(
-              child: Container(
-            child: new Stack(
-              fit: StackFit.expand,
-              children: <Widget>[
-                new Align(
-                  alignment: Alignment.center,
-                  child:
-                      new Text("测试，测试，测试，测试，测试，测试，测试，测试，测试，测试，测试，测试，测试，测试，测试"),
-                ),
-                new Align(
-                  alignment: Alignment.bottomCenter,
-                  child: new Container(
-                    width: MediaQuery.sizeOf(context).width,
-                    child: new Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        new Container(
-                          width: MediaQuery.sizeOf(context).width,
-                          padding: EdgeInsets.symmetric(horizontal: 10),
-                          decoration: BoxDecoration(
-                              border: Border.all(color: Colors.blueAccent)),
-                          child: TextField(
-                            decoration: InputDecoration(
-                                hintText: "请输入",
-                                enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(width: 0)),
-                                focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(width: 0)),
-                                disabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(width: 0)),
-                                border: UnderlineInputBorder(
-                                    borderSide: BorderSide(width: 0))),
-                            controller: textEditingController,
-                          ),
-                        ),
-                        Visibility(
-                          visible: isKeyboardShowing,
-                          child: new Container(
-                            alignment: Alignment.center,
-                            color: Colors.grey,
-                            height: 40,
+          child: SafeArea(
+              child: Stack(
+                fit: StackFit.expand,
+                children: <Widget>[
+                  const Align(
+                    alignment: Alignment.center,
+                    child:
+                        Text("测试，测试，测试，测试，测试，测试，测试，测试，测试，测试，测试，测试，测试，测试，测试"),
+                  ),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: SizedBox(
+                      width: MediaQuery.sizeOf(context).width,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          Container(
                             width: MediaQuery.sizeOf(context).width,
-                            child: new Text("bottom bar"),
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            decoration: BoxDecoration(
+                                border: Border.all(color: Colors.blueAccent)),
+                            child: TextField(
+                              decoration: const InputDecoration(
+                                  hintText: "请输入",
+                                  enabledBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(width: 0)),
+                                  focusedBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(width: 0)),
+                                  disabledBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(width: 0)),
+                                  border: UnderlineInputBorder(
+                                      borderSide: BorderSide(width: 0))),
+                              controller: textEditingController,
+                            ),
                           ),
-                        ),
-                      ],
+                          Visibility(
+                            visible: isKeyboardShowing,
+                            child: Container(
+                              alignment: Alignment.center,
+                              color: Colors.grey,
+                              height: 40,
+                              width: MediaQuery.sizeOf(context).width,
+                              child: const Text("bottom bar"),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ],
-            ),
-          )),
+                ],
+              )),
         ),
       ),
     );
@@ -102,7 +102,7 @@ class KeyboardDetector extends StatefulWidget {
 
   final Widget content;
 
-  KeyboardDetector({this.keyboardShowCallback, required this.content});
+  const KeyboardDetector({super.key, this.keyboardShowCallback, required this.content});
 
   @override
   _KeyboardDetectorState createState() => _KeyboardDetectorState();

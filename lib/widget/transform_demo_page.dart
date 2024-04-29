@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 
 class TransformDemoPage extends StatelessWidget {
+  const TransformDemoPage({super.key});
+
 
   ///头像
   getHeader(context) {
     ///向上偏移 -30 位置
     return Transform.translate(
-      offset: Offset(0, -30),
-      child: new Container(
+      offset: const Offset(0, -30),
+      child: Container(
         width: 72.0,
         height: 72.0,
         decoration: BoxDecoration(
@@ -20,7 +22,7 @@ class TransformDemoPage extends StatelessWidget {
           shape: BoxShape.circle,
 
           ///图片
-          image: DecorationImage(
+          image: const DecorationImage(
             fit: BoxFit.cover,
             image: AssetImage(
               "static/gsy_cat.png",
@@ -38,20 +40,20 @@ class TransformDemoPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColorDark,
       appBar: AppBar(
-        title: new Text("TransformDemoPage"),
+        title: const Text("TransformDemoPage"),
       ),
       body: Container(
         alignment: Alignment.center,
-        child: new Card(
-          margin: EdgeInsets.all(10),
+        child: Card(
+          margin: const EdgeInsets.all(10),
           child: Container(
             height: 150,
-            padding: EdgeInsets.all(10),
-            child: new Column(
+            padding: const EdgeInsets.all(10),
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 getHeader(context),
-                new Text(
+                const Text(
                   "Flutter is Google's portable UI toolkit for crafting "
                   "beautiful, natively compiled applications for mobile, "
                   "web, and desktop from a single codebase. ",

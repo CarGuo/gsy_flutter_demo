@@ -5,14 +5,12 @@ import 'package:flutter/rendering.dart';
 
 class _CustomSliver extends SingleChildRenderObjectWidget {
   const _CustomSliver({
-    Key? key,
     this.containerLayoutExtent = 0.0,
     this.initLayoutExtent = 0.0,
     this.hasLayoutExtent = false,
     this.pinned = false,
-    Widget? child,
-  })  : assert(containerLayoutExtent >= 0.0),
-        super(key: key, child: child);
+    super.child,
+  })  : assert(containerLayoutExtent >= 0.0);
 
   final double initLayoutExtent;
   final double containerLayoutExtent;
@@ -223,7 +221,7 @@ typedef ContainerBuilder = Widget Function(
 
 class CustomSliver extends StatefulWidget {
   const CustomSliver({
-    Key? key,
+    super.key,
     this.triggerPullDistance = _defaultTriggerPullDistance,
     this.containerExtent = _defaultcontainerExtent,
     this.initLayoutExtent = 0,
@@ -234,8 +232,7 @@ class CustomSliver extends StatefulWidget {
         assert(
             triggerPullDistance >= containerExtent,
             'The  container cannot take more space in its final state '
-            'than the amount initially created by overscrolling.'),
-        super(key: key);
+            'than the amount initially created by overscrolling.');
 
   final double triggerPullDistance;
 
@@ -259,19 +256,18 @@ class CustomSliver extends StatefulWidget {
     const Curve opacityCurve = Interval(0.0, 1, curve: Curves.easeInOut);
     return Stack(
       children: <Widget>[
-        new Opacity(
+        Opacity(
           opacity: 1.0,
-          child: new Container(color: Colors.red),
+          child: Container(color: Colors.red),
         ),
-        new Opacity(
+        Opacity(
           opacity:
               opacityCurve.transform(min(pulledExtent / containerExtent, 1.0)),
           child: InkWell(
             onTap: () {
-              print("FFFF");
             },
-            child: new Container(
-              decoration: BoxDecoration(
+            child: Container(
+              decoration: const BoxDecoration(
                 color: Colors.amber,
                 image: DecorationImage(
                   fit: BoxFit.cover,

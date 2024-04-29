@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:ui' as ui show ImageFilter;
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'drop_rect_tween.dart';
@@ -30,28 +31,27 @@ class DropSelectMenu extends DropSelectWidget {
 
   final double? maxMenuHeight;
 
-  DropSelectMenu(
+  const DropSelectMenu(
       {required this.menus,
-        DropSelectController? controller,
+        super.controller,
       Duration? hideDuration,
       Duration? showDuration,
       this.onHide,
       this.blur,
-      Key? key,
+      super.key,
       this.maxMenuHeight,
       Curve? hideCurve,
       this.switchStyle = DropSelectMenuSwitchStyle
           .animationShowUntilAnimationHideComplete,
       Curve? showCurve})
-      : hideDuration = hideDuration ?? new Duration(milliseconds: 150),
-        showDuration = showDuration ?? new Duration(milliseconds: 300),
+      : hideDuration = hideDuration ?? const Duration(milliseconds: 150),
+        showDuration = showDuration ?? const Duration(milliseconds: 300),
         showCurve = showCurve ?? Curves.fastOutSlowIn,
-        hideCurve = hideCurve ?? Curves.fastOutSlowIn,
-        super(key: key, controller: controller);
+        hideCurve = hideCurve ?? Curves.fastOutSlowIn;
 
   @override
   DropSelectState<DropSelectMenu> createState() {
-    return new _DropSelectMenuState();
+    return _DropSelectMenuState();
   }
 }
 
@@ -61,13 +61,13 @@ class _DropSelectAnimation {
   late DropRectTween position;
 
   _DropSelectAnimation(TickerProvider provider) {
-    animationController = new AnimationController(vsync: provider);
+    animationController = AnimationController(vsync: provider);
   }
 
   set height(double value) {
-    position = new DropRectTween(
-      begin: new Rect.fromLTRB(0.0, -value, 0.0, 0.0),
-      end: new Rect.fromLTRB(0.0, 0.0, 0.0, 0.0),
+    position = DropRectTween(
+      begin: Rect.fromLTRB(0.0, -value, 0.0, 0.0),
+      end: const Rect.fromLTRB(0.0, 0.0, 0.0, 0.0),
     );
 
     rect = position.animate(animationController);
@@ -90,7 +90,7 @@ class _DropSelectAnimation {
 class SizeClipper extends CustomClipper<Rect> {
   @override
   Rect getClip(Size size) {
-    return new Rect.fromLTWH(0.0, 0.0, size.width, size.height);
+    return Rect.fromLTWH(0.0, 0.0, size.width, size.height);
   }
 
   @override
@@ -113,15 +113,15 @@ class _DropSelectMenuState extends DropSelectState<DropSelectMenu>
     _showing = [];
     _dropSelectAnimations = [];
     for (int i = 0, c = widget.menus.length; i < c; ++i) {
-      _dropSelectAnimations.add(new _DropSelectAnimation(this));
+      _dropSelectAnimations.add(_DropSelectAnimation(this));
     }
 
     _updateHeights();
 
     _show = false;
 
-    _fadeController = new AnimationController(vsync: this);
-    _fadeAnimation = new Tween(
+    _fadeController = AnimationController(vsync: this);
+    _fadeAnimation = Tween(
       begin: 0.0,
       end: 1.0,
     ).animate(_fadeController);
@@ -155,21 +155,21 @@ class _DropSelectMenuState extends DropSelectState<DropSelectMenu>
   Widget createMenu(BuildContext context, DropSelectMenuBuilder menu, int i) {
     DropSelectMenuBuilder builder = menu;
 
-    return new ClipRect(
-      clipper: new SizeClipper(),
-      child: new SizedBox(
+    return ClipRect(
+      clipper: SizeClipper(),
+      child: SizedBox(
           height: _ensureHeight(builder.height),
           child: _showing.contains(i) ? builder.builder(context) : null),
     );
   }
 
   Widget _buildBackground(BuildContext context) {
-    Widget container = new Container(
+    Widget container = Container(
       color: Colors.black26,
     );
 
-    container = new BackdropFilter(
-        filter: new ui.ImageFilter.blur(
+    container = BackdropFilter(
+        filter: ui.ImageFilter.blur(
           sigmaY: widget.blur ?? 0,
           sigmaX: widget.blur ?? 0,
         ),
@@ -182,25 +182,27 @@ class _DropSelectMenuState extends DropSelectState<DropSelectMenu>
   Widget build(BuildContext context) {
     List<Widget> list = [];
 
-    print("build ${new DateTime.now()}");
+    if (kDebugMode) {
+      print("build ${DateTime.now()}");
+    }
 
     if (_show) {
       list.add(
-        new FadeTransition(
+        FadeTransition(
           opacity: _fadeAnimation,
-          child: new GestureDetector(
+          child: GestureDetector(
               onTap: onHide, child: _buildBackground(context)),
         ),
       );
     }
 
     for (int i = 0, c = widget.menus.length; i < c; ++i) {
-      list.add(new RelativePositionedTransition(
+      list.add(RelativePositionedTransition(
           rect: _dropSelectAnimations[i].rect,
-          size: new Size(0.0, 0.0),
-          child: new Align(
+          size: const Size(0.0, 0.0),
+          child: Align(
               alignment: Alignment.topCenter,
-              child: new Container(
+              child: Container(
                 color: Theme.of(context).scaffoldBackgroundColor,
                 child: createMenu(context, widget.menus[i], i),
               ))));
@@ -208,7 +210,7 @@ class _DropSelectMenuState extends DropSelectState<DropSelectMenu>
 
     //WidgetsBinding;
     //context.findRenderObject();
-    return new Stack(
+    return Stack(
       fit: StackFit.expand,
       children: list,
     );
@@ -238,7 +240,7 @@ class _DropSelectMenuState extends DropSelectState<DropSelectMenu>
       return future;
     }
 
-    return new TickerFuture.complete();
+    return TickerFuture.complete();
   }
 
   TickerFuture _hide(int index) {
@@ -273,7 +275,7 @@ class _DropSelectMenuState extends DropSelectState<DropSelectMenu>
               _show = true;
             });
 
-            return new Future.value(null);
+            return Future.value(null);
           }
         case DropSelectMenuSwitchStyle.animationHideAnimationShow:
           {

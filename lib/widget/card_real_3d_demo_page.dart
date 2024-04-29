@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:zflutter/zflutter.dart';
 
 class CardReal3DDemoPage extends StatefulWidget {
-  const CardReal3DDemoPage({Key? key}) : super(key: key);
+  const CardReal3DDemoPage({super.key});
 
   @override
   State<CardReal3DDemoPage> createState() => _CardReal3DDemoPageState();
@@ -41,13 +41,13 @@ class _CardReal3DDemoPageState extends State<CardReal3DDemoPage> {
   Widget build(BuildContext context) {
     double width = 279;
     double height = 194;
-    final double screenRadius = 15;
-    final double border = 4;
+    const double screenRadius = 15;
+    const double border = 4;
 
     return Scaffold(
-      appBar: AppBar(title: Text("CardReal3DDemoPage")),
+      appBar: AppBar(title: const Text("CardReal3DDemoPage")),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
               colors: [Colors.blueAccent, Colors.yellowAccent],
               begin: Alignment.topCenter,
@@ -65,7 +65,7 @@ class _CardReal3DDemoPageState extends State<CardReal3DDemoPage> {
                       sortMode: SortMode.stack,
                       children: [
                         ZPositioned(
-                          translate: ZVector(0, 0, -border / 2),
+                          translate: const ZVector(0, 0, -border / 2),
                           child: ZRoundedRect(
                             width: width,
                             height: height,
@@ -80,30 +80,28 @@ class _CardReal3DDemoPageState extends State<CardReal3DDemoPage> {
                           height: height,
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(screenRadius),
-                            child: Container(
-                              child: Stack(
-                                children: [
-                                  SizedBox.fromSize(
-                                      size: Size(width, height),
-                                      child: Image.asset(
-                                          "static/card_down_2.png")),
-                                  Transform(
-                                    transform: Matrix4.identity()..rotateY(pi),
-                                    alignment: FractionalOffset.center,
-                                    child: Align(
-                                      alignment: Alignment(0.5, -0.07),
-                                      child: new Text(
-                                        "G S Y",
-                                        style: TextStyle(
-                                            fontSize: 23,
-                                            fontFamily: "bglbt",
-                                            fontStyle: FontStyle.italic,
-                                            fontWeight: FontWeight.bold),
-                                      ),
+                            child: Stack(
+                              children: [
+                                SizedBox.fromSize(
+                                    size: Size(width, height),
+                                    child: Image.asset(
+                                        "static/card_down_2.png")),
+                                Transform(
+                                  transform: Matrix4.identity()..rotateY(pi),
+                                  alignment: FractionalOffset.center,
+                                  child: const Align(
+                                    alignment: Alignment(0.5, -0.07),
+                                    child: Text(
+                                      "G S Y",
+                                      style: TextStyle(
+                                          fontSize: 23,
+                                          fontFamily: "bglbt",
+                                          fontStyle: FontStyle.italic,
+                                          fontWeight: FontWeight.bold),
                                     ),
-                                  )
-                                ],
-                              ),
+                                  ),
+                                )
+                              ],
                             ),
                           ),
                         ),
@@ -139,7 +137,7 @@ class _CardReal3DDemoPageState extends State<CardReal3DDemoPage> {
                                 stroke: 1,
                                 closed: false,
                                 backfaceColor: Colors.black54,
-                                front: ZVector.only(z: 100),
+                                front: const ZVector.only(z: 100),
                                 color: Colors.grey.withAlpha(200),
                               ),
                             ),
@@ -150,12 +148,12 @@ class _CardReal3DDemoPageState extends State<CardReal3DDemoPage> {
                                 stroke: 2,
                                 closed: false,
                                 backfaceColor: Colors.black54,
-                                front: ZVector.only(z: 100),
+                                front: const ZVector.only(z: 100),
                                 color: Colors.white.withAlpha(200),
                               ),
                             ),
                             ZPositioned(
-                              rotate: ZVector(0, 0, tau / 2),
+                              rotate: const ZVector(0, 0, tau / 2),
                               child: ZShape(
                                 visible: false,
                                 path: [...listNum(width, height, 2)],
@@ -166,7 +164,7 @@ class _CardReal3DDemoPageState extends State<CardReal3DDemoPage> {
                               ),
                             ),
                             ZPositioned(
-                              rotate: ZVector(0, 0, tau / 2),
+                              rotate: const ZVector(0, 0, tau / 2),
                               child: ZShape(
                                 visible: false,
                                 path: [...listNum(width, height, 1)],
@@ -174,7 +172,7 @@ class _CardReal3DDemoPageState extends State<CardReal3DDemoPage> {
                                 stroke: 2,
                                 closed: false,
                                 backfaceColor: Colors.black54,
-                                front: ZVector.only(z: 100),
+                                front: const ZVector.only(z: 100),
                                 color: Colors.white.withAlpha(200),
                               ),
                             ),

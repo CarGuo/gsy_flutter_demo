@@ -3,50 +3,50 @@ import 'package:flutter/material.dart';
 const String testString = "Hello GSY，欢迎你的交流";
 
 class AnimaDemoPage5 extends StatefulWidget {
+  const AnimaDemoPage5({super.key});
+
   @override
   _AnimaDemoPageState createState() => _AnimaDemoPageState();
 }
 
 class _AnimaDemoPageState extends State<AnimaDemoPage5>
     with TickerProviderStateMixin {
-  List<String> _charList = [];
-  List<AnimationController> _controllerList =[];
-  List<CurvedAnimation> _moveAnimation = [];
+  final List<String> _charList = [];
+  final List<AnimationController> _controllerList =[];
+  final List<CurvedAnimation> _moveAnimation = [];
 
   bool played = false;
   bool playing = false;
 
   @override
   void initState() {
-    testString.codeUnits.forEach((value) {
+    for (var value in testString.codeUnits) {
       _charList.add(String.fromCharCode(value));
       var controller = AnimationController(
-          vsync: this, duration: Duration(milliseconds: 600));
+          vsync: this, duration: const Duration(milliseconds: 600));
       _controllerList.add(controller);
       _moveAnimation.add(CurvedAnimation(
         parent: controller,
         curve: Curves.easeInOutExpo,
       ));
-    });
+    }
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('AnimaDemoPage5')),
-      body: Container(
-        child: new Center(
-          child: Wrap(
-            children: List.generate(_charList.length, (i) {
-              return AnimatedText(
-                  animation: _moveAnimation[i],
-                  child: Text(
-                    _charList[i],
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                  ));
-            }),
-          ),
+      appBar: AppBar(title: const Text('AnimaDemoPage5')),
+      body: Center(
+        child: Wrap(
+          children: List.generate(_charList.length, (i) {
+            return AnimatedText(
+                animation: _moveAnimation[i],
+                child: Text(
+                  _charList[i],
+                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ));
+          }),
         ),
       ),
       floatingActionButton: FloatingActionButton(
@@ -54,12 +54,13 @@ class _AnimaDemoPageState extends State<AnimaDemoPage5>
           if (playing) {
             return;
           }
-          if (played)
+          if (played) {
             back();
-          else
+          } else {
             play();
+          }
         },
-        child: Icon(Icons.play_arrow),
+        child: const Icon(Icons.play_arrow),
       ),
     );
   }
@@ -101,7 +102,7 @@ class AnimatedText extends AnimatedWidget {
   final Tween<double> _opacityAnim = Tween(begin: 0, end: 1);
   final Widget? child;
 
-  AnimatedText({required Animation<double> animation, this.child})
+  AnimatedText({super.key, required Animation<double> animation, this.child})
       : super(listenable: animation);
 
   _getOpacity() {
@@ -121,7 +122,7 @@ class AnimatedText extends AnimatedWidget {
       opacity: _getOpacity(),
       child: SlideTransition(
         position:
-            Tween(begin: Offset(0, 5), end: Offset(0, 0)).animate(listenable as Animation<double>),
+            Tween(begin: const Offset(0, 5), end: const Offset(0, 0)).animate(listenable as Animation<double>),
         child: child,
       ),
     );

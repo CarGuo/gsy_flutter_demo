@@ -1,9 +1,10 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 
 
 class AnimTextDemoPage extends StatefulWidget {
-  AnimTextDemoPage({Key? key}) : super(key: key);
+  const AnimTextDemoPage({super.key});
 
   @override
   _AnimTextDemoPageState createState() => _AnimTextDemoPageState();
@@ -18,7 +19,9 @@ class _AnimTextDemoPageState extends State<AnimTextDemoPage> {
   void initState() {
     super.initState();
     _examples = animatedTextExamples(onTap: () {
-      print('Tap Event');
+      if (kDebugMode) {
+        print('Tap Event');
+      }
       setState(() {
         _tapCount++;
       });
@@ -33,7 +36,7 @@ class _AnimTextDemoPageState extends State<AnimTextDemoPage> {
       appBar: AppBar(
         title: Text(
           animatedTextExample.label,
-          style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
+          style: const TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
         ),
       ),
       body: Column(
@@ -124,7 +127,7 @@ List<AnimatedTextExample> animatedTextExamples({VoidCallback? onTap}) =>
                   height: 100.0,
                 ),
                 DefaultTextStyle(
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 40.0,
                     fontFamily: 'Horizon',
                   ),

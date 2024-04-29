@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 
 ///来着 [Flutter 社区 公众号] 的动画例子
 class AnimationContainerDemoPage extends StatefulWidget {
+  const AnimationContainerDemoPage({super.key});
+
   @override
   _AnimationContainerDemoPageState createState() => _AnimationContainerDemoPageState();
 }
@@ -21,7 +23,7 @@ class _AnimationContainerDemoPageState extends State<AnimationContainerDemoPage>
   Widget build(BuildContext context) {
     return  Scaffold(
       appBar: AppBar(
-        title: Text('AnimationContainerDemoPage Demo'),
+        title: const Text('AnimationContainerDemoPage Demo'),
       ),
       body: Center(
         child: AnimatedContainer(
@@ -33,13 +35,13 @@ class _AnimationContainerDemoPageState extends State<AnimationContainerDemoPage>
             borderRadius: _borderRadius,
           ),
           // Define how long the animation should take.
-          duration: Duration(seconds: 1),
+          duration: const Duration(seconds: 1),
           // Provide an optional curve to make the animation feel smoother.
           curve: Curves.fastOutSlowIn,
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.play_arrow),
+        child: const Icon(Icons.play_arrow),
         // When the user taps the button
         onPressed: () {
           // Use setState to rebuild the widget with new values.

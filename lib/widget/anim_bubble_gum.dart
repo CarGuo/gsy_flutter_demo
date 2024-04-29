@@ -9,13 +9,15 @@ import 'package:flutter/material.dart';
 /// https://codepen.io/rx-labz/pen/xxwdGaM?__cf_chl_jschl_tk__=830b2fd03dd1ccb9ac8d7c1fdbdee39e71fc2e7c-1587971334-0-AQ6h_JKRflUPLJcJhlH7eT841oCDgD5EttuC0cq9I50PQHwBtecDMdA9H-_a9FitSk4HQwlPO3dvvYn83act0FI6ufSlRL7MCB-gJVkKQov2i-AVA92X3KFwD93JOfog1LMy9yTdUyNb1zr43ZgC2X-cg0IsMGPr6U54kAb40AQgoK-KbYc9-KYWUIFqFy8pShOZIfn23-0lInSjKlJ3p8rnLXp84p7rhdTNrQU0pWPKNiDkuuthEaqzi9THfk4-iTrZ3CJ6wU0t81T9GyKwIT5VthFlnuPyNqIKseggtyxBxgZJ4W4ec6FmQoFp7bYAQF9rFb3D5L_3juEL-262JH_TP20ojcgjb30pvNnHyTfh
 
 class AnimBubbleGumDemoPage extends StatelessWidget {
+  const AnimBubbleGumDemoPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("AnimBubbleGumDemoPage"),
+        title: const Text("AnimBubbleGumDemoPage"),
       ),
-      body: Container(color: Colors.pink[200], child: AnimBubbleGum()),
+      body: Container(color: Colors.pink[200], child: const AnimBubbleGum()),
     );
   }
 }
@@ -40,18 +42,20 @@ class Circle {
 }
 
 class AnimBubbleGum extends StatefulWidget {
+  const AnimBubbleGum({super.key});
+
   @override
-  _AnimBubbleGumState createState() => _AnimBubbleGumState();
+  AnimBubbleGumState createState() => AnimBubbleGumState();
 }
 
-class _AnimBubbleGumState extends State<AnimBubbleGum> {
+class AnimBubbleGumState extends State<AnimBubbleGum> {
   late Timer timer;
 
   final circles = <Circle>[];
 
   late Size size;
 
-  Offset force = Offset(1, 1);
+  Offset force = const Offset(1, 1);
 
   HSLColor hslColor = HSLColor.fromColor(Colors.pink[100]!);
 
@@ -70,7 +74,7 @@ class _AnimBubbleGumState extends State<AnimBubbleGum> {
     timer = Timer.periodic(
       frequency,
       (t) {
-        if (circles.isEmpty)
+        if (circles.isEmpty) {
           _circleStreamer.add(
             circles
               ..add(
@@ -81,6 +85,7 @@ class _AnimBubbleGumState extends State<AnimBubbleGum> {
                 ),
               ),
           );
+        }
         int count = 0;
         while (count < 29) {
           final p = // newPoint
@@ -118,7 +123,7 @@ class _AnimBubbleGumState extends State<AnimBubbleGum> {
   Widget build(BuildContext context) => Stack(
         children: [
           StreamBuilder<List<Circle>>(
-            initialData: [],
+            initialData: const [],
             stream: _circle$.map(
               (event) => event.length > numCircles
                   ? event
@@ -164,11 +169,12 @@ class Painter extends CustomPainter {
               c.offset! - Offset(0, c.radius),
               c.radius,
               [
-                Color(0x53ffffff),
+                const Color(0x53ffffff),
                 Colors.transparent,
               ],
             );
         }
+      // ignore: empty_catches
       } catch (e) {}
       //too heavy for mobile web rendering
 

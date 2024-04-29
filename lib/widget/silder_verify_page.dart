@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
 
 class SlideVerifyPage extends StatelessWidget {
-  const SlideVerifyPage({Key? key}) : super(key: key);
+  const SlideVerifyPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("SlideVerifyPage"),
+        title: const Text("SlideVerifyPage"),
       ),
-      body: Container(
-        child: Center(
-          child: SlideVerify(
-            sliderImage: "static/gsy_cat.png",
-            successText: "验证成功",
-            initText: "滑动验证",
-          ),
+      body: const Center(
+        child: SlideVerify(
+          sliderImage: "static/gsy_cat.png",
+          successText: "验证成功",
+          initText: "滑动验证",
         ),
       ),
     );
@@ -37,7 +35,7 @@ class SlideVerify extends StatefulWidget {
   final VoidCallback? successListener;
 
   const SlideVerify(
-      {Key? key,
+      {super.key,
       this.height = 60,
       this.width = 250,
       this.successText,
@@ -50,8 +48,7 @@ class SlideVerify extends StatefulWidget {
       this.bgColor = Colors.grey,
       this.moveColor = Colors.blue,
       this.borderColor = Colors.blueAccent,
-      this.successListener})
-      : super(key: key);
+      this.successListener});
 
   @override
   State<StatefulWidget> createState() {
@@ -98,8 +95,8 @@ class SlideVerifyState extends State<SlideVerify>
   @override
   void initState() {
     super.initState();
-    this.width = widget.width;
-    this.height = widget.height;
+    width = widget.width;
+    height = widget.height;
     _init();
   }
 
@@ -150,7 +147,7 @@ class SlideVerifyState extends State<SlideVerify>
         decoration: BoxDecoration(
             color: widget.bgColor,
             border: Border.all(color: widget.borderColor),
-            borderRadius: BorderRadius.all(new Radius.circular(height))),
+            borderRadius: BorderRadius.all(Radius.circular(height))),
         child: Stack(
           alignment: Alignment.centerLeft,
           children: <Widget>[
@@ -187,7 +184,7 @@ class SlideVerifyState extends State<SlideVerify>
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.all(
-                    new Radius.circular(sliderWidth),
+                    Radius.circular(sliderWidth),
                   ),
                 ),
                 child: Row(

@@ -3,7 +3,7 @@ import 'dart:math' as math;
 
 ///聊天列表，添加旧数据和新数据的时候不会导致列表跳动，首尾添加数据不会抖动
 class ChatListScrollDemoPage2 extends StatefulWidget {
-  const ChatListScrollDemoPage2({Key? key}) : super(key: key);
+  const ChatListScrollDemoPage2({super.key});
 
   @override
   _ChatListScrollDemoPageState2 createState() =>
@@ -14,9 +14,9 @@ class _ChatListScrollDemoPageState2 extends State<ChatListScrollDemoPage2> {
   final random = math.Random(10);
 
   List<ItemData> newData = [
-    new ItemData(txt: "*********init 1*********", type: "Left", size: 60),
-    new ItemData(txt: "*********init 2*********", type: "Left", size: 70),
-    new ItemData(txt: "*********init 3*********", type: "Left", size: 100)
+    ItemData(txt: "*********init 1*********", type: "Left", size: 60),
+    ItemData(txt: "*********init 2*********", type: "Left", size: 70),
+    ItemData(txt: "*********init 3*********", type: "Left", size: 100)
   ];
   List<ItemData> loadMoreData = [];
 
@@ -31,10 +31,10 @@ class _ChatListScrollDemoPageState2 extends State<ChatListScrollDemoPage2> {
         borderRadius: BorderRadius.circular(4),
         color: Colors.red,
       ),
-      margin: EdgeInsets.only(left: 50, right: 10, top: 5, bottom: 5),
-      padding: EdgeInsets.all(10),
+      margin: const EdgeInsets.only(left: 50, right: 10, top: 5, bottom: 5),
+      padding: const EdgeInsets.all(10),
       alignment: Alignment.centerRight,
-      child: new Text(
+      child: Text(
         data.txt,
         maxLines: 10,
       ),
@@ -48,17 +48,17 @@ class _ChatListScrollDemoPageState2 extends State<ChatListScrollDemoPage2> {
         borderRadius: BorderRadius.circular(4),
         color: Colors.green,
       ),
-      margin: EdgeInsets.only(right: 50, left: 10, top: 5, bottom: 5),
-      padding: EdgeInsets.all(10),
+      margin: const EdgeInsets.only(right: 50, left: 10, top: 5, bottom: 5),
+      padding: const EdgeInsets.all(10),
       alignment: Alignment.centerLeft,
-      child: new Text(
+      child: Text(
         data.txt,
         maxLines: 10,
       ),
     );
   }
 
-  ScrollPhysics _physics = BouncingScrollPhysics();
+  final ScrollPhysics _physics = const BouncingScrollPhysics();
 
   @override
   Widget build(BuildContext context) {
@@ -70,19 +70,19 @@ class _ChatListScrollDemoPageState2 extends State<ChatListScrollDemoPage2> {
               type: "Right",
               size: random.nextInt(60)));
           setState(() {});
-          Future.delayed(Duration(milliseconds: 1000), () {
+          Future.delayed(const Duration(milliseconds: 1000), () {
             scroller.jumpTo(scroller.position.maxScrollExtent);
           });
         },
-        child: Text(
+        child: const Text(
           "Send",
           style: TextStyle(color: Colors.yellow),
         ),
       ),
       appBar: AppBar(
-        title: new Text("ControllerDemoPage"),
+        title: const Text("ControllerDemoPage"),
         actions: [
-          new TextButton.icon(
+          TextButton.icon(
               onPressed: () {
                 final random = math.Random();
                 int randomInt = random.nextInt(10);
@@ -102,15 +102,15 @@ class _ChatListScrollDemoPageState2 extends State<ChatListScrollDemoPage2> {
                 }
                 setState(() {});
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.add,
                 color: Colors.red,
               ),
-              label: Text(
+              label: const Text(
                 "add old",
                 style: TextStyle(color: Colors.red),
               )),
-          new TextButton.icon(
+          TextButton.icon(
               onPressed: () {
                 final random = math.Random();
                 int randomInt = random.nextInt(10);
@@ -130,13 +130,13 @@ class _ChatListScrollDemoPageState2 extends State<ChatListScrollDemoPage2> {
                 }
                 setState(() {});
                 if (extentAfter == 0) {
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                     content: Text("你目前位于最底部，自动跳转新消息item"),
                     duration: Duration(milliseconds: 1000),
                   ));
-                  Future.delayed(Duration(milliseconds: 200), () {
+                  Future.delayed(const Duration(milliseconds: 200), () {
                     scroller.jumpTo(scroller.position.maxScrollExtent);
-                    Future.delayed(Duration(milliseconds: 400), () {
+                    Future.delayed(const Duration(milliseconds: 400), () {
                       scroller.jumpTo(scroller.position.maxScrollExtent);
                     });
                   });
@@ -146,9 +146,9 @@ class _ChatListScrollDemoPageState2 extends State<ChatListScrollDemoPage2> {
                       onTap: () {
                         scroller
                             .jumpTo(scroller.position.maxScrollExtent * 0.7);
-                        Future.delayed(Duration(milliseconds: 400), () {
+                        Future.delayed(const Duration(milliseconds: 400), () {
                           scroller.animateTo(scroller.position.maxScrollExtent,
-                              duration: Duration(milliseconds: 500),
+                              duration: const Duration(milliseconds: 500),
                               curve: Curves.linear);
                         });
                       },
@@ -157,18 +157,18 @@ class _ChatListScrollDemoPageState2 extends State<ChatListScrollDemoPage2> {
                         width: 200,
                         color: Colors.blueAccent,
                         alignment: Alignment.centerLeft,
-                        child: Text("点击我自动跳转新消息item"),
+                        child: const Text("点击我自动跳转新消息item"),
                       ),
                     ),
-                    duration: Duration(milliseconds: 1000),
+                    duration: const Duration(milliseconds: 1000),
                   ));
                 }
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.add,
                 color: Colors.yellow,
               ),
-              label: Text(
+              label: const Text(
                 "add new",
                 style: TextStyle(color: Colors.yellow),
               )),
@@ -239,10 +239,11 @@ class _ChatListScrollDemoPageState2 extends State<ChatListScrollDemoPage2> {
               delegate: SliverChildBuilderDelegate(
                 (BuildContext context, int index) {
                   var item = loadMoreData[index];
-                  if (item.type == "Right")
+                  if (item.type == "Right") {
                     return renderRightItem(item, random.nextInt(60).toDouble());
-                  else
+                  } else {
                     return renderLeftItem(item, random.nextInt(60).toDouble());
+                  }
                 },
                 childCount: loadMoreData.length,
               ),
@@ -255,10 +256,11 @@ class _ChatListScrollDemoPageState2 extends State<ChatListScrollDemoPage2> {
               delegate: SliverChildBuilderDelegate(
                 (BuildContext context, int index) {
                   var item = newData[index];
-                  if (item.type == "Right")
+                  if (item.type == "Right") {
                     return renderRightItem(item, item.size.toDouble());
-                  else
+                  } else {
                     return renderLeftItem(item, item.size.toDouble());
+                  }
                 },
                 childCount: newData.length,
               ),

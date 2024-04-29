@@ -28,7 +28,7 @@ class BubbleTipWidget extends StatefulWidget {
   final VoidCallback? voidCallback;
 
   const BubbleTipWidget(
-      {this.width,
+      {super.key, this.width,
       this.height,
       this.radius,
       this.text = "",
@@ -52,10 +52,6 @@ class _BubbleTipWidgetState extends State<BubbleTipWidget>
     super.initState();
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -139,7 +135,7 @@ class _BubbleTipWidgetState extends State<BubbleTipWidget>
     }
 
 
-    return new Scaffold(
+    return Scaffold(
       backgroundColor: Colors.transparent,
       body: GestureDetector(
         ///透明可以点击
@@ -152,42 +148,42 @@ class _BubbleTipWidgetState extends State<BubbleTipWidget>
           width: widget.width,
           height: widget.height,
           margin: EdgeInsets.only(left: x, top: y),
-          child: new Stack(
+          child: Stack(
             children: <Widget>[
               ///绘制气泡背景
               CustomPaint(
                   key: paintKey,
-                  size: new Size(widget.width!, widget.height!),
+                  size: Size(widget.width!, widget.height!),
                   painter: bubbleBuild.build()),
 
               Align(
                 alignment: alignment,
 
                 ///显示文本等
-                child: new Container(
+                child: Container(
                   margin: margin,
                   width: widget.width,
                   height: widget.height! - arrowHeight,
                   alignment: Alignment.centerLeft,
-                  child: new Row(
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      new Container(
-                        margin: EdgeInsets.only(left: 20),
+                      Container(
+                        margin: const EdgeInsets.only(left: 20),
                         height: widget.height,
-                        child: new Icon(
+                        child: Icon(
                           Icons.notifications,
                           size: widget.height! - 30,
                           color: Theme.of(context).primaryColorDark,
                         ),
                       ),
-                      new Expanded(
-                        child: new Container(
-                          margin: EdgeInsets.only(left: 5, right: 5),
-                          child: new Text(
+                      Expanded(
+                        child: Container(
+                          margin: const EdgeInsets.only(left: 5, right: 5),
+                          child: Text(
                             widget.text,
-                            style: TextStyle(fontSize: 14, color: Colors.black),
+                            style: const TextStyle(fontSize: 14, color: Colors.black),
                           ),
                         ),
                       )

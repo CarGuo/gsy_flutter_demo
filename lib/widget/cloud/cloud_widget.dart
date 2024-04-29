@@ -6,12 +6,12 @@ class CloudWidget extends MultiChildRenderObjectWidget {
   final Clip overflow;
   final double ratio;
 
-  CloudWidget({
-    Key? key,
+  const CloudWidget({
+    super.key,
     this.ratio = 1,
     this.overflow = Clip.none,
-    List<Widget> children = const <Widget>[],
-  }) : super(key: key, children: children);
+    super.children,
+  });
 
   @override
   RenderObject createRenderObject(BuildContext context) {

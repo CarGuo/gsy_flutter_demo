@@ -1,7 +1,10 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/physics.dart';
 
 class IndexStackDragCardDemoPage2 extends StatefulWidget {
+  const IndexStackDragCardDemoPage2({super.key});
+
   @override
   _IndexStackDragCardDemoPage2State createState() =>
       _IndexStackDragCardDemoPage2State();
@@ -21,8 +24,8 @@ class _IndexStackDragCardDemoPage2State
     setState(() {
       dataList.removeAt(index);
     });
-    if (dataList.length == 0) {
-      Future.delayed(Duration(seconds: 0), () {
+    if (dataList.isEmpty) {
+      Future.delayed(const Duration(seconds: 0), () {
         setState(() {
           dataList = getDataList();
         });
@@ -34,7 +37,7 @@ class _IndexStackDragCardDemoPage2State
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('A draggable card!'),
+        title: const Text('A draggable card!'),
       ),
       body: Stack(
         children: getCardList(),
@@ -72,7 +75,9 @@ class _IndexStackDragCardDemoPage2State
   getCardItem(index, data) {
     return GestureDetector(
       onTap: () {
-        print("###### ${data.name}");
+        if (kDebugMode) {
+          print("###### ${data.name}");
+        }
       },
       child: Card(
           elevation: 8.0,
@@ -83,7 +88,7 @@ class _IndexStackDragCardDemoPage2State
             children: <Widget>[
               Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(20.0),
                       topRight: Radius.circular(20.0)),
                   image: DecorationImage(
@@ -93,10 +98,10 @@ class _IndexStackDragCardDemoPage2State
                 width: 300.0,
               ),
               Container(
-                padding: EdgeInsets.symmetric(vertical: 10),
+                padding: const EdgeInsets.symmetric(vertical: 10),
                 child: Text(
                   data.name,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 18.0,
                     color: Colors.blue,
                   ),
@@ -113,7 +118,7 @@ class DraggableCard extends StatefulWidget {
   final ValueChanged? removeCall;
   final int? index;
 
-  DraggableCard({this.child, this.removeCall, this.index});
+  const DraggableCard({super.key, this.child, this.removeCall, this.index});
 
   @override
   _DraggableCardState createState() => _DraggableCardState();
@@ -154,7 +159,7 @@ class _DraggableCardState extends State<DraggableCard>
   void initState() {
     super.initState();
     _controller = AnimationController(vsync: this)
-      ..duration = Duration(microseconds: 500);
+      ..duration = const Duration(microseconds: 500);
 
     _controller.addListener(() {
       setState(() {
@@ -177,7 +182,9 @@ class _DraggableCardState extends State<DraggableCard>
         _controller.stop();
       },
       onPanUpdate: (details) {
-        print("#### ${details.localPosition}");
+        if (kDebugMode) {
+          print("#### ${details.localPosition}");
+        }
 
         ///往下斜着拖
         if ((details.localPosition.dx.abs() >

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class RichTextDemoPage2 extends StatefulWidget {
+  const RichTextDemoPage2({super.key});
+
   @override
   _RichTextDemoState2 createState() => _RichTextDemoState2();
 }
@@ -12,7 +14,7 @@ class _RichTextDemoState2 extends State<RichTextDemoPage2> {
   Widget build(BuildContext mainContext) {
     return Scaffold(
       appBar: AppBar(
-        title: new Text("RichTextDemoPage"),
+        title: const Text("RichTextDemoPage"),
         actions: <Widget>[
           IconButton(
             onPressed: () {
@@ -20,7 +22,7 @@ class _RichTextDemoState2 extends State<RichTextDemoPage2> {
                 size += 10;
               });
             },
-            icon: Icon(Icons.add_circle_outline),
+            icon: const Icon(Icons.add_circle_outline),
           ),
           IconButton(
             onPressed: () {
@@ -28,19 +30,19 @@ class _RichTextDemoState2 extends State<RichTextDemoPage2> {
                 size -= 10;
               });
             },
-            icon: Icon(Icons.remove_circle_outline),
+            icon: const Icon(Icons.remove_circle_outline),
           )
         ],
       ),
       body: SelectionArea(
-        child: new Container(
-          margin: EdgeInsets.all(10),
+        child: Container(
+          margin: const EdgeInsets.all(10),
           child: Builder(builder: (context) {
             return Center(
               child: Text.rich(TextSpan(
                 children: <InlineSpan>[
-                  TextSpan(text: 'Flutter is'),
-                  WidgetSpan(
+                  const TextSpan(text: 'Flutter is'),
+                  const WidgetSpan(
                       child: SizedBox(
                     width: 120,
                     height: 50,
@@ -52,13 +54,13 @@ class _RichTextDemoState2 extends State<RichTextDemoPage2> {
                       child: SizedBox(
                     width: size > 0 ? size : 0,
                     height: size > 0 ? size : 0,
-                    child: new Image.asset(
+                    child: Image.asset(
                       "static/gsy_cat.png",
                       fit: BoxFit.cover,
                     ),
                   )),
-                  TextSpan(text: 'the best!'),
-                  WidgetSpan(
+                  const TextSpan(text: 'the best!'),
+                  const WidgetSpan(
                     child: SelectionContainer.disabled(
                       child: Text(' not copy'),
                     ),
@@ -78,7 +80,7 @@ class _RichTextDemoState2 extends State<RichTextDemoPage2> {
       action: SnackBarAction(
         label: 'ACTION',
         onPressed: () {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             content: Text('You pressed snackbar\'s action.'),
           ));
         },

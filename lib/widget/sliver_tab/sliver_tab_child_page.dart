@@ -4,29 +4,29 @@ import 'package:gsy_flutter_demo/widget/sliver_tab/sliver_tab_sliver.dart';
 
 class SliverTabChildPage extends StatefulWidget {
   final List pageList;
-  final tabIndex;
+  final int tabIndex;
 
-  SliverTabChildPage(this.tabIndex, this.pageList);
+  const SliverTabChildPage(this.tabIndex, this.pageList, {super.key});
 
   @override
-  _SliverTabChildPageState createState() => _SliverTabChildPageState();
+  SliverTabChildPageState createState() => SliverTabChildPageState();
 }
 
-class _SliverTabChildPageState extends State<SliverTabChildPage>
+class SliverTabChildPageState extends State<SliverTabChildPage>
     with AutomaticKeepAliveClientMixin {
-  GlobalKey<CustomSliverState> globalKey = new GlobalKey();
+  GlobalKey<CustomSliverState> globalKey = GlobalKey();
 
   double initLayoutExtent = 100;
   double showPullDistance = 150;
   final double indicatorExtent = 200;
   final double triggerPullDistance = 300;
   final ScrollController scrollController =
-      new ScrollController(initialScrollOffset: -100);
+      ScrollController(initialScrollOffset: -100);
 
   renderListByIndex(tabIndex, pageList) {
     return CustomScrollView(
       controller: scrollController,
-      physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+      physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
       slivers: <Widget>[
         SliverTabSliver(
           key: globalKey,

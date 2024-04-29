@@ -7,6 +7,8 @@ import 'package:scroll_to_index/scroll_to_index.dart';
 /// 因为官方一直未支持滑动都执行 item
 /// 所有有第三方库另辟蹊径
 class ScrollToIndexDemoPage extends StatefulWidget {
+  const ScrollToIndexDemoPage({super.key});
+
   @override
   _ScrollToIndexDemoPageState createState() => _ScrollToIndexDemoPageState();
 }
@@ -40,7 +42,7 @@ class _ScrollToIndexDemoPageState extends State<ScrollToIndexDemoPage> {
     return _wrapScrollTag(
         index: index,
         child: Container(
-          padding: EdgeInsets.all(8),
+          padding: const EdgeInsets.all(8),
           alignment: Alignment.topCenter,
           height: height,
           decoration: BoxDecoration(
@@ -54,37 +56,35 @@ class _ScrollToIndexDemoPageState extends State<ScrollToIndexDemoPage> {
         key: ValueKey(index),
         controller: controller!,
         index: index,
-        child: child,
         highlightColor: Colors.black.withOpacity(0.1),
+        child: child,
       );
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: new Text("ScrollToIndexDemoPage"),
+        title: const Text("ScrollToIndexDemoPage"),
       ),
-      body: new Container(
-        child: ListView(
-          scrollDirection: scrollDirection,
-          controller: controller,
-          children: randomList.map<Widget>((data) {
-            return Padding(
-              padding: EdgeInsets.all(8),
-              child: _getRow(data[0], math.max(data[1].toDouble(), 50.0)),
-            );
-          }).toList(),
-        ),
+      body: ListView(
+        scrollDirection: scrollDirection,
+        controller: controller,
+        children: randomList.map<Widget>((data) {
+          return Padding(
+            padding: const EdgeInsets.all(8),
+            child: _getRow(data[0], math.max(data[1].toDouble(), 50.0)),
+          );
+        }).toList(),
       ),
       persistentFooterButtons: <Widget>[
-        new TextButton(
+        TextButton(
           onPressed: () async {
             ///滑动到第13个的位置
             await controller!.scrollToIndex(13,
                 preferPosition: AutoScrollPosition.begin);
             controller!.highlight(13);
           },
-          child: new Text("Scroll to 13"),
+          child: const Text("Scroll to 13"),
         ),
       ],
     );

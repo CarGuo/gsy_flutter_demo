@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 
 class TagDemoPage extends StatelessWidget {
+  const TagDemoPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: new Text("TagDemoPage"),
+        title: const Text("TagDemoPage"),
       ),
-      body: new Container(
-        child: new Wrap(children: <Widget>[
-          new TagItem("Start"),
-          for (var item in tags) new TagItem(item),
-          new TagItem("End"),
-        ]),
-      ),
+      body: Wrap(children: <Widget>[
+        const TagItem("Start"),
+        for (var item in tags) TagItem(item),
+        const TagItem("End"),
+      ]),
     );
   }
 }
@@ -21,17 +21,17 @@ class TagDemoPage extends StatelessWidget {
 class TagItem extends StatelessWidget {
   final String text;
 
-  TagItem(this.text);
+  const TagItem(this.text, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 2, horizontal: 5),
-      margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+      padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 5),
+      margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
       decoration: BoxDecoration(
           color: Colors.blueAccent.withAlpha(60),
-          borderRadius: BorderRadius.all(Radius.circular(5))),
-      child: new Text(text),
+          borderRadius: const BorderRadius.all(Radius.circular(5))),
+      child: Text(text),
     );
   }
 }

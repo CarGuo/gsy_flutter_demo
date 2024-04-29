@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 ///键盘相关Demo
 ///键盘是否弹起等
 class KeyBoardDemoPage extends StatefulWidget {
+  const KeyBoardDemoPage({super.key});
+
   @override
   _KeyBoardDemoPageState createState() => _KeyBoardDemoPageState();
 }
@@ -10,7 +12,7 @@ class KeyBoardDemoPage extends StatefulWidget {
 class _KeyBoardDemoPageState extends State<KeyBoardDemoPage> {
   bool isKeyboardShowing = false;
 
-  final FocusNode _focusNode = new FocusNode();
+  final FocusNode _focusNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -24,61 +26,59 @@ class _KeyBoardDemoPageState extends State<KeyBoardDemoPage> {
       },
       content: Scaffold(
         appBar: AppBar(
-          title: new Text("KeyBoardDemoPage"),
+          title: const Text("KeyBoardDemoPage"),
         ),
-        body: new GestureDetector(
+        body: GestureDetector(
           ///透明可以触摸
           behavior: HitTestBehavior.translucent,
           onTap: () {
             /// 触摸收起键盘
-            FocusScope.of(context).requestFocus(new FocusNode());
+            FocusScope.of(context).requestFocus(FocusNode());
           },
-          child: Container(
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                new Expanded(
-                  child: new Container(
-                    alignment: Alignment.center,
-                    child: Text(
-                      isKeyboardShowing ? "键盘弹起" : "键盘未弹起",
-                      style: TextStyle(
-                          color: isKeyboardShowing
-                              ? Colors.redAccent
-                              : Colors.greenAccent),
-                    ),
-                  ),
-                  flex: 2,
-                ),
-                new Expanded(
-                  child: new Center(
-                    child: new TextButton(
-                      onPressed: () {
-                        if (!isKeyboardShowing) {
-                          /// 触摸收起键盘
-                          FocusScope.of(context).requestFocus(_focusNode);
-                        }
-                      },
-                      child: new Text("弹出键盘"),
-                    ),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Expanded(
+                flex: 2,
+                child: Container(
+                  alignment: Alignment.center,
+                  child: Text(
+                    isKeyboardShowing ? "键盘弹起" : "键盘未弹起",
+                    style: TextStyle(
+                        color: isKeyboardShowing
+                            ? Colors.redAccent
+                            : Colors.greenAccent),
                   ),
                 ),
-                new Expanded(
-                  flex: 2,
-                  child: new Container(
-                    margin: EdgeInsets.symmetric(horizontal: 10),
-                    child: new TextField(
-                      focusNode: _focusNode,
-                      maxLines: 7,
-                      minLines: 1,
-                      decoration:
-                          const InputDecoration(border: OutlineInputBorder()),
-                    ),
+              ),
+              Expanded(
+                child: Center(
+                  child: TextButton(
+                    onPressed: () {
+                      if (!isKeyboardShowing) {
+                        /// 触摸收起键盘
+                        FocusScope.of(context).requestFocus(_focusNode);
+                      }
+                    },
+                    child: const Text("弹出键盘"),
                   ),
-                )
-              ],
-            ),
+                ),
+              ),
+              Expanded(
+                flex: 2,
+                child: Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 10),
+                  child: TextField(
+                    focusNode: _focusNode,
+                    maxLines: 7,
+                    minLines: 1,
+                    decoration:
+                        const InputDecoration(border: OutlineInputBorder()),
+                  ),
+                ),
+              )
+            ],
           ),
         ),
       ),
@@ -94,7 +94,7 @@ class KeyboardDetector extends StatefulWidget {
 
   final Widget content;
 
-  KeyboardDetector({this.keyboardShowCallback, required this.content});
+  const KeyboardDetector({super.key, this.keyboardShowCallback, required this.content});
 
   @override
   _KeyboardDetectorState createState() => _KeyboardDetectorState();

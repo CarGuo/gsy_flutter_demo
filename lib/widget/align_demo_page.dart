@@ -2,22 +2,24 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 class AlignDemoPage extends StatefulWidget {
+  const AlignDemoPage({super.key});
+
   @override
-  _AlignDemoPageState createState() => _AlignDemoPageState();
+  AlignDemoPageState createState() => AlignDemoPageState();
 }
 
-class _AlignDemoPageState extends State<AlignDemoPage>
+class AlignDemoPageState extends State<AlignDemoPage>
     with SingleTickerProviderStateMixin {
   getAlign(x) {
     return Align(
-      child: new Container(
+      alignment: Alignment(math.cos(x * math.pi), math.sin(x * math.pi)),
+      child: Container(
         height: 20,
         width: 20,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             color: Colors.green,
             borderRadius: BorderRadius.all(Radius.circular(10))),
       ),
-      alignment: Alignment(math.cos(x * math.pi), math.sin(x * math.pi)),
     );
   }
 
@@ -26,11 +28,11 @@ class _AlignDemoPageState extends State<AlignDemoPage>
     int size = 20;
     return Scaffold(
       appBar: AppBar(
-        title: new Text("AlignDemoPage"),
+        title: const Text("AlignDemoPage"),
       ),
-      body: new Container(
-        alignment: Alignment(0, 0),
-        child: Container(
+      body: Container(
+        alignment: const Alignment(0, 0),
+        child: SizedBox(
           height: MediaQuery.sizeOf(context).width,
           width: MediaQuery.sizeOf(context).width,
           child: Stack(

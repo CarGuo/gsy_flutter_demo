@@ -9,7 +9,7 @@ import 'drop_select_widget.dart';
 
 const double kDropExpendedSelectMenuItemHeight = 45.0;
 
-typedef Widget MenuItemExpandedBuilder<T extends DropSelectObject>(
+typedef MenuItemExpandedBuilder<T extends DropSelectObject> = Widget Function(
     BuildContext context, T data);
 
 class DropSelectExpandedListMenu<T extends DropSelectObject>
@@ -19,21 +19,21 @@ class DropSelectExpandedListMenu<T extends DropSelectObject>
   final bool singleSelected;
   final MenuItemExpandedBuilder? itemBuilder;
 
-  DropSelectExpandedListMenu(
-      {this.data,
+  const DropSelectExpandedListMenu(
+      {super.key, this.data,
       this.itemBuilder,
       this.singleSelected = false,
       this.itemExtent = kDropExpendedSelectMenuItemHeight});
 
   @override
   DropSelectState<DropSelectWidget> createState() {
-    return new _MenuListExpandedState<T>();
+    return _MenuListExpandedState<T>();
   }
 }
 
 class _MenuListExpandedState<T extends DropSelectObject>
     extends DropSelectState<DropSelectExpandedListMenu<T>> {
-  Map<String, int> cleanOtherList = new HashMap();
+  Map<String, int> cleanOtherList = HashMap();
 
   final List<ExpandableController> _controllers = [];
 
@@ -52,41 +52,41 @@ class _MenuListExpandedState<T extends DropSelectObject>
   }
 
   hideAllExpandController() {
-    _controllers.forEach((controller) {
+    for (var controller in _controllers) {
       controller.expanded = false;
-    });
+    }
   }
 
   Widget renderButton() {
-    return new Container(
+    return SizedBox(
       height: 50,
-      child: new Row(
+      child: Row(
         children: <Widget>[
-          new Expanded(
-              child: new TextButton(
+          Expanded(
+              child: TextButton(
                   onPressed: () {
                     setState(() {
                       resetList(widget.data!);
                     });
                     controller!.hide();
                   },
-                  child: new Text("重置"))),
-          new Expanded(
-              child: new TextButton(
+                  child: const Text("重置"))),
+          Expanded(
+              child: TextButton(
                   onPressed: () {
                     controller!.select(_cloneList);
                   },
-                  child: new Text("确定"))),
+                  child: const Text("确定"))),
         ],
       ),
     );
   }
 
   renderGrid(count, data, index) {
-    return new Container(
+    return SizedBox(
       height: widget.itemExtent * count,
       child: GridView.count(
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         crossAxisCount: 2,
         childAspectRatio: 3,
         children: List.generate(count, (i) {
@@ -94,7 +94,7 @@ class _MenuListExpandedState<T extends DropSelectObject>
           if (child.selectedCleanOther) {
             cleanOtherList["$i"] = i;
           }
-          return new InkWell(
+          return InkWell(
             onTap: () {
               if (widget.singleSelected) {
                 data.forEach((item) {
@@ -106,7 +106,7 @@ class _MenuListExpandedState<T extends DropSelectObject>
                   item.selected = false;
                 });
               }
-              if (!child.selectedCleanOther && cleanOtherList.length > 0) {
+              if (!child.selectedCleanOther && cleanOtherList.isNotEmpty) {
                 cleanOtherList.forEach((key, value) {
                   if (value != i) {
                     data.children[value].selected = false;
@@ -126,39 +126,37 @@ class _MenuListExpandedState<T extends DropSelectObject>
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: new Column(
-        children: <Widget>[
-          new Expanded(
-            child: new ListView.builder(
-              itemBuilder: (context, index) {
-                return ExpandablePanel(
+    return Column(
+      children: <Widget>[
+        Expanded(
+          child: ListView.builder(
+            itemBuilder: (context, index) {
+              return ExpandablePanel(
+                height: widget.itemExtent,
+                initialExpanded: _controllers[index].expanded,
+                controller: _controllers[index],
+                header: Container(
                   height: widget.itemExtent,
-                  initialExpanded: _controllers[index].expanded,
-                  controller: _controllers[index],
-                  header: new Container(
-                    height: widget.itemExtent,
-                    padding: EdgeInsets.only(left: 10),
-                    child: new Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        _cloneList[index].title!,
-                        style: TextStyle(fontSize: 16, color: Colors.black),
-                      ),
+                  padding: const EdgeInsets.only(left: 10),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      _cloneList[index].title!,
+                      style: const TextStyle(fontSize: 16, color: Colors.black),
                     ),
                   ),
-                  expanded: renderGrid(_cloneList[index].children!.length,
-                      _cloneList[index], index),
-                  tapHeaderToExpand: true,
-                  hasIcon: true,
-                );
-              },
-              itemCount: _cloneList.length,
-            ),
+                ),
+                expanded: renderGrid(_cloneList[index].children!.length,
+                    _cloneList[index], index),
+                tapHeaderToExpand: true,
+                hasIcon: true,
+              );
+            },
+            itemCount: _cloneList.length,
           ),
-          renderButton(),
-        ],
-      ),
+        ),
+        renderButton(),
+      ],
     );
   }
 

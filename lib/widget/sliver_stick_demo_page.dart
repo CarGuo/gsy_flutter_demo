@@ -6,13 +6,15 @@ import 'package:flutter/rendering.dart';
 ///用 Sliver 的模式实现 Stick
 ///目前的实现方式就是性能不大好
 class SliverStickListDemoPage extends StatefulWidget {
+  const SliverStickListDemoPage({super.key});
+
   @override
   _SliverStickListDemoPageState createState() =>
       _SliverStickListDemoPageState();
 }
 
 class _SliverStickListDemoPageState extends State<SliverStickListDemoPage> {
-  ScrollController scrollController = new ScrollController();
+  ScrollController scrollController = ScrollController();
 
   List<Widget> slivers = [];
 
@@ -28,30 +30,30 @@ class _SliverStickListDemoPageState extends State<SliverStickListDemoPage> {
       slivers.add(
         SliverHeaderItem(
           i,
-          child: new Container(
+          headerHeight: headerHeight,
+          contentHeight: contentHeight,
+          child: Container(
             height: headerHeight,
             alignment: Alignment.center,
             color: Colors.redAccent,
-            child: new Container(
-              padding: EdgeInsets.symmetric(horizontal: 10),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
               alignment: Alignment.centerLeft,
               height: headerHeight,
-              child: new Text("Header $i"),
+              child: Text("Header $i"),
             ),
           ),
-          headerHeight: headerHeight,
-          contentHeight: contentHeight,
         ),
       );
 
       ///内容
       slivers.add(
         SliverToBoxAdapter(
-          child: new Container(
+          child: Container(
             height: contentHeight,
-            padding: EdgeInsets.only(left: 10),
+            padding: const EdgeInsets.only(left: 10),
             alignment: Alignment.centerLeft,
-            child: new Text("Content $i"),
+            child: Text("Content $i"),
           ),
         ),
       );
@@ -61,7 +63,7 @@ class _SliverStickListDemoPageState extends State<SliverStickListDemoPage> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    Future.delayed(Duration(seconds: 0), () {
+    Future.delayed(const Duration(seconds: 0), () {
       setState(() {
         initItem();
       });
@@ -72,14 +74,12 @@ class _SliverStickListDemoPageState extends State<SliverStickListDemoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: new Text("SliverListDemoPage"),
+        title: const Text("SliverListDemoPage"),
       ),
-      body: new Container(
-        child: CustomScrollView(
-          controller: scrollController,
-          physics: const AlwaysScrollableScrollPhysics(),
-          slivers: slivers,
-        ),
+      body: CustomScrollView(
+        controller: scrollController,
+        physics: const AlwaysScrollableScrollPhysics(),
+        slivers: slivers,
       ),
     );
   }
@@ -96,8 +96,8 @@ class SliverHeaderItem extends StatefulWidget {
   ///内容高度
   final double contentHeight;
 
-  SliverHeaderItem(this.index,
-      {required this.child, this.headerHeight = 60, this.contentHeight = 120});
+  const SliverHeaderItem(this.index,
+      {super.key, required this.child, this.headerHeight = 60, this.contentHeight = 120});
 
   @override
   _SliverHeaderItemState createState() => _SliverHeaderItemState();
@@ -114,7 +114,7 @@ class _SliverHeaderItemState extends State<SliverHeaderItem>
     super.initState();
 
     ///监听列表改变
-    Future.delayed(Duration(seconds: 0), () {
+    Future.delayed(const Duration(seconds: 0), () {
       Scrollable.of(context).position.addListener(scrollListener);
     });
   }
@@ -125,10 +125,6 @@ class _SliverHeaderItemState extends State<SliverHeaderItem>
     super.deactivate();
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -167,7 +163,7 @@ class _SliverHeaderItemState extends State<SliverHeaderItem>
 
             return Visibility(
               visible: (position <= widget.index),
-              child: new Transform.translate(
+              child: Transform.translate(
                 offset: Offset(0, -(widget.headerHeight - height)),
                 child: widget.child,
               ),
@@ -225,5 +221,5 @@ class GSYSliverHeaderDelegate extends SliverPersistentHeaderDelegate {
   FloatingHeaderSnapConfiguration get snapConfiguration => snapConfig;
 }
 
-typedef Widget Builder(
+typedef Builder = Widget Function(
     BuildContext context, double shrinkOffset, bool overlapsContent);

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 ///from https://pub.flutter-io.cn/packages/drop_shadow
 class PngShadowDemoPage extends StatefulWidget {
-  const PngShadowDemoPage({Key? key}) : super(key: key);
+  const PngShadowDemoPage({super.key});
 
   @override
   State<PngShadowDemoPage> createState() => _PngShadowDemoPageState();
@@ -15,7 +15,7 @@ class _PngShadowDemoPageState extends State<PngShadowDemoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("PngShadowDemoPage"),
+        title: const Text("PngShadowDemoPage"),
       ),
       body: Container(
         alignment: Alignment.center,
@@ -39,14 +39,14 @@ class DropShadow extends StatelessWidget {
   final double spread;
 
   const DropShadow({
-    Key? key,
+    super.key,
     required this.child,
     this.blurRadius = 10.0,
     this.borderRadius = 0.0,
     this.offset = const Offset(0.0, 8.0),
     this.opacity = 1.0,
     this.spread = 1.0,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

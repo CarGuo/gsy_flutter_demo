@@ -104,19 +104,19 @@ class BookPainter extends CustomPainter {
     f = CalPoint();
 
     ///其他坐标
-    g = new CalPoint();
-    e = new CalPoint();
-    h = new CalPoint();
-    c = new CalPoint();
-    j = new CalPoint();
-    b = new CalPoint();
-    k = new CalPoint();
-    d = new CalPoint();
-    i = new CalPoint();
+    g = CalPoint();
+    e = CalPoint();
+    h = CalPoint();
+    c = CalPoint();
+    j = CalPoint();
+    b = CalPoint();
+    k = CalPoint();
+    d = CalPoint();
+    i = CalPoint();
 
-    pathB = new Path();
-    pathA = new Path();
-    pathC = new Path();
+    pathB = Path();
+    pathA = Path();
+    pathC = Path();
   }
 
   _selectCalPoint(CalPoint cur, CalPoint pre, {bool? limitAngle = true}) {
@@ -171,24 +171,24 @@ class BookPainter extends CustomPainter {
   }
 
   _initPaintAndPath() {
-    bgPaint = new Paint();
+    bgPaint = Paint();
     bgPaint.color = Colors.white;
 
-    pathAPaint = new Paint();
+    pathAPaint = Paint();
     pathAPaint.color = bgColor;
     pathAPaint.isAntiAlias = true;
 
-    pathCPaint = new Paint();
+    pathCPaint = Paint();
     pathCPaint.color = frontColor;
     pathCPaint.blendMode = BlendMode.dstATop;
     pathCPaint.isAntiAlias = true;
 
-    pathBPaint = new Paint();
+    pathBPaint = Paint();
     pathBPaint.color = Colors.tealAccent;
     pathBPaint.blendMode = BlendMode.dstATop;
     pathBPaint.isAntiAlias = true;
 
-    pathB = new Path();
+    pathB = Path();
   }
 
   void onDraw(Canvas canvas, Size size) async {
@@ -240,7 +240,7 @@ class BookPainter extends CustomPainter {
     canvas.restore();
     canvas.save();
 
-    var gradientColors = [Color(0x01333333), Color(0x33333333)];
+    var gradientColors = [const Color(0x01333333), const Color(0x33333333)];
 
     double? left;
     double? right;
@@ -260,10 +260,10 @@ class BookPainter extends CustomPainter {
       gradient = ui.Gradient.linear(
           Offset(right, top), Offset(left!, top), gradientColors);
     }
-    Paint paint = new Paint()..shader = gradient;
+    Paint paint = Paint()..shader = gradient;
 
     //裁剪出我们需要的区域
-    Path mPath = new Path();
+    Path mPath = Path();
     mPath.moveTo(a.x! - Math.max(rPathAShadowDis, lPathAShadowDis) / 2, a.y!);
     mPath.lineTo(d.x!, d.y!);
     mPath.lineTo(e.x!, e.y!);
@@ -285,8 +285,8 @@ class BookPainter extends CustomPainter {
     canvas.save();
 
     var gradientColors = [
-      Color(0x33333333),
-      Color(0x01333333),
+      const Color(0x33333333),
+      const Color(0x01333333),
     ];
 
     double viewDiagonalLength = _hypot(viewWidth!, viewHeight!) as double; //view对角线长度
@@ -308,9 +308,9 @@ class BookPainter extends CustomPainter {
       gradient = ui.Gradient.linear(
           Offset(left, top!), Offset(left, bottom), gradientColors);
     }
-    Paint paint = new Paint()..shader = gradient;
+    Paint paint = Paint()..shader = gradient;
 
-    Path mPath = new Path();
+    Path mPath = Path();
     mPath.moveTo(a.x! - Math.max(rPathAShadowDis, lPathAShadowDis) / 2, a.y!);
 //        mPath.lineTo(i.x,i.y);
     mPath.lineTo(h.x!, h.y!);
@@ -330,7 +330,7 @@ class BookPainter extends CustomPainter {
     canvas.restore();
     canvas.save();
 
-    var radientColors = [Color(0x01333333), Color(0x44333333)]; //渐变颜色数组
+    var radientColors = [const Color(0x01333333), const Color(0x44333333)]; //渐变颜色数组
 
     double maxShadowWidth = 30; //阴影矩形最大的宽度
     double left = (a.x! - Math.min(maxShadowWidth, (rPathAShadowDis / 2)));
@@ -340,7 +340,7 @@ class BookPainter extends CustomPainter {
 
     ui.Gradient gradient = ui.Gradient.linear(
         Offset(left, top), Offset(right, top), radientColors);
-    Paint paint = new Paint()..shader = gradient;
+    Paint paint = Paint()..shader = gradient;
 
     canvas.clipPath(pathA);
 
@@ -370,7 +370,7 @@ class BookPainter extends CustomPainter {
   }
 
   void _drawPathBShadow(Canvas canvas) {
-    var gradientColors = [Color(0xf0111111), Color(0x00000000)]; //渐变颜色数组
+    var gradientColors = [const Color(0xf0111111), const Color(0x00000000)]; //渐变颜色数组
     int elevation = 6;
     int deepOffset = 0; //深色端的偏移值
     int lightOffset = 0; //浅色端的偏移值
@@ -397,7 +397,7 @@ class BookPainter extends CustomPainter {
           Offset(right, top), Offset(left, top), gradientColors);
     }
 
-    Paint paint = new Paint()
+    Paint paint = Paint()
       //..color = Colors.black.withAlpha(80);
       //..blendMode = BlendMode.srcOver
       ..shader = gradient;
@@ -459,7 +459,7 @@ class BookPainter extends CustomPainter {
   }
 
   void _drawPathCShadow(Canvas canvas) {
-    var gradientColors = [Color(0x00333333), Color(0xff111111)]; //渐变颜色数组
+    var gradientColors = [const Color(0x00333333), const Color(0xff111111)]; //渐变颜色数组
 
     int deepOffset = 1; //深色端的偏移值
     int lightOffset = -30; //浅色端的偏移值
@@ -486,7 +486,7 @@ class BookPainter extends CustomPainter {
       gradient = ui.Gradient.linear(
           Offset(right, top), Offset(left, top), gradientColors);
     }
-    Paint paint = new Paint()..shader = gradient;
+    Paint paint = Paint()..shader = gradient;
 
     canvas.translate(c.x!, c.y!);
     canvas.rotate(Math.atan2(e.x! - f.x!, h.y! - f.y!));
@@ -621,8 +621,8 @@ class BookPainter extends CustomPainter {
   ///计算C点的X值
   _calcPointCX(CalPoint a, CalPoint f) {
     CalPoint g, e;
-    g = new CalPoint();
-    e = new CalPoint();
+    g = CalPoint();
+    e = CalPoint();
     g.x = (a.x! + f.x!) / 2;
     g.y = (a.y! + f.y!) / 2;
 

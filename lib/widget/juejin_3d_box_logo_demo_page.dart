@@ -4,23 +4,23 @@ import 'package:flutter/material.dart';
 import 'package:zflutter/zflutter.dart';
 
 class JueJin3DBoxLogoDemoPage extends StatefulWidget {
-  const JueJin3DBoxLogoDemoPage({Key? key}) : super(key: key);
+  const JueJin3DBoxLogoDemoPage({super.key});
 
   @override
   State<JueJin3DBoxLogoDemoPage> createState() => _JueJin3DBoxLogoDemoPageState();
 }
 
 class _JueJin3DBoxLogoDemoPageState extends State<JueJin3DBoxLogoDemoPage> {
-  Color color = Color(0xFF1E80FF);
-  Color colorLight = Color(0xFF1E8FFF);
-  Color colorDeep = Color(0xA11E38FF);
+  Color color = const Color(0xFF1E80FF);
+  Color colorLight = const Color(0xFF1E8FFF);
+  Color colorDeep = const Color(0xA11E38FF);
 
   renderBottom() {
     return [
       ZPositioned(
-        rotate: ZVector.only(z: pi * 0.28),
+        rotate: const ZVector.only(z: pi * 0.28),
         child: ZPositioned(
-          translate: ZVector(100, 100, 0),
+          translate: const ZVector(100, 100, 0),
           child: ZBoxToBoxAdapter(
             height: 153,
             width: 30,
@@ -39,9 +39,9 @@ class _JueJin3DBoxLogoDemoPageState extends State<JueJin3DBoxLogoDemoPage> {
         ),
       ),
       ZPositioned(
-        rotate: ZVector.only(z: -pi * 0.28),
+        rotate: const ZVector.only(z: -pi * 0.28),
         child: ZPositioned(
-          translate: ZVector(-0, 100, 0),
+          translate: const ZVector(-0, 100, 0),
           child: ZBoxToBoxAdapter(
             height: 153,
             width: 30,
@@ -65,9 +65,9 @@ class _JueJin3DBoxLogoDemoPageState extends State<JueJin3DBoxLogoDemoPage> {
   renderMiddle() {
     return [
       ZPositioned(
-        rotate: ZVector.only(z: pi * 0.28),
+        rotate: const ZVector.only(z: pi * 0.28),
         child: ZPositioned(
-          translate: ZVector(80, 40, 0),
+          translate: const ZVector(80, 40, 0),
           child: ZBoxToBoxAdapter(
             height: 100,
             width: 30,
@@ -86,9 +86,9 @@ class _JueJin3DBoxLogoDemoPageState extends State<JueJin3DBoxLogoDemoPage> {
         ),
       ),
       ZPositioned(
-        rotate: ZVector.only(z: -pi * 0.28),
+        rotate: const ZVector.only(z: -pi * 0.28),
         child: ZPositioned(
-          translate: ZVector(20, 40, 0),
+          translate: const ZVector(20, 40, 0),
           child: ZBoxToBoxAdapter(
             height: 100,
             width: 30,
@@ -114,9 +114,9 @@ class _JueJin3DBoxLogoDemoPageState extends State<JueJin3DBoxLogoDemoPage> {
   renderTop() {
     return [
       ZPositioned(
-        rotate: ZVector.only(z: -pi / 4),
+        rotate: const ZVector.only(z: -pi / 4),
         child: ZPositioned(
-          translate: ZVector(50, -30, 0),
+          translate: const ZVector(50, -30, 0),
           child: ZBoxToBoxAdapter(
             height: 40,
             width: 40,
@@ -147,7 +147,7 @@ class _JueJin3DBoxLogoDemoPageState extends State<JueJin3DBoxLogoDemoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("JueJin3DBoxLogoDemoPage"),
+        title: const Text("JueJin3DBoxLogoDemoPage"),
       ),
       body: Center(
         child: ZDragDetector(builder: (context, controller) {
@@ -157,7 +157,7 @@ class _JueJin3DBoxLogoDemoPageState extends State<JueJin3DBoxLogoDemoPage> {
               ZPositioned(
                 rotate: controller.rotate,
                 child: ZPositioned(
-                  translate: ZVector.only(x: -40),
+                  translate: const ZVector.only(x: -40),
                   child: ZGroup(
                     children: [
                       ...renderBottom(),

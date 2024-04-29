@@ -5,14 +5,12 @@ import 'package:flutter/rendering.dart';
 
 class _LinkSliverHeader extends SingleChildRenderObjectWidget {
   const _LinkSliverHeader({
-    Key? key,
     this.containerLayoutExtent = 0.0,
     this.initLayoutExtent = 0.0,
     this.hasLayoutExtent = false,
     this.pinned = false,
-    Widget? child,
-  })  : assert(containerLayoutExtent >= 0.0),
-        super(key: key, child: child);
+    super.child,
+  })  : assert(containerLayoutExtent >= 0.0);
 
   final double initLayoutExtent;
   final double containerLayoutExtent;
@@ -223,7 +221,7 @@ typedef ContainerBuilder = Widget Function(
 
 class LinkSliverHeader extends StatefulWidget {
   const LinkSliverHeader({
-    Key? key,
+    super.key,
     this.triggerPullDistance = _defaultTriggerPullDistance,
     this.containerExtent = _defaultcontainerExtent,
     this.initLayoutExtent = 0,
@@ -234,8 +232,7 @@ class LinkSliverHeader extends StatefulWidget {
         assert(
             triggerPullDistance >= containerExtent,
             'The  container cannot take more space in its final state '
-            'than the amount initially created by overscrolling.'),
-        super(key: key);
+            'than the amount initially created by overscrolling.');
 
   final double triggerPullDistance;
 
@@ -258,15 +255,14 @@ class LinkSliverHeader extends StatefulWidget {
   ) {
     return Stack(
       children: <Widget>[
-        new Container(
+        Container(
           color: Colors.blue,
-          padding: EdgeInsets.symmetric(horizontal: 30),
+          padding: const EdgeInsets.symmetric(horizontal: 30),
           child: InkWell(
             onTap: () {
-              print("FFFF");
             },
-            child: new Container(
-              decoration: BoxDecoration(
+            child: Container(
+              decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(10),
                   topRight: Radius.circular(10),

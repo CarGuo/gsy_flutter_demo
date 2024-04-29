@@ -6,21 +6,23 @@ import 'package:supercharged/supercharged.dart';
 enum _ColorTween { color1, color2 }
 
 class ParticlePage extends StatelessWidget {
+  const ParticlePage({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
+    return Scaffold(
       appBar: AppBar(
-        title: new Text("ParticlePage"),
+        title: const Text("ParticlePage"),
       ),
       backgroundColor: Colors.black,
-      body: Stack(children: <Widget>[
+      body: const Stack(children: <Widget>[
         Positioned.fill(child: AnimatedBackground()),
         Positioned.fill(child: ParticlesWidget(30)),
         Positioned.fill(
-          child: new Center(
-            child: new Text(
+          child: Center(
+            child: Text(
               "GSY Flutter Demo",
-              style: new TextStyle(
+              style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
                   color: Colors.white),
@@ -33,17 +35,19 @@ class ParticlePage extends StatelessWidget {
 }
 
 class AnimatedBackground extends StatelessWidget {
+  const AnimatedBackground({super.key});
+
   @override
   Widget build(BuildContext context) {
     final tween = MovieTween()
       ..tween(
         _ColorTween.color1,
-        Color(0xffD38312).tweenTo(Colors.lightBlue.shade900),
+        const Color(0xffD38312).tweenTo(Colors.lightBlue.shade900),
         duration: 3.seconds,
       )
       ..tween(
         _ColorTween.color2,
-        Color(0xffA83279).tweenTo(Colors.blue.shade600),
+        const Color(0xffA83279).tweenTo(Colors.blue.shade600),
         duration: 3.seconds,
       );
 

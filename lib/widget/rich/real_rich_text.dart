@@ -1,6 +1,5 @@
 import 'dart:ui' as ui show Image;
 
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -40,9 +39,8 @@ import 'package:flutter/rendering.dart';
 class RealRichText extends Text {
   final List<TextSpan> textSpanList;
 
-  RealRichText(
-    this.textSpanList, {
-    Key? key,
+  const RealRichText(
+    this.textSpanList, {super.key,
     TextStyle? style,
     TextAlign textAlign = TextAlign.start,
     TextDirection? textDirection,
@@ -62,13 +60,13 @@ class RealRichText extends Text {
             locale: locale);
 
   List<TextSpan> extractAllNestedChildren(TextSpan textSpan) {
-    if (textSpan.children == null || textSpan.children!.length == 0) {
+    if (textSpan.children == null || textSpan.children!.isEmpty) {
       return [textSpan];
     }
     List<TextSpan> childrenSpan = [];
-    textSpan.children!.forEach((child) {
+    for (var child in textSpan.children!) {
       childrenSpan.addAll(extractAllNestedChildren(child as TextSpan));
-    });
+    }
     return childrenSpan;
   }
 
@@ -76,11 +74,13 @@ class RealRichText extends Text {
   Widget build(BuildContext context) {
     final DefaultTextStyle defaultTextStyle = DefaultTextStyle.of(context);
     TextStyle? effectiveTextStyle = style;
-    if (style == null || style!.inherit)
+    if (style == null || style!.inherit) {
       effectiveTextStyle = defaultTextStyle.style.merge(style);
-    if (MediaQuery.boldTextOf(context))
+    }
+    if (MediaQuery.boldTextOf(context)) {
       effectiveTextStyle =
-          effectiveTextStyle!.merge(TextStyle(fontWeight: FontWeight.bold));
+          effectiveTextStyle!.merge(const TextStyle(fontWeight: FontWeight.bold));
+    }
 
     TextSpan textSpan = TextSpan(
         style: effectiveTextStyle,
@@ -92,11 +92,11 @@ class RealRichText extends Text {
         )));
 
     // pass the context to ImageSpan to create a ImageConfiguration
-    textSpan.children!.forEach((f) {
+    for (var f in textSpan.children!) {
       if (f is ImageSpan) {
         f.updateImageConfiguration(context);
       }
-    });
+    }
 
     Widget result = _RichTextWrapper(
         textAlign: textAlign ?? defaultTextStyle.textAlign ?? TextAlign.start,
@@ -137,7 +137,7 @@ class ImageSpan extends TextSpan {
     this.imageWidth = 14.0,
     this.imageHeight = 14.0,
     this.margin,
-    GestureRecognizer? recognizer,
+    super.recognizer,
   })  : imageResolver = ImageResolver(imageProvider),
         super(
             style: TextStyle(
@@ -148,8 +148,7 @@ class ImageSpan extends TextSpan {
                 fontSize: (imageHeight / 1.15) +
                     (margin == null ? 0 : margin.vertical)),
             text: "\u200B",
-            children: [],
-            recognizer: recognizer);
+            children: []);
 
   void updateImageConfiguration(BuildContext context) {
     imageResolver.updateImageConfiguration(context, imageWidth, imageHeight);
@@ -191,12 +190,12 @@ class ImageResolver {
     _imageStream = imageProvider.resolve(_imageConfiguration!);
     assert(_imageStream != null);
 
-    this._listener = listener;
+    _listener = listener;
     if (_imageStream!.key != oldImageStream?.key) {
       if (imageStreamListener != null) {
         oldImageStream?.removeListener(imageStreamListener!);
       }
-      imageStreamListener ??= new ImageStreamListener(_handleImageChanged);
+      imageStreamListener ??= ImageStreamListener(_handleImageChanged);
       _imageStream!.addListener(imageStreamListener!);
     }
   }
@@ -207,8 +206,8 @@ class ImageResolver {
   }
 
   void addListening() {
-    if (this._listener != null) {
-      imageStreamListener ??= new ImageStreamListener(_handleImageChanged);
+    if (_listener != null) {
+      imageStreamListener ??= ImageStreamListener(_handleImageChanged);
       _imageStream?.addListener(imageStreamListener!);
     }
   }
@@ -226,26 +225,15 @@ class ImageResolver {
 /// No more special purpose.
 class _RichTextWrapper extends RichText {
   _RichTextWrapper({
-    Key? key,
-    required TextSpan text,
-    TextAlign textAlign = TextAlign.start,
-    TextDirection? textDirection,
-    bool softWrap = true,
-    TextOverflow overflow = TextOverflow.clip,
-    TextScaler textScaler = TextScaler.noScaling,
-    int? maxLines,
-    Locale? locale,
-  })  : assert(maxLines == null || maxLines > 0),
-        super(
-            key: key,
-            text: text,
-            textAlign: textAlign,
-            textDirection: textDirection,
-            softWrap: softWrap,
-            overflow: overflow,
-            textScaler: textScaler,
-            maxLines: maxLines,
-            locale: locale);
+    required TextSpan super.text,
+    super.textAlign,
+    super.textDirection,
+    super.softWrap,
+    super.overflow,
+    super.textScaler,
+    super.maxLines,
+    super.locale,
+  })  : assert(maxLines == null || maxLines > 0);
 
   @override
   RenderParagraph createRenderObject(BuildContext context) {
@@ -265,24 +253,14 @@ class _RichTextWrapper extends RichText {
 
 /// paint the image on the top of those ImageSpan's blank space
 class _RealRichRenderParagraph extends RenderParagraph {
-  _RealRichRenderParagraph(TextSpan text,
-      {required TextAlign textAlign,
-      required TextDirection textDirection,
-      required bool softWrap,
-      required TextOverflow overflow,
-      required TextScaler textScaler,
-      int? maxLines,
-      Locale? locale})
-      : super(
-          text,
-          textAlign: textAlign,
-          textDirection: textDirection,
-          softWrap: softWrap,
-          overflow: overflow,
-          textScaler: textScaler,
-          maxLines: maxLines,
-          locale: locale,
-        );
+  _RealRichRenderParagraph(TextSpan super.text,
+      {required super.textAlign,
+      required super.textDirection,
+      required super.softWrap,
+      required super.overflow,
+      required super.textScaler,
+      super.maxLines,
+      super.locale});
 
   @override
   void paint(PaintingContext context, Offset offset) {
@@ -295,21 +273,21 @@ class _RealRichRenderParagraph extends RenderParagraph {
   @override
   void attach(covariant Object owner) {
     super.attach(owner as PipelineOwner);
-    (text as TextSpan).children!.forEach((textSpan) {
+    for (var textSpan in (text as TextSpan).children!) {
       if (textSpan is ImageSpan) {
         textSpan.imageResolver.addListening();
       }
-    });
+    }
   }
 
   @override
   void detach() {
     super.detach();
-    (text as TextSpan).children!.forEach((textSpan) {
+    for (var textSpan in (text as TextSpan).children!) {
       if (textSpan is ImageSpan) {
         textSpan.imageResolver.stopListening();
       }
-    });
+    }
   }
 
   @override

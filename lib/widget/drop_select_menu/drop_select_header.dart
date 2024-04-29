@@ -3,9 +3,9 @@ import 'package:gsy_flutter_demo/widget/drop_select_menu/drop_select_widget.dart
 
 import 'drop_select_controller.dart';
 
-typedef void DropdownMenuHeadTapCallback(int index);
+typedef DropdownMenuHeadTapCallback = void Function(int index);
 
-typedef String ShowTitle(dynamic data, int? index);
+typedef ShowTitle = String Function(dynamic data, int? index);
 
 class DropSelectHeader extends DropSelectWidget {
   final List titles;
@@ -19,17 +19,16 @@ class DropSelectHeader extends DropSelectWidget {
   DropSelectHeader({
     required this.titles,
     this.activeIndex,
-    DropSelectController? controller,
+    super.controller,
     this.onTap,
-    Key? key,
+    super.key,
     this.height = 46.0,
     this.showTitle,
-  })  : assert(titles.length > 0),
-        super(key: key, controller: controller);
+  })  : assert(titles.isNotEmpty);
 
   @override
   DropSelectState<DropSelectWidget> createState() {
-    return new _DropSelectHeaderState();
+    return _DropSelectHeaderState();
   }
 }
 
@@ -40,24 +39,24 @@ class _DropSelectHeaderState extends DropSelectState<DropSelectHeader> {
     final Color unselectedColor = Theme.of(context).unselectedWidgetColor;
     final ShowTitle showTitle = widget.showTitle!;
 
-    return new GestureDetector(
+    return GestureDetector(
       behavior: HitTestBehavior.opaque,
-      child: new Padding(
-          padding: new EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
-          child: new DecoratedBox(
-              decoration: new BoxDecoration(
-                  border: new Border(left: Divider.createBorderSide(context))),
-              child: new Center(
-                  child: new Row(
+      child: Padding(
+          padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
+          child: DecoratedBox(
+              decoration: BoxDecoration(
+                  border: Border(left: Divider.createBorderSide(context))),
+              child: Center(
+                  child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
-                    new Text(
+                    Text(
                       showTitle(title, index),
-                      style: new TextStyle(
+                      style: TextStyle(
                         color: selected ? primaryColor : unselectedColor,
                       ),
                     ),
-                    new Icon(
+                    Icon(
                       selected ? Icons.arrow_drop_up : Icons.arrow_drop_down,
                       color: selected ? primaryColor : unselectedColor,
                     )
@@ -95,24 +94,24 @@ class _DropSelectHeaderState extends DropSelectState<DropSelectHeader> {
     }
 
     list = list.map((Widget widget) {
-      return new Expanded(
+      return Expanded(
         child: widget,
       );
     }).toList();
 
-    final Decoration decoration = new BoxDecoration(
-      border: new Border(
+    final Decoration decoration = BoxDecoration(
+      border: Border(
         bottom: Divider.createBorderSide(context),
       ),
     );
 
-    return new DecoratedBox(
+    return DecoratedBox(
       decoration: decoration,
-      child: new SizedBox(
-          child: new Row(
+      child: SizedBox(
+          height: height,
+          child: Row(
             children: list,
-          ),
-          height: height),
+          )),
     );
   }
 

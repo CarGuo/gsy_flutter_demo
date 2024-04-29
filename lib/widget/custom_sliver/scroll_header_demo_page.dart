@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'custom_sliver.dart';
 
 class ScrollHeaderDemoPage extends StatefulWidget {
+  const ScrollHeaderDemoPage({super.key});
+
   @override
   _ScrollHeaderDemoPageState createState() => _ScrollHeaderDemoPageState();
 }
 
 class _ScrollHeaderDemoPageState extends State<ScrollHeaderDemoPage>
     with SingleTickerProviderStateMixin {
-  GlobalKey<CustomSliverState> globalKey = new GlobalKey();
+  GlobalKey<CustomSliverState> globalKey = GlobalKey();
 
   final ScrollController controller =
       ScrollController(initialScrollOffset: -70);
@@ -24,9 +26,9 @@ class _ScrollHeaderDemoPageState extends State<ScrollHeaderDemoPage>
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColorDark,
       appBar: AppBar(
-        title: new Text("ScrollHeaderDemoPage"),
+        title: const Text("ScrollHeaderDemoPage"),
       ),
-      body: new NotificationListener(
+      body: NotificationListener(
         onNotification: (ScrollNotification notification) {
           if (notification is ScrollUpdateNotification) {
             if (initLayoutExtent > 0) {
@@ -60,7 +62,7 @@ class _ScrollHeaderDemoPageState extends State<ScrollHeaderDemoPage>
             SliverPadding(
               padding: EdgeInsets.only(bottom: pinned ? initLayoutExtent : 0),
               sliver: SliverGrid(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   mainAxisSpacing: 2,
                   crossAxisSpacing: 2,
@@ -71,10 +73,10 @@ class _ScrollHeaderDemoPageState extends State<ScrollHeaderDemoPage>
                 delegate: SliverChildBuilderDelegate(
                   (BuildContext context, int index) {
                     return Card(
-                      child: new Container(
+                      child: Container(
                         height: 60,
                         alignment: Alignment.centerLeft,
-                        child: new Text("Item $index"),
+                        child: Text("Item $index"),
                       ),
                     );
                   },
@@ -86,18 +88,18 @@ class _ScrollHeaderDemoPageState extends State<ScrollHeaderDemoPage>
         ),
       ),
       persistentFooterButtons: <Widget>[
-        new ElevatedButton(
+        ElevatedButton(
           onPressed: () async {
             setState(() {
               pinned = !pinned;
             });
           },
-          child: new Text(
+          child: Text(
             pinned ? "pinned" : "scroll",
-            style: TextStyle(color: Colors.white),
+            style: const TextStyle(color: Colors.white),
           ),
         ),
-        new ElevatedButton(
+        ElevatedButton(
           onPressed: () async {
             setState(() {
               if (initLayoutExtent == 0) {
@@ -108,12 +110,12 @@ class _ScrollHeaderDemoPageState extends State<ScrollHeaderDemoPage>
               }
             });
           },
-          child: new Text(
+          child: Text(
             initLayoutExtent != 0 ? "minHeight" : "non Height",
-            style: TextStyle(color: Colors.white),
+            style: const TextStyle(color: Colors.white),
           ),
         ),
-        new ElevatedButton(
+        ElevatedButton(
           onPressed: () async {
             setState(() {
               if (showPullDistance > 150) {
@@ -123,9 +125,9 @@ class _ScrollHeaderDemoPageState extends State<ScrollHeaderDemoPage>
               }
             });
           },
-          child: new Text(
+          child: Text(
             showPullDistance > 150 ? "autoBack" : "non autoBack",
-            style: TextStyle(color: Colors.white),
+            style: const TextStyle(color: Colors.white),
           ),
         ),
       ],

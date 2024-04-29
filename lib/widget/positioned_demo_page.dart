@@ -2,45 +2,47 @@ import 'package:flutter/material.dart';
 
 ///Stack + Positioned例子
 class PositionedDemoPage extends StatelessWidget {
+  const PositionedDemoPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: new Text("PositionedDemoPage"),
+        title: const Text("PositionedDemoPage"),
       ),
       body: Container(
         width: MediaQuery.sizeOf(context).width,
         height: MediaQuery.sizeOf(context).height,
-        margin: EdgeInsets.all(15),
-        child: new Stack(
+        margin: const EdgeInsets.all(15),
+        child: Stack(
           children: <Widget>[
-            new MaterialButton(
+            MaterialButton(
               onPressed: () {},
               color: Colors.blue,
             ),
-            new Positioned(
-                child: new MaterialButton(
+            Positioned(
+                left: MediaQuery.sizeOf(context).width / 2,
+                child: MaterialButton(
                   onPressed: () {},
                   color: Colors.greenAccent,
-                ),
-                left: MediaQuery.sizeOf(context).width / 2),
-            new Positioned(
-              child: new MaterialButton(
+                )),
+            Positioned(
+              left: MediaQuery.sizeOf(context).width / 5,
+              top: MediaQuery.sizeOf(context).height / 4 * 3,
+              child: MaterialButton(
                 onPressed: () {},
                 color: Colors.yellow,
               ),
-              left: MediaQuery.sizeOf(context).width / 5,
-              top: MediaQuery.sizeOf(context).height / 4 * 3,
             ),
-            new Positioned(
-              child: new MaterialButton(
-                onPressed: () {},
-                color: Colors.redAccent,
-              ),
+            Positioned(
               left: MediaQuery.sizeOf(context).width / 2 - Theme.of(context).buttonTheme.minWidth / 2,
               top: MediaQuery.sizeOf(context).height / 2 -
                   MediaQuery.paddingOf(context).top -
                   kToolbarHeight,
+              child: MaterialButton(
+                onPressed: () {},
+                color: Colors.redAccent,
+              ),
             ),
           ],
         ),

@@ -6,7 +6,7 @@ import 'drop_select_controller.dart';
 abstract class DropSelectWidget extends StatefulWidget {
   final DropSelectController? controller;
 
-  DropSelectWidget({Key? key, this.controller}) : super(key: key);
+  const DropSelectWidget({super.key, this.controller});
 
   @override
   DropSelectState<DropSelectWidget> createState();
@@ -40,27 +40,27 @@ abstract class DropSelectState<T extends DropSelectWidget> extends State<T> {
 
   cloneDataList(List<DropSelectObject> form, List<DropSelectObject> to) {
     to.clear();
-    form.forEach((item) {
+    for (var item in form) {
       to.add(item.clone());
-    });
+    }
   }
 
   resetList(List<DropSelectObject> list) {
-    list.forEach((item) {
+    for (var item in list) {
       item.selected = false;
       item.children?.forEach((child) {
         child.selected = false;
       });
-    });
+    }
     selectChildFirst(list);
   }
 
   selectChildFirst(List<DropSelectObject> list) {
-    list.forEach((item) {
+    for (var item in list) {
       if (item.children != null) {
         item.children![0].selected = true;
       }
-    });
+    }
   }
 
   void _onEvent() {
@@ -71,11 +71,11 @@ abstract class DropSelectState<T extends DropSelectWidget> extends State<T> {
 }
 
 class DropSelectMenuContainer extends StatefulWidget {
-  DropSelectMenuContainer({
-    Key? key,
+  const DropSelectMenuContainer({
+    super.key,
     required this.child,
     this.onSelected,
-  }) : super(key: key);
+  });
 
   final Widget child;
 
@@ -83,7 +83,7 @@ class DropSelectMenuContainer extends StatefulWidget {
 
   @override
   _DropSelectMenuContainerState createState() =>
-      new _DropSelectMenuContainerState();
+      _DropSelectMenuContainerState();
 
   static DropSelectController? of(BuildContext context) {
     final _DropSelectMenuInherited? scope =
@@ -99,7 +99,7 @@ class _DropSelectMenuContainerState extends State<DropSelectMenuContainer>
   @override
   void initState() {
     super.initState();
-    _controller = new DropSelectController();
+    _controller = DropSelectController();
     _controller!.addListener(_onController);
   }
 
@@ -131,7 +131,7 @@ class _DropSelectMenuContainerState extends State<DropSelectMenuContainer>
 
   @override
   Widget build(BuildContext context) {
-    return new _DropSelectMenuInherited(
+    return _DropSelectMenuInherited(
       controller: _controller,
       enable: TickerMode.of(context),
       child: widget.child,
@@ -141,8 +141,7 @@ class _DropSelectMenuContainerState extends State<DropSelectMenuContainer>
 
 class _DropSelectMenuInherited extends InheritedWidget {
   const _DropSelectMenuInherited(
-      {Key? key, this.controller, this.enable, required Widget child})
-      : super(key: key, child: child);
+      {this.controller, this.enable, required super.child});
 
   final bool? enable;
   final DropSelectController? controller;
@@ -160,4 +159,4 @@ class DropSelectMenuBuilder {
   DropSelectMenuBuilder({required this.builder, this.height});
 }
 
-typedef DropOnSelected({int? menuIndex, int? index, dynamic data});
+typedef DropOnSelected = Function({int? menuIndex, int? index, dynamic data});

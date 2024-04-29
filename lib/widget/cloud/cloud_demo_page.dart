@@ -5,6 +5,8 @@ import 'cloud_widget.dart';
 
 ///云词图
 class CloudDemoPage extends StatefulWidget {
+  const CloudDemoPage({super.key});
+
   @override
   _CloudDemoPageState createState() => _CloudDemoPageState();
 }
@@ -60,18 +62,18 @@ class _CloudDemoPageState extends State<CloudDemoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: new Text("CloudDemoPage"),
+        title: const Text("CloudDemoPage"),
       ),
-      body: new Center(
-        child: Container(
+      body: Center(
+        child: SizedBox(
           width: MediaQuery.sizeOf(context).width,
           height: MediaQuery.sizeOf(context).width,
 
           ///利用 FittedBox 约束 child
-          child: new FittedBox(
+          child: FittedBox(
             /// Cloud 布局
             child: Container(
-              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 6),
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 6),
               color: Colors.brown,
 
               ///布局
@@ -86,7 +88,7 @@ class _CloudDemoPageState extends State<CloudDemoPage> {
                       quarterTurns: item.rotate ? 1 : 0,
                       child: Text(
                         item.text,
-                        style: new TextStyle(
+                        style: TextStyle(
                           fontSize: item.size,
                           color: item.color,
                         ),

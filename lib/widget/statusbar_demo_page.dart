@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 
 ///状态栏颜色
 class StatusBarDemoPage extends StatefulWidget {
+  const StatusBarDemoPage({super.key});
+
   @override
   _StatusBarDemoPageState createState() => _StatusBarDemoPageState();
 }
@@ -26,49 +28,47 @@ class _StatusBarDemoPageState extends State<StatusBarDemoPage> {
 
   getBody() {
     return Scaffold(
-      appBar: ImageAppBar(),
-      body: new Container(
-        child: Center(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              new TextButton(
-                onPressed: () {
-                  ///手动修改
-                  setState(() {
-                    customSystemUIOverlayStyle = true;
-                  });
-                  SystemChrome.setSystemUIOverlayStyle(
-                      SystemUiOverlayStyle.light);
-                },
-                style: ButtonStyle(
-                  backgroundColor: ButtonStyleButton.allOrNull<Color>(
-                    Colors.yellowAccent,
-                  ),
+      appBar: const ImageAppBar(),
+      body: Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            TextButton(
+              onPressed: () {
+                ///手动修改
+                setState(() {
+                  customSystemUIOverlayStyle = true;
+                });
+                SystemChrome.setSystemUIOverlayStyle(
+                    SystemUiOverlayStyle.light);
+              },
+              style: ButtonStyle(
+                backgroundColor: ButtonStyleButton.allOrNull<Color>(
+                  Colors.yellowAccent,
                 ),
-                child: new Text("Light"),
               ),
-              new SizedBox(
-                width: 10,
-              ),
-              new TextButton(
-                onPressed: () {
-                  setState(() {
-                    customSystemUIOverlayStyle = true;
-                  });
-                  SystemChrome.setSystemUIOverlayStyle(
-                      SystemUiOverlayStyle.dark);
-                },
-                style: ButtonStyle(
-                  backgroundColor: ButtonStyleButton.allOrNull<Color>(
-                    Colors.greenAccent,
-                  ),
+              child: const Text("Light"),
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+            TextButton(
+              onPressed: () {
+                setState(() {
+                  customSystemUIOverlayStyle = true;
+                });
+                SystemChrome.setSystemUIOverlayStyle(
+                    SystemUiOverlayStyle.dark);
+              },
+              style: ButtonStyle(
+                backgroundColor: ButtonStyleButton.allOrNull<Color>(
+                  Colors.greenAccent,
                 ),
-                child: new Text("Dart"),
               ),
-            ],
-          ),
+              child: const Text("Dart"),
+            ),
+          ],
         ),
       ),
     );
@@ -77,29 +77,30 @@ class _StatusBarDemoPageState extends State<StatusBarDemoPage> {
 
 ///自定义 PreferredSizeWidget 做 AppBar
 class ImageAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const ImageAppBar({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Stack(
-        children: <Widget>[
-          new Image.asset(
-            "static/gsy_cat.png",
-            fit: BoxFit.cover,
-            width: MediaQuery.sizeOf(context).width,
-            height: kToolbarHeight * 3,
-          ),
-          SafeArea(
-            child: new IconButton(
-                color: Colors.white,
-                icon: Icon(Icons.arrow_back_ios),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                }),
-          )
-        ],
-      ),
+    return Stack(
+      children: <Widget>[
+        Image.asset(
+          "static/gsy_cat.png",
+          fit: BoxFit.cover,
+          width: MediaQuery.sizeOf(context).width,
+          height: kToolbarHeight * 3,
+        ),
+        SafeArea(
+          child: IconButton(
+              color: Colors.white,
+              icon: const Icon(Icons.arrow_back_ios),
+              onPressed: () {
+                Navigator.of(context).pop();
+              }),
+        )
+      ],
     );
   }
 
-  Size get preferredSize => Size.fromHeight(kToolbarHeight * 3);
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight * 3);
 }

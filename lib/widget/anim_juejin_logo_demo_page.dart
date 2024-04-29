@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
 
 class AnimJueJinLogoDemoPage extends StatefulWidget {
-  const AnimJueJinLogoDemoPage({Key? key}) : super(key: key);
+  const AnimJueJinLogoDemoPage({super.key});
 
   @override
   State<AnimJueJinLogoDemoPage> createState() => _AnimJueJinLogoDemoPageState();
@@ -13,12 +13,10 @@ class _AnimJueJinLogoDemoPageState extends State<AnimJueJinLogoDemoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("AnimJueJinLogoDemoPage"),
+        title: const Text("AnimJueJinLogoDemoPage"),
       ),
-      body: Container(
-        child: RiveAnimation.asset(
-          'static/juejin.riv',
-        ),
+      body: const RiveAnimation.asset(
+        'static/juejin.riv',
       ),
     );
   }

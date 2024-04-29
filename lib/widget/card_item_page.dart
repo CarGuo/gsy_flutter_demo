@@ -1,49 +1,49 @@
 import 'package:flutter/material.dart';
 
 class CardItemPage extends StatelessWidget {
+  const CardItemPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.blueAccent,
       appBar: AppBar(
-        title: new Text("CardItemPage"),
+        title: const Text("CardItemPage"),
       ),
-      body: Container(
-        child: Column(children: <Widget>[
-          renderImageNormal("static/gsy_cat.png"),
-          renderImageRatio(context, "static/gsy_cat.png"),
-          renderImageNormal("static/test.jpeg"),
-          renderImageRatio(context, "static/test.jpeg"),
-        ]),
-      ),
+      body: Column(children: <Widget>[
+        renderImageNormal("static/gsy_cat.png"),
+        renderImageRatio(context, "static/gsy_cat.png"),
+        renderImageNormal("static/test.jpeg"),
+        renderImageRatio(context, "static/test.jpeg"),
+      ]),
     );
   }
 
   renderImageNormal(image) {
     return Card(
-      margin: EdgeInsets.all(5),
+      margin: const EdgeInsets.all(5),
       child: Container(
-        margin: EdgeInsets.only(right: 10),
+        margin: const EdgeInsets.only(right: 10),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             ClipRRect(
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(4.0),
                 bottomLeft: Radius.circular(4.0),
               ),
-              child: new Image.asset(
+              child: Image.asset(
                 image,
                 fit: BoxFit.cover,
                 width: 70,
                 height: 70,
               ),
             ),
-            new SizedBox(
+            const SizedBox(
               width: 10,
             ),
-            new Expanded(
-                child: new Text(
+            const Expanded(
+                child: Text(
               'FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF'
               'FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF'
               'FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF',
@@ -68,29 +68,29 @@ class CardItemPage extends StatelessWidget {
     //var data = MediaQueryData.fromWindow(WidgetsBinding.instance.window);
 
     return Card(
-      margin: EdgeInsets.all(5),
+      margin: const EdgeInsets.all(5),
       child: Container(
-        margin: EdgeInsets.only(right: 10),
+        margin: const EdgeInsets.only(right: 10),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             ClipRRect(
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(4.0),
                 bottomLeft: Radius.circular(4.0),
               ),
-              child: new Image.asset(
+              child: Image.asset(
                 image,
                 fit: BoxFit.cover,
                 height: itemHeight,
                 width: itemHeight,
               ),
             ),
-            new SizedBox(
+            const SizedBox(
               width: 10,
             ),
-            new Expanded(
-                child: new Text(
+            Expanded(
+                child: Text(
               'FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF'
               'FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF'
               'FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF',

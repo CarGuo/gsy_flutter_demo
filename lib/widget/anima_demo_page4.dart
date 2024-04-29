@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class AnimaDemoPage4 extends StatefulWidget {
+  const AnimaDemoPage4({super.key});
+
   @override
   _AnimaDemoPageState createState() => _AnimaDemoPageState();
 }
@@ -12,22 +14,23 @@ class _AnimaDemoPageState extends State<AnimaDemoPage4> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('AnimaDemoPage4'),
+        title: const Text('AnimaDemoPage4'),
         actions: <Widget>[
           AnimatedSwitcher(
             transitionBuilder: (child, anim) {
-              return ScaleTransition(child: child, scale: anim);
+              return ScaleTransition(scale: anim, child: child);
             },
-            duration: Duration(milliseconds: 300),
+            duration: const Duration(milliseconds: 300),
             child: IconButton(
                 key: ValueKey(iconData),
                 icon: Icon(iconData),
                 onPressed: () {
                   setState(() {
-                    if (iconData == Icons.clear)
+                    if (iconData == Icons.clear) {
                       iconData = Icons.add;
-                    else
+                    } else {
                       iconData = Icons.clear;
+                    }
                   });
                 }),
           )
@@ -37,26 +40,28 @@ class _AnimaDemoPageState extends State<AnimaDemoPage4> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           setState(() {
-            if (iconData == Icons.clear)
+            if (iconData == Icons.clear) {
               iconData = Icons.add;
-            else
+            } else {
               iconData = Icons.clear;
+            }
           });
         },
         child: AnimatedSwitcher(
           transitionBuilder: (child, anim) {
-            return ScaleTransition(child: child, scale: anim);
+            return ScaleTransition(scale: anim, child: child);
           },
-          duration: Duration(milliseconds: 300),
+          duration: const Duration(milliseconds: 300),
           child: IconButton(
               key: ValueKey(iconData),
               icon: Icon(iconData),
               onPressed: () {
                 setState(() {
-                  if (iconData == Icons.clear)
+                  if (iconData == Icons.clear) {
                     iconData = Icons.add;
-                  else
+                  } else {
                     iconData = Icons.clear;
+                  }
                 });
               }),
         ),

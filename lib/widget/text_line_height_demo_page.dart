@@ -9,20 +9,22 @@ class TextLineHeightDemoPage extends StatelessWidget {
 
   final double fontSize = 16;
 
+  const TextLineHeightDemoPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: new Text("TextLineHeightDemoPage"),
+        title: const Text("TextLineHeightDemoPage"),
       ),
       body: Container(
         color: Colors.blueGrey,
-        margin: EdgeInsets.all(20),
+        margin: const EdgeInsets.all(20),
 
         ///利用 Transform 偏移将对应权重部分位置
         child: Transform.translate(
           offset: Offset(0, -fontSize * leading / 2),
-          child: new Text(
+          child: Text(
             textContent,
             strutStyle:
                 StrutStyle(forceStrutHeight: true, height: 1, leading: leading),

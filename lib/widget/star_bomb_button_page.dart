@@ -4,15 +4,17 @@ import 'package:flutter/material.dart';
 ///以下代码全部来自 ChatGPT 生成，具体详情可见：
 /// https://juejin.cn/post/7210605626501595195
 class StarBombButtonPage extends StatelessWidget {
-  const StarBombButtonPage({Key? key}) : super(key: key);
+  const StarBombButtonPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return YellowStarPage();
+    return const YellowStarPage();
   }
 }
 
 class YellowStarPage extends StatefulWidget {
+  const YellowStarPage({super.key});
+
   @override
   _YellowStarPageState createState() => _YellowStarPageState();
 }
@@ -26,7 +28,7 @@ class _YellowStarPageState extends State<YellowStarPage>
   void initState() {
     super.initState();
     _animationController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 500))
+        AnimationController(vsync: this, duration: const Duration(milliseconds: 500))
           ..addListener(() {
             setState(() {});
           });
@@ -42,7 +44,7 @@ class _YellowStarPageState extends State<YellowStarPage>
     if (!_isExploded) {
       _isExploded = true;
       _animationController.forward(from: 0);
-      Future.delayed(Duration(milliseconds: 500), () {
+      Future.delayed(const Duration(milliseconds: 500), () {
         setState(() {
           _isExploded = false;
         });
@@ -54,11 +56,11 @@ class _YellowStarPageState extends State<YellowStarPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Yellow Star')),
+      appBar: AppBar(title: const Text('Yellow Star')),
       body: Center(
         child: GestureDetector(
           onTap: _handleStarTap,
-          child: Container(
+          child: SizedBox(
             width: 300,
             height: 300,
             child: AnimatedBuilder(

@@ -4,6 +4,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class CanvasClickDemoPage extends StatefulWidget {
+  const CanvasClickDemoPage({super.key});
+
   @override
   _CanvasClickDemoPageState createState() => _CanvasClickDemoPageState();
 }
@@ -18,11 +20,11 @@ class _CanvasClickDemoPageState extends State<CanvasClickDemoPage>
 
   @override
   void initState() {
-    timer = Timer.periodic(Duration(milliseconds: 800), (_) {
+    timer = Timer.periodic(const Duration(milliseconds: 800), (_) {
       setState(() {});
     });
-    controller = new AnimationController(
-        vsync: this, duration: Duration(milliseconds: 100));
+    controller = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 100));
     animation = Tween(begin: 0.0, end: 0.0).animate(controller);
     super.initState();
   }
@@ -39,35 +41,33 @@ class _CanvasClickDemoPageState extends State<CanvasClickDemoPage>
     var time = DateTime.now();
     return Scaffold(
         appBar: AppBar(
-          title: new Text("CanvasClickDemoPage"),
+          title: const Text("CanvasClickDemoPage"),
         ),
-        body: Container(
-          child: Center(
-            child: DebounceButton(
-              onTap: () {
-                if (controller.isAnimating) {
-                  animation = Tween(begin: 0.0, end: 0.0).animate(controller);
-                  controller.stop();
-                  setState(() {});
-                } else {
-                  CurvedAnimation curvedAnimation = CurvedAnimation(
-                      parent: controller, curve: Curves.bounceInOut);
-                  animation = Tween(begin: -0.01 * pi, end: 0.01 * pi)
-                      .animate(curvedAnimation);
-                  controller.repeat(reverse: true);
-                }
-              },
-              child: RotationTransition(
-                turns: animation as Animation<double>,
-                child: SizedBox(
-                  width: 300,
-                  height: 300,
-                  child: CustomPaint(
-                    painter: ClockPainter(
-                      hour: time.hour,
-                      minute: time.minute,
-                      second: time.second,
-                    ),
+        body: Center(
+          child: DebounceButton(
+            onTap: () {
+              if (controller.isAnimating) {
+                animation = Tween(begin: 0.0, end: 0.0).animate(controller);
+                controller.stop();
+                setState(() {});
+              } else {
+                CurvedAnimation curvedAnimation = CurvedAnimation(
+                    parent: controller, curve: Curves.bounceInOut);
+                animation = Tween(begin: -0.01 * pi, end: 0.01 * pi)
+                    .animate(curvedAnimation);
+                controller.repeat(reverse: true);
+              }
+            },
+            child: RotationTransition(
+              turns: animation as Animation<double>,
+              child: SizedBox(
+                width: 300,
+                height: 300,
+                child: CustomPaint(
+                  painter: ClockPainter(
+                    hour: time.hour,
+                    minute: time.minute,
+                    second: time.second,
                   ),
                 ),
               ),
@@ -154,70 +154,70 @@ class ClockPainter extends CustomPainter {
       footLeftAngel;
 
   void init() {
-    clockCirclePaint = new Paint()
+    clockCirclePaint = Paint()
       ..isAntiAlias = true
       ..style = PaintingStyle.stroke
       ..color = edgeColor;
 
-    earPaint = new Paint()
+    earPaint = Paint()
       ..isAntiAlias = true
       ..style = PaintingStyle.fill
       ..color = earColor;
 
-    footPaint = new Paint()
+    footPaint = Paint()
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round
       ..strokeJoin = StrokeJoin.round
       ..color = footColor;
 
-    scalePaint = new Paint()
+    scalePaint = Paint()
       ..isAntiAlias = true
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round
       ..strokeJoin = StrokeJoin.round
       ..color = scaleColor;
 
-    headLinePaint = new Paint()
+    headLinePaint = Paint()
       ..isAntiAlias = true
       ..style = PaintingStyle.stroke
       ..color = headColor;
 
-    headCirclePaint = new Paint()
+    headCirclePaint = Paint()
       ..style = PaintingStyle.fill
       ..color = headColor;
 
-    centerCirclePaint = new Paint()
+    centerCirclePaint = Paint()
       ..style = PaintingStyle.fill
       ..color = centerPointColor;
 
-    hourHandPaint = new Paint()
+    hourHandPaint = Paint()
       ..isAntiAlias = true
       ..strokeJoin = StrokeJoin.round
       ..strokeCap = StrokeCap.round
       ..style = PaintingStyle.fill
       ..color = hourHandColor;
 
-    minHandPaint = new Paint()
+    minHandPaint = Paint()
       ..isAntiAlias = true
       ..strokeJoin = StrokeJoin.round
       ..strokeCap = StrokeCap.round
       ..color = minuteHandColor;
 
-    secondHandPaint = new Paint()
+    secondHandPaint = Paint()
       ..isAntiAlias = true
       ..strokeJoin = StrokeJoin.round
       ..strokeCap = StrokeCap.round
       ..color = secondHandColor;
 
-    earPath = new Path();
-    earPath2 = new Path();
+    earPath = Path();
+    earPath2 = Path();
 
-    footRightStartPointF = new Offset(0, 0);
-    footRightEndPointF = new Offset(0, 0);
-    footLeftStartPointF = new Offset(0, 0);
-    footLeftEndPointF = new Offset(0, 0);
-    earRightEndPointF = new Offset(0, 0);
-    earLeftEndPointF = new Offset(0, 0);
+    footRightStartPointF = const Offset(0, 0);
+    footRightEndPointF = const Offset(0, 0);
+    footLeftStartPointF = const Offset(0, 0);
+    footLeftEndPointF = const Offset(0, 0);
+    earRightEndPointF = const Offset(0, 0);
+    earLeftEndPointF = const Offset(0, 0);
 
     earRightAngel = 300 * pi / 180;
     earLeftAngel = 240 * pi / 180;
@@ -369,7 +369,7 @@ class ClockPainter extends CustomPainter {
   }
 
   void drawEars(Canvas canvas, Size size) {
-    canvas.saveLayer(Offset.zero & size, new Paint());
+    canvas.saveLayer(Offset.zero & size, Paint());
     canvas.translate(centerX!, centerY!);
     canvas.rotate(-atan2(centerX!, centerY!));
     canvas.translate(-centerX!, -centerY!);
@@ -417,14 +417,14 @@ class DebounceButton extends StatefulWidget {
   final GestureTapCallback? onTap;
   final double radius;
 
-  DebounceButton({this.child, this.onTap, this.radius = 0});
+  const DebounceButton({super.key, this.child, this.onTap, this.radius = 0});
 
   @override
   _DebounceButtonState createState() => _DebounceButtonState();
 }
 
 class _DebounceButtonState extends State<DebounceButton> {
-  Duration durationTime = Duration(milliseconds: 500);
+  Duration durationTime = const Duration(milliseconds: 500);
   Timer? timer;
 
   @override
@@ -447,7 +447,7 @@ class _DebounceButtonState extends State<DebounceButton> {
         setState(() {
           if (timer == null) {
             widget.onTap?.call();
-            timer = new Timer(durationTime, () {
+            timer = Timer(durationTime, () {
               timer = null;
             });
           }

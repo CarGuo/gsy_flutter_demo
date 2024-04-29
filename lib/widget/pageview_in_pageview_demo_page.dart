@@ -5,7 +5,7 @@ import 'package:flutter/rendering.dart';
 
 //https://dartpad.dev/?id=abe26388e1f3a2ea0660fbd6089c6da5
 class PageViewInPageViewDemoPage extends StatefulWidget {
-  const PageViewInPageViewDemoPage({Key? key}) : super(key: key);
+  const PageViewInPageViewDemoPage({super.key});
 
   @override
   State<PageViewInPageViewDemoPage> createState() =>
@@ -98,7 +98,7 @@ class _PageViewInPageViewDemoPageState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: new Text("PageViewInPageViewDemoPage"),
+        title: const Text("PageViewInPageViewDemoPage"),
       ),
       extendBody: true,
       body: PageView(
@@ -107,9 +107,7 @@ class _PageViewInPageViewDemoPageState
         children: [
           Column(
             children: [
-              Container(
-                child: new Text("Inner PageView 1"),
-              ),
+              const Text("Inner PageView 1"),
               Expanded(
                 child: NotificationListener(
                   onNotification: (notification) {
@@ -125,13 +123,13 @@ class _PageViewInPageViewDemoPageState
                         isEnd = false;
                       }
                     },
-                    physics: ClampingScrollPhysics(),
+                    physics: const ClampingScrollPhysics(),
                     controller: _pageController3,
                     children: [
                       KeepAliveWrapper(
                         child: Container(
                           color: Colors.purpleAccent,
-                          child: Center(
+                          child: const Center(
                             child: Text("Inner PageView Item"),
                           ),
                         ),
@@ -139,7 +137,7 @@ class _PageViewInPageViewDemoPageState
                       KeepAliveWrapper(
                         child: Container(
                           color: Colors.teal,
-                          child: Center(
+                          child: const Center(
                             child: Text("Inner PageView Item"),
                           ),
                         ),
@@ -152,9 +150,7 @@ class _PageViewInPageViewDemoPageState
           ),
           Column(
             children: [
-              Container(
-                child: new Text("Inner PageView 2"),
-              ),
+              const Text("Inner PageView 2"),
               Expanded(
                 child: NotificationListener(
                   onNotification: (notification) {
@@ -163,13 +159,13 @@ class _PageViewInPageViewDemoPageState
                     return false;
                   },
                   child: PageView(
-                    physics: ClampingScrollPhysics(),
+                    physics: const ClampingScrollPhysics(),
                     controller: _pageController2,
                     children: [
                       KeepAliveWrapper(
                         child: Container(
                           color: Colors.greenAccent,
-                          child: Center(
+                          child: const Center(
                             child: Text("Inner PageView Item"),
                           ),
                         ),
@@ -177,7 +173,7 @@ class _PageViewInPageViewDemoPageState
                       KeepAliveWrapper(
                         child: Container(
                           color: Colors.yellowAccent,
-                          child: Center(
+                          child: const Center(
                             child: Text("Inner PageView Item"),
                           ),
                         ),
@@ -190,7 +186,7 @@ class _PageViewInPageViewDemoPageState
           ),
           Container(
             color: Colors.blue,
-            child: Center(
+            child: const Center(
               child: Text("Outer PageView Item"),
             ),
           ),
@@ -202,10 +198,10 @@ class _PageViewInPageViewDemoPageState
 
 class KeepAliveWrapper extends StatefulWidget {
   const KeepAliveWrapper({
-    Key? key,
+    super.key,
     this.keepAlive = true,
     required this.child,
-  }) : super(key: key);
+  });
   final bool keepAlive;
   final Widget child;
 

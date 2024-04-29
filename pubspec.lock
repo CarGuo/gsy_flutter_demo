@@ -270,6 +270,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.0.0"
+  flutter_lints:
+    dependency: "direct dev"
+    description:
+      name: flutter_lints
+      sha256: "9e8c3858111da373efc5aa341de011d9bd23e2c5c5e0c62bccf32438e192d7b1"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.0.2"
   flutter_swiper_view:
     dependency: "direct main"
     description:
@@ -379,6 +387,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.0.1"
+  lints:
+    dependency: transitive
+    description:
+      name: lints
+      sha256: cbf8d4b858bb0134ef3ef87841abdf8d63bfc255c266b7bf6b39daa1085c4290
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.0.0"
   logging:
     dependency: transitive
     description:
@@ -633,7 +649,7 @@ packages:
     source: hosted
     version: "1.3.0"
   vector_math:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: vector_math
       sha256: "80b3257d1492ce4d091729e3a67a60407d227c27241d6927be0130c98e741803"

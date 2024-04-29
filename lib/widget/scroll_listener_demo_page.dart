@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 
 ///滑动监听
 class ScrollListenerDemoPage extends StatefulWidget {
+  const ScrollListenerDemoPage({super.key});
+
   @override
   _ScrollListenerDemoPageState createState() => _ScrollListenerDemoPageState();
 }
 
 class _ScrollListenerDemoPageState extends State<ScrollListenerDemoPage> {
-  final ScrollController _scrollController = new ScrollController();
+  final ScrollController _scrollController = ScrollController();
 
   bool isEnd = false;
 
@@ -31,59 +33,57 @@ class _ScrollListenerDemoPageState extends State<ScrollListenerDemoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: new Text("ScrollListenerDemoPage"),
+        title: const Text("ScrollListenerDemoPage"),
       ),
-      body: new Container(
-        child: NotificationListener(
-          onNotification: (dynamic notification) {
-            String notify = "";
-            if (notification is ScrollEndNotification) {
-              notify = "ScrollEnd";
-            } else if (notification is ScrollStartNotification) {
-              notify = "ScrollStart";
-            } else if (notification is UserScrollNotification) {
-              notify = " UserScroll";
-            } else if (notification is ScrollUpdateNotification) {
-              notify = "ScrollUpdate";
-            }
-            setState(() {
-              this.notify = notify;
-            });
-            return false;
+      body: NotificationListener(
+        onNotification: (dynamic notification) {
+          String notify = "";
+          if (notification is ScrollEndNotification) {
+            notify = "ScrollEnd";
+          } else if (notification is ScrollStartNotification) {
+            notify = "ScrollStart";
+          } else if (notification is UserScrollNotification) {
+            notify = " UserScroll";
+          } else if (notification is ScrollUpdateNotification) {
+            notify = "ScrollUpdate";
+          }
+          setState(() {
+            this.notify = notify;
+          });
+          return false;
+        },
+        child: ListView.builder(
+          controller: _scrollController,
+          itemBuilder: (context, index) {
+            return Card(
+              child: Container(
+                height: 60,
+                alignment: Alignment.centerLeft,
+                child: Text("Item $index"),
+              ),
+            );
           },
-          child: new ListView.builder(
-            controller: _scrollController,
-            itemBuilder: (context, index) {
-              return Card(
-                child: new Container(
-                  height: 60,
-                  alignment: Alignment.centerLeft,
-                  child: new Text("Item $index"),
-                ),
-              );
-            },
-            itemCount: 100,
-          ),
+          itemCount: 100,
         ),
       ),
       persistentFooterButtons: <Widget>[
-        new TextButton(
+        TextButton(
           onPressed: () {
             _scrollController.animateTo(0,
-                duration: Duration(seconds: 1), curve: Curves.bounceInOut);
+                duration: const Duration(seconds: 1), curve: Curves.bounceInOut);
           },
-          child: new Text("position: ${offset.floor()}"),
+          child: Text("position: ${offset.floor()}"),
         ),
-        new Container(width: 0.3, height: 30.0),
-        new TextButton(
+        const SizedBox(width: 0.3, height: 30.0),
+        TextButton(
           onPressed: () {},
-          child: new Text(notify),
+          child: Text(notify),
         ),
-        new Visibility(
+        Visibility(
           visible: isEnd,
-          child: new TextButton(
+          child: TextButton(
             onPressed: () {},
-            child: new Text("到达底部"),
+            child: const Text("到达底部"),
           ),
         )
       ],

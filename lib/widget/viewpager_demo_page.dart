@@ -10,12 +10,14 @@ class ViewPagerDemoPage extends StatelessWidget {
     Colors.greenAccent
   ];
 
+  ViewPagerDemoPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColorDark,
       appBar: AppBar(
-        title: new Text("ViewPagerDemoPage"),
+        title: const Text("ViewPagerDemoPage"),
       ),
       body: Container(
         alignment: Alignment.topCenter,
@@ -24,19 +26,19 @@ class ViewPagerDemoPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.max,
           children: <Widget>[
-            new Expanded(
-              child: new TransformerPageView(
+            Expanded(
+              child: TransformerPageView(
                   loop: false,
                   controller: IndexController(),
                   itemBuilder: (BuildContext context, int index) {
-                    return new Container(
+                    return Container(
                       decoration: BoxDecoration(
                           color: colorList[index % colorList.length],
                           border: Border.all(color: Colors.white)),
-                      child: new Center(
-                        child: new Text(
+                      child: Center(
+                        child: Text(
                           "$index",
-                          style: new TextStyle(
+                          style: const TextStyle(
                               fontSize: 80.0, color: Colors.white),
                         ),
                       ),
@@ -44,20 +46,20 @@ class ViewPagerDemoPage extends StatelessWidget {
                   },
                   itemCount: 3),
             ),
-            new Expanded(
-              child: new TransformerPageView(
+            Expanded(
+              child: TransformerPageView(
                   loop: true,
                   controller: IndexController(),
-                  transformer: new AccordionTransformer(),
+                  transformer: AccordionTransformer(),
                   itemBuilder: (BuildContext context, int index) {
-                    return new Container(
+                    return Container(
                       decoration: BoxDecoration(
                           color: colorList[index % colorList.length],
                           border: Border.all(color: Colors.white)),
-                      child: new Center(
-                        child: new Text(
+                      child: Center(
+                        child: Text(
                           "$index",
-                          style: new TextStyle(
+                          style: const TextStyle(
                               fontSize: 80.0, color: Colors.white),
                         ),
                       ),
@@ -65,20 +67,20 @@ class ViewPagerDemoPage extends StatelessWidget {
                   },
                   itemCount: 3),
             ),
-            new Expanded(
-              child: new TransformerPageView(
+            Expanded(
+              child: TransformerPageView(
                   loop: true,
                   controller: IndexController(),
-                  transformer: new ThreeDTransformer(),
+                  transformer: ThreeDTransformer(),
                   itemBuilder: (BuildContext context, int index) {
-                    return new Container(
+                    return Container(
                       decoration: BoxDecoration(
                           color: colorList[index % colorList.length],
                           border: Border.all(color: Colors.white)),
-                      child: new Center(
-                        child: new Text(
+                      child: Center(
+                        child: Text(
                           "$index",
-                          style: new TextStyle(
+                          style: const TextStyle(
                               fontSize: 80.0, color: Colors.white),
                         ),
                       ),
@@ -86,20 +88,20 @@ class ViewPagerDemoPage extends StatelessWidget {
                   },
                   itemCount: 3),
             ),
-            new Expanded(
-              child: new TransformerPageView(
+            Expanded(
+              child: TransformerPageView(
                   loop: true,
                   controller: IndexController(),
-                  transformer: new DeepthPageTransformer(),
+                  transformer: DeepthPageTransformer(),
                   itemBuilder: (BuildContext context, int index) {
-                    return new Container(
+                    return Container(
                       decoration: BoxDecoration(
                           color: colorList[index % colorList.length],
                           border: Border.all(color: Colors.white)),
-                      child: new Center(
-                        child: new Text(
+                      child: Center(
+                        child: Text(
                           "$index",
-                          style: new TextStyle(
+                          style: const TextStyle(
                               fontSize: 80.0, color: Colors.white),
                         ),
                       ),
@@ -119,13 +121,13 @@ class AccordionTransformer extends PageTransformer {
   Widget transform(Widget child, TransformInfo info) {
     double position = info.position!;
     if (position < 0.0) {
-      return new Transform.scale(
+      return Transform.scale(
         scale: 1 + position,
         alignment: Alignment.topRight,
         child: child,
       );
     } else {
-      return new Transform.scale(
+      return Transform.scale(
         scale: 1 - position,
         alignment: Alignment.bottomLeft,
         child: child,
@@ -145,10 +147,10 @@ class ThreeDTransformer extends PageTransformer {
       // left scrolling
       pivotX = width;
     }
-    return new Transform(
-      transform: new Matrix4.identity()
-        ..rotate(new vector.Vector3(0.0, 2.0, 0.0), position * 1.5),
-      origin: new Offset(pivotX!, height / 2),
+    return Transform(
+      transform: Matrix4.identity()
+        ..rotate(vector.Vector3(0.0, 2.0, 0.0), position * 1.5),
+      origin: Offset(pivotX!, height / 2),
       child: child,
     );
   }
@@ -162,9 +164,9 @@ class ZoomInPageTransformer extends PageTransformer {
     double position = info.position!;
     double? width = info.width;
     if (position > 0 && position <= 1) {
-      return new Transform.translate(
-        offset: new Offset(-width! * position, 0.0),
-        child: new Transform.scale(
+      return Transform.translate(
+        offset: Offset(-width! * position, 0.0),
+        child: Transform.scale(
           scale: 1 - position,
           child: child,
         ),
@@ -205,11 +207,11 @@ class ZoomOutPageTransformer extends PageTransformer {
       double opacity = MIN_ALPHA +
           (scaleFactor - MIN_SCALE) / (1 - MIN_SCALE) * (1 - MIN_ALPHA);
 
-      return new Opacity(
+      return Opacity(
         opacity: opacity,
-        child: new Transform.translate(
-          offset: new Offset(dx, 0.0),
-          child: new Transform.scale(
+        child: Transform.translate(
+          offset: Offset(dx, 0.0),
+          child: Transform.scale(
             scale: scaleFactor,
             child: child,
           ),
@@ -232,26 +234,26 @@ class DeepthPageTransformer extends PageTransformer {
   Widget transform(Widget child, TransformInfo info) {
     double position = info.position!;
     if (position <= 0) {
-      return new Opacity(
+      return Opacity(
         opacity: 1.0,
-        child: new Transform.translate(
-          offset: new Offset(0.0, 0.0),
-          child: new Transform.scale(
+        child: Transform.translate(
+          offset: const Offset(0.0, 0.0),
+          child: Transform.scale(
             scale: 1.0,
             child: child,
           ),
         ),
       );
     } else if (position <= 1) {
-      const double MIN_SCALE = 0.75;
+      const double minScale = 0.75;
       // Scale the page down (between MIN_SCALE and 1)
-      double scaleFactor = MIN_SCALE + (1 - MIN_SCALE) * (1 - position);
+      double scaleFactor = minScale + (1 - minScale) * (1 - position);
 
-      return new Opacity(
+      return Opacity(
         opacity: 1.0 - position,
-        child: new Transform.translate(
-          offset: new Offset(info.width! * -position, 0.0),
-          child: new Transform.scale(
+        child: Transform.translate(
+          offset: Offset(info.width! * -position, 0.0),
+          child: Transform.scale(
             scale: scaleFactor,
             child: child,
           ),
@@ -272,17 +274,17 @@ class ScaleAndFadeTransformer extends PageTransformer {
         _scale = scale;
 
   @override
-  Widget transform(Widget item, TransformInfo info) {
+  Widget transform(Widget child, TransformInfo info) {
     double position = info.position!;
     double scaleFactor = (1 - position.abs()) * (1 - _scale);
     double fadeFactor = (1 - position.abs()) * (1 - _fade);
     double opacity = _fade + fadeFactor;
     double scale = _scale + scaleFactor;
-    return new Opacity(
+    return Opacity(
       opacity: opacity,
-      child: new Transform.scale(
+      child: Transform.scale(
         scale: scale,
-        child: item,
+        child: child,
       ),
     );
   }

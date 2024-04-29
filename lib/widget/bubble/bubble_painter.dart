@@ -4,8 +4,8 @@ import 'dart:math' as Math;
 ///绘制气泡背景
 class BubblePainter extends CustomPainter {
   Rect? mRect;
-  Path mPath = new Path();
-  Paint mPaint = new Paint();
+  Path mPath = Path();
+  Paint mPaint = Paint();
   late double mArrowWidth;
   double? mAngle;
   late double mArrowHeight;
@@ -16,14 +16,14 @@ class BubblePainter extends CustomPainter {
   Color? bubbleColor;
 
   BubblePainter(BubbleBuilder builder) {
-    this.mAngle = builder.mAngle;
-    this.mArrowHeight = builder.mArrowHeight;
-    this.mArrowWidth = builder.mArrowWidth;
-    this.mArrowPosition = builder.mArrowPosition;
-    this.bubbleColor = builder.bubbleColor;
-    this.mArrowLocation = builder.mArrowLocation;
-    this.bubbleType = builder.bubbleType;
-    this.mArrowCenter = builder.arrowCenter;
+    mAngle = builder.mAngle;
+    mArrowHeight = builder.mArrowHeight;
+    mArrowWidth = builder.mArrowWidth;
+    mArrowPosition = builder.mArrowPosition;
+    bubbleColor = builder.bubbleColor;
+    mArrowLocation = builder.mArrowLocation;
+    bubbleType = builder.bubbleType;
+    mArrowCenter = builder.arrowCenter;
   }
 
   @override
@@ -63,7 +63,7 @@ class BubblePainter extends CustomPainter {
       default:
         break;
     }
-    mRect ??= new Rect.fromLTRB(0, 0, size.width, size.height);
+    mRect ??= Rect.fromLTRB(0, 0, size.width, size.height);
     setUpPath(mArrowLocation, mPath);
     canvas.drawPath(mPath, mPaint);
   }
@@ -175,7 +175,7 @@ class BubbleBuilder {
   bool arrowCenter = true;
 
   build() {
-    return new BubblePainter(this);
+    return BubblePainter(this);
   }
 }
 

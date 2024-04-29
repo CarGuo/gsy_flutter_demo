@@ -4,6 +4,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class PlayAnimButton extends StatefulWidget {
+  const PlayAnimButton({super.key});
+
   @override
   _PlayAnimButtonState createState() => _PlayAnimButtonState();
 }
@@ -16,9 +18,9 @@ class _PlayAnimButtonState extends State<PlayAnimButton>
   @override
   void initState() {
     super.initState();
-    playerButtonController = new AnimationController(vsync: this)
-      ..duration = Duration(milliseconds: 1000);
-    this.playerAnimation = CurvedAnimation(
+    playerButtonController = AnimationController(vsync: this)
+      ..duration = const Duration(milliseconds: 1000);
+    playerAnimation = CurvedAnimation(
       parent: playerButtonController,
       curve: Curves.bounceInOut,
     )..addListener(updateState);
@@ -46,7 +48,7 @@ class _PlayAnimButtonState extends State<PlayAnimButton>
         }
       },
       child: CustomPaint(
-        painter: new PlayButtonPainter(fraction: playerAnimation.value),
+        painter: PlayButtonPainter(fraction: playerAnimation.value),
       ),
     );
   }
@@ -83,9 +85,9 @@ class PlayButtonPainter extends CustomPainter {
       painter.isAntiAlias = true;
     }
 
-    painter = new Paint();
+    painter = Paint();
     init(painter);
-    bgPainter = new Paint();
+    bgPainter = Paint();
     init(bgPainter);
   }
 
@@ -97,12 +99,12 @@ class PlayButtonPainter extends CustomPainter {
     circleRadius = width / 8;
     centerX = w / 2;
     centerY = h / 2;
-    rect = new Rect.fromLTRB(
+    rect = Rect.fromLTRB(
         centerX - circleRadius,
         centerY + 0.6 * circleRadius,
         centerX + circleRadius,
         centerY + 2.6 * circleRadius);
-    bgRect = new Rect.fromLTRB(centerX - width / 2, centerY - height / 2,
+    bgRect = Rect.fromLTRB(centerX - width / 2, centerY - height / 2,
         centerX + width / 2, centerY + height / 2);
     path.moveTo(centerX - circleRadius, centerY + 1.8 * circleRadius);
     path.lineTo(centerX - circleRadius, centerY - 1.8 * circleRadius);
@@ -144,8 +146,9 @@ class PlayButtonPainter extends CustomPainter {
           Offset(centerX - circleRadius, centerY + 1.6 * circleRadius),
           painter);
 
-      if (fraction != 0)
+      if (fraction != 0) {
         canvas.drawArc(rect, 0, pi / 0.3 * fraction, false, painter);
+      }
 
       canvas.drawArc(bgRect, -105 / 180 * pi + 2 * pi * fraction,
           2 * pi * (1 - fraction), false, painter);
@@ -157,7 +160,7 @@ class PlayButtonPainter extends CustomPainter {
       var extractPath = pathMetric.extractPath(0.02 * pathLength,
           0.38 * pathLength + 0.42 * pathLength / 0.3 * (fraction - 0.3),
           startWithMoveTo: true);
-      dstPath.addPath(extractPath, Offset(0, 0));
+      dstPath.addPath(extractPath, const Offset(0, 0));
       canvas.drawPath(dstPath, painter);
 
       canvas.drawArc(bgRect, -105 / 180 * pi + 2 * pi * fraction,
@@ -169,7 +172,7 @@ class PlayButtonPainter extends CustomPainter {
           0.02 * pathLength + 0.2 * pathLength / 0.2 * (fraction - 0.6),
           0.8 * pathLength + 0.2 * pathLength / 0.2 * (fraction - 0.6),
           startWithMoveTo: true);
-      dstPath.addPath(extractPath, Offset(0, 0));
+      dstPath.addPath(extractPath, const Offset(0, 0));
       canvas.drawPath(dstPath, painter);
 
       canvas.drawArc(bgRect, -105 / 180 * pi + 2 * pi * fraction,
@@ -180,7 +183,7 @@ class PlayButtonPainter extends CustomPainter {
       var extractPath = pathMetric.extractPath(
           10 * circleRadius * (fraction - 1), pathLength,
           startWithMoveTo: true);
-      dstPath.addPath(extractPath, Offset(0, 0));
+      dstPath.addPath(extractPath, const Offset(0, 0));
       canvas.drawPath(dstPath, painter);
     }
   }

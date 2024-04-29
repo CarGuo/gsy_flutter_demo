@@ -6,7 +6,7 @@ import 'dart:async';
 
 ///列表简单联动 BottomSheet
 class ListLinkBottomSheetDemoPage extends StatefulWidget {
-  const ListLinkBottomSheetDemoPage({Key? key}) : super(key: key);
+  const ListLinkBottomSheetDemoPage({super.key});
 
   @override
   State<ListLinkBottomSheetDemoPage> createState() =>
@@ -20,8 +20,8 @@ class _ListLinkBottomSheetDemoPageState
   ScrollController? _activeScrollController;
   Drag? _drag;
   Drag? _bottomSheetDrag;
-  GlobalKey<_LinkBottomSheetState> btKey = new GlobalKey();
-  _BTController _btController = _BTController();
+  GlobalKey<_LinkBottomSheetState> btKey = GlobalKey();
+  final _BTController _btController = _BTController();
 
   @override
   void initState() {
@@ -43,13 +43,13 @@ class _ListLinkBottomSheetDemoPageState
     if (_listScrollController?.hasClients == true &&
         _listScrollController?.position.context.storageContext != null) {
       ///获取 ListView 的  renderBox
-      final RenderBox? renderBox = _listScrollController
+      final RenderBox renderBox = _listScrollController
           ?.position.context.storageContext
           .findRenderObject() as RenderBox;
 
       ///判断触摸的位置是否在 ListView 内
       ///不在范围内一般是因为 ListView 已经滑动上去了，坐标位置和触摸位置不一致
-      if (renderBox?.paintBounds
+      if (renderBox.paintBounds
               .shift(renderBox.localToGlobal(Offset.zero))
               .contains(details.globalPosition) ==
           true) {
@@ -118,7 +118,7 @@ class _ListLinkBottomSheetDemoPageState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: new Text("ListLinkBottomSheetDemoPage"),
+        title: const Text("ListLinkBottomSheetDemoPage"),
       ),
       extendBody: true,
       body: RawGestureDetector(
@@ -163,7 +163,7 @@ class _ListLinkBottomSheetDemoPageState
                 )),
             Container(
               color: Colors.white,
-              child: Center(
+              child: const Center(
                 child: Text(
                   '纯粹背后占位',
                   style: TextStyle(fontSize: 50),
@@ -189,13 +189,11 @@ class _ListLinkBottomSheetDemoPageState
           },
           onVerticalDragUpdate: (details) {
             if (_activeScrollController == _pageController) {
-              if (_bottomSheetDrag == null) {
-                _bottomSheetDrag = _pageController?.position.drag(
+              _bottomSheetDrag ??= _pageController?.position.drag(
                     DragStartDetails(
                         globalPosition: details.globalPosition,
                         localPosition: details.localPosition),
                     _disposeDrag);
-              }
               _bottomSheetDrag?.update(details);
             }
           },
@@ -234,7 +232,7 @@ class _KeepAliveListView extends StatefulWidget {
   final ScrollController? listScrollController;
   final int itemCount;
 
-  _KeepAliveListView({
+  const _KeepAliveListView({
     required this.listScrollController,
     required this.itemCount,
   });
@@ -288,7 +286,7 @@ class _LinkBottomSheet extends StatefulWidget {
   final void Function(DragEndDetails details)? onVerticalDragEnd;
 
   _LinkBottomSheet({
-    Key? key,
+    super.key,
     required this.headerBar,
     required this.body,
     required this.controller,
@@ -306,11 +304,10 @@ class _LinkBottomSheet extends StatefulWidget {
     this.onVerticalDragEnd,
     this.onVerticalDragUpdate,
   })  : assert(elevation >= 0.0),
-        assert(minHeight >= 0.0),
-        super(key: key) {
-    this.controller!.height =
-        this.showOnAppear ? this.maxHeight : this.minHeight;
-    this.controller!.config = smoothness;
+        assert(minHeight >= 0.0) {
+    controller!.height =
+        showOnAppear ? maxHeight : minHeight;
+    controller!.config = smoothness;
   }
 
   @override
@@ -332,12 +329,13 @@ class _LinkBottomSheetState extends State<_LinkBottomSheet> {
 
   void onVerticalDragEnd(data, fromOuter) {
     _setUsersConfig();
-    if (isDragDirectionUp! && widget.controller!.value)
+    if (isDragDirectionUp! && widget.controller!.value) {
       _show();
-    else if (!isDragDirectionUp! && !widget.controller!.value)
+    } else if (!isDragDirectionUp! && !widget.controller!.value) {
       _hide();
-    else
+    } else {
       widget.controller!.value = isDragDirectionUp!;
+    }
     if (!fromOuter) widget.onVerticalDragEnd?.call(data);
   }
 
@@ -466,7 +464,7 @@ class _BTConfig {
 }
 
 class _BTController extends ValueNotifier<bool> {
-  BTStreamStatus _bloc = BTStreamStatus();
+  final BTStreamStatus _bloc = BTStreamStatus();
 
   double? _height;
 
@@ -499,14 +497,14 @@ class _BTController extends ValueNotifier<bool> {
 }
 
 class BTStreamStatus {
-  StreamController<double> _heightController =
+  final StreamController<double> _heightController =
       StreamController<double>.broadcast();
 
   Stream<double> get height => _heightController.stream;
 
   Sink<double> get _heightSink => _heightController.sink;
 
-  StreamController<bool> _visibilityController =
+  final StreamController<bool> _visibilityController =
       StreamController<bool>.broadcast();
 
   Stream<bool> get isOpen => _visibilityController.stream;

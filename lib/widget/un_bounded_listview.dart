@@ -6,7 +6,7 @@ import 'package:flutter/rendering.dart';
 
 ///介绍链接 https://juejin.cn/post/7225891176531951677
 class UnboundedListViewDemoPage extends StatefulWidget {
-  const UnboundedListViewDemoPage({Key? key}) : super(key: key);
+  const UnboundedListViewDemoPage({super.key});
 
   @override
   State<UnboundedListViewDemoPage> createState() =>
@@ -33,7 +33,7 @@ class _UnboundedListViewDemoPageState extends State<UnboundedListViewDemoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: new Text("UnboundedListViewDemoPage"),
+        title: const Text("UnboundedListViewDemoPage"),
       ),
       extendBody: true,
       body: Container(
@@ -46,7 +46,7 @@ class _UnboundedListViewDemoPageState extends State<UnboundedListViewDemoPage> {
                 child: Row(
                   children: List<Widget>.generate(50, (index) {
                     return Padding(
-                      padding: EdgeInsets.all(2),
+                      padding: const EdgeInsets.all(2),
                       child: Container(
                         alignment: Alignment.bottomCenter,
                         color: Colors.blue,
@@ -64,9 +64,11 @@ class _UnboundedListViewDemoPageState extends State<UnboundedListViewDemoPage> {
                 scrollDirection: Axis.horizontal,
                 itemCount: 100,
                 itemBuilder: (context, index) {
-                  print('$index');
+                  if (kDebugMode) {
+                    print('$index');
+                  }
                   return Padding(
-                    padding: EdgeInsets.all(2),
+                    padding: const EdgeInsets.all(2),
                     child: Container(
                       height: index * 1.0 + 10,
                       width: 50,
@@ -133,6 +135,7 @@ mixin UnboundedListViewMixin on ListView {
     return UnboundedSliverList(delegate: childrenDelegate);
   }
 
+  @override
   @protected
   Widget buildViewport(
     BuildContext context,
@@ -184,9 +187,10 @@ mixin UnboundedListViewMixin on ListView {
       }
     }
 
-    if (effectivePadding != null)
+    if (effectivePadding != null) {
       sliver =
           UnboundedSliverPadding(padding: effectivePadding, sliver: sliver);
+    }
     return <Widget>[sliver];
   }
 }
@@ -234,8 +238,8 @@ mixin UnboundedSliverListMixin on SliverList {
 
 class UnboundedRenderSliverList extends RenderSliverList {
   UnboundedRenderSliverList({
-    required RenderSliverBoxChildManager childManager,
-  }) : super(childManager: childManager);
+    required super.childManager,
+  });
 
   // See RenderSliverList::performLayout
   @override
@@ -590,8 +594,9 @@ class UnboundedRenderSliverList extends RenderSliverList {
 
     // We may have started the layout while scrolled to the end, which would not
     // expose a new child.
-    if (estimatedMaxScrollOffset == endScrollOffset)
+    if (estimatedMaxScrollOffset == endScrollOffset) {
       childManager.setDidUnderflow(true);
+    }
     childManager.didFinishLayout();
   }
 }
@@ -654,7 +659,7 @@ mixin UnboundedRenderViewportMixin on RenderViewport {
     required double mainAxisExtent,
     required double crossAxisExtent,
     required GrowthDirection growthDirection,
-    required RenderSliver? advance(RenderSliver child),
+    required RenderSliver? Function(RenderSliver child) advance,
     required double remainingCacheExtent,
     required double cacheOrigin,
   }) {

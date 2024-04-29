@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 /// 在 Flutter 中有很多内置的 Controller
@@ -7,9 +8,13 @@ import 'package:flutter/material.dart';
 /// 比如 ListView  的 ScrollController
 /// 一般想对控件做 OOXX 的事情，先找个 Controller 就对了。
 class ControllerDemoPage extends StatelessWidget {
+  const ControllerDemoPage({super.key});
+
   @override
   Widget build(BuildContext context) {
-    print("######### MyHomePage ${MediaQuery.of(context).size}");
+    if (kDebugMode) {
+      print("######### MyHomePage ${MediaQuery.of(context).size}");
+    }
     return Scaffold(
       appBar: AppBar(),
       body: Container(
@@ -17,10 +22,10 @@ class ControllerDemoPage extends StatelessWidget {
         child: InkWell(
           onTap: () {
             Navigator.of(context).push(CupertinoPageRoute(builder: (context) {
-              return EditPage();
+              return const EditPage();
             }));
           },
-          child: new Text(
+          child: const Text(
             "Click",
             style: TextStyle(fontSize: 50),
           ),
@@ -32,23 +37,25 @@ class ControllerDemoPage extends StatelessWidget {
 
 
 class EditPage extends StatelessWidget {
+  const EditPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: new Text("ControllerDemoPage"),
+        title: const Text("ControllerDemoPage"),
       ),
       extendBody: true,
       body: Column(
         children: [
-          new Spacer(),
-          new Container(
-            margin: EdgeInsets.all(10),
-            child: new Center(
-              child: new TextField(),
+          const Spacer(),
+          Container(
+            margin: const EdgeInsets.all(10),
+            child: const Center(
+              child: TextField(),
             ),
           ),
-          new Spacer(),
+          const Spacer(),
         ],
       ),
     );

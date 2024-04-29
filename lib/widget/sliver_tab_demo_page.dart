@@ -5,6 +5,8 @@ import 'package:flutter/rendering.dart';
 
 /// 低级版 Sliver Tab，还有 SliverTabDemoPage2
 class SliverTabDemoPage extends StatefulWidget {
+  const SliverTabDemoPage({super.key});
+
   @override
   _SliverTabDemoPageState createState() => _SliverTabDemoPageState();
 }
@@ -13,7 +15,7 @@ class _SliverTabDemoPageState extends State<SliverTabDemoPage>
     with TickerProviderStateMixin {
   TabController? tabController;
 
-  final ScrollController scrollController = new ScrollController();
+  final ScrollController scrollController = ScrollController();
   final int tabLength = 4;
   final double maxHeight = kToolbarHeight;
   final double minHeight = 30;
@@ -37,9 +39,9 @@ class _SliverTabDemoPageState extends State<SliverTabDemoPage>
               size: tabIconSize - offset,
             ),
           ),
-          new Expanded(
-            child: new Center(
-              child: new Text(
+          Expanded(
+            child: Center(
+              child: Text(
                 "Tab$index",
               ),
             ),
@@ -56,10 +58,10 @@ class _SliverTabDemoPageState extends State<SliverTabDemoPage>
       delegate: SliverChildBuilderDelegate(
         (BuildContext context, int index) {
           return Card(
-            child: new Container(
+            child: Container(
               height: 60,
               alignment: Alignment.centerLeft,
-              child: new Text("Tab $indexTab Item $index"),
+              child: Text("Tab $indexTab Item $index"),
             ),
           );
         },
@@ -70,7 +72,7 @@ class _SliverTabDemoPageState extends State<SliverTabDemoPage>
 
   @override
   void initState() {
-    tabController = new TabController(length: tabLength, vsync: this);
+    tabController = TabController(length: tabLength, vsync: this);
     super.initState();
   }
 
@@ -78,51 +80,49 @@ class _SliverTabDemoPageState extends State<SliverTabDemoPage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: new Text("SliverTabDemoPage"),
+        title: const Text("SliverTabDemoPage"),
       ),
-      body: new Container(
-        child: new CustomScrollView(
-          physics: BouncingScrollPhysics(),
-          controller: scrollController,
-          slivers: <Widget>[
-            ///动态放大缩小的tab控件
-            SliverPersistentHeader(
-              pinned: true,
+      body: CustomScrollView(
+        physics: const BouncingScrollPhysics(),
+        controller: scrollController,
+        slivers: <Widget>[
+          ///动态放大缩小的tab控件
+          SliverPersistentHeader(
+            pinned: true,
 
-              /// SliverPersistentHeaderDelegate 的实现
-              delegate: GSYSliverHeaderDelegate(
-                  maxHeight: maxHeight,
-                  minHeight: minHeight,
-                  changeSize: true,
-                  vSync: this,
-                  snapConfig: FloatingHeaderSnapConfiguration(
-                    curve: Curves.bounceInOut,
-                    duration: const Duration(milliseconds: 10),
-                  ),
-                  builder: (BuildContext context, double shrinkOffset,
-                      bool overlapsContent) {
-                    return Container(
-                      height: maxHeight,
-                      color: Colors.blue,
-                      child: TabBar(
-                        indicatorColor: Colors.cyanAccent,
-                        unselectedLabelColor: Colors.white.withAlpha(100),
-                        labelColor: Colors.cyanAccent,
-                        controller: tabController,
-                        tabs: renderTabs(shrinkOffset),
-                        onTap: (index) {
-                          setState(() {});
-                          scrollController.animateTo(0,
-                              duration: Duration(milliseconds: 100),
-                              curve: Curves.fastOutSlowIn);
-                        },
-                      ),
-                    );
-                  }),
-            ),
-            renderListByIndex()
-          ],
-        ),
+            /// SliverPersistentHeaderDelegate 的实现
+            delegate: GSYSliverHeaderDelegate(
+                maxHeight: maxHeight,
+                minHeight: minHeight,
+                changeSize: true,
+                vSync: this,
+                snapConfig: FloatingHeaderSnapConfiguration(
+                  curve: Curves.bounceInOut,
+                  duration: const Duration(milliseconds: 10),
+                ),
+                builder: (BuildContext context, double shrinkOffset,
+                    bool overlapsContent) {
+                  return Container(
+                    height: maxHeight,
+                    color: Colors.blue,
+                    child: TabBar(
+                      indicatorColor: Colors.cyanAccent,
+                      unselectedLabelColor: Colors.white.withAlpha(100),
+                      labelColor: Colors.cyanAccent,
+                      controller: tabController,
+                      tabs: renderTabs(shrinkOffset),
+                      onTap: (index) {
+                        setState(() {});
+                        scrollController.animateTo(0,
+                            duration: const Duration(milliseconds: 100),
+                            curve: Curves.fastOutSlowIn);
+                      },
+                    ),
+                  );
+                }),
+          ),
+          renderListByIndex()
+        ],
       ),
     );
   }
@@ -175,5 +175,5 @@ class GSYSliverHeaderDelegate extends SliverPersistentHeaderDelegate {
   FloatingHeaderSnapConfiguration get snapConfiguration => snapConfig;
 }
 
-typedef Widget Builder(
+typedef Builder = Widget Function(
     BuildContext context, double shrinkOffset, bool overlapsContent);

@@ -4,7 +4,7 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 
 class CustomShaderPathDemoPage extends StatefulWidget {
-  const CustomShaderPathDemoPage({Key? key}) : super(key: key);
+  const CustomShaderPathDemoPage({super.key});
 
   @override
   State<CustomShaderPathDemoPage> createState() =>
@@ -13,10 +13,10 @@ class CustomShaderPathDemoPage extends StatefulWidget {
 
 class _CustomShaderPathDemoPageState extends State<CustomShaderPathDemoPage> {
   Future<ui.Image> _loadAssetImage() {
-    Completer<ui.Image> completer = new Completer<ui.Image>();
+    Completer<ui.Image> completer = Completer<ui.Image>();
 
-    AssetImage("static/gsy_cat.png")
-        .resolve(new ImageConfiguration())
+    const AssetImage("static/gsy_cat.png")
+        .resolve(const ImageConfiguration())
         .addListener(
             ImageStreamListener((ImageInfo image, bool synchronousCall) {
       ui.Image img;
@@ -31,34 +31,32 @@ class _CustomShaderPathDemoPageState extends State<CustomShaderPathDemoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: new Text("CustomShaderPathDemoPage"),
+          title: const Text("CustomShaderPathDemoPage"),
         ),
-        body: new Container(
-          child: Center(
-            child: FutureBuilder<ui.Image>(
-              future: _loadAssetImage(),
-              builder: (c, s) {
-                if (s.data == null) {
-                  return Container();
-                }
-                return new Container(
-                  height: 200,
-                  width: 200,
-                  color: Colors.greenAccent,
-                  child: CustomPaint(
-                    ///直接使用值做动画
-                    foregroundPainter: _AnimationPainter(s.data!),
-                  ),
-                );
-              },
-            ),
+        body: Center(
+          child: FutureBuilder<ui.Image>(
+            future: _loadAssetImage(),
+            builder: (c, s) {
+              if (s.data == null) {
+                return Container();
+              }
+              return Container(
+                height: 200,
+                width: 200,
+                color: Colors.greenAccent,
+                child: CustomPaint(
+                  ///直接使用值做动画
+                  foregroundPainter: _AnimationPainter(s.data!),
+                ),
+              );
+            },
           ),
         ));
   }
 }
 
 class _AnimationPainter extends CustomPainter {
-  final Paint _paint = new Paint();
+  final Paint _paint = Paint();
 
   final ui.Image img;
 
@@ -96,13 +94,15 @@ class _AnimationPainter extends CustomPainter {
     var b = path.getBounds();
     canvas.save();
     canvas.clipPath(path);
-    for (int i = step; i < b.width; i = i + step)
+    for (int i = step; i < b.width; i = i + step) {
       canvas.drawLine(
           Offset(b.left + i, b.top), Offset(b.left + i, b.bottom), Paint());
+    }
 
-    for (int i = step; i < b.height; i = i + step)
+    for (int i = step; i < b.height; i = i + step) {
       canvas.drawLine(
           Offset(b.left, b.top + i), Offset(b.right, b.top + i), Paint());
+    }
 
     canvas.restore();
   }

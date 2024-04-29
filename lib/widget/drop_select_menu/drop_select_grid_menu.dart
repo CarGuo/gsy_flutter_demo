@@ -8,7 +8,7 @@ import 'drop_select_widget.dart';
 
 const double kDropExpendedSelectMenuItemHeight = 45.0;
 
-typedef Widget MenuItemGridBuilder<T extends DropSelectObject>(
+typedef MenuItemGridBuilder<T extends DropSelectObject> = Widget Function(
     BuildContext context, T data);
 
 class DropSelectGridListMenu<T extends DropSelectObject>
@@ -18,21 +18,21 @@ class DropSelectGridListMenu<T extends DropSelectObject>
   final bool singleSelected;
   final MenuItemGridBuilder? itemBuilder;
 
-  DropSelectGridListMenu(
-      {this.data,
+  const DropSelectGridListMenu(
+      {super.key, this.data,
       this.itemBuilder,
       this.singleSelected = false,
       this.itemExtent = kDropExpendedSelectMenuItemHeight});
 
   @override
   DropSelectState<DropSelectWidget> createState() {
-    return new _MenuListGridState<T>();
+    return _MenuListGridState<T>();
   }
 }
 
 class _MenuListGridState<T extends DropSelectObject>
     extends DropSelectState<DropSelectGridListMenu<T>> {
-  Map<String, int> cleanOtherList = new HashMap();
+  Map<String, int> cleanOtherList = HashMap();
 
   ///clone列表，深度拷贝，仅在确定选择后才复制到 widget.data
   final List<T> _cloneList = [];
@@ -47,10 +47,10 @@ class _MenuListGridState<T extends DropSelectObject>
 
   ///绘制 grid 列表嵌套
   renderGrid(count, data, index) {
-    return new Container(
+    return SizedBox(
       height: widget.itemExtent * count,
       child: GridView.count(
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         crossAxisCount: 2,
         childAspectRatio: 3,
         children: List.generate(count, (i) {
@@ -61,7 +61,7 @@ class _MenuListGridState<T extends DropSelectObject>
             cleanOtherList["$i"] = i;
           }
 
-          return new InkWell(
+          return InkWell(
             onTap: () {
 
               ///是否单选
@@ -78,7 +78,7 @@ class _MenuListGridState<T extends DropSelectObject>
               }
 
               ///如果存在冲突选择，需要处理
-              if (!child.selectedCleanOther && cleanOtherList.length > 0) {
+              if (!child.selectedCleanOther && cleanOtherList.isNotEmpty) {
                 cleanOtherList.forEach((key, value) {
                   if (value != i) {
                     data.children[value].selected = false;
@@ -100,25 +100,25 @@ class _MenuListGridState<T extends DropSelectObject>
 
   ///绘制底部按键
   Widget renderButton() {
-    return new Container(
+    return SizedBox(
       height: 50,
-      child: new Row(
+      child: Row(
         children: <Widget>[
-          new Expanded(
-              child: new TextButton(
+          Expanded(
+              child: TextButton(
                   onPressed: () {
                     setState(() {
                       resetList(widget.data!);
                     });
                     controller!.hide();
                   },
-                  child: new Text("重置"))),
-          new Expanded(
-              child: new TextButton(
+                  child: const Text("重置"))),
+          Expanded(
+              child: TextButton(
                   onPressed: () {
                     controller!.select(_cloneList);
                   },
-                  child: new Text("确定"))),
+                  child: const Text("确定"))),
         ],
       ),
     );
@@ -126,30 +126,29 @@ class _MenuListGridState<T extends DropSelectObject>
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: new Column(children: <Widget>[
-        new Expanded(
-          child: new ListView.builder(
-            itemBuilder: (context, index) {
-              return new Container(
-                child: new Column(
-                  children: <Widget>[
-                    new Container(
-                      child: new Text(_cloneList[index].title!),
-                      alignment: Alignment.centerLeft,
-                    ),
-                    renderGrid(_cloneList[index].children!.length,
-                        _cloneList[index], index)
-                  ],
-                ),
-              );
-            },
-            itemCount: _cloneList.length,
-          ),
+    return Column(children: <Widget>[
+      Expanded(
+        child: ListView.builder(
+          itemBuilder: (context, index) {
+            // ignore: avoid_unnecessary_containers
+            return Container(
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    child: Text(_cloneList[index].title!),
+                  ),
+                  renderGrid(_cloneList[index].children!.length,
+                      _cloneList[index], index)
+                ],
+              ),
+            );
+          },
+          itemCount: _cloneList.length,
         ),
-        renderButton(),
-      ]),
-    );
+      ),
+      renderButton(),
+    ]);
   }
 
   @override

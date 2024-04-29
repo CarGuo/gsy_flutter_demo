@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
 class DemoDraggableSheetStickPage extends StatefulWidget {
-  const DemoDraggableSheetStickPage({Key? key}) : super(key: key);
+  const DemoDraggableSheetStickPage({super.key});
 
   @override
   State<DemoDraggableSheetStickPage> createState() =>
@@ -19,7 +19,7 @@ class _DemoDraggableSheetStickPageState
 }
 
 class DraggableScrollablePage extends StatefulWidget {
-  const DraggableScrollablePage({Key? key}) : super(key: key);
+  const DraggableScrollablePage({super.key});
 
   @override
   State<DraggableScrollablePage> createState() =>
@@ -28,7 +28,7 @@ class DraggableScrollablePage extends StatefulWidget {
 
 class _DraggableScrollablePageState extends State<DraggableScrollablePage>
     with SingleTickerProviderStateMixin {
-  var controller = new DraggableScrollableController();
+  var controller = DraggableScrollableController();
 
   @override
   Widget build(BuildContext context) {
@@ -38,9 +38,9 @@ class _DraggableScrollablePageState extends State<DraggableScrollablePage>
       ),
       body: Stack(
         children: [
-          new Container(
+          Container(
             height: 300,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(
                   "static/gsy_cat.png",
@@ -54,7 +54,7 @@ class _DraggableScrollablePageState extends State<DraggableScrollablePage>
               controller: controller,
               builder:
                   (BuildContext context, ScrollController scrollController) {
-                List<Widget> _sliverList(int sliverChildCount) {
+                List<Widget> sliverList(int sliverChildCount) {
                   List<Widget> widgetList = [];
                   widgetList
                     ..add(
@@ -96,7 +96,7 @@ class _DraggableScrollablePageState extends State<DraggableScrollablePage>
                   color: Colors.blue[100],
                   child: CustomScrollView(
                     controller: scrollController,
-                    slivers: _sliverList(25),
+                    slivers: sliverList(25),
                   ),
                 );
               },
@@ -107,7 +107,7 @@ class _DraggableScrollablePageState extends State<DraggableScrollablePage>
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           controller.animateTo(1,
-              duration: Duration(milliseconds: 200), curve: Curves.linear);
+              duration: const Duration(milliseconds: 200), curve: Curves.linear);
         },
       ),
     );
@@ -161,7 +161,7 @@ class GSYSliverHeaderDelegate extends SliverPersistentHeaderDelegate {
   FloatingHeaderSnapConfiguration get snapConfiguration => snapConfig;
 }
 
-typedef Widget Builder(
+typedef Builder = Widget Function(
     BuildContext context, double shrinkOffset, bool overlapsContent);
 
 
@@ -175,9 +175,9 @@ Widget build(BuildContext context) {
     ),
     body: Stack(
       children: [
-        new Container(
+        Container(
           height: 300,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage(
                 "static/gsy_cat.png",
@@ -195,7 +195,7 @@ Widget build(BuildContext context) {
                     Align(
                       alignment: Alignment.topCenter,
                       child: Container(
-                        margin: EdgeInsets.symmetric(vertical: 8),
+                        margin: const EdgeInsets.symmetric(vertical: 8),
                         height: 8.0,
                         width: 70.0,
                         decoration: BoxDecoration(
@@ -203,7 +203,7 @@ Widget build(BuildContext context) {
                             borderRadius: BorderRadius.circular(10.0)),
                       ),
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     Expanded(
                         child: Container(
                       color: Colors.blue[100],

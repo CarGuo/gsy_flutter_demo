@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
 final random = math.Random();
-final stickHeader = 50.0;
+const stickHeader = 50.0;
 
 class StickSliverListDemoPage extends StatefulWidget {
   final List<ExpendedModel?> dataList = List.generate(7, (index) {
     return ExpendedModel(false, List.filled(random.nextInt(100), null));
   });
+
+  StickSliverListDemoPage({super.key});
 
   @override
   _StickSliverListDemoPageState createState() =>
@@ -20,7 +22,7 @@ class _StickSliverListDemoPageState extends State<StickSliverListDemoPage> {
   int _titleIndex = 0;
   bool _showTitleTopButton = false;
 
-  ScrollController _scrollController = new ScrollController();
+  final ScrollController _scrollController = ScrollController();
 
   final GlobalKey scrollKey = GlobalKey();
 
@@ -37,7 +39,7 @@ class _StickSliverListDemoPageState extends State<StickSliverListDemoPage> {
   }
 
   scrollChanged() {
-    if (widget.dataList.length == 0) {
+    if (widget.dataList.isEmpty) {
       return;
     }
     var item = widget.dataList.lastWhere((item) {
@@ -76,25 +78,23 @@ class _StickSliverListDemoPageState extends State<StickSliverListDemoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: new Text("StickSliverListDemoPage"),
+          title: const Text("StickSliverListDemoPage"),
         ),
-        body: new Stack(
+        body: Stack(
           children: <Widget>[
-            new Container(
-              child: CustomScrollView(
-                key: scrollKey,
-                controller: _scrollController,
-                physics: const ClampingScrollPhysics(),
-                slivers: List.generate(widget.dataList.length, (index) {
-                  return SliverExpandedList(
-                    widget.dataList[index],
-                    "header $index",
-                    valueChanged: (_) {
-                      setState(() {});
-                    },
-                  );
-                }),
-              ),
+            CustomScrollView(
+              key: scrollKey,
+              controller: _scrollController,
+              physics: const ClampingScrollPhysics(),
+              slivers: List.generate(widget.dataList.length, (index) {
+                return SliverExpandedList(
+                  widget.dataList[index],
+                  "header $index",
+                  valueChanged: (_) {
+                    setState(() {});
+                  },
+                );
+              }),
             ),
             StickHeader("header $_titleIndex",
                 showTopButton: _showTitleTopButton, callback: () {
@@ -116,8 +116,8 @@ class SliverExpandedList extends StatefulWidget {
   final int visibleCount;
   final ValueChanged? valueChanged;
 
-  SliverExpandedList(this.expendedModel, this.title,
-      {this.visibleCount = 3, this.valueChanged});
+  const SliverExpandedList(this.expendedModel, this.title,
+      {super.key, this.visibleCount = 3, this.valueChanged});
 
   @override
   _SliverExpandedListState createState() => _SliverExpandedListState();
@@ -141,12 +141,12 @@ class _SliverExpandedListState extends State<SliverExpandedList> {
 
   ///大于可见数量才使用 查看更多
   renderExpendedMore() {
-    return new Container(
+    return Container(
       height: 50.0,
       color: Colors.grey,
-      padding: new EdgeInsets.only(left: 10.0),
+      padding: const EdgeInsets.only(left: 10.0),
       alignment: Alignment.center,
-      child: new InkWell(
+      child: InkWell(
         onTap: () {
           if (expanded) {
             ///获取 renderBox
@@ -160,9 +160,9 @@ class _SliverExpandedListState extends State<SliverExpandedList> {
         child: Container(
           alignment: Alignment.center,
           width: MediaQuery.sizeOf(context).width,
-          child: new Text(
+          child: Text(
             expanded ? "收起" : '查看更多',
-            style: TextStyle(color: Colors.black),
+            style: const TextStyle(color: Colors.black),
           ),
         ),
       ),
@@ -197,10 +197,10 @@ class _SliverExpandedListState extends State<SliverExpandedList> {
             return StickHeader(widget.title);
           }
           return Card(
-            child: new Container(
+            child: Container(
               height: 60,
               alignment: Alignment.centerLeft,
-              child: new Text("Item $index"),
+              child: Text("Item $index"),
             ),
           );
         },
@@ -215,22 +215,21 @@ class StickHeader extends StatelessWidget {
   final bool showTopButton;
   final VoidCallback? callback;
 
-  StickHeader(this.title, {Key? key, this.showTopButton = false, this.callback})
-      : super(key: key);
+  const StickHeader(this.title, {super.key, this.showTopButton = false, this.callback});
 
   @override
   Widget build(BuildContext context) {
-    return new Container(
+    return Container(
       height: stickHeader,
       color: Colors.deepPurple,
-      padding: new EdgeInsets.only(left: 10.0),
+      padding: const EdgeInsets.only(left: 10.0),
       alignment: Alignment.centerLeft,
-      child: new Row(
+      child: Row(
         children: <Widget>[
           Expanded(
-            child: new Text(
+            child: Text(
               '我的 $title 头啊',
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
             ),
           ),
           Visibility(
@@ -239,7 +238,7 @@ class StickHeader extends StatelessWidget {
               onTap: () {
                 callback?.call();
               },
-              child: Icon(Icons.vertical_align_top),
+              child: const Icon(Icons.vertical_align_top),
             ),
           )
         ],
@@ -253,7 +252,7 @@ class ExpendedModel {
 
   List dataList;
 
-  GlobalKey globalKey = new GlobalKey();
+  GlobalKey globalKey = GlobalKey();
 
   ExpendedModel(this.expended, this.dataList);
 }

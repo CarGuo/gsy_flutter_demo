@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 const radius = 6.0;
 
 class AnimProgressImgDemoPage extends StatefulWidget {
+  const AnimProgressImgDemoPage({super.key});
+
   @override
   _AnimProgressImgDemoPageState createState() =>
       _AnimProgressImgDemoPageState();
@@ -25,9 +27,9 @@ class _AnimProgressImgDemoPageState extends State<AnimProgressImgDemoPage>
   void initState() {
     super.initState();
 
-    animController = new AnimationController(vsync: this)
-      ..duration = Duration(milliseconds: 1000);
-    this.animAnimation = CurvedAnimation(
+    animController = AnimationController(vsync: this)
+      ..duration = const Duration(milliseconds: 1000);
+    animAnimation = CurvedAnimation(
       parent: animController,
       curve: Curves.linear,
     )..addListener(updateState);
@@ -49,41 +51,39 @@ class _AnimProgressImgDemoPageState extends State<AnimProgressImgDemoPage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: new Text("AnimProgressImgDemoPage"),
+        title: const Text("AnimProgressImgDemoPage"),
       ),
-      body: Container(
-        child: Center(
-          child: Stack(
-            children: <Widget>[
-              ClipRRect(
-                borderRadius: BorderRadius.circular(radius),
-                child: new Image.asset(
-                  "static/gsy_cat.png",
-                  fit: BoxFit.cover,
-                  width: 300,
-                  height: 200,
-                ),
-              ),
-              SizedBox(
+      body: Center(
+        child: Stack(
+          children: <Widget>[
+            ClipRRect(
+              borderRadius: BorderRadius.circular(radius),
+              child: Image.asset(
+                "static/gsy_cat.png",
+                fit: BoxFit.cover,
                 width: 300,
                 height: 200,
-                child: CustomPaint(
-                  painter: AnimProgressPainter(
-                      status: progressType,
-                      animatorValue: animAnimation.value,
-                      finishAnimValue: animAnimation.value,
-                      progress: progress),
-                ),
-              )
-            ],
-          ),
+              ),
+            ),
+            SizedBox(
+              width: 300,
+              height: 200,
+              child: CustomPaint(
+                painter: AnimProgressPainter(
+                    status: progressType,
+                    animatorValue: animAnimation.value,
+                    finishAnimValue: animAnimation.value,
+                    progress: progress),
+              ),
+            )
+          ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           progress = 0;
           progressTimer?.cancel();
-          progressTimer = Timer.periodic(Duration(milliseconds: 30), (_) {
+          progressTimer = Timer.periodic(const Duration(milliseconds: 30), (_) {
             if (progress == 100) {
               progress = 0;
               progressTimer?.cancel();
@@ -100,7 +100,7 @@ class _AnimProgressImgDemoPageState extends State<AnimProgressImgDemoPage>
           animController.reset();
           animController.repeat(reverse: true);
         },
-        child: Icon(Icons.play_arrow),
+        child: const Icon(Icons.play_arrow),
       ),
     );
   }
@@ -141,10 +141,10 @@ class AnimProgressPainter extends CustomPainter {
 
     canvas.save();
     path.addRRect(
-        new RRect.fromLTRBR(0, 0, width, height, Radius.circular(radius)));
+        RRect.fromLTRBR(0, 0, width, height, const Radius.circular(radius)));
     canvas.clipPath(path);
     Paint paint = Paint();
-    paint.color = Color(0x99000000);
+    paint.color = const Color(0x99000000);
     canvas.save();
     canvas.translate(width / 2, height / 2);
 
@@ -158,7 +158,7 @@ class AnimProgressPainter extends CustomPainter {
           Rect.fromCircle(center: Offset.zero, radius: outRadius - 10);
 
       try {
-        if (Platform.isAndroid == true || Platform.isIOS == true)
+        if (Platform.isAndroid == true || Platform.isIOS == true) {
           paint.shader =
               RadialGradient(tileMode: TileMode.mirror, radius: 0.1, colors: [
             Colors.transparent,
@@ -166,15 +166,17 @@ class AnimProgressPainter extends CustomPainter {
             Colors.white.withAlpha((255 * animatorValue).toInt()),
             Colors.transparent
           ]).createShader(arcRect);
+        }
+      // ignore: empty_catches
       } catch (e) {}
 
-      canvas.drawCircle(Offset(0, 0),
+      canvas.drawCircle(const Offset(0, 0),
           innRadius + (outRadius - innRadius - 3) * animatorValue, paint);
 
       paint.blendMode = BlendMode.dstOut;
       paint.shader = null;
       paint.color = Colors.white;
-      canvas.drawCircle(Offset(0, 0), innRadius, paint);
+      canvas.drawCircle(const Offset(0, 0), innRadius, paint);
 
       paint.blendMode = BlendMode.srcOver;
 
@@ -192,7 +194,7 @@ class AnimProgressPainter extends CustomPainter {
           Math.pow(width.toDouble(), 2.0) + Math.pow(height.toDouble(), 2.0));
       paint.blendMode = BlendMode.dstOut;
       paint.color = Colors.white;
-      canvas.drawCircle(Offset(0, 0),
+      canvas.drawCircle(const Offset(0, 0),
           (outRadius + (maxRadius / 2 - outRadius) * finishAnimValue), paint);
       paint.blendMode = BlendMode.srcOver;
       canvas.restore();

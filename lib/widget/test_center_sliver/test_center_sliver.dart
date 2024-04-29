@@ -1,18 +1,17 @@
 import 'dart:math';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
 class _TestCenterSliver extends SingleChildRenderObjectWidget {
   const _TestCenterSliver({
-    Key? key,
     this.containerLayoutExtent = 0.0,
     this.initLayoutExtent = 0.0,
     this.hasLayoutExtent = false,
     this.pinned = false,
-    Widget? child,
-  })  : assert(containerLayoutExtent >= 0.0),
-        super(key: key, child: child);
+    super.child,
+  })  : assert(containerLayoutExtent >= 0.0);
 
   final double initLayoutExtent;
   final double containerLayoutExtent;
@@ -122,7 +121,7 @@ class _RenderCustomSliver extends RenderSliver
     ///布局没有发生变化，滚动
 
     final bool active = constraints.overlap < 0.0 || layoutExtent > 0.0;
-    final double overscrolledExtent = 0.0;
+    const double overscrolledExtent = 0.0;
 
     child!.layout(
       constraints.asBoxConstraints(
@@ -222,7 +221,7 @@ typedef ContainerBuilder = Widget Function(
 
 class TestCenterSliver extends StatefulWidget {
   const TestCenterSliver({
-    Key? key,
+    super.key,
     this.triggerPullDistance = _defaultTriggerPullDistance,
     this.containerExtent = _defaultcontainerExtent,
     this.initLayoutExtent = 0,
@@ -233,8 +232,7 @@ class TestCenterSliver extends StatefulWidget {
         assert(
             triggerPullDistance >= containerExtent,
             'The  container cannot take more space in its final state '
-            'than the amount initially created by overscrolling.'),
-        super(key: key);
+            'than the amount initially created by overscrolling.');
 
   final double triggerPullDistance;
 
@@ -258,19 +256,21 @@ class TestCenterSliver extends StatefulWidget {
     const Curve opacityCurve = Interval(0.0, 1, curve: Curves.easeInOut);
     return Stack(
       children: <Widget>[
-        new Opacity(
+        Opacity(
           opacity: 1.0,
-          child: new Container(color: Colors.red),
+          child: Container(color: Colors.red),
         ),
-        new Opacity(
+        Opacity(
           opacity:
               opacityCurve.transform(min(pulledExtent / containerExtent, 1.0)),
           child: InkWell(
             onTap: () {
-              print("FFFF");
+              if (kDebugMode) {
+                print("FFFF");
+              }
             },
-            child: new Container(
-              decoration: BoxDecoration(
+            child: Container(
+              decoration: const BoxDecoration(
                 color: Colors.amber,
                 image: DecorationImage(
                   fit: BoxFit.cover,

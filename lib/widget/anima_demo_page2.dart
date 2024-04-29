@@ -4,7 +4,10 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class AnimaDemoPage2 extends StatefulWidget {
+  const AnimaDemoPage2({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _AnimaDemoPageState2 createState() => _AnimaDemoPageState2();
 }
 
@@ -19,7 +22,7 @@ class _AnimaDemoPageState2 extends State<AnimaDemoPage2>
 
     controller = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 500),
     );
 
     animation = CurvedAnimation(
@@ -38,7 +41,7 @@ class _AnimaDemoPageState2 extends State<AnimaDemoPage2>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("AnimaDemoPage2"),
+        title: const Text("AnimaDemoPage2"),
       ),
       body: Container(
         color: Colors.blueAccent,
@@ -54,7 +57,7 @@ class _AnimaDemoPageState2 extends State<AnimaDemoPage2>
               height: 250,
               width: 250,
               color: Colors.greenAccent,
-              child: new Text("我我我我我我我我我我我说"),
+              child: const Text("我我我我我我我我我我我说"),
             ),
           ),
         ),
@@ -68,7 +71,7 @@ class _AnimaDemoPageState2 extends State<AnimaDemoPage2>
             controller.forward();
           }
         },
-        child: new Text("点我"),
+        child: const Text("点我"),
       ),
     );
   }
@@ -85,7 +88,7 @@ class CRAnimation extends StatelessWidget {
 
   final Animation<double>? animation;
 
-  CRAnimation({
+  const CRAnimation({super.key, 
     required this.child,
     required this.animation,
     this.offset,
@@ -105,7 +108,7 @@ class CRAnimation extends StatelessWidget {
             maxR: maxR,
             offset: offset,
           ),
-          child: this.child,
+          child: child,
         );
       },
     );
@@ -129,7 +132,7 @@ class AnimationClipper extends CustomClipper<Path> {
   });
 
   @override
-  bool shouldReclip(old) => true;
+  bool shouldReclip(oldClipper) => true;
 
   @override
   Path getClip(Size size) {

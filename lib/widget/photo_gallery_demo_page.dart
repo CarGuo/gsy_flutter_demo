@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -7,7 +8,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 /// 来自  https://github.com/gskinnerTeam/flutter-wonderous-app 上的一个 UI 效果
 /// 文章  https://juejin.cn/post/7212249660581249082
 class PhotoGalleryDemoPage extends StatefulWidget {
-  const PhotoGalleryDemoPage({Key? key}) : super(key: key);
+  const PhotoGalleryDemoPage({super.key});
 
   @override
   State<PhotoGalleryDemoPage> createState() => _PhotoGalleryDemoPageState();
@@ -16,12 +17,12 @@ class PhotoGalleryDemoPage extends StatefulWidget {
 class _PhotoGalleryDemoPageState extends State<PhotoGalleryDemoPage> {
   @override
   Widget build(BuildContext context) {
-    return PhotoGallery();
+    return const PhotoGallery();
   }
 }
 
 class PhotoGallery extends StatefulWidget {
-  const PhotoGallery({Key? key}) : super(key: key);
+  const PhotoGallery({super.key});
 
   @override
   State<PhotoGallery> createState() => _PhotoGalleryState();
@@ -93,12 +94,15 @@ class _PhotoGalleryState extends State<PhotoGallery> {
 
     ///这里判断下 index 是不是超出位置
     // After calculating new index, exit early if we don't like it...
-    if (newIndex < 0 || newIndex > _imgCount - 1)
+    if (newIndex < 0 || newIndex > _imgCount - 1) {
       return; // keep the index in range
-    if (dir.dx < 0 && newIndex % _gridSize == 0)
+    }
+    if (dir.dx < 0 && newIndex % _gridSize == 0) {
       return; // prevent right-swipe when at right side
-    if (dir.dx > 0 && newIndex % _gridSize == _gridSize - 1)
+    }
+    if (dir.dx > 0 && newIndex % _gridSize == _gridSize - 1) {
       return; // prevent left-swipe when at left side
+    }
     /// 响应
     _lastSwipeDir = dir;
     HapticFeedback.lightImpact();
@@ -106,7 +110,9 @@ class _PhotoGalleryState extends State<PhotoGallery> {
   }
 
   void _setIndex(int value, {bool skipAnimation = false}) {
-    print("######## $value");
+    if (kDebugMode) {
+      print("######## $value");
+    }
     if (value < 0 || value >= _imgCount) return;
     _skipNextOffsetTween = skipAnimation;
     setState(() => _index = value);
@@ -166,10 +172,10 @@ class _PhotoGalleryState extends State<PhotoGallery> {
     var padding = _getPadding(MediaQuery.sizeOf(context));
 
     final cutoutTweenDuration =
-        _skipNextOffsetTween ? Duration.zero : Duration(milliseconds: 600) * .5;
+        _skipNextOffsetTween ? Duration.zero : const Duration(milliseconds: 600) * .5;
 
     final offsetTweenDuration =
-        _skipNextOffsetTween ? Duration.zero : Duration(milliseconds: 600) * .4;
+        _skipNextOffsetTween ? Duration.zero : const Duration(milliseconds: 600) * .4;
 
     var gridOffset = _calculateCurrentOffset(padding, imgSize);
     gridOffset += Offset(0, -MediaQuery.paddingOf(context).top / 2);
@@ -200,7 +206,7 @@ class _PhotoGalleryState extends State<PhotoGallery> {
                 builder: (_, value, child) =>
                     Transform.translate(offset: value, child: child),
                 child: GridView.count(
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   crossAxisCount: _gridSize,
                   childAspectRatio: imgSize.aspectRatio,
                   mainAxisSpacing: padding,
@@ -217,11 +223,10 @@ class _PhotoGalleryState extends State<PhotoGallery> {
 
 class EightWaySwipeDetector extends StatefulWidget {
   const EightWaySwipeDetector(
-      {Key? key,
+      {super.key,
       required this.child,
       this.threshold = 50,
-      required this.onSwipe})
-      : super(key: key);
+      required this.onSwipe});
   final Widget child;
   final double threshold;
   final void Function(Offset dir)? onSwipe;
@@ -298,14 +303,12 @@ class _EightWaySwipeDetectorState extends State<EightWaySwipeDetector> {
 
 class _AnimatedCutoutOverlay extends StatelessWidget {
   const _AnimatedCutoutOverlay(
-      {Key? key,
-      required this.child,
+      {required this.child,
       required this.cutoutSize,
       required this.animationKey,
       this.duration,
       required this.swipeDir,
-      required this.opacity})
-      : super(key: key);
+      required this.opacity});
   final Widget child;
   final Size cutoutSize;
   final Key animationKey;
@@ -370,7 +373,7 @@ class _CutoutClipper extends CustomClipper<Path> {
             padY,
             size.width - padX,
             size.height - padY,
-            Radius.circular(6),
+            const Radius.circular(6),
           ),
         )
         ..close(),
@@ -383,11 +386,13 @@ class _CutoutClipper extends CustomClipper<Path> {
 }
 
 class ShowPathDifference extends StatelessWidget {
+  const ShowPathDifference({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('ShowPathDifference'),
+        title: const Text('ShowPathDifference'),
       ),
       body: Stack(
         alignment: Alignment.center,
@@ -396,7 +401,7 @@ class ShowPathDifference extends StatelessWidget {
             child: Container(
               width: 300,
               height: 300,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 image: DecorationImage(
                   fit: BoxFit.cover,
                   image: AssetImage("static/gsy_cat.png"),
@@ -425,9 +430,9 @@ class ShowPathDifferencePainter extends CustomPainter {
         PathOperation.difference,
         Path()
           ..addRRect(
-              RRect.fromLTRBR(-150, -150, 150, 150, Radius.circular(10))),
+              RRect.fromLTRBR(-150, -150, 150, 150, const Radius.circular(10))),
         Path()
-          ..addOval(Rect.fromCircle(center: Offset(0, 0), radius: 100))
+          ..addOval(Rect.fromCircle(center: const Offset(0, 0), radius: 100))
           ..close(),
       ),
       paint,

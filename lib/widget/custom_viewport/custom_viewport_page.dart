@@ -7,7 +7,7 @@ import 'package:gsy_flutter_demo/widget/custom_viewport/secondary_tab_bar.dart';
 import 'package:gsy_flutter_demo/widget/custom_viewport/secondary_tab_bar_render_sliver.dart';
 
 class CustomViewportPage extends StatelessWidget {
-  const CustomViewportPage({Key? key}) : super(key: key);
+  const CustomViewportPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class CustomViewportPage extends StatelessWidget {
         viewportBuilder: (BuildContext context, ViewportOffset position) {
           return CustomViewport(
             offset: position,
-            highestChildInPaintOrderClassList: [
+            highestChildInPaintOrderClassList: const [
               FirstTabBarRenderSliver,
               SecondaryTabBarRenderSliver,
             ],

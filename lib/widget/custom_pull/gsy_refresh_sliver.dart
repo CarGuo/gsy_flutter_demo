@@ -12,12 +12,10 @@ import 'package:flutter/services.dart';
 
 class _CupertinoSliverRefresh extends SingleChildRenderObjectWidget {
   const _CupertinoSliverRefresh({
-    Key? key,
     this.refreshIndicatorLayoutExtent = 0.0,
     this.hasLayoutExtent = false,
-    Widget? child,
-  }) : assert(refreshIndicatorLayoutExtent >= 0.0),
-        super(key: key, child: child);
+    super.child,
+  }) : assert(refreshIndicatorLayoutExtent >= 0.0);
 
   // The amount of space the indicator should occupy in the sliver in a
   // resting state when in the refreshing mode.
@@ -68,8 +66,9 @@ class _RenderCupertinoSliverRefresh extends RenderSliver
   double _refreshIndicatorExtent;
   set refreshIndicatorLayoutExtent(double value) {
     assert(value >= 0.0);
-    if (value == _refreshIndicatorExtent)
+    if (value == _refreshIndicatorExtent) {
       return;
+    }
     _refreshIndicatorExtent = value;
     markNeedsLayout();
   }
@@ -80,8 +79,9 @@ class _RenderCupertinoSliverRefresh extends RenderSliver
   bool get hasLayoutExtent => _hasLayoutExtent;
   bool _hasLayoutExtent;
   set hasLayoutExtent(bool value) {
-    if (value == _hasLayoutExtent)
+    if (value == _hasLayoutExtent) {
       return;
+    }
     _hasLayoutExtent = value;
     markNeedsLayout();
   }
@@ -278,7 +278,7 @@ class CupertinoSliverRefreshControl extends StatefulWidget {
   /// The [onRefresh] argument will be called when pulled far enough to trigger
   /// a refresh.
   const CupertinoSliverRefreshControl({
-    Key? key,
+    super.key,
     this.refreshTriggerPullDistance = _defaultRefreshTriggerPullDistance,
     this.refreshIndicatorExtent = _defaultRefreshIndicatorExtent,
     this.builder = buildSimpleRefreshIndicator,
@@ -289,8 +289,7 @@ class CupertinoSliverRefreshControl extends StatefulWidget {
         refreshTriggerPullDistance >= refreshIndicatorExtent,
         'The refresh indicator cannot take more space in its final state '
             'than the amount initially created by overscrolling.'
-        ),
-        super(key: key);
+        );
 
   /// The amount of overscroll the scrollable must be dragged to trigger a reload.
   ///

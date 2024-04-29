@@ -1,11 +1,12 @@
 import 'dart:math' as math;
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:gsy_flutter_demo/widget/expand/expand_widget.dart';
 import 'package:gsy_flutter_demo/widget/stick/stick_widget.dart';
 
 final random = math.Random();
-final stickHeader = 50.0;
+const stickHeader = 50.0;
 
 ///具备展开和收缩列表能力的Demo
 class StickExpendDemoPage extends StatefulWidget {
@@ -13,6 +14,8 @@ class StickExpendDemoPage extends StatefulWidget {
   final List<ExpendedModel> tagList = List.generate(50, (index) {
     return ExpendedModel(false, List.filled(random.nextInt(20), null));
   });
+
+  StickExpendDemoPage({super.key});
 
   @override
   _StickExpendDemoPageState createState() => _StickExpendDemoPageState();
@@ -23,42 +26,41 @@ class _StickExpendDemoPageState extends State<StickExpendDemoPage> {
   Widget build(_) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("StickExpendDemoPage"),
+        title: const Text("StickExpendDemoPage"),
       ),
-      body: Container(
-        ///列表数据
-        child: new ListView.builder(
-            physics: AlwaysScrollableScrollPhysics(),
-            itemCount: widget.tagList.length,
-            itemBuilder: (context, index) {
-              return new Container(
-                color: Colors.white,
+      body: ListView.builder(
+          physics: const AlwaysScrollableScrollPhysics(),
+          itemCount: widget.tagList.length,
+          itemBuilder: (context, index) {
+            return Container(
+              color: Colors.white,
 
-                ///头部停靠
-                child: new StickWidget(
-                  ///头部
-                  stickHeader: new Container(
-                    height: stickHeader,
-                    color: Colors.deepPurple,
-                    padding: new EdgeInsets.only(left: 10.0),
-                    alignment: Alignment.centerLeft,
-                    child: new InkWell(
-                      onTap: () {
+              ///头部停靠
+              child: StickWidget(
+                ///头部
+                stickHeader: Container(
+                  height: stickHeader,
+                  color: Colors.deepPurple,
+                  padding: const EdgeInsets.only(left: 10.0),
+                  alignment: Alignment.centerLeft,
+                  child: InkWell(
+                    onTap: () {
+                      if (kDebugMode) {
                         print("header");
-                      },
-                      child: new Text(
-                        '我的 $index 头啊',
-                        style: TextStyle(color: Colors.white),
-                      ),
+                      }
+                    },
+                    child: Text(
+                      '我的 $index 头啊',
+                      style: const TextStyle(color: Colors.white),
                     ),
                   ),
-
-                  ///可展开内容
-                  stickContent: ExpandChildList(widget.tagList[index]),
                 ),
-              );
-            }),
-      ),
+
+                ///可展开内容
+                stickContent: ExpandChildList(widget.tagList[index]),
+              ),
+            );
+          }),
     );
   }
 }
@@ -67,7 +69,7 @@ class _StickExpendDemoPageState extends State<StickExpendDemoPage> {
 class ExpandChildList extends StatefulWidget {
   final ExpendedModel expendedModel;
 
-  ExpandChildList(this.expendedModel);
+  const ExpandChildList(this.expendedModel, {super.key});
 
   @override
   _ExpandChildListState createState() => _ExpandChildListState();
@@ -151,21 +153,20 @@ class ExpandableVisibleContainer extends StatelessWidget {
   final List dataList;
   final ExpandedStateChanged? expandedStateChanged;
 
-  ExpandableVisibleContainer(this.dataList,
+  const ExpandableVisibleContainer(this.dataList,
       {required this.visibleCount,
       this.itemHeight = 150,
       this.expandedStateChanged,
-      key})
-      : super(key: key);
+      super.key});
 
   ///大于可见数量才使用 查看更多
   renderExpendedMore(context) {
-    return new Container(
+    return Container(
       height: 50.0,
       color: Colors.grey,
-      padding: new EdgeInsets.only(left: 10.0),
+      padding: const EdgeInsets.only(left: 10.0),
       alignment: Alignment.center,
-      child: new InkWell(
+      child: InkWell(
         onTap: () {
           ///展开，回调
           ExpandableController.of(context)!.toggle();
@@ -174,7 +175,7 @@ class ExpandableVisibleContainer extends StatelessWidget {
         child: Container(
           alignment: Alignment.center,
           width: MediaQuery.sizeOf(context).width,
-          child: new Text(
+          child: const Text(
             '查看更多',
             style: TextStyle(color: Colors.black),
           ),
@@ -195,32 +196,32 @@ class ExpandableVisibleContainer extends StatelessWidget {
             ? visibleCount + 1
             : visibleCount;
 
-    return new Container(
-      child: new Align(
-        alignment: Alignment.centerLeft,
-        child: Column(
-          children: List.generate(realVisibleCount, (index) {
-            ///绘制加载更多按键
-            if (index == visibleCount) {
-              return renderExpendedMore(context);
-            }
-            return new InkWell(
-              onTap: () {
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Column(
+        children: List.generate(realVisibleCount, (index) {
+          ///绘制加载更多按键
+          if (index == visibleCount) {
+            return renderExpendedMore(context);
+          }
+          return InkWell(
+            onTap: () {
+              if (kDebugMode) {
                 print("content $index");
-              },
-              child: new Container(
-                color: Colors.pinkAccent,
-                height: itemHeight,
-                child: new Center(
-                  child: new Text(
-                    '我的 $index 内容',
-                    style: TextStyle(color: Colors.white),
-                  ),
+              }
+            },
+            child: Container(
+              color: Colors.pinkAccent,
+              height: itemHeight,
+              child: Center(
+                child: Text(
+                  '我的 $index 内容',
+                  style: const TextStyle(color: Colors.white),
                 ),
               ),
-            );
-          }),
-        ),
+            ),
+          );
+        }),
       ),
     );
   }
@@ -233,18 +234,18 @@ class ExpandableContainer extends StatelessWidget {
   final List dataList;
   final int visibleCount;
 
-  ExpandableContainer(this.dataList,
-      {required this.visibleCount,
+  const ExpandableContainer(this.dataList,
+      {super.key, required this.visibleCount,
       this.itemHeight = 150,
       this.expandedStateChanged});
 
   renderMoreItem(context) {
-    return new Container(
+    return Container(
       height: 50.0,
       color: Colors.grey,
-      padding: new EdgeInsets.only(left: 10.0),
+      padding: const EdgeInsets.only(left: 10.0),
       alignment: Alignment.center,
-      child: new InkWell(
+      child: InkWell(
         onTap: () {
           ///收起，回调
           ExpandableController.of(context)!.toggle();
@@ -253,7 +254,7 @@ class ExpandableContainer extends StatelessWidget {
         child: Container(
           alignment: Alignment.center,
           width: MediaQuery.sizeOf(context).width,
-          child: new Text(
+          child: const Text(
             '收起',
             style: TextStyle(color: Colors.black),
           ),
@@ -273,23 +274,25 @@ class ExpandableContainer extends StatelessWidget {
       return Container();
     }
 
-    return new Column(
+    return Column(
       children: List.generate(expandedCount, (index) {
         ///只有展开后的才需要显示 收起按键
         if (index == decCount) {
           return renderMoreItem(context);
         }
-        return new InkWell(
+        return InkWell(
           onTap: () {
-            print("content $index");
+            if (kDebugMode) {
+              print("content $index");
+            }
           },
-          child: new Container(
+          child: Container(
             color: Colors.pinkAccent,
             height: itemHeight,
-            child: new Center(
-              child: new Text(
+            child: Center(
+              child: Text(
                 '我的展开的 $index 内容 啊',
-                style: TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.white),
               ),
             ),
           ),
@@ -299,7 +302,7 @@ class ExpandableContainer extends StatelessWidget {
   }
 }
 
-typedef ExpandedStateChanged(bool expanded);
+typedef ExpandedStateChanged = Function(bool expanded);
 
 class ExpendedModel {
   bool expended;

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ColorProgressDemoPage extends StatefulWidget {
+  const ColorProgressDemoPage({super.key});
+
   @override
   _ColorProgressDemoPageState createState() => _ColorProgressDemoPageState();
 }
@@ -10,14 +12,14 @@ class _ColorProgressDemoPageState extends State<ColorProgressDemoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: new Text("ColorProgressDemoPage"),
+        title: const Text("ColorProgressDemoPage"),
       ),
       backgroundColor: Colors.grey,
       body: Center(
         child: Container(
           color: Colors.grey,
           alignment: Alignment.center,
-          margin: EdgeInsets.symmetric(horizontal: 50),
+          margin: const EdgeInsets.symmetric(horizontal: 50),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -27,7 +29,7 @@ class _ColorProgressDemoPageState extends State<ColorProgressDemoPage> {
                 bgBorder: bgBorder1,
                 value: 0.5,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               ColorProgress(
@@ -36,7 +38,7 @@ class _ColorProgressDemoPageState extends State<ColorProgressDemoPage> {
                 bgBorder: bgBorder2,
                 value: 0.3,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               ColorProgress(
@@ -45,7 +47,7 @@ class _ColorProgressDemoPageState extends State<ColorProgressDemoPage> {
                 bgBorder: bgBorder3,
                 value: 1,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               ProgressPainterAnim(
@@ -54,7 +56,7 @@ class _ColorProgressDemoPageState extends State<ColorProgressDemoPage> {
                 bgBorder: bgBorder1,
                 value: 0.8,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               ProgressPainterAnim(
@@ -63,7 +65,7 @@ class _ColorProgressDemoPageState extends State<ColorProgressDemoPage> {
                 bgBorder: bgBorder2,
                 value: 0.4,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               ProgressPainterAnim(
@@ -86,8 +88,8 @@ class ColorProgress extends StatefulWidget {
   final Border bgBorder;
   final double value;
 
-  ColorProgress(
-      {required this.colorList,
+  const ColorProgress(
+      {super.key, required this.colorList,
       required this.backgroundColor,
       required this.value,
       required this.bgBorder});
@@ -101,25 +103,25 @@ class _ColorProgressState extends State<ColorProgress> {
 
   List<Widget> renderColorList() {
     List<Widget> widgetList = [];
-    widget.colorList.forEach((element) {
+    for (var element in widget.colorList) {
       widgetList.add(
         Container(
           decoration: BoxDecoration(
             gradient: element,
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
                 topRight: Radius.circular(8), bottomRight: Radius.circular(8)),
           ),
           child: Container(),
         ),
       );
-    });
+    }
     return widgetList;
   }
 
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(seconds: 0), () {
+    Future.delayed(const Duration(seconds: 0), () {
       setState(() {
         _value = widget.value;
       });
@@ -128,9 +130,9 @@ class _ColorProgressState extends State<ColorProgress> {
 
   @override
   Widget build(BuildContext context) {
-    var borderRadius = BorderRadius.all(Radius.circular(8));
+    var borderRadius = const BorderRadius.all(Radius.circular(8));
     return ClipRRect(
-      borderRadius: BorderRadius.all(Radius.circular(8)),
+      borderRadius: const BorderRadius.all(Radius.circular(8)),
       child: Container(
         decoration: BoxDecoration(
           border: widget.bgBorder,
@@ -152,19 +154,15 @@ class _ColorProgressState extends State<ColorProgress> {
                       minHeight: 10,
                       maxHeight: 10,
                       alignment: Alignment.centerLeft,
-                      child: Container(
-                        child: AnimatedContainer(
-                          // Use the properties stored in the State class.
-                          width: constraints.maxWidth * _value,
-                          duration: Duration(seconds: 2),
-                          curve: Curves.fastOutSlowIn,
-                          child: Container(
-                            child: Stack(
-                              clipBehavior: Clip.none,
-                              alignment: Alignment.center,
-                              children: renderColorList(),
-                            ),
-                          ),
+                      child: AnimatedContainer(
+                        // Use the properties stored in the State class.
+                        width: constraints.maxWidth * _value,
+                        duration: const Duration(seconds: 2),
+                        curve: Curves.fastOutSlowIn,
+                        child: Stack(
+                          clipBehavior: Clip.none,
+                          alignment: Alignment.center,
+                          children: renderColorList(),
                         ),
                       ),
                     ),
@@ -180,7 +178,7 @@ class _ColorProgressState extends State<ColorProgress> {
 }
 
 List<Gradient> colorList1 = [
-  LinearGradient(
+  const LinearGradient(
     begin: Alignment(0.52576, 0.80444),
     end: Alignment(0.52576, 0.20356),
     stops: [
@@ -192,7 +190,7 @@ List<Gradient> colorList1 = [
       Color.fromARGB(255, 255, 216, 152),
     ],
   ),
-  LinearGradient(
+  const LinearGradient(
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
     stops: [
@@ -210,7 +208,7 @@ List<Gradient> colorList1 = [
       Color.fromARGB(255, 133, 101, 30),
     ],
   ),
-  LinearGradient(
+  const LinearGradient(
     begin: Alignment(1, 0.5),
     end: Alignment(0.5857, 0.5),
     stops: [
@@ -225,7 +223,7 @@ List<Gradient> colorList1 = [
 ];
 
 List<Gradient> colorList2 = [
-  LinearGradient(
+  const LinearGradient(
     begin: Alignment(0.52576, 0.80444),
     end: Alignment(0.52576, 0.20356),
     stops: [
@@ -237,7 +235,7 @@ List<Gradient> colorList2 = [
       Color.fromARGB(255, 255, 216, 152),
     ],
   ),
-  LinearGradient(
+  const LinearGradient(
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
     stops: [
@@ -255,7 +253,7 @@ List<Gradient> colorList2 = [
       Color.fromARGB(255, 200, 28, 3),
     ],
   ),
-  LinearGradient(
+  const LinearGradient(
     begin: Alignment(1, 0.5),
     end: Alignment(0.5857, 0.5),
     stops: [
@@ -270,7 +268,7 @@ List<Gradient> colorList2 = [
 ];
 
 List<Gradient> colorList3 = [
-  LinearGradient(
+  const LinearGradient(
     begin: Alignment(1, 0.5),
     end: Alignment(0, 0.5),
     stops: [
@@ -282,7 +280,7 @@ List<Gradient> colorList3 = [
       Color.fromARGB(255, 255, 255, 255),
     ],
   ),
-  LinearGradient(
+  const LinearGradient(
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
     stops: [
@@ -300,7 +298,7 @@ List<Gradient> colorList3 = [
       Color.fromARGB(0, 200, 28, 3),
     ],
   ),
-  LinearGradient(
+  const LinearGradient(
     begin: Alignment(1, 0.5),
     end: Alignment(0.5857, 0.5),
     stops: [
@@ -314,7 +312,7 @@ List<Gradient> colorList3 = [
   )
 ];
 
-var bgColor1 = LinearGradient(
+var bgColor1 = const LinearGradient(
   begin: Alignment(0.99899, 0.5),
   end: Alignment(0, 0.5),
   stops: [
@@ -327,7 +325,7 @@ var bgColor1 = LinearGradient(
   ],
 );
 
-var bgColor2 = LinearGradient(
+var bgColor2 = const LinearGradient(
   begin: Alignment(1, 0.5),
   end: Alignment(0, 0.5),
   stops: [
@@ -340,7 +338,7 @@ var bgColor2 = LinearGradient(
   ],
 );
 
-var bgColor3 = LinearGradient(
+var bgColor3 = const LinearGradient(
   begin: Alignment(1, 0.5),
   end: Alignment(0, 0.5),
   stops: [
@@ -355,17 +353,17 @@ var bgColor3 = LinearGradient(
 
 var bgBorder1 = Border.all(
   width: 1,
-  color: Color.fromARGB(58, 92, 64, 18),
+  color: const Color.fromARGB(58, 92, 64, 18),
 );
 
 var bgBorder2 = Border.all(
   width: 1,
-  color: Color.fromARGB(69, 255, 124, 124),
+  color: const Color.fromARGB(69, 255, 124, 124),
 );
 
 var bgBorder3 = Border.all(
   width: 1,
-  color: Color.fromARGB(69, 113, 113, 113),
+  color: const Color.fromARGB(69, 113, 113, 113),
 );
 
 class ProgressPainterAnim extends StatefulWidget {
@@ -374,8 +372,8 @@ class ProgressPainterAnim extends StatefulWidget {
   final Border bgBorder;
   final double value;
 
-  ProgressPainterAnim(
-      {required this.colorList,
+  const ProgressPainterAnim(
+      {super.key, required this.colorList,
       required this.backgroundColor,
       required this.value,
       required this.bgBorder});
@@ -394,7 +392,7 @@ class _ProgressPainterAnimState extends State<ProgressPainterAnim>
     super.initState();
     controller = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 3),
+      duration: const Duration(seconds: 3),
     );
     CurvedAnimation curvedAnimation =
         CurvedAnimation(parent: controller, curve: Curves.bounceInOut)
@@ -413,7 +411,7 @@ class _ProgressPainterAnimState extends State<ProgressPainterAnim>
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 6,
       child: LayoutBuilder(
         builder: (context, size) {
@@ -448,12 +446,12 @@ class ProgressPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    Paint paint = new Paint();
+    Paint paint = Paint();
 
     var radiusOut = size.height / 2;
     var radiusInner = size.height / 2;
 
-    paint..shader = backgroundColor.createShader(Offset.zero & size);
+    paint.shader = backgroundColor.createShader(Offset.zero & size);
     canvas.drawRRect(
         RRect.fromLTRBR(
             0, 0, size.width, size.height, Radius.circular(radiusOut)),
@@ -463,9 +461,9 @@ class ProgressPainter extends CustomPainter {
       RRect.fromLTRBR(
           0, 0, size.width, size.height, Radius.circular(radiusOut)),
     );
-    colorList.forEach((element) {
+    for (var element in colorList) {
       paint
-        ..shader = element
+        .shader = element
             .createShader(Offset.zero & Size(size.width * value, size.height));
       canvas.drawRRect(
         RRect.fromLTRBAndCorners(0, -5, size.width * value, size.height + 5,
@@ -475,7 +473,7 @@ class ProgressPainter extends CustomPainter {
             bottomRight: Radius.circular(radiusInner)),
         paint,
       );
-    });
+    }
 
     bgBorder.paint(canvas, Offset.zero & size,
         borderRadius: BorderRadius.all(Radius.circular(radiusOut)));

@@ -5,6 +5,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class ArcSeekBarDemoPage extends StatefulWidget {
+  const ArcSeekBarDemoPage({super.key});
+
   @override
   _ArcSeekBarDemoPageState createState() => _ArcSeekBarDemoPageState();
 }
@@ -14,7 +16,7 @@ class _ArcSeekBarDemoPageState extends State<ArcSeekBarDemoPage>
   double progress = 0;
   final double rotateAngle = 90;
   final double openAngle = 120;
-  final Size size = Size(300, 300);
+  final Size size = const Size(300, 300);
 
   onTouch(DragUpdateDetails d) {
     var x = d.localPosition.dx;
@@ -59,21 +61,19 @@ class _ArcSeekBarDemoPageState extends State<ArcSeekBarDemoPage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("ArcSeekBarDemoPage"),
+        title: const Text("ArcSeekBarDemoPage"),
       ),
-      body: Container(
-        child: Center(
-          child: GestureDetector(
-            onPanUpdate: onTouch,
-            child: SizedBox(
-              height: size.width,
-              width: size.height,
-              child: CustomPaint(
-                painter: new ArcSeekBarPainter(
-                    progress: progress,
-                    rotateAngle: rotateAngle,
-                    openAngle: openAngle),
-              ),
+      body: Center(
+        child: GestureDetector(
+          onPanUpdate: onTouch,
+          child: SizedBox(
+            height: size.width,
+            width: size.height,
+            child: CustomPaint(
+              painter: ArcSeekBarPainter(
+                  progress: progress,
+                  rotateAngle: rotateAngle,
+                  openAngle: openAngle),
             ),
           ),
         ),
@@ -105,8 +105,8 @@ class ArcSeekBarPainter extends CustomPainter {
   late Rect content;
   late double startAngle;
   late double sweepAngle;
-  Offset tempPos = Offset(0, 0);
-  Offset tempTan = Offset(0, 0);
+  Offset tempPos = const Offset(0, 0);
+  Offset tempTan = const Offset(0, 0);
 
   PathMetric? seekPathMeasure;
 
@@ -125,8 +125,8 @@ class ArcSeekBarPainter extends CustomPainter {
   late List<Color> arcColors;
 
   void initData() {
-    seekPath = new Path();
-    borderPath = new Path();
+    seekPath = Path();
+    borderPath = Path();
     arcColors = [Colors.blueAccent, Colors.pinkAccent, Colors.amberAccent];
   }
 
@@ -138,7 +138,7 @@ class ArcSeekBarPainter extends CustomPainter {
   }
 
   void initArcPaint() {
-    arcPaint = new Paint();
+    arcPaint = Paint();
     arcPaint.isAntiAlias = true;
     arcPaint.strokeWidth = 40;
     arcPaint.style = PaintingStyle.stroke;
@@ -146,7 +146,7 @@ class ArcSeekBarPainter extends CustomPainter {
   }
 
   void initThumbPaint() {
-    thumbPaint = new Paint();
+    thumbPaint = Paint();
     thumbPaint.isAntiAlias = true;
     thumbPaint.color = Colors.white;
     thumbPaint.strokeWidth = borderWidth;
@@ -155,7 +155,7 @@ class ArcSeekBarPainter extends CustomPainter {
   }
 
   void initBorderPaint() {
-    borderPaint = new Paint();
+    borderPaint = Paint();
     borderPaint.isAntiAlias = true;
     borderPaint.color = Colors.white;
     borderPaint.strokeWidth = 0;
@@ -188,7 +188,7 @@ class ArcSeekBarPainter extends CustomPainter {
       startY = 0;
     }
 
-    content = new Rect.fromLTRB(
+    content = Rect.fromLTRB(
         startX + fix, startY + fix, startX + edgeLength, startY + edgeLength);
     centerX = content.center.dx;
     centerY = content.center.dy;
@@ -231,8 +231,10 @@ class ArcSeekBarPainter extends CustomPainter {
     }
     var sweepGradient = SweepGradient(colors: arcColors, stops: pos);
     try {
-      if (Platform.isIOS == true || Platform.isAndroid == true)
+      if (Platform.isIOS == true || Platform.isAndroid == true) {
         arcPaint.shader = sweepGradient.createShader(Offset.zero & size);
+      }
+    // ignore: empty_catches
     } catch (e) {}
   }
 

@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/physics.dart';
 
 class AnimScanDemoPage extends StatefulWidget {
+  const AnimScanDemoPage({super.key});
+
   @override
   _AnimScanDemoPageState createState() => _AnimScanDemoPageState();
 }
@@ -35,9 +37,9 @@ class _AnimScanDemoPageState extends State<AnimScanDemoPage>
   void initState() {
     super.initState();
 
-    animController = new AnimationController(vsync: this)
-      ..duration = Duration(milliseconds: 1000);
-    this.animAnimation = CurvedAnimation(
+    animController = AnimationController(vsync: this)
+      ..duration = const Duration(milliseconds: 1000);
+    animAnimation = CurvedAnimation(
       parent: animController,
       curve: Curves.linear,
     )..addListener(() {
@@ -46,9 +48,9 @@ class _AnimScanDemoPageState extends State<AnimScanDemoPage>
       });
     animController.repeat(reverse: true);
 
-    imgAnimController = new AnimationController(vsync: this);
+    imgAnimController = AnimationController(vsync: this);
     imgAnimation =
-        imgAnimController.drive<double>(new Tween(begin: 0.8, end: 1.0));
+        imgAnimController.drive<double>(Tween(begin: 0.8, end: 1.0));
     startImgAnim();
   }
 
@@ -87,42 +89,41 @@ class _AnimScanDemoPageState extends State<AnimScanDemoPage>
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("AnimScanDemoPage"),
+          title: const Text("AnimScanDemoPage"),
         ),
-        body: Container(
-            child: Center(
-                child: Stack(
-          alignment: Alignment.center,
-          children: <Widget>[
-            new SizedBox(
-              width: 300,
-              height: 300,
-              child: CustomPaint(
-                painter: AnimScanPainter(
-                    rippleCircles: rippleCircles, sweepProgress: sweepProgress),
+        body: Center(
+            child: Stack(
+                  alignment: Alignment.center,
+                  children: <Widget>[
+        SizedBox(
+          width: 300,
+          height: 300,
+          child: CustomPaint(
+            painter: AnimScanPainter(
+                rippleCircles: rippleCircles, sweepProgress: sweepProgress),
+          ),
+        ),
+        DebounceButton(
+          onTap: () {
+            startRipple(300, 300);
+            startImgAnim();
+          },
+          radius: 70,
+          child: ScaleTransition(
+            scale: imgAnimation as Animation<double>,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(70),
+              child: Image.asset(
+                "static/gsy_cat.png",
+                fit: BoxFit.cover,
+                width: 140,
+                height: 140,
               ),
             ),
-            DebounceButton(
-              onTap: () {
-                startRipple(300, 300);
-                startImgAnim();
-              },
-              radius: 70,
-              child: ScaleTransition(
-                scale: imgAnimation as Animation<double>,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(70),
-                  child: new Image.asset(
-                    "static/gsy_cat.png",
-                    fit: BoxFit.cover,
-                    width: 140,
-                    height: 140,
-                  ),
-                ),
-              ),
-            )
-          ],
-        ))));
+          ),
+        )
+                  ],
+                )));
   }
 }
 
@@ -154,12 +155,12 @@ class AnimScanPainter extends CustomPainter {
     var colors = [
       Colors.blueAccent[700],
       Colors.blue,
-      Color(0xFFFFF6F6),
+      const Color(0xFFFFF6F6),
       Colors.white,
     ];
 
     var sweepGradient =
-        SweepGradient(colors: colors as List<Color>, stops: [0, 0.001, 0.9, 1]);
+        SweepGradient(colors: colors as List<Color>, stops: const [0, 0.001, 0.9, 1]);
 
     /// shader 暂不支持 web
     if (Platform.isAndroid == true || Platform.isIOS == true) {
@@ -178,12 +179,12 @@ class AnimScanPainter extends CustomPainter {
     canvas.drawCircle(Offset(width / 2, height / 2), radius, backPaint);
 
     backPaint.shader = SweepGradient(colors: [
-      Color(0xFFFFF6F6).withAlpha(0),
-      Color(0xFFFFF6F6).withAlpha(10),
+      const Color(0xFFFFF6F6).withAlpha(0),
+      const Color(0xFFFFF6F6).withAlpha(10),
       Colors.white.withAlpha(0),
-      Color(0xFFFFF6F6).withAlpha(10),
+      const Color(0xFFFFF6F6).withAlpha(10),
       Colors.blue,
-    ], stops: [
+    ], stops: const [
       0,
       0.001,
       0.001,
@@ -247,14 +248,14 @@ class DebounceButton extends StatefulWidget {
   final GestureTapCallback? onTap;
   final double radius;
 
-  DebounceButton({this.child, this.onTap, this.radius = 0});
+  const DebounceButton({super.key, this.child, this.onTap, this.radius = 0});
 
   @override
   _DebounceButtonState createState() => _DebounceButtonState();
 }
 
 class _DebounceButtonState extends State<DebounceButton> {
-  Duration durationTime = Duration(milliseconds: 500);
+  Duration durationTime = const Duration(milliseconds: 500);
   Timer? timer;
 
   @override
@@ -277,7 +278,7 @@ class _DebounceButtonState extends State<DebounceButton> {
         setState(() {
           if (timer == null) {
             widget.onTap?.call();
-            timer = new Timer(durationTime, () {
+            timer = Timer(durationTime, () {
               timer = null;
             });
           }

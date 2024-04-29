@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:gsy_flutter_demo/widget/list_anim/header_appbar.dart';
 
 class ListAnimDemoPage extends StatefulWidget {
+  const ListAnimDemoPage({super.key});
+
   @override
   _ListAnimDemoPageState createState() => _ListAnimDemoPageState();
 }
@@ -58,30 +60,30 @@ class _ListAnimDemoPageState extends State<ListAnimDemoPage> {
     return Container(
       alignment: Alignment.topCenter,
       height: headerHeight,
-      child: new Stack(
+      child: Stack(
         children: <Widget>[
-          new Image.asset(
+          Image.asset(
             "static/gsy_cat.png",
             fit: BoxFit.cover,
             width: MediaQuery.sizeOf(context).width,
             height: headerHeight - headerRectMargin,
           ),
-          new Align(
+          Align(
             alignment: Alignment.bottomCenter,
             child: Container(
               height: headerRectHeight,
               color: Colors.amber,
               margin: EdgeInsets.only(left: marginEdge, right: marginEdge),
-              padding: EdgeInsets.symmetric(horizontal: 10),
-              child: new Row(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Row(
                 mainAxisSize: MainAxisSize.max,
                 children: <Widget>[
-                  new Text(
+                  const Text(
                     "StickText",
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
-                  new Expanded(child: new Container()),
-                  new Icon(
+                  Expanded(child: Container()),
+                  const Icon(
                     Icons.ac_unit,
                     color: Colors.white,
                   )
@@ -113,7 +115,7 @@ class _ListAnimDemoPageState extends State<ListAnimDemoPage> {
 
   @override
   Widget build(BuildContext context) {
-    return new Stack(
+    return Stack(
       children: <Widget>[
         Scaffold(
           ///去除 SafeArea 的 padding
@@ -123,30 +125,28 @@ class _ListAnimDemoPageState extends State<ListAnimDemoPage> {
             removeTop: true,
             removeRight: true,
             removeBottom: true,
-            child: Container(
-              child: new NotificationListener(
-                onNotification: (ScrollNotification notification) {
-                  if (notification is ScrollUpdateNotification) {
-                    _handleScrollUpdateNotification(notification);
+            child: NotificationListener(
+              onNotification: (ScrollNotification notification) {
+                if (notification is ScrollUpdateNotification) {
+                  _handleScrollUpdateNotification(notification);
+                }
+                return false;
+              },
+              child: ListView.builder(
+                physics: const AlwaysScrollableScrollPhysics(),
+                itemBuilder: (context, index) {
+                  if (index == 0) {
+                    return _buildHeader();
                   }
-                  return false;
+                  return Card(
+                    child: Container(
+                      height: 60,
+                      alignment: Alignment.centerLeft,
+                      child: Text("Item ${[index]} FFFFF"),
+                    ),
+                  );
                 },
-                child: new ListView.builder(
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  itemBuilder: (context, index) {
-                    if (index == 0) {
-                      return _buildHeader();
-                    }
-                    return Card(
-                      child: new Container(
-                        height: 60,
-                        alignment: Alignment.centerLeft,
-                        child: new Text("Item ${[index]} FFFFF"),
-                      ),
-                    );
-                  },
-                  itemCount: 100,
-                ),
+                itemCount: 100,
               ),
             ),
           ),

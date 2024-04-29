@@ -10,6 +10,8 @@ import 'drop_select_list_menu.dart';
 import 'drop_select_menu.dart';
 
 class DropSelectDemoPage extends StatefulWidget {
+  const DropSelectDemoPage({super.key});
+
   @override
   _DropSelectDemoPageState createState() => _DropSelectDemoPageState();
 }
@@ -26,7 +28,7 @@ class _DropSelectDemoPageState extends State<DropSelectDemoPage> {
   }
 
   DropSelectHeader renderDropSelectHeader() {
-    return new DropSelectHeader(
+    return DropSelectHeader(
       titles: [selectChildGrid[0], selectExpand[0], selectNormal[0]],
       showTitle: (_, index) {
         switch (index) {
@@ -43,28 +45,28 @@ class _DropSelectDemoPageState extends State<DropSelectDemoPage> {
   }
 
   DropSelectMenu renderDropSelectMenu() {
-    return new DropSelectMenu(
+    return DropSelectMenu(
         maxMenuHeight: MediaQuery.sizeOf(context).height,
         menus: [
-          new DropSelectMenuBuilder(
+          DropSelectMenuBuilder(
               builder: (BuildContext context) {
-                return new DropSelectExpandedListMenu(
+                return DropSelectExpandedListMenu(
                   data: selectExpand,
                   itemBuilder: renderSelectItemGrid,
                 );
               },
               height: MediaQuery.sizeOf(context).height),
-          new DropSelectMenuBuilder(
+          DropSelectMenuBuilder(
               builder: (BuildContext context) {
-                return new DropSelectGridListMenu(
+                return DropSelectGridListMenu(
                   data: selectChildGrid,
                   itemBuilder: renderSelectItemGrid,
                 );
               },
               height: MediaQuery.sizeOf(context).height),
-          new DropSelectMenuBuilder(
+          DropSelectMenuBuilder(
               builder: (BuildContext context) {
-                return new DropSelectListMenu(
+                return DropSelectListMenu(
                   data: selectNormal,
                   singleSelected: true,
                   itemBuilder: renderSelectItem,
@@ -75,24 +77,24 @@ class _DropSelectDemoPageState extends State<DropSelectDemoPage> {
   }
 
   Widget renderSelectItem(BuildContext context, DropSelectObject data) {
-    return new Padding(
-        padding: new EdgeInsets.all(10.0),
-        child: new Row(
+    return Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Row(
           children: <Widget>[
-            new Text(
+            Text(
               data.title!,
               style: data.selected
-                  ? new TextStyle(
+                  ? TextStyle(
                       fontSize: 14.0,
                       color: Theme.of(context).primaryColor,
                       fontWeight: FontWeight.w400)
-                  : new TextStyle(fontSize: 14.0),
+                  : const TextStyle(fontSize: 14.0),
             ),
-            new Expanded(
-                child: new Align(
+            Expanded(
+                child: Align(
               alignment: Alignment.centerRight,
               child: data.selected
-                  ? new Icon(
+                  ? Icon(
                       Icons.check_circle,
                       color: Theme.of(context).primaryColor,
                     )
@@ -103,9 +105,9 @@ class _DropSelectDemoPageState extends State<DropSelectDemoPage> {
   }
 
   Widget renderSelectItemGrid(BuildContext context, DropSelectObject data) {
-    return new Container(
-      padding: new EdgeInsets.all(10.0),
-      child: new Container(
+    return Container(
+      padding: const EdgeInsets.all(10.0),
+      child: Container(
         alignment: Alignment.center,
         decoration: BoxDecoration(
           border: Border.all(
@@ -113,14 +115,14 @@ class _DropSelectDemoPageState extends State<DropSelectDemoPage> {
                   data.selected ? Theme.of(context).primaryColor : Colors.grey,
               width: 1.0),
         ),
-        child: new Text(
+        child: Text(
           data.title!,
           style: data.selected
-              ? new TextStyle(
+              ? TextStyle(
                   fontSize: 14.0,
                   color: Theme.of(context).primaryColor,
                   fontWeight: FontWeight.w400)
-              : new TextStyle(fontSize: 14.0),
+              : const TextStyle(fontSize: 14.0),
         ),
       ),
     );
@@ -130,35 +132,33 @@ class _DropSelectDemoPageState extends State<DropSelectDemoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: new Text("DropSelectDemoPage"),
+        title: const Text("DropSelectDemoPage"),
       ),
-      body: Container(
-        child: new DropSelectMenuContainer(
-          child: new Column(
-            children: <Widget>[
-              renderDropSelectHeader(),
-              new Expanded(
-                child: new Stack(
-                  children: <Widget>[
-                    new ListView(
-                      children: List.generate(100, (index) {
-                        return Container(
-                          height: 40,
-                          margin: EdgeInsets.only(left: 10),
-                          child: new Text("Text $index"),
-                        );
-                      }),
-                    ),
-                    new Column(
-                      children: <Widget>[
-                        new Expanded(child: renderDropSelectMenu()),
-                      ],
-                    )
-                  ],
-                ),
-              )
-            ],
-          ),
+      body: DropSelectMenuContainer(
+        child: Column(
+          children: <Widget>[
+            renderDropSelectHeader(),
+            Expanded(
+              child: Stack(
+                children: <Widget>[
+                  ListView(
+                    children: List.generate(100, (index) {
+                      return Container(
+                        height: 40,
+                        margin: const EdgeInsets.only(left: 10),
+                        child: Text("Text $index"),
+                      );
+                    }),
+                  ),
+                  Column(
+                    children: <Widget>[
+                      Expanded(child: renderDropSelectMenu()),
+                    ],
+                  )
+                ],
+              ),
+            )
+          ],
         ),
       ),
     );

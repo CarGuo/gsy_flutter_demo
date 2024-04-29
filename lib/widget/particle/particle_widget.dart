@@ -9,7 +9,7 @@ import 'package:supercharged/supercharged.dart';
 class ParticlesWidget extends StatefulWidget {
   final int numberOfParticles;
 
-  ParticlesWidget(this.numberOfParticles);
+  const ParticlesWidget(this.numberOfParticles, {super.key});
 
   @override
   _ParticlesWidgetState createState() => _ParticlesWidgetState();
@@ -29,7 +29,7 @@ class _ParticlesWidgetState extends State<ParticlesWidget> {
   @override
   Widget build(BuildContext context) {
     return LoopAnimationBuilder(
-      duration: Duration(seconds: 1),
+      duration: const Duration(seconds: 1),
       tween: ConstantTween(1),
       builder: (context, child, dynamic _) {
         _simulateParticles();
@@ -41,8 +41,9 @@ class _ParticlesWidgetState extends State<ParticlesWidget> {
   }
 
   _simulateParticles() {
-    particles
-        .forEach((particle) => particle.checkIfParticleNeedsToBeRestarted());
+    for (var particle in particles) {
+      particle.checkIfParticleNeedsToBeRestarted();
+    }
   }
 
 }

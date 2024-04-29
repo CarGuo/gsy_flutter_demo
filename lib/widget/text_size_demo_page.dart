@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class TextSizeDemoPage extends StatefulWidget {
+  const TextSizeDemoPage({super.key});
+
   @override
   _TextSizeDemoPageState createState() => _TextSizeDemoPageState();
 }
@@ -22,28 +24,28 @@ class _TextSizeDemoPageState extends State<TextSizeDemoPage> {
             .copyWith(textScaler: textScaler),
         child: Scaffold(
           appBar: AppBar(
-            title: new Text("TextLineHeightDemoPage"),
+            title: const Text("TextLineHeightDemoPage"),
           ),
-          body: new Stack(
+          body: Stack(
             children: <Widget>[
               Container(
                 color: Colors.blueGrey,
-                margin: EdgeInsets.all(20),
+                margin: const EdgeInsets.all(20),
 
                 ///利用 Transform 偏移将对应权重部分位置
-                child: new Text(
+                child: const Text(
                   textContent,
                   style: TextStyle(color: Colors.black),
                 ),
               ),
-              new Align(
+              Align(
                 alignment: Alignment.bottomCenter,
-                child: new Padding(
-                  padding: EdgeInsets.only(bottom: 50),
-                  child: new Row(
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 50),
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      new TextButton(
+                      TextButton(
                         onPressed: () {
                           if (scale > 1) {
                             setState(() {
@@ -54,12 +56,12 @@ class _TextSizeDemoPageState extends State<TextSizeDemoPage> {
                         },
                         style: TextButton.styleFrom(
                             backgroundColor: Colors.redAccent),
-                        child: new Text("-"),
+                        child: const Text("-"),
                       ),
-                      new SizedBox(
+                      const SizedBox(
                         width: 10,
                       ),
-                      new TextButton(
+                      TextButton(
                         onPressed: () {
                           setState(() {
                             textScaler.scale(scale + 1);
@@ -68,7 +70,7 @@ class _TextSizeDemoPageState extends State<TextSizeDemoPage> {
                         },
                         style: TextButton.styleFrom(
                             backgroundColor: Colors.greenAccent),
-                        child: new Text("+"),
+                        child: const Text("+"),
                       )
                     ],
                   ),

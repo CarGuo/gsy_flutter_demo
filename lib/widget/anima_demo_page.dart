@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class AnimaDemoPage extends StatefulWidget {
+  const AnimaDemoPage({super.key});
+
   @override
   _AnimaDemoPageState createState() => _AnimaDemoPageState();
 }
@@ -17,7 +19,7 @@ class _AnimaDemoPageState extends State<AnimaDemoPage>
   void initState() {
     super.initState();
     controller1 =
-        new AnimationController(vsync: this, duration: Duration(seconds: 3));
+        AnimationController(vsync: this, duration: const Duration(seconds: 3));
 
     animation1 = Tween(begin: 0.0, end: 200.0).animate(controller1)
       ..addListener(() {
@@ -39,22 +41,20 @@ class _AnimaDemoPageState extends State<AnimaDemoPage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: new Text("AnimaDemoPage"),
+        title: const Text("AnimaDemoPage"),
       ),
 
       ///用封装好的 Transition 做动画
-      body: new RotationTransition(
+      body: RotationTransition(
         turns: animation2 as Animation<double>,
-        child: new Container(
-          child: Center(
-            child: new Container(
-              height: 200,
-              width: 200,
-              color: Colors.greenAccent,
-              child: CustomPaint(
-                ///直接使用值做动画
-                foregroundPainter: _AnimationPainter(animation1),
-              ),
+        child: Center(
+          child: Container(
+            height: 200,
+            width: 200,
+            color: Colors.greenAccent,
+            child: CustomPaint(
+              ///直接使用值做动画
+              foregroundPainter: _AnimationPainter(animation1),
             ),
           ),
         ),
@@ -64,7 +64,7 @@ class _AnimaDemoPageState extends State<AnimaDemoPage>
 }
 
 class _AnimationPainter extends CustomPainter {
-  Paint _paint = new Paint();
+  final Paint _paint = Paint();
 
   Animation? animation;
 
@@ -76,7 +76,7 @@ class _AnimationPainter extends CustomPainter {
       ..color = Colors.redAccent
       ..strokeWidth = 4
       ..style = PaintingStyle.stroke;
-    canvas.drawCircle(Offset(100, 100), animation!.value * 1.5, _paint);
+    canvas.drawCircle(const Offset(100, 100), animation!.value * 1.5, _paint);
   }
 
   @override

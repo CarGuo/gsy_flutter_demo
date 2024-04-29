@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class RouteDemoPage extends StatefulWidget {
-  const RouteDemoPage({Key? key}) : super(key: key);
+  const RouteDemoPage({super.key});
 
   @override
   State<RouteDemoPage> createState() => _RouteDemoPageState();
@@ -12,7 +12,7 @@ class _RouteDemoPageState extends State<RouteDemoPage> {
   final GlobalKey<NavigatorState> _navigator = GlobalKey();
 
   getRouter(index) {
-    return new CupertinoPageRoute(
+    return CupertinoPageRoute(
         builder: (context) {
           return RoutePage(index);
         },
@@ -24,56 +24,54 @@ class _RouteDemoPageState extends State<RouteDemoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("RouteDemoPage"),
+        title: const Text("RouteDemoPage"),
       ),
-      body: Container(
-        child: Row(
-          children: [
-            Expanded(
-              child: Container(
-                color: Colors.blue,
-                child: new Column(
-                  children: List.generate(10, (index) {
-                    return InkWell(
-                        onTap: () {
-                          _navigator.currentState!.push(getRouter(index));
-                        },
-                        child: Container(
-                            height: 30,
-                            margin: EdgeInsets.symmetric(vertical: 10),
-                            color: Colors.amberAccent,
-                            alignment: Alignment.center,
-                            child: Text("click  $index")));
-                  }),
-                ),
+      body: Row(
+        children: [
+          Expanded(
+            flex: 1,
+            child: Container(
+              color: Colors.blue,
+              child: Column(
+                children: List.generate(10, (index) {
+                  return InkWell(
+                      onTap: () {
+                        _navigator.currentState!.push(getRouter(index));
+                      },
+                      child: Container(
+                          height: 30,
+                          margin: const EdgeInsets.symmetric(vertical: 10),
+                          color: Colors.amberAccent,
+                          alignment: Alignment.center,
+                          child: Text("click  $index")));
+                }),
               ),
-              flex: 1,
             ),
-            new Divider(
+          ),
+          const Divider(
+            color: Colors.grey,
+          ),
+          const SizedBox(
+            width: 30,
+          ),
+          Expanded(
+            flex: 3,
+            child: Container(
               color: Colors.grey,
-            ),
-            new SizedBox(
-              width: 30,
-            ),
-            Expanded(
-              child: Container(
-                color: Colors.grey,
-                child: Navigator(
-                  restorationScopeId: 'nav2',
-                  key: _navigator,
-                  onGenerateInitialRoutes:
-                      (NavigatorState navigator, String initialRoute) {
-                    return [
-                      getRouter(0),
-                    ];
-                  },
-                  reportsRouteUpdateToEngine: true,
-                ),
+              child: Navigator(
+                restorationScopeId: 'nav2',
+                key: _navigator,
+                onGenerateInitialRoutes:
+                    (NavigatorState navigator, String initialRoute) {
+                  return [
+                    getRouter(0),
+                  ];
+                },
+                reportsRouteUpdateToEngine: true,
               ),
-              flex: 3,
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -82,7 +80,7 @@ class _RouteDemoPageState extends State<RouteDemoPage> {
 class RoutePage extends StatefulWidget {
   final int index;
 
-  const RoutePage(this.index);
+  const RoutePage(this.index, {super.key});
 
   @override
   State<RoutePage> createState() => _RoutePageState();
@@ -103,9 +101,9 @@ class _RoutePageState extends State<RoutePage> {
           height: 200,
           alignment: Alignment.center,
           color: Colors.amber,
-          child: new Text(
+          child: Text(
             "${widget.index}",
-            style: TextStyle(fontSize: 100, color: Colors.red),
+            style: const TextStyle(fontSize: 100, color: Colors.red),
           ),
         ),
       ),

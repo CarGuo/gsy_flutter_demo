@@ -6,34 +6,36 @@ import 'package:supercharged/supercharged.dart';
 enum _ColorTween { color1, color2 }
 
 class AnimBgDemoPage extends StatelessWidget {
+  const AnimBgDemoPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: new Text("AnimBgDemoPage"),
+        title: const Text("AnimBgDemoPage"),
       ),
       body: Stack(
         children: <Widget>[
-          Positioned.fill(child: AnimatedBackground()),
-          onBottom(AnimatedWave(
+          const Positioned.fill(child: AnimatedBackground()),
+          onBottom(const AnimatedWave(
             height: 180,
             speed: 1.0,
           )),
-          onBottom(AnimatedWave(
+          onBottom(const AnimatedWave(
             height: 120,
             speed: 0.9,
             offset: pi,
           )),
-          onBottom(AnimatedWave(
+          onBottom(const AnimatedWave(
             height: 220,
             speed: 1.2,
             offset: pi / 2,
           )),
-          Positioned.fill(
-              child: new Center(
-            child: new Text(
+          const Positioned.fill(
+              child: Center(
+            child: Text(
               "GSY Flutter Demo",
-              style: new TextStyle(
+              style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
                   color: Colors.white),
@@ -57,12 +59,12 @@ class AnimatedWave extends StatelessWidget {
   final double? speed;
   final double offset;
 
-  AnimatedWave({this.height, this.speed, this.offset = 0.0});
+  const AnimatedWave({super.key, this.height, this.speed, this.offset = 0.0});
 
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
-      return Container(
+      return SizedBox(
         height: height,
         width: constraints.biggest.width,
         child: LoopAnimationBuilder<double>(
@@ -112,17 +114,19 @@ class CurvePainter extends CustomPainter {
 }
 
 class AnimatedBackground extends StatelessWidget {
+  const AnimatedBackground({super.key});
+
   @override
   Widget build(BuildContext context) {
     final tween = MovieTween()
       ..tween(
         _ColorTween.color1,
-        Color(0xffD38312).tweenTo(Colors.lightBlue.shade900),
+        const Color(0xffD38312).tweenTo(Colors.lightBlue.shade900),
         duration: 3.seconds,
       )
       ..tween(
         _ColorTween.color2,
-        Color(0xffA83279).tweenTo(Colors.blue.shade600),
+        const Color(0xffA83279).tweenTo(Colors.blue.shade600),
         duration: 3.seconds,
       );
 

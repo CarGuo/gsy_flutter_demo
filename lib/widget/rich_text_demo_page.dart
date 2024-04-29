@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:gsy_flutter_demo/widget/rich/real_rich_text.dart';
 
 class RichTextDemoPage extends StatefulWidget {
+  const RichTextDemoPage({super.key});
+
   @override
   _RichTextDemoState createState() => _RichTextDemoState();
 }
@@ -12,37 +14,37 @@ class _RichTextDemoState extends State<RichTextDemoPage> {
   Widget build(BuildContext mainContext) {
     return Scaffold(
       appBar: AppBar(
-        title: new Text("RichTextDemoPage"),
+        title: const Text("RichTextDemoPage"),
       ),
-      body: new Container(
-        margin: EdgeInsets.all(10),
+      body: Container(
+        margin: const EdgeInsets.all(10),
         child: Builder(builder: (context) {
           return Center(
             child: RealRichText([
               TextSpan(
                 text: "A Text Link",
-                style: TextStyle(color: Colors.red, fontSize: 14),
+                style: const TextStyle(color: Colors.red, fontSize: 14),
                 recognizer: TapGestureRecognizer()
                   ..onTap = () {
                     show(context, "Link Clicked.");
                   },
               ),
               ImageSpan(
-                AssetImage("static/gsy_cat.png"),
+                const AssetImage("static/gsy_cat.png"),
                 imageWidth: 24,
                 imageHeight: 24,
               ),
-              ImageSpan(AssetImage("static/gsy_cat.png"),
+              ImageSpan(const AssetImage("static/gsy_cat.png"),
                   imageWidth: 24,
                   imageHeight: 24,
-                  margin: EdgeInsets.symmetric(horizontal: 10)),
-              TextSpan(
+                  margin: const EdgeInsets.symmetric(horizontal: 10)),
+              const TextSpan(
                 text: "哈哈哈",
                 style: TextStyle(color: Colors.yellow, fontSize: 14),
               ),
               TextSpan(
                 text: "@Somebody",
-                style: TextStyle(
+                style: const TextStyle(
                     color: Colors.black,
                     fontSize: 14,
                     fontWeight: FontWeight.bold),
@@ -53,21 +55,21 @@ class _RichTextDemoState extends State<RichTextDemoPage> {
               ),
               TextSpan(
                 text: " #RealRichText# ",
-                style: TextStyle(color: Colors.blue, fontSize: 14),
+                style: const TextStyle(color: Colors.blue, fontSize: 14),
                 recognizer: TapGestureRecognizer()
                   ..onTap = () {
                     show(context, "Link Clicked.");
                   },
               ),
-              TextSpan(
+              const TextSpan(
                 text: "showing a bigger image",
                 style: TextStyle(color: Colors.black, fontSize: 14),
               ),
-              ImageSpan(AssetImage("static/gsy_cat.png"),
+              ImageSpan(const AssetImage("static/gsy_cat.png"),
                   imageWidth: 24,
                   imageHeight: 24,
-                  margin: EdgeInsets.symmetric(horizontal: 5)),
-              TextSpan(
+                  margin: const EdgeInsets.symmetric(horizontal: 5)),
+              const TextSpan(
                 text: "and seems working perfect……",
                 style: TextStyle(color: Colors.black, fontSize: 14),
               ),
@@ -84,7 +86,7 @@ class _RichTextDemoState extends State<RichTextDemoPage> {
       action: SnackBarAction(
         label: 'ACTION',
         onPressed: () {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             content: Text('You pressed snackbar\'s action.'),
           ));
         },

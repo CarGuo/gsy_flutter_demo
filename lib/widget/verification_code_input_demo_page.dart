@@ -5,33 +5,32 @@ import 'package:flutter/services.dart';
 
 ///验证码输入框
 class VerificationCodeInputDemoPage extends StatelessWidget {
+  const VerificationCodeInputDemoPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: new Text("VerificationCodeInputDemoPage"),
+        title: const Text("VerificationCodeInputDemoPage"),
       ),
-      body: new GestureDetector(
+      body: GestureDetector(
         behavior: HitTestBehavior.translucent,
         onTap: () {
-          FocusScope.of(context).requestFocus(new FocusNode());
+          FocusScope.of(context).requestFocus(FocusNode());
         },
-        child: Container(
-          child: new Center(
-            child: VerCodeInput(
-              ctx: context,
-              length: 6,
-              keyboardType: TextInputType.number,
-              builder: staticRectangle(context),
-              onChanged: (value) {
-                print(value);
-              },
+        child: Center(
+          child: VerCodeInput(
+            ctx: context,
+            length: 6,
+            keyboardType: TextInputType.number,
+            builder: staticRectangle(context),
+            onChanged: (value) {
+            },
 
-              ///输入完成时
-              onFilled: (value) {
-                //print('Your input is $value.');
-              },
-            ),
+            ///输入完成时
+            onFilled: (value) {
+              //print('Your input is $value.');
+            },
           ),
         ),
       ),
@@ -64,7 +63,7 @@ typedef CodeInputBuilder = Widget Function(bool hasFocus, String char);
 
 class VerCodeInput extends StatefulWidget {
   const VerCodeInput._({
-    Key? key,
+    super.key,
     required this.length,
     required this.keyboardType,
     required this.inputFormatters,
@@ -72,7 +71,7 @@ class VerCodeInput extends StatefulWidget {
     required this.ctx,
     this.onChanged,
     this.onFilled,
-  }) : super(key: key);
+  });
 
   factory VerCodeInput({
     Key? key,
@@ -190,7 +189,7 @@ class _VerCodeInputState extends State<VerCodeInput> {
     return Stack(children: <Widget>[
       // This is the actual EditableText wrapped in a Container with zero
       // dimensions.
-      Container(
+      SizedBox(
           width: 0.0,
           height: 0.0,
           child: EditableText(
@@ -199,7 +198,7 @@ class _VerCodeInputState extends State<VerCodeInput> {
             inputFormatters: widget.inputFormatters,
             keyboardType: widget.keyboardType,
             backgroundCursorColor: Colors.black,
-            style: TextStyle(),
+            style: const TextStyle(),
             // Doesn't really matter.
             cursorColor: Colors.black,
             // Doesn't really matter.
@@ -267,7 +266,7 @@ abstract class CodeInputBuilders {
         height: totalSize.height,
         alignment: Alignment.center,
         child: AnimatedContainer(
-          duration: Duration(milliseconds: 100),
+          duration: const Duration(milliseconds: 100),
           decoration: char.isEmpty ? emptyDecoration : filledDecoration,
           width: char.isEmpty ? emptySize.width : filledSize.width,
           height: char.isEmpty ? emptySize.height : filledSize.height,
@@ -339,7 +338,7 @@ abstract class CodeInputBuilders {
         filledRadius: filledRadius,
         border: Border.all(color: Colors.white, width: 2.0),
         color: Colors.white10,
-        textStyle: TextStyle(
+        textStyle: const TextStyle(
             color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.bold));
   }
 
@@ -355,7 +354,7 @@ abstract class CodeInputBuilders {
         filledRadius: filledRadius,
         border: Border.all(color: Colors.black, width: 2.0),
         color: Colors.black12,
-        textStyle: TextStyle(
+        textStyle: const TextStyle(
             color: Colors.black, fontSize: 20.0, fontWeight: FontWeight.bold));
   }
 
@@ -373,7 +372,7 @@ abstract class CodeInputBuilders {
         borderRadius: borderRadius,
         border: Border.all(color: Colors.white, width: 2.0),
         color: Colors.white10,
-        textStyle: TextStyle(
+        textStyle: const TextStyle(
             color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.bold));
   }
 
@@ -390,7 +389,7 @@ abstract class CodeInputBuilders {
         borderRadius: borderRadius,
         border: Border.all(color: Colors.white, width: 1.0),
         color: Colors.transparent,
-        textStyle: TextStyle(
+        textStyle: const TextStyle(
             color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.bold));
   }
 
@@ -408,7 +407,7 @@ abstract class CodeInputBuilders {
         borderRadius: borderRadius,
         border: Border.all(color: Colors.black, width: 2.0),
         color: Colors.black12,
-        textStyle: TextStyle(
+        textStyle: const TextStyle(
             color: Colors.black, fontSize: 20.0, fontWeight: FontWeight.bold));
   }
 }

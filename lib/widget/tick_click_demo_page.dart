@@ -5,6 +5,8 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 class TickClickDemoPage extends StatefulWidget {
+  const TickClickDemoPage({super.key});
+
   @override
   _TickClickPageState createState() => _TickClickPageState();
 }
@@ -21,7 +23,7 @@ class _TickClickPageState extends State<TickClickDemoPage>
   void initState() {
     super.initState();
     controller =
-        new AnimationController(vsync: this, duration: Duration(seconds: 59));
+        AnimationController(vsync: this, duration: const Duration(seconds: 59));
     animation = Tween(begin: 60.0, end: 1.0).animate(controller)
       ..addListener(() {
         if (animation!.value.toInt() != value) {
@@ -43,20 +45,18 @@ class _TickClickPageState extends State<TickClickDemoPage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: new Text("TickClickDemoPage"),
+        title: const Text("TickClickDemoPage"),
       ),
 
       ///用封装好的 Transition 做动画
-      body: new Container(
-        child: Center(
-          child: new Container(
-            height: MediaQuery.sizeOf(context).width,
-            width: MediaQuery.sizeOf(context).width,
-            color: Colors.greenAccent,
-            child: CustomPaint(
-              ///直接使用值做动画
-              foregroundPainter: _ClickAnimationPainter(animation),
-            ),
+      body: Center(
+        child: Container(
+          height: MediaQuery.sizeOf(context).width,
+          width: MediaQuery.sizeOf(context).width,
+          color: Colors.greenAccent,
+          child: CustomPaint(
+            ///直接使用值做动画
+            foregroundPainter: _ClickAnimationPainter(animation),
           ),
         ),
       ),
@@ -105,6 +105,7 @@ class _ClickAnimationPainter extends CustomPainter {
       if (Platform.isAndroid == true || Platform.isIOS == true) {
         canvas.drawColor(Colors.black, BlendMode.clear);
       }
+    // ignore: empty_catches
     } catch (e) {}
     canvas.save();
     canvas.translate(paintWidth / 2, paintHeight / 2);
@@ -163,7 +164,7 @@ class _ClickAnimationPainter extends CustomPainter {
     String minute = ((dateTime.minute) < 10)
         ? "0${(dateTime.minute)}"
         : dateTime.minute.toString();
-    drawText(canvas, "$hour:$minute", Color(0xFFFFFFFF), textSize,
+    drawText(canvas, "$hour:$minute", const Color(0xFFFFFFFF), textSize,
         Offset(-textSize / 2, -textSize / 3),
         fontSize: hourRadius * 0.4);
 
@@ -173,7 +174,7 @@ class _ClickAnimationPainter extends CustomPainter {
         : (dateTime.month + 1).toString();
     String day = dateTime.day.toString();
     String dayOfWeek = dateTime.weekday.toString();
-    drawText(canvas, "$month.$day 星期$dayOfWeek", Color(0xFFFFFFFF), textSize,
+    drawText(canvas, "$month.$day 星期$dayOfWeek", const Color(0xFFFFFFFF), textSize,
         Offset(-textSize / 2, 20),
         fontSize: hourRadius * 0.16);
   }

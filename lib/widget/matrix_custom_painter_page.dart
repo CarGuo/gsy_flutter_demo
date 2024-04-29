@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:matrix_gesture_detector/matrix_gesture_detector.dart';
 
 class MatrixCustomPainterDemo extends StatefulWidget {
+  const MatrixCustomPainterDemo({super.key});
+
   @override
   _MatrixCustomPainterDemoState createState() => _MatrixCustomPainterDemoState();
 }
@@ -22,7 +24,7 @@ class _MatrixCustomPainterDemoState extends State<MatrixCustomPainterDemo> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('MatrixCustomPainterDemo Demo'),
+        title: const Text('MatrixCustomPainterDemo Demo'),
       ),
       body: MatrixGestureDetector(
         onMatrixUpdate: (m, tm, sm, rm) => notifier!.value = m,
@@ -77,7 +79,7 @@ class TestCustomPainter extends CustomPainter {
       for (int i = 0; i < 3; i++) {
         path.addRRect(rr.shift(offset * i.toDouble()));
       }
-      backgroundPaint.shader = LinearGradient(
+      backgroundPaint.shader = const LinearGradient(
         colors: [
           Color(0xff000044),
           Color(0xff000022),
@@ -90,10 +92,10 @@ class TestCustomPainter extends CustomPainter {
 
     canvas.drawPaint(backgroundPaint);
 
-    shapesPaint.color = Color(0xff880000);
+    shapesPaint.color = const Color(0xff880000);
     canvas.drawPath(path, shapesPaint);
 
-    shapesPaint.color = Color(0xffbb6600);
+    shapesPaint.color = const Color(0xffbb6600);
     Matrix4 inverted = Matrix4.zero();
     inverted.copyInverse(notifier!.value);
     canvas.save();
@@ -101,7 +103,7 @@ class TestCustomPainter extends CustomPainter {
     canvas.drawPath(path, shapesPaint);
     canvas.restore();
 
-    shapesPaint.color = Color(0xff008800);
+    shapesPaint.color = const Color(0xff008800);
     canvas.drawPath(path.transform(notifier!.value.storage), shapesPaint);
 
     paragraph.layout(ui.ParagraphConstraints(width: size.width - 64));

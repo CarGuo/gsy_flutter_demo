@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 ///聊天列表，添加旧数据和新数据的时候不会导致列表跳动，首尾添加数据不会抖动
 class ChatListScrollDemoPage extends StatefulWidget {
-  const ChatListScrollDemoPage({Key? key}) : super(key: key);
+  const ChatListScrollDemoPage({super.key});
 
   @override
   _ChatListScrollDemoPageState createState() => _ChatListScrollDemoPageState();
@@ -10,9 +10,9 @@ class ChatListScrollDemoPage extends StatefulWidget {
 
 class _ChatListScrollDemoPageState extends State<ChatListScrollDemoPage> {
   List<ItemData> loadMoreData = [
-    new ItemData(txt: "aaa11", type: "Right"),
-    new ItemData(txt: "aaa22", type: "Right"),
-    new ItemData(txt: "aaa33", type: "Right")
+    ItemData(txt: "aaa11", type: "Right"),
+    ItemData(txt: "aaa22", type: "Right"),
+    ItemData(txt: "aaa33", type: "Right")
   ];
   List<ItemData> newData = [];
 
@@ -26,10 +26,10 @@ class _ChatListScrollDemoPageState extends State<ChatListScrollDemoPage> {
         borderRadius: BorderRadius.circular(4),
         color: Colors.red,
       ),
-      margin: EdgeInsets.only(left: 50, right: 10, top: 5, bottom: 5),
-      padding: EdgeInsets.all(10),
+      margin: const EdgeInsets.only(left: 50, right: 10, top: 5, bottom: 5),
+      padding: const EdgeInsets.all(10),
       alignment: Alignment.centerRight,
-      child: new Text(
+      child: Text(
         data.txt,
         maxLines: 10,
       ),
@@ -43,10 +43,10 @@ class _ChatListScrollDemoPageState extends State<ChatListScrollDemoPage> {
         borderRadius: BorderRadius.circular(4),
         color: Colors.green,
       ),
-      margin: EdgeInsets.only(right: 50, left: 10, top: 5, bottom: 5),
-      padding: EdgeInsets.all(10),
+      margin: const EdgeInsets.only(right: 50, left: 10, top: 5, bottom: 5),
+      padding: const EdgeInsets.all(10),
       alignment: Alignment.centerLeft,
-      child: new Text(
+      child: Text(
         data.txt,
         maxLines: 10,
       ),
@@ -61,19 +61,19 @@ class _ChatListScrollDemoPageState extends State<ChatListScrollDemoPage> {
           newData.add(
               ItemData(txt: "#### new Send ${newData.length}", type: "Right"));
           setState(() {});
-          Future.delayed(Duration(milliseconds: 1000), () {
+          Future.delayed(const Duration(milliseconds: 1000), () {
             scroller.jumpTo(scroller.position.minScrollExtent);
           });
         },
-        child: Text(
+        child: const Text(
           "Send",
           style: TextStyle(color: Colors.yellow),
         ),
       ),
       appBar: AppBar(
-        title: new Text("ControllerDemoPage"),
+        title: const Text("ControllerDemoPage"),
         actions: [
-          new TextButton.icon(
+          TextButton.icon(
               onPressed: () {
                 for (int i = 0; i < 20; i++) {
                   loadMoreData.add(ItemData(
@@ -81,15 +81,15 @@ class _ChatListScrollDemoPageState extends State<ChatListScrollDemoPage> {
                 }
                 setState(() {});
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.add,
                 color: Colors.red,
               ),
-              label: Text(
+              label: const Text(
                 "add old",
                 style: TextStyle(color: Colors.red),
               )),
-          new TextButton.icon(
+          TextButton.icon(
               onPressed: () {
                 for (int i = 0; i < 20; i++) {
                   newData.add(
@@ -97,11 +97,11 @@ class _ChatListScrollDemoPageState extends State<ChatListScrollDemoPage> {
                 }
                 setState(() {});
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.add,
                 color: Colors.yellow,
               ),
-              label: Text(
+              label: const Text(
                 "add new",
                 style: TextStyle(color: Colors.yellow),
               )),
@@ -117,10 +117,11 @@ class _ChatListScrollDemoPageState extends State<ChatListScrollDemoPage> {
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
                 var item = newData[index];
-                if (item.type == "Right")
+                if (item.type == "Right") {
                   return renderRightItem(item);
-                else
+                } else {
                   return renderLeftItem(item);
+                }
               },
               childCount: newData.length,
             ),
@@ -133,10 +134,11 @@ class _ChatListScrollDemoPageState extends State<ChatListScrollDemoPage> {
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
                 var item = loadMoreData[index];
-                if (item.type == "Right")
+                if (item.type == "Right") {
                   return renderRightItem(item);
-                else
+                } else {
                   return renderLeftItem(item);
+                }
               },
               childCount: loadMoreData.length,
             ),

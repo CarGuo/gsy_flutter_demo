@@ -16,6 +16,8 @@ class BubbleDemoPage extends StatelessWidget {
   final GlobalKey button3Key = GlobalKey();
   final GlobalKey button4Key = GlobalKey();
 
+  BubbleDemoPage({super.key});
+
   getX(GlobalKey key) {
     RenderBox renderBox = key.currentContext!.findRenderObject() as RenderBox;
     double dx = renderBox.localToGlobal(Offset.zero).dx;
@@ -102,16 +104,16 @@ class BubbleDemoPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: new Text("BubbleDemoPage"),
+        title: const Text("BubbleDemoPage"),
       ),
       body: Container(
         width: MediaQuery.sizeOf(context).width,
         height: MediaQuery.sizeOf(context).height,
-        margin: EdgeInsets.all(15),
-        child: new Stack(
+        margin: const EdgeInsets.all(15),
+        child: Stack(
           key: contentKey,
           children: <Widget>[
-            new MaterialButton(
+            MaterialButton(
               key: button1Key,
               onPressed: () {
                 showDialog(
@@ -129,8 +131,9 @@ class BubbleDemoPage extends StatelessWidget {
               },
               color: Colors.blue,
             ),
-            new Positioned(
-                child: new MaterialButton(
+            Positioned(
+                left: MediaQuery.sizeOf(context).width / 2,
+                child: MaterialButton(
                   key: button2Key,
                   onPressed: () {
                     showDialog(
@@ -147,10 +150,11 @@ class BubbleDemoPage extends StatelessWidget {
                         });
                   },
                   color: Colors.greenAccent,
-                ),
-                left: MediaQuery.sizeOf(context).width / 2),
-            new Positioned(
-              child: new MaterialButton(
+                )),
+            Positioned(
+              left: MediaQuery.sizeOf(context).width / 5,
+              top: MediaQuery.sizeOf(context).height / 4 * 3,
+              child: MaterialButton(
                 key: button3Key,
                 onPressed: () {
                   showDialog(
@@ -168,11 +172,14 @@ class BubbleDemoPage extends StatelessWidget {
                 },
                 color: Colors.yellow,
               ),
-              left: MediaQuery.sizeOf(context).width / 5,
-              top: MediaQuery.sizeOf(context).height / 4 * 3,
             ),
-            new Positioned(
-              child: new MaterialButton(
+            Positioned(
+              left: MediaQuery.sizeOf(context).width / 2 -
+                  Theme.of(context).buttonTheme.minWidth / 2,
+              top: MediaQuery.sizeOf(context).height / 2 -
+                  MediaQuery.paddingOf(context).top -
+                  kToolbarHeight,
+              child: MaterialButton(
                 key: button4Key,
                 onPressed: () {
                   showDialog(
@@ -190,11 +197,6 @@ class BubbleDemoPage extends StatelessWidget {
                 },
                 color: Colors.redAccent,
               ),
-              left: MediaQuery.sizeOf(context).width / 2 -
-                  Theme.of(context).buttonTheme.minWidth / 2,
-              top: MediaQuery.sizeOf(context).height / 2 -
-                  MediaQuery.paddingOf(context).top -
-                  kToolbarHeight,
             ),
           ],
         ),
@@ -225,8 +227,8 @@ class BubbleDialog extends StatelessWidget {
 
   final VoidCallback? voidCallback;
 
-  BubbleDialog(this.text,
-      {this.width,
+  const BubbleDialog(this.text,
+      {super.key, this.width,
       this.height,
       this.radius = 4,
       this.arrowLocation = ArrowLocation.BOTTOM,
@@ -240,9 +242,9 @@ class BubbleDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
+    return Scaffold(
       backgroundColor: Colors.transparent,
-      body: new InkWell(
+      body: InkWell(
         splashColor: Colors.transparent,
         highlightColor: Colors.transparent,
         onTap: () {

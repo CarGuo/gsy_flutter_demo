@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -8,7 +9,7 @@ class StickRender extends RenderBox
         ContainerRenderObjectMixin<RenderBox, StickParentData>,
         RenderBoxContainerDefaultsMixin<RenderBox, StickParentData> {
   StickRender({required ScrollableState? scrollable}) {
-    this._scrollable = scrollable;
+    _scrollable = scrollable;
   }
 
   ScrollableState? _scrollable;
@@ -35,16 +36,18 @@ class StickRender extends RenderBox
     try {
       return localToGlobal(Offset.zero, ancestor: renderObject).dy;
     } catch (e) {
-      print(e);
+      if (kDebugMode) {
+        print(e);
+      }
     }
     return 0;
   }
 
   @override
-  void attach(_) {
+  void attach(owner) {
     ///设置监听
     _scrollable!.position.addListener(markNeedsLayout);
-    super.attach(_);
+    super.attach(owner);
   }
 
   @override
@@ -86,7 +89,7 @@ class StickRender extends RenderBox
   void setupParentData(RenderObject child) {
     super.setupParentData(child);
     if (child.parentData is! StickParentData) {
-      child.parentData = new StickParentData();
+      child.parentData = StickParentData();
     }
   }
 
@@ -107,11 +110,11 @@ class StickRender extends RenderBox
     ///对于当前布局，用内容作为宽高
     var width = content.size.width;
     var height = headerHeight + contentHeight;
-    size = new Size(width, height);
+    size = Size(width, height);
 
     ///内容的初始化位置
     (content.parentData as StickParentData).offset =
-    new Offset(0, headerHeight);
+    Offset(0, headerHeight);
 
     /// 计算出 header 需要的整体偏移量，用于反方向
     var headerOffset = height - headerHeight;
@@ -122,7 +125,7 @@ class StickRender extends RenderBox
     ///是滑动的多还是偏移量
     var realHeaderOffset = math.min(-scrollAbleDy, headerOffset);
     (header.parentData as StickParentData).offset =
-    new Offset(0, math.max(0, realHeaderOffset));
+    Offset(0, math.max(0, realHeaderOffset));
   }
 
   @override

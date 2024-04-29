@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 ///对应文章解析  https://juejin.cn/post/7124064789763981326
 class Card3DDemoPage extends StatefulWidget {
-  const Card3DDemoPage({Key? key}) : super(key: key);
+  const Card3DDemoPage({super.key});
 
   @override
   State<Card3DDemoPage> createState() => _Card3DDemoPageState();
@@ -43,7 +43,7 @@ class _Card3DDemoPageState extends State<Card3DDemoPage> {
 
   autoShow() {
     cancelShow();
-    timer = Timer.periodic(Duration(milliseconds: 50), (timer) {
+    timer = Timer.periodic(const Duration(milliseconds: 50), (timer) {
       touchX = touchX + 0.05;
       touchX = touchX % (2 * pi);
       touchY = 0;
@@ -61,10 +61,10 @@ class _Card3DDemoPageState extends State<Card3DDemoPage> {
       showIndex = 1;
     }
     return Scaffold(
-      appBar: AppBar(title: Text("Card3DDemoPage")),
+      appBar: AppBar(title: const Text("Card3DDemoPage")),
       body: Container(
         alignment: Alignment.center,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
               colors: [Colors.blueAccent, Colors.yellowAccent],
               begin: Alignment.topCenter,
@@ -122,8 +122,8 @@ class _Card3DDemoPageState extends State<Card3DDemoPage> {
                   child: Container(
                     width: cardWidth,
                     height: cardHeight,
-                    padding: EdgeInsets.all(20),
-                    decoration: BoxDecoration(
+                    padding: const EdgeInsets.all(20),
+                    decoration: const BoxDecoration(
                       image: DecorationImage(
                           image: AssetImage("static/card_down.png")),
                       boxShadow: [
@@ -142,8 +142,8 @@ class _Card3DDemoPageState extends State<Card3DDemoPage> {
                   child: Container(
                     width: cardWidth,
                     height: cardHeight,
-                    padding: EdgeInsets.all(20),
-                    decoration: BoxDecoration(
+                    padding: const EdgeInsets.all(20),
+                    decoration: const BoxDecoration(
                       image: DecorationImage(
                           image: AssetImage("static/card_up.png")),
                       boxShadow: [
@@ -157,15 +157,15 @@ class _Card3DDemoPageState extends State<Card3DDemoPage> {
                     ),
                     child: Column(
                       children: [
-                        new Spacer(),
-                        new Spacer(),
-                        new Expanded(
+                        const Spacer(),
+                        const Spacer(),
+                        Expanded(
                           child: Text(
                             "8888 8888 8888 8888",
                             style: TextStyle(
                               fontSize: 25,
                               fontFamily: 'bglbt',
-                              shadows: [
+                              shadows: const [
                                 Shadow(
                                     color: Colors.black54,
                                     blurRadius: 2,
@@ -174,12 +174,12 @@ class _Card3DDemoPageState extends State<Card3DDemoPage> {
                               foreground: Paint()
                                 ..style = PaintingStyle.stroke
                                 ..strokeWidth = 0.3
-                                ..shader = LinearGradient(
+                                ..shader = const LinearGradient(
                                         begin: Alignment.centerLeft,
                                         end: Alignment.bottomRight,
                                         colors: [Colors.white, Colors.blueAccent, Colors.black54])
                                     .createShader(
-                                  Rect.fromLTWH(0, 0, 1000, 100),
+                                  const Rect.fromLTWH(0, 0, 1000, 100),
                                 ),
                             ),
                           ),

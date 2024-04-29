@@ -34,6 +34,7 @@ class DropSelectController extends ChangeNotifier {
 
 enum DropSelectEvent {
   SELECT,
+  // ignore: constant_identifier_names
   ACTIVE,
   HIDE,
 }

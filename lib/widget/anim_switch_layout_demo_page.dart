@@ -1,7 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class AnimSwitchLayoutDemoPage extends StatefulWidget {
-  const AnimSwitchLayoutDemoPage({Key? key}) : super(key: key);
+  const AnimSwitchLayoutDemoPage({super.key});
 
   @override
   State<AnimSwitchLayoutDemoPage> createState() =>
@@ -50,13 +51,13 @@ class _AnimSwitchLayoutDemoPageState extends State<AnimSwitchLayoutDemoPage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: new Text("ControllerDemoPage"),
+        title: const Text("ControllerDemoPage"),
       ),
       extendBody: true,
       body: Center(
         child: Container(
           height: 300,
-          margin: EdgeInsets.symmetric(horizontal: 20),
+          margin: const EdgeInsets.symmetric(horizontal: 20),
           child: LayoutBuilder(
             builder: (_, con) {
               var f = getIndexPosition(currentIndex % 3, con.biggest);
@@ -68,21 +69,27 @@ class _AnimSwitchLayoutDemoPageState extends State<AnimSwitchLayoutDemoPage>
                   PositionItem(f,
                       child: InkWell(
                         onTap: () {
-                          print("red");
+                          if (kDebugMode) {
+                            print("red");
+                          }
                         },
                         child: Container(color: Colors.redAccent),
                       )),
                   PositionItem(s,
                       child: InkWell(
                         onTap: () {
-                          print("green");
+                          if (kDebugMode) {
+                            print("green");
+                          }
                         },
                         child: Container(color: Colors.greenAccent),
                       )),
                   PositionItem(t,
                       child: InkWell(
                         onTap: () {
-                          print("yello");
+                          if (kDebugMode) {
+                            print("yello");
+                          }
                         },
                         child: Container(color: Colors.yellowAccent),
                       )),
@@ -107,22 +114,22 @@ class PositionItem extends StatelessWidget {
   final PositionedItemData data;
   final Widget child;
 
-  const PositionItem(this.data, {required this.child});
+  const PositionItem(this.data, {super.key, required this.child});
 
   @override
   Widget build(BuildContext context) {
-    return new AnimatedPositioned(
-      duration: Duration(seconds: 1),
+    return AnimatedPositioned(
+      duration: const Duration(seconds: 1),
       curve: Curves.fastOutSlowIn,
-      child: new AnimatedContainer(
-        duration: Duration(seconds: 1),
+      left: data.left,
+      top: data.top,
+      child: AnimatedContainer(
+        duration: const Duration(seconds: 1),
         curve: Curves.fastOutSlowIn,
         width: data.width,
         height: data.height,
         child: child,
       ),
-      left: data.left,
-      top: data.top,
     );
   }
 }

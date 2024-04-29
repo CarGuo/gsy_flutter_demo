@@ -7,7 +7,7 @@ class LoadingAnimButton extends StatefulWidget {
   final LoadingState? loadingState;
   final int loadingSpeed;
 
-  LoadingAnimButton({this.loadingState, this.loadingSpeed = 2});
+  const LoadingAnimButton({super.key, this.loadingState, this.loadingSpeed = 2});
 
   @override
   _LoadingAnimButtonState createState() => _LoadingAnimButtonState();
@@ -25,9 +25,9 @@ class _LoadingAnimButtonState extends State<LoadingAnimButton>
   @override
   void initState() {
     super.initState();
-    loadingButtonController = new AnimationController(vsync: this)
-      ..duration = Duration(milliseconds: 1000);
-    this.loadingAnimation = CurvedAnimation(
+    loadingButtonController = AnimationController(vsync: this)
+      ..duration = const Duration(milliseconds: 1000);
+    loadingAnimation = CurvedAnimation(
       parent: loadingButtonController,
       curve: Curves.decelerate,
     )..addListener(updateState);
@@ -105,9 +105,9 @@ class LoadingButtonPainter extends CustomPainter {
       painter.isAntiAlias = true;
     }
 
-    painter = new Paint();
+    painter = Paint();
     init(painter);
-    bgPainter = new Paint();
+    bgPainter = Paint();
     init(bgPainter);
   }
 
@@ -122,7 +122,7 @@ class LoadingButtonPainter extends CustomPainter {
     centerX = w / 2;
     centerY = h / 2;
     currentRippleX = centerX - baseRippleLength * 10;
-    rect = new Rect.fromLTRB(
+    rect = Rect.fromLTRB(
         centerX - circleRadius,
         centerY + 0.6 * circleRadius,
         centerX + circleRadius,
@@ -221,8 +221,9 @@ class LoadingButtonPainter extends CustomPainter {
             rect, -0.5 * pi, 359.99 / 180 * pi * fraction, false, painter);
         path.reset();
         currentRippleX += loadingSpeed;
-        if (currentRippleX > centerX - baseRippleLength * 6)
+        if (currentRippleX > centerX - baseRippleLength * 6) {
           currentRippleX = centerX - baseRippleLength * 10;
+        }
         currentRippleXCallback?.call(currentRippleX);
         path.moveTo(currentRippleX, centerY);
         for (int i = 0; i < 4; i++) {

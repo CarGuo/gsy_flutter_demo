@@ -1,10 +1,14 @@
 import 'dart:math' as math;
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper_view/flutter_swiper_view.dart';
+// ignore: implementation_imports
 import 'package:flutter_swiper_view/src/transformer_page_view.dart';
 
 class BottomAnimNavPage extends StatefulWidget {
+  const BottomAnimNavPage({super.key});
+
   @override
   _BottomAnimNavPageState createState() => _BottomAnimNavPageState();
 }
@@ -21,7 +25,7 @@ class _BottomAnimNavPageState extends State<BottomAnimNavPage>
   void initState() {
     super.initState();
     controller = AnimationController(vsync: this)
-      ..duration = Duration(milliseconds: 500);
+      ..duration = const Duration(milliseconds: 500);
     animation = Tween(begin: 0.0, end: 1.0).animate(controller);
   }
 
@@ -30,7 +34,7 @@ class _BottomAnimNavPageState extends State<BottomAnimNavPage>
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColorDark,
       appBar: AppBar(
-        title: new Text("ViewPagerDemoPage"),
+        title: const Text("ViewPagerDemoPage"),
       ),
       body: GestureDetector(
         behavior: HitTestBehavior.opaque,
@@ -39,7 +43,7 @@ class _BottomAnimNavPageState extends State<BottomAnimNavPage>
         },
         child: Container(
           alignment: Alignment.bottomCenter,
-          margin: EdgeInsets.only(bottom: 50),
+          margin: const EdgeInsets.only(bottom: 50),
           child: Builder(
             builder: (context) {
               return TextButton(
@@ -52,7 +56,7 @@ class _BottomAnimNavPageState extends State<BottomAnimNavPage>
                       context: context,
                       backgroundColor: Colors.transparent,
                       builder: (context) {
-                        return new Container(
+                        return SizedBox(
                           height: 300,
                           child: Stack(
                             children: <Widget>[
@@ -73,7 +77,7 @@ class _BottomAnimNavPageState extends State<BottomAnimNavPage>
                                 itemBuilder: (BuildContext context, int index) {
                                   return ScaleTransition(
                                     scale: animation as Animation<double>,
-                                    child: new Container(
+                                    child: Container(
                                       decoration: BoxDecoration(
                                           color: Colors.red,
                                           shape: BoxShape.circle,
@@ -84,16 +88,18 @@ class _BottomAnimNavPageState extends State<BottomAnimNavPage>
                                               (index == this.index) ? 5 : 10),
                                       child: InkWell(
                                         onTap: () {
-                                          print("##### $index");
+                                          if (kDebugMode) {
+                                            print("##### $index");
+                                          }
                                         },
                                         focusColor: Colors.transparent,
                                         hoverColor: Colors.transparent,
                                         highlightColor: Colors.transparent,
                                         splashColor: Colors.transparent,
-                                        child: new Center(
-                                          child: new Text(
+                                        child: Center(
+                                          child: Text(
                                             "$index",
-                                            style: new TextStyle(
+                                            style: const TextStyle(
                                                 fontSize: 20.0,
                                                 color: Colors.white),
                                           ),
@@ -114,7 +120,7 @@ class _BottomAnimNavPageState extends State<BottomAnimNavPage>
                   controller.reset();
                   controller.forward();
                 },
-                child: new Text(
+                child: const Text(
                   "Show",
                   style: TextStyle(fontSize: 22, color: Colors.white),
                 ),
@@ -137,12 +143,11 @@ class AngleTransformer extends PageTransformer {
         _radius = radius;
 
   @override
-  Widget transform(Widget item, TransformInfo info) {
+  Widget transform(Widget child, TransformInfo info) {
     double position = info.position!;
-    Widget child = item;
 
     var dx = _horizontalOffset * (position.abs() * 10);
-    var dy;
+    double dy;
     if (dx <= _radius) {
       dy = _radius - math.sqrt((_radius * _radius) - (dx * dx));
     } else {
@@ -153,12 +158,12 @@ class AngleTransformer extends PageTransformer {
 
     double fadeFactor = (1 - position.abs()) * (1 - _fade);
     double opacity = _fade + fadeFactor;
-    child = new Opacity(
+    child = Opacity(
       opacity: opacity,
       child: child,
     );
 
-    child = new Transform.translate(
+    child = Transform.translate(
       offset: Offset(position.isNegative ? -dx : dx, dy),
       child: child,
     );

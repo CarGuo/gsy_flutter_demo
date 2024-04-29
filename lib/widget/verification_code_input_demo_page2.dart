@@ -5,6 +5,8 @@ import 'package:flutter/services.dart';
 
 ///验证码输入框
 class VerificationCodeInputDemoPage2 extends StatefulWidget {
+  const VerificationCodeInputDemoPage2({super.key});
+
   @override
   _VerificationCodeInputDemoPage2State createState() =>
       _VerificationCodeInputDemoPage2State();
@@ -12,19 +14,19 @@ class VerificationCodeInputDemoPage2 extends StatefulWidget {
 
 class _VerificationCodeInputDemoPage2State
     extends State<VerificationCodeInputDemoPage2> {
-  var focusNode = new FocusNode();
+  var focusNode = FocusNode();
   var textEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: new Text("VerificationCodeInputDemoPage"),
+        title: const Text("VerificationCodeInputDemoPage"),
       ),
-      body: new GestureDetector(
+      body: GestureDetector(
         behavior: HitTestBehavior.translucent,
         onTap: () {
-          FocusScope.of(context).requestFocus(new FocusNode());
+          FocusScope.of(context).requestFocus(FocusNode());
         },
         child: Container(
           alignment: Alignment.center,
@@ -51,13 +53,13 @@ class PINInputWidget extends StatelessWidget {
 
   final void Function(String value)? onFilled;
 
-  final GlobalKey tipGlobalKey = new GlobalKey();
+  final GlobalKey tipGlobalKey = GlobalKey();
   final TextEditingController? textEditingController;
   final FocusNode? node;
   final EdgeInsetsGeometry? margin;
 
   PINInputWidget(
-      {this.title = "",
+      {super.key, this.title = "",
       this.tipTitle,
       this.onChanged,
       this.onFilled,
@@ -72,29 +74,29 @@ class PINInputWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        new Container(
-          margin: margin ?? EdgeInsets.only(left: 50, right: 50),
-          child: new Row(
+        Container(
+          margin: margin ?? const EdgeInsets.only(left: 50, right: 50),
+          child: Row(
             children: <Widget>[
               Text(
                 title,
-                style: TextStyle(
+                style: const TextStyle(
                     color: Colors.black,
                     fontSize: 16,
                     fontWeight: FontWeight.bold),
               ),
-              new Expanded(child: new Container()),
+              Expanded(child: Container()),
               if (needTip)
                 Text(tipTitle!,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.black,
                       fontSize: 16,
                     )),
             ],
           ),
         ),
-        new Container(
-          margin: EdgeInsets.only(top: 5),
+        Container(
+          margin: const EdgeInsets.only(top: 5),
           child: VerCodeInput(
             controller: textEditingController,
             length: 6,
@@ -106,7 +108,7 @@ class PINInputWidget extends StatelessWidget {
             ///输入完成时
             onFilled: onFilled ??
                 (value) {
-                  FocusScope.of(context).requestFocus(new FocusNode());
+                  FocusScope.of(context).requestFocus(FocusNode());
                 },
           ),
         )
@@ -127,7 +129,7 @@ CodeInputBuilder pinRectangle(BuildContext context,
   double width = MediaQuery.sizeOf(context).width;
   double codeFullSize = ((width - 2 * padding) / codeSize);
   double codeNormalSize = codeFullSize;
-  final textStyle =
+  const textStyle =
       TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold);
   return _pinContainerized(
       totalSize: Size(codeFullSize, codeFullSize),
@@ -147,13 +149,13 @@ CodeInputBuilder _pinContainerized(
     required TextStyle emptyTextStyle,
     required TextStyle filledTextStyle,
     required Color color}) {
-  final width = 0.5;
-  final borderRadiusSize = Radius.circular(4);
+  const width = 0.5;
+  const borderRadiusSize = Radius.circular(4);
 
-  final borderColor = Color.fromARGB(255, 151, 151, 151);
+  const borderColor = Color.fromARGB(255, 151, 151, 151);
 
   final decoration = BoxDecoration(
-    border: Border(
+    border: const Border(
       top: BorderSide(width: width, color: borderColor),
       left: BorderSide(width: width, color: borderColor),
       right: BorderSide.none,
@@ -164,7 +166,7 @@ CodeInputBuilder _pinContainerized(
 
   ///因为有 borderRadius 的不能 BorderSide 不同
   final decorationSecond = BoxDecoration(
-    border: Border(
+    border: const Border(
       top: BorderSide(width: width, color: borderColor),
       left: BorderSide.none,
       right: BorderSide.none,
@@ -175,26 +177,26 @@ CodeInputBuilder _pinContainerized(
 
   ///开始带弧度的 border
   final decorationStart = BoxDecoration(
-    border: Border(
+    border: const Border(
       top: BorderSide(width: width, color: borderColor),
       left: BorderSide(width: width, color: borderColor),
       right: BorderSide(width: width, color: borderColor),
       bottom: BorderSide(width: width, color: borderColor),
     ),
-    borderRadius: BorderRadius.only(
+    borderRadius: const BorderRadius.only(
         topLeft: borderRadiusSize, bottomLeft: borderRadiusSize),
     color: color,
   );
 
   ///结束带弧度的 border
   final decorationEnd = BoxDecoration(
-    border: Border(
+    border: const Border(
       top: BorderSide(width: width, color: borderColor),
       left: BorderSide(width: width, color: borderColor),
       right: BorderSide(width: width, color: borderColor),
       bottom: BorderSide(width: width, color: borderColor),
     ),
-    borderRadius: BorderRadius.only(
+    borderRadius: const BorderRadius.only(
         topRight: borderRadiusSize, bottomRight: borderRadiusSize),
     color: color,
   );
@@ -215,7 +217,7 @@ CodeInputBuilder _pinContainerized(
       height: totalSize.height,
       alignment: Alignment.center,
       child: AnimatedContainer(
-        duration: Duration(milliseconds: 100),
+        duration: const Duration(milliseconds: 100),
         decoration: getDecoration(index),
         width: char.isEmpty ? emptySize.width : filledSize.width,
         height: char.isEmpty ? emptySize.height : filledSize.height,
@@ -241,21 +243,21 @@ CodeInputBuilder pinLine(BuildContext context) {
           bottom:
               BorderSide(color: Theme.of(context).primaryColor, width: 0.5)),
       color: Colors.transparent,
-      textStyle: TextStyle(
+      textStyle: const TextStyle(
           color: Colors.black, fontSize: 16.0, fontWeight: FontWeight.bold));
 }
 
 renderTipIcon(BuildContext context, String title, GlobalKey key,
     {expanded = true, double? width, bool needIcon = true}) {
-  var titleWidget = new Container(
+  var titleWidget = Container(
       alignment: Alignment.centerLeft,
-      child: new RichText(
-        text: new TextSpan(
-            style: TextStyle(
+      child: RichText(
+        text: TextSpan(
+            style: const TextStyle(
                 fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black),
             text: title,
-            children: [
-              new TextSpan(
+            children: const [
+              TextSpan(
                   style: TextStyle(
                       color: Colors.black,
                       fontSize: 15,
@@ -266,12 +268,12 @@ renderTipIcon(BuildContext context, String title, GlobalKey key,
   if (!needIcon) {
     return titleWidget;
   }
-  return new Row(
+  return Row(
     crossAxisAlignment: CrossAxisAlignment.center,
     mainAxisAlignment: MainAxisAlignment.start,
     children: <Widget>[
       titleWidget,
-      new Container(
+      Container(
         alignment: Alignment.topLeft,
         child: InkWell(
           onTap: () {
@@ -283,7 +285,7 @@ renderTipIcon(BuildContext context, String title, GlobalKey key,
 //              Offset offset = renderBoxRed.localToGlobal(Offset.zero);
 //              showPasswordTip(context, offset.dx + 7, offset.dy - top + 14);
           },
-          child: new Icon(
+          child: Icon(
             Icons.error,
             key: key,
             color: Colors.black,
@@ -319,7 +321,7 @@ class UpWhitelistingTextInputFormatter extends TextInputFormatter {
             .allMatches(substring.toUpperCase())
             .map<String?>((Match match) => match.group(0))
             .join();
-        if (result.length > 0) {
+        if (result.isNotEmpty) {
           return result;
         }
         return "";
@@ -334,10 +336,10 @@ class UpWhitelistingTextInputFormatter extends TextInputFormatter {
   TextEditingValue _selectionAwareTextManipulation(
     TextEditingValue old,
     TextEditingValue value,
-    String substringManipulation(String substring),
+    String Function(String substring) substringManipulation,
   ) {
-    if (value.text.length != 0 &&
-        substringManipulation(value.text).length == 0) {
+    if (value.text.isNotEmpty &&
+        substringManipulation(value.text).isEmpty) {
       return old;
     }
     final int selectionStartIndex = value.selection.baseOffset;
@@ -381,7 +383,7 @@ typedef CodeInputBuilder = Widget Function(
 
 class VerCodeInput extends StatefulWidget {
   const VerCodeInput._({
-    Key? key,
+    super.key,
     required this.length,
     required this.keyboardType,
     required this.inputFormatters,
@@ -390,7 +392,7 @@ class VerCodeInput extends StatefulWidget {
     this.controller,
     this.onFilled,
     this.node,
-  }) : super(key: key);
+  });
 
   factory VerCodeInput({
     Key? key,
@@ -519,7 +521,7 @@ class _VerCodeInputState extends State<VerCodeInput> {
     return Stack(children: <Widget>[
       // This is the actual EditableText wrapped in a Container with zero
       // dimensions.
-      Container(
+      SizedBox(
           width: 0.0,
           height: 0.0,
           child: EditableText(
@@ -528,7 +530,7 @@ class _VerCodeInputState extends State<VerCodeInput> {
             inputFormatters: widget.inputFormatters,
             keyboardType: widget.keyboardType,
             backgroundCursorColor: Colors.black,
-            style: TextStyle(),
+            style: const TextStyle(),
             // Doesn't really matter.
             cursorColor: Colors.black,
             // Doesn't really matter.
@@ -593,7 +595,7 @@ abstract class CodeInputBuilders {
         height: totalSize.height,
         alignment: alignment,
         child: AnimatedContainer(
-          duration: Duration(milliseconds: 100),
+          duration: const Duration(milliseconds: 100),
           decoration: char.isEmpty ? emptyDecoration : filledDecoration,
           width: char.isEmpty ? emptySize.width : filledSize.width,
           height: char.isEmpty ? emptySize.height : filledSize.height,
@@ -667,7 +669,7 @@ abstract class CodeInputBuilders {
         filledRadius: filledRadius,
         border: Border.all(color: Colors.white, width: 2.0),
         color: Colors.white10,
-        textStyle: TextStyle(
+        textStyle: const TextStyle(
             color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.bold));
   }
 
@@ -683,7 +685,7 @@ abstract class CodeInputBuilders {
         filledRadius: filledRadius,
         border: Border.all(color: Colors.black, width: 2.0),
         color: Colors.black12,
-        textStyle: TextStyle(
+        textStyle: const TextStyle(
             color: Colors.black, fontSize: 20.0, fontWeight: FontWeight.bold));
   }
 
@@ -701,7 +703,7 @@ abstract class CodeInputBuilders {
         borderRadius: borderRadius,
         border: Border.all(color: Colors.white, width: 2.0),
         color: Colors.white10,
-        textStyle: TextStyle(
+        textStyle: const TextStyle(
             color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.bold));
   }
 
@@ -718,7 +720,7 @@ abstract class CodeInputBuilders {
         borderRadius: borderRadius,
         border: Border.all(color: Colors.white, width: 1.0),
         color: Colors.transparent,
-        textStyle: TextStyle(
+        textStyle: const TextStyle(
             color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.bold));
   }
 
@@ -736,7 +738,7 @@ abstract class CodeInputBuilders {
         borderRadius: borderRadius,
         border: Border.all(color: Colors.black, width: 2.0),
         color: Colors.black12,
-        textStyle: TextStyle(
+        textStyle: const TextStyle(
             color: Colors.black, fontSize: 20.0, fontWeight: FontWeight.bold));
   }
 }

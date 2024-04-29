@@ -2,32 +2,32 @@ import 'package:flutter/material.dart';
 
 ///共性元素动画
 class HonorDemoPage extends StatelessWidget {
+  const HonorDemoPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: new Text("HonorDemoPage"),
+        title: const Text("HonorDemoPage"),
       ),
-      body: Container(
-        child: Center(
-          child: new InkWell(
-            onTap: () {
-              Navigator.of(context).push(new MaterialPageRoute(
-                  builder: (context) {
-                    return HonorPage();
-                  },
-                  fullscreenDialog: true));
-            },
+      body: Center(
+        child: InkWell(
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) {
+                  return const HonorPage();
+                },
+                fullscreenDialog: true));
+          },
 
-            /// Hero  tag 共享
-            child: new Hero(
-              tag: "image",
-              child: new Image.asset(
-                "static/gsy_cat.png",
-                fit: BoxFit.cover,
-                width: 100,
-                height: 100,
-              ),
+          /// Hero  tag 共享
+          child: Hero(
+            tag: "image",
+            child: Image.asset(
+              "static/gsy_cat.png",
+              fit: BoxFit.cover,
+              width: 100,
+              height: 100,
             ),
           ),
         ),
@@ -37,19 +37,21 @@ class HonorDemoPage extends StatelessWidget {
 }
 
 class HonorPage extends StatelessWidget {
+  const HonorPage({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
+    return Scaffold(
       backgroundColor: Colors.transparent,
-      body: new InkWell(
+      body: InkWell(
         onTap: () {
           Navigator.of(context).pop();
         },
-        child: new Container(
+        child: Container(
           alignment: Alignment.center,
-          child: new Hero(
+          child: Hero(
             tag: "image",
-            child: new Image.asset(
+            child: Image.asset(
               "static/gsy_cat.png",
               fit: BoxFit.cover,
               width: MediaQuery.sizeOf(context).width,

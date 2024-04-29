@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class LinkFlexibleSpaceBar extends StatefulWidget {
   const LinkFlexibleSpaceBar({
-    Key? key,
+    super.key,
     this.title,
     this.background,
     this.centerTitle,
@@ -13,7 +13,7 @@ class LinkFlexibleSpaceBar extends StatefulWidget {
     this.titlePadding,
     this.collapseMode = CollapseMode.parallax,
     this.stretchModes = const <StretchMode>[StretchMode.zoomBackground],
-  })  : super(key: key);
+  });
 
   final Widget? title;
 
@@ -123,12 +123,12 @@ class _LinkFlexibleSpaceBarState extends State<LinkFlexibleSpaceBar> {
                 (constraints.maxHeight - settings.maxExtent) / 10;
             children.add(Positioned.fill(
                 child: BackdropFilter(
-                    child: Container(
-                      color: Colors.transparent,
-                    ),
                     filter: ui.ImageFilter.blur(
                       sigmaX: blurAmount,
                       sigmaY: blurAmount,
+                    ),
+                    child: Container(
+                      color: Colors.transparent,
                     ))));
           }
         }
@@ -193,8 +193,8 @@ class _LinkFlexibleSpaceBarState extends State<LinkFlexibleSpaceBar> {
               padding: padding,
               child: Column(
                 children: <Widget>[
-                  Spacer(),
-                  new Row(
+                  const Spacer(),
+                  Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: <Widget>[
                       Transform(
@@ -208,13 +208,13 @@ class _LinkFlexibleSpaceBarState extends State<LinkFlexibleSpaceBar> {
                           ),
                         ),
                       ),
-                      Spacer(),
+                      const Spacer(),
                       Opacity(
                         opacity: opacityValue,
-                        child: new Container(
+                        child: Container(
                           width: 60,
                           height: 60,
-                          margin: EdgeInsets.only(right: 20, bottom: 20),
+                          margin: const EdgeInsets.only(right: 20, bottom: 20),
                           decoration: BoxDecoration(
                               image: DecorationImage(
                                 image: AssetImage(
@@ -223,19 +223,19 @@ class _LinkFlexibleSpaceBarState extends State<LinkFlexibleSpaceBar> {
                                 fit: BoxFit.cover,
                               ),
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(30))),
+                                  const BorderRadius.all(Radius.circular(30))),
                         ),
                       ),
                     ],
                   ),
                   Opacity(
                     opacity: opacityValue,
-                    child: Container(
+                    child: SizedBox(
                       height: 80 * scaleBottomValue,
                       child: Column(
                         children: <Widget>[
-                          new Expanded(
-                            child: new Row(
+                          Expanded(
+                            child: Row(
                               children:
                                   widget.bottom ?? Container() as List<Widget>,
                             ),
@@ -257,10 +257,10 @@ class _LinkFlexibleSpaceBarState extends State<LinkFlexibleSpaceBar> {
 
   renderItem() {
     return Expanded(
-      child: new Container(
+      child: Container(
         alignment: Alignment.centerLeft,
-        child: Center(
-          child: new Text(
+        child: const Center(
+          child: Text(
             "FFFF",
             style: TextStyle(fontSize: 18, color: Colors.white),
           ),

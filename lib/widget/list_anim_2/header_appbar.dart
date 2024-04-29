@@ -4,7 +4,7 @@ class HeaderAppBar2 extends StatelessWidget {
   final int alphaBg;
   final bool showStickItem;
 
-  HeaderAppBar2({this.alphaBg = 0, this.showStickItem = false});
+  const HeaderAppBar2({super.key, this.alphaBg = 0, this.showStickItem = false});
 
   @override
   Widget build(BuildContext context) {
@@ -20,30 +20,31 @@ class HeaderAppBar2 extends StatelessWidget {
 
     var color = Theme.of(context).primaryColor.withAlpha(alphaBg);
 
-    return new Material(
+    return Material(
       color: Colors.transparent,
-      child: new Container(
+      child: Container(
         alignment: Alignment.centerLeft,
         height: containerHeight,
-        child: new Stack(
+        child: Stack(
           children: <Widget>[
-            new Container(
+            Container(
               margin: EdgeInsets.only(top: statusBarHeight + kToolbarHeight),
               child: AnimatedSwitcher(
-                switchInCurve: Cubic(0.4, 0.0, 0.2, 1.0),
-                switchOutCurve: Cubic(1.0, 0.1, 1.0, 0.1),
+                switchInCurve: const Cubic(0.4, 0.0, 0.2, 1.0),
+                switchOutCurve: const Cubic(1.0, 0.1, 1.0, 0.1),
                 transitionBuilder: (child, anim) {
                   ///不同状态显示不同动画
-                  if (showStickItem)
+                  if (showStickItem) {
                     return SlideTransition(
-                        child: child,
                         position: Tween<Offset>(
-                          begin: Offset(0.0, -0.5),
-                          end: Offset(0.0, 0.0),
-                        ).animate(anim));
+                          begin: const Offset(0.0, -0.5),
+                          end: const Offset(0.0, 0.0),
+                        ).animate(anim),
+                        child: child);
+                  }
                   return FadeTransition(
-                    child: child,
                     opacity: anim,
+                    child: child,
                   );
                 },
                 duration: Duration(milliseconds: showStickItem ? 500 : 1),
@@ -52,68 +53,68 @@ class HeaderAppBar2 extends StatelessWidget {
                         alignment: Alignment.centerLeft,
                         width: MediaQuery.sizeOf(context).width,
                         height: reactHeight,
-                        key: ValueKey("stickItem"),
+                        key: const ValueKey("stickItem"),
                         color: Colors.amber,
-                        child: new Row(
+                        child: const Row(
                           children: <Widget>[
-                            new Icon(Icons.ac_unit,
+                            Icon(Icons.ac_unit,
                                 color: Colors.white, size: 13),
-                            new SizedBox(
+                            SizedBox(
                               width: 10,
                             ),
-                            new Text(
+                            Text(
                               "StickText",
                               style: TextStyle(color: Colors.white),
                             ),
                           ],
                         ),
                       )
-                    : new Container(
-                        key: ValueKey("hideItem"),
+                    : Container(
+                        key: const ValueKey("hideItem"),
                       ),
               ),
             ),
-            new Column(
+            Column(
               mainAxisSize: MainAxisSize.max,
               children: <Widget>[
                 ///撑满状态栏颜色
-                new Container(
+                Container(
                   height: statusBarHeight,
                   color: color,
                 ),
-                new Container(
+                Container(
                   color: color,
                   height: kToolbarHeight,
-                  child: new Row(
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      new Container(
+                      Container(
                         width: 36,
                         height: 36,
                         alignment: Alignment.center,
-                        margin: EdgeInsets.only(right: 10, left: 10),
+                        margin: const EdgeInsets.only(right: 10, left: 10),
                         decoration: BoxDecoration(
                             color: Colors.white.withAlpha(125),
                             borderRadius:
-                                BorderRadius.all(Radius.circular(18))),
+                                const BorderRadius.all(Radius.circular(18))),
                         child: InkWell(
                           onTap: () {
                             Navigator.of(context).pop();
                           },
-                          child: Icon(
+                          child: const Icon(
                             Icons.arrow_back_ios,
                             color: Colors.white,
                           ),
                         ),
                       ),
-                      new Expanded(
-                        child: new Container(
+                      Expanded(
+                        child: Container(
                           height: kToolbarHeight - 15,
-                          margin: EdgeInsets.only(right: 20, left: 20),
+                          margin: const EdgeInsets.only(right: 20, left: 20),
                           decoration: BoxDecoration(
                               color: Colors.white.withAlpha(125),
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(10))),
+                                  const BorderRadius.all(Radius.circular(10))),
                         ),
                       ),
                     ],

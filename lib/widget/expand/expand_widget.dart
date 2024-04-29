@@ -7,15 +7,14 @@ class ExpandableNotifier extends StatefulWidget {
   final Duration? animationDuration;
   final Widget? child;
 
-  ExpandableNotifier(
-      {Key? key,
+  const ExpandableNotifier(
+      {super.key,
         this.controller,
         this.initialExpanded,
         this.animationDuration,
         required this.child})
       : assert(!(controller != null && animationDuration != null)),
-        assert(!(controller != null && initialExpanded != null)),
-        super(key: key);
+        assert(!(controller != null && initialExpanded != null));
 
   @override
   _ExpandableNotifierState createState() => _ExpandableNotifierState();
@@ -43,9 +42,9 @@ class _ExpandableNotifierState extends State<ExpandableNotifier> {
 
 class _ExpandableInheritedNotifier
     extends InheritedNotifier<ExpandableController> {
-  _ExpandableInheritedNotifier(
-      {required ExpandableController? controller, required Widget child})
-      : super(notifier: controller, child: child);
+  const _ExpandableInheritedNotifier(
+      {required ExpandableController? controller, required super.child})
+      : super(notifier: controller);
 }
 
 class ExpandableController extends ValueNotifier<bool> {
@@ -53,7 +52,7 @@ class ExpandableController extends ValueNotifier<bool> {
   final Duration animationDuration;
 
   ExpandableController({bool? initialExpanded, Duration? animationDuration})
-      : this.animationDuration =
+      : animationDuration =
       animationDuration ?? const Duration(milliseconds: 300),
         super(initialExpanded ?? false);
 
@@ -90,8 +89,8 @@ class Expandable extends StatelessWidget {
   final Curve fadeCurve;
   final Curve sizeCurve;
 
-  Expandable(
-      {this.collapsed,
+  const Expandable(
+      {super.key, this.collapsed,
       this.expanded,
       this.collapsedFadeStart = 0,
       this.collapsedFadeEnd = 1,
@@ -121,7 +120,7 @@ class Expandable extends StatelessWidget {
   }
 }
 
-typedef Widget ExpandableBuilder(
+typedef ExpandableBuilder = Widget Function(
     BuildContext context, Widget? collapsed, Widget? expanded);
 
 /// Determines the placement of the expand/collapse icon in [ExpandablePanel]
@@ -171,8 +170,8 @@ class ExpandablePanel extends StatelessWidget {
     );
   }
 
-  ExpandablePanel(
-      {this.collapsed,
+  const ExpandablePanel(
+      {super.key, this.collapsed,
       this.height = 56.5,
       this.header,
       this.expanded,
@@ -194,10 +193,10 @@ class ExpandablePanel extends StatelessWidget {
           Expanded(
             child: child,
           ),
-          new Center(
-            child: new Container(
+          Center(
+            child: SizedBox(
               height: height,
-              child: expandableIcon ?? ExpandableIcon(),
+              child: expandableIcon ?? const ExpandableIcon(),
             ),
           )
         ];
@@ -214,7 +213,7 @@ class ExpandablePanel extends StatelessWidget {
       return tapHeaderToExpand
           ? ExpandableButton(
               child: ConstrainedBox(
-                  constraints: BoxConstraints(minHeight: 45.0), child: child))
+                  constraints: const BoxConstraints(minHeight: 45.0), child: child))
           : child ?? Container();
     }
 
@@ -233,7 +232,7 @@ class ExpandablePanel extends StatelessWidget {
 
     return ExpandableNotifier(
       controller: controller ?? ExpandableController(initialExpanded: initialExpanded),
-      child: this.header != null ? buildWithHeader() : buildWithoutHeader(),
+      child: header != null ? buildWithHeader() : buildWithoutHeader(),
     );
   }
 }
@@ -241,6 +240,8 @@ class ExpandablePanel extends StatelessWidget {
 /// An down/up arrow icon that toggles the state of [ExpandableController] when the user clicks on it.
 /// The model is accessed via [ScopedModelDescendant].
 class ExpandableIcon extends StatelessWidget {
+  const ExpandableIcon({super.key});
+
   @override
   Widget build(BuildContext context) {
     final controller = ExpandableController.of(context)!;
@@ -257,7 +258,7 @@ class ExpandableIcon extends StatelessWidget {
 class ExpandableButton extends StatelessWidget {
   final Widget? child;
 
-  ExpandableButton({this.child});
+  const ExpandableButton({super.key, this.child});
 
   @override
   Widget build(BuildContext context) {
@@ -287,14 +288,14 @@ class ScrollOnExpand extends StatefulWidget {
   /// If true then the widget will be scrolled to become visible when collapsed
   final bool scrollOnCollapse;
 
-  ScrollOnExpand({
-    Key? key,
+  const ScrollOnExpand({
+    super.key,
     required
     this.child,
     this.scrollAnimationDuration = const Duration(milliseconds: 300),
     this.scrollOnExpand = true,
     this.scrollOnCollapse = true,
-  }): super(key: key);
+  });
 
   @override
   _ScrollOnExpandState createState() => _ScrollOnExpandState();
@@ -343,7 +344,7 @@ class _ScrollOnExpandState extends State<ScrollOnExpand> {
 
   _expandedStateChanged() {
     _isAnimating++;
-    Future.delayed(_controller!.animationDuration + Duration(milliseconds: 10), _animationComplete);
+    Future.delayed(_controller!.animationDuration + const Duration(milliseconds: 10), _animationComplete);
   }
 
   @override

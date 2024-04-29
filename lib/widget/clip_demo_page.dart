@@ -2,24 +2,26 @@ import 'package:flutter/material.dart';
 
 /// 圆角效果处理实现
 class ClipDemoPage extends StatelessWidget {
+  const ClipDemoPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: new Text("ClipDemoPage"),
+        title: const Text("ClipDemoPage"),
       ),
-      body: new Container(
+      body: Container(
         alignment: Alignment.center,
-        margin: EdgeInsets.all(10),
-        child: new Column(
+        margin: const EdgeInsets.all(10),
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            new Text("BoxDecoration 圆角"),
-            new Container(
+            const Text("BoxDecoration 圆角"),
+            Container(
               width: 100,
               height: 100,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   color: Colors.red,
                   image: DecorationImage(
                     fit: BoxFit.cover,
@@ -27,30 +29,30 @@ class ClipDemoPage extends StatelessWidget {
                   ),
                   borderRadius: BorderRadius.all(Radius.circular(5.0))),
             ),
-            new SizedBox(
+            const SizedBox(
               height: 10,
             ),
-            new Text("BoxDecoration 圆角对 child"),
-            new Container(
+            const Text("BoxDecoration 圆角对 child"),
+            Container(
               width: 100,
               height: 100,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   color: Colors.red,
                   borderRadius: BorderRadius.all(Radius.circular(5.0))),
-              child: new Image.asset(
+              child: Image.asset(
                 "static/gsy_cat.png",
                 fit: BoxFit.cover,
                 width: 100,
                 height: 100,
               ),
             ),
-            new SizedBox(
+            const SizedBox(
               height: 10,
             ),
-            new Text("ClipRRect 圆角对 child"),
-            new ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(5.0)),
-              child: new Image.asset(
+            const Text("ClipRRect 圆角对 child"),
+            ClipRRect(
+              borderRadius: const BorderRadius.all(Radius.circular(5.0)),
+              child: Image.asset(
                 "static/gsy_cat.png",
                 fit: BoxFit.cover,
                 width: 100,

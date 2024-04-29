@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 
 ///展示如何在 Flutter 里实现 WrapContent 的状态
 class WrapContentPage extends StatelessWidget {
+  const WrapContentPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: new Text(
+        title: const Text(
           "WrapContentPage",
         ),
       ),
@@ -16,14 +18,14 @@ class WrapContentPage extends StatelessWidget {
 
               ///关键就是 minHeight 和  double.infinity
               ///这样就可以由内部 children 来支撑决定外部大小
-              BoxConstraints(minHeight: 100, maxHeight: double.infinity),
+              const BoxConstraints(minHeight: 100, maxHeight: double.infinity),
           child: Column(
             ///min而不是max
             mainAxisSize: MainAxisSize.min,
             children: [
               Container(
                 ///关键就是 minHeight 和  double.infinity
-                constraints: BoxConstraints(
+                constraints: const BoxConstraints(
                   minHeight: 100,
                   maxHeight: double.infinity,
                 ),
@@ -31,11 +33,11 @@ class WrapContentPage extends StatelessWidget {
                 /// Stack 默认是 StackFit.loose, 需要内部一个固定的最大大小来支撑
                 child: Stack(
                   children: [
-                    new Container(
+                    Container(
                       height: 400,
                       color: Colors.yellow,
                     ),
-                    new Container(
+                    Container(
                       height: 50,
                       color: Colors.red,
                     ),
@@ -47,7 +49,7 @@ class WrapContentPage extends StatelessWidget {
                         height: 56,
                         alignment: Alignment.centerLeft,
                         color: Colors.blueGrey,
-                        child: new Container(
+                        child: Container(
                           width: 33,
                           height: 33,
                           color: Colors.black,
@@ -58,19 +60,19 @@ class WrapContentPage extends StatelessWidget {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(top: 20),
+                margin: const EdgeInsets.only(top: 20),
 
                 ///关键就是 minHeight 和  double.infinity
                 constraints:
-                    BoxConstraints(minHeight: 100, maxHeight: double.infinity),
+                    const BoxConstraints(minHeight: 100, maxHeight: double.infinity),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    new Container(
+                    Container(
                       height: 600,
                       color: Colors.green,
                     ),
-                    new Container(
+                    Container(
                       height: 50,
                       color: Colors.amber,
                     ),

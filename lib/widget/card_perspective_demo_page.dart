@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 ///对应文章解析  https://juejin.cn/post/7124064789763981326
 class CardPerspectiveDemoPage extends StatefulWidget {
-  const CardPerspectiveDemoPage({Key? key}) : super(key: key);
+  const CardPerspectiveDemoPage({super.key});
 
   @override
   State<CardPerspectiveDemoPage> createState() =>
@@ -20,10 +20,10 @@ class _CardPerspectiveDemoPageState extends State<CardPerspectiveDemoPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("CardPerspectiveDemoPage")),
+      appBar: AppBar(title: const Text("CardPerspectiveDemoPage")),
       body: Container(
         alignment: Alignment.center,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
               colors: [Colors.blueAccent, Colors.yellowAccent],
               begin: Alignment.topCenter,
@@ -61,15 +61,15 @@ class _CardPerspectiveDemoPageState extends State<CardPerspectiveDemoPage> {
             child: Container(
               width: cardWidth,
               height: cardHeight,
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
                 color: Colors.blueGrey,
                 borderRadius: BorderRadius.circular(20),
-                gradient: LinearGradient(
+                gradient: const LinearGradient(
                     colors: [Colors.white, Colors.blueGrey],
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter),
-                boxShadow: [
+                boxShadow: const [
                   BoxShadow(
                     color: Colors.black54,
                     blurRadius: 25,
@@ -92,7 +92,7 @@ class _CardPerspectiveDemoPageState extends State<CardPerspectiveDemoPage> {
                         fontSize: 80,
                         fontFamily: 'Canterbury',
                         fontWeight: FontWeight.w800,
-                        shadows: [
+                        shadows: const [
                           Shadow(
                               color: Colors.black54,
                               blurRadius: 2,
@@ -101,17 +101,17 @@ class _CardPerspectiveDemoPageState extends State<CardPerspectiveDemoPage> {
                         foreground: Paint()
                           ..style = PaintingStyle.fill
                           ..strokeWidth = 3
-                          ..shader = LinearGradient(
+                          ..shader = const LinearGradient(
                                   begin: Alignment.bottomLeft,
                                   end: Alignment.topRight,
                                   colors: [Colors.yellow, Colors.black])
-                              .createShader(Rect.fromLTWH(0, 0, 200, 100)),
+                              .createShader(const Rect.fromLTWH(0, 0, 200, 100)),
                       ),
                     ),
                   ),
-                  new Container(
-                    margin: EdgeInsets.only(top: 10, bottom: 10),
-                    child: new Text(
+                  Container(
+                    margin: const EdgeInsets.only(top: 10, bottom: 10),
+                    child: const Text(
                       "MIUI 13",
                       style: TextStyle(
                           color: Colors.blueAccent,
@@ -120,10 +120,10 @@ class _CardPerspectiveDemoPageState extends State<CardPerspectiveDemoPage> {
                           fontFamily: "Agne"),
                     ),
                   ),
-                  new Spacer(),
-                  new Container(
-                    margin: EdgeInsets.only(bottom: 10),
-                    child: new Text(
+                  const Spacer(),
+                  Container(
+                    margin: const EdgeInsets.only(bottom: 10),
+                    child: const Text(
                       "新版本优化应用",
                       style: TextStyle(
                         color: Colors.white,

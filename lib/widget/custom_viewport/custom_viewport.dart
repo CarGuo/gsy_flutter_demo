@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
@@ -7,24 +8,16 @@ class CustomViewport extends Viewport {
   final List<Type> highestChildInPaintOrderClassList;
 
   CustomViewport({
-    Key? key,
-    AxisDirection axisDirection = AxisDirection.down,
-    AxisDirection? crossAxisDirection,
-    double anchor = 0.0,
-    required ViewportOffset offset,
-    Key? center,
-    double? cacheExtent,
-    List<Widget> slivers = const <Widget>[],
+    super.key,
+    super.axisDirection,
+    super.crossAxisDirection,
+    super.anchor,
+    required super.offset,
+    super.center,
+    super.cacheExtent,
+    super.slivers,
     this.highestChildInPaintOrderClassList = const <Type>[],
-  }) : super(
-            key: key,
-            slivers: slivers,
-            axisDirection: axisDirection,
-            crossAxisDirection: crossAxisDirection,
-            anchor: anchor,
-            offset: offset,
-            center: center,
-            cacheExtent: cacheExtent);
+  });
 
   @override
   RenderViewport createRenderObject(BuildContext context) {
@@ -44,23 +37,13 @@ class _RenderExpandedViewport extends RenderViewport {
   final List<Type> highestChildInPaintOrderClassList;
 
   _RenderExpandedViewport({
-    AxisDirection axisDirection = AxisDirection.down,
-    required AxisDirection crossAxisDirection,
-    required ViewportOffset offset,
-    double anchor = 0.0,
-    List<RenderSliver>? children,
-    RenderSliver? center,
-    double? cacheExtent,
+    super.axisDirection,
+    required super.crossAxisDirection,
+    required super.offset,
+    super.anchor,
+    super.cacheExtent,
     this.highestChildInPaintOrderClassList = const <Type>[],
-  }) : super(
-          axisDirection: axisDirection,
-          crossAxisDirection: crossAxisDirection,
-          offset: offset,
-          anchor: anchor,
-          children: children,
-          center: center,
-          cacheExtent: cacheExtent,
-        );
+  });
 
   @override
   Iterable<RenderSliver> get childrenInPaintOrder {
@@ -84,16 +67,18 @@ class _RenderExpandedViewport extends RenderViewport {
       child = childAfter(child);
     }
     if (highestChildInPaintOrderClassList.isNotEmpty) {
-      highestChildInPaintOrderClassList.forEach((clazz) {
+      for (var clazz in highestChildInPaintOrderClassList) {
         try {
           final renderSliver =
               children.firstWhere((child) => child.runtimeType == clazz);
           children.remove(renderSliver);
           children.add(renderSliver);
         } catch (e) {
-          print(e);
+          if (kDebugMode) {
+            print(e);
+          }
         }
-      });
+      }
       return children;
     } else {
       return children.reversed.toList();

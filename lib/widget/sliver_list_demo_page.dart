@@ -5,6 +5,8 @@ import 'package:flutter/material.dart' as W;
 import 'package:flutter/rendering.dart';
 
 class SliverListDemoPage extends StatefulWidget {
+  const SliverListDemoPage({super.key});
+
   @override
   _SliverListDemoPageState createState() => _SliverListDemoPageState();
 }
@@ -25,7 +27,7 @@ class _SliverListDemoPageState extends State<SliverListDemoPage>
             curve: Curves.bounceInOut,
             duration: const Duration(milliseconds: 10),
           ),
-          child: new Container(
+          child: Container(
             color: Colors.redAccent,
           ),
         ),
@@ -53,34 +55,34 @@ class _SliverListDemoPageState extends State<SliverListDemoPage>
                   child: Padding(
                     padding: EdgeInsets.only(
                         bottom: 10, left: lr, right: lr, top: lr),
-                    child: new Row(
+                    child: Row(
                       mainAxisSize: MainAxisSize.max,
                       children: <Widget>[
-                        new Expanded(
-                          child: new Container(
+                        Expanded(
+                          child: Container(
                             alignment: Alignment.center,
                             color: Colors.orangeAccent,
-                            child: new TextButton(
+                            child: TextButton(
                               onPressed: () {
                                 setState(() {
                                   listCount = 30;
                                 });
                               },
-                              child: new Text("按键1"),
+                              child: const Text("按键1"),
                             ),
                           ),
                         ),
-                        new Expanded(
-                          child: new Container(
+                        Expanded(
+                          child: Container(
                             alignment: Alignment.center,
                             color: Colors.orangeAccent,
-                            child: new TextButton(
+                            child: TextButton(
                               onPressed: () {
                                 setState(() {
                                   listCount = 4;
                                 });
                               },
-                              child: new Text("按键2"),
+                              child: const Text("按键2"),
                             ),
                           ),
                         ),
@@ -98,38 +100,36 @@ class _SliverListDemoPageState extends State<SliverListDemoPage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: new Text("SliverListDemoPage"),
+        title: const Text("SliverListDemoPage"),
       ),
-      body: new Container(
-        child: NestedScrollView(
-          physics: const AlwaysScrollableScrollPhysics(),
-          headerSliverBuilder: _sliverBuilder,
-          body: CustomScrollView(
-            slivers: [
-              W.Builder(
-                builder: (context) {
-                  return SliverOverlapInjector(
-                      handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
-                          context));
+      body: NestedScrollView(
+        physics: const AlwaysScrollableScrollPhysics(),
+        headerSliverBuilder: _sliverBuilder,
+        body: CustomScrollView(
+          slivers: [
+            W.Builder(
+              builder: (context) {
+                return SliverOverlapInjector(
+                    handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
+                        context));
+              },
+            ),
+            SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (context, index) {
+                  return Card(
+                    child: Container(
+                      height: 60,
+                      padding: const EdgeInsets.only(left: 10),
+                      alignment: Alignment.centerLeft,
+                      child: Text("Item $index"),
+                    ),
+                  );
                 },
+                childCount: 100,
               ),
-              SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  (context, index) {
-                    return Card(
-                      child: new Container(
-                        height: 60,
-                        padding: EdgeInsets.only(left: 10),
-                        alignment: Alignment.centerLeft,
-                        child: new Text("Item $index"),
-                      ),
-                    );
-                  },
-                  childCount: 100,
-                ),
-              )
-            ],
-          ),
+            )
+          ],
         ),
       ),
     );
@@ -183,5 +183,5 @@ class GSYSliverHeaderDelegate extends SliverPersistentHeaderDelegate {
   FloatingHeaderSnapConfiguration get snapConfiguration => snapConfig;
 }
 
-typedef Widget Builder(
+typedef Builder = Widget Function(
     BuildContext context, double shrinkOffset, bool overlapsContent);

@@ -24,9 +24,9 @@ class ParticleModel {
 
     tween = MovieTween()
       ..tween(ParticleOffsetProps.x, startPosition.dx.tweenTo(endPosition.dx),
-          duration: Duration(milliseconds: 20))
+          duration: const Duration(milliseconds: 20))
       ..tween(ParticleOffsetProps.y, startPosition.dy.tweenTo(endPosition.dy),
-          duration: Duration(milliseconds: 20));
+          duration: const Duration(milliseconds: 20));
 
     duration = 3000.milliseconds + random.nextInt(6000).milliseconds;
     startTime = DateTime.now().duration();
@@ -34,7 +34,7 @@ class ParticleModel {
   }
 
   void _shuffle() {
-    startTime -= (this.random.nextDouble() * duration.inMilliseconds)
+    startTime -= (random.nextDouble() * duration.inMilliseconds)
         .round()
         .milliseconds;
   }

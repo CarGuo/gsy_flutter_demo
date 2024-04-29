@@ -3,8 +3,8 @@ import 'package:gsy_flutter_demo/widget/custom_viewport/first_tab_bar_sliver_wid
 
 class FirstTabBar extends StatelessWidget {
   const FirstTabBar({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class FirstTabBar extends StatelessWidget {
     return Container(
       height: 66,
       color: Colors.deepPurpleAccent,
-      child: Center(
+      child: const Center(
         child: Text('一级tab'),
       ),
     );

@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:gsy_flutter_demo/widget/sliver_tab/sliver_tab_child_page.dart';
 
-final kMinHeight = 30.0;
+const kMinHeight = 30.0;
 
 /// 高级版 Sliver Tab
 class SliverTabDemoPage3 extends StatefulWidget {
+  const SliverTabDemoPage3({super.key});
+
   @override
   _SliverTabDemoPageState createState() => _SliverTabDemoPageState();
 }
@@ -16,7 +18,7 @@ class _SliverTabDemoPageState extends State<SliverTabDemoPage3>
     with TickerProviderStateMixin {
   TabController? tabController;
 
-  final PageController pageController = new PageController();
+  final PageController pageController = PageController();
   final int tabLength = 4;
   final double tabIconSize = 30;
   final List<List> dataList = [
@@ -47,9 +49,9 @@ class _SliverTabDemoPageState extends State<SliverTabDemoPage3>
               size: tabIconSize - offset,
             ),
           ),
-          new Expanded(
-            child: new Center(
-              child: new Text(
+          Expanded(
+            child: Center(
+              child: Text(
                 "Tab$index",
               ),
             ),
@@ -67,7 +69,7 @@ class _SliverTabDemoPageState extends State<SliverTabDemoPage3>
 
   @override
   void initState() {
-    tabController = new TabController(length: tabLength, vsync: this);
+    tabController = TabController(length: tabLength, vsync: this);
     super.initState();
   }
 
@@ -75,9 +77,9 @@ class _SliverTabDemoPageState extends State<SliverTabDemoPage3>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: new Text("SliverTabDemoPage3"),
+        title: const Text("SliverTabDemoPage3"),
       ),
-      body: new NotificationListener(
+      body: NotificationListener(
         onNotification: (ScrollNotification notification) {
           if (notification.metrics is PageMetrics) {
             return false;
@@ -144,7 +146,7 @@ class _SliverTabDemoPageState extends State<SliverTabDemoPage3>
                 },
               ),
             ),
-            new Expanded(
+            Expanded(
               child: PageView(
                 //physics: NeverScrollableScrollPhysics(),
                 onPageChanged: (index) {
@@ -203,5 +205,5 @@ class GSYSliverHeaderDelegate extends SliverPersistentHeaderDelegate {
   FloatingHeaderSnapConfiguration get snapConfiguration => snapConfig;
 }
 
-typedef Widget BuilderDelegate(
+typedef BuilderDelegate = Widget Function(
     BuildContext context, double shrinkOffset, bool overlapsContent);
