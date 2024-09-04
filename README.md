@@ -20,7 +20,7 @@
 ### [Web 版在线测试](https://guoshuyu.cn/home/web/#/)
 ### [APK 下载](https://github.com/CarGuo/gsy_flutter_demo/releases)
 
-> 目前开始逐步补全完善，主要提供一些有用或者有趣的例子，如果你也有好例子，环境提交 PR 。
+> 目前开始逐步补全完善，主要提供一些有用或者有趣的例子，如果你也有好例子，欢迎提交 PR 。
 >
 > **运行须知：配置好Flutter开发环境(目前Flutter SDK 版本 *3.24* 以上版本)。**
 >
