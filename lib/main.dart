@@ -132,6 +132,8 @@ import 'package:gsy_flutter_demo/widget/stick_sliver_list_demo_page.dart'
     deferred as stick_sliver_list_demo_page;
 import 'package:gsy_flutter_demo/widget/tag_demo_page.dart'
     deferred as tag_demo_page;
+import 'package:gsy_flutter_demo/widget/text_baseline_align_demo_page.dart'
+    deferred as text_baseline_align_demo_page;
 import 'package:gsy_flutter_demo/widget/text_line_height_demo_page.dart'
     deferred as text_line_height_demo_page;
 import 'package:gsy_flutter_demo/widget/text_size_demo_page.dart'
@@ -384,6 +386,12 @@ Map<String, WidgetBuilder> routers = {
         (context) {
       return transform_demo_page.TransformDemoPage();
     });
+  },
+  "文字混排基线对齐(\$对齐价格)": (context) {
+    return ContainerAsyncRouterPage(text_baseline_align_demo_page.loadLibrary(),
+            (context) {
+          return text_baseline_align_demo_page.TextBaselineAlignDemoPage();
+        });
   },
   "计算另类文本行间距展示": (context) {
     return ContainerAsyncRouterPage(text_line_height_demo_page.loadLibrary(),

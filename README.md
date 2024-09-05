@@ -84,6 +84,12 @@ Map<String, WidgetBuilder> routers = {
           return transform_demo_page.TransformDemoPage();
         });
   },
+  "文字混排基线对齐(\$对齐价格)": (context) {
+    return ContainerAsyncRouterPage(text_baseline_align_demo_page.loadLibrary(),
+            (context) {
+          return text_baseline_align_demo_page.TextBaselineAlignDemoPage();
+        });
+  },
   "计算另类文本行间距展示": (context) {
     return ContainerAsyncRouterPage(text_line_height_demo_page.loadLibrary(),
             (context) {
