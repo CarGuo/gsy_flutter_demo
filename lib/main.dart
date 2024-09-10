@@ -212,6 +212,9 @@ import 'package:gsy_flutter_demo/widget/un_bounded_listview.dart'
 import 'package:gsy_flutter_demo/widget/pageview_in_pageview_demo_page.dart'
     deferred as pageview_in_pageview_demo_page;
 
+import 'package:gsy_flutter_demo/widget/gesture_password/gesture_password_demo_page.dart'
+    deferred as gesture_password_demo_page;
+
 import 'package:window_location_href/window_location_href.dart';
 
 void main() => runApp(const MyApp());
@@ -915,6 +918,12 @@ Map<String, WidgetBuilder> routers = {
     return ContainerAsyncRouterPage(
         pageview_in_pageview_demo_page.loadLibrary(), (context) {
       return pageview_in_pageview_demo_page.PageViewInPageViewDemoPage();
+    });
+  },
+  "手势密码": (context) {
+    return ContainerAsyncRouterPage(gesture_password_demo_page.loadLibrary(),
+        (context) {
+      return gesture_password_demo_page.GesturePasswordDemoPage();
     });
   },
 };

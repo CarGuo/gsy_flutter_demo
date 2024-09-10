@@ -610,6 +610,18 @@ Map<String, WidgetBuilder> routers = {
           return un_bounded_listview.UnboundedListViewDemoPage();
         });
   },
+  "PageView嵌套PageView": (context) {
+    return ContainerAsyncRouterPage(
+        pageview_in_pageview_demo_page.loadLibrary(), (context) {
+      return pageview_in_pageview_demo_page.PageViewInPageViewDemoPage();
+    });
+  },
+  "手势密码": (context) {
+    return ContainerAsyncRouterPage(gesture_password_demo_page.loadLibrary(),
+            (context) {
+          return gesture_password_demo_page.GesturePasswordDemoPage();
+        });
+  },
 };
 
 ```
