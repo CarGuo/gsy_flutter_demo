@@ -25,6 +25,8 @@ if (flutterVersionName == null) {
 android {
     compileSdkVersion 34
 
+    namespace "com.gsy.shuyu.gsy_flutter_demo"
+
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }

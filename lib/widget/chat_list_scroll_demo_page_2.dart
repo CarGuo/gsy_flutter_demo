@@ -60,6 +60,28 @@ class _ChatListScrollDemoPageState2 extends State<ChatListScrollDemoPage2> {
 
   final ScrollPhysics _physics = const BouncingScrollPhysics();
 
+  Future<void> firstScrollToBottom({bool isAnimated = true}) async {
+    final double maxScroll = scroller.position.maxScrollExtent;
+    final double currentScroll = scroller.offset;
+
+    if (currentScroll < maxScroll) {
+      if (isAnimated) {
+        // Perform the animated scroll only on the first call
+        await scroller.animateTo(
+          maxScroll,
+          duration: const Duration(milliseconds: 100),
+          curve: Curves.linear,
+        );
+      } else {
+        // Perform an immediate jump to the bottom on subsequent recursive calls
+        scroller.jumpTo(maxScroll);
+      }
+
+      // Recursive call with isAnimated set to false
+      await firstScrollToBottom(isAnimated: false);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,6 +94,7 @@ class _ChatListScrollDemoPageState2 extends State<ChatListScrollDemoPage2> {
           setState(() {});
           Future.delayed(const Duration(milliseconds: 1000), () {
             scroller.jumpTo(scroller.position.maxScrollExtent);
+            //firstScrollToBottom(isAnimated: false);
           });
         },
         child: const Text(
@@ -135,10 +158,7 @@ class _ChatListScrollDemoPageState2 extends State<ChatListScrollDemoPage2> {
                     duration: Duration(milliseconds: 1000),
                   ));
                   Future.delayed(const Duration(milliseconds: 200), () {
-                    scroller.jumpTo(scroller.position.maxScrollExtent);
-                    Future.delayed(const Duration(milliseconds: 400), () {
-                      scroller.jumpTo(scroller.position.maxScrollExtent);
-                    });
+                    firstScrollToBottom(isAnimated: false);
                   });
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -151,6 +171,7 @@ class _ChatListScrollDemoPageState2 extends State<ChatListScrollDemoPage2> {
                               duration: const Duration(milliseconds: 500),
                               curve: Curves.linear);
                         });
+                        //firstScrollToBottom(isAnimated: true);
                       },
                       child: Container(
                         height: 50,
