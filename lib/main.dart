@@ -217,7 +217,10 @@ import 'package:gsy_flutter_demo/widget/gesture_password/gesture_password_demo_p
 
 import 'package:window_location_href/window_location_href.dart';
 
-void main() => runApp(const MyApp());
+void main() {
+  runApp(const MyApp());
+  WidgetsBinding.instance.addObserver(ReferrerObserver());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -248,6 +251,18 @@ class MyHomePage extends StatefulWidget {
 
   @override
   MyHomePageState createState() => MyHomePageState();
+}
+
+class ReferrerObserver with WidgetsBindingObserver {
+  @override
+  Future<bool> didPushRouteInformation(
+      RouteInformation routeInformation) async {
+    if (kDebugMode) {
+      print("didPushRouteInformation ${routeInformation.uri}");
+    }
+    /// print("didPushRouteInformation ${await Referrer().getReferrer()}");
+    return false;
+  }
 }
 
 class MyHomePageState extends State<MyHomePage> {
