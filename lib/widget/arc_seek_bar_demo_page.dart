@@ -164,7 +164,7 @@ class ArcSeekBarPainter extends CustomPainter {
 
   void initShadowPaint() {
     shadowPaint = Paint()
-      ..color = Colors.black.withOpacity(0.3)
+      ..color = Colors.black.withValues(alpha: 0.3)
       ..strokeWidth = arcPaint.strokeWidth + 4
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round
@@ -254,7 +254,7 @@ class ArcSeekBarPainter extends CustomPainter {
         ..addOval(Rect.fromCircle(
             center: Offset(thumbX, thumbY), radius: thumbRadius + 3));
       Paint shadowPaint = Paint()
-        ..color = Colors.black.withOpacity(0.3)
+        ..color = Colors.black.withValues(alpha: 0.3)
         ..maskFilter = MaskFilter.blur(BlurStyle.normal, thumbShadowRadius);
       canvas.drawPath(oval, shadowPaint);
     }

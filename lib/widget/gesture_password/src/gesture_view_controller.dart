@@ -16,6 +16,7 @@ class GestureViewController {
   Function()? _updateView;
   Offset? _firstPoint;
   Offset? _movePoint;
+  // ignore: prefer_final_fields
   List<int> _result = [];
 }
 

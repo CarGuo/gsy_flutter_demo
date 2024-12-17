@@ -165,9 +165,7 @@ class BookPainter extends CustomPainter {
         f.y = viewHeight;
         _calcPointsXY(a, f);
         break;
-      default:
-        break;
-    }
+      }
   }
 
   _initPaintAndPath() {

@@ -285,6 +285,7 @@ class MyHomePageState extends State<MyHomePage> {
         var result = Uri.decodeFull(key);
         if (routers.keys.contains(result) && result != "/") {
           Future(() {
+            // ignore: use_build_context_synchronously
             Navigator.pushNamed(context, result);
           });
         }
@@ -972,3 +973,5 @@ extension CatExtension on Cat {
     }
   }
 }
+
+

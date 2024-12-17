@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gsy_flutter_demo/widget/gesture_password/gesture_password_view.dart';
-import 'package:gsy_flutter_demo/widget/link_sliver/link_flexible_space_bar.dart';
 
 class GesturePasswordDemoPage extends StatefulWidget {
   const GesturePasswordDemoPage({super.key});
