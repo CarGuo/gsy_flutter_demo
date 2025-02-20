@@ -231,7 +231,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'GSY Flutter Demo',
       theme: ThemeData(
-        useMaterial3: false,
+        useMaterial3: true,
         primarySwatch: Colors.blue,
         textButtonTheme: const TextButtonThemeData(
           // 去掉 TextButton 的水波纹效果
