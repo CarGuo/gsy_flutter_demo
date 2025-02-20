@@ -29,6 +29,7 @@
 .pub/
 /build/
 .gradle
+.cxx/
 
 # Android related
 **/android/**/gradle-wrapper.jar
