@@ -25,7 +25,7 @@ jobs:
           java-version: 21
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: '3.27.1'
+          flutter-version: '3.29.2'
       - run: flutter pub get
       - run: flutter build apk
 
@@ -43,11 +43,11 @@ jobs:
           java-version: 21
       - uses: subosito/flutter-action@v1
         with:
-          flutter-version: '3.27.1'
+          flutter-version: '3.29.2'
       - run: flutter pub get
       - run: flutter build apk --target-platform android-arm64
       - name: Upload APK
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: apk
           path: build/app/outputs/apk/release/app-release.apk
@@ -58,7 +58,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download APK from build
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           name: apk
       - name: Display structure of downloaded files
