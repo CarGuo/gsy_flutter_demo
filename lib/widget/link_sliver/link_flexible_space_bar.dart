@@ -166,7 +166,7 @@ class _LinkFlexibleSpaceBarState extends State<LinkFlexibleSpaceBar> {
         if (opacity > 0.0) {
           TextStyle titleStyle = theme.primaryTextTheme.titleLarge!;
           titleStyle = titleStyle.copyWith(
-              color: titleStyle.color!..withValues(alpha: opacity));
+              color: titleStyle.color!.withOpacity(opacity));
           final bool effectiveCenterTitle = _getEffectiveCenterTitle(theme)!;
           final EdgeInsetsGeometry padding = widget.titlePadding ??
               EdgeInsetsDirectional.only(

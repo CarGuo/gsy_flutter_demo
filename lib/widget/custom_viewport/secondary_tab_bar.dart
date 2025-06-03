@@ -16,7 +16,7 @@ class SecondaryTabBar extends StatelessWidget {
   Widget _buildChild() {
     return Container(
       height: 66,
-      color: Colors.red.withValues(alpha: 0.8),
+      color: Colors.red.withOpacity(0.8),
       child: const Center(child: Text('二级tab')),
     );
   }

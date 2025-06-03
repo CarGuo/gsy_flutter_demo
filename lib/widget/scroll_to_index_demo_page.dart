@@ -56,7 +56,7 @@ class _ScrollToIndexDemoPageState extends State<ScrollToIndexDemoPage> {
         key: ValueKey(index),
         controller: controller!,
         index: index,
-        highlightColor: Colors.black..withValues(alpha: 0.1),
+        highlightColor: Colors.black.withOpacity(0.1),
         child: child,
       );
 

@@ -152,7 +152,7 @@ class _PhotoGalleryState extends State<PhotoGallery> {
     colorList = List.generate(
         _imgCount,
         (index) => Color((Random().nextDouble() * 0xFFFFFF).toInt())
-            .withValues(alpha: 1));
+            .withOpacity(1));
 
     super.initState();
   }
@@ -334,7 +334,7 @@ class _AnimatedCutoutOverlay extends StatelessWidget {
           // 用一个黑色的蒙层，这里的 child 会变成 effects 里 builder 里的 child
           // 也就是黑色 Container 会在 _buildAnimatedCutout 作为 ClipPath 的 child
           child: IgnorePointer(
-              child: Container(color: Colors.black.withValues(alpha: opacity))),
+              child: Container(color: Colors.black.withOpacity(opacity))),
         ),
       ],
     );
