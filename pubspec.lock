@@ -270,6 +270,14 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.0.0"
+  flutter_conch_plugin:
+    dependency: "direct main"
+    description:
+      name: flutter_conch_plugin
+      sha256: "70d354433f28bd640643d198c789461c16d6d2b213b571ffaa3a6ab96688b21c"
+      url: "http://pub.woa.com"
+    source: hosted
+    version: "1.5.1"
   flutter_lints:
     dependency: "direct dev"
     description:
