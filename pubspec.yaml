@@ -105,6 +105,7 @@ deferred-components:
       - package:gsy_flutter_demo/widget/transform_canvas_demo_page.dart
       - package:gsy_flutter_demo/widget/juejin_3d_logo_demo_page.dart
       - package:gsy_flutter_demo/widget/juejin_3d_box_logo_demo_page.dart
+      - package:gsy_flutter_demo/widget/link_scroll_page.dart
 
 dependencies:
   flutter:

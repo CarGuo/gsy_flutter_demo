@@ -215,6 +215,9 @@ import 'package:gsy_flutter_demo/widget/pageview_in_pageview_demo_page.dart'
 import 'package:gsy_flutter_demo/widget/gesture_password/gesture_password_demo_page.dart'
     deferred as gesture_password_demo_page;
 
+import 'package:gsy_flutter_demo/widget/link_scroll_page.dart'
+    deferred as link_scroll_page;
+
 import 'package:window_location_href/window_location_href.dart';
 
 void main() {
@@ -260,6 +263,7 @@ class ReferrerObserver with WidgetsBindingObserver {
     if (kDebugMode) {
       print("didPushRouteInformation ${routeInformation.uri}");
     }
+
     /// print("didPushRouteInformation ${await Referrer().getReferrer()}");
     return false;
   }
@@ -942,6 +946,11 @@ Map<String, WidgetBuilder> routers = {
       return gesture_password_demo_page.GesturePasswordDemoPage();
     });
   },
+  "link scroll": (context) {
+    return ContainerAsyncRouterPage(link_scroll_page.loadLibrary(), (context) {
+      return link_scroll_page.LinkListViewPage();
+    });
+  },
 };
 
 enum Cat {
@@ -973,5 +982,3 @@ extension CatExtension on Cat {
     }
   }
 }
-
-
