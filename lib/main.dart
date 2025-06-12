@@ -218,6 +218,9 @@ import 'package:gsy_flutter_demo/widget/gesture_password/gesture_password_demo_p
 import 'package:gsy_flutter_demo/widget/link_scroll_page.dart'
     deferred as link_scroll_page;
 
+import 'package:gsy_flutter_demo/widget/glass_demo_page.dart'
+    deferred as glass_demo_page;
+
 import 'package:window_location_href/window_location_href.dart';
 
 void main() {
@@ -949,6 +952,11 @@ Map<String, WidgetBuilder> routers = {
   "link scroll": (context) {
     return ContainerAsyncRouterPage(link_scroll_page.loadLibrary(), (context) {
       return link_scroll_page.LinkListViewPage();
+    });
+  },
+  "glass": (context) {
+    return ContainerAsyncRouterPage(glass_demo_page.loadLibrary(), (context) {
+      return glass_demo_page.GlassDemoPage();
     });
   },
 };
