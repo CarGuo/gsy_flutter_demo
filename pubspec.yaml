@@ -108,6 +108,7 @@ deferred-components:
       - package:gsy_flutter_demo/widget/link_scroll_page.dart
       - package:gsy_flutter_demo/widget/glass_demo_page.dart
       - package:gsy_flutter_demo/widget/liquid_glass_demo.dart
+      - package:gsy_flutter_demo/widget/liquid_glass_demo2.dart
 
 dependencies:
   flutter:
@@ -155,7 +156,8 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   shaders:
-    - shaders/liquid_glass.frag # 路径要正确
+    - shaders/liquid_glass.frag
+    - shaders/liquid_glass2.frag
 
   # To add assets to your application, add an assets section, like this:
   assets:

@@ -224,6 +224,9 @@ import 'package:gsy_flutter_demo/widget/glass_demo_page.dart'
 import 'package:gsy_flutter_demo/widget/liquid_glass_demo.dart'
     deferred as liquid_glass_demo;
 
+import 'package:gsy_flutter_demo/widget/liquid_glass_demo2.dart'
+    deferred as liquid_glass_demo2;
+
 import 'package:window_location_href/window_location_href.dart';
 
 void main() {
@@ -965,6 +968,12 @@ Map<String, WidgetBuilder> routers = {
   "liquid glass": (context) {
     return ContainerAsyncRouterPage(liquid_glass_demo.loadLibrary(), (context) {
       return liquid_glass_demo.LiquidGlassShaderView();
+    });
+  },
+  "liquid glass 2": (context) {
+    return ContainerAsyncRouterPage(liquid_glass_demo2.loadLibrary(),
+        (context) {
+      return liquid_glass_demo2.LiquidGlassShaderView2();
     });
   },
 };
