@@ -15,7 +15,6 @@ class _LiquidGlassShaderViewState extends State<LiquidGlassShaderView> {
   ui.FragmentProgram? _program;
   ui.Image? _texture;
 
-  // 使用更通用的名字，并初始化在一个不会产生效果的位置
   final _pointerPosition = ValueNotifier<Offset>(const Offset(-100, -100));
   bool _isPointerDown = false;
 
@@ -59,25 +58,18 @@ class _LiquidGlassShaderViewState extends State<LiquidGlassShaderView> {
     if (_program == null || _texture == null) {
       return const Center(child: CircularProgressIndicator());
     }
-
-    // 使用 GestureDetector 替换 Listener
     return Scaffold(
       appBar: AppBar(),
       body: GestureDetector(
-        // 手指开始接触屏幕（或鼠标按下）
         onPanStart: (details) =>
             _updatePointerState(details.localPosition, true),
-        // 手指在屏幕上拖动
         onPanUpdate: (details) =>
             _updatePointerState(details.localPosition, true),
-        // 手指离开屏幕（或鼠标抬起）
         onPanEnd: (details) =>
             _updatePointerState(_pointerPosition.value, false),
-        // 处理没有拖动的“点击”
         onTapDown: (details) =>
             _updatePointerState(details.localPosition, true),
         onTapUp: (details) => _updatePointerState(details.localPosition, false),
-
         child: SizedBox.expand(
           child: ValueListenableBuilder<Offset>(
             valueListenable: _pointerPosition,

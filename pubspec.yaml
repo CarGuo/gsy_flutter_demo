@@ -107,6 +107,7 @@ deferred-components:
       - package:gsy_flutter_demo/widget/juejin_3d_box_logo_demo_page.dart
       - package:gsy_flutter_demo/widget/link_scroll_page.dart
       - package:gsy_flutter_demo/widget/glass_demo_page.dart
+      - package:gsy_flutter_demo/widget/liquid_glass_demo.dart
 
 dependencies:
   flutter:
@@ -119,11 +120,11 @@ dependencies:
   another_transformer_page_view: 2.0.0
   simple_animations: 5.0.2
   supercharged: 2.1.1
-  matrix_gesture_detector : 0.2.0-nullsafety.1
-  flutter_swiper_view : 1.1.8
-  animated_text_kit : 4.2.1
+  matrix_gesture_detector: 0.2.0-nullsafety.1
+  flutter_swiper_view: 1.1.8
+  animated_text_kit: 4.2.1
   window_location_href: 1.0.0
-  rive: 0.9.1
+  rive: 0.13.20
   animations: 2.0.4
   flutter_animate: ^1.0.0
   polygon: ^0.1.0
