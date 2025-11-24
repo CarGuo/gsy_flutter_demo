@@ -448,8 +448,8 @@ class BookPainter extends CustomPainter {
 
     Matrix4 mMatrix = Matrix4.fromList(mMatrixArray);
 
-    mMatrix.leftTranslate(e.x, e.y!);
-    mMatrix.translate(-e.x!, -e.y!);
+    mMatrix.leftTranslateByDouble(e.x!, e.y!, 0.0, 1.0);
+    mMatrix.translateByDouble(-e.x!, -e.y!, 0.0, 1.0);
     canvas.transform(mMatrix.storage);
     canvas.drawPicture(pic);
     _drawPathCShadow(canvas); //调用阴影绘制方法

@@ -183,7 +183,7 @@ class _LinkFlexibleSpaceBarState extends State<LinkFlexibleSpaceBar> {
               Tween<double>(begin: 1, end: 0.0).transform(t);
 
           final Matrix4 scaleTransform = Matrix4.identity()
-            ..scale(scaleValue, scaleValue, 1.0);
+            ..scaleByDouble(scaleValue, scaleValue, 1.0, 1.0);
 
           final Alignment titleAlignment =
               _getTitleAlignment(effectiveCenterTitle)!;

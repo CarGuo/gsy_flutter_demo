@@ -129,8 +129,8 @@ class _AnimationPainter extends CustomPainter {
       [double positionX = 0, double positionY = 0]) {
     Path path = Path();
     var t = Matrix4.identity()..rotateX(angleX)..rotateY(angleY);
-    t.leftTranslate(positionX, positionY);
-    t.translate(-positionX, -positionY);
+    t.leftTranslateByDouble(positionX, positionY, 0.0, 1.0);
+    t.translateByDouble(-positionX, -positionY, 0.0, 1.0);
     path.moveTo(-30.0 + positionX, positionY);
     path.lineTo(30.0 + positionX, positionY);
     path = path.transform(t.storage);

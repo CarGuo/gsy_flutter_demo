@@ -83,8 +83,8 @@ class _CardPerspectiveDemoPageState extends State<CardPerspectiveDemoPage> {
                 children: [
                   Transform(
                     transform: Matrix4.identity()
-                      ..translate(startTransform ? touchX * 50 - 5 : 0.0,
-                          startTransform ? touchY * 50 - 5 : 0.0, 0.0),
+                      ..translateByDouble(startTransform ? touchX * 50 - 5 : 0.0,
+                          startTransform ? touchY * 50 - 5 : 0.0, 0.0, 1.0),
                     alignment: FractionalOffset.center,
                     child: Text(
                       '13',
@@ -134,8 +134,8 @@ class _CardPerspectiveDemoPageState extends State<CardPerspectiveDemoPage> {
                   ),
                   Transform(
                     transform: Matrix4.identity()
-                      ..translate(startTransform ? touchX * 30 - 5 : 0.0,
-                          startTransform ? touchY * 30 - 5 : 0.0, 0.0),
+                      ..translateByDouble(startTransform ? touchX * 30 - 5 : 0.0,
+                          startTransform ? touchY * 30 - 5 : 0.0, 0.0, 1.0),
                     alignment: FractionalOffset.center,
                     child: Image.asset(
                       "static/gsy_cat.png",

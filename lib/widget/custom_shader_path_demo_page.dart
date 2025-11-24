@@ -83,7 +83,7 @@ class _AnimationPainter extends CustomPainter {
         path,
         _paint
           ..shader = ImageShader(img, TileMode.repeated, TileMode.repeated,
-              Matrix4.identity().scaled(0.2).storage)
+              Matrix4.identity().scaledByDouble(0.2, 0.2, 0.2, 1.0).storage)
           ..strokeWidth = 20
           ..style = PaintingStyle.stroke);
 

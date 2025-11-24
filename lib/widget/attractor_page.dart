@@ -238,7 +238,7 @@ class AttractorPainter extends CustomPainter {
         break;
     }
 
-    paint.color = particleColor.withOpacity(0.6);
+    paint.color = particleColor.withValues(alpha: 0.6);
 
     final cosA = cos(angle);
     final sinA = sin(angle);
@@ -247,7 +247,7 @@ class AttractorPainter extends CustomPainter {
     for (var p in particles) {
       // 旋转公式 (绕 Y 轴)
       double rotX = p.x * cosA - p.z * sinA;
-      double rotZ = p.x * sinA + p.z * cosA;
+      //double rotZ = p.x * sinA + p.z * cosA;
       double rotY = p.y;
 
       // 透视/正交投影
