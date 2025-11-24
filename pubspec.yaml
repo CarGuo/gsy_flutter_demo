@@ -109,6 +109,7 @@ deferred-components:
       - package:gsy_flutter_demo/widget/glass_demo_page.dart
       - package:gsy_flutter_demo/widget/liquid_glass_demo.dart
       - package:gsy_flutter_demo/widget/liquid_glass_demo2.dart
+      - package:gsy_flutter_demo/widget/attractor_page.dart
 
 dependencies:
   flutter:

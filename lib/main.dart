@@ -227,6 +227,9 @@ import 'package:gsy_flutter_demo/widget/liquid_glass_demo.dart'
 import 'package:gsy_flutter_demo/widget/liquid_glass_demo2.dart'
     deferred as liquid_glass_demo2;
 
+import 'package:gsy_flutter_demo/widget/attractor_page.dart'
+    deferred as attractor_page;
+
 import 'package:window_location_href/window_location_href.dart';
 
 void main() {
@@ -975,6 +978,12 @@ Map<String, WidgetBuilder> routers = {
         (context) {
       return liquid_glass_demo2.LiquidGlassShaderView2();
     });
+  },
+  "粒子动画": (context) {
+    return ContainerAsyncRouterPage(attractor_page.loadLibrary(),
+            (context) {
+          return attractor_page.AttractorPage();
+        });
   },
 };
 
