@@ -38,6 +38,7 @@ class _GlassDemoPageState extends State<GlassDemoPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: Container(
         width: double.infinity,
         height: double.infinity,

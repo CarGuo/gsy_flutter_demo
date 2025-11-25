@@ -1,5 +1,8 @@
+![](./logo.png)
+
 # GSY Flutter Demo
 
+### [English Document](README_EN.md)
 
 ### 不同于 [GSYGithubAppFlutter](https://github.com/CarGuo/GSYGithubAppFlutter) 项目，本项目将逐步完善各种 Flutter 独立例子，方便新手学习上手。
 
@@ -12,9 +15,15 @@
 - ## [Flutter系列文章专栏](https://juejin.cn/column/6960546078202527774)
 
 ----
-- ## [Flutter 独立简单学习演示项目](https://github.com/CarGuo/gsy_flutter_demo)
+
+- ### 同款 Flutter 完整项目版本 （ https://github.com/CarGuo/gsy_github_app_flutter ）
+* ### 同款 Android Compose 版本（ https://github.com/CarGuo/GSYGithubAppCompose ）
+* ### 同款 React Native 版 （ https://github.com/CarGuo/GSYGithubApp ）
+* ### 同款 Android Kotlin View 版本（ https://github.com/CarGuo/GSYGithubAppKotlin ）
+* ### 同款 Weex 版 （ https://github.com/CarGuo/GSYGithubAppWeex ）
+
 - ## [Flutter 完整开发实战详解 Gitbook 预览下载](https://github.com/CarGuo/gsy_flutter_book)
-- ## [所有运行问题请点击这里](https://github.com/CarGuo/gsy_github_app_flutter/issues/13)
+
 
 
 ### [Web 版在线测试](https://guoshuyu.cn/home/web/#/)
@@ -22,7 +31,7 @@
 
 > 目前开始逐步补全完善，主要提供一些有用或者有趣的例子，如果你也有好例子，欢迎提交 PR 。
 >
-> **运行须知：配置好Flutter开发环境(目前Flutter SDK 版本 *3.29* 以上版本)。**
+> **运行须知：配置好Flutter开发环境(目前Flutter SDK 版本 *3.35* 以上版本)。**
 >
 > **[如果克隆太慢或者图片看不到，可尝试从码云地址下载](https://gitee.com/CarGuo/GSYFlutterDemo)**
 
@@ -36,6 +45,7 @@
 
 ![公众号](http://img.cdn.guoshuyu.cn/wechat_qq.png)
 
+![](demo1.gif)
 ![](demo.jpg)
 
 ### 已有例子
@@ -622,8 +632,34 @@ Map<String, WidgetBuilder> routers = {
           return gesture_password_demo_page.GesturePasswordDemoPage();
         });
   },
+  "link scroll": (context) {
+    return ContainerAsyncRouterPage(link_scroll_page.loadLibrary(), (context) {
+      return link_scroll_page.LinkListViewPage();
+    });
+  },
+  "glass": (context) {
+    return ContainerAsyncRouterPage(glass_demo_page.loadLibrary(), (context) {
+      return glass_demo_page.GlassDemoPage();
+    });
+  },
+  "liquid glass": (context) {
+    return ContainerAsyncRouterPage(liquid_glass_demo.loadLibrary(), (context) {
+      return liquid_glass_demo.LiquidGlassShaderView();
+    });
+  },
+  "liquid glass 2": (context) {
+    return ContainerAsyncRouterPage(liquid_glass_demo2.loadLibrary(),
+            (context) {
+          return liquid_glass_demo2.LiquidGlassShaderView2();
+        });
+  },
+  "粒子动画": (context) {
+    return ContainerAsyncRouterPage(attractor_page.loadLibrary(),
+            (context) {
+          return attractor_page.AttractorPage();
+        });
+  },
 };
-
 ```
 
 
