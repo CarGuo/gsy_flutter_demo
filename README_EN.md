@@ -39,7 +39,11 @@
 
 [![](http://img.cdn.guoshuyu.cn/WechatIMG65.jpeg)](https://item.jd.com/12883054.html)
 
-![](demo1.gif)
+
+|    |                 |  
+|---------|-----------------|
+| ![](demo1.gif)  | ![](demo2.webp) | 
+
 ![](demo.jpg)
 
 ### Available Examples

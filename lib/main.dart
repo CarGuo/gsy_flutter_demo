@@ -229,6 +229,8 @@ import 'package:gsy_flutter_demo/widget/liquid_glass_demo2.dart'
 
 import 'package:gsy_flutter_demo/widget/attractor_page.dart'
     deferred as attractor_page;
+import 'package:gsy_flutter_demo/widget/fibonacci_sphere_page.dart'
+    deferred as fibonacci_sphere_page;
 
 import 'package:window_location_href/window_location_href.dart';
 
@@ -980,11 +982,16 @@ Map<String, WidgetBuilder> routers = {
     });
   },
   "粒子动画": (context) {
-    return ContainerAsyncRouterPage(attractor_page.loadLibrary(),
-            (context) {
-          return attractor_page.AttractorPage();
-        });
+    return ContainerAsyncRouterPage(attractor_page.loadLibrary(), (context) {
+      return attractor_page.AttractorPage();
+    });
   },
+  "斐波那契球体动画": (context) {
+    return ContainerAsyncRouterPage(fibonacci_sphere_page.loadLibrary(), (context) {
+      return fibonacci_sphere_page.FibonacciSpherePage();
+    });
+  },
+
 };
 
 enum Cat {
