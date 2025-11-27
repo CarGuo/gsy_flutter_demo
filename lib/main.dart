@@ -234,6 +234,9 @@ import 'package:gsy_flutter_demo/widget/fibonacci_sphere_page.dart'
 import 'package:gsy_flutter_demo/widget/galaxy_scene_page.dart'
     deferred as galaxy_scene_page;
 
+import 'package:gsy_flutter_demo/widget/neon_slider_page.dart'
+    deferred as neon_slider_page;
+
 import 'package:window_location_href/window_location_href.dart';
 
 void main() {
@@ -999,6 +1002,12 @@ Map<String, WidgetBuilder> routers = {
       return galaxy_scene_page.GalaxyScene();
     });
   },
+  "霓虹滑块，100%高亮": (context) {
+    return ContainerAsyncRouterPage(neon_slider_page.loadLibrary(), (context) {
+      return neon_slider_page.NeonSliderPage();
+    });
+  },
+
 };
 
 enum Cat {
