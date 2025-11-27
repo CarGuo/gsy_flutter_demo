@@ -231,6 +231,8 @@ import 'package:gsy_flutter_demo/widget/attractor_page.dart'
     deferred as attractor_page;
 import 'package:gsy_flutter_demo/widget/fibonacci_sphere_page.dart'
     deferred as fibonacci_sphere_page;
+import 'package:gsy_flutter_demo/widget/galaxy_scene_page.dart'
+    deferred as galaxy_scene_page;
 
 import 'package:window_location_href/window_location_href.dart';
 
@@ -987,11 +989,16 @@ Map<String, WidgetBuilder> routers = {
     });
   },
   "斐波那契球体动画": (context) {
-    return ContainerAsyncRouterPage(fibonacci_sphere_page.loadLibrary(), (context) {
+    return ContainerAsyncRouterPage(fibonacci_sphere_page.loadLibrary(),
+        (context) {
       return fibonacci_sphere_page.FibonacciSpherePage();
     });
   },
-
+  "星云动画": (context) {
+    return ContainerAsyncRouterPage(galaxy_scene_page.loadLibrary(), (context) {
+      return galaxy_scene_page.GalaxyScene();
+    });
+  },
 };
 
 enum Cat {

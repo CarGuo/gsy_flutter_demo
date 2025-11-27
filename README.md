@@ -40,9 +40,9 @@
 | GSYTech  |  [点我](https://juejin.im/user/582aca2ba22b9d006b59ae68/posts)    |   [点我](https://www.zhihu.com/people/carguo)       |   [点我](https://blog.csdn.net/ZuoYueLiang)  |   [点我](https://www.jianshu.com/u/6e613846e1ea)  
 
 
-|    |                 |  
-|---------|-----------------|
-| ![](demo1.gif)  | ![](demo2.webp) | 
+|    |                 |                 | 
+|---------|-----------------|-----------------|
+| ![](demo1.gif)  | ![](demo2.webp) | ![](demo3.webp) | 
 
 
 
@@ -658,6 +658,11 @@ Map<String, WidgetBuilder> routers = {
             (context) {
           return attractor_page.AttractorPage();
         });
+  },
+  "星云动画": (context) {
+    return ContainerAsyncRouterPage(galaxy_scene_page.loadLibrary(), (context) {
+      return galaxy_scene_page.GalaxyScene();
+    });
   },
 };
 ```

@@ -40,9 +40,9 @@
 [![](http://img.cdn.guoshuyu.cn/WechatIMG65.jpeg)](https://item.jd.com/12883054.html)
 
 
-|    |                 |  
-|---------|-----------------|
-| ![](demo1.gif)  | ![](demo2.webp) | 
+|    |                 |                 | 
+|---------|-----------------|-----------------|
+| ![](demo1.gif)  | ![](demo2.webp) | ![](demo3.webp) | 
 
 ![](demo.jpg)
 
@@ -953,6 +953,11 @@ Map<String, WidgetBuilder> routers = {
             (context) {
           return platform_ui_demo_page.PlatformUIDemoPage();
         });
+  },
+  "Galaxy Scene": (context) {
+    return ContainerAsyncRouterPage(galaxy_scene_page.loadLibrary(), (context) {
+      return galaxy_scene_page.GalaxyScene();
+    });
   },
 };
 ```
