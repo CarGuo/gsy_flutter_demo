@@ -237,6 +237,9 @@ import 'package:gsy_flutter_demo/widget/galaxy_scene_page.dart'
 import 'package:gsy_flutter_demo/widget/neon_slider_page.dart'
     deferred as neon_slider_page;
 
+import 'package:gsy_flutter_demo/widget/radial_lines_page.dart'
+    deferred as radial_lines_page;
+
 import 'package:window_location_href/window_location_href.dart';
 
 void main() {
@@ -1005,6 +1008,11 @@ Map<String, WidgetBuilder> routers = {
   "霓虹滑块，100%高亮": (context) {
     return ContainerAsyncRouterPage(neon_slider_page.loadLibrary(), (context) {
       return neon_slider_page.NeonSliderPage();
+    });
+  },
+  "Radial lines": (context) {
+    return ContainerAsyncRouterPage(radial_lines_page.loadLibrary(), (context) {
+      return radial_lines_page.RadialLinesPage();
     });
   },
 

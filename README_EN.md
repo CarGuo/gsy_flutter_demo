@@ -959,6 +959,16 @@ Map<String, WidgetBuilder> routers = {
       return galaxy_scene_page.GalaxyScene();
     });
   },
+  "霓虹滑块，100%高亮": (context) {
+    return ContainerAsyncRouterPage(neon_slider_page.loadLibrary(), (context) {
+      return neon_slider_page.NeonSliderPage();
+    });
+  },
+  "Radial lines": (context) {
+    return ContainerAsyncRouterPage(radial_lines_page.loadLibrary(), (context) {
+      return radial_lines_page.RadialLinesPage();
+    });
+  },
 };
 ```
 
