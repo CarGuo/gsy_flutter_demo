@@ -239,6 +239,8 @@ import 'package:gsy_flutter_demo/widget/neon_slider_page.dart'
 
 import 'package:gsy_flutter_demo/widget/radial_lines_page.dart'
     deferred as radial_lines_page;
+import 'package:gsy_flutter_demo/widget/boom_particle_page.dart'
+    deferred as boom_particle_page;
 
 import 'package:window_location_href/window_location_href.dart';
 
@@ -1013,6 +1015,11 @@ Map<String, WidgetBuilder> routers = {
   "Radial lines": (context) {
     return ContainerAsyncRouterPage(radial_lines_page.loadLibrary(), (context) {
       return radial_lines_page.RadialLinesPage();
+    });
+  },
+  "炫酷爆炸粒子": (context) {
+    return ContainerAsyncRouterPage(boom_particle_page.loadLibrary(), (context) {
+      return boom_particle_page.BoomParticlePage();
     });
   },
 

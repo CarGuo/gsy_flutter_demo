@@ -114,6 +114,7 @@ deferred-components:
       - package:gsy_flutter_demo/widget/galaxy_scene_page.dart
       - package:gsy_flutter_demo/widget/neon_slider_page.dart
       - package:gsy_flutter_demo/widget/radial_lines_page.dart
+      - package:gsy_flutter_demo/widget/boom_particle_page.dart
 
 dependencies:
   flutter:

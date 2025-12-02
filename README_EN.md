@@ -969,6 +969,11 @@ Map<String, WidgetBuilder> routers = {
       return radial_lines_page.RadialLinesPage();
     });
   },
+  "炫酷爆炸粒子": (context) {
+    return ContainerAsyncRouterPage(radial_lines_page.loadLibrary(), (context) {
+      return boom_particle_page.BoomParticlePage();
+    });
+  },
 };
 ```
 
