@@ -242,6 +242,9 @@ import 'package:gsy_flutter_demo/widget/radial_lines_page.dart'
 import 'package:gsy_flutter_demo/widget/boom_particle_page.dart'
     deferred as boom_particle_page;
 
+import 'package:gsy_flutter_demo/widget/black_hole_simulation_page.dart'
+    deferred as black_hole_simulation_page;
+
 import 'package:window_location_href/window_location_href.dart';
 
 void main() {
@@ -1018,11 +1021,17 @@ Map<String, WidgetBuilder> routers = {
     });
   },
   "炫酷爆炸粒子": (context) {
-    return ContainerAsyncRouterPage(boom_particle_page.loadLibrary(), (context) {
+    return ContainerAsyncRouterPage(boom_particle_page.loadLibrary(),
+        (context) {
       return boom_particle_page.BoomParticlePage();
     });
   },
-
+  "Black hole": (context) {
+    return ContainerAsyncRouterPage(black_hole_simulation_page.loadLibrary(),
+            (context) {
+          return black_hole_simulation_page.BlackHoleSimulation();
+        });
+  },
 };
 
 enum Cat {

@@ -679,6 +679,12 @@ Map<String, WidgetBuilder> routers = {
       return boom_particle_page.BoomParticlePage();
     });
   },
+  "Black hole": (context) {
+    return ContainerAsyncRouterPage(black_hole_simulation_page.loadLibrary(),
+            (context) {
+          return black_hole_simulation_page.BlackHoleSimulation();
+        });
+  },
 };
 ```
 

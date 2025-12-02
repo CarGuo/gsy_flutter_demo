@@ -203,7 +203,7 @@ class ParticlePainter extends CustomPainter {
     // 也可以试试 pointsFromPolygon 如果需要更大的点
 
     final Paint paint = Paint()
-      ..color = Colors.cyanAccent.withOpacity(0.6)
+      ..color = Colors.cyanAccent.withValues(alpha: 0.6)
       ..strokeWidth = 2.0
       ..strokeCap = StrokeCap.round
       ..blendMode = BlendMode.screen; // 混合模式产生发光叠加效果
