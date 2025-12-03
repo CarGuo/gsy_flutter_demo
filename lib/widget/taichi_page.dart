@@ -173,6 +173,7 @@ class _TaiChiMasterpieceState extends State<TaiChiMasterpiece>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       backgroundColor: Colors.black, // 确保背景色
       body: Stack(
         children: [
