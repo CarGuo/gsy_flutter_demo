@@ -61,6 +61,7 @@ class _GalaxyParticleScreenState extends State<GalaxyParticleScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       backgroundColor: Colors.black,
       body: LayoutBuilder(
         builder: (context, constraints) {
@@ -247,7 +248,7 @@ class ParticlePainter extends CustomPainter {
     // 白洞光晕
     final whiteGlow = Paint()
       ..shader = RadialGradient(
-        colors: [Colors.white.withOpacity(0.8), Colors.transparent],
+        colors: [Colors.white.withValues(alpha: 0.8), Colors.transparent],
       ).createShader(Rect.fromCircle(center: whiteHole, radius: 40));
     canvas.drawCircle(whiteHole, 40, whiteGlow);
 
@@ -264,7 +265,7 @@ class ParticlePainter extends CustomPainter {
     // 这里采用这种折中方案：统一用一种微透明的白色，靠重叠产生亮度。
 
     final paint = Paint()
-      ..color = Colors.white.withOpacity(0.4) // 基础透明度
+      ..color = Colors.white.withValues(alpha: 0.4) // 基础透明度
       ..strokeWidth = 1.5
       ..strokeCap = StrokeCap.round;
 

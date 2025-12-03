@@ -113,6 +113,7 @@ class _NebulaTaiChiPageState extends State<NebulaTaiChiPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       backgroundColor: Colors.black,
       body: Center(
         // 使用 RepaintBoundary 可以提高静态背景下的性能
@@ -177,13 +178,13 @@ class NebulaPainter extends CustomPainter {
     // 1. 绘制拖尾 (分层绘制以实现渐变透明度)
     for (int i = 0; i < trailSegments.length; i++) {
       double alpha = (1.0 - i / trailSegments.length) * 0.3;
-      blurPaint.color = Colors.white.withOpacity(alpha);
+      blurPaint.color = Colors.white.withValues(alpha:   alpha);
       blurPaint.strokeWidth = 1.0; // 拖尾稍细
       canvas.drawPoints(PointMode.points, trailSegments[i], blurPaint);
     }
 
     // 2. 绘制粒子头部 (最亮)
-    blurPaint.color = Colors.white.withOpacity(0.8);
+    blurPaint.color = Colors.white.withValues(alpha: 0.8);
     blurPaint.strokeWidth = 1.5; // 头部稍粗
     canvas.drawPoints(PointMode.points, headPoints, blurPaint);
   }

@@ -698,6 +698,11 @@ Map<String, WidgetBuilder> routers = {
           return black_hole_page.GalaxyParticleScreen();
         });
   },
+  "太极粒子": (context) {
+    return ContainerAsyncRouterPage(taichi_page.loadLibrary(), (context) {
+      return taichi_page.TaiChiMasterpiece();
+    });
+  },
 };
 ```
 
