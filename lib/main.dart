@@ -245,6 +245,9 @@ import 'package:gsy_flutter_demo/widget/boom_particle_page.dart'
 import 'package:gsy_flutter_demo/widget/black_hole_simulation_page.dart'
     deferred as black_hole_simulation_page;
 
+import 'package:gsy_flutter_demo/widget/stream_taichi_page.dart'
+    deferred as stream_taichi_page;
+
 import 'package:window_location_href/window_location_href.dart';
 
 void main() {
@@ -1028,10 +1031,17 @@ Map<String, WidgetBuilder> routers = {
   },
   "Black hole": (context) {
     return ContainerAsyncRouterPage(black_hole_simulation_page.loadLibrary(),
+        (context) {
+      return black_hole_simulation_page.BlackHoleSimulation();
+    });
+  },
+  "流体太极": (context) {
+    return ContainerAsyncRouterPage(stream_taichi_page.loadLibrary(),
             (context) {
-          return black_hole_simulation_page.BlackHoleSimulation();
+          return stream_taichi_page.NebulaTaiChiPage();
         });
   },
+
 };
 
 enum Cat {
