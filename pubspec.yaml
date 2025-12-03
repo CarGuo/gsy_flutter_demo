@@ -117,6 +117,7 @@ deferred-components:
       - package:gsy_flutter_demo/widget/boom_particle_page.dart
       - package:gsy_flutter_demo/widget/black_hole_simulation_page.dart
       - package:gsy_flutter_demo/widget/stream_taichi_page.dart
+      - package:gsy_flutter_demo/widget/black_hole_page.dart
 
 dependencies:
   flutter:

@@ -980,6 +980,18 @@ Map<String, WidgetBuilder> routers = {
           return black_hole_simulation_page.BlackHoleSimulation();
         });
   },
+  "流体太极": (context) {
+    return ContainerAsyncRouterPage(stream_taichi_page.loadLibrary(),
+            (context) {
+          return stream_taichi_page.NebulaTaiChiPage();
+        });
+  },
+  "黑洞流体": (context) {
+    return ContainerAsyncRouterPage(black_hole_page.loadLibrary(),
+            (context) {
+          return black_hole_page.GalaxyParticleScreen();
+        });
+  },
 };
 ```
 
