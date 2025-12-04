@@ -47,6 +47,7 @@ class _AkazaCompassWidgetState extends State<AkazaCompassWidget>
 
   bool _isDrawingComplete = false;
   bool _isRotationComplete = false;
+  bool _isAllAnimationsComplete = false; // 所有动画是否完成
 
   @override
   void initState() {
@@ -126,6 +127,15 @@ class _AkazaCompassWidgetState extends State<AkazaCompassWidget>
       }
     });
 
+    _characterController.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        // 所有动画完成
+        setState(() {
+          _isAllAnimationsComplete = true;
+        });
+      }
+    });
+
     // 启动动画
     _drawController.forward();
   }
@@ -139,6 +149,24 @@ class _AkazaCompassWidgetState extends State<AkazaCompassWidget>
     super.dispose();
   }
 
+  // 重新播放动画
+  void _replayAnimation() {
+    setState(() {
+      _isDrawingComplete = false;
+      _isRotationComplete = false;
+      _isAllAnimationsComplete = false;
+    });
+
+    // 重置所有控制器
+    _drawController.reset();
+    _rotateController.reset();
+    _tiltController.reset();
+    _characterController.reset();
+
+    // 重新开始动画
+    _drawController.forward();
+  }
+
   @override
   Widget build(BuildContext context) {
     // 图片原始比例
@@ -148,7 +176,9 @@ class _AkazaCompassWidgetState extends State<AkazaCompassWidget>
     // 定义发光颜色，与阵法的青蓝色光晕一致 (参考了 Painter 中的 cCyanGlow)
     const Color charGlowColor = Color(0xFF6FF3F2);
 
-    return AnimatedBuilder(
+    return Stack(
+      children: [
+        AnimatedBuilder(
       animation: Listenable.merge([
         _drawController,
         _rotateController,
@@ -249,6 +279,22 @@ class _AkazaCompassWidgetState extends State<AkazaCompassWidget>
           ],
         );
       },
+    ),
+        // FAB 按钮：动画全部完成后显示
+        if (_isAllAnimationsComplete)
+          Positioned(
+            right: 20,
+            bottom: 20,
+            child: FloatingActionButton(
+              onPressed: _replayAnimation,
+              backgroundColor: const Color(0xFF6FF3F2),
+              child: const Icon(
+                Icons.replay,
+                color: Color(0xFF020008),
+              ),
+            ),
+          ),
+      ],
     );
   }
 }
