@@ -996,6 +996,11 @@ Map<String, WidgetBuilder> routers = {
     return ContainerAsyncRouterPage(taichi_page.loadLibrary(), (context) {
       return taichi_page.TaiChiMasterpiece();
     });
+  },  
+  "破坏杀·罗针": (context) {
+    return ContainerAsyncRouterPage(akaza_page.loadLibrary(), (context) {
+      return akaza_page.AkazaCompassPage();
+    });
   },
 };
 ```

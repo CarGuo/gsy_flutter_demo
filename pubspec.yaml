@@ -119,6 +119,7 @@ deferred-components:
       - package:gsy_flutter_demo/widget/stream_taichi_page.dart
       - package:gsy_flutter_demo/widget/black_hole_page.dart
       - package:gsy_flutter_demo/widget/taichi_page.dart
+      - package:gsy_flutter_demo/widget/akaza_page.dart
 
 dependencies:
   flutter:

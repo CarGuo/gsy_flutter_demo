@@ -254,6 +254,8 @@ import 'package:gsy_flutter_demo/widget/black_hole_page.dart'
 import 'package:gsy_flutter_demo/widget/taichi_page.dart'
     deferred as taichi_page;
 
+import 'package:gsy_flutter_demo/widget/akaza_page.dart' deferred as akaza_page;
+
 import 'package:window_location_href/window_location_href.dart';
 
 void main() {
@@ -1055,6 +1057,11 @@ Map<String, WidgetBuilder> routers = {
   "太极粒子": (context) {
     return ContainerAsyncRouterPage(taichi_page.loadLibrary(), (context) {
       return taichi_page.TaiChiMasterpiece();
+    });
+  },
+  "破坏杀·罗针": (context) {
+    return ContainerAsyncRouterPage(akaza_page.loadLibrary(), (context) {
+      return akaza_page.AkazaCompassPage();
     });
   },
 
