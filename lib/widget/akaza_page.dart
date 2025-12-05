@@ -7,9 +7,10 @@ class AkazaCompassPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: Color(0xFF020008),
-      body: Center(
+    return  Scaffold(
+      appBar: AppBar(),
+      backgroundColor: const Color(0xFF020008),
+      body: const Center(
         child: Padding(
           padding: EdgeInsets.all(20.0),
           child: AspectRatio(

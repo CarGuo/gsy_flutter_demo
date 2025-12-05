@@ -49,912 +49,615 @@
 ### Available Examples
 
 ```dart
+
 Map<String, WidgetBuilder> routers = {
-  "Text Input with Simple Controller": (context) {
+  "文本输入框简单的 Controller": (context) {
     return ContainerAsyncRouterPage(controller_demo_page.loadLibrary(),
             (context) {
           return controller_demo_page.ControllerDemoPage();
         });
   },
-  "Implementing Different Corner Radius Combinations": (context) {
+  "实现控件圆角不同组合": (context) {
     return ContainerAsyncRouterPage(clip_demo_page.loadLibrary(), (context) {
       return clip_demo_page.ClipDemoPage();
     });
   },
-  "List Scroll Listener": (context) {
+  "列表滑动监听": (context) {
     return ContainerAsyncRouterPage(scroll_listener_demo_page.loadLibrary(),
             (context) {
           return scroll_listener_demo_page.ScrollListenerDemoPage();
         });
   },
-  "Scroll to Specified Position": (context) {
+  "滑动到指定位置": (context) {
     return ContainerAsyncRouterPage(scroll_to_index_demo_page.loadLibrary(),
             (context) {
           return scroll_to_index_demo_page.ScrollToIndexDemoPage();
         });
   },
-  "Scroll to Specified Position 2": (context) {
+  "滑动到指定位置2": (context) {
     return ContainerAsyncRouterPage(scroll_to_index_demo_page2.loadLibrary(),
             (context) {
           return scroll_to_index_demo_page2.ScrollToIndexDemoPage2();
         });
   },
-  "Display Gradient Text with Border": (context) {
+  "展示渐变带边框的文本": (context) {
     return ContainerAsyncRouterPage(gradient_text_demo_page.loadLibrary(),
             (context) {
           return gradient_text_demo_page.GradientTextDemoPage();
         });
   },
-  "Transform Effect Display": (context) {
+  "Transform 效果展示": (context) {
     return ContainerAsyncRouterPage(transform_demo_page.loadLibrary(),
             (context) {
           return transform_demo_page.TransformDemoPage();
         });
   },
-  "Calculate Alternative Text Line Height Display": (context) {
+  "计算另类文本行间距展示": (context) {
     return ContainerAsyncRouterPage(text_line_height_demo_page.loadLibrary(),
             (context) {
           return text_line_height_demo_page.TextLineHeightDemoPage();
         });
   },
-  "Simple Pull-to-Refresh": (context) {
+  "简单上下刷新": (context) {
     return ContainerAsyncRouterPage(refrsh_demo_page.loadLibrary(), (context) {
       return refrsh_demo_page.RefreshDemoPage();
     });
   },
-  "Simple Pull-to-Refresh 2": (context) {
+  "简单上下刷新2": (context) {
     return ContainerAsyncRouterPage(refrsh_demo_page2.loadLibrary(), (context) {
       return refrsh_demo_page2.RefreshDemoPage2();
     });
   },
-  "Simple Pull-to-Refresh 3": (context) {
+  "简单上下刷新3": (context) {
     return ContainerAsyncRouterPage(refrsh_demo_page3.loadLibrary(), (context) {
       return refrsh_demo_page3.RefreshDemoPage3();
     });
   },
-  "Absolute Positioning Layout": (context) {
+  "通过绝对定位布局": (context) {
     return ContainerAsyncRouterPage(positioned_demo_page.loadLibrary(),
             (context) {
           return positioned_demo_page.PositionedDemoPage();
         });
   },
-  "Bubble Tooltip": (context) {
+  "气泡提示框": (context) {
     return ContainerAsyncRouterPage(bubble_demo_page.loadLibrary(), (context) {
       return bubble_demo_page.BubbleDemoPage();
     });
   },
-  "Tag Effect Display": (context) {
+  "Tag效果展示": (context) {
     return ContainerAsyncRouterPage(tag_demo_page.loadLibrary(), (context) {
       return tag_demo_page.TagDemoPage();
     });
   },
-  "Shared Element Transition Effect": (context) {
+  "共享元素跳转效果": (context) {
     return ContainerAsyncRouterPage(honor_demo_page.loadLibrary(), (context) {
       return honor_demo_page.HonorDemoPage();
     });
   },
-  "Slide Verification": (context) {
+  "滑动验证": (context) {
     return ContainerAsyncRouterPage(silder_verify_page.loadLibrary(),
             (context) {
           return silder_verify_page.SlideVerifyPage();
         });
   },
-  "Wrap Content Implementation": (context) {
+  "warpContent实现": (context) {
     return ContainerAsyncRouterPage(wrap_content_page.loadLibrary(), (context) {
       return wrap_content_page.WrapContentPage();
     });
   },
-  "Status Bar Color Modification (App Only)": (context) {
+  "状态栏颜色修改（仅 App）": (context) {
     return ContainerAsyncRouterPage(statusbar_demo_page.loadLibrary(),
             (context) {
           return statusbar_demo_page.StatusBarDemoPage();
         });
   },
-  "Key Sample Application": (context) {
-    return ContainerAsyncRouterPage(key_demo_page.loadLibrary(), (context) {
-      return key_demo_page.KeyDemoPage();
+  "键盘弹出与监听（仅 App）": (context) {
+    return ContainerAsyncRouterPage(keyboard_demo_page.loadLibrary(),
+            (context) {
+          return keyboard_demo_page.KeyBoardDemoPage();
+        });
+  },
+  "控件动画组合展示（旋转加放大圆）": (context) {
+    return ContainerAsyncRouterPage(anima_demo_page.loadLibrary(), (context) {
+      return anima_demo_page.AnimaDemoPage();
     });
   },
-  "Download Button Animation": (context) {
-    return ContainerAsyncRouterPage(circle_download_button_widget.loadLibrary(),
-            (context) {
-          return circle_download_button_widget.DownloadDemoPage();
-        });
-  },
-  "Sticky Header": (context) {
-    return ContainerAsyncRouterPage(stick_demo_page.loadLibrary(), (context) {
-      return stick_demo_page.StickDemoPage();
+  "控件展开动画效果": (context) {
+    return ContainerAsyncRouterPage(anima_demo_page2.loadLibrary(), (context) {
+      return anima_demo_page2.AnimaDemoPage2();
     });
   },
-  "Sticky Header 2": (context) {
-    return ContainerAsyncRouterPage(stick_demo_page2.loadLibrary(), (context) {
-      return stick_demo_page2.StickDemoPage2();
-    });
-  },
-  "Animated Text": (context) {
-    return ContainerAsyncRouterPage(animated_text_demo_page.loadLibrary(),
+  "全局悬浮按键效果": (context) {
+    return ContainerAsyncRouterPage(floating_touch_demo_page.loadLibrary(),
             (context) {
-          return animated_text_demo_page.AnimatedTextDemoPage();
+          return floating_touch_demo_page.FloatingTouchDemoPage();
         });
   },
-  "Verification Input Box": (context) {
-    return ContainerAsyncRouterPage(verification_input_demo_page.loadLibrary(),
-            (context) {
-          return verification_input_demo_page.VerificationInputDemoPage();
-        });
-  },
-  "Rich Text Demo 1": (context) {
-    return ContainerAsyncRouterPage(rich_text_demo_page.loadLibrary(),
-            (context) {
-          return rich_text_demo_page.RichTextDemoPage();
-        });
-  },
-  "Rich Text Demo 2": (context) {
-    return ContainerAsyncRouterPage(rich_text_demo_page2.loadLibrary(),
-            (context) {
-          return rich_text_demo_page2.RichTextDemoPage2();
-        });
-  },
-  "Canvas Drawing Demo": (context) {
-    return ContainerAsyncRouterPage(canvas_demo_page.loadLibrary(), (context) {
-      return canvas_demo_page.CanvasDemoPage();
-    });
-  },
-  "Horizontal ListView": (context) {
-    return ContainerAsyncRouterPage(horizontal_line_demo_page.loadLibrary(),
-            (context) {
-          return horizontal_line_demo_page.HorizontalLineDemoPage();
-        });
-  },
-  "ListView Item Size": (context) {
-    return ContainerAsyncRouterPage(listview_item_size_page.loadLibrary(),
-            (context) {
-          return listview_item_size_page.ListViewItemSizePage();
-        });
-  },
-  "Card Inner Scrolling List": (context) {
-    return ContainerAsyncRouterPage(card_list_demo_page.loadLibrary(),
-            (context) {
-          return card_list_demo_page.CardListDemoPage();
-        });
-  },
-  "Keyboard Open/Close Listener": (context) {
-    return ContainerAsyncRouterPage(keyboard_open_close_demo_page.loadLibrary(),
-            (context) {
-          return keyboard_open_close_demo_page.KeyboardOpenCloseDemoPage();
-        });
-  },
-  "Gesture Overlay Problem": (context) {
-    return ContainerAsyncRouterPage(gesture_page.loadLibrary(), (context) {
-      return gesture_page.GesturePage();
-    });
-  },
-  "Neumorphism Widget": (context) {
-    return ContainerAsyncRouterPage(neuro_widget_demo.loadLibrary(), (context) {
-      return neuro_widget_demo.NeuroWidgetDemo();
-    });
-  },
-  "Text Adaptive Size": (context) {
+  "全局设置字体大小": (context) {
     return ContainerAsyncRouterPage(text_size_demo_page.loadLibrary(),
             (context) {
           return text_size_demo_page.TextSizeDemoPage();
         });
   },
-  "Text Fit Size Based on Size": (context) {
+  "旧版实现富文本": (context) {
+    return ContainerAsyncRouterPage(rich_text_demo_page.loadLibrary(),
+            (context) {
+          return rich_text_demo_page.RichTextDemoPage();
+        });
+  },
+  "官方实现富文本": (context) {
+    return ContainerAsyncRouterPage(rich_text_demo_page2.loadLibrary(),
+            (context) {
+          return rich_text_demo_page2.RichTextDemoPage2();
+        });
+  },
+  "第三方 viewpager 封装实现": (context) {
+    return ContainerAsyncRouterPage(viewpager_demo_page.loadLibrary(),
+            (context) {
+          return viewpager_demo_page.ViewPagerDemoPage();
+        });
+  },
+  "列表滑动过程控件停靠效果": (context) {
+    return ContainerAsyncRouterPage(sliver_list_demo_page.loadLibrary(),
+            (context) {
+          return sliver_list_demo_page.SliverListDemoPage();
+        });
+  },
+  "验证码输入框": (context) {
     return ContainerAsyncRouterPage(
-        text_fit_size_demo_page.loadLibrary(), (context) {
-      return text_fit_size_demo_page.TextFitSizeDemoPage();
+        verification_code_input_demo_page.loadLibrary(), (context) {
+      return verification_code_input_demo_page.VerificationCodeInputDemoPage();
     });
   },
-  "Align Text Baseline": (context) {
-    return ContainerAsyncRouterPage(text_baseline_demo_page.loadLibrary(),
-            (context) {
-          return text_baseline_demo_page.TextBaselineDemoPage();
-        });
-  },
-  "Scrollable Positioned": (context) {
-    return ContainerAsyncRouterPage(scrollable_positioned_page.loadLibrary(),
-            (context) {
-          return scrollable_positioned_page.ScrollablePositionedPage();
-        });
-  },
-  "Underline Tab Indicator": (context) {
-    return ContainerAsyncRouterPage(underline_tab_indicator_page.loadLibrary(),
-            (context) {
-          return underline_tab_indicator_page.UnderlineTabIndicatorPage();
-        });
-  },
-  "Linkable Scrolling List Views": (context) {
-    return ContainerAsyncRouterPage(link_scroll_page.loadLibrary(), (context) {
-      return link_scroll_page.LinkListViewPage();
-    });
-  },
-  "Two-Level NestedScrollView": (context) {
-    return ContainerAsyncRouterPage(nested_refresh_list_page.loadLibrary(),
-            (context) {
-          return nested_refresh_list_page.NestedRefreshListPage();
-        });
-  },
-  "Three-Level NestedScrollView": (context) {
-    return ContainerAsyncRouterPage(nested_refresh_list_page2.loadLibrary(),
-            (context) {
-          return nested_refresh_list_page2.NestedRefreshListPage2();
-        });
-  },
-  "Float Tab Nested Widget": (context) {
-    return ContainerAsyncRouterPage(float_tab_nested_page.loadLibrary(),
-            (context) {
-          return float_tab_nested_page.FloatTabNestedPage();
-        });
-  },
-  "Sliver Custom Widget": (context) {
+  "验证码输入框2": (context) {
     return ContainerAsyncRouterPage(
-        sliver_custom_widget_demo_page.loadLibrary(), (context) {
-      return sliver_custom_widget_demo_page.SliverCustomWidgetDemoPage();
+        verification_code_input_demo_page2.loadLibrary(), (context) {
+      return verification_code_input_demo_page2
+          .VerificationCodeInputDemoPage2();
     });
   },
-  "Inner Widget Drag": (context) {
-    return ContainerAsyncRouterPage(inner_drag_page.loadLibrary(), (context) {
-      return inner_drag_page.InnerDragPage();
-    });
-  },
-  "Rive Animation": (context) {
-    return ContainerAsyncRouterPage(rive_demo_page.loadLibrary(), (context) {
-      return rive_demo_page.RiveDemoPage();
-    });
-  },
-  "Rive Animation 2": (context) {
-    return ContainerAsyncRouterPage(rive_demo_page2.loadLibrary(), (context) {
-      return rive_demo_page2.RiveDemoPage2();
-    });
-  },
-  "Lottie Animation": (context) {
-    return ContainerAsyncRouterPage(lottie_demo_page.loadLibrary(), (context) {
-      return lottie_demo_page.LottieDemoPage();
-    });
-  },
-  "Liquid Animation": (context) {
-    return ContainerAsyncRouterPage(animation_demo_page.loadLibrary(),
+  "自定义布局展示效果": (context) {
+    return ContainerAsyncRouterPage(custom_multi_render_demo_page.loadLibrary(),
             (context) {
-          return animation_demo_page.AnimationDemoPage();
+          return custom_multi_render_demo_page.CustomMultiRenderDemoPage();
         });
   },
-  "Text Gradient Animation": (context) {
-    return ContainerAsyncRouterPage(text_gradient_demo_page.loadLibrary(),
-            (context) {
-          return text_gradient_demo_page.TextGradientDemoPage();
-        });
-  },
-  "Animated Switch": (context) {
-    return ContainerAsyncRouterPage(animated_switch_demo_page.loadLibrary(),
-            (context) {
-          return animated_switch_demo_page.AnimatedSwitchDemoPage();
-        });
-  },
-  "3D Card Flip Effect": (context) {
-    return ContainerAsyncRouterPage(
-        animated_flip_card_demo_page.loadLibrary(), (context) {
-      return animated_flip_card_demo_page.AnimatedFlipCardDemoPage();
+  "自定义布局实现云词图展示": (context) {
+    return ContainerAsyncRouterPage(cloud_demo_page.loadLibrary(), (context) {
+      return cloud_demo_page.CloudDemoPage();
     });
   },
-  "Blur Effect": (context) {
+  "列表滑动停靠 （Stick）": (context) {
+    return ContainerAsyncRouterPage(stick_demo_page.loadLibrary(), (context) {
+      return stick_demo_page.StickDemoPage();
+    });
+  },
+  "列表滑动停靠 （Stick）+ 展开收回": (context) {
+    return ContainerAsyncRouterPage(stick_demo_page2.loadLibrary(), (context) {
+      return stick_demo_page2.StickExpendDemoPage();
+    });
+  },
+  "列表滑动停靠效果2 （Stick": (context) {
+    return ContainerAsyncRouterPage(sliver_stick_demo_page.loadLibrary(),
+            (context) {
+          return sliver_stick_demo_page.SliverStickListDemoPage();
+        });
+  },
+  "键盘顶起展示（仅 App）": (context) {
+    return ContainerAsyncRouterPage(input_bottom_demo_page.loadLibrary(),
+            (context) {
+          return input_bottom_demo_page.InputBottomDemoPage();
+        });
+  },
+  "Blur 高斯模糊效果": (context) {
     return ContainerAsyncRouterPage(blur_demo_page.loadLibrary(), (context) {
       return blur_demo_page.BlurDemoPage();
     });
   },
-  "Swipe Button": (context) {
-    return ContainerAsyncRouterPage(swipe_button_demo_page.loadLibrary(),
+  "控件动画变形效果": (context) {
+    return ContainerAsyncRouterPage(animation_container_demo_page.loadLibrary(),
             (context) {
-          return swipe_button_demo_page.SwipeButtonDemoPage();
+          return animation_container_demo_page.AnimationContainerDemoPage();
         });
   },
-  "Wave Animation": (context) {
-    return ContainerAsyncRouterPage(wave_demo_page.loadLibrary(), (context) {
-      return wave_demo_page.WaveDemoPage();
-    });
-  },
-  "Progress Widget with Gradient": (context) {
-    return ContainerAsyncRouterPage(progress_demo_page.loadLibrary(),
+  "时钟动画绘制展示": (context) {
+    return ContainerAsyncRouterPage(tick_click_demo_page.loadLibrary(),
             (context) {
-          return progress_demo_page.ProgressDemoPage();
+          return tick_click_demo_page.TickClickDemoPage();
         });
   },
-  "AnimatedList Dynamic Add/Remove": (context) {
-    return ContainerAsyncRouterPage(animated_list_demo_page.loadLibrary(),
+  "按键切换动画效果": (context) {
+    return ContainerAsyncRouterPage(anima_demo_page4.loadLibrary(), (context) {
+      return anima_demo_page4.AnimaDemoPage4();
+    });
+  },
+  "列表滑动过程 item 停靠动画效果": (context) {
+    return ContainerAsyncRouterPage(list_anim_demo_page.loadLibrary(),
             (context) {
-          return animated_list_demo_page.AnimatedListDemoPage();
+          return list_anim_demo_page.ListAnimDemoPage();
         });
   },
-  "Web In-App Browser": (context) {
-    return ContainerAsyncRouterPage(web_view_demo_page.loadLibrary(),
+  "列表滑动过程 item 停靠动画效果2": (context) {
+    return ContainerAsyncRouterPage(list_anim_demo_page2.loadLibrary(),
             (context) {
-          return web_view_demo_page.WebViewDemoPage();
+          return list_anim_demo_page2.ListAnimDemoPage2();
         });
   },
-  "Window Size Change Listener": (context) {
-    return ContainerAsyncRouterPage(window_demo_page.loadLibrary(), (context) {
-      return window_demo_page.WindowDemoPage();
-    });
-  },
-  "Chart Display": (context) {
-    return ContainerAsyncRouterPage(chart_demo_page.loadLibrary(), (context) {
-      return chart_demo_page.ChartDemoPage();
-    });
-  },
-  "Shader Effect Demo": (context) {
-    return ContainerAsyncRouterPage(shader_demo_page.loadLibrary(), (context) {
-      return shader_demo_page.ShaderDemoPage();
-    });
-  },
-  "Shader Effect Demo 2": (context) {
-    return ContainerAsyncRouterPage(shader_demo_page2.loadLibrary(), (context) {
-      return shader_demo_page2.ShaderDemoPage2();
-    });
-  },
-  "State Management (InheritedWidget)": (context) {
-    return ContainerAsyncRouterPage(state_demo_page.loadLibrary(), (context) {
-      return state_demo_page.StateDemoPage();
-    });
-  },
-  "State Management (ChangeNotifier)": (context) {
-    return ContainerAsyncRouterPage(state_demo_page2.loadLibrary(), (context) {
-      return state_demo_page2.StateDemoPage2();
-    });
-  },
-  "State Management (ValueNotifier)": (context) {
-    return ContainerAsyncRouterPage(state_demo_page3.loadLibrary(), (context) {
-      return state_demo_page3.StateDemoPage3();
-    });
-  },
-  "Background Process Demo": (context) {
-    return ContainerAsyncRouterPage(isolate_demo_page.loadLibrary(), (context) {
-      return isolate_demo_page.IsolateDemoPage();
-    });
-  },
-  "FFI Plugin Demo (Desktop)": (context) {
-    return ContainerAsyncRouterPage(ffi_demo_page.loadLibrary(), (context) {
-      return ffi_demo_page.FFIDemoPage();
-    });
-  },
-  "MethodChannel Demo": (context) {
-    return ContainerAsyncRouterPage(method_demo_page.loadLibrary(), (context) {
-      return method_demo_page.MethodDemoPage();
-    });
-  },
-  "Image Picker Demo": (context) {
-    return ContainerAsyncRouterPage(image_picker_demo_page.loadLibrary(),
+  "下弹筛选展示效果": (context) {
+    return ContainerAsyncRouterPage(drop_select_demo_page.loadLibrary(),
             (context) {
-          return image_picker_demo_page.ImagePickerDemoPage();
+          return drop_select_demo_page.DropSelectDemoPage();
         });
   },
-  "Video Player Demo": (context) {
-    return ContainerAsyncRouterPage(video_demo_page.loadLibrary(), (context) {
-      return video_demo_page.VideoDemoPage();
+  "文本弹出动画效果": (context) {
+    return ContainerAsyncRouterPage(anima_demo_page5.loadLibrary(), (context) {
+      return anima_demo_page5.AnimaDemoPage5();
     });
   },
-  "PlatformView Demo (Native View Integration)": (context) {
-    return ContainerAsyncRouterPage(platform_view_demo_page.loadLibrary(),
+  "强大的自定义滑动与停靠结合展示": (context) {
+    return ContainerAsyncRouterPage(scroll_header_demo_page.loadLibrary(),
             (context) {
-          return platform_view_demo_page.PlatformViewDemoPage();
+          return scroll_header_demo_page.ScrollHeaderDemoPage();
         });
   },
-  "Local Notification": (context) {
-    return ContainerAsyncRouterPage(notification_demo_page.loadLibrary(),
+  "自定义列表内sliver渲染顺序": (context) {
+    return ContainerAsyncRouterPage(custom_viewport_page.loadLibrary(),
             (context) {
-          return notification_demo_page.NotificationDemoPage();
+          return custom_viewport_page.CustomViewportPage();
         });
   },
-  "System Lifecycle Events": (context) {
-    return ContainerAsyncRouterPage(lifecycle_demo_page.loadLibrary(),
+  "点击弹出动画提示": (context) {
+    return ContainerAsyncRouterPage(anim_tip_demo_page.loadLibrary(),
             (context) {
-          return lifecycle_demo_page.LifecycleDemoPage();
+          return anim_tip_demo_page.AnimTipDemoPage();
         });
   },
-  "InkWell Ripple Effect": (context) {
-    return ContainerAsyncRouterPage(inkwell_demo_page.loadLibrary(), (context) {
-      return inkwell_demo_page.InkWellDemoPage();
-    });
-  },
-  "Custom Painter Example": (context) {
-    return ContainerAsyncRouterPage(painter_demo_page.loadLibrary(), (context) {
-      return painter_demo_page.PainterDemoPage();
-    });
-  },
-  "QR Code Generator": (context) {
-    return ContainerAsyncRouterPage(qr_demo_page.loadLibrary(), (context) {
-      return qr_demo_page.QrDemoPage();
-    });
-  },
-  "Calendar Widget": (context) {
-    return ContainerAsyncRouterPage(calendar_demo_page.loadLibrary(),
+  "列表停靠展开+回到当前头部": (context) {
+    return ContainerAsyncRouterPage(stick_sliver_list_demo_page.loadLibrary(),
             (context) {
-          return calendar_demo_page.CalendarDemoPage();
+          return stick_sliver_list_demo_page.StickSliverListDemoPage();
         });
   },
-  "File Operation Demo": (context) {
-    return ContainerAsyncRouterPage(file_demo_page.loadLibrary(), (context) {
-      return file_demo_page.FileDemoPage();
-    });
-  },
-  "Database Demo (SQLite)": (context) {
-    return ContainerAsyncRouterPage(db_demo_page.loadLibrary(), (context) {
-      return db_demo_page.DbDemoPage();
-    });
-  },
-  "SharedPreferences Demo": (context) {
-    return ContainerAsyncRouterPage(sp_demo_page.loadLibrary(), (context) {
-      return sp_demo_page.SpDemoPage();
-    });
-  },
-  "Network Request Demo": (context) {
-    return ContainerAsyncRouterPage(http_demo_page.loadLibrary(), (context) {
-      return http_demo_page.HttpDemoPage();
-    });
-  },
-  "JSON Serialization Demo": (context) {
-    return ContainerAsyncRouterPage(json_demo_page.loadLibrary(), (context) {
-      return json_demo_page.JsonDemoPage();
-    });
-  },
-  "Stream & StreamBuilder": (context) {
-    return ContainerAsyncRouterPage(stream_demo_page.loadLibrary(), (context) {
-      return stream_demo_page.StreamDemoPage();
-    });
-  },
-  "Future & FutureBuilder": (context) {
-    return ContainerAsyncRouterPage(future_demo_page.loadLibrary(), (context) {
-      return future_demo_page.FutureDemoPage();
-    });
-  },
-  "Async & Await": (context) {
-    return ContainerAsyncRouterPage(async_demo_page.loadLibrary(), (context) {
-      return async_demo_page.AsyncDemoPage();
-    });
-  },
-  "Permission Request Demo": (context) {
-    return ContainerAsyncRouterPage(permission_demo_page.loadLibrary(),
+  "使用 overflow 处理图片": (context) {
+    return ContainerAsyncRouterPage(overflow_image_page.loadLibrary(),
             (context) {
-          return permission_demo_page.PermissionDemoPage();
+          return overflow_image_page.OverflowImagePage();
         });
   },
-  "Internationalization (i18n)": (context) {
-    return ContainerAsyncRouterPage(i18n_demo_page.loadLibrary(), (context) {
-      return i18n_demo_page.I18nDemoPage();
+  "展示 Align 排布控件": (context) {
+    return ContainerAsyncRouterPage(align_demo_page.loadLibrary(), (context) {
+      return align_demo_page.AlignDemoPage();
     });
   },
-  "Theme Switching": (context) {
-    return ContainerAsyncRouterPage(theme_demo_page.loadLibrary(), (context) {
-      return theme_demo_page.ThemeDemoPage();
+  "通过不同尺寸计算方式展示比例": (context) {
+    return ContainerAsyncRouterPage(card_item_page.loadLibrary(), (context) {
+      return card_item_page.CardItemPage();
     });
   },
-  "Dark Mode": (context) {
-    return ContainerAsyncRouterPage(dark_demo_page.loadLibrary(), (context) {
-      return dark_demo_page.DarkDemoPage();
-    });
-  },
-  "Custom Font": (context) {
-    return ContainerAsyncRouterPage(font_demo_page.loadLibrary(), (context) {
-      return font_demo_page.FontDemoPage();
-    });
-  },
-  "Adaptive Layout (Responsive)": (context) {
-    return ContainerAsyncRouterPage(adaptive_demo_page.loadLibrary(),
+  "多列表+顶部Tab效果展示": (context) {
+    return ContainerAsyncRouterPage(sliver_tab_demo_page.loadLibrary(),
             (context) {
-          return adaptive_demo_page.AdaptiveDemoPage();
+          return sliver_tab_demo_page.SliverTabDemoPage();
         });
   },
-  "Navigation 2.0 Router": (context) {
-    return ContainerAsyncRouterPage(router_demo_page.loadLibrary(), (context) {
-      return router_demo_page.RouterDemoPage();
-    });
-  },
-  "Deep Link": (context) {
-    return ContainerAsyncRouterPage(deep_link_demo_page.loadLibrary(),
+  "多列表+顶部Tab效果展示2": (context) {
+    return ContainerAsyncRouterPage(sliver_tab_demo_page2.loadLibrary(),
             (context) {
-          return deep_link_demo_page.DeepLinkDemoPage();
+          return sliver_tab_demo_page2.SliverTabDemoPage2();
         });
   },
-  "WebSocket Demo": (context) {
-    return ContainerAsyncRouterPage(websocket_demo_page.loadLibrary(),
+  "多列表+顶部Tab效果展示3": (context) {
+    return ContainerAsyncRouterPage(sliver_tab_demo_page3.loadLibrary(),
             (context) {
-          return websocket_demo_page.WebSocketDemoPage();
+          return sliver_tab_demo_page3.SliverTabDemoPage3();
         });
   },
-  "Battery Info": (context) {
-    return ContainerAsyncRouterPage(battery_demo_page.loadLibrary(), (context) {
-      return battery_demo_page.BatteryDemoPage();
+  "仿真书本翻页动画（仅APP）": (context) {
+    return ContainerAsyncRouterPage(book_page.loadLibrary(), (context) {
+      return book_page.BookPage();
     });
   },
-  "Device Info": (context) {
-    return ContainerAsyncRouterPage(device_demo_page.loadLibrary(), (context) {
-      return device_demo_page.DeviceDemoPage();
+  "粒子动画效果": (context) {
+    return ContainerAsyncRouterPage(particle_page.loadLibrary(), (context) {
+      return particle_page.ParticlePage();
     });
   },
-  "Package Info": (context) {
-    return ContainerAsyncRouterPage(package_demo_page.loadLibrary(), (context) {
-      return package_demo_page.PackageDemoPage();
+  "动画背景效果": (context) {
+    return ContainerAsyncRouterPage(anim_bg_demo_page.loadLibrary(), (context) {
+      return anim_bg_demo_page.AnimBgDemoPage();
     });
   },
-  "Connectivity Check": (context) {
-    return ContainerAsyncRouterPage(connectivity_demo_page.loadLibrary(),
+  "手势效果": (context) {
+    return ContainerAsyncRouterPage(matrix_custom_painter_page.loadLibrary(),
             (context) {
-          return connectivity_demo_page.ConnectivityDemoPage();
+          return matrix_custom_painter_page.MatrixCustomPainterDemo();
         });
   },
-  "Share Plugin": (context) {
-    return ContainerAsyncRouterPage(share_demo_page.loadLibrary(), (context) {
-      return share_demo_page.ShareDemoPage();
+  "一个有趣的底部跟随和停靠例子": (context) {
+    return ContainerAsyncRouterPage(
+        scroll_inner_content_demo_page.loadLibrary(), (context) {
+      return scroll_inner_content_demo_page.ScrollInnerContentDemoPage();
     });
   },
-  "URL Launcher": (context) {
-    return ContainerAsyncRouterPage(url_launcher_demo_page.loadLibrary(),
+  "一个有趣的圆形选择器": (context) {
+    return ContainerAsyncRouterPage(bottom_anim_nav_page.loadLibrary(),
             (context) {
-          return url_launcher_demo_page.UrlLauncherDemoPage();
+          return bottom_anim_nav_page.BottomAnimNavPage();
         });
   },
-  "Path Provider": (context) {
-    return ContainerAsyncRouterPage(path_demo_page.loadLibrary(), (context) {
-      return path_demo_page.PathDemoPage();
+  "一个类似探探堆叠卡片例子": (context) {
+    return ContainerAsyncRouterPage(
+        index_stack_drag_card_demo_page.loadLibrary(), (context) {
+      return index_stack_drag_card_demo_page.IndexStackDragCardDemoPage();
     });
   },
-  "Location Service": (context) {
-    return ContainerAsyncRouterPage(location_demo_page.loadLibrary(), (context) {
-      return location_demo_page.LocationDemoPage();
+  "一个类似探探堆叠卡片例子2": (context) {
+    return ContainerAsyncRouterPage(
+        index_stack_drag_card_demo_page2.loadLibrary(), (context) {
+      return index_stack_drag_card_demo_page2.IndexStackDragCardDemoPage2();
     });
   },
-  "Map Integration": (context) {
-    return ContainerAsyncRouterPage(map_demo_page.loadLibrary(), (context) {
-      return map_demo_page.MapDemoPage();
-    });
-  },
-  "Camera Demo": (context) {
-    return ContainerAsyncRouterPage(camera_demo_page.loadLibrary(), (context) {
-      return camera_demo_page.CameraDemoPage();
-    });
-  },
-  "Barcode Scanner": (context) {
-    return ContainerAsyncRouterPage(barcode_demo_page.loadLibrary(), (context) {
-      return barcode_demo_page.BarcodeDemoPage();
-    });
-  },
-  "Biometric Authentication": (context) {
-    return ContainerAsyncRouterPage(biometric_demo_page.loadLibrary(),
+  "动画按键例子": (context) {
+    return ContainerAsyncRouterPage(anim_button_demo_page.loadLibrary(),
             (context) {
-          return biometric_demo_page.BiometricDemoPage();
+          return anim_button_demo_page.AnimButtonDemoPage();
         });
   },
-  "Firebase Integration": (context) {
-    return ContainerAsyncRouterPage(firebase_demo_page.loadLibrary(), (context) {
-      return firebase_demo_page.FirebaseDemoPage();
-    });
-  },
-  "Crashlytics": (context) {
-    return ContainerAsyncRouterPage(crashlytics_demo_page.loadLibrary(),
+  "类似QQ发送图片的动画": (context) {
+    return ContainerAsyncRouterPage(anim_progress_img_demo_page.loadLibrary(),
             (context) {
-          return crashlytics_demo_page.CrashlyticsDemoPage();
+          return anim_progress_img_demo_page.AnimProgressImgDemoPage();
         });
   },
-  "Analytics": (context) {
-    return ContainerAsyncRouterPage(analytics_demo_page.loadLibrary(),
+  "类似探探扫描的动画效果": (context) {
+    return ContainerAsyncRouterPage(anim_scan_demo_page.loadLibrary(),
             (context) {
-          return analytics_demo_page.AnalyticsDemoPage();
+          return anim_scan_demo_page.AnimScanDemoPage();
         });
   },
-  "Push Notification": (context) {
-    return ContainerAsyncRouterPage(push_demo_page.loadLibrary(), (context) {
-      return push_demo_page.PushDemoPage();
-    });
-  },
-  "In-App Purchase": (context) {
-    return ContainerAsyncRouterPage(iap_demo_page.loadLibrary(), (context) {
-      return iap_demo_page.IAPDemoPage();
-    });
-  },
-  "AdMob Integration": (context) {
-    return ContainerAsyncRouterPage(admob_demo_page.loadLibrary(), (context) {
-      return admob_demo_page.AdMobDemoPage();
-    });
-  },
-  "Social Login (Google/Facebook)": (context) {
-    return ContainerAsyncRouterPage(social_login_demo_page.loadLibrary(),
+  "圆弧形的 SeekBar（仅APP）": (context) {
+    return ContainerAsyncRouterPage(arc_seek_bar_demo_page.loadLibrary(),
             (context) {
-          return social_login_demo_page.SocialLoginDemoPage();
+          return arc_seek_bar_demo_page.ArcSeekBarDemoPage();
         });
   },
-  "Audio Player": (context) {
-    return ContainerAsyncRouterPage(audio_demo_page.loadLibrary(), (context) {
-      return audio_demo_page.AudioDemoPage();
+  "一个国外友人很惊艳的动画效果": (context) {
+    return ContainerAsyncRouterPage(anim_bubble_gum.loadLibrary(), (context) {
+      return anim_bubble_gum.AnimBubbleGumDemoPage();
     });
   },
-  "Audio Recorder": (context) {
-    return ContainerAsyncRouterPage(audio_record_demo_page.loadLibrary(),
+  "纯 Canvas 绘制闹钟": (context) {
+    return ContainerAsyncRouterPage(canvas_click_demo_page.loadLibrary(),
             (context) {
-          return audio_record_demo_page.AudioRecordDemoPage();
+          return canvas_click_demo_page.CanvasClickDemoPage();
         });
   },
-  "Speech to Text": (context) {
-    return ContainerAsyncRouterPage(stt_demo_page.loadLibrary(), (context) {
-      return stt_demo_page.STTDemoPage();
-    });
-  },
-  "Text to Speech": (context) {
-    return ContainerAsyncRouterPage(tts_demo_page.loadLibrary(), (context) {
-      return tts_demo_page.TTSDemoPage();
-    });
-  },
-  "Bluetooth Demo": (context) {
-    return ContainerAsyncRouterPage(bluetooth_demo_page.loadLibrary(),
+  "类似 boss 直聘我的页面联动效果": (context) {
+    return ContainerAsyncRouterPage(link_sliver_demo_page.loadLibrary(),
             (context) {
-          return bluetooth_demo_page.BluetoothDemoPage();
+          return link_sliver_demo_page.LinkSliverDemoPage();
         });
   },
-  "NFC Demo": (context) {
-    return ContainerAsyncRouterPage(nfc_demo_page.loadLibrary(), (context) {
-      return nfc_demo_page.NFCDemoPage();
-    });
-  },
-  "Sensor Demo (Accelerometer)": (context) {
-    return ContainerAsyncRouterPage(sensor_demo_page.loadLibrary(), (context) {
-      return sensor_demo_page.SensorDemoPage();
-    });
-  },
-  "Vibration": (context) {
-    return ContainerAsyncRouterPage(vibration_demo_page.loadLibrary(),
+  "结合 Matrix 的拖拽": (context) {
+    return ContainerAsyncRouterPage(drag_img_demo_page.loadLibrary(),
             (context) {
-          return vibration_demo_page.VibrationDemoPage();
+          return drag_img_demo_page.DragImgDemoPage();
         });
   },
-  "Flashlight": (context) {
-    return ContainerAsyncRouterPage(flashlight_demo_page.loadLibrary(),
+  "彩色进度条": (context) {
+    return ContainerAsyncRouterPage(color_progress_demo_page.loadLibrary(),
             (context) {
-          return flashlight_demo_page.FlashlightDemoPage();
+          return color_progress_demo_page.ColorProgressDemoPage();
         });
   },
-  "Screen Brightness": (context) {
-    return ContainerAsyncRouterPage(brightness_demo_page.loadLibrary(),
+  "第三方的动画字体": (context) {
+    return ContainerAsyncRouterPage(anim_text_demo_page.loadLibrary(),
             (context) {
-          return brightness_demo_page.BrightnessDemoPage();
+          return anim_text_demo_page.AnimTextDemoPage();
         });
   },
-  "Screen Orientation": (context) {
-    return ContainerAsyncRouterPage(orientation_demo_page.loadLibrary(),
+  "首尾添加数据不会抖动": (context) {
+    return ContainerAsyncRouterPage(chat_list_scroll_demo_page.loadLibrary(),
             (context) {
-          return orientation_demo_page.OrientationDemoPage();
+          return chat_list_scroll_demo_page.ChatListScrollDemoPage();
         });
   },
-  "Full Screen Mode": (context) {
-    return ContainerAsyncRouterPage(fullscreen_demo_page.loadLibrary(),
+  "首尾添加数据不会抖动2": (context) {
+    return ContainerAsyncRouterPage(chat_list_scroll_demo_page_2.loadLibrary(),
             (context) {
-          return fullscreen_demo_page.FullscreenDemoPage();
+          return chat_list_scroll_demo_page_2.ChatListScrollDemoPage2();
         });
   },
-  "Wake Lock": (context) {
-    return ContainerAsyncRouterPage(wakelock_demo_page.loadLibrary(), (context) {
-      return wakelock_demo_page.WakeLockDemoPage();
+  "测试路由嵌套": (context) {
+    return ContainerAsyncRouterPage(route_demo_page.loadLibrary(), (context) {
+      return route_demo_page.RouteDemoPage();
     });
   },
-  "App Icon Badge": (context) {
-    return ContainerAsyncRouterPage(badge_demo_page.loadLibrary(), (context) {
-      return badge_demo_page.BadgeDemoPage();
-    });
-  },
-  "Launch Review": (context) {
-    return ContainerAsyncRouterPage(review_demo_page.loadLibrary(), (context) {
-      return review_demo_page.ReviewDemoPage();
-    });
-  },
-  "Store Redirect": (context) {
-    return ContainerAsyncRouterPage(store_demo_page.loadLibrary(), (context) {
-      return store_demo_page.StoreDemoPage();
-    });
-  },
-  "Email Sender": (context) {
-    return ContainerAsyncRouterPage(email_demo_page.loadLibrary(), (context) {
-      return email_demo_page.EmailDemoPage();
-    });
-  },
-  "SMS Sender": (context) {
-    return ContainerAsyncRouterPage(sms_demo_page.loadLibrary(), (context) {
-      return sms_demo_page.SmsDemoPage();
-    });
-  },
-  "Phone Call": (context) {
-    return ContainerAsyncRouterPage(phone_demo_page.loadLibrary(), (context) {
-      return phone_demo_page.PhoneDemoPage();
-    });
-  },
-  "Contact Picker": (context) {
-    return ContainerAsyncRouterPage(contact_demo_page.loadLibrary(), (context) {
-      return contact_demo_page.ContactDemoPage();
-    });
-  },
-  "Clipboard": (context) {
-    return ContainerAsyncRouterPage(clipboard_demo_page.loadLibrary(),
+  "测试 canvas 阴影": (context) {
+    return ContainerAsyncRouterPage(shader_canvas_demo_page.loadLibrary(),
             (context) {
-          return clipboard_demo_page.ClipboardDemoPage();
+          return shader_canvas_demo_page.ShaderCanvasDemoPage();
         });
   },
-  "App Lifecycle": (context) {
-    return ContainerAsyncRouterPage(app_lifecycle_demo_page.loadLibrary(),
+  "控件动画切换效果": (context) {
+    ///对应文章解析  https://juejin.cn/post/7111071430292275213
+    return ContainerAsyncRouterPage(anim_switch_layout_demo_page.loadLibrary(),
             (context) {
-          return app_lifecycle_demo_page.AppLifecycleDemoPage();
+          return anim_switch_layout_demo_page.AnimSwitchLayoutDemoPage();
         });
   },
-  "Platform Channel Communication": (context) {
-    return ContainerAsyncRouterPage(channel_demo_page.loadLibrary(), (context) {
-      return channel_demo_page.ChannelDemoPage();
+  "ListView 嵌套 ViewPager 解决斜着滑动问题": (context) {
+    ///对应文章解析 https://juejin.cn/post/7116267156655833102
+    return ContainerAsyncRouterPage(vp_list_demo_page.loadLibrary(), (context) {
+      return vp_list_demo_page.VPListView();
     });
   },
-  "Native Code Integration": (context) {
-    return ContainerAsyncRouterPage(native_demo_page.loadLibrary(), (context) {
-      return native_demo_page.NativeDemoPage();
+  "垂直  ViewPager 嵌套垂直 ListView ": (context) {
+    ///对应文章解析 https://juejin.cn/post/7116267156655833102
+    return ContainerAsyncRouterPage(vp_list_demo_page.loadLibrary(), (context) {
+      return vp_list_demo_page.VPNestListView();
     });
   },
-  "Package/Plugin Development": (context) {
-    return ContainerAsyncRouterPage(plugin_demo_page.loadLibrary(), (context) {
-      return plugin_demo_page.PluginDemoPage();
+  "垂直  ListView 嵌套垂直  ViewPager": (context) {
+    ///对应文章解析 https://juejin.cn/post/7116267156655833102
+    return ContainerAsyncRouterPage(vp_list_demo_page.loadLibrary(), (context) {
+      return vp_list_demo_page.ListViewNestVP();
     });
   },
-  "Custom Widget Library": (context) {
-    return ContainerAsyncRouterPage(custom_widget_demo_page.loadLibrary(),
+  "垂直  ListView 联动  ListView": (context) {
+    ///对应文章解析 https://juejin.cn/post/7116267156655833102
+    return ContainerAsyncRouterPage(vp_list_demo_page.loadLibrary(), (context) {
+      return vp_list_demo_page.ListViewLinkListView();
+    });
+  },
+  "3D 透视卡片": (context) {
+    ///对应文章解析  https://juejin.cn/post/7124064789763981326
+    return ContainerAsyncRouterPage(card_perspective_demo_page.loadLibrary(),
             (context) {
-          return custom_widget_demo_page.CustomWidgetDemoPage();
+          return card_perspective_demo_page.CardPerspectiveDemoPage();
         });
   },
-  "Performance Optimization": (context) {
-    return ContainerAsyncRouterPage(performance_demo_page.loadLibrary(),
+  "3D 卡片旋转": (context) {
+    ///对应文章解析  https://juejin.cn/post/7124064789763981326
+    return ContainerAsyncRouterPage(card_3d_demo_page.loadLibrary(), (context) {
+      return card_3d_demo_page.Card3DDemoPage();
+    });
+  },
+  "硬核 3D 卡片旋转": (context) {
+    ///对应文章解析 https://juejin.cn/post/7129239231473385503
+    return ContainerAsyncRouterPage(card_real_3d_demo_page.loadLibrary(),
             (context) {
-          return performance_demo_page.PerformanceDemoPage();
+          return card_real_3d_demo_page.CardReal3DDemoPage();
         });
   },
-  "Memory Management": (context) {
-    return ContainerAsyncRouterPage(memory_demo_page.loadLibrary(), (context) {
-      return memory_demo_page.MemoryDemoPage();
+  "3D Dash": (context) {
+    ///对应文章解析 https://juejin.cn/post/7129239231473385503
+    return ContainerAsyncRouterPage(dash_3d_demo_page.loadLibrary(), (context) {
+      return dash_3d_demo_page.Dash3dDemoPage();
     });
   },
-  "Testing Demo (Unit/Widget/Integration)": (context) {
-    return ContainerAsyncRouterPage(test_demo_page.loadLibrary(), (context) {
-      return test_demo_page.TestDemoPage();
-    });
-  },
-  "CI/CD Pipeline": (context) {
-    return ContainerAsyncRouterPage(cicd_demo_page.loadLibrary(), (context) {
-      return cicd_demo_page.CICDDemoPage();
-    });
-  },
-  "Code Generation (build_runner)": (context) {
-    return ContainerAsyncRouterPage(codegen_demo_page.loadLibrary(), (context) {
-      return codegen_demo_page.CodegenDemoPage();
-    });
-  },
-  "Dependency Injection": (context) {
-    return ContainerAsyncRouterPage(di_demo_page.loadLibrary(), (context) {
-      return di_demo_page.DIDemoPage();
-    });
-  },
-  "BLoC Pattern": (context) {
-    return ContainerAsyncRouterPage(bloc_demo_page.loadLibrary(), (context) {
-      return bloc_demo_page.BlocDemoPage();
-    });
-  },
-  "Provider Pattern": (context) {
-    return ContainerAsyncRouterPage(provider_demo_page.loadLibrary(), (context) {
-      return provider_demo_page.ProviderDemoPage();
-    });
-  },
-  "Riverpod Pattern": (context) {
-    return ContainerAsyncRouterPage(riverpod_demo_page.loadLibrary(), (context) {
-      return riverpod_demo_page.RiverpodDemoPage();
-    });
-  },
-  "GetX Pattern": (context) {
-    return ContainerAsyncRouterPage(getx_demo_page.loadLibrary(), (context) {
-      return getx_demo_page.GetXDemoPage();
-    });
-  },
-  "Redux Pattern": (context) {
-    return ContainerAsyncRouterPage(redux_demo_page.loadLibrary(), (context) {
-      return redux_demo_page.ReduxDemoPage();
-    });
-  },
-  "MobX Pattern": (context) {
-    return ContainerAsyncRouterPage(mobx_demo_page.loadLibrary(), (context) {
-      return mobx_demo_page.MobXDemoPage();
-    });
-  },
-  "MVVM Architecture": (context) {
-    return ContainerAsyncRouterPage(mvvm_demo_page.loadLibrary(), (context) {
-      return mvvm_demo_page.MVVMDemoPage();
-    });
-  },
-  "Clean Architecture": (context) {
-    return ContainerAsyncRouterPage(clean_demo_page.loadLibrary(), (context) {
-      return clean_demo_page.CleanDemoPage();
-    });
-  },
-  "Error Handling": (context) {
-    return ContainerAsyncRouterPage(error_demo_page.loadLibrary(), (context) {
-      return error_demo_page.ErrorDemoPage();
-    });
-  },
-  "Logging & Debug": (context) {
-    return ContainerAsyncRouterPage(log_demo_page.loadLibrary(), (context) {
-      return log_demo_page.LogDemoPage();
-    });
-  },
-  "Encryption & Security": (context) {
-    return ContainerAsyncRouterPage(security_demo_page.loadLibrary(), (context) {
-      return security_demo_page.SecurityDemoPage();
-    });
-  },
-  "Obfuscation": (context) {
-    return ContainerAsyncRouterPage(obfuscation_demo_page.loadLibrary(),
+  "展示 canvas transform": (context) {
+    ///对应文章解析 https://juejin.cn/post/7129239231473385503
+    return ContainerAsyncRouterPage(transform_canvas_demo_page.loadLibrary(),
             (context) {
-          return obfuscation_demo_page.ObfuscationDemoPage();
+          return transform_canvas_demo_page.TransformCanvasDemoPage();
         });
   },
-  "App Signing": (context) {
-    return ContainerAsyncRouterPage(signing_demo_page.loadLibrary(), (context) {
-      return signing_demo_page.SigningDemoPage();
+  "rive 掘金 logo": (context) {
+    ///对应文章解析  https://juejin.cn/post/7126661045564735519
+    return ContainerAsyncRouterPage(anim_juejin_logo_demo_page.loadLibrary(),
+            (context) {
+          return anim_juejin_logo_demo_page.AnimJueJinLogoDemoPage();
+        });
+  },
+  "掘金 3d logo": (context) {
+    ///对应文章解析 https://juejin.cn/post/7129239231473385503
+    return ContainerAsyncRouterPage(juejin_3d_logo_demo_page.loadLibrary(),
+            (context) {
+          return juejin_3d_logo_demo_page.JueJin3DLogoDemoPage();
+        });
+  },
+  "掘金更 3d logo": (context) {
+    ///对应文章解析 https://juejin.cn/post/7129239231473385503
+    return ContainerAsyncRouterPage(juejin_3d_box_logo_demo_page.loadLibrary(),
+            (context) {
+          return juejin_3d_box_logo_demo_page.JueJin3DBoxLogoDemoPage();
+        });
+  },
+  "png shadow": (context) {
+    return ContainerAsyncRouterPage(png_shadow_demo_page.loadLibrary(),
+            (context) {
+          return png_shadow_demo_page.PngShadowDemoPage();
+        });
+  },
+  "path 路径 png 效果": (context) {
+    return ContainerAsyncRouterPage(custom_shader_path_demo_page.loadLibrary(),
+            (context) {
+          return custom_shader_path_demo_page.CustomShaderPathDemoPage();
+        });
+  },
+  "列表联动 BottomSheet 效果": (context) {
+    return ContainerAsyncRouterPage(
+        list_link_bottomsheet_demo_page.loadLibrary(), (context) {
+      return list_link_bottomsheet_demo_page.ListLinkBottomSheetDemoPage();
     });
   },
-  "Flavors (Dev/Staging/Prod)": (context) {
-    return ContainerAsyncRouterPage(flavor_demo_page.loadLibrary(), (context) {
-      return flavor_demo_page.FlavorDemoPage();
+  "DraggableSheet 的 stick 效果": (context) {
+    return ContainerAsyncRouterPage(
+        demo_draggable_sheet_stick_page.loadLibrary(), (context) {
+      return demo_draggable_sheet_stick_page.DemoDraggableSheetStickPage();
     });
   },
-  "Build Configuration": (context) {
-    return ContainerAsyncRouterPage(build_demo_page.loadLibrary(), (context) {
-      return build_demo_page.BuildDemoPage();
+  "异步调用的顺序执行": (context) {
+    return ContainerAsyncRouterPage(async_to_sync_call_page.loadLibrary(),
+            (context) {
+          return async_to_sync_call_page.AsyncToSyncCallPage();
+        });
+  },
+  "点击爆炸的五角星（ChatGPT 生成代码）": (context) {
+    return ContainerAsyncRouterPage(star_bomb_button_page.loadLibrary(),
+            (context) {
+          return star_bomb_button_page.StarBombButtonPage();
+        });
+  },
+  "有趣画廊": (context) {
+    return ContainerAsyncRouterPage(photo_gallery_demo_page.loadLibrary(),
+            (context) {
+          return photo_gallery_demo_page.PhotoGalleryDemoPage();
+        });
+  },
+  "有趣的文本撕裂动画": (context) {
+    return ContainerAsyncRouterPage(tear_text_demo_page.loadLibrary(),
+            (context) {
+          return tear_text_demo_page.TearTextDemoPage();
+        });
+  },
+  "自适应横竖列表": (context) {
+    return ContainerAsyncRouterPage(un_bounded_listview.loadLibrary(),
+            (context) {
+          return un_bounded_listview.UnboundedListViewDemoPage();
+        });
+  },
+  "PageView嵌套PageView": (context) {
+    return ContainerAsyncRouterPage(
+        pageview_in_pageview_demo_page.loadLibrary(), (context) {
+      return pageview_in_pageview_demo_page.PageViewInPageViewDemoPage();
     });
   },
-  "Desktop App (Windows/Mac/Linux)": (context) {
-    return ContainerAsyncRouterPage(desktop_demo_page.loadLibrary(), (context) {
-      return desktop_demo_page.DesktopDemoPage();
+  "手势密码": (context) {
+    return ContainerAsyncRouterPage(gesture_password_demo_page.loadLibrary(),
+            (context) {
+          return gesture_password_demo_page.GesturePasswordDemoPage();
+        });
+  },
+  "link scroll": (context) {
+    return ContainerAsyncRouterPage(link_scroll_page.loadLibrary(), (context) {
+      return link_scroll_page.LinkListViewPage();
     });
   },
-  "Web App Specific Features": (context) {
-    return ContainerAsyncRouterPage(web_specific_demo_page.loadLibrary(),
-            (context) {
-          return web_specific_demo_page.WebSpecificDemoPage();
-        });
-  },
-  "Embedded Device (IoT)": (context) {
-    return ContainerAsyncRouterPage(embedded_demo_page.loadLibrary(), (context) {
-      return embedded_demo_page.EmbeddedDemoPage();
+  "glass": (context) {
+    return ContainerAsyncRouterPage(glass_demo_page.loadLibrary(), (context) {
+      return glass_demo_page.GlassDemoPage();
     });
   },
-  "Accessibility (a11y)": (context) {
-    return ContainerAsyncRouterPage(accessibility_demo_page.loadLibrary(),
+  "liquid glass": (context) {
+    return ContainerAsyncRouterPage(liquid_glass_demo.loadLibrary(), (context) {
+      return liquid_glass_demo.LiquidGlassShaderView();
+    });
+  },
+  "liquid glass 2": (context) {
+    return ContainerAsyncRouterPage(liquid_glass_demo2.loadLibrary(),
             (context) {
-          return accessibility_demo_page.AccessibilityDemoPage();
+          return liquid_glass_demo2.LiquidGlassShaderView2();
         });
   },
-  "Localization Advanced": (context) {
-    return ContainerAsyncRouterPage(localization_demo_page.loadLibrary(),
+  "粒子动画": (context) {
+    return ContainerAsyncRouterPage(attractor_page.loadLibrary(),
             (context) {
-          return localization_demo_page.LocalizationDemoPage();
+          return attractor_page.AttractorPage();
         });
   },
-  "Material Design 3": (context) {
-    return ContainerAsyncRouterPage(material3_demo_page.loadLibrary(),
-            (context) {
-          return material3_demo_page.Material3DemoPage();
-        });
-  },
-  "Cupertino (iOS Style) Widgets": (context) {
-    return ContainerAsyncRouterPage(cupertino_demo_page.loadLibrary(),
-            (context) {
-          return cupertino_demo_page.CupertinoDemoPage();
-        });
-  },
-  "Platform-Specific UI": (context) {
-    return ContainerAsyncRouterPage(platform_ui_demo_page.loadLibrary(),
-            (context) {
-          return platform_ui_demo_page.PlatformUIDemoPage();
-        });
-  },
-  "Galaxy Scene": (context) {
+  "星云动画": (context) {
     return ContainerAsyncRouterPage(galaxy_scene_page.loadLibrary(), (context) {
       return galaxy_scene_page.GalaxyScene();
     });
@@ -996,7 +699,7 @@ Map<String, WidgetBuilder> routers = {
     return ContainerAsyncRouterPage(taichi_page.loadLibrary(), (context) {
       return taichi_page.TaiChiMasterpiece();
     });
-  },  
+  },
   "破坏杀·罗针": (context) {
     return ContainerAsyncRouterPage(akaza_page.loadLibrary(), (context) {
       return akaza_page.AkazaCompassPage();
