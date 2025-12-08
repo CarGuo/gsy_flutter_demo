@@ -78,3 +78,6 @@ ios/Flutter/.last_build_id
 ios/Flutter/Flutter.podspec
 
 .flutter-plugins-dependencies
+
+# FVM Version Cache
+.fvm/

@@ -62,6 +62,7 @@ class _NeonSliderPageState extends State<NeonSliderPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       backgroundColor: Colors.black, // 纯黑背景
       body: Center(
         child: Padding(
