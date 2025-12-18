@@ -39,12 +39,12 @@
 
 [![](http://img.cdn.guoshuyu.cn/WechatIMG65.jpeg)](https://item.jd.com/12883054.html)
 
-|                  |                  |                 | 
-|------------------|------------------|-----------------|
-| ![](demo1.gif)   | ![](demo2.webp)  | ![](demo3.webp) | 
-| ![](demo4.webp)  | ![](demo5.webp)  | ![](demo6.webp) | 
-| ![](demo7.webp)  | ![](demo8.webp)  | ![](demo9.webp) | 
-| ![](demo10.webp) | ![](demo11.webp) | | 
+|                  |                  |                  | 
+|------------------|------------------|------------------|
+| ![](demo1.gif)   | ![](demo2.webp)  | ![](demo3.webp)  | 
+| ![](demo4.webp)  | ![](demo5.webp)  | ![](demo6.webp)  | 
+| ![](demo7.webp)  | ![](demo8.webp)  | ![](demo9.webp)  | 
+| ![](demo10.webp) | ![](demo11.webp) | ![](demo12.webp) | 
 
 
 ![](demo.jpg)
@@ -708,6 +708,19 @@ Map<String, WidgetBuilder> routers = {
       return akaza_page.AkazaCompassPage();
     });
   },
+  "骚气滑动列表": (context) {
+    return ContainerAsyncRouterPage(tornado_scroll_demo.loadLibrary(),
+            (context) {
+          return tornado_scroll_demo.TornadoScrollDemo();
+        });
+  },
+  "骚气粒子效果": (context) {
+    return ContainerAsyncRouterPage(particle_morphing_page.loadLibrary(),
+            (context) {
+          return particle_morphing_page.ParticleMorphingPage();
+        });
+  },
+
 };
 ```
 

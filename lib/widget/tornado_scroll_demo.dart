@@ -72,13 +72,13 @@ class _TornadoScrollDemoState extends State<TornadoScrollDemo>
 
   List<Widget> _buildSpiralItems() {
     List<Widget> items = [];
-    final int totalItems = 30; // 假设列表长度
+    const int totalItems = 30; // 假设列表长度
 
     // 螺旋的核心参数
     // 半径随 intensity 变化
     final double radius = 150.0 * _twistIntensity;
     // 垂直间距
-    final double itemSpacing = 60.0;
+    //const double itemSpacing = 60.0;
 
     for (int i = 0; i < totalItems; i++) {
       // t 是归一化的路径进度
@@ -149,12 +149,12 @@ class _TornadoScrollDemoState extends State<TornadoScrollDemo>
       decoration: BoxDecoration(
           // 根据索引变色，方便观察
           color: Colors.primaries[index % Colors.primaries.length]
-              .withOpacity(0.9),
+              .withValues(alpha:0.9),
           borderRadius: BorderRadius.circular(30),
           boxShadow: [
-            BoxShadow(color: Colors.black.withOpacity(0.5), blurRadius: 10)
+            BoxShadow(color: Colors.black.withValues(alpha:0.5), blurRadius: 10)
           ],
-          border: Border.all(color: Colors.white.withOpacity(0.2))),
+          border: Border.all(color: Colors.white.withValues(alpha:0.2))),
       child: Center(
         child: Text(
           "Item $index",

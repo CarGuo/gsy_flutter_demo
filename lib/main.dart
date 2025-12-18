@@ -257,6 +257,9 @@ import 'package:gsy_flutter_demo/widget/taichi_page.dart'
 import 'package:gsy_flutter_demo/widget/tornado_scroll_demo.dart'
     deferred as tornado_scroll_demo;
 
+import 'package:gsy_flutter_demo/widget/particle_morphing_page.dart'
+    deferred as particle_morphing_page;
+
 import 'package:gsy_flutter_demo/widget/akaza_page.dart' deferred as akaza_page;
 
 import 'package:window_location_href/window_location_href.dart';
@@ -1068,9 +1071,16 @@ Map<String, WidgetBuilder> routers = {
     });
   },
   "骚气滑动列表": (context) {
-    return ContainerAsyncRouterPage(tornado_scroll_demo.loadLibrary(), (context) {
+    return ContainerAsyncRouterPage(tornado_scroll_demo.loadLibrary(),
+        (context) {
       return tornado_scroll_demo.TornadoScrollDemo();
     });
+  },
+  "骚气粒子效果": (context) {
+    return ContainerAsyncRouterPage(particle_morphing_page.loadLibrary(),
+            (context) {
+          return particle_morphing_page.ParticleMorphingPage();
+        });
   },
 
 };

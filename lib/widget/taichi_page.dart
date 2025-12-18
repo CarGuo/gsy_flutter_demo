@@ -73,7 +73,7 @@ class _TaiChiMasterpieceState extends State<TaiChiMasterpiece>
     final double eyeOrbitRadius = radius * 0.25;
     final double denseCenterX = cos(angle) * eyeOrbitRadius;
     final double denseCenterY = sin(angle) * eyeOrbitRadius;
-    final double blackEyeRadius = 8.0;
+    const double blackEyeRadius = 8.0;
 
     int spawnCount = 200; // 每帧发射数量
 
@@ -109,9 +109,9 @@ class _TaiChiMasterpieceState extends State<TaiChiMasterpiece>
     final double lobeCenterDist = radius * 0.5;
 
     // 模式1需要的参数
-    final double voidCenterX_Imp1 = cos(angle + pi) * eyeOrbitRadius;
-    final double voidCenterY_Imp1 = sin(angle + pi) * eyeOrbitRadius;
-    final double voidRadius_Imp1 = radius * 0.36;
+    final double voidCenterXImp1 = cos(angle + pi) * eyeOrbitRadius;
+    final double voidCenterYImp1 = sin(angle + pi) * eyeOrbitRadius;
+    final double voidRadiusImp1 = radius * 0.36;
 
     // --- 3. 粒子更新与消亡判定 ---
     for (var p in particles) {
@@ -147,8 +147,8 @@ class _TaiChiMasterpieceState extends State<TaiChiMasterpiece>
         } else {
           // >>>>>> 模式 1: 简单圆形排斥 (柔和模式) <<<<<<
 
-          double distToVoid = sqrt(pow(p.x - voidCenterX_Imp1, 2) + pow(p.y - voidCenterY_Imp1, 2));
-          if (distToVoid < voidRadius_Imp1) {
+          double distToVoid = sqrt(pow(p.x - voidCenterXImp1, 2) + pow(p.y - voidCenterYImp1, 2));
+          if (distToVoid < voidRadiusImp1) {
             shouldDie = true;
           }
         }
@@ -227,11 +227,11 @@ class SandParticle {
     this.y = y;
     this.vx = vx;
     this.vy = vy;
-    this.life = 80 + Random().nextDouble() * 40;
-    this.maxLife = this.life;
-    this.isDead = false;
-    this.alpha = 1.0;
-    this.size = 1.2;
+    life = 80 + Random().nextDouble() * 40;
+    maxLife = life;
+    isDead = false;
+    alpha = 1.0;
+    size = 1.2;
   }
 
   void update() {
@@ -272,7 +272,7 @@ class MasterpiecePainter extends CustomPainter {
     // 绘制所有存活粒子
     for (var p in particles) {
       if (p.isDead || p.alpha < 0.05) continue;
-      paint.color = Colors.white.withOpacity(p.alpha);
+      paint.color = Colors.white.withValues(alpha: p.alpha);
       paint.strokeWidth = p.size;
       canvas.drawPoints(PointMode.points, [Offset(p.x, p.y)], paint);
     }
@@ -291,7 +291,7 @@ class MasterpiecePainter extends CustomPainter {
       whiteEyePos,
       12.0,
       Paint()
-        ..color = Colors.white.withOpacity(0.3)
+        ..color = Colors.white.withValues(alpha: 0.3)
         ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 8),
     );
     canvas.drawCircle(whiteEyePos, 5.0, Paint()..color = Colors.white);
