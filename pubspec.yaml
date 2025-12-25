@@ -121,6 +121,7 @@ deferred-components:
       - package:gsy_flutter_demo/widget/taichi_page.dart
       - package:gsy_flutter_demo/widget/akaza_page.dart
       - package:gsy_flutter_demo/widget/tornado_scroll_demo.dart
+      - package:gsy_flutter_demo/widget/combined_scene_page.dart
 
 dependencies:
   flutter:

@@ -720,7 +720,12 @@ Map<String, WidgetBuilder> routers = {
           return particle_morphing_page.ParticleMorphingPage();
         });
   },
-
+  "炫酷圣诞树": (context) {
+    return ContainerAsyncRouterPage(combined_scene_page.loadLibrary(),
+            (context) {
+          return combined_scene_page.CombinedScenePage();
+        });
+  },
 };
 ```
 

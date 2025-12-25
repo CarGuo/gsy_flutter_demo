@@ -260,6 +260,9 @@ import 'package:gsy_flutter_demo/widget/tornado_scroll_demo.dart'
 import 'package:gsy_flutter_demo/widget/particle_morphing_page.dart'
     deferred as particle_morphing_page;
 
+import 'package:gsy_flutter_demo/widget/combined_scene_page.dart'
+    deferred as combined_scene_page;
+
 import 'package:gsy_flutter_demo/widget/akaza_page.dart' deferred as akaza_page;
 
 import 'package:window_location_href/window_location_href.dart';
@@ -1078,8 +1081,14 @@ Map<String, WidgetBuilder> routers = {
   },
   "骚气粒子效果": (context) {
     return ContainerAsyncRouterPage(particle_morphing_page.loadLibrary(),
+        (context) {
+      return particle_morphing_page.ParticleMorphingPage();
+    });
+  },
+  "炫酷圣诞树": (context) {
+    return ContainerAsyncRouterPage(combined_scene_page.loadLibrary(),
             (context) {
-          return particle_morphing_page.ParticleMorphingPage();
+          return combined_scene_page.CombinedScenePage();
         });
   },
 
