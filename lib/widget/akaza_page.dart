@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
+import 'package:vector_math/vector_math_64.dart' show Vector3;
 
 class AkazaCompassPage extends StatelessWidget {
   const AkazaCompassPage({super.key});
@@ -201,7 +202,7 @@ class _AkazaCompassWidgetState extends State<AkazaCompassWidget>
         if (_tiltController.value > 0) {
           transformMatrix.rotateX(_tiltAnim.value);
           double scale = 1.0 - (_tiltController.value * 0.2);
-          transformMatrix.scale(scale);
+          transformMatrix.scaleByVector3(Vector3(scale, scale, scale));
         }
 
         return Stack(

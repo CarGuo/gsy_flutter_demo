@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:vector_math/vector_math_64.dart' show Vector3;
 
 class TornadoScrollDemo extends StatefulWidget {
   const TornadoScrollDemo({super.key});
@@ -20,6 +21,7 @@ class _TornadoScrollDemoState extends State<TornadoScrollDemo>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       backgroundColor: Colors.black,
       body: Stack(
         children: [
@@ -109,7 +111,7 @@ class _TornadoScrollDemoState extends State<TornadoScrollDemo>
       double dx = radius * sin(angle);
       double dz = radius * cos(angle);
 
-      matrix.translate(dx, dy, dz);
+      matrix.translateByVector3(Vector3(dx, dy, dz));
 
       // 5. 切线旋转 (关键！让 Item 永远面朝螺旋中心或切线方向)
       // 负号是为了抵消螺旋造成的朝向偏移，保持卡片大致面向前方

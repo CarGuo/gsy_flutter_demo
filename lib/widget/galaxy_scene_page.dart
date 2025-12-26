@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:vector_math/vector_math_64.dart' show Vector3;
 
 class GalaxyScene extends StatefulWidget {
   const GalaxyScene({super.key});
@@ -346,7 +347,7 @@ class GalaxyPainter extends CustomPainter {
       double width = coreBaseSize * (0.15 + i * 0.02) * stretch;
       double height = coreBaseSize * (0.12 + (5 - i) * 0.02) / stretch;
 
-      final Float64List matrixStorage = (Matrix4.identity()..scale(1.0, height / width, 1.0)).storage;
+      final Float64List matrixStorage = (Matrix4.identity()..scaleByVector3(Vector3(1.0, height / width, 1.0))).storage;
       final Paint bhPaint = Paint()..shader = ui.Gradient.radial(Offset.zero, width, blackHoleColors, blackHoleStops, TileMode.clamp, matrixStorage);
 
       canvas.drawOval(Rect.fromCenter(center: Offset.zero, width: width * 1.8, height: height * 1.8), bhPaint);

@@ -3,10 +3,6 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-void main() {
-  runApp(const MaterialApp(home: ParticleMorphingPage()));
-}
-
 // 定义形状枚举
 enum ParticleShape { sphere, cube, torus, heart }
 
@@ -143,6 +139,7 @@ class _ParticleMorphingPageState extends State<ParticleMorphingPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       backgroundColor: Colors.black,
 
       // 保持之前的切换分布模式按钮
