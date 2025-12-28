@@ -262,6 +262,8 @@ import 'package:gsy_flutter_demo/widget/particle_morphing_page.dart'
 
 import 'package:gsy_flutter_demo/widget/combined_scene_page.dart'
     deferred as combined_scene_page;
+import 'package:gsy_flutter_demo/widget/notion_qrcode_page.dart'
+    deferred as notion_qrcode_page;
 
 import 'package:gsy_flutter_demo/widget/akaza_page.dart' deferred as akaza_page;
 
@@ -1087,11 +1089,16 @@ Map<String, WidgetBuilder> routers = {
   },
   "炫酷圣诞树": (context) {
     return ContainerAsyncRouterPage(combined_scene_page.loadLibrary(),
-            (context) {
-          return combined_scene_page.CombinedScenePage();
-        });
+        (context) {
+      return combined_scene_page.CombinedScenePage();
+    });
   },
-
+  "炫酷二维码": (context) {
+    return ContainerAsyncRouterPage(notion_qrcode_page.loadLibrary(),
+        (context) {
+      return notion_qrcode_page.NotionFinalQRCodeEntryPage();
+    });
+  },
 };
 
 enum Cat {

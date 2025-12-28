@@ -728,6 +728,12 @@ Map<String, WidgetBuilder> routers = {
           return combined_scene_page.CombinedScenePage();
         });
   },
+  "炫酷二维码": (context) {
+    return ContainerAsyncRouterPage(notion_qrcode_page.loadLibrary(),
+            (context) {
+          return notion_qrcode_page.NotionFinalQRCodeEntryPage();
+        });
+  },
 };
 ```
 

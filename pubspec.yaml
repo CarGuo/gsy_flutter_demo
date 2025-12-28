@@ -122,6 +122,7 @@ deferred-components:
       - package:gsy_flutter_demo/widget/akaza_page.dart
       - package:gsy_flutter_demo/widget/tornado_scroll_demo.dart
       - package:gsy_flutter_demo/widget/combined_scene_page.dart
+      - package:gsy_flutter_demo/widget/notion_qrcode_page.dart
 
 dependencies:
   flutter:
@@ -142,6 +143,7 @@ dependencies:
   animations: 2.0.4
   flutter_animate: ^1.0.0
   polygon: ^0.1.0
+  qr: ^3.0.1
   zflutter:
     git:
       url: https://github.com/CarGuo/zflutter.git
