@@ -244,6 +244,7 @@ class _DiscoSphereFinalFusionPageState extends State<DiscoSphereFinalFusionPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       backgroundColor: const Color(0xFF020205), // 深邃黑背景
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {

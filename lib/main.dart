@@ -1098,16 +1098,15 @@ Map<String, WidgetBuilder> routers = {
   },
   "炫酷二维码": (context) {
     return ContainerAsyncRouterPage(notion_qrcode_page.loadLibrary(),
-            (context) {
-          return notion_qrcode_page.NotionFinalQRCodeEntryPage();
-        });
+        (context) {
+      return notion_qrcode_page.NotionFinalQRCodeEntryPage();
+    });
   },
-  "炫酷二维码": (context) {
-    return ContainerAsyncRouterPage(notion_qrcode_page.loadLibrary(),
-            (context) {
-          return notion_qrcode_page.NotionFinalQRCodeEntryPage();
-        });
-  },
+  "Cool Disco Sphere": (context) {
+    return ContainerAsyncRouterPage(disco_sphere_page.loadLibrary(), (context) {
+      return disco_sphere_page.DiscoSphereFinalFusionPage();
+    });
+  }
 };
 
 enum Cat {
