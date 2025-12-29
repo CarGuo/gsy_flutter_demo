@@ -734,6 +734,12 @@ Map<String, WidgetBuilder> routers = {
           return notion_qrcode_page.NotionFinalQRCodeEntryPage();
         });
   },
+  "Cool Disco Sphere": (context) {
+    return ContainerAsyncRouterPage(disco_sphere_page.loadLibrary(),
+            (context) {
+          return disco_sphere_page.DiscoSphereFinalFusionPage();
+        });
+  },
 };
 ```
 

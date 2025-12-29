@@ -265,6 +265,9 @@ import 'package:gsy_flutter_demo/widget/combined_scene_page.dart'
 import 'package:gsy_flutter_demo/widget/notion_qrcode_page.dart'
     deferred as notion_qrcode_page;
 
+import 'package:gsy_flutter_demo/widget/disco_sphere_page.dart'
+    deferred as disco_sphere_page;
+
 import 'package:gsy_flutter_demo/widget/akaza_page.dart' deferred as akaza_page;
 
 import 'package:window_location_href/window_location_href.dart';
@@ -1095,9 +1098,15 @@ Map<String, WidgetBuilder> routers = {
   },
   "炫酷二维码": (context) {
     return ContainerAsyncRouterPage(notion_qrcode_page.loadLibrary(),
-        (context) {
-      return notion_qrcode_page.NotionFinalQRCodeEntryPage();
-    });
+            (context) {
+          return notion_qrcode_page.NotionFinalQRCodeEntryPage();
+        });
+  },
+  "炫酷二维码": (context) {
+    return ContainerAsyncRouterPage(notion_qrcode_page.loadLibrary(),
+            (context) {
+          return notion_qrcode_page.NotionFinalQRCodeEntryPage();
+        });
   },
 };
 
