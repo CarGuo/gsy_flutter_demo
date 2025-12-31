@@ -268,6 +268,9 @@ import 'package:gsy_flutter_demo/widget/notion_qrcode_page.dart'
 import 'package:gsy_flutter_demo/widget/disco_sphere_page.dart'
     deferred as disco_sphere_page;
 
+import 'package:gsy_flutter_demo/widget/spatial_grid_page.dart'
+    deferred as spatial_grid_page;
+
 import 'package:gsy_flutter_demo/widget/akaza_page.dart' deferred as akaza_page;
 
 import 'package:window_location_href/window_location_href.dart';
@@ -1106,7 +1109,13 @@ Map<String, WidgetBuilder> routers = {
     return ContainerAsyncRouterPage(disco_sphere_page.loadLibrary(), (context) {
       return disco_sphere_page.DiscoSphereFinalFusionPage();
     });
+  },
+  "Cool Spatial Grid": (context) {
+    return ContainerAsyncRouterPage(spatial_grid_page.loadLibrary(), (context) {
+      return spatial_grid_page.SpatialGridPage();
+    });
   }
+
 };
 
 enum Cat {

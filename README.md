@@ -47,6 +47,7 @@
 | ![](demo7.webp)  | ![](demo8.webp)  | ![](demo9.webp)  | 
 | ![](demo10.webp) | ![](demo11.webp) | ![](demo12.webp) | 
 | ![](demo13.webp) | ![](demo14.webp)  | ![](demo15.webp)  | 
+| ![](demo16.webp) |  |   | 
 
 
 ![](demo.jpg)
@@ -740,6 +741,11 @@ Map<String, WidgetBuilder> routers = {
           return disco_sphere_page.DiscoSphereFinalFusionPage();
         });
   },
+  "Cool Spatial Grid": (context) {
+    return ContainerAsyncRouterPage(spatial_grid_page.loadLibrary(), (context) {
+      return spatial_grid_page.SpatialGridPage();
+    });
+  }
 };
 ```
 

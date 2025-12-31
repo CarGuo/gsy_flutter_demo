@@ -123,6 +123,7 @@ deferred-components:
       - package:gsy_flutter_demo/widget/tornado_scroll_demo.dart
       - package:gsy_flutter_demo/widget/combined_scene_page.dart
       - package:gsy_flutter_demo/widget/notion_qrcode_page.dart
+      - package:gsy_flutter_demo/widget/spatial_grid_page.dart
 
 dependencies:
   flutter:
