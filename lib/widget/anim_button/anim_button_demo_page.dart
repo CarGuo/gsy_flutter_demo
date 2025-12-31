@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:gsy_flutter_demo/widget/anim_button/play_anim_button.dart';
 
@@ -23,7 +24,7 @@ class AnimButtonDemoPageState extends State<AnimButtonDemoPage> {
   Widget build(BuildContext context) {
     Widget playButton;
     try {
-      if (Platform.isAndroid == true || Platform.isIOS == true) {
+      if (!kIsWeb) {
         playButton = const SizedBox(
           height: 50,
           width: 50,

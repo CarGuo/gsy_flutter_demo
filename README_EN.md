@@ -745,6 +745,12 @@ Map<String, WidgetBuilder> routers = {
     return ContainerAsyncRouterPage(spatial_grid_page.loadLibrary(), (context) {
       return spatial_grid_page.SpatialGridPage();
     });
+  },
+  "Shock Wave Chat": (context) {
+    return ContainerAsyncRouterPage(shock_wave_chat_page.loadLibrary(),
+            (context) {
+          return shock_wave_chat_page.ShockwaveChatPage();
+        });
   }
 };
 ```

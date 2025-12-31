@@ -124,6 +124,7 @@ deferred-components:
       - package:gsy_flutter_demo/widget/combined_scene_page.dart
       - package:gsy_flutter_demo/widget/notion_qrcode_page.dart
       - package:gsy_flutter_demo/widget/spatial_grid_page.dart
+      - package:gsy_flutter_demo/widget/shock_wave_chat_page.dart
 
 dependencies:
   flutter:
@@ -174,6 +175,8 @@ flutter:
   shaders:
     - shaders/liquid_glass.frag
     - shaders/liquid_glass2.frag
+    - shaders/shockwave.frag
+    - shaders/elastic.frag
 
   # To add assets to your application, add an assets section, like this:
   assets:

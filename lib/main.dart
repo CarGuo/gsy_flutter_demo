@@ -271,6 +271,9 @@ import 'package:gsy_flutter_demo/widget/disco_sphere_page.dart'
 import 'package:gsy_flutter_demo/widget/spatial_grid_page.dart'
     deferred as spatial_grid_page;
 
+import 'package:gsy_flutter_demo/widget/shock_wave_chat_page.dart'
+    deferred as shock_wave_chat_page;
+
 import 'package:gsy_flutter_demo/widget/akaza_page.dart' deferred as akaza_page;
 
 import 'package:window_location_href/window_location_href.dart';
@@ -1114,8 +1117,13 @@ Map<String, WidgetBuilder> routers = {
     return ContainerAsyncRouterPage(spatial_grid_page.loadLibrary(), (context) {
       return spatial_grid_page.SpatialGridPage();
     });
+  },
+  "Shock Wave Chat": (context) {
+    return ContainerAsyncRouterPage(shock_wave_chat_page.loadLibrary(),
+        (context) {
+      return shock_wave_chat_page.ShockwaveChatPage();
+    });
   }
-
 };
 
 enum Cat {
