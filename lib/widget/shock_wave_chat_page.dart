@@ -92,6 +92,7 @@ class _ShockwaveChatPageState extends State<ShockwaveChatPage> {
     /// 稍微降低截图分辨率可以提高性能，对动态模糊效果影响不大
     final image = await boundary.toImage(pixelRatio: pixelRatio);
 
+    // ignore: use_build_context_synchronously
     final RenderBox renderBox = itemContext.findRenderObject() as RenderBox;
     final size = renderBox.size;
     final offset = renderBox.localToGlobal(Offset.zero);
@@ -231,7 +232,6 @@ class _InteractiveItem extends StatefulWidget {
   final VoidCallback onUp;
 
   const _InteractiveItem({
-    super.key,
     required this.text,
     required this.isMe,
     required this.onDown,
@@ -326,7 +326,7 @@ class _MessageBubble extends StatelessWidget {
   final String text;
   final bool isMe;
 
-  const _MessageBubble({super.key, required this.text, required this.isMe});
+  const _MessageBubble({required this.text, required this.isMe});
 
   @override
   Widget build(BuildContext context) {
@@ -358,7 +358,6 @@ class _ShockwaveOverlay extends StatefulWidget {
   final VoidCallback onAnimationEnd;
 
   const _ShockwaveOverlay({
-    super.key,
     required this.program,
     required this.screenImage,
     required this.touchCenter,
@@ -523,14 +522,14 @@ class _ShockwaveOverlayState extends State<_ShockwaveOverlay>
                         /// 阴影透明度也会跟随 _holdController 平滑消失
                         BoxShadow(
                           color: Colors.black
-                              .withOpacity(0.5 * _holdController.value),
+                              .withValues(alpha:0.5 * _holdController.value),
                           blurRadius: 30,
                           offset: const Offset(0, 10),
                           spreadRadius: 2,
                         ),
                         BoxShadow(
                           color: Colors.white
-                              .withOpacity(0.6 * _holdController.value),
+                              .withValues(alpha:0.6 * _holdController.value),
                           blurRadius: 25,
                           spreadRadius: 2,
                         ),
@@ -563,7 +562,7 @@ class _SpotlightHolePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     canvas.saveLayer(Offset.zero & size, Paint());
-    canvas.drawColor(Colors.black.withOpacity(opacity), BlendMode.srcOver);
+    canvas.drawColor(Colors.black.withValues(alpha:opacity), BlendMode.srcOver);
     final currentHole = holeRect.inflate(expansion);
     final paint = Paint()..blendMode = BlendMode.clear;
     canvas.drawRRect(

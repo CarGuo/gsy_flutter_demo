@@ -231,7 +231,7 @@ class _GridPainter extends CustomPainter {
     // 预计算一些常量
     final double centerX = mousePoint.dx * 3.0;
     final double centerY = mousePoint.dy * 3.0 * 1.5;
-    final double radius = 1.3;
+    const double radius = 1.3;
     double tiltX = (mousePoint.dx - lagPoint.dx) * 2.0;
     double tiltY = (mousePoint.dy - lagPoint.dy) * 2.0;
 
@@ -277,7 +277,7 @@ class _GridPainter extends CustomPainter {
     // --- 2. 绘制网格 (核心修改：动态能量脉冲) ---
     if (!isCyberpunkMode) {
       // 普通模式简单绘制
-      gridCorePaint..color = Colors.black.withOpacity(0.8)..strokeWidth = 1.0;
+      gridCorePaint..color = Colors.black.withValues(alpha: 0.8)..strokeWidth = 1.0;
       for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
           if (j < cols - 1) canvas.drawLine(gridPoints[i][j], gridPoints[i][j+1], gridCorePaint);
@@ -336,7 +336,7 @@ class _GridPainter extends CustomPainter {
         }
         Path headPath = _generatePath(beam, headStartT, headEndT, gridPoints);
 
-        tailPaint.color = beam.color.withOpacity(0.6);
+        tailPaint.color = beam.color.withValues(alpha: 0.6);
         canvas.drawPath(tailPath, tailPaint);
         canvas.drawPath(headPath, headPaint);
       }
@@ -387,12 +387,12 @@ class _GridPainter extends CustomPainter {
 
     // 应用样式并绘制
     glowPaint
-      ..color = baseColor.withOpacity(glowOpacity)
+      ..color = baseColor.withValues(alpha: glowOpacity)
       ..strokeWidth = glowWidth;
     canvas.drawLine(p1, p2, glowPaint);
 
     corePaint
-      ..color = baseColor.withOpacity(coreOpacity)
+      ..color = baseColor.withValues(alpha: coreOpacity)
       ..strokeWidth = coreWidth;
     canvas.drawLine(p1, p2, corePaint);
   }

@@ -75,9 +75,9 @@ class _DiscoSphereFinalFusionPageState extends State<DiscoSphereFinalFusionPage>
   final int _lonSegments = 48;
   final double _radius = 120.0;
 
-  List<_GridTile> _tiles = [];
+  final List<_GridTile> _tiles = [];
 
-  double _rotX = 0.25;
+  final double _rotX = 0.25;
   double _baseRotY = 0.0;
   double _time = 0.0;
 
@@ -187,10 +187,11 @@ class _DiscoSphereFinalFusionPageState extends State<DiscoSphereFinalFusionPage>
         // --- 核心：金属质感冷色调 ---
         Color color;
         double r = random.nextDouble();
-        if (r > 0.70) color = const Color(0xFFF5F5F5); // 亮银
-        else if (r > 0.50) color = const Color(0xFFD1C4E9); // 淡紫 (Lavender)
-        else if (r > 0.25) color = const Color(0xFF9575CD); // 中紫
-        else color = const Color(0xFF673AB7); // 深紫
+        if (r > 0.70) {
+          color = const Color(0xFFF5F5F5); // 亮银
+        } else if (r > 0.50){ color = const Color(0xFFD1C4E9); }// 淡紫 (Lavender)
+        else if (r > 0.25) {color = const Color(0xFF9575CD);} // 中紫
+        else {color = const Color(0xFF673AB7);} // 深紫
 
         _Vec3 noise = _Vec3(
           (random.nextDouble() - 0.5) * 0.8,
@@ -252,7 +253,7 @@ class _DiscoSphereFinalFusionPageState extends State<DiscoSphereFinalFusionPage>
             _isPaperSpreadMode = !_isPaperSpreadMode;
           });
         },
-        backgroundColor: Colors.white.withOpacity(0.15),
+        backgroundColor: Colors.white.withValues(alpha: 0.15),
         elevation: 0,
         icon: Icon(
             _isPaperSpreadMode ? Icons.layers : Icons.grain,
@@ -406,9 +407,9 @@ class _BreathingSpherePainter extends CustomPainter {
         finalCenterPos = basePos + flyDir * totalOffset;
         double tumbleAngle = totalOffset * 0.08;
         bool shouldTumble = totalOffset > 1.0;
-        double cT = 1, sT = 0, one_cT = 0, ux=0, uy=0, uz=0;
+        double cT = 1, sT = 0, oneCT = 0, ux=0, uy=0, uz=0;
         if (shouldTumble) {
-          cT = cos(tumbleAngle); sT = sin(tumbleAngle); one_cT = 1 - cT;
+          cT = cos(tumbleAngle); sT = sin(tumbleAngle); oneCT = 1 - cT;
           ux = tile.tumbleAxis.x; uy = tile.tumbleAxis.y; uz = tile.tumbleAxis.z;
         }
         for (var vBase in tile.vertices) {
@@ -416,9 +417,9 @@ class _BreathingSpherePainter extends CustomPainter {
           _Vec3 vLocal = (vRot - worldCenter) * radius;
           if (shouldTumble) {
             double dot = vLocal.x * ux + vLocal.y * uy + vLocal.z * uz;
-            double rx = ux * dot * one_cT + vLocal.x * cT + (uy * vLocal.z - uz * vLocal.y) * sT;
-            double ry = uy * dot * one_cT + vLocal.y * cT + (uz * vLocal.x - ux * vLocal.z) * sT;
-            double rz = uz * dot * one_cT + vLocal.z * cT + (ux * vLocal.y - uy * vLocal.x) * sT;
+            double rx = ux * dot * oneCT + vLocal.x * cT + (uy * vLocal.z - uz * vLocal.y) * sT;
+            double ry = uy * dot * oneCT + vLocal.y * cT + (uz * vLocal.x - ux * vLocal.z) * sT;
+            double rz = uz * dot * oneCT + vLocal.z * cT + (ux * vLocal.y - uy * vLocal.x) * sT;
             vLocal = _Vec3(rx, ry, rz);
           }
           finalVertices.add(finalCenterPos + vLocal);
@@ -466,9 +467,9 @@ class _BreathingSpherePainter extends CustomPainter {
       Color base = tile.baseColor;
       Color shaded = Color.fromARGB(
           255,
-          (base.red * brightness).clamp(0, 255).toInt(),
-          (base.green * brightness).clamp(0, 255).toInt(),
-          (base.blue * brightness).clamp(0, 255).toInt()
+          (base.r * brightness).clamp(0, 255).toInt(),
+          (base.g * brightness).clamp(0, 255).toInt(),
+          (base.b * brightness).clamp(0, 255).toInt()
       );
 
       Color finalColor;
@@ -489,7 +490,7 @@ class _BreathingSpherePainter extends CustomPainter {
     Paint stroke = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = 0.5
-      ..color = Colors.black.withOpacity(0.3)
+      ..color = Colors.black.withValues(alpha:0.3)
       ..strokeJoin = StrokeJoin.bevel;
 
     for (var quad in renderList) {

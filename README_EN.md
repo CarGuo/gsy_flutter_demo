@@ -46,7 +46,7 @@
 | ![](demo7.webp)  | ![](demo8.webp)  | ![](demo9.webp)  | 
 | ![](demo10.webp) | ![](demo11.webp) | ![](demo12.webp) | 
 | ![](demo13.webp) | ![](demo14.webp) | ![](demo15.webp) | 
-| ![](demo16.webp) | ![](demo17.webp) |   | 
+| ![](demo16.webp) | ![](demo17.webp) | ![](demo18.webp) | 
 
 
 
@@ -750,6 +750,12 @@ Map<String, WidgetBuilder> routers = {
     return ContainerAsyncRouterPage(shock_wave_chat_page.loadLibrary(),
             (context) {
           return shock_wave_chat_page.ShockwaveChatPage();
+        });
+  },
+  "Particle Effect": (context) {
+    return ContainerAsyncRouterPage(particle_effect_screen.loadLibrary(),
+            (context) {
+          return particle_effect_screen.ParticleEffectScreen();
         });
   }
 };
