@@ -48,6 +48,7 @@
 | ![](demo10.webp) | ![](demo11.webp) | ![](demo12.webp) | 
 | ![](demo13.webp) | ![](demo14.webp) | ![](demo15.webp) | 
 | ![](demo16.webp) | ![](demo17.webp) | ![](demo18.webp) | 
+| ![](demo19.webp) |  | | 
 
 
 ![](demo.jpg)
@@ -757,7 +758,14 @@ Map<String, WidgetBuilder> routers = {
             (context) {
           return particle_effect_screen.ParticleEffectScreen();
         });
+  },
+  "Mosaic Scanner ": (context) {
+    return ContainerAsyncRouterPage(mosaic_scanner_page.loadLibrary(),
+            (context) {
+          return mosaic_scanner_page.MosaicScannerPage();
+        });
   }
+  
 };
 ```
 

@@ -1,281 +1,284 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:gsy_flutter_demo/widget/align_demo_page.dart'
-    deferred as align_demo_page;
+deferred as align_demo_page;
 import 'package:gsy_flutter_demo/widget/anim_bg_demo_page.dart'
-    deferred as anim_bg_demo_page;
+deferred as anim_bg_demo_page;
 import 'package:gsy_flutter_demo/widget/anim_bubble_gum.dart'
-    deferred as anim_bubble_gum;
+deferred as anim_bubble_gum;
 import 'package:gsy_flutter_demo/widget/anim_button/anim_button_demo_page.dart'
-    deferred as anim_button_demo_page;
+deferred as anim_button_demo_page;
 import 'package:gsy_flutter_demo/widget/anim_progress_img_demo_page.dart'
-    deferred as anim_progress_img_demo_page;
+deferred as anim_progress_img_demo_page;
 import 'package:gsy_flutter_demo/widget/anim_scan_demo_page.dart'
-    deferred as anim_scan_demo_page;
+deferred as anim_scan_demo_page;
 import 'package:gsy_flutter_demo/widget/anim_text_demo_page.dart'
-    deferred as anim_text_demo_page;
+deferred as anim_text_demo_page;
 import 'package:gsy_flutter_demo/widget/anim_tip_demo_page.dart'
-    deferred as anim_tip_demo_page;
+deferred as anim_tip_demo_page;
 import 'package:gsy_flutter_demo/widget/anima_demo_page.dart'
-    deferred as anima_demo_page;
+deferred as anima_demo_page;
 import 'package:gsy_flutter_demo/widget/anima_demo_page2.dart'
-    deferred as anima_demo_page2;
+deferred as anima_demo_page2;
 import 'package:gsy_flutter_demo/widget/anima_demo_page4.dart'
-    deferred as anima_demo_page4;
+deferred as anima_demo_page4;
 import 'package:gsy_flutter_demo/widget/anima_demo_page5.dart'
-    deferred as anima_demo_page5;
+deferred as anima_demo_page5;
 import 'package:gsy_flutter_demo/widget/animation_container_demo_page.dart'
-    deferred as animation_container_demo_page;
+deferred as animation_container_demo_page;
 import 'package:gsy_flutter_demo/widget/arc_seek_bar_demo_page.dart'
-    deferred as arc_seek_bar_demo_page;
+deferred as arc_seek_bar_demo_page;
 import 'package:gsy_flutter_demo/widget/blur_demo_page.dart'
-    deferred as blur_demo_page;
+deferred as blur_demo_page;
 import 'package:gsy_flutter_demo/widget/book_page/book_page.dart'
-    deferred as book_page;
+deferred as book_page;
 import 'package:gsy_flutter_demo/widget/bottom_anim_nav_page.dart'
-    deferred as bottom_anim_nav_page;
+deferred as bottom_anim_nav_page;
 import 'package:gsy_flutter_demo/widget/bubble/bubble_demo_page.dart'
-    deferred as bubble_demo_page;
+deferred as bubble_demo_page;
 import 'package:gsy_flutter_demo/widget/canvas_click_demo_page.dart'
-    deferred as canvas_click_demo_page;
+deferred as canvas_click_demo_page;
 import 'package:gsy_flutter_demo/widget/card_item_page.dart'
-    deferred as card_item_page;
+deferred as card_item_page;
 import 'package:gsy_flutter_demo/widget/chat_list_scroll_demo_page.dart'
-    deferred as chat_list_scroll_demo_page;
+deferred as chat_list_scroll_demo_page;
 import 'package:gsy_flutter_demo/widget/chat_list_scroll_demo_page_2.dart'
-    deferred as chat_list_scroll_demo_page_2;
+deferred as chat_list_scroll_demo_page_2;
 import 'package:gsy_flutter_demo/widget/clip_demo_page.dart'
-    deferred as clip_demo_page;
+deferred as clip_demo_page;
 import 'package:gsy_flutter_demo/widget/cloud/cloud_demo_page.dart'
-    deferred as cloud_demo_page;
+deferred as cloud_demo_page;
 import 'package:gsy_flutter_demo/widget/color_progress_demo_page.dart'
-    deferred as color_progress_demo_page;
+deferred as color_progress_demo_page;
 import 'package:gsy_flutter_demo/widget/controller_demo_page.dart'
-    deferred as controller_demo_page;
+deferred as controller_demo_page;
 import 'package:gsy_flutter_demo/widget/custom_multi_render_demo_page.dart'
-    deferred as custom_multi_render_demo_page;
+deferred as custom_multi_render_demo_page;
 import 'package:gsy_flutter_demo/widget/custom_pull/refrsh_demo_page3.dart'
-    deferred as refrsh_demo_page3;
+deferred as refrsh_demo_page3;
 import 'package:gsy_flutter_demo/widget/custom_sliver/scroll_header_demo_page.dart'
-    deferred as scroll_header_demo_page;
+deferred as scroll_header_demo_page;
 import 'package:gsy_flutter_demo/widget/custom_viewport/custom_viewport_page.dart'
-    deferred as custom_viewport_page;
+deferred as custom_viewport_page;
 import 'package:gsy_flutter_demo/widget/drag_img_demo_page.dart'
-    deferred as drag_img_demo_page;
+deferred as drag_img_demo_page;
 import 'package:gsy_flutter_demo/widget/drop_select_menu/drop_select_demo_page.dart'
-    deferred as drop_select_demo_page;
+deferred as drop_select_demo_page;
 import 'package:gsy_flutter_demo/widget/floating_touch_demo_page.dart'
-    deferred as floating_touch_demo_page;
+deferred as floating_touch_demo_page;
 import 'package:gsy_flutter_demo/widget/gradient_text_demo_page.dart'
-    deferred as gradient_text_demo_page;
+deferred as gradient_text_demo_page;
 import 'package:gsy_flutter_demo/widget/honor_demo_page.dart'
-    deferred as honor_demo_page;
+deferred as honor_demo_page;
 import 'package:gsy_flutter_demo/widget/index_stack_drag_card_demo_page.dart'
-    deferred as index_stack_drag_card_demo_page;
+deferred as index_stack_drag_card_demo_page;
 import 'package:gsy_flutter_demo/widget/index_stack_drag_card_demo_page2.dart'
-    deferred as index_stack_drag_card_demo_page2;
+deferred as index_stack_drag_card_demo_page2;
 import 'package:gsy_flutter_demo/widget/input_bottom_demo_page.dart'
-    deferred as input_bottom_demo_page;
+deferred as input_bottom_demo_page;
 import 'package:gsy_flutter_demo/widget/keyboard_demo_page.dart'
-    deferred as keyboard_demo_page;
+deferred as keyboard_demo_page;
 import 'package:gsy_flutter_demo/widget/link_sliver/link_sliver_demo_page.dart'
-    deferred as link_sliver_demo_page;
+deferred as link_sliver_demo_page;
 import 'package:gsy_flutter_demo/widget/list_anim/list_anim_demo_page.dart'
-    deferred as list_anim_demo_page;
+deferred as list_anim_demo_page;
 import 'package:gsy_flutter_demo/widget/list_anim_2/list_anim_demo_page.dart'
-    deferred as list_anim_demo_page2;
+deferred as list_anim_demo_page2;
 import 'package:gsy_flutter_demo/widget/matrix_custom_painter_page.dart'
-    deferred as matrix_custom_painter_page;
+deferred as matrix_custom_painter_page;
 import 'package:gsy_flutter_demo/widget/overflow_image_page.dart'
-    deferred as overflow_image_page;
+deferred as overflow_image_page;
 import 'package:gsy_flutter_demo/widget/particle/particle_page.dart'
-    deferred as particle_page;
+deferred as particle_page;
 import 'package:gsy_flutter_demo/widget/positioned_demo_page.dart'
-    deferred as positioned_demo_page;
+deferred as positioned_demo_page;
 import 'package:gsy_flutter_demo/widget/refrsh_demo_page.dart'
-    deferred as refrsh_demo_page;
+deferred as refrsh_demo_page;
 import 'package:gsy_flutter_demo/widget/refrsh_demo_page2.dart'
-    deferred as refrsh_demo_page2;
+deferred as refrsh_demo_page2;
 import 'package:gsy_flutter_demo/widget/rich_text_demo_page.dart'
-    deferred as rich_text_demo_page;
+deferred as rich_text_demo_page;
 import 'package:gsy_flutter_demo/widget/rich_text_demo_page2.dart'
-    deferred as rich_text_demo_page2;
+deferred as rich_text_demo_page2;
 import 'package:gsy_flutter_demo/widget/route_demo_page.dart'
-    deferred as route_demo_page;
+deferred as route_demo_page;
 import 'package:gsy_flutter_demo/widget/scroll_inner_content_demo_page.dart'
-    deferred as scroll_inner_content_demo_page;
+deferred as scroll_inner_content_demo_page;
 import 'package:gsy_flutter_demo/widget/scroll_listener_demo_page.dart'
-    deferred as scroll_listener_demo_page;
+deferred as scroll_listener_demo_page;
 import 'package:gsy_flutter_demo/widget/scroll_to_index_demo_page.dart'
-    deferred as scroll_to_index_demo_page;
+deferred as scroll_to_index_demo_page;
 import 'package:gsy_flutter_demo/widget/scroll_to_index_demo_page2.dart'
-    deferred as scroll_to_index_demo_page2;
+deferred as scroll_to_index_demo_page2;
 import 'package:gsy_flutter_demo/widget/silder_verify_page.dart'
-    deferred as silder_verify_page;
+deferred as silder_verify_page;
 import 'package:gsy_flutter_demo/widget/sliver_list_demo_page.dart'
-    deferred as sliver_list_demo_page;
+deferred as sliver_list_demo_page;
 import 'package:gsy_flutter_demo/widget/sliver_stick_demo_page.dart'
-    deferred as sliver_stick_demo_page;
+deferred as sliver_stick_demo_page;
 import 'package:gsy_flutter_demo/widget/sliver_tab/sliver_tab_demo_page3.dart'
-    deferred as sliver_tab_demo_page3;
+deferred as sliver_tab_demo_page3;
 import 'package:gsy_flutter_demo/widget/sliver_tab_demo_page.dart'
-    deferred as sliver_tab_demo_page;
+deferred as sliver_tab_demo_page;
 import 'package:gsy_flutter_demo/widget/sliver_tab_demo_page2.dart'
-    deferred as sliver_tab_demo_page2;
+deferred as sliver_tab_demo_page2;
 import 'package:gsy_flutter_demo/widget/statusbar_demo_page.dart'
-    deferred as statusbar_demo_page;
+deferred as statusbar_demo_page;
 import 'package:gsy_flutter_demo/widget/stick/stick_demo_page.dart'
-    deferred as stick_demo_page;
+deferred as stick_demo_page;
 import 'package:gsy_flutter_demo/widget/stick/stick_demo_page2.dart'
-    deferred as stick_demo_page2;
+deferred as stick_demo_page2;
 import 'package:gsy_flutter_demo/widget/stick_sliver_list_demo_page.dart'
-    deferred as stick_sliver_list_demo_page;
+deferred as stick_sliver_list_demo_page;
 import 'package:gsy_flutter_demo/widget/tag_demo_page.dart'
-    deferred as tag_demo_page;
+deferred as tag_demo_page;
 import 'package:gsy_flutter_demo/widget/text_line_height_demo_page.dart'
-    deferred as text_line_height_demo_page;
+deferred as text_line_height_demo_page;
 import 'package:gsy_flutter_demo/widget/text_size_demo_page.dart'
-    deferred as text_size_demo_page;
+deferred as text_size_demo_page;
 import 'package:gsy_flutter_demo/widget/tick_click_demo_page.dart'
-    deferred as tick_click_demo_page;
+deferred as tick_click_demo_page;
 import 'package:gsy_flutter_demo/widget/transform_demo_page.dart'
-    deferred as transform_demo_page;
+deferred as transform_demo_page;
 import 'package:gsy_flutter_demo/widget/verification_code_input_demo_page.dart'
-    deferred as verification_code_input_demo_page;
+deferred as verification_code_input_demo_page;
 import 'package:gsy_flutter_demo/widget/verification_code_input_demo_page2.dart'
-    deferred as verification_code_input_demo_page2;
+deferred as verification_code_input_demo_page2;
 import 'package:gsy_flutter_demo/widget/viewpager_demo_page.dart'
-    deferred as viewpager_demo_page;
+deferred as viewpager_demo_page;
 import 'package:gsy_flutter_demo/widget/wrap_content_page.dart'
-    deferred as wrap_content_page;
+deferred as wrap_content_page;
 
 import 'package:gsy_flutter_demo/widget/shader_canvas_demo_page.dart'
-    deferred as shader_canvas_demo_page;
+deferred as shader_canvas_demo_page;
 
 import 'package:gsy_flutter_demo/widget/anim_switch_layout_demo_page.dart'
-    deferred as anim_switch_layout_demo_page;
+deferred as anim_switch_layout_demo_page;
 
 import 'package:gsy_flutter_demo/widget/vp_list_demo_page.dart'
-    deferred as vp_list_demo_page;
+deferred as vp_list_demo_page;
 
 import 'package:gsy_flutter_demo/widget/card_perspective_demo_page.dart'
-    deferred as card_perspective_demo_page;
+deferred as card_perspective_demo_page;
 
 import 'package:gsy_flutter_demo/widget/card_3d_demo_page.dart'
-    deferred as card_3d_demo_page;
+deferred as card_3d_demo_page;
 
 import 'package:gsy_flutter_demo/widget/card_real_3d_demo_page.dart'
-    deferred as card_real_3d_demo_page;
+deferred as card_real_3d_demo_page;
 
 import 'package:gsy_flutter_demo/widget/anim_juejin_logo_demo_page.dart'
-    deferred as anim_juejin_logo_demo_page;
+deferred as anim_juejin_logo_demo_page;
 
 import 'package:gsy_flutter_demo/widget/dash_3d_demo_page.dart'
-    deferred as dash_3d_demo_page;
+deferred as dash_3d_demo_page;
 
 import 'package:gsy_flutter_demo/widget/png_shadow_demo_page.dart'
-    deferred as png_shadow_demo_page;
+deferred as png_shadow_demo_page;
 
 import 'package:gsy_flutter_demo/widget/transform_canvas_demo_page.dart'
-    deferred as transform_canvas_demo_page;
+deferred as transform_canvas_demo_page;
 
 import 'package:gsy_flutter_demo/widget/juejin_3d_logo_demo_page.dart'
-    deferred as juejin_3d_logo_demo_page;
+deferred as juejin_3d_logo_demo_page;
 
 import 'package:gsy_flutter_demo/widget/juejin_3d_box_logo_demo_page.dart'
-    deferred as juejin_3d_box_logo_demo_page;
+deferred as juejin_3d_box_logo_demo_page;
 
 import 'package:gsy_flutter_demo/widget/custom_shader_path_demo_page.dart'
-    deferred as custom_shader_path_demo_page;
+deferred as custom_shader_path_demo_page;
 
 import 'package:gsy_flutter_demo/widget/list_link_bottomsheet_demo_page.dart'
-    deferred as list_link_bottomsheet_demo_page;
+deferred as list_link_bottomsheet_demo_page;
 
 import 'package:gsy_flutter_demo/widget/demo_draggable_sheet_stick_page.dart'
-    deferred as demo_draggable_sheet_stick_page;
+deferred as demo_draggable_sheet_stick_page;
 
 import 'package:gsy_flutter_demo/widget/async_to_sync_call_page.dart'
-    deferred as async_to_sync_call_page;
+deferred as async_to_sync_call_page;
 
 import 'package:gsy_flutter_demo/widget/star_bomb_button_page.dart'
-    deferred as star_bomb_button_page;
+deferred as star_bomb_button_page;
 
 import 'package:gsy_flutter_demo/widget/photo_gallery_demo_page.dart'
-    deferred as photo_gallery_demo_page;
+deferred as photo_gallery_demo_page;
 
 import 'package:gsy_flutter_demo/widget/tear_text_demo_page.dart'
-    deferred as tear_text_demo_page;
+deferred as tear_text_demo_page;
 
 import 'package:gsy_flutter_demo/widget/un_bounded_listview.dart'
-    deferred as un_bounded_listview;
+deferred as un_bounded_listview;
 
 import 'package:gsy_flutter_demo/widget/pageview_in_pageview_demo_page.dart'
-    deferred as pageview_in_pageview_demo_page;
+deferred as pageview_in_pageview_demo_page;
 
 import 'package:gsy_flutter_demo/widget/gesture_password/gesture_password_demo_page.dart'
-    deferred as gesture_password_demo_page;
+deferred as gesture_password_demo_page;
 
 import 'package:gsy_flutter_demo/widget/link_scroll_page.dart'
-    deferred as link_scroll_page;
+deferred as link_scroll_page;
 
 import 'package:gsy_flutter_demo/widget/glass_demo_page.dart'
-    deferred as glass_demo_page;
+deferred as glass_demo_page;
 
 import 'package:gsy_flutter_demo/widget/liquid_glass_demo.dart'
-    deferred as liquid_glass_demo;
+deferred as liquid_glass_demo;
 
 import 'package:gsy_flutter_demo/widget/liquid_glass_demo2.dart'
-    deferred as liquid_glass_demo2;
+deferred as liquid_glass_demo2;
 
 import 'package:gsy_flutter_demo/widget/attractor_page.dart'
-    deferred as attractor_page;
+deferred as attractor_page;
 import 'package:gsy_flutter_demo/widget/fibonacci_sphere_page.dart'
-    deferred as fibonacci_sphere_page;
+deferred as fibonacci_sphere_page;
 import 'package:gsy_flutter_demo/widget/galaxy_scene_page.dart'
-    deferred as galaxy_scene_page;
+deferred as galaxy_scene_page;
 
 import 'package:gsy_flutter_demo/widget/neon_slider_page.dart'
-    deferred as neon_slider_page;
+deferred as neon_slider_page;
 
 import 'package:gsy_flutter_demo/widget/radial_lines_page.dart'
-    deferred as radial_lines_page;
+deferred as radial_lines_page;
 import 'package:gsy_flutter_demo/widget/boom_particle_page.dart'
-    deferred as boom_particle_page;
+deferred as boom_particle_page;
 
 import 'package:gsy_flutter_demo/widget/black_hole_simulation_page.dart'
-    deferred as black_hole_simulation_page;
+deferred as black_hole_simulation_page;
 
 import 'package:gsy_flutter_demo/widget/stream_taichi_page.dart'
-    deferred as stream_taichi_page;
+deferred as stream_taichi_page;
 
 import 'package:gsy_flutter_demo/widget/black_hole_page.dart'
-    deferred as black_hole_page;
+deferred as black_hole_page;
 
 import 'package:gsy_flutter_demo/widget/taichi_page.dart'
-    deferred as taichi_page;
+deferred as taichi_page;
 
 import 'package:gsy_flutter_demo/widget/tornado_scroll_demo.dart'
-    deferred as tornado_scroll_demo;
+deferred as tornado_scroll_demo;
 
 import 'package:gsy_flutter_demo/widget/particle_morphing_page.dart'
-    deferred as particle_morphing_page;
+deferred as particle_morphing_page;
 
 import 'package:gsy_flutter_demo/widget/combined_scene_page.dart'
-    deferred as combined_scene_page;
+deferred as combined_scene_page;
 import 'package:gsy_flutter_demo/widget/notion_qrcode_page.dart'
-    deferred as notion_qrcode_page;
+deferred as notion_qrcode_page;
 
 import 'package:gsy_flutter_demo/widget/disco_sphere_page.dart'
-    deferred as disco_sphere_page;
+deferred as disco_sphere_page;
 
 import 'package:gsy_flutter_demo/widget/spatial_grid_page.dart'
-    deferred as spatial_grid_page;
+deferred as spatial_grid_page;
 
 import 'package:gsy_flutter_demo/widget/shock_wave_chat_page.dart'
-    deferred as shock_wave_chat_page;
+deferred as shock_wave_chat_page;
 
 import 'package:gsy_flutter_demo/widget/particle_effect_screen.dart'
-    deferred as particle_effect_screen;
+deferred as particle_effect_screen;
+
+import 'package:gsy_flutter_demo/widget/mosaic_scanner_page.dart'
+deferred as mosaic_scanner_page;
 
 import 'package:gsy_flutter_demo/widget/akaza_page.dart' deferred as akaza_page;
 
@@ -430,9 +433,9 @@ class ContainerAsyncRouterPage extends StatelessWidget {
 Map<String, WidgetBuilder> routers = {
   "文本输入框简单的 Controller": (context) {
     return ContainerAsyncRouterPage(controller_demo_page.loadLibrary(),
-        (context) {
-      return controller_demo_page.ControllerDemoPage();
-    });
+            (context) {
+          return controller_demo_page.ControllerDemoPage();
+        });
   },
   "实现控件圆角不同组合": (context) {
     return ContainerAsyncRouterPage(clip_demo_page.loadLibrary(), (context) {
@@ -441,39 +444,39 @@ Map<String, WidgetBuilder> routers = {
   },
   "列表滑动监听": (context) {
     return ContainerAsyncRouterPage(scroll_listener_demo_page.loadLibrary(),
-        (context) {
-      return scroll_listener_demo_page.ScrollListenerDemoPage();
-    });
+            (context) {
+          return scroll_listener_demo_page.ScrollListenerDemoPage();
+        });
   },
   "滑动到指定位置": (context) {
     return ContainerAsyncRouterPage(scroll_to_index_demo_page.loadLibrary(),
-        (context) {
-      return scroll_to_index_demo_page.ScrollToIndexDemoPage();
-    });
+            (context) {
+          return scroll_to_index_demo_page.ScrollToIndexDemoPage();
+        });
   },
   "滑动到指定位置2": (context) {
     return ContainerAsyncRouterPage(scroll_to_index_demo_page2.loadLibrary(),
-        (context) {
-      return scroll_to_index_demo_page2.ScrollToIndexDemoPage2();
-    });
+            (context) {
+          return scroll_to_index_demo_page2.ScrollToIndexDemoPage2();
+        });
   },
   "展示渐变带边框的文本": (context) {
     return ContainerAsyncRouterPage(gradient_text_demo_page.loadLibrary(),
-        (context) {
-      return gradient_text_demo_page.GradientTextDemoPage();
-    });
+            (context) {
+          return gradient_text_demo_page.GradientTextDemoPage();
+        });
   },
   "Transform 效果展示": (context) {
     return ContainerAsyncRouterPage(transform_demo_page.loadLibrary(),
-        (context) {
-      return transform_demo_page.TransformDemoPage();
-    });
+            (context) {
+          return transform_demo_page.TransformDemoPage();
+        });
   },
   "计算另类文本行间距展示": (context) {
     return ContainerAsyncRouterPage(text_line_height_demo_page.loadLibrary(),
-        (context) {
-      return text_line_height_demo_page.TextLineHeightDemoPage();
-    });
+            (context) {
+          return text_line_height_demo_page.TextLineHeightDemoPage();
+        });
   },
   "简单上下刷新": (context) {
     return ContainerAsyncRouterPage(refrsh_demo_page.loadLibrary(), (context) {
@@ -492,9 +495,9 @@ Map<String, WidgetBuilder> routers = {
   },
   "通过绝对定位布局": (context) {
     return ContainerAsyncRouterPage(positioned_demo_page.loadLibrary(),
-        (context) {
-      return positioned_demo_page.PositionedDemoPage();
-    });
+            (context) {
+          return positioned_demo_page.PositionedDemoPage();
+        });
   },
   "气泡提示框": (context) {
     return ContainerAsyncRouterPage(bubble_demo_page.loadLibrary(), (context) {
@@ -513,9 +516,9 @@ Map<String, WidgetBuilder> routers = {
   },
   "滑动验证": (context) {
     return ContainerAsyncRouterPage(silder_verify_page.loadLibrary(),
-        (context) {
-      return silder_verify_page.SlideVerifyPage();
-    });
+            (context) {
+          return silder_verify_page.SlideVerifyPage();
+        });
   },
   "warpContent实现": (context) {
     return ContainerAsyncRouterPage(wrap_content_page.loadLibrary(), (context) {
@@ -524,15 +527,15 @@ Map<String, WidgetBuilder> routers = {
   },
   "状态栏颜色修改（仅 App）": (context) {
     return ContainerAsyncRouterPage(statusbar_demo_page.loadLibrary(),
-        (context) {
-      return statusbar_demo_page.StatusBarDemoPage();
-    });
+            (context) {
+          return statusbar_demo_page.StatusBarDemoPage();
+        });
   },
   "键盘弹出与监听（仅 App）": (context) {
     return ContainerAsyncRouterPage(keyboard_demo_page.loadLibrary(),
-        (context) {
-      return keyboard_demo_page.KeyBoardDemoPage();
-    });
+            (context) {
+          return keyboard_demo_page.KeyBoardDemoPage();
+        });
   },
   "控件动画组合展示（旋转加放大圆）": (context) {
     return ContainerAsyncRouterPage(anima_demo_page.loadLibrary(), (context) {
@@ -546,39 +549,39 @@ Map<String, WidgetBuilder> routers = {
   },
   "全局悬浮按键效果": (context) {
     return ContainerAsyncRouterPage(floating_touch_demo_page.loadLibrary(),
-        (context) {
-      return floating_touch_demo_page.FloatingTouchDemoPage();
-    });
+            (context) {
+          return floating_touch_demo_page.FloatingTouchDemoPage();
+        });
   },
   "全局设置字体大小": (context) {
     return ContainerAsyncRouterPage(text_size_demo_page.loadLibrary(),
-        (context) {
-      return text_size_demo_page.TextSizeDemoPage();
-    });
+            (context) {
+          return text_size_demo_page.TextSizeDemoPage();
+        });
   },
   "旧版实现富文本": (context) {
     return ContainerAsyncRouterPage(rich_text_demo_page.loadLibrary(),
-        (context) {
-      return rich_text_demo_page.RichTextDemoPage();
-    });
+            (context) {
+          return rich_text_demo_page.RichTextDemoPage();
+        });
   },
   "官方实现富文本": (context) {
     return ContainerAsyncRouterPage(rich_text_demo_page2.loadLibrary(),
-        (context) {
-      return rich_text_demo_page2.RichTextDemoPage2();
-    });
+            (context) {
+          return rich_text_demo_page2.RichTextDemoPage2();
+        });
   },
   "第三方 viewpager 封装实现": (context) {
     return ContainerAsyncRouterPage(viewpager_demo_page.loadLibrary(),
-        (context) {
-      return viewpager_demo_page.ViewPagerDemoPage();
-    });
+            (context) {
+          return viewpager_demo_page.ViewPagerDemoPage();
+        });
   },
   "列表滑动过程控件停靠效果": (context) {
     return ContainerAsyncRouterPage(sliver_list_demo_page.loadLibrary(),
-        (context) {
-      return sliver_list_demo_page.SliverListDemoPage();
-    });
+            (context) {
+          return sliver_list_demo_page.SliverListDemoPage();
+        });
   },
   "验证码输入框": (context) {
     return ContainerAsyncRouterPage(
@@ -595,9 +598,9 @@ Map<String, WidgetBuilder> routers = {
   },
   "自定义布局展示效果": (context) {
     return ContainerAsyncRouterPage(custom_multi_render_demo_page.loadLibrary(),
-        (context) {
-      return custom_multi_render_demo_page.CustomMultiRenderDemoPage();
-    });
+            (context) {
+          return custom_multi_render_demo_page.CustomMultiRenderDemoPage();
+        });
   },
   "自定义布局实现云词图展示": (context) {
     return ContainerAsyncRouterPage(cloud_demo_page.loadLibrary(), (context) {
@@ -616,15 +619,15 @@ Map<String, WidgetBuilder> routers = {
   },
   "列表滑动停靠效果2 （Stick": (context) {
     return ContainerAsyncRouterPage(sliver_stick_demo_page.loadLibrary(),
-        (context) {
-      return sliver_stick_demo_page.SliverStickListDemoPage();
-    });
+            (context) {
+          return sliver_stick_demo_page.SliverStickListDemoPage();
+        });
   },
   "键盘顶起展示（仅 App）": (context) {
     return ContainerAsyncRouterPage(input_bottom_demo_page.loadLibrary(),
-        (context) {
-      return input_bottom_demo_page.InputBottomDemoPage();
-    });
+            (context) {
+          return input_bottom_demo_page.InputBottomDemoPage();
+        });
   },
   "Blur 高斯模糊效果": (context) {
     return ContainerAsyncRouterPage(blur_demo_page.loadLibrary(), (context) {
@@ -633,15 +636,15 @@ Map<String, WidgetBuilder> routers = {
   },
   "控件动画变形效果": (context) {
     return ContainerAsyncRouterPage(animation_container_demo_page.loadLibrary(),
-        (context) {
-      return animation_container_demo_page.AnimationContainerDemoPage();
-    });
+            (context) {
+          return animation_container_demo_page.AnimationContainerDemoPage();
+        });
   },
   "时钟动画绘制展示": (context) {
     return ContainerAsyncRouterPage(tick_click_demo_page.loadLibrary(),
-        (context) {
-      return tick_click_demo_page.TickClickDemoPage();
-    });
+            (context) {
+          return tick_click_demo_page.TickClickDemoPage();
+        });
   },
   "按键切换动画效果": (context) {
     return ContainerAsyncRouterPage(anima_demo_page4.loadLibrary(), (context) {
@@ -650,21 +653,21 @@ Map<String, WidgetBuilder> routers = {
   },
   "列表滑动过程 item 停靠动画效果": (context) {
     return ContainerAsyncRouterPage(list_anim_demo_page.loadLibrary(),
-        (context) {
-      return list_anim_demo_page.ListAnimDemoPage();
-    });
+            (context) {
+          return list_anim_demo_page.ListAnimDemoPage();
+        });
   },
   "列表滑动过程 item 停靠动画效果2": (context) {
     return ContainerAsyncRouterPage(list_anim_demo_page2.loadLibrary(),
-        (context) {
-      return list_anim_demo_page2.ListAnimDemoPage2();
-    });
+            (context) {
+          return list_anim_demo_page2.ListAnimDemoPage2();
+        });
   },
   "下弹筛选展示效果": (context) {
     return ContainerAsyncRouterPage(drop_select_demo_page.loadLibrary(),
-        (context) {
-      return drop_select_demo_page.DropSelectDemoPage();
-    });
+            (context) {
+          return drop_select_demo_page.DropSelectDemoPage();
+        });
   },
   "文本弹出动画效果": (context) {
     return ContainerAsyncRouterPage(anima_demo_page5.loadLibrary(), (context) {
@@ -673,33 +676,33 @@ Map<String, WidgetBuilder> routers = {
   },
   "强大的自定义滑动与停靠结合展示": (context) {
     return ContainerAsyncRouterPage(scroll_header_demo_page.loadLibrary(),
-        (context) {
-      return scroll_header_demo_page.ScrollHeaderDemoPage();
-    });
+            (context) {
+          return scroll_header_demo_page.ScrollHeaderDemoPage();
+        });
   },
   "自定义列表内sliver渲染顺序": (context) {
     return ContainerAsyncRouterPage(custom_viewport_page.loadLibrary(),
-        (context) {
-      return custom_viewport_page.CustomViewportPage();
-    });
+            (context) {
+          return custom_viewport_page.CustomViewportPage();
+        });
   },
   "点击弹出动画提示": (context) {
     return ContainerAsyncRouterPage(anim_tip_demo_page.loadLibrary(),
-        (context) {
-      return anim_tip_demo_page.AnimTipDemoPage();
-    });
+            (context) {
+          return anim_tip_demo_page.AnimTipDemoPage();
+        });
   },
   "列表停靠展开+回到当前头部": (context) {
     return ContainerAsyncRouterPage(stick_sliver_list_demo_page.loadLibrary(),
-        (context) {
-      return stick_sliver_list_demo_page.StickSliverListDemoPage();
-    });
+            (context) {
+          return stick_sliver_list_demo_page.StickSliverListDemoPage();
+        });
   },
   "使用 overflow 处理图片": (context) {
     return ContainerAsyncRouterPage(overflow_image_page.loadLibrary(),
-        (context) {
-      return overflow_image_page.OverflowImagePage();
-    });
+            (context) {
+          return overflow_image_page.OverflowImagePage();
+        });
   },
   "展示 Align 排布控件": (context) {
     return ContainerAsyncRouterPage(align_demo_page.loadLibrary(), (context) {
@@ -713,21 +716,21 @@ Map<String, WidgetBuilder> routers = {
   },
   "多列表+顶部Tab效果展示": (context) {
     return ContainerAsyncRouterPage(sliver_tab_demo_page.loadLibrary(),
-        (context) {
-      return sliver_tab_demo_page.SliverTabDemoPage();
-    });
+            (context) {
+          return sliver_tab_demo_page.SliverTabDemoPage();
+        });
   },
   "多列表+顶部Tab效果展示2": (context) {
     return ContainerAsyncRouterPage(sliver_tab_demo_page2.loadLibrary(),
-        (context) {
-      return sliver_tab_demo_page2.SliverTabDemoPage2();
-    });
+            (context) {
+          return sliver_tab_demo_page2.SliverTabDemoPage2();
+        });
   },
   "多列表+顶部Tab效果展示3": (context) {
     return ContainerAsyncRouterPage(sliver_tab_demo_page3.loadLibrary(),
-        (context) {
-      return sliver_tab_demo_page3.SliverTabDemoPage3();
-    });
+            (context) {
+          return sliver_tab_demo_page3.SliverTabDemoPage3();
+        });
   },
   "仿真书本翻页动画（仅APP）": (context) {
     return ContainerAsyncRouterPage(book_page.loadLibrary(), (context) {
@@ -746,9 +749,9 @@ Map<String, WidgetBuilder> routers = {
   },
   "手势效果": (context) {
     return ContainerAsyncRouterPage(matrix_custom_painter_page.loadLibrary(),
-        (context) {
-      return matrix_custom_painter_page.MatrixCustomPainterDemo();
-    });
+            (context) {
+          return matrix_custom_painter_page.MatrixCustomPainterDemo();
+        });
   },
   "一个有趣的底部跟随和停靠例子": (context) {
     return ContainerAsyncRouterPage(
@@ -758,9 +761,9 @@ Map<String, WidgetBuilder> routers = {
   },
   "一个有趣的圆形选择器": (context) {
     return ContainerAsyncRouterPage(bottom_anim_nav_page.loadLibrary(),
-        (context) {
-      return bottom_anim_nav_page.BottomAnimNavPage();
-    });
+            (context) {
+          return bottom_anim_nav_page.BottomAnimNavPage();
+        });
   },
   "一个类似探探堆叠卡片例子": (context) {
     return ContainerAsyncRouterPage(
@@ -776,27 +779,27 @@ Map<String, WidgetBuilder> routers = {
   },
   "动画按键例子": (context) {
     return ContainerAsyncRouterPage(anim_button_demo_page.loadLibrary(),
-        (context) {
-      return anim_button_demo_page.AnimButtonDemoPage();
-    });
+            (context) {
+          return anim_button_demo_page.AnimButtonDemoPage();
+        });
   },
   "类似QQ发送图片的动画": (context) {
     return ContainerAsyncRouterPage(anim_progress_img_demo_page.loadLibrary(),
-        (context) {
-      return anim_progress_img_demo_page.AnimProgressImgDemoPage();
-    });
+            (context) {
+          return anim_progress_img_demo_page.AnimProgressImgDemoPage();
+        });
   },
   "类似探探扫描的动画效果": (context) {
     return ContainerAsyncRouterPage(anim_scan_demo_page.loadLibrary(),
-        (context) {
-      return anim_scan_demo_page.AnimScanDemoPage();
-    });
+            (context) {
+          return anim_scan_demo_page.AnimScanDemoPage();
+        });
   },
   "圆弧形的 SeekBar（仅APP）": (context) {
     return ContainerAsyncRouterPage(arc_seek_bar_demo_page.loadLibrary(),
-        (context) {
-      return arc_seek_bar_demo_page.ArcSeekBarDemoPage();
-    });
+            (context) {
+          return arc_seek_bar_demo_page.ArcSeekBarDemoPage();
+        });
   },
   "一个国外友人很惊艳的动画效果": (context) {
     return ContainerAsyncRouterPage(anim_bubble_gum.loadLibrary(), (context) {
@@ -805,45 +808,45 @@ Map<String, WidgetBuilder> routers = {
   },
   "纯 Canvas 绘制闹钟": (context) {
     return ContainerAsyncRouterPage(canvas_click_demo_page.loadLibrary(),
-        (context) {
-      return canvas_click_demo_page.CanvasClickDemoPage();
-    });
+            (context) {
+          return canvas_click_demo_page.CanvasClickDemoPage();
+        });
   },
   "类似 boss 直聘我的页面联动效果": (context) {
     return ContainerAsyncRouterPage(link_sliver_demo_page.loadLibrary(),
-        (context) {
-      return link_sliver_demo_page.LinkSliverDemoPage();
-    });
+            (context) {
+          return link_sliver_demo_page.LinkSliverDemoPage();
+        });
   },
   "结合 Matrix 的拖拽": (context) {
     return ContainerAsyncRouterPage(drag_img_demo_page.loadLibrary(),
-        (context) {
-      return drag_img_demo_page.DragImgDemoPage();
-    });
+            (context) {
+          return drag_img_demo_page.DragImgDemoPage();
+        });
   },
   "彩色进度条": (context) {
     return ContainerAsyncRouterPage(color_progress_demo_page.loadLibrary(),
-        (context) {
-      return color_progress_demo_page.ColorProgressDemoPage();
-    });
+            (context) {
+          return color_progress_demo_page.ColorProgressDemoPage();
+        });
   },
   "第三方的动画字体": (context) {
     return ContainerAsyncRouterPage(anim_text_demo_page.loadLibrary(),
-        (context) {
-      return anim_text_demo_page.AnimTextDemoPage();
-    });
+            (context) {
+          return anim_text_demo_page.AnimTextDemoPage();
+        });
   },
   "首尾添加数据不会抖动": (context) {
     return ContainerAsyncRouterPage(chat_list_scroll_demo_page.loadLibrary(),
-        (context) {
-      return chat_list_scroll_demo_page.ChatListScrollDemoPage();
-    });
+            (context) {
+          return chat_list_scroll_demo_page.ChatListScrollDemoPage();
+        });
   },
   "首尾添加数据不会抖动2": (context) {
     return ContainerAsyncRouterPage(chat_list_scroll_demo_page_2.loadLibrary(),
-        (context) {
-      return chat_list_scroll_demo_page_2.ChatListScrollDemoPage2();
-    });
+            (context) {
+          return chat_list_scroll_demo_page_2.ChatListScrollDemoPage2();
+        });
   },
   "测试路由嵌套": (context) {
     return ContainerAsyncRouterPage(route_demo_page.loadLibrary(), (context) {
@@ -852,16 +855,16 @@ Map<String, WidgetBuilder> routers = {
   },
   "测试 canvas 阴影": (context) {
     return ContainerAsyncRouterPage(shader_canvas_demo_page.loadLibrary(),
-        (context) {
-      return shader_canvas_demo_page.ShaderCanvasDemoPage();
-    });
+            (context) {
+          return shader_canvas_demo_page.ShaderCanvasDemoPage();
+        });
   },
   "控件动画切换效果": (context) {
     ///对应文章解析  https://juejin.cn/post/7111071430292275213
     return ContainerAsyncRouterPage(anim_switch_layout_demo_page.loadLibrary(),
-        (context) {
-      return anim_switch_layout_demo_page.AnimSwitchLayoutDemoPage();
-    });
+            (context) {
+          return anim_switch_layout_demo_page.AnimSwitchLayoutDemoPage();
+        });
   },
   "ListView 嵌套 ViewPager 解决斜着滑动问题": (context) {
     ///对应文章解析 https://juejin.cn/post/7116267156655833102
@@ -890,9 +893,9 @@ Map<String, WidgetBuilder> routers = {
   "3D 透视卡片": (context) {
     ///对应文章解析  https://juejin.cn/post/7124064789763981326
     return ContainerAsyncRouterPage(card_perspective_demo_page.loadLibrary(),
-        (context) {
-      return card_perspective_demo_page.CardPerspectiveDemoPage();
-    });
+            (context) {
+          return card_perspective_demo_page.CardPerspectiveDemoPage();
+        });
   },
   "3D 卡片旋转": (context) {
     ///对应文章解析  https://juejin.cn/post/7124064789763981326
@@ -903,9 +906,9 @@ Map<String, WidgetBuilder> routers = {
   "硬核 3D 卡片旋转": (context) {
     ///对应文章解析 https://juejin.cn/post/7129239231473385503
     return ContainerAsyncRouterPage(card_real_3d_demo_page.loadLibrary(),
-        (context) {
-      return card_real_3d_demo_page.CardReal3DDemoPage();
-    });
+            (context) {
+          return card_real_3d_demo_page.CardReal3DDemoPage();
+        });
   },
   "3D Dash": (context) {
     ///对应文章解析 https://juejin.cn/post/7129239231473385503
@@ -916,42 +919,42 @@ Map<String, WidgetBuilder> routers = {
   "展示 canvas transform": (context) {
     ///对应文章解析 https://juejin.cn/post/7129239231473385503
     return ContainerAsyncRouterPage(transform_canvas_demo_page.loadLibrary(),
-        (context) {
-      return transform_canvas_demo_page.TransformCanvasDemoPage();
-    });
+            (context) {
+          return transform_canvas_demo_page.TransformCanvasDemoPage();
+        });
   },
   "rive 掘金 logo": (context) {
     ///对应文章解析  https://juejin.cn/post/7126661045564735519
     return ContainerAsyncRouterPage(anim_juejin_logo_demo_page.loadLibrary(),
-        (context) {
-      return anim_juejin_logo_demo_page.AnimJueJinLogoDemoPage();
-    });
+            (context) {
+          return anim_juejin_logo_demo_page.AnimJueJinLogoDemoPage();
+        });
   },
   "掘金 3d logo": (context) {
     ///对应文章解析 https://juejin.cn/post/7129239231473385503
     return ContainerAsyncRouterPage(juejin_3d_logo_demo_page.loadLibrary(),
-        (context) {
-      return juejin_3d_logo_demo_page.JueJin3DLogoDemoPage();
-    });
+            (context) {
+          return juejin_3d_logo_demo_page.JueJin3DLogoDemoPage();
+        });
   },
   "掘金更 3d logo": (context) {
     ///对应文章解析 https://juejin.cn/post/7129239231473385503
     return ContainerAsyncRouterPage(juejin_3d_box_logo_demo_page.loadLibrary(),
-        (context) {
-      return juejin_3d_box_logo_demo_page.JueJin3DBoxLogoDemoPage();
-    });
+            (context) {
+          return juejin_3d_box_logo_demo_page.JueJin3DBoxLogoDemoPage();
+        });
   },
   "png shadow": (context) {
     return ContainerAsyncRouterPage(png_shadow_demo_page.loadLibrary(),
-        (context) {
-      return png_shadow_demo_page.PngShadowDemoPage();
-    });
+            (context) {
+          return png_shadow_demo_page.PngShadowDemoPage();
+        });
   },
   "path 路径 png 效果": (context) {
     return ContainerAsyncRouterPage(custom_shader_path_demo_page.loadLibrary(),
-        (context) {
-      return custom_shader_path_demo_page.CustomShaderPathDemoPage();
-    });
+            (context) {
+          return custom_shader_path_demo_page.CustomShaderPathDemoPage();
+        });
   },
   "列表联动 BottomSheet 效果": (context) {
     return ContainerAsyncRouterPage(
@@ -967,33 +970,33 @@ Map<String, WidgetBuilder> routers = {
   },
   "异步调用的顺序执行": (context) {
     return ContainerAsyncRouterPage(async_to_sync_call_page.loadLibrary(),
-        (context) {
-      return async_to_sync_call_page.AsyncToSyncCallPage();
-    });
+            (context) {
+          return async_to_sync_call_page.AsyncToSyncCallPage();
+        });
   },
   "点击爆炸的五角星（ChatGPT 生成代码）": (context) {
     return ContainerAsyncRouterPage(star_bomb_button_page.loadLibrary(),
-        (context) {
-      return star_bomb_button_page.StarBombButtonPage();
-    });
+            (context) {
+          return star_bomb_button_page.StarBombButtonPage();
+        });
   },
   "有趣画廊": (context) {
     return ContainerAsyncRouterPage(photo_gallery_demo_page.loadLibrary(),
-        (context) {
-      return photo_gallery_demo_page.PhotoGalleryDemoPage();
-    });
+            (context) {
+          return photo_gallery_demo_page.PhotoGalleryDemoPage();
+        });
   },
   "有趣的文本撕裂动画": (context) {
     return ContainerAsyncRouterPage(tear_text_demo_page.loadLibrary(),
-        (context) {
-      return tear_text_demo_page.TearTextDemoPage();
-    });
+            (context) {
+          return tear_text_demo_page.TearTextDemoPage();
+        });
   },
   "自适应横竖列表": (context) {
     return ContainerAsyncRouterPage(un_bounded_listview.loadLibrary(),
-        (context) {
-      return un_bounded_listview.UnboundedListViewDemoPage();
-    });
+            (context) {
+          return un_bounded_listview.UnboundedListViewDemoPage();
+        });
   },
   "PageView嵌套PageView": (context) {
     return ContainerAsyncRouterPage(
@@ -1003,9 +1006,9 @@ Map<String, WidgetBuilder> routers = {
   },
   "手势密码": (context) {
     return ContainerAsyncRouterPage(gesture_password_demo_page.loadLibrary(),
-        (context) {
-      return gesture_password_demo_page.GesturePasswordDemoPage();
-    });
+            (context) {
+          return gesture_password_demo_page.GesturePasswordDemoPage();
+        });
   },
   "link scroll": (context) {
     return ContainerAsyncRouterPage(link_scroll_page.loadLibrary(), (context) {
@@ -1024,9 +1027,9 @@ Map<String, WidgetBuilder> routers = {
   },
   "liquid glass 2": (context) {
     return ContainerAsyncRouterPage(liquid_glass_demo2.loadLibrary(),
-        (context) {
-      return liquid_glass_demo2.LiquidGlassShaderView2();
-    });
+            (context) {
+          return liquid_glass_demo2.LiquidGlassShaderView2();
+        });
   },
   "粒子动画": (context) {
     return ContainerAsyncRouterPage(attractor_page.loadLibrary(), (context) {
@@ -1035,9 +1038,9 @@ Map<String, WidgetBuilder> routers = {
   },
   "斐波那契球体动画": (context) {
     return ContainerAsyncRouterPage(fibonacci_sphere_page.loadLibrary(),
-        (context) {
-      return fibonacci_sphere_page.FibonacciSpherePage();
-    });
+            (context) {
+          return fibonacci_sphere_page.FibonacciSpherePage();
+        });
   },
   "星云动画": (context) {
     return ContainerAsyncRouterPage(galaxy_scene_page.loadLibrary(), (context) {
@@ -1056,21 +1059,21 @@ Map<String, WidgetBuilder> routers = {
   },
   "炫酷爆炸粒子": (context) {
     return ContainerAsyncRouterPage(boom_particle_page.loadLibrary(),
-        (context) {
-      return boom_particle_page.BoomParticlePage();
-    });
+            (context) {
+          return boom_particle_page.BoomParticlePage();
+        });
   },
   "Black hole": (context) {
     return ContainerAsyncRouterPage(black_hole_simulation_page.loadLibrary(),
-        (context) {
-      return black_hole_simulation_page.BlackHoleSimulation();
-    });
+            (context) {
+          return black_hole_simulation_page.BlackHoleSimulation();
+        });
   },
   "流体太极": (context) {
     return ContainerAsyncRouterPage(stream_taichi_page.loadLibrary(),
-        (context) {
-      return stream_taichi_page.NebulaTaiChiPage();
-    });
+            (context) {
+          return stream_taichi_page.NebulaTaiChiPage();
+        });
   },
   "黑洞流体": (context) {
     return ContainerAsyncRouterPage(black_hole_page.loadLibrary(), (context) {
@@ -1089,27 +1092,27 @@ Map<String, WidgetBuilder> routers = {
   },
   "骚气滑动列表": (context) {
     return ContainerAsyncRouterPage(tornado_scroll_demo.loadLibrary(),
-        (context) {
-      return tornado_scroll_demo.TornadoScrollDemo();
-    });
+            (context) {
+          return tornado_scroll_demo.TornadoScrollDemo();
+        });
   },
   "骚气粒子效果": (context) {
     return ContainerAsyncRouterPage(particle_morphing_page.loadLibrary(),
-        (context) {
-      return particle_morphing_page.ParticleMorphingPage();
-    });
+            (context) {
+          return particle_morphing_page.ParticleMorphingPage();
+        });
   },
   "炫酷圣诞树": (context) {
     return ContainerAsyncRouterPage(combined_scene_page.loadLibrary(),
-        (context) {
-      return combined_scene_page.CombinedScenePage();
-    });
+            (context) {
+          return combined_scene_page.CombinedScenePage();
+        });
   },
   "炫酷二维码": (context) {
     return ContainerAsyncRouterPage(notion_qrcode_page.loadLibrary(),
-        (context) {
-      return notion_qrcode_page.NotionFinalQRCodeEntryPage();
-    });
+            (context) {
+          return notion_qrcode_page.NotionFinalQRCodeEntryPage();
+        });
   },
   "Cool Disco Sphere": (context) {
     return ContainerAsyncRouterPage(disco_sphere_page.loadLibrary(), (context) {
@@ -1123,17 +1126,22 @@ Map<String, WidgetBuilder> routers = {
   },
   "Shock Wave Chat": (context) {
     return ContainerAsyncRouterPage(shock_wave_chat_page.loadLibrary(),
-        (context) {
-      return shock_wave_chat_page.ShockwaveChatPage();
-    });
+            (context) {
+          return shock_wave_chat_page.ShockwaveChatPage();
+        });
   },
   "Particle Effect": (context) {
     return ContainerAsyncRouterPage(particle_effect_screen.loadLibrary(),
             (context) {
           return particle_effect_screen.ParticleEffectScreen();
         });
+  },
+  "Mosaic Scanner ": (context) {
+    return ContainerAsyncRouterPage(mosaic_scanner_page.loadLibrary(),
+            (context) {
+          return mosaic_scanner_page.MosaicScannerPage();
+        });
   }
-
 };
 
 enum Cat {
