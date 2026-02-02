@@ -40,15 +40,12 @@
 | GSYTech  |  [点我](https://juejin.im/user/582aca2ba22b9d006b59ae68/posts)    |   [点我](https://www.zhihu.com/people/carguo)       |   [点我](https://blog.csdn.net/ZuoYueLiang)  |   [点我](https://www.jianshu.com/u/6e613846e1ea)  
 
 
-|                  |                  |                  | 
-|------------------|------------------|------------------|
-| ![](demo1.gif)   | ![](demo2.webp)  | ![](demo3.webp)  | 
-| ![](demo4.webp)  | ![](demo5.webp)  | ![](demo6.webp)  | 
-| ![](demo7.webp)  | ![](demo8.webp)  | ![](demo9.webp)  | 
-| ![](demo10.webp) | ![](demo11.webp) | ![](demo12.webp) | 
-| ![](demo13.webp) | ![](demo14.webp) | ![](demo15.webp) | 
-| ![](demo16.webp) | ![](demo17.webp) | ![](demo18.webp) | 
-| ![](demo19.webp) | ![](demo20.gif)  | | 
+|                  |                  |                  |                  |                  |
+|------------------|------------------|------------------|------------------|------------------|
+| ![](demo1.gif)   | ![](demo2.webp)  | ![](demo3.webp)  | ![](demo4.webp)  | ![](demo5.webp)  |
+| ![](demo6.webp)  | ![](demo7.webp)  | ![](demo8.webp)  | ![](demo9.webp)  | ![](demo10.webp) |
+| ![](demo11.webp) | ![](demo12.webp) | ![](demo13.webp) | ![](demo14.webp) | ![](demo15.webp) |
+| ![](demo16.webp) | ![](demo17.webp) | ![](demo18.webp) | ![](demo19.webp) | ![](demo20.gif)  | 
 
 
 ![](demo.jpg)
