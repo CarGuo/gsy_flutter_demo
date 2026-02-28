@@ -89,6 +89,7 @@ class DemoCategoryConfig {
       '路径',
       '高斯',
       '手势',
+      'jaw',
     ]),
     _CategoryRule(DemoCategory.animation, <String>[
       'anim',

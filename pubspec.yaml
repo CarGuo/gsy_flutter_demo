@@ -127,6 +127,7 @@ deferred-components:
       - package:gsy_flutter_demo/widget/scroll/shock_wave_chat_page.dart
       - package:gsy_flutter_demo/widget/visual/mosaic_scanner_page.dart
       - package:gsy_flutter_demo/widget/visual/koi_fish_animation.dart
+      - package:gsy_flutter_demo/widget/canvas/dynamic_jaw_control_page.dart
 
 dependencies:
   flutter:

@@ -286,6 +286,9 @@ import 'package:gsy_flutter_demo/widget/visual/koi_fish_animation.dart'
 import 'package:gsy_flutter_demo/widget/basic/akaza_page.dart'
     deferred as akaza_page;
 
+import 'package:gsy_flutter_demo/widget/canvas/dynamic_jaw_control_page.dart'
+    deferred as dynamic_jaw_control_page;
+
 class ContainerAsyncRouterPage extends StatelessWidget {
   final Future libraryFuture;
 
@@ -1103,6 +1106,12 @@ Map<String, WidgetBuilder> demoRoutes = {
     return ContainerAsyncRouterPage(koi_fish_animation.loadLibrary(),
         (context) {
       return koi_fish_animation.KoiFishAnimationPage();
+    });
+  },
+  "Jaw Control": (context) {
+    return ContainerAsyncRouterPage(dynamic_jaw_control_page.loadLibrary(),
+        (context) {
+      return dynamic_jaw_control_page.DynamicJawControlPage();
     });
   }
 };
