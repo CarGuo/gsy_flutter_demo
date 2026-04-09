@@ -30,6 +30,7 @@
 /build/
 .gradle
 .cxx/
+.junie/
 
 # Android related
 **/android/**/gradle-wrapper.jar

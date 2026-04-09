@@ -45,6 +45,7 @@
 | ![](docs/images/demo6.webp)  | ![](docs/images/demo7.webp)  | ![](docs/images/demo8.webp)  | ![](docs/images/demo9.webp)  | ![](docs/images/demo10.webp) |
 | ![](docs/images/demo11.webp) | ![](docs/images/demo12.webp) | ![](docs/images/demo13.webp) | ![](docs/images/demo14.webp) | ![](docs/images/demo15.webp) |
 | ![](docs/images/demo16.webp) | ![](docs/images/demo17.webp) | ![](docs/images/demo18.webp) | ![](docs/images/demo19.webp) | ![](docs/images/demo20.gif)  | 
+| ![](docs/images/demo12.webp) |  | |  |  |
 
 
 
@@ -161,7 +162,7 @@
 | 117 | Cool Christmas tree | `widget/animation/combined_scene_page.dart` |
 | 122 | Particle Effect | `widget/animation/particle_effect_screen.dart` |
 
-#### Canvas & Shader (13)
+#### Canvas & Shader (15)
 
 | # | Name | Page File |
 |---|---|---|
@@ -178,6 +179,8 @@
 | 102 | liquid glass | `widget/canvas/liquid_glass_demo.dart` |
 | 103 | liquid glass 2 | `widget/canvas/liquid_glass_demo2.dart` |
 | 108 | Radial lines | `widget/canvas/radial_lines_page.dart` |
+| 125 | Jaw Control | `widget/canvas/dynamic_jaw_control_page.dart` |
+| 126 | Fire Shader | `widget/canvas/fire_shader_demo_page.dart` |
 
 #### 3D & Visual (17)
 

@@ -288,6 +288,8 @@ import 'package:gsy_flutter_demo/widget/basic/akaza_page.dart'
 
 import 'package:gsy_flutter_demo/widget/canvas/dynamic_jaw_control_page.dart'
     deferred as dynamic_jaw_control_page;
+import 'package:gsy_flutter_demo/widget/canvas/fire_shader_demo_page.dart'
+    deferred as fire_shader_demo_page;
 
 class ContainerAsyncRouterPage extends StatelessWidget {
   final Future libraryFuture;
@@ -1112,6 +1114,12 @@ Map<String, WidgetBuilder> demoRoutes = {
     return ContainerAsyncRouterPage(dynamic_jaw_control_page.loadLibrary(),
         (context) {
       return dynamic_jaw_control_page.DynamicJawControlPage();
+    });
+  },
+  "Fire Shader": (context) {
+    return ContainerAsyncRouterPage(fire_shader_demo_page.loadLibrary(),
+        (context) {
+      return fire_shader_demo_page.FireShaderDemoPage();
     });
   }
 };

@@ -184,6 +184,7 @@ flutter:
     - shaders/shockwave.frag
     - shaders/elastic.frag
     - shaders/mosaic_wave.frag
+    - shaders/fire.frag
 
   # To add assets to your application, add an assets section, like this:
   assets:
